@@ -92,9 +92,198 @@ Search & discoverability
 
 ---
 
-If you'd like, I can:
+## MVP User Stories (48-Hour Hackathon)
 
-- Pre-populate this directory with the rest of the high-level user stories derived from `docs/vision.md` (I can infer personas from `vision.md`).
-- Implement an AI command snippet you can paste into a chat to ask the AI to create specs from the selected story.
+### Core Pipeline - Video Processing
 
-Tell me which you prefer and I will proceed.
+#### US-0001: Course Selection
+- ID: US-0001
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to select my course from a list so that the system knows which syllabus to match my learning content against.
+- Priority: P0
+- Estimate: 2h
+- Acceptance Criteria:
+  - [ ] Dropdown displays 3 courses (Philosophy 101, Biology 101, Economics 101)
+  - [ ] Course selection persists across sessions
+  - [ ] Dashboard shows "0/X concepts for this course" after selection
+  - [ ] User can change course with confirmation
+- Spec: [us-0001-course-selection.md](../specs/us-0001-course-selection.md)
+
+#### US-0002: Video URL Submission
+- ID: US-0002
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to paste a YouTube video URL so that the system can extract concepts from content I'm already consuming.
+- Priority: P0
+- Estimate: 3h
+- Acceptance Criteria:
+  - [ ] Accepts valid YouTube URLs (youtube.com/watch, youtu.be, youtube.com/embed)
+  - [ ] Shows processing status with estimated time
+  - [ ] Validates URL format and shows errors for invalid URLs
+  - [ ] Completes processing within 60 seconds
+- Spec: [us-0002-video-url-submission.md](../specs/us-0002-video-url-submission.md)
+
+#### US-0003: Concept Extraction ⚠️ HIGHEST RISK
+- ID: US-0003
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want the system to automatically extract atomic concepts from videos so that I don't have to manually take notes.
+- Priority: P0
+- Estimate: 8h
+- Acceptance Criteria:
+  - [ ] Extracts 3-10 atomic concepts per video
+  - [ ] Each concept has: name, definition, timestamp, confidence score
+  - [ ] Processing completes within 30 seconds
+  - [ ] 70%+ extraction accuracy verified on test videos
+- Notes: Test on 20 videos BEFORE hackathon. This is the core thesis.
+- Spec: [us-0003-concept-extraction.md](../specs/us-0003-concept-extraction.md)
+
+#### US-0004: Concept-to-Syllabus Matching ⚠️ HIGHEST VALUE
+- ID: US-0004
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to know which concepts from my video match my course requirements so that I can see if I'm covering what my professor expects.
+- Priority: P0
+- Estimate: 6h
+- Acceptance Criteria:
+  - [ ] Matches extracted concepts to syllabus with confidence scores
+  - [ ] ≥80% confidence shows as "Matched" (green)
+  - [ ] 60-79% shows as "Partial Match" (yellow, requires confirmation)
+  - [ ] <60% shows as "No Match" (gray)
+  - [ ] 68%+ matching accuracy on test data
+- Notes: Core differentiator. Without this, it's just another flashcard app.
+- Spec: [us-0004-concept-to-syllabus-matching.md](../specs/us-0004-concept-to-syllabus-matching.md)
+
+#### US-0005: Flashcard Generation
+- ID: US-0005
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want auto-generated flashcards from matched concepts so that I can review and retain what I've learned.
+- Priority: P0
+- Estimate: 4h
+- Acceptance Criteria:
+  - [ ] Generates 1 flashcard per matched concept (confidence ≥80%)
+  - [ ] Questions use active recall format (not yes/no)
+  - [ ] Answers are concise (1-3 sentences)
+  - [ ] Flashcards include source video timestamp
+- Spec: [us-0005-flashcard-generation.md](../specs/us-0005-flashcard-generation.md)
+
+### Review & Retention
+
+#### US-0006: First Review Session
+- ID: US-0006
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to review flashcards immediately after processing a video so that I can start encoding concepts into long-term memory.
+- Priority: P0
+- Estimate: 5h
+- Acceptance Criteria:
+  - [ ] Shows one flashcard at a time with question → reveal answer flow
+  - [ ] User rates each card as Easy, Medium, or Hard
+  - [ ] Progress indicator shows "Card X of Y"
+  - [ ] Completion summary shows next review schedule
+  - [ ] Works on mobile (large tap targets)
+- Spec: [us-0006-first-review-session.md](../specs/us-0006-first-review-session.md)
+
+#### US-0007: Review Scheduling
+- ID: US-0007
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want flashcards scheduled for optimal review intervals so that I retain concepts long-term.
+- Priority: P0
+- Estimate: 4h
+- Acceptance Criteria:
+  - [ ] Hard = 1 day, Medium = 1 day, Easy = 3 days (first review)
+  - [ ] Repeat "Easy" reviews double the interval
+  - [ ] Next review date stored and displayed
+  - [ ] Timezone-aware scheduling (store UTC, display local)
+- Notes: Use simple fixed intervals for MVP, not adaptive SM-2 algorithm
+- Spec: [us-0007-review-scheduling.md](../specs/us-0007-review-scheduling.md)
+
+### Progress & Analytics
+
+#### US-0008: Progress Dashboard
+- ID: US-0008
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to see my progress toward course mastery so that I stay motivated.
+- Priority: P1
+- Estimate: 3h
+- Acceptance Criteria:
+  - [ ] Shows "X/Y concepts for [Course]" prominently
+  - [ ] Visual progress bar
+  - [ ] Breakdown: Mastered, In Progress, Not Started
+  - [ ] Updates in real-time after video processing
+- Notes: This is the "magic moment" visualization
+- Spec: [us-0008-progress-dashboard.md](../specs/us-0008-progress-dashboard.md)
+
+#### US-0009: Gap Analysis
+- ID: US-0009
+- Persona: Motivated Struggler
+- Title: As a Motivated Struggler, I want to see which syllabus concepts I haven't learned yet so that I know exactly what to study before the exam.
+- Priority: P1
+- Estimate: 2h
+- Acceptance Criteria:
+  - [ ] Lists all unmatched syllabus concepts
+  - [ ] Groups by category (if available)
+  - [ ] Shows concept name + description
+  - [ ] Empty state if no gaps: "🎉 You've covered all concepts!"
+- Notes: Key differentiator - shows exactly what's missing
+- Spec: [us-0009-gap-analysis.md](../specs/us-0009-gap-analysis.md)
+
+### Admin/Setup
+
+#### US-0012: Admin Pre-load Syllabi
+- ID: US-0012
+- Persona: Admin/Founder
+- Title: As an admin, I need 3 course syllabi ready before demo so that students can select courses.
+- Priority: P0
+- Estimate: 4h
+- Acceptance Criteria:
+  - [ ] 3 syllabi parsed into required concepts
+  - [ ] Each syllabus has 25-35 concepts
+  - [ ] Syllabi available in course dropdown
+- Notes: Manual process for MVP - pre-populate before hackathon
+
+## Next-Stage User Stories (Post-Hackathon)
+
+### Content Sources
+- **US-0014**: Manual syllabus upload (PDF parsing)
+- **US-0015**: Multiple content sources (TikTok, articles, PDFs)
+
+### User Control
+- **US-0016**: Edit flashcards (fix AI-generated content)
+- **US-0017**: Delete irrelevant concepts
+- **US-0024**: Concept tagging for organization
+
+### Advanced Features
+- **US-0018**: Daily review notifications
+- **US-0019**: Prerequisite detection (learn X before Y)
+- **US-0020**: Knowledge graph visualization
+- **US-0021**: Export to Obsidian
+- **US-0023**: Advanced spaced repetition (SM-2 algorithm)
+
+### B2B Features
+- **US-0022**: Professor dashboard (class-wide progress)
+- **US-0025**: Collaborative syllabi (community contributions)
+
+---
+
+## Critical Path for Hackathon Demo
+
+**Day 1 (Friday):**
+- US-0012: Pre-load syllabi
+- US-0001: Course selection
+- US-0002: Video URL input
+
+**Day 2 (Saturday) - CORE:**
+- US-0003: Concept extraction ⚠️ HIGHEST RISK
+- US-0004: Concept matching ⚠️ HIGHEST VALUE
+- Validate 70%+ accuracy on test videos
+
+**Day 3 (Sunday):**
+- US-0005: Flashcard generation
+- US-0006: Review interface
+- US-0007: Review scheduling
+
+**Day 4 (Monday AM):**
+- US-0008: Progress dashboard
+- US-0009: Gap analysis
+- Polish and test demo flow
+
+**Total estimated effort:** ~47 hours (parallelizable)
+
+---
