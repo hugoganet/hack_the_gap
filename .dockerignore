@@ -1,0 +1,77 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+.nyc_output
+__tests__
+e2e
+playwright-report
+test-results
+
+# Next.js
+.next/
+out/
+build
+dist
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local env files
+.env*.local
+.env.development
+.env.test
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+# Don't ignore next-env.d.ts - needed for build
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+documentation_starter_pack
+*.md
+!README.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Temp files
+tmp
+temp
+*.tmp
+
+# Logs
+logs
+*.log
+
+# Generated
+.claude
+.conductor
+# Don't ignore src/generated - Prisma client generated there
