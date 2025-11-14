@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / JS
+node_modules/
+dist/
+build/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Env
+.env
+.env.*
+
+# Misc
+.tmp/
+.cache/
+coverage/
+
+# TODO files
+TODO.md

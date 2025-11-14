@@ -1,0 +1,29 @@
+{
+  "name": "project-documentation-starter-pack",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "lint:md": "markdownlint-cli2 '**/*.md' --config .markdownlint.json",
+    "lint:md:fix": "markdownlint-cli2 --fix '**/*.md' --config .markdownlint.json",
+    "lint": "npm run lint:md",
+    "docs:update:diff": "./scripts/collect_diff_for_ai.sh"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
+    "markdownlint-cli2": "*",
+    "prettier": "^2.8.0",
+    "eslint": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.md": [
+      "markdownlint-cli2 --fix --config .markdownlint.json",
+      "prettier --write"
+    ],
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

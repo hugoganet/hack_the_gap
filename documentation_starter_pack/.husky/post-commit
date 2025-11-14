@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Generate an AI-friendly diff payload for the last commit
+# Uses HEAD~1..HEAD by default
+if [ -x "scripts/collect_diff_for_ai.sh" ]; then
+  ./scripts/collect_diff_for_ai.sh "HEAD~1..HEAD"
+fi

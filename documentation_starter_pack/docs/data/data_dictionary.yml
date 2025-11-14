@@ -1,0 +1,49 @@
+# Data dictionary
+# Top-level structure: a map of entities (tables/records) with fields and metadata.
+
+users:
+  description: "Primary user record stored for authentication and profile features. Avoid storing PII in sample data."
+  source: "auth-service / users table"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key (v4 UUID)."
+      required: true
+    email:
+      type: string
+      description: "User email address. Treated as PII. Use hashed emails for analytics."
+      required: true
+      pii: true
+    display_name:
+      type: string
+      description: "Public display name; may be empty."
+      required: false
+    created_at:
+      type: timestamp
+      description: "Record creation timestamp (ISO 8601)."
+      required: true
+
+events:
+  description: "High-level event stream records for product analytics and integrations."
+  source: "events topic / events table"
+  fields:
+    event_id:
+      type: uuid
+      description: "Event id."
+      required: true
+    user_id:
+      type: uuid
+      description: "If present, the user associated with the event."
+      required: false
+    name:
+      type: string
+      description: "Event name (kebab-case)."
+      required: true
+    properties:
+      type: object
+      description: "Free-form event properties. Keep small and typed when possible."
+      required: false
+    occurred_at:
+      type: timestamp
+      description: "When the event occurred."
+      required: true

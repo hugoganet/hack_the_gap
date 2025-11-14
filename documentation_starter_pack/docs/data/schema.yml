@@ -1,0 +1,30 @@
+# Canonical schema for primary records (JSON Schema expressed in YAML)
+# Extend or add new schemas per-entity as needed.
+
+---
+$id: "https://example.com/schemas/users.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: users
+type: object
+required:
+  - id
+  - email
+  - created_at
+properties:
+  id:
+    type: string
+    format: uuid
+    description: "v4 UUID"
+  email:
+    type: string
+    format: email
+    description: "User email (PII)"
+  display_name:
+    type: ["string", "null"]
+    description: "Public name"
+  created_at:
+    type: string
+    format: date-time
+    description: "ISO 8601 timestamp"
+
+# You can add additional entity schemas in the same file or split per-entity into files

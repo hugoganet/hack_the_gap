@@ -1,0 +1,109 @@
+name: AI Doc Updater
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  doc-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh || true
+
+      - name: Determine commit range
+        id: range
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "range=origin/${{ github.base_ref }}...HEAD" >> $GITHUB_OUTPUT
+          else
+            # Push: use before..after range when available
+            BEFORE="${{ github.event.before }}"
+            AFTER="${{ github.sha }}"
+            if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+              echo "range=$BEFORE..$AFTER" >> $GITHUB_OUTPUT
+            else
+              echo "range=HEAD~1..HEAD" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Collect diff for AI
+        run: ./scripts/collect_diff_for_ai.sh "${{ steps.range.outputs.range }}"
+
+      - name: Find latest auto-diff file
+        id: autodiff
+        run: |
+          FILE=$(ls -1 docs/ai_sessions/auto-diff-*.md | sort | tail -n1)
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Run AI Doc Updater
+        id: runai
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+          DOC_AI_PROVIDER: ${{ vars.DOC_AI_PROVIDER }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ] && [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "No AI provider secrets set. Skipping AI Doc Updater run." ; exit 0 ;
+          fi
+          node scripts/run_ai_doc_updater.js --diff "${{ steps.autodiff.outputs.file }}"
+
+      - name: Find latest patches file
+        id: patches
+        run: |
+          if ls -1 docs/ai_sessions/auto-patches-*.md >/dev/null 2>&1; then
+            FILE=$(ls -1 docs/ai_sessions/auto-patches-*.md | sort | tail -n1)
+            echo "file=$FILE" >> $GITHUB_OUTPUT
+          else
+            echo "file=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload artifact (patches)
+        if: steps.patches.outputs.file != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-doc-patches
+          path: ${{ steps.patches.outputs.file }}
+
+      - name: Comment on PR with patches
+        if: github.event_name == 'pull_request' && steps.patches.outputs.file != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const file = process.env.PATCH_FILE;
+            const content = fs.readFileSync(file, 'utf8');
+            const body = [
+              'AI Doc Updater generated the following proposed patches (review and apply locally):',
+              '\n',
+              '```\n' + content.substring(0, 60000) + '\n```' // truncate if very long
+            ].join('\n');
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+        env:
+          PATCH_FILE: ${{ steps.patches.outputs.file }}
