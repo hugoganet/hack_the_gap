@@ -13,11 +13,16 @@ model User {
   resendContactId String?
 
   // Outgoing
-  sessions    Session[]
-  accounts    Account[]
-  feedbacks   Feedback[]
-  members     Member[]
-  invitations Invitation[]
+  sessions       Session[]
+  accounts       Account[]
+  feedbacks      Feedback[]
+  members        Member[]
+  invitations    Invitation[]
+  // Added domain relations (hackathon MVP)
+  userCourses    UserCourse[]
+  videoJobs      VideoJob[]
+  flashcards     Flashcard[]
+  reviewSessions ReviewSession[]
 
   role       String?
   banned     Boolean?
