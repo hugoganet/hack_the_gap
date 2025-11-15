@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Layout,
-  LayoutActions,
   LayoutContent,
   LayoutDescription,
   LayoutHeader,
@@ -10,12 +9,10 @@ import {
 import { getRequiredAdmin } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import type { PageParams } from "@/types/next";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrganizationMembers } from "./_components/organization-members";
-import { OrganizationPayments } from "./_components/organization-payments";
-import { OrganizationSubscription } from "./_components/organization-subscription";
 
 export default async function OrganizationDetailPage(
   props: PageParams<{ orgId: string }>,
@@ -40,7 +37,6 @@ export default async function OrganizationDetailPage(
           },
         },
       },
-      subscription: true,
     },
   });
 
@@ -63,33 +59,13 @@ export default async function OrganizationDetailPage(
           <LayoutTitle>{organization.name}</LayoutTitle>
         </div>
         <LayoutDescription>
-          Manage {organization.name}'s members, payments, and subscription
+          Manage {organization.name}'s members
         </LayoutDescription>
       </LayoutHeader>
-      <LayoutActions>
-        {organization.stripeCustomerId && (
-          <Button variant="outline" asChild>
-            <a
-              href={`https://dashboard.stripe.com/customers/${organization.stripeCustomerId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <ExternalLink className="h-4 w-4" />
-              View Stripe Customer
-            </a>
-          </Button>
-        )}
-      </LayoutActions>
 
       <LayoutContent>
         <div className="space-y-6">
           <OrganizationMembers members={organization.members} />
-          <OrganizationPayments organizationId={organization.id} />
-          <OrganizationSubscription
-            organization={organization}
-            subscription={organization.subscription}
-          />
         </div>
       </LayoutContent>
     </Layout>

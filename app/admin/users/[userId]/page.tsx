@@ -39,11 +39,7 @@ export default async function RoutePage(props: {
     include: {
       members: {
         include: {
-          organization: {
-            include: {
-              subscription: true,
-            },
-          },
+          organization: true,
         },
       },
       accounts: {
@@ -119,26 +115,6 @@ export default async function RoutePage(props: {
                           <div className="text-muted-foreground text-xs">
                             Role: {memberRole.role}
                           </div>
-                          {memberRole.organization.subscription && (
-                            <div className="mt-1">
-                              <Badge
-                                variant={
-                                  memberRole.organization.subscription
-                                    .status === "active"
-                                    ? "default"
-                                    : memberRole.organization.subscription
-                                          .status === "canceled"
-                                      ? "destructive"
-                                      : "secondary"
-                                }
-                                className="text-xs"
-                              >
-                                {memberRole.organization.subscription.plan}
-                                {memberRole.organization.subscription.status &&
-                                  ` (${memberRole.organization.subscription.status})`}
-                              </Badge>
-                            </div>
-                          )}
                         </div>
                       </Link>
                     </div>
