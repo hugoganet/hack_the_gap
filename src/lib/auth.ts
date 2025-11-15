@@ -13,7 +13,6 @@ import { generateSlug } from "./format/id";
 import { logger } from "./logger";
 import { prisma } from "./prisma";
 import { getServerUrl } from "./server-url";
-import { stripe } from "./stripe";
 
 type SocialProvidersType = Parameters<typeof betterAuth>[0]["socialProviders"];
 
@@ -156,21 +155,7 @@ export const auth = betterAuth({
       membershipLimit: 10,
       autoCreateOrganizationOnSignUp: true,
 
-      organizationCreation: {
-        async afterCreate(data) {
-          const stripeCustomer = await stripe.customers.create({
-            email: data.user.email,
-            name: data.organization.name,
-            metadata: {
-              organizationId: data.organization.id,
-            },
-          });
-          await prisma.organization.update({
-            where: { id: data.organization.id },
-            data: { stripeCustomerId: stripeCustomer.id },
-          });
-        },
-      },
+      // Removed Stripe customer creation - not needed for hackathon
       async sendInvitationEmail({ id, email }) {
         const inviteLink = `${getServerUrl()}/orgs/accept-invitation/${id}`;
         await sendEmail({

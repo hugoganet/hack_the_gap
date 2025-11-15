@@ -22,7 +22,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { InlineTooltip } from "@/components/ui/tooltip";
 import { LoadingButton } from "@/features/form/submit-button";
-import { ImageFormItem } from "@/features/images/image-form-item";
 import { authClient } from "@/lib/auth-client";
 import { displayName } from "@/lib/format/display-name";
 import { unwrapSafePromise } from "@/lib/promises";
@@ -53,7 +52,7 @@ export const EditProfileCardForm = ({
       return unwrapSafePromise(
         authClient.updateUser({
           name: values.name ?? "",
-          image: values.image,
+          // Image upload disabled for hackathon
         }),
       );
     },
@@ -91,20 +90,13 @@ export const EditProfileCardForm = ({
       >
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-2">
-              <ImageFormItem
-                className="size-16 rounded-full"
-                onChange={(url) => form.setValue("image", url)}
-                imageUrl={form.watch("image")}
-              />
-
-              <CardTitle>
-                {displayName({
-                  email: defaultValues.email,
-                  name: form.watch("name"),
-                })}
-              </CardTitle>
-            </div>
+            {/* Image upload removed for hackathon */}
+            <CardTitle>
+              {displayName({
+                email: defaultValues.email,
+                name: form.watch("name"),
+              })}
+            </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             <FormField

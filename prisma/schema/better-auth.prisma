@@ -88,10 +88,8 @@ model Organization {
   logo             String?
   createdAt        DateTime
   metadata         String?
-  stripeCustomerId String?
   members          Member[]
   invitations      Invitation[]
-  subscription     Subscription?
   email            String?
 
   @@unique([slug])
@@ -122,20 +120,4 @@ model Invitation {
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
   @@map("invitation")
-}
-
-model Subscription {
-  id                   String       @id
-  plan                 String
-  referenceId          String       @unique
-  organization         Organization @relation(fields: [referenceId], references: [id], onDelete: Cascade)
-  stripeCustomerId     String?
-  stripeSubscriptionId String?
-  status               String?
-  periodStart          DateTime?
-  periodEnd            DateTime?
-  cancelAtPeriodEnd    Boolean?
-  seats                Int?
-
-  @@map("subscription")
 }

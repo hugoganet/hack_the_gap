@@ -1,101 +1,141 @@
-# Database Setup (Supabase + Prisma)
+# Hack the Gap
 
-### 1. Create Supabase Project
+AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition.
 
-1. Sign in at <https://supabase.com> and create a new project.
-2. Grab the project ref from the dashboard URL (e.g. `abcd1234`).
-3. Get the database password (Settings → Database) and API keys (Settings → API).
+> **🚀 HACKATHON MODE**: Ce template a été simplifié pour le hackathon. Consultez **[HACKATHON_QUICKSTART.md](./HACKATHON_QUICKSTART.md)** pour démarrer rapidement.
 
-### 2. Configure Environment
+> **Note**: This project is built on the [NOW.TS](https://nowts.app) boilerplate template.
 
-Copy `.env.example` to `.env` and fill in:
+## 🚀 Quick Start
 
-```bash
-SUPABASE_PROJECT_ID=abcd1234
-SUPABASE_DB_PASSWORD=super-secret
-SUPABASE_ANON_KEY=pk_...
-SUPABASE_SERVICE_ROLE_KEY=sk_...
-AUTH_SECRET=generate-a-random-32-byte-secret
-```
+### Option 1: Docker (Recommandé)
 
-`DATABASE_URL` and `DIRECT_URL` are constructed automatically in `.env.example` using the project ref and password. The username pattern must be `postgres.<project_ref>` and the host uses dots: `aws-1.eu-west-1.pooler.supabase.com`.
-
-### 3. Install & Generate Prisma Client
-
-Run (already configured in `schema.prisma`):
+Le moyen le plus rapide pour démarrer le projet :
 
 ```bash
-pnpm install
-pnpm prisma generate
+# Setup + Build + Start tout en une commande
+make quick-start
+
+# Ou manuellement :
+make setup      # Créer .env et générer les secrets
+make build      # Build les images Docker
+make up         # Démarrer les services
 ```
 
-### 4. Apply Migrations
+L'application sera disponible sur http://localhost:3000
 
-Initial migration creates hackathon MVP domain tables plus auth tables:
+📚 **[Guide Docker complet →](README.docker.md)**
+
+### Option 2: Installation Locale
+
+Si vous préférez développer sans Docker :
+
+1. **Prérequis** : Node.js 20+, pnpm, PostgreSQL
+
+2. **Installation** :
+   ```bash
+   pnpm install
+   cp .env.docker.example .env.local
+   # Configurer DATABASE_URL dans .env.local
+   ```
+
+3. **Database setup** :
+   ```bash
+   pnpm prisma generate
+   pnpm prisma migrate dev
+   pnpm prisma:seed  # Optionnel
+   ```
+
+4. **Démarrage** :
+   ```bash
+   pnpm dev
+   ```
+
+## 📋 Commandes Docker (via Makefile)
 
 ```bash
-pnpm prisma migrate dev --name init
+make help           # Voir toutes les commandes disponibles
+
+# Production
+make up             # Démarrer les services
+make down           # Arrêter les services
+make logs           # Voir les logs
+make restart        # Redémarrer
+
+# Development (avec hot reload)
+make dev            # Démarrer en mode dev (port 3001)
+make dev-down       # Arrêter le mode dev
+
+# Base de données
+make migrate        # Exécuter les migrations
+make seed           # Seed la base de données
+make studio         # Ouvrir Prisma Studio
+make db-shell       # Shell PostgreSQL
+
+# Tests
+make test           # Tests unitaires
+make test-e2e       # Tests E2E
+
+# Maintenance
+make clean          # Nettoyer conteneurs
+make reset          # Reset complet (⚠️ perd les données)
 ```
 
-This uses `DIRECT_URL` for direct (non-pooled) connections.
+## 📦 Stack Technique
 
-### 5. Seed Data
+- **Framework**: Next.js 15 (App Router) + React 19
+- **Language**: TypeScript (strict mode)
+- **Database**: PostgreSQL + Prisma ORM
+- **Auth**: Better Auth (email/password, OAuth)
+- **Styling**: TailwindCSS v4 + Shadcn/UI
+- **Email**: React Email + Resend
+- **Testing**: Vitest + Playwright
+- **Package Manager**: pnpm
 
-The `prisma/seed.ts` script now seeds:
+## 📚 Documentation
 
-- Auth users, organizations, members
-- Subjects, academic years, semesters
-- Courses & syllabus concepts
-- Enrollments (`user_courses`)
-- Video jobs, concepts, concept match
-- Flashcard, review session & event
+- **[Guide Docker](README.docker.md)** - Documentation complète Docker
+- **[Guide Agent IA](AGENTS.md)** - Instructions pour Claude/Copilot
+- **[Documentation Projet](documentation_starter_pack/README.md)** - Vision, architecture, ADRs
+- **[NOW.TS Course](https://codeline.app/courses/clqn8pmte0001lr54itcjzl59/lessons/clqn8pz990003112iia11p7uo)** - Setup du template original
 
-Run:
+## 🛠️ Scripts de Développement
 
 ```bash
-pnpm prisma db seed
+pnpm dev            # Serveur de développement (Turbopack)
+pnpm build          # Build production
+pnpm start          # Démarrer production
+pnpm test           # Tests unitaires
+pnpm test:e2e       # Tests E2E
+pnpm lint           # Linter
+pnpm ts             # Type checking
+pnpm clean          # Lint + type check + format
 ```
 
-(If not wired yet, you can run: `ts-node prisma/seed.ts` or add a `prisma.seed` script in `package.json`).
+## 🔧 Configuration Requise
 
-### 6. Verify
-
-Open the Supabase SQL editor or connect with psql to confirm tables populated:
+Créer un fichier `.env.local` ou `.env` avec :
 
 ```bash
-pnpm prisma studio
+# Database
+DATABASE_URL="postgresql://..."
+DATABASE_URL_UNPOOLED="postgresql://..."
+
+# Auth
+BETTER_AUTH_SECRET="..." # Générer avec: openssl rand -base64 32
+
+# Email
+RESEND_API_KEY="re_..."
+EMAIL_FROM="noreply@yourdomain.com"
+
+# Pour le projet Hack the Gap
+OPENAI_API_KEY="sk-..." # Extraction de concepts
 ```
 
-### 7. Regeneration After Schema Changes
+## 🤝 Contributions
 
-Whenever you edit `prisma/schema/schema.prisma`:
+Feel free to create a pull request with any changes you think valuable.
 
-```bash
-pnpm prisma migrate dev --name <change>
-pnpm prisma generate
-```
+## 📄 License
 
-### Inconsistencies & Notes
-
-- We avoided Prisma enums per repo conventions (string columns hold status/difficulty).
-- Composite key for `user_courses` aligns with data dictionary (no surrogate id).
-- Academic years & semesters seeded with deterministic IDs (`year-<level>`, `sem-<number>`) for idempotent upserts.
-- Seed uses minimal inline type aliases to keep strict TypeScript without depending on generated Prisma types at build time.
-
-### Troubleshooting
-
-| Issue | Fix |
-|-------|-----|
-| Pool exhaustion during migration | Use `DIRECT_URL` (already set) |
-| P1001 cannot reach host | Verify host uses dots (`aws-1.eu-west-1.pooler.supabase.com`) and username pattern `postgres.<ref>` |
-| Wrong password | Copy again from Supabase Database settings (avoid quoting artifacts) |
-| Local firewall/VPN block | Temporarily disable VPN or whitelist 5432/6543 |
-| Missing tables after migrate | Ensure `.env` is loaded, re-run `pnpm prisma migrate dev` |
-| Seed fails with type errors | Run `pnpm prisma generate` first |
-| Auth tables missing | Regenerate Better-Auth file via CLI per `better-auth.prisma` header |
-
-### Next Steps
-
-- Add uniqueness constraints if subject names can collide.
-- Add basic check constraints (confidence between 0 and 1) via raw SQL migration for additional safety.
-- Introduce background job table for scaling video processing later (post-MVP).
+See LICENSE.TXT for details.

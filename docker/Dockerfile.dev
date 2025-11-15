@@ -1,0 +1,26 @@
+# Development Dockerfile with hot reload
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@10.14.0 --activate
+
+# Install dependencies
+COPY package.json pnpm-lock.yaml ./
+COPY prisma.config.ts ./
+COPY prisma ./prisma
+COPY .npmrc ./
+
+RUN pnpm install
+
+# Copy source code
+COPY . .
+
+# Generate Prisma Client
+RUN pnpm prisma generate
+
+EXPOSE 3000
+
+# Start development server with hot reload
+CMD ["sh", "-c", "pnpm prisma migrate deploy && pnpm dev"]

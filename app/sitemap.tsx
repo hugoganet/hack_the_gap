@@ -1,8 +1,7 @@
-import { getPosts } from "@/features/posts/post-manager";
 import type { MetadataRoute } from "next";
 
+// Posts removed for hackathon - simplified sitemap
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPosts();
   return [
     {
       url: "https://codeline.app",
@@ -19,13 +18,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "monthly",
     },
-    ...posts.map(
-      (post) =>
-        ({
-          url: `https://codeline.app/posts/${post.slug}`,
-          lastModified: new Date(post.attributes.date),
-          changeFrequency: "monthly",
-        }) as const,
-    ),
   ];
 }
