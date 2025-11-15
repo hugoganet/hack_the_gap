@@ -1,4 +1,4 @@
-import { getAvailableCourses } from "@/app/actions/course-enrollment.action";
+import { getAvailableCourses } from "@app/actions/course-enrollment.action";
 import { getUser } from "@/lib/auth/auth-user";
 import { redirect } from "next/navigation";
 import { CourseSelectionClient } from "./course-selection-client";

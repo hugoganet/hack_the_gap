@@ -8,77 +8,72 @@ AI-powered Zettelkasten that auto-converts students' passive content consumption
 
 ## 🚀 Quick Start
 
-### Option 1: Docker (Recommandé)
+### Prerequisites
 
-Le moyen le plus rapide pour démarrer le projet :
+- Node.js 20+
+- pnpm package manager
+- A Supabase account (free tier works great!)
 
-```bash
-# Setup + Build + Start tout en une commande
-make quick-start
+### Installation
 
-# Ou manuellement :
-make setup      # Créer .env et générer les secrets
-make build      # Build les images Docker
-make up         # Démarrer les services
-```
-
-L'application sera disponible sur http://localhost:3000
-
-📚 **[Guide Docker complet →](README.docker.md)**
-
-### Option 2: Installation Locale
-
-Si vous préférez développer sans Docker :
-
-1. **Prérequis** : Node.js 20+, pnpm, PostgreSQL
-
-2. **Installation** :
+1. **Clone and install dependencies**:
    ```bash
    pnpm install
-   cp .env.docker.example .env.local
-   # Configurer DATABASE_URL dans .env.local
    ```
 
-3. **Database setup** :
+2. **Setup Supabase Database**:
+   
+   📚 **[Complete Supabase Setup Guide →](./SUPABASE_SETUP.md)**
+   
+   Quick steps:
+   - Create a project at [Supabase Dashboard](https://app.supabase.com)
+   - Get your connection strings from Project Settings → Database
+   - Copy `.env.example` to `.env` and add your Supabase credentials
+
+3. **Configure Environment**:
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your Supabase connection strings
+   ```
+
+4. **Initialize Database**:
    ```bash
    pnpm prisma generate
-   pnpm prisma migrate dev
-   pnpm prisma:seed  # Optionnel
+   pnpm prisma db push
+   pnpm prisma:seed  # Optional: Add sample data
    ```
 
-4. **Démarrage** :
+5. **Start Development Server**:
    ```bash
    pnpm dev
    ```
 
-## 📋 Commandes Docker (via Makefile)
+The application will be available at **http://localhost:3000**
+
+## 📋 Development Commands
 
 ```bash
-make help           # Voir toutes les commandes disponibles
+# Development
+pnpm dev            # Start development server (Turbopack)
+pnpm build          # Build for production
+pnpm start          # Start production server
 
-# Production
-make up             # Démarrer les services
-make down           # Arrêter les services
-make logs           # Voir les logs
-make restart        # Redémarrer
+# Database
+pnpm prisma generate    # Generate Prisma Client
+pnpm prisma db push     # Push schema to database
+pnpm prisma studio      # Open Prisma Studio (database GUI)
+pnpm prisma:seed        # Seed database with sample data
 
-# Development (avec hot reload)
-make dev            # Démarrer en mode dev (port 3001)
-make dev-down       # Arrêter le mode dev
+# Testing
+pnpm test           # Run unit tests
+pnpm test:e2e       # Run E2E tests
+pnpm test:ci        # Run tests in CI mode
 
-# Base de données
-make migrate        # Exécuter les migrations
-make seed           # Seed la base de données
-make studio         # Ouvrir Prisma Studio
-make db-shell       # Shell PostgreSQL
-
-# Tests
-make test           # Tests unitaires
-make test-e2e       # Tests E2E
-
-# Maintenance
-make clean          # Nettoyer conteneurs
-make reset          # Reset complet (⚠️ perd les données)
+# Code Quality
+pnpm lint           # Run ESLint
+pnpm ts             # Type checking
+pnpm clean          # Lint + type check + format
+pnpm format         # Format code with Prettier
 ```
 
 ## 📦 Stack Technique
@@ -94,43 +89,37 @@ make reset          # Reset complet (⚠️ perd les données)
 
 ## 📚 Documentation
 
-- **[Guide Docker](README.docker.md)** - Documentation complète Docker
-- **[Guide Agent IA](AGENTS.md)** - Instructions pour Claude/Copilot
-- **[Documentation Projet](documentation_starter_pack/README.md)** - Vision, architecture, ADRs
-- **[NOW.TS Course](https://codeline.app/courses/clqn8pmte0001lr54itcjzl59/lessons/clqn8pz990003112iia11p7uo)** - Setup du template original
+- **[Supabase Setup Guide](./SUPABASE_SETUP.md)** - Complete database setup instructions
+- **[Hackathon Quick Start](./HACKATHON_QUICKSTART.md)** - Fast-track development guide
+- **[Agent IA Guide](./AGENTS.md)** - Instructions for Claude/Copilot
+- **[Project Documentation](./documentation_starter_pack/README.md)** - Vision, architecture, ADRs
+- **[NOW.TS Course](https://codeline.app/courses/clqn8pmte0001lr54itcjzl59/lessons/clqn8pz990003112iia11p7uo)** - Original template setup
 
-## 🛠️ Scripts de Développement
+## 🔧 Environment Variables
 
-```bash
-pnpm dev            # Serveur de développement (Turbopack)
-pnpm build          # Build production
-pnpm start          # Démarrer production
-pnpm test           # Tests unitaires
-pnpm test:e2e       # Tests E2E
-pnpm lint           # Linter
-pnpm ts             # Type checking
-pnpm clean          # Lint + type check + format
-```
-
-## 🔧 Configuration Requise
-
-Créer un fichier `.env.local` ou `.env` avec :
+Create a `.env` file with the following variables:
 
 ```bash
-# Database
-DATABASE_URL="postgresql://..."
-DATABASE_URL_UNPOOLED="postgresql://..."
+# Database - Supabase
+DATABASE_URL="postgresql://postgres.xxxxx:[PASSWORD]@aws-0-region.pooler.supabase.com:6543/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://postgres:[PASSWORD]@db.xxxxx.supabase.co:5432/postgres"
 
 # Auth
-BETTER_AUTH_SECRET="..." # Générer avec: openssl rand -base64 32
+BETTER_AUTH_SECRET="..." # Generate with: openssl rand -base64 32
+BETTER_AUTH_URL="http://localhost:3000"
 
-# Email
+# Email (Optional for development)
 RESEND_API_KEY="re_..."
 EMAIL_FROM="noreply@yourdomain.com"
 
-# Pour le projet Hack the Gap
-OPENAI_API_KEY="sk-..." # Extraction de concepts
+# AI - Required for concept extraction
+OPENAI_API_KEY="sk-..."
+
+# Public
+NEXT_PUBLIC_EMAIL_CONTACT="support@hackthegap.com"
 ```
+
+See `.env.example` for a complete template.
 
 ## 🤝 Contributions
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { enrollInCourse } from "@/app/actions/course-enrollment.action";
+import { enrollInCourse } from "@app/actions/course-enrollment.action";
 import { Button } from "@/components/ui/button";
 import {
   Card,

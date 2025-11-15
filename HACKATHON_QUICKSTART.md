@@ -1,38 +1,64 @@
 # 🚀 Hack the Gap - Guide de Démarrage Rapide
 
-> Template simplifié pour votre hackathon - Auth, Admin, Database déjà configurés
+> Template simplifié pour votre hackathon - Auth, Admin, Database déjà configurés avec Supabase
 
-## ⚡ Démarrage en 2 minutes
+## ⚡ Démarrage en 5 minutes
 
-### 1. Setup Initial
+### 1. Setup Supabase
+
+1. Créer un compte sur [Supabase](https://app.supabase.com)
+2. Créer un nouveau projet
+3. Récupérer vos connection strings :
+   - Aller dans **Project Settings** → **Database**
+   - Copier la **Connection string** (URI format)
+   - Activer **"Use connection pooling"** pour obtenir l'URL pooler
+
+### 2. Setup Initial
 
 ```bash
 # Installer les dépendances
 pnpm install
 
 # Copier le fichier d'environnement
-cp .env.docker.example .env
+cp .env.example .env
+
+# Éditer .env et ajouter vos credentials Supabase
+# DATABASE_URL=postgresql://postgres.xxxxx:[PASSWORD]@aws-0-region.pooler.supabase.com:6543/postgres?pgbouncer=true
+# DIRECT_URL=postgresql://postgres:[PASSWORD]@db.xxxxx.supabase.co:5432/postgres
 
 # Générer un secret pour l'auth
 openssl rand -base64 32
 # Copier le résultat dans .env → BETTER_AUTH_SECRET
 ```
 
-### 2. Lancer avec Docker (Recommandé)
+### 3. Initialiser la Database
 
 ```bash
-# Tout en une commande
-make quick-start
+# Générer le client Prisma
+pnpm prisma generate
+
+# Pousser le schema vers Supabase
+pnpm prisma db push
+
+# (Optionnel) Ajouter des données de test
+pnpm prisma:seed
+```
+
+### 4. Lancer l'Application
+
+```bash
+# Démarrer le serveur de développement
+pnpm dev
 
 # L'app sera disponible sur http://localhost:3000
 ```
 
-### 3. Première Connexion
+### 5. Première Connexion
 
 1. Ouvrir http://localhost:3000
 2. Cliquer sur "Sign Up"
 3. Créer un compte (email: test@test.com, password: test1234)
-4. Les emails sont loggés dans la console : `make logs-app`
+4. Les emails sont loggés dans la console du terminal
 
 ## 📁 Structure du Projet (Simplifié)
 
@@ -354,59 +380,48 @@ echo "OPENAI_API_KEY=sk-your-key-here" >> .env
 - Algorithme spaced repetition
 - Dashboard progression
 
-## 📊 Commandes Docker Essentielles
+## 📊 Commandes Essentielles
 
 ```bash
-# Démarrer (production mode)
-make up
+# Développement
+pnpm dev                # Démarrer le serveur de développement
+pnpm build              # Build pour production
+pnpm start              # Démarrer en mode production
 
-# Démarrer en dev (hot reload sur port 3001)
-make dev
+# Database
+pnpm prisma generate    # Générer le client Prisma
+pnpm prisma db push     # Pousser le schema vers Supabase
+pnpm prisma studio      # Ouvrir Prisma Studio (GUI database)
+pnpm prisma:seed        # Seed la base de données
 
-# Arrêter
-make down
+# Tests
+pnpm test               # Tests unitaires
+pnpm test:e2e           # Tests E2E
 
-# Voir les logs en temps réel
-make logs
-
-# Logs app seulement
-make logs-app
-
-# Prisma Studio (GUI database)
-make studio
-
-# Shell dans le conteneur
-make shell
-
-# Shell PostgreSQL
-make db-shell
-
-# Redémarrer
-make restart
-
-# Rebuild complet
-make down && make build && make up
-
-# Reset complet (⚠️ PERD LES DONNÉES)
-make reset
+# Code Quality
+pnpm lint               # Linter
+pnpm ts                 # Type checking
+pnpm clean              # Lint + type check + format
 ```
 
 ## 🔧 Variables d'Environnement Importantes
 
 ```bash
-# .env (créé à partir de .env.docker.example)
+# .env (créé à partir de .env.example)
 
-# Database (Docker auto-configuré)
-DATABASE_URL=postgresql://postgres:postgres@db:5432/hack_the_gap
+# Database - Supabase (REQUIS)
+DATABASE_URL=postgresql://postgres.xxxxx:[PASSWORD]@aws-0-region.pooler.supabase.com:6543/postgres?pgbouncer=true
+DIRECT_URL=postgresql://postgres:[PASSWORD]@db.xxxxx.supabase.co:5432/postgres
 
 # Auth (REQUIS - générer avec openssl rand -base64 32)
 BETTER_AUTH_SECRET=your-secret-key-here
+BETTER_AUTH_URL=http://localhost:3000
 
 # Email (Optionnel pour MVP - les emails sont loggés en console)
 RESEND_API_KEY=re_your_api_key
 EMAIL_FROM=noreply@hackthegap.com
 
-# OpenAI (À AJOUTER pour votre projet)
+# OpenAI (REQUIS pour extraction de concepts)
 OPENAI_API_KEY=sk-your-openai-key
 
 # OAuth (Optionnel)
@@ -416,22 +431,18 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 ```
 
+📚 **[Guide complet Supabase →](./SUPABASE_SETUP.md)**
+
 ## 🐛 Debugging
 
 ### Voir les logs
 
 ```bash
-# Tous les logs
-make logs
+# Logs du serveur de développement
+# Les logs s'affichent directement dans le terminal où vous avez lancé `pnpm dev`
 
-# Suivre les logs en temps réel
-docker compose -f docker/docker-compose.yml logs -f
-
-# Logs de l'app uniquement
-make logs-app
-
-# Logs PostgreSQL
-make logs-db
+# Logs de l'application
+# Vérifier la console du navigateur (F12)
 ```
 
 ### Vérifier la santé
@@ -440,26 +451,25 @@ make logs-db
 # Health check API
 curl http://localhost:3000/api/health
 
-# Liste des conteneurs
-docker compose -f docker/docker-compose.yml ps
-
-# Entrer dans le conteneur
-make shell
+# Vérifier la connexion Supabase
+pnpm prisma studio
+# Si Prisma Studio s'ouvre, la connexion fonctionne
 ```
 
 ### Reset si problème
 
 ```bash
-# Soft reset (redémarrage)
-make restart
+# Régénérer le client Prisma
+pnpm prisma generate
 
-# Hard reset (rebuild sans cache)
-make down
-docker compose -f docker/docker-compose.yml build --no-cache
-make up
+# Re-pousser le schema
+pnpm prisma db push
 
-# Nuclear reset (⚠️ perd toutes les données)
-make reset
+# Reset complet de la database (⚠️ perd toutes les données)
+# Aller dans Supabase Dashboard → Database → Tables
+# Supprimer toutes les tables manuellement, puis :
+pnpm prisma db push
+pnpm prisma:seed
 ```
 
 ## 📚 Ressources
@@ -525,24 +535,27 @@ pnpm test
 
 | Problème | Solution |
 |----------|----------|
-| Port 3000 occupé | `lsof -i :3000` puis `kill -9 <PID>` ou changer port dans docker-compose.yml |
-| Prisma errors | `pnpm prisma generate` puis restart |
+| Port 3000 occupé | `lsof -i :3000` puis `kill -9 <PID>` |
+| Prisma errors | `pnpm prisma generate` puis redémarrer |
 | Auth ne fonctionne pas | Vérifier `BETTER_AUTH_SECRET` dans `.env` |
-| Database connection failed | `make logs-db` pour voir les logs PostgreSQL |
-| Hot reload ne marche pas | Utiliser `make dev` au lieu de `make up` |
+| Database connection failed | Vérifier `DATABASE_URL` et `DIRECT_URL` dans `.env` |
+| "Can't reach database server" | Vérifier que votre projet Supabase est actif |
+| "Prepared statement already exists" | Ajouter `?pgbouncer=true` à `DATABASE_URL` |
 
 ## ✅ Checklist Avant de Coder
 
+- [ ] Projet Supabase créé
 - [ ] `pnpm install` effectué
-- [ ] `.env` créé et configuré (au minimum `BETTER_AUTH_SECRET`)
-- [ ] `make quick-start` lancé avec succès
+- [ ] `.env` créé avec `DATABASE_URL`, `DIRECT_URL`, et `BETTER_AUTH_SECRET`
+- [ ] `pnpm prisma db push` exécuté avec succès
+- [ ] `pnpm dev` lancé avec succès
 - [ ] http://localhost:3000 accessible
 - [ ] Account créé et login fonctionne
-- [ ] Prisma Studio accessible (`make studio`)
+- [ ] Prisma Studio accessible (`pnpm prisma studio`)
 - [ ] Lecture de `documentation_starter_pack/docs/vision.md`
 
 ---
 
 **🎉 Vous êtes prêt ! Bon hackathon !**
 
-> En cas de blocage : vérifier les logs avec `make logs` et consulter la doc Better Auth / Prisma
+> En cas de blocage : consulter [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) et la doc Better Auth / Prisma
