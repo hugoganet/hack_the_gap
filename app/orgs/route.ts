@@ -18,6 +18,18 @@ export const GET = async () => {
     return NextResponse.redirect(`${getServerUrl()}/auth/signin`);
   }
 
+  // Check if user has enrolled in any courses
+  const courseEnrollmentCount = await prisma.userCourse.count({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  // If user hasn't enrolled in any courses, redirect to course selection
+  if (courseEnrollmentCount === 0) {
+    return NextResponse.redirect(`${getServerUrl()}/courses/select`);
+  }
+
   const member = await prisma.member.findFirst({
     where: {
       userId: user.id,
