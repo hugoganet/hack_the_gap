@@ -10,7 +10,7 @@ export const SiteConfig = {
     address: "", // Not needed for hackathon
   },
   brand: {
-    primary: "#3b82f6", // Blue for education
+    primary: "#8b5cf6", // Purple for education
   },
   team: {
     image: "/images/icon.png",
