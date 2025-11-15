@@ -24,6 +24,18 @@ model Feedback {
   updatedAt DateTime @updatedAt
 }
 
+model BetaInvitation {
+  id        String   @id @default(nanoid(11))
+  email     String   @unique
+  status    String   @default("pending") // pending, invited, registered
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([email])
+  @@index([status])
+}
+
 // Domain Models (Hackathon MVP) – Avoid Prisma enums per project conventions.
 // Each model maps to plural snake_case table name to align with provided JSON schema & data dictionary.
 

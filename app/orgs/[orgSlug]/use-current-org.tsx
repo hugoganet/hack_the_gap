@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/promise-function-async */
 "use client";
 
-import type { CurrentOrgPayload } from "@/lib/organizations/get-org";
 import type { PropsWithChildren } from "react";
 import { create } from "zustand";
 

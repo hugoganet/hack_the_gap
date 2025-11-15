@@ -9,7 +9,7 @@ export const GET = route
       orgId: z.string(),
     }),
   )
-  .handler(async (req, { params }) => {
+  .handler(async (_req, { params: _params }) => {
     await getRequiredAdmin();
 
     // No payment history in hackathon version
