@@ -284,6 +284,8 @@ Search & discoverability
 - US-0009: Gap analysis
 - Polish and test demo flow
 
-**Total estimated effort:** ~47 hours (parallelizable)
+**Total estimated effort:** ~52-68 hours (parallelizable with pre-work)
+
+**Note:** Only 9 MVP user stories documented (US-0001 to US-0009). US-0010, US-0011, US-0012 mentioned in original planning but not yet specified. US-0012 (Admin pre-load syllabi) is referenced in implementation plan but spec not yet created.
 
 ---
