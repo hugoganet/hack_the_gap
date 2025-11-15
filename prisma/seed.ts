@@ -10,7 +10,7 @@ type Course = { id: string; code: string; name: string }; // only fields we use 
 type SyllabusConcept = { id: string; courseId: string; conceptText: string };
 type UserCourse = { userId: string; courseId: string };
 type Organization = { id: string; name: string };
-declare const process: { exit(code?: number): void };
+declare const process: { exit: (code?: number) => void };
 import { prisma } from "../src/lib/prisma";
 
 // Set seed for reproducibility
@@ -140,7 +140,7 @@ async function main() {
     { name: "Economics" },
   ];
   const subjects: Subject[] = await Promise.all(
-    subjectsData.map((s) =>
+    subjectsData.map(async (s) =>
       prisma.subject.upsert({
         where: { name: s.name }, // assuming unique name
         update: {},
@@ -157,7 +157,7 @@ async function main() {
     { name: "Licence 3", level: 3 },
   ];
   const years: AcademicYear[] = await Promise.all(
-    yearsData.map((y) =>
+    yearsData.map(async (y) =>
       prisma.academicYear.upsert({
         where: { name: y.name }, // assume unique name
         update: { level: y.level },
@@ -169,7 +169,7 @@ async function main() {
   // Semesters
   const semestersData = [1, 5, 6];
   const semesters: Semester[] = await Promise.all(
-    semestersData.map((n) =>
+    semestersData.map(async (n) =>
       prisma.semester.upsert({
         where: { id: `sem-${n}` }, // id used as unique key
         update: { number: n },
@@ -214,7 +214,7 @@ async function main() {
     },
   ];
   const courses: Course[] = await Promise.all(
-    coursesData.map((c) =>
+    coursesData.map(async (c) =>
       prisma.course.upsert({
         where: { code: c.code },
         update: {
@@ -265,7 +265,7 @@ async function main() {
     },
   ];
   const syllabusConcepts: SyllabusConcept[] = await Promise.all(
-    syllabusConceptsData.map((sc) => {
+    syllabusConceptsData.map(async (sc) => {
       const course = courses.find((c) => c.code === sc.courseCode);
       if (!course) throw new Error(`Missing course for syllabus concept ${sc.conceptText}`);
       return prisma.syllabusConcept.create({
@@ -286,7 +286,7 @@ async function main() {
     [
       { user: users[0], course: courses[0], learnedCount: 12 },
       { user: users[1], course: courses[1], learnedCount: 5 },
-    ].map((e) =>
+    ].map(async (e) =>
       prisma.userCourse.upsert({
         where: { userId_courseId: { userId: e.user.id, courseId: e.course.id } },
         update: { learnedCount: e.learnedCount },
@@ -320,7 +320,7 @@ async function main() {
         processedConceptsCount: null,
         completedAt: null,
       },
-    ].map((vj) =>
+    ].map(async (vj) =>
       prisma.videoJob.create({
         data: {
           id: crypto.randomUUID(),
@@ -351,7 +351,7 @@ async function main() {
         timestamp: "05:12",
         confidence: 0.85,
       },
-    ].map((c) =>
+    ].map(async (c) =>
       prisma.concept.create({
         data: {
           id: crypto.randomUUID(),
