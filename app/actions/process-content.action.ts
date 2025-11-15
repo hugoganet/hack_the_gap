@@ -4,6 +4,10 @@ import { env } from "@/lib/env";
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import path from "node:path";
+import fs from "node:fs/promises";
+import { generateText } from "ai";
+import { getBlackboxModel } from "@/lib/blackbox";
 
 const ProcessContentSchema = z.object({
   url: z.string().url("Invalid URL format"),
@@ -145,14 +149,103 @@ export async function processContent(url: string) {
 
       console.log("Stored video job in database:", videoJob.id);
 
+      // Phase 2: Extract concepts using the production prompt (prefer Blackbox, fallback OpenAI)
+      let processedConceptsCount: number | undefined;
+      try {
+        // Choose model provider: Blackbox first if key present, else OpenAI if key present
+        let model: any | null = null;
+        if (env.BLACKBOX_API_KEY) {
+          model = getBlackboxModel();
+        } else if (env.OPENAI_API_KEY) {
+          const { openaiModel } = await import("@/lib/ai");
+          model = openaiModel;
+        } else {
+          console.warn("No AI provider configured (BLACKBOX_API_KEY or OPENAI_API_KEY). Skipping concept extraction.");
+        }
+
+        if (model) {
+          const promptPath = path.resolve(process.cwd(), "src/master-prompts/transcript-concept-extraction-prompt.md");
+          const promptContent = await fs.readFile(promptPath, "utf8");
+
+          // Build user message using the template defined in the prompt
+          const transcriptBlock = [
+            "Please extract atomic, testable learning concepts from the following video transcript.",
+            "Return a single JSON object that follows the schema in your instructions.",
+            "",
+            "---TRANSCRIPT START---",
+            fullTranscript,
+            "---TRANSCRIPT END---",
+          ].join("\n");
+
+          // Keep temperature low for consistency
+          const { text } = await generateText({
+            model,
+            temperature: 0.2,
+            maxOutputTokens: 3000,
+            // Provide the entire prompt as context plus the user message
+            prompt: `${promptContent}\n\n${transcriptBlock}`,
+          });
+
+          // Extract JSON from model response
+          const jsonText = extractJson(text);
+          const parsed = JSON.parse(jsonText) as {
+            concepts?: Array<{
+              conceptText: string;
+              definition?: string | null;
+              timestamp?: string | null;
+              confidence: number;
+            }>;
+            error?: unknown;
+          };
+
+          if ((parsed as any)?.error) {
+            console.warn("Concept extraction returned error:", (parsed as any).error);
+          } else if (parsed?.concepts && parsed.concepts.length > 0) {
+            // Normalize and clamp fields to Prisma constraints
+            const conceptsData = parsed.concepts.map((c) => ({
+              videoJobId: videoJob.id,
+              conceptText: truncate(c.conceptText?.trim() ?? "", 100),
+              definition: c.definition ? truncate(c.definition.trim(), 400) : null,
+              timestamp: c.timestamp?.trim() || null,
+              confidence: Number.isFinite(c.confidence) ? Math.max(0, Math.min(1, c.confidence)) : 0.0,
+            })).filter((c) => c.conceptText.length >= 3);
+
+            if (conceptsData.length > 0) {
+              // Insert concepts
+              await prisma.concept.createMany({ data: conceptsData });
+              processedConceptsCount = conceptsData.length;
+
+              // Update job with count and status
+              await prisma.videoJob.update({
+                where: { id: videoJob.id },
+                data: {
+                  processedConceptsCount,
+                  status: "concepts_extracted",
+                  completedAt: new Date(),
+                },
+              });
+              console.log(
+                `Concept extraction complete: ${processedConceptsCount} concepts inserted for videoJob ${videoJob.id}`,
+              );
+            }
+          } else {
+            console.warn("Concept extraction produced no concepts.");
+          }
+        }
+      } catch (aiErr) {
+        console.error("Concept extraction error:", aiErr);
+      }
+
       return {
         success: true,
-        message: `Successfully fetched transcript! (${apiResponse.data.wordCount} words)`,
+        message: `Successfully fetched transcript! (${apiResponse.data.wordCount} words)` +
+          (processedConceptsCount ? ` • Extracted ${processedConceptsCount} concepts` : ""),
         data: {
           videoJobId: videoJob.id,
           url: apiResponse.data.url,
           wordCount: apiResponse.data.wordCount,
           segments: apiResponse.data.segments,
+          processedConceptsCount: processedConceptsCount ?? 0,
         },
       };
     } catch (dbError) {
@@ -208,4 +301,21 @@ function extractYouTubeVideoId(url: string): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Extract the first valid JSON object from a possibly noisy model response.
+ */
+function extractJson(text: string): string {
+  const start = text.indexOf("{");
+  const end = text.lastIndexOf("}");
+  if (start !== -1 && end !== -1 && end > start) {
+    return text.slice(start, end + 1);
+  }
+  // Fallback - return as-is (will likely throw JSON.parse error)
+  return text.trim();
+}
+
+function truncate(s: string, max: number): string {
+  return s.length > max ? s.slice(0, max) : s;
 }

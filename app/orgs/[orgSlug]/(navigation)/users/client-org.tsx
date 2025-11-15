@@ -74,7 +74,11 @@ export const ClientOrg = () => {
       
       if (result.success) {
         const message = "message" in result ? result.message : "Content processed successfully!";
-        toast.success(message);
+        const concepts = (result as any).data?.processedConceptsCount ?? 0;
+        const toastMessage = concepts > 0
+          ? `${message} Extracted ${concepts} concept${concepts === 1 ? "" : "s"}.`
+          : `${message} No concepts extracted.`;
+        toast.success(toastMessage);
         setUrl("");
       } else {
         const error = "error" in result ? result.error : "Failed to process content";

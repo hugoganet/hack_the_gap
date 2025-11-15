@@ -19,6 +19,8 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "production", "test"]),
     // OpenAI for concept extraction (add your key in .env)
     OPENAI_API_KEY: z.string().optional(),
+    // Blackbox AI (OpenAI-compatible) for concept extraction
+    BLACKBOX_API_KEY: z.string().optional(),
     // SocialKit API for processing YouTube videos
     SOCIALKIT_API_KEY: z.string().min(1),
   },
