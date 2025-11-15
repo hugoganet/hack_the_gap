@@ -150,33 +150,37 @@ async function main() {
   );
   subjects.forEach((s: Subject) => logger.info(`🧪 Subject: ${s.name}`));
 
-  // Academic Years
-  const yearsData = [
-    { name: "Licence 1", level: 1 },
-    { name: "Licence 2", level: 2 },
-    { name: "Licence 3", level: 3 },
-  ];
-  const years: AcademicYear[] = await Promise.all(
-    yearsData.map((y) =>
-      prisma.academicYear.upsert({
-        where: { name: y.name }, // assume unique name
-        update: { level: y.level },
-        create: { id: `year-${y.level}`, name: y.name, level: y.level },
-      }),
-    ),
-  );
+  // Academic Years - use findMany or create to avoid upsert issues
+  const existingYears = await prisma.academicYear.findMany();
+  let years: AcademicYear[];
+  
+  if (existingYears.length === 0) {
+    const yearsData = [
+      { id: crypto.randomUUID(), name: "Licence 1", level: 1 },
+      { id: crypto.randomUUID(), name: "Licence 2", level: 2 },
+      { id: crypto.randomUUID(), name: "Licence 3", level: 3 },
+    ];
+    await prisma.academicYear.createMany({ data: yearsData });
+    years = await prisma.academicYear.findMany();
+  } else {
+    years = existingYears;
+  }
 
-  // Semesters
-  const semestersData = [1, 5, 6];
-  const semesters: Semester[] = await Promise.all(
-    semestersData.map((n) =>
-      prisma.semester.upsert({
-        where: { id: `sem-${n}` }, // id used as unique key
-        update: { number: n },
-        create: { id: `sem-${n}`, number: n },
-      }),
-    ),
-  );
+  // Semesters - use findMany or create to avoid upsert issues
+  const existingSemesters = await prisma.semester.findMany();
+  let semesters: Semester[];
+  
+  if (existingSemesters.length === 0) {
+    const semestersData = [
+      { id: crypto.randomUUID(), number: 1 },
+      { id: crypto.randomUUID(), number: 5 },
+      { id: crypto.randomUUID(), number: 6 },
+    ];
+    await prisma.semester.createMany({ data: semestersData });
+    semesters = await prisma.semester.findMany();
+  } else {
+    semesters = existingSemesters;
+  }
 
   // Helper lookup maps
   const subjectByName: Record<string, Subject> = Object.fromEntries(subjects.map((s) => [s.name, s]));
