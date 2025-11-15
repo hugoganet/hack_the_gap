@@ -29,6 +29,7 @@ Show students which required syllabus concepts they haven't learned yet, enablin
 **Then** they can see a placeholder for "Suggested Resources" (not functional for MVP, just UI)
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Gap list shows only syllabus concepts with zero matches
 - [ ] Each gap shows: concept name, description, category (if available)
 - [ ] Gaps are sorted by importance (core concepts first, if tagged)
@@ -92,6 +93,7 @@ Progress: 12/30 concepts
 ## Scope
 
 **In scope:**
+
 - List all unmatched syllabus concepts
 - Group by category (if available)
 - Sort by importance (core concepts first)
@@ -100,6 +102,7 @@ Progress: 12/30 concepts
 - Mobile-friendly list view
 
 **Out of scope:**
+
 - Recommended resources/videos for gaps (post-MVP)
 - AI-generated study plan for filling gaps (post-MVP)
 - "Add to study queue" action (post-MVP)
@@ -110,6 +113,7 @@ Progress: 12/30 concepts
 ## Technical Design
 
 **Components impacted:**
+
 - `GapAnalysis.tsx` (new component)
 - `GapService.ts` (backend queries)
 - `ConceptList.tsx` (reusable list component)
@@ -341,16 +345,19 @@ describe('Gap Analysis', () => {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed
 - Feature flag: `gap_analysis_enabled`
 
 **Metrics:**
+
 - Gap analysis view rate (% users who view gaps)
 - Average gaps per user
 - Gap reduction rate (gaps filled per week)
 - Click-through to "Find Resources" (even if disabled, track intent)
 
 **Post-launch checklist:**
+
 - [ ] Verify gaps update after video processing
 - [ ] Test with 0 gaps (100% coverage)
 - [ ] Test with all gaps (new user)
@@ -358,6 +365,7 @@ describe('Gap Analysis', () => {
 - [ ] Mobile responsiveness check
 
 **Post-MVP improvements:**
+
 - Recommended resources for each gap (YouTube search integration)
 - AI-generated study plan ("Learn X before Y")
 - "Add to study queue" action

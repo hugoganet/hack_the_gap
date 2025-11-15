@@ -29,6 +29,7 @@ Display student progress toward course mastery with a simple, motivating dashboa
 **Then** concepts with at least one review show as "in progress," concepts with 3+ easy ratings show as "mastered"
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Progress counter shows: "12/30 concepts learned (40%)"
 - [ ] Visual progress bar (e.g., 40% filled)
 - [ ] Three progress states: Not Started, In Progress, Mastered
@@ -89,6 +90,7 @@ Display student progress toward course mastery with a simple, motivating dashboa
 ## Scope
 
 **In scope:**
+
 - Overall progress counter (X/Y concepts)
 - Visual progress bar
 - Three progress states (Mastered, In Progress, Not Started)
@@ -97,6 +99,7 @@ Display student progress toward course mastery with a simple, motivating dashboa
 - Real-time updates after video processing
 
 **Out of scope:**
+
 - Historical progress tracking (progress over time graph) - post-MVP
 - Per-topic/category progress breakdown - post-MVP
 - Comparison with other students (leaderboard) - post-MVP
@@ -107,6 +110,7 @@ Display student progress toward course mastery with a simple, motivating dashboa
 ## Technical Design
 
 **Components impacted:**
+
 - `ProgressDashboard.tsx` (new component)
 - `ProgressService.ts` (backend calculations)
 - `ConceptList.tsx` (grouped concept display)
@@ -336,16 +340,19 @@ function ProgressDashboard({ courseId }: { courseId: string }) {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed
 - Feature flag: `progress_dashboard_enabled`
 
 **Metrics:**
+
 - Dashboard load time (target: <2s)
 - Average progress per user after 1 week
 - Progress distribution (histogram of completion %)
 - Click-through rate to detailed progress view
 
 **Post-launch checklist:**
+
 - [ ] Verify progress updates after video processing
 - [ ] Verify progress updates after review sessions
 - [ ] Test with 0% progress (new user)
@@ -353,6 +360,7 @@ function ProgressDashboard({ courseId }: { courseId: string }) {
 - [ ] Mobile responsiveness check
 
 **Post-MVP improvements:**
+
 - Historical progress graph (progress over time)
 - Per-topic/category breakdown
 - Goal setting and tracking

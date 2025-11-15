@@ -29,6 +29,7 @@ Enable students to review generated flashcards immediately after video processin
 **Then** system schedules next reviews based on difficulty ratings and shows completion summary
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Review interface is mobile-friendly (large tap targets)
 - [ ] Cards show one at a time (no multi-card view for MVP)
 - [ ] User can reveal answer before rating
@@ -88,6 +89,7 @@ Enable students to review generated flashcards immediately after video processin
 ```
 
 **Mobile-first design:**
+
 - Full-screen cards
 - Large, thumb-friendly buttons
 - Swipe gestures (optional: swipe up = reveal, left/right = difficulty)
@@ -96,6 +98,7 @@ Enable students to review generated flashcards immediately after video processin
 ## Scope
 
 **In scope:**
+
 - Single-card view (one at a time)
 - Show question → reveal answer → rate difficulty
 - Three difficulty ratings (Hard, Medium, Easy)
@@ -105,6 +108,7 @@ Enable students to review generated flashcards immediately after video processin
 - Keyboard shortcuts for desktop users
 
 **Out of scope:**
+
 - Multiple review modes (flashcards, cloze, multiple choice) - post-MVP
 - Card editing during review - post-MVP
 - Skip/delete cards - post-MVP
@@ -116,6 +120,7 @@ Enable students to review generated flashcards immediately after video processin
 ## Technical Design
 
 **Components impacted:**
+
 - `ReviewSession.tsx` (new component)
 - `FlashcardView.tsx` (card display component)
 - `ReviewService.ts` (backend session management)
@@ -298,10 +303,12 @@ const KEYBOARD_SHORTCUTS = {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed
 - Feature flag: `review_sessions_enabled`
 
 **Metrics:**
+
 - Session completion rate (% sessions finished vs abandoned)
 - Average time per card (reveal + rate)
 - Difficulty distribution (% hard/medium/easy ratings)
@@ -309,6 +316,7 @@ const KEYBOARD_SHORTCUTS = {
 - Mid-session abandonment rate
 
 **Post-launch checklist:**
+
 - [ ] Test review flow on mobile (iOS and Android)
 - [ ] Verify keyboard shortcuts work on desktop
 - [ ] Test mid-session exit and resume
@@ -316,6 +324,7 @@ const KEYBOARD_SHORTCUTS = {
 - [ ] Monitor session abandonment rate
 
 **Post-MVP improvements:**
+
 - Undo last rating
 - Skip/delete cards during review
 - Audio playback of cards

@@ -29,6 +29,7 @@ Enable first-time users to select which course they're studying from a dropdown 
 **Then** their previously selected course is remembered and auto-selected
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Dropdown displays 3 courses with clear names (Philosophy 101, Biology 101, Economics 101)
 - [ ] Course selection persists in browser localStorage or user session
 - [ ] After selection, progress counter shows "0/[total concepts] concepts for this course"
@@ -54,6 +55,7 @@ Enable first-time users to select which course they're studying from a dropdown 
 ```
 
 **Mobile-first wireframe:**
+
 - Large dropdown (easy to tap)
 - Course names clearly visible
 - Concept count shown for transparency
@@ -62,6 +64,7 @@ Enable first-time users to select which course they're studying from a dropdown 
 ## Scope
 
 **In scope:**
+
 - Dropdown UI component
 - 3 pre-loaded courses (hard-coded for MVP)
 - Course selection persistence (localStorage)
@@ -69,6 +72,7 @@ Enable first-time users to select which course they're studying from a dropdown 
 - Basic course switching with confirmation
 
 **Out of scope:**
+
 - Manual syllabus upload (post-MVP)
 - Multi-course tracking simultaneously (post-MVP)
 - Course search/filtering (only 3 courses for MVP)
@@ -78,11 +82,13 @@ Enable first-time users to select which course they're studying from a dropdown 
 ## Technical Design
 
 **Components impacted:**
+
 - `CourseSelector.tsx` (new component)
 - `Dashboard.tsx` (consumes selected course)
 - `AppContext.tsx` (stores selected course state)
 
 **API contracts:**
+
 ```typescript
 // GET /api/courses
 Response: {
@@ -109,6 +115,7 @@ Response: {
 ```
 
 **Data model changes:**
+
 ```sql
 -- Courses table (pre-populated for MVP)
 CREATE TABLE courses (
@@ -129,6 +136,7 @@ CREATE TABLE user_courses (
 ```
 
 **State management:**
+
 ```typescript
 interface AppState {
   selectedCourse: {
@@ -144,6 +152,7 @@ interface AppState {
 ```
 
 **Risks:**
+
 - **Low complexity**: Straightforward dropdown, minimal risk
 - **Dependency**: All other features depend on course being selected first
 - **Persistence**: If localStorage is cleared, user loses selection (acceptable for MVP)
@@ -151,15 +160,18 @@ interface AppState {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed (new feature)
 - No feature flag required for MVP
 
 **Metrics:**
+
 - Course selection rate (% users who select a course within 30s of landing)
 - Course distribution (which courses are most popular)
 - Course switching rate (do users change courses frequently?)
 
 **Post-launch checklist:**
+
 - [ ] Verify 3 courses appear in dropdown
 - [ ] Test course selection persistence after page refresh
 - [ ] Verify progress counter updates correctly
@@ -167,6 +179,7 @@ interface AppState {
 - [ ] Mobile responsiveness on iOS/Android
 
 **Post-MVP improvements:**
+
 - Add manual syllabus upload
 - Support multiple active courses per user
 - Add course search for larger catalog

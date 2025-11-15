@@ -70,20 +70,24 @@ flowchart TB
 ## Key Architectural Decisions
 
 ### 1. Monolith vs Microservices
+
 **Choice:** Monolith (Next.js full-stack)  
 **Rationale:** 48-hour MVP timeline. Monolith = faster iteration, simpler deployment, no network overhead.  
 **Post-MVP:** Extract video processing to separate service if performance becomes bottleneck.
 
 ### 2. Server Components vs Client Components
+
 **Choice:** RSC by default, client components only when needed (interactivity, hooks)  
 **Rationale:** Better performance (less JS shipped), simpler data fetching, SEO benefits.  
 **Tradeoff:** Learning curve, debugging complexity.
 
 ### 3. Prisma vs Raw SQL
+
 **Choice:** Prisma for CRUD, raw SQL for complex queries (concept matching)  
 **Rationale:** Type safety for 90% of queries, performance for critical paths.
 
 ### 4. Synchronous vs Async Processing
+
 **Choice:** Synchronous for MVP (video processing blocks until complete)  
 **Rationale:** Simpler implementation, acceptable for demo (60s timeout).  
 **Post-MVP:** Move to queue (Inngest/BullMQ) for production.
@@ -99,6 +103,7 @@ flowchart TB
 ## Dependencies & Versions
 
 **Critical dependencies:**
+
 - Next.js: 15.5.0 (React 19.1.1)
 - Prisma: 6.14.0
 - Better-Auth: 1.3.8
@@ -107,6 +112,7 @@ flowchart TB
 - Vercel AI SDK: 5.0.21
 
 **Dev dependencies:**
+
 - TypeScript: 5.9.2
 - Vitest: 3.2.4
 - Playwright: 1.55.0

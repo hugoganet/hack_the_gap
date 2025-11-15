@@ -97,6 +97,7 @@ Search & discoverability
 ### Core Pipeline - Video Processing
 
 #### US-0001: Course Selection
+
 - ID: US-0001
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to select my course from a list so that the system knows which syllabus to match my learning content against.
@@ -110,6 +111,7 @@ Search & discoverability
 - Spec: [us-0001-course-selection.md](../specs/us-0001-course-selection.md)
 
 #### US-0002: Video URL Submission
+
 - ID: US-0002
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to paste a YouTube video URL so that the system can extract concepts from content I'm already consuming.
@@ -123,6 +125,7 @@ Search & discoverability
 - Spec: [us-0002-video-url-submission.md](../specs/us-0002-video-url-submission.md)
 
 #### US-0003: Concept Extraction ⚠️ HIGHEST RISK
+
 - ID: US-0003
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want the system to automatically extract atomic concepts from videos so that I don't have to manually take notes.
@@ -137,6 +140,7 @@ Search & discoverability
 - Spec: [us-0003-concept-extraction.md](../specs/us-0003-concept-extraction.md)
 
 #### US-0004: Concept-to-Syllabus Matching ⚠️ HIGHEST VALUE
+
 - ID: US-0004
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to know which concepts from my video match my course requirements so that I can see if I'm covering what my professor expects.
@@ -152,6 +156,7 @@ Search & discoverability
 - Spec: [us-0004-concept-to-syllabus-matching.md](../specs/us-0004-concept-to-syllabus-matching.md)
 
 #### US-0005: Flashcard Generation
+
 - ID: US-0005
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want auto-generated flashcards from matched concepts so that I can review and retain what I've learned.
@@ -167,6 +172,7 @@ Search & discoverability
 ### Review & Retention
 
 #### US-0006: First Review Session
+
 - ID: US-0006
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to review flashcards immediately after processing a video so that I can start encoding concepts into long-term memory.
@@ -181,6 +187,7 @@ Search & discoverability
 - Spec: [us-0006-first-review-session.md](../specs/us-0006-first-review-session.md)
 
 #### US-0007: Review Scheduling
+
 - ID: US-0007
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want flashcards scheduled for optimal review intervals so that I retain concepts long-term.
@@ -197,6 +204,7 @@ Search & discoverability
 ### Progress & Analytics
 
 #### US-0008: Progress Dashboard
+
 - ID: US-0008
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to see my progress toward course mastery so that I stay motivated.
@@ -211,6 +219,7 @@ Search & discoverability
 - Spec: [us-0008-progress-dashboard.md](../specs/us-0008-progress-dashboard.md)
 
 #### US-0009: Gap Analysis
+
 - ID: US-0009
 - Persona: Motivated Struggler
 - Title: As a Motivated Struggler, I want to see which syllabus concepts I haven't learned yet so that I know exactly what to study before the exam.
@@ -227,6 +236,7 @@ Search & discoverability
 ### Admin/Setup
 
 #### US-0012: Admin Pre-load Syllabi
+
 - ID: US-0012
 - Persona: Admin/Founder
 - Title: As an admin, I need 3 course syllabi ready before demo so that students can select courses.
@@ -241,15 +251,18 @@ Search & discoverability
 ## Next-Stage User Stories (Post-Hackathon)
 
 ### Content Sources
+
 - **US-0014**: Manual syllabus upload (PDF parsing)
 - **US-0015**: Multiple content sources (TikTok, articles, PDFs)
 
 ### User Control
+
 - **US-0016**: Edit flashcards (fix AI-generated content)
 - **US-0017**: Delete irrelevant concepts
 - **US-0024**: Concept tagging for organization
 
 ### Advanced Features
+
 - **US-0018**: Daily review notifications
 - **US-0019**: Prerequisite detection (learn X before Y)
 - **US-0020**: Knowledge graph visualization
@@ -257,6 +270,7 @@ Search & discoverability
 - **US-0023**: Advanced spaced repetition (SM-2 algorithm)
 
 ### B2B Features
+
 - **US-0022**: Professor dashboard (class-wide progress)
 - **US-0025**: Collaborative syllabi (community contributions)
 
@@ -265,21 +279,25 @@ Search & discoverability
 ## Critical Path for Hackathon Demo
 
 **Day 1 (Friday):**
+
 - US-0012: Pre-load syllabi
 - US-0001: Course selection
 - US-0002: Video URL input
 
 **Day 2 (Saturday) - CORE:**
+
 - US-0003: Concept extraction ⚠️ HIGHEST RISK
 - US-0004: Concept matching ⚠️ HIGHEST VALUE
 - Validate 70%+ accuracy on test videos
 
 **Day 3 (Sunday):**
+
 - US-0005: Flashcard generation
 - US-0006: Review interface
 - US-0007: Review scheduling
 
 **Day 4 (Monday AM):**
+
 - US-0008: Progress dashboard
 - US-0009: Gap analysis
 - Polish and test demo flow

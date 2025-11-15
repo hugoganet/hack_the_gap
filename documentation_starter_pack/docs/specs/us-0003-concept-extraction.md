@@ -32,6 +32,7 @@ Extract atomic concepts from YouTube video transcripts using AI (GPT-4 or Claude
 **Then** 70%+ of extracted concepts are accurate and atomic (not compound concepts)
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Extraction completes within 30 seconds per video (API timeout)
 - [ ] Each concept is atomic (single idea, not compound)
 - [ ] Concepts include definitions suitable for flashcard generation
@@ -62,6 +63,7 @@ Extract atomic concepts from YouTube video transcripts using AI (GPT-4 or Claude
 ```
 
 **User sees:**
+
 - "Extracting concepts..." (with spinner)
 - "Extracted 4 concepts" (success message)
 - List of concepts with confidence scores (in concept review UI)
@@ -69,6 +71,7 @@ Extract atomic concepts from YouTube video transcripts using AI (GPT-4 or Claude
 ## Scope
 
 **In scope:**
+
 - AI-based extraction using GPT-4 or Claude API
 - Atomic concept identification (per Zettelkasten methodology)
 - Confidence scoring for each extracted concept
@@ -78,6 +81,7 @@ Extract atomic concepts from YouTube video transcripts using AI (GPT-4 or Claude
 - Error handling for API failures, low-quality transcripts
 
 **Out of scope:**
+
 - Fine-tuned models (use prompt engineering only for MVP)
 - Multi-language support (English only)
 - Image/diagram extraction from video frames (text-only)
@@ -89,6 +93,7 @@ Extract atomic concepts from YouTube video transcripts using AI (GPT-4 or Claude
 ## Technical Design
 
 **Components impacted:**
+
 - `ConceptExtractor.ts` (new service)
 - `AIService.ts` (GPT-4/Claude integration)
 - `ConceptValidator.ts` (quality checks)
@@ -285,6 +290,7 @@ async function validateExtractionAccuracy() {
 ## Rollout
 
 **Pre-hackathon validation (Thursday/Friday):**
+
 - [ ] Test extraction on 20 diverse YouTube videos
 - [ ] Manually verify accuracy (count correct concepts / total concepts)
 - [ ] If <70% accuracy: iterate on prompts, test again
@@ -292,12 +298,14 @@ async function validateExtractionAccuracy() {
 - [ ] Estimate API cost per video
 
 **Hackathon rollout:**
+
 - [ ] Use validated prompt version
 - [ ] Pre-process 5 "known good" videos as backups
 - [ ] Monitor API responses in real-time during demo
 - [ ] Have fallback: if live extraction fails, use pre-processed results
 
 **Metrics:**
+
 - Extraction accuracy (% correct concepts identified)
 - Average concepts per video
 - Average confidence score
@@ -306,12 +314,14 @@ async function validateExtractionAccuracy() {
 - Error rate by video type
 
 **Post-launch checklist:**
+
 - [ ] Manual review of first 50 extractions
 - [ ] Track user feedback on concept quality
 - [ ] Monitor API costs (should be <$0.50 per video)
 - [ ] A/B test different prompts for accuracy improvement
 
 **Post-MVP improvements:**
+
 - Fine-tune model on validated concept extractions
 - Add prerequisite relationship detection
 - Support multiple concept types (definition, example, argument)
@@ -322,6 +332,7 @@ async function validateExtractionAccuracy() {
 ## ADR Dependencies
 
 This feature requires architectural decisions on:
+
 - **ADR-0002**: AI provider selection (GPT-4 vs Claude vs hybrid)
 - **ADR-0003**: Concept extraction prompt design and versioning
 - **ADR-0004**: Quality validation strategy (automated vs manual review)

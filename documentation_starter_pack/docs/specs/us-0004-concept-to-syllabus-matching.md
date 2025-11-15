@@ -36,6 +36,7 @@ Match extracted concepts from student content (YouTube videos) to required conce
 **Then** concept is shown as "Unmatched" with gray indicator
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Matching completes within 20 seconds per video (after extraction)
 - [ ] Each match includes: extracted_concept_id, syllabus_concept_id, confidence_score, match_rationale
 - [ ] Confidence scores are calibrated (80%+ threshold validated on test data)
@@ -93,6 +94,7 @@ Matched to your syllabus: 3/4 concepts
 ## Scope
 
 **In scope:**
+
 - Semantic similarity matching (embeddings + cosine similarity)
 - AI-enhanced matching for ambiguous cases
 - Confidence scoring with calibrated thresholds (≥80%, 60-79%, <60%)
@@ -102,6 +104,7 @@ Matched to your syllabus: 3/4 concepts
 - Prevent duplicate matches
 
 **Out of scope:**
+
 - Prerequisite relationship detection (post-MVP)
 - Multi-syllabus matching (student taking multiple courses simultaneously)
 - Manual match editing (user can flag, but not manually link concepts)
@@ -112,6 +115,7 @@ Matched to your syllabus: 3/4 concepts
 ## Technical Design
 
 **Components impacted:**
+
 - `ConceptMatcher.ts` (new service)
 - `EmbeddingService.ts` (OpenAI/Cohere embeddings)
 - `AIReasoningService.ts` (GPT-4 for ambiguous matches)
@@ -370,6 +374,7 @@ async function validateMatchingAccuracy(): Promise<number> {
 ## Rollout
 
 **Pre-hackathon validation (Friday):**
+
 - [ ] Pre-process and embed all 3 syllabus concept sets
 - [ ] Run matching on 20 test video extractions
 - [ ] Manually verify match accuracy (target: 68%+)
@@ -377,11 +382,13 @@ async function validateMatchingAccuracy(): Promise<number> {
 - [ ] Document known failure cases
 
 **Hackathon rollout:**
+
 - [ ] Cache syllabus embeddings (don't recompute during demo)
 - [ ] Monitor AI reasoning API calls (cost and latency)
 - [ ] Have backup: pre-computed matches for demo videos if live matching fails
 
 **Metrics:**
+
 - Match accuracy (% correct matches)
 - Average confidence score
 - Distribution of match types (exact, related, example-of, no-match)
@@ -390,6 +397,7 @@ async function validateMatchingAccuracy(): Promise<number> {
 - API costs per video
 
 **Post-launch checklist:**
+
 - [ ] Review all user-flagged incorrect matches
 - [ ] Calculate precision and recall on real user data
 - [ ] Monitor confidence score distribution
@@ -397,6 +405,7 @@ async function validateMatchingAccuracy(): Promise<number> {
 - [ ] Iterate on AI reasoning prompt based on failure cases
 
 **Post-MVP improvements:**
+
 - Prerequisite relationship detection
 - Multi-syllabus matching (cross-course concepts)
 - Confidence learning (adjust based on user feedback)
@@ -407,6 +416,7 @@ async function validateMatchingAccuracy(): Promise<number> {
 ## ADR Dependencies
 
 This feature requires architectural decisions on:
+
 - **ADR-0005**: Embedding provider selection (OpenAI vs Cohere vs Sentence Transformers)
 - **ADR-0006**: Matching algorithm design (embedding-only vs hybrid with AI reasoning)
 - **ADR-0007**: Confidence threshold calibration methodology

@@ -15,6 +15,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 ## Backlog
 
 ### Pre-Hackathon Validation (Priority: P0)
+
 - [ ] Test concept extraction on 20 videos → validate 70%+ accuracy (US-0003)
 - [ ] Recruit 3 beta test students for hackathon testing
 - [ ] Pre-download 5 public course syllabi (Philosophy, Biology, Economics, Psychology, History)
@@ -25,6 +26,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] Test Better-Auth integration (signin/signup flows)
 
 ### MVP Implementation - Core Pipeline
+
 - [ ] US-0012: Admin pre-load syllabi (seed data script) → See `docs/specs/`
 - [ ] US-0001: Course selection UI → See `docs/specs/us-0001-course-selection.md`
 - [ ] US-0002: Video URL submission → See `docs/specs/us-0002-video-url-submission.md`
@@ -32,15 +34,18 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] US-0004: Concept-to-syllabus matching ⚠️ CRITICAL → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
 
 ### MVP Implementation - Review System
+
 - [ ] US-0005: Flashcard generation → See `docs/specs/us-0005-flashcard-generation.md`
 - [ ] US-0006: First review session → See `docs/specs/us-0006-first-review-session.md`
 - [ ] US-0007: Review scheduling → See `docs/specs/us-0007-review-scheduling.md`
 
 ### MVP Implementation - Dashboard
+
 - [ ] US-0008: Progress dashboard → See `docs/specs/us-0008-progress-dashboard.md`
 - [ ] US-0009: Gap analysis → See `docs/specs/us-0009-gap-analysis.md`
 
 ### Testing & Polish
+
 - [ ] E2E test: Full pipeline (video → concepts → flashcards → review)
 - [ ] Mobile responsiveness testing (iOS + Android)
 - [ ] Performance testing (video processing <60s)
@@ -60,6 +65,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 ## Done
 
 ### Documentation (2025-11-13 - 2025-11-14)
+
 - [x] Product vision defined → `docs/vision.md` ✅ 2025-11-13
 - [x] User stories created (9 stories) → `docs/specs/` ✅ 2025-11-13
 - [x] Data schema designed → `docs/data/` ✅ 2025-11-14
@@ -72,6 +78,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [x] Context bundle updated → `docs/context.md` ✅ 2025-11-14
 
 ### Boilerplate Setup (Pre-2025-11-13)
+
 - [x] Next.js 15.5 boilerplate configured
 - [x] Better-Auth integrated
 - [x] Prisma ORM set up
@@ -84,6 +91,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 **Current Sprint:** Pre-Hackathon Preparation  
 **Dates:** 2025-11-14 to 2025-11-17 (4 days before hackathon)  
 **Goals:**
+
 1. Complete pre-hackathon validation checklist
 2. Verify all infrastructure is ready (Supabase, OpenAI, Vercel)
 3. Test concept extraction accuracy on real videos
@@ -92,12 +100,14 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 **Next Sprint:** Hackathon MVP (48 hours)  
 **Dates:** TBD (hackathon weekend)  
 **Goals:**
+
 1. Implement core pipeline (US-0001 to US-0004) - Day 1-2
 2. Implement review system (US-0005 to US-0007) - Day 2-3
 3. Implement dashboard (US-0008 to US-0009) - Day 3-4
 4. Polish and demo preparation - Day 4
 
 **Risks:**
+
 - ⚠️ **HIGH**: Concept extraction accuracy <70% → Mitigation: Test early, iterate on prompts
 - ⚠️ **HIGH**: Concept matching accuracy <68% → Mitigation: Test with diverse content, adjust thresholds
 - ⚠️ **MEDIUM**: OpenAI API rate limits during demo → Mitigation: Pre-process backup videos, cache results
@@ -108,6 +118,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 US-0003 (Concept Extraction) → US-0004 (Concept Matching) → Everything else depends on these working
 
 **Estimated Effort:**
+
 - Pre-hackathon validation: 8-12 hours
 - Core pipeline (US-0001 to US-0004): 20-24 hours
 - Review system (US-0005 to US-0007): 12-16 hours

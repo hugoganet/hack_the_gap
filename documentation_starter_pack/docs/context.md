@@ -62,12 +62,14 @@ See `./tech_stack.md` for complete details.
 ## Data Schema Status
 
 ✅ **COMPLETE** - 13 tables defined and synchronized:
+
 - Reference tables: `users`, `subjects`, `academic_years`, `semesters`
 - Course structure: `courses`, `user_courses`, `syllabus_concepts`
 - Processing pipeline: `video_jobs`, `concepts`, `concept_matches`
 - Learning system: `flashcards`, `review_sessions`, `review_events`
 
 See `./data/` for:
+
 - `schema.yml` - JSON Schema definitions
 - `data_dictionary.yml` - Field descriptions
 - `erd.md` - Entity relationship diagram
@@ -77,6 +79,7 @@ See `./data/` for:
 ## User Stories Status
 
 ✅ **9 MVP stories documented** (US-0001 to US-0009):
+
 - US-0001: Course Selection ✅ Spec complete
 - US-0002: Video URL Submission ✅ Spec complete
 - US-0003: Concept Extraction ⚠️ HIGHEST RISK - Spec complete
@@ -106,6 +109,7 @@ See `./specs/` for detailed specifications.
 ## ADRs to Draft
 
 Priority ADRs needed:
+
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives
 - **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
@@ -115,6 +119,7 @@ Priority ADRs needed:
 ## Pre-Hackathon Checklist
 
 **Before starting implementation:**
+
 - [ ] Test concept extraction on 20 videos (validate 70%+ accuracy)
 - [ ] Recruit 3 beta test students
 - [ ] Pre-download 5 public course syllabi
@@ -123,6 +128,7 @@ Priority ADRs needed:
 - [ ] Deploy boilerplate to Vercel (verify deployment works)
 
 **Implementation priority:**
+
 1. US-0012: Admin pre-load syllabi (seed data)
 2. US-0001: Course selection UI
 3. US-0002: Video URL submission

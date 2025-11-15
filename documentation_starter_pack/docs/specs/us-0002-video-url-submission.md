@@ -29,6 +29,7 @@ Allow students to paste a YouTube video URL to begin the concept extraction pipe
 **Then** system shows: "Processing your previous video. Please wait..."
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Input field accepts YouTube URLs in formats: youtube.com/watch?v=, youtu.be/, youtube.com/embed/
 - [ ] Validation happens on paste/submit (instant feedback)
 - [ ] Loading state shows: "Processing: Transcribing... Extracting concepts... Matching to syllabus..."
@@ -63,8 +64,9 @@ Allow students to paste a YouTube video URL to begin the concept extraction pipe
 ```
 
 **Mobile-first wireframe:**
+
 - Full-width input field
-- Placeholder text: "https://youtube.com/watch?v=..."
+- Placeholder text: "<https://youtube.com/watch?v=>..."
 - Paste button for mobile users
 - Clear progress indicators
 - Estimated time remaining
@@ -72,6 +74,7 @@ Allow students to paste a YouTube video URL to begin the concept extraction pipe
 ## Scope
 
 **In scope:**
+
 - YouTube URL input and validation
 - Real-time processing status updates
 - Error handling for common failures
@@ -80,6 +83,7 @@ Allow students to paste a YouTube video URL to begin the concept extraction pipe
 - Support for standard YouTube URL formats
 
 **Out of scope:**
+
 - TikTok, article URLs, PDF uploads (post-MVP)
 - Video preview/thumbnail before processing (post-MVP)
 - Batch upload (multiple videos at once) (post-MVP)
@@ -90,6 +94,7 @@ Allow students to paste a YouTube video URL to begin the concept extraction pipe
 ## Technical Design
 
 **Components impacted:**
+
 - `VideoSubmissionForm.tsx` (new component)
 - `ProcessingStatus.tsx` (new component)
 - `VideoProcessor.ts` (backend service)
@@ -216,6 +221,7 @@ function extractYouTubeVideoId(url: string): string | null {
 ```
 
 **Risks:**
+
 - **YouTube API rate limits**: Mitigation: Cache transcripts, use quota-efficient endpoints
 - **Processing timeout**: Mitigation: 60s hard limit, show error if exceeded
 - **Invalid/private videos**: Mitigation: Clear error messages, suggest public alternatives
@@ -225,10 +231,12 @@ function extractYouTubeVideoId(url: string): string | null {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed
 - Feature flag: `video_processing_enabled` (killswitch for demo)
 
 **Metrics:**
+
 - Video submission rate (videos/user/day)
 - Processing success rate (% jobs completed vs failed)
 - Average processing time per video
@@ -236,6 +244,7 @@ function extractYouTubeVideoId(url: string): string | null {
 - Processing cancellation rate
 
 **Post-launch checklist:**
+
 - [ ] Test with 10 different YouTube videos (various lengths, channels)
 - [ ] Verify error messages are user-friendly
 - [ ] Test processing timeout (submit very long video)
@@ -244,6 +253,7 @@ function extractYouTubeVideoId(url: string): string | null {
 - [ ] Test mobile paste functionality on iOS/Android
 
 **Post-MVP improvements:**
+
 - Support TikTok, article URLs, PDFs
 - Batch processing (multiple videos)
 - Video thumbnail preview

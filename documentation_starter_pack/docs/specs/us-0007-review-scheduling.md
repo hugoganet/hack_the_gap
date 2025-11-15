@@ -33,6 +33,7 @@ Schedule flashcard reviews based on spaced repetition principles using difficult
 **Then** the interval doubles from the previous interval (simple progressive spacing)
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Scheduling uses fixed intervals for MVP (not adaptive SM-2 algorithm)
 - [ ] Intervals: Hard=1d, Medium=1d, Easy=3d (first review)
 - [ ] Subsequent reviews: multiply previous interval by 2 if "Easy", reset to 1d if "Hard"
@@ -91,6 +92,7 @@ Next review schedule:
 ## Scope
 
 **In scope:**
+
 - Fixed interval scheduling (simple, predictable)
 - Three intervals based on difficulty (Hard=1d, Medium=1d, Easy=3d)
 - Interval doubling for repeat "Easy" reviews
@@ -99,6 +101,7 @@ Next review schedule:
 - Display next review schedule after session
 
 **Out of scope:**
+
 - Adaptive spaced repetition (SM-2, Anki algorithm) - post-MVP
 - Custom intervals per user - post-MVP
 - "Lapsed" card detection (cards not reviewed for long time) - post-MVP
@@ -109,6 +112,7 @@ Next review schedule:
 ## Technical Design
 
 **Components impacted:**
+
 - `SchedulingService.ts` (new service)
 - `FlashcardService.ts` (update next_review_at)
 - `Dashboard.tsx` (show upcoming reviews)
@@ -360,10 +364,12 @@ describe('Review Scheduling', () => {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed (new feature)
 - Feature flag: `spaced_repetition_enabled`
 
 **Metrics:**
+
 - Average interval length by difficulty
 - Review completion rate (% due reviews actually completed)
 - Interval distribution (histogram of review intervals)
@@ -371,6 +377,7 @@ describe('Review Scheduling', () => {
 - Retention rate by interval (do longer intervals harm retention?)
 
 **Post-launch checklist:**
+
 - [ ] Verify scheduling works correctly for all difficulty ratings
 - [ ] Test timezone handling (schedule reviews in UTC, display local)
 - [ ] Monitor average cards/user/day (should be <10 for MVP)
@@ -378,6 +385,7 @@ describe('Review Scheduling', () => {
 - [ ] Validate interval doubling doesn't grow too fast
 
 **Post-MVP improvements:**
+
 - Implement SM-2 or Anki's algorithm (adaptive intervals)
 - Add "lapsed" card detection (cards overdue by >7 days)
 - Custom intervals per user (preferences)
@@ -388,5 +396,6 @@ describe('Review Scheduling', () => {
 ## ADR Dependencies
 
 This feature requires architectural decisions on:
+
 - **ADR-0008**: Spaced repetition algorithm selection (fixed intervals vs SM-2 vs custom)
 - **ADR-0009**: Timezone handling strategy for scheduled reviews

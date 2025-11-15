@@ -29,6 +29,7 @@ Auto-generate flashcards from matched concepts for spaced repetition review. Eac
 **Then** they see a list of flashcards with question previews
 
 **Detailed Acceptance Criteria:**
+
 - [ ] Only matched concepts (confidence ≥80%) generate flashcards
 - [ ] Questions are clear, testable, and use active recall format
 - [ ] Answers include the concept definition plus context from video
@@ -67,6 +68,7 @@ Generated 3 flashcards from this video:
 ## Scope
 
 **In scope:**
+
 - Auto-generate 1 flashcard per matched concept
 - Question-answer format (simple, proven)
 - Source attribution (link to video timestamp)
@@ -75,6 +77,7 @@ Generated 3 flashcards from this video:
 - Skip flashcard generation option (don't force review immediately)
 
 **Out of scope:**
+
 - Multiple flashcard types (cloze deletion, multiple choice) - post-MVP
 - User editing of generated flashcards - post-MVP
 - Multiple flashcards per concept - post-MVP
@@ -85,6 +88,7 @@ Generated 3 flashcards from this video:
 ## Technical Design
 
 **Components impacted:**
+
 - `FlashcardGenerator.ts` (new service)
 - `AIService.ts` (GPT-4 for question generation)
 - `FlashcardPreview.tsx` (UI component)
@@ -251,10 +255,12 @@ Response: {
 ## Rollout
 
 **Migration/feature flags:**
+
 - No migration needed (new feature)
 - Feature flag: `flashcard_generation_enabled`
 
 **Metrics:**
+
 - Flashcards generated per video (avg)
 - Question quality score (manual review of first 50)
 - Generation time per flashcard
@@ -262,6 +268,7 @@ Response: {
 - User skip rate (% users who skip review after generation)
 
 **Post-launch checklist:**
+
 - [ ] Manually review first 30 generated flashcards for quality
 - [ ] Verify no yes/no questions are generated
 - [ ] Test answer length (should be 1-3 sentences)
@@ -269,6 +276,7 @@ Response: {
 - [ ] Monitor generation time (<10s per video)
 
 **Post-MVP improvements:**
+
 - Multiple flashcard types (cloze deletion, multiple choice)
 - User editing of flashcards (fix poor generations)
 - Image inclusion (screenshots from video)
