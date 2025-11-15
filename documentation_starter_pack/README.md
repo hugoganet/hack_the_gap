@@ -101,7 +101,6 @@ This mirrors the CI workflow so you get the same feedback locally.
 
 To run linters automatically on staged files, install dev deps and enable Husky.
 
-
 1. Install the recommended dev dependencies once in this repo:
 
 ```bash
@@ -118,7 +117,6 @@ Now every `git commit` will run `lint-staged`, which will:
 
 - fix markdown issues with `markdownlint-cli2 --fix` and run `prettier --write` on staged `.md` files
 - run `eslint --fix` and `prettier --write` on staged JS/TS files
-
 
 Notes:
 

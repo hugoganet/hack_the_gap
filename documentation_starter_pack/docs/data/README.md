@@ -33,14 +33,57 @@ Example quick prompt (copy-paste)
 
 - See `./erd.md` for the current ERD (Mermaid). Keep this updated when entities or relationships change.
 
-## Migration Checklist
+## Migration Checklist - Hackathon MVP
 
-- Create or alter base tables and indexes
-- Validate sample data against `schema.yml`
-- Apply retention policies per `privacy.md`
-- Verify foreign keys and constraints before launch
-- Backfill and data seeding steps (if applicable)
+**Pre-Hackathon (Thursday/Friday):**
+
+- [ ] Create 13 base tables in order:
+  - Reference tables: `users`, `subjects`, `academic_years`, `semesters`
+  - Course structure: `courses`, `user_courses`, `syllabus_concepts`
+  - Processing pipeline: `video_jobs`, `concepts`, `concept_matches`
+  - Learning system: `flashcards`, `review_sessions`, `review_events`
+- [ ] Add indexes on all foreign keys
+- [ ] Seed reference data:
+  - 3 subjects (Philosophy, Biology, Economics)
+  - 6 academic_years (Licence 1-3, Master 1-2, Doctorat)
+  - 6 semesters (1-6)
+- [ ] **Process 3 real syllabus PDFs** to extract concepts:
+  - LU1PH51F - Métaphysique (Licence 3, Semester 5, UE 1) → extracts ~20 concepts
+  - BIOL2001 - Cell Biology (Licence 2, Semester 1) → extracts ~25 concepts
+  - ECON1101 - Intro to Microeconomics (Licence 1, Semester 1) → extracts ~18 concepts
+- [ ] Seed `courses` table with processed course metadata
+- [ ] Seed `syllabus_concepts` with AI-extracted concepts from syllabi
+- [ ] Validate sample data from `sample_records.jsonl` loads correctly
+- [ ] Test foreign key constraints and ON DELETE CASCADE
+
+**During Hackathon:**
+
+- [ ] Monitor `video_jobs` for stuck processing (status='processing' >5min)
+- [ ] Verify `user_courses.learned_count` increments after concept matching
+- [ ] Check `flashcards.next_review_at` schedules correctly
+
+**Skip for MVP:**
+
+- ❌ Retention policies (keep all data)
+- ❌ Soft deletes (hard delete only)
+- ❌ Data archiving
+- ❌ Materialized views
 
 ## ADRs to Draft
 
-- (list data-impacting decisions here, e.g., normalization strategy, soft deletes, event retention)
+**Required:**
+
+- **ADR-0010**: Database choice (PostgreSQL via Supabase recommended)
+- **ADR-0011**: Normalized course structure (subjects/years/semesters vs denormalized)
+
+**Optional (Post-MVP):**
+
+- **ADR-0012**: Hard vs soft deletes
+- **ADR-0013**: Event retention policy
+
+## Key Schema Points
+
+✅ **Dynamic concept counts**: Total concepts per course = `COUNT(syllabus_concepts WHERE course_id = X)`
+✅ **Syllabus-driven**: Concept counts emerge from PDF processing, not hardcoded
+✅ **French UE structure**: Courses belong to subject/year/semester
+✅ **Dashboard formula**: Progress = `user_courses.learned_count / COUNT(syllabus_concepts)`

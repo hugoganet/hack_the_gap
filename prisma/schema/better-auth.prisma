@@ -13,11 +13,16 @@ model User {
   resendContactId String?
 
   // Outgoing
-  sessions    Session[]
-  accounts    Account[]
-  feedbacks   Feedback[]
-  members     Member[]
-  invitations Invitation[]
+  sessions       Session[]
+  accounts       Account[]
+  feedbacks      Feedback[]
+  members        Member[]
+  invitations    Invitation[]
+  // Added domain relations (hackathon MVP)
+  userCourses    UserCourse[]
+  videoJobs      VideoJob[]
+  flashcards     Flashcard[]
+  reviewSessions ReviewSession[]
 
   role       String?
   banned     Boolean?
@@ -83,10 +88,8 @@ model Organization {
   logo             String?
   createdAt        DateTime
   metadata         String?
-  stripeCustomerId String?
   members          Member[]
   invitations      Invitation[]
-  subscription     Subscription?
   email            String?
 
   @@unique([slug])
@@ -117,20 +120,4 @@ model Invitation {
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
   @@map("invitation")
-}
-
-model Subscription {
-  id                   String       @id
-  plan                 String
-  referenceId          String       @unique
-  organization         Organization @relation(fields: [referenceId], references: [id], onDelete: Cascade)
-  stripeCustomerId     String?
-  stripeSubscriptionId String?
-  status               String?
-  periodStart          DateTime?
-  periodEnd            DateTime?
-  cancelAtPeriodEnd    Boolean?
-  seats                Int?
-
-  @@map("subscription")
 }
