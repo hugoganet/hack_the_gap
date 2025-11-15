@@ -120,6 +120,19 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  plan: 'plan',
+  referenceId: 'referenceId',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  status: 'status',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+  seats: 'seats'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -129,10 +142,10 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   resendContactId: 'resendContactId',
-  role: 'role',
-  banned: 'banned',
+  banExpires: 'banExpires',
   banReason: 'banReason',
-  banExpires: 'banExpires'
+  banned: 'banned',
+  role: 'role'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -180,8 +193,8 @@ exports.Prisma.OrganizationScalarFieldEnum = {
   logo: 'logo',
   createdAt: 'createdAt',
   metadata: 'metadata',
-  stripeCustomerId: 'stripeCustomerId',
-  email: 'email'
+  email: 'email',
+  stripeCustomerId: 'stripeCustomerId'
 };
 
 exports.Prisma.MemberScalarFieldEnum = {
@@ -202,25 +215,20 @@ exports.Prisma.InvitationScalarFieldEnum = {
   inviterId: 'inviterId'
 };
 
-exports.Prisma.SubscriptionScalarFieldEnum = {
-  id: 'id',
-  plan: 'plan',
-  referenceId: 'referenceId',
-  stripeCustomerId: 'stripeCustomerId',
-  stripeSubscriptionId: 'stripeSubscriptionId',
-  status: 'status',
-  periodStart: 'periodStart',
-  periodEnd: 'periodEnd',
-  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
-  seats: 'seats'
-};
-
 exports.Prisma.FeedbackScalarFieldEnum = {
   id: 'id',
   review: 'review',
   message: 'message',
   email: 'email',
   userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BetaInvitationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -359,6 +367,7 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  subscription: 'subscription',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -366,8 +375,8 @@ exports.Prisma.ModelName = {
   Organization: 'Organization',
   Member: 'Member',
   Invitation: 'Invitation',
-  Subscription: 'Subscription',
   Feedback: 'Feedback',
+  BetaInvitation: 'BetaInvitation',
   Subject: 'Subject',
   AcademicYear: 'AcademicYear',
   Semester: 'Semester',

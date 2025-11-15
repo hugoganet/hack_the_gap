@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../../src/generated/prisma"
@@ -13,53 +10,44 @@ datasource db {
 }
 
 model Feedback {
-  id      String  @id @default(nanoid(11))
-  review  Int
-  message String
-  email   String?
-  userId  String?
-  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
-
+  id        String   @id @default(nanoid(11))
+  review    Int
+  message   String
+  email     String?
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 model BetaInvitation {
   id        String   @id @default(nanoid(11))
   email     String   @unique
-  status    String   @default("pending") // pending, invited, registered
-  
+  status    String   @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   @@index([email])
   @@index([status])
 }
 
-// Domain Models (Hackathon MVP) – Avoid Prisma enums per project conventions.
-// Each model maps to plural snake_case table name to align with provided JSON schema & data dictionary.
-
 model Subject {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   createdAt DateTime @default(now())
+  courses   Course[]
 
-  courses Course[]
-
-  @@unique([name])
   @@index([name])
   @@map("subjects")
 }
 
 model AcademicYear {
   id        String   @id @default(uuid())
-  name      String
+  name      String   @unique
   level     Int
   createdAt DateTime @default(now())
+  courses   Course[]
 
-  courses Course[]
-
-  @@unique([name])
   @@index([level])
   @@map("academic_years")
 }
@@ -68,48 +56,43 @@ model Semester {
   id        String   @id @default(uuid())
   number    Int
   createdAt DateTime @default(now())
-
-  courses Course[]
+  courses   Course[]
 
   @@index([number])
   @@map("semesters")
 }
 
 model Course {
-  id          String   @id @default(uuid())
-  code        String
-  name        String
-  subjectId   String
-  yearId      String? // academic_years (optional)
-  semesterId  String? // semesters (optional)
-  ueNumber    String?
-  syllabusUrl String?
-  createdAt   DateTime @default(now())
-
+  id               String            @id @default(uuid())
+  code             String            @unique
+  name             String
+  subjectId        String
+  yearId           String?
+  semesterId       String?
+  ueNumber         String?
+  syllabusUrl      String?
+  createdAt        DateTime          @default(now())
+  semester         Semester?         @relation(fields: [semesterId], references: [id])
   subject          Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   year             AcademicYear?     @relation(fields: [yearId], references: [id])
-  semester         Semester?         @relation(fields: [semesterId], references: [id])
-  enrollments      UserCourse[]
-  syllabusConcepts SyllabusConcept[]
   reviewSessions   ReviewSession[]
+  syllabusConcepts SyllabusConcept[]
+  enrollments      UserCourse[]
 
-  @@unique([code])
   @@index([subjectId])
   @@index([yearId])
   @@index([semesterId])
   @@map("courses")
 }
 
-// Junction table: user ↔ course with progress info (composite primary key)
 model UserCourse {
   userId       String
   courseId     String
   isActive     Boolean
   learnedCount Int      @default(0)
   createdAt    DateTime @default(now())
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, courseId])
   @@index([learnedCount])
@@ -117,16 +100,15 @@ model UserCourse {
 }
 
 model SyllabusConcept {
-  id          String   @id @default(uuid())
-  courseId    String
-  conceptText String
-  category    String?
-  importance  Int?
-  order       Int
-  createdAt   DateTime @default(now())
-
-  course         Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id             String         @id @default(uuid())
+  courseId       String
+  conceptText    String
+  category       String?
+  importance     Int?
+  order          Int
+  createdAt      DateTime       @default(now())
   conceptMatches ConceptMatch[]
+  course         Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   @@index([courseId])
   @@index([importance])
@@ -138,14 +120,13 @@ model VideoJob {
   userId                 String
   url                    String
   youtubeVideoId         String?
-  status                 String // processing | completed | failed | cancelled
+  status                 String
   processedConceptsCount Int?
   errorMessage           String?
   createdAt              DateTime  @default(now())
   completedAt            DateTime?
-
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  concepts Concept[]
+  concepts               Concept[]
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -153,16 +134,15 @@ model VideoJob {
 }
 
 model Concept {
-  id          String   @id @default(uuid())
-  videoJobId  String
-  conceptText String
-  definition  String?
-  timestamp   String?
-  confidence  Float
-  createdAt   DateTime @default(now())
-
-  videoJob       VideoJob       @relation(fields: [videoJobId], references: [id], onDelete: Cascade)
+  id             String         @id @default(uuid())
+  videoJobId     String
+  conceptText    String
+  definition     String?
+  timestamp      String?
+  confidence     Float
+  createdAt      DateTime       @default(now())
   conceptMatches ConceptMatch[]
+  videoJob       VideoJob       @relation(fields: [videoJobId], references: [id], onDelete: Cascade)
 
   @@index([videoJobId])
   @@index([confidence])
@@ -170,18 +150,17 @@ model Concept {
 }
 
 model ConceptMatch {
-  id                String   @id @default(uuid())
+  id                String          @id @default(uuid())
   conceptId         String
   syllabusConceptId String
   confidence        Float
-  matchType         String? // exact | related | example-of | no-match
+  matchType         String?
   rationale         String?
-  userFeedback      String? // correct | incorrect | uncertain
-  createdAt         DateTime @default(now())
-
-  concept         Concept         @relation(fields: [conceptId], references: [id], onDelete: Cascade)
-  syllabusConcept SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
-  flashcards      Flashcard[]
+  userFeedback      String?
+  createdAt         DateTime        @default(now())
+  concept           Concept         @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+  syllabusConcept   SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
+  flashcards        Flashcard[]
 
   @@index([conceptId])
   @@index([syllabusConceptId])
@@ -190,21 +169,20 @@ model ConceptMatch {
 }
 
 model Flashcard {
-  id              String    @id @default(uuid())
+  id              String        @id @default(uuid())
   conceptMatchId  String
   userId          String
   question        String
   answer          String
   sourceTimestamp String?
-  timesReviewed   Int       @default(0)
-  timesCorrect    Int       @default(0)
+  timesReviewed   Int           @default(0)
+  timesCorrect    Int           @default(0)
   lastReviewedAt  DateTime?
   nextReviewAt    DateTime?
-  createdAt       DateTime  @default(now())
-
-  conceptMatch ConceptMatch  @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reviewEvents ReviewEvent[]
+  createdAt       DateTime      @default(now())
+  conceptMatch    ConceptMatch  @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviewEvents    ReviewEvent[]
 
   @@index([conceptMatchId])
   @@index([userId])
@@ -213,18 +191,17 @@ model Flashcard {
 }
 
 model ReviewSession {
-  id               String    @id @default(uuid())
+  id               String        @id @default(uuid())
   userId           String
   courseId         String
   flashcardCount   Int
-  currentCardIndex Int       @default(0)
-  status           String // in-progress | completed | abandoned
-  startedAt        DateTime  @default(now())
+  currentCardIndex Int           @default(0)
+  status           String
+  startedAt        DateTime      @default(now())
   completedAt      DateTime?
-
-  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  events ReviewEvent[]
+  events           ReviewEvent[]
+  course           Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -232,16 +209,15 @@ model ReviewSession {
 }
 
 model ReviewEvent {
-  id             String   @id @default(uuid())
+  id             String        @id @default(uuid())
   sessionId      String
   flashcardId    String
-  difficulty     String // easy | medium | hard
+  difficulty     String
   timeToRevealMs Int?
   timeToRateMs   Int?
-  createdAt      DateTime @default(now())
-
-  session   ReviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  flashcard Flashcard     @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  createdAt      DateTime      @default(now())
+  flashcard      Flashcard     @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  session        ReviewSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId])
   @@index([flashcardId])

@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model subscription
+ * 
+ */
+export type subscription = $Result.DefaultSelection<Prisma.$subscriptionPayload>
+/**
  * Model User
  * 
  */
@@ -49,15 +54,15 @@ export type Member = $Result.DefaultSelection<Prisma.$MemberPayload>
  */
 export type Invitation = $Result.DefaultSelection<Prisma.$InvitationPayload>
 /**
- * Model Subscription
- * 
- */
-export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
-/**
  * Model Feedback
  * 
  */
 export type Feedback = $Result.DefaultSelection<Prisma.$FeedbackPayload>
+/**
+ * Model BetaInvitation
+ * 
+ */
+export type BetaInvitation = $Result.DefaultSelection<Prisma.$BetaInvitationPayload>
 /**
  * Model Subject
  * 
@@ -126,8 +131,8 @@ export type ReviewEvent = $Result.DefaultSelection<Prisma.$ReviewEventPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Subscriptions
+ * const subscriptions = await prisma.subscription.findMany()
  * ```
  *
  *
@@ -147,8 +152,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Subscriptions
+   * const subscriptions = await prisma.subscription.findMany()
    * ```
    *
    *
@@ -238,6 +243,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.subscription`: Exposes CRUD operations for the **subscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscription.findMany()
+    * ```
+    */
+  get subscription(): Prisma.subscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -308,16 +323,6 @@ export class PrismaClient<
   get invitation(): Prisma.InvitationDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.subscription`: Exposes CRUD operations for the **Subscription** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Subscriptions
-    * const subscriptions = await prisma.subscription.findMany()
-    * ```
-    */
-  get subscription(): Prisma.SubscriptionDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.feedback`: Exposes CRUD operations for the **Feedback** model.
     * Example usage:
     * ```ts
@@ -326,6 +331,16 @@ export class PrismaClient<
     * ```
     */
   get feedback(): Prisma.FeedbackDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.betaInvitation`: Exposes CRUD operations for the **BetaInvitation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BetaInvitations
+    * const betaInvitations = await prisma.betaInvitation.findMany()
+    * ```
+    */
+  get betaInvitation(): Prisma.BetaInvitationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.subject`: Exposes CRUD operations for the **Subject** model.
@@ -886,6 +901,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    subscription: 'subscription',
     User: 'User',
     Session: 'Session',
     Account: 'Account',
@@ -893,8 +909,8 @@ export namespace Prisma {
     Organization: 'Organization',
     Member: 'Member',
     Invitation: 'Invitation',
-    Subscription: 'Subscription',
     Feedback: 'Feedback',
+    BetaInvitation: 'BetaInvitation',
     Subject: 'Subject',
     AcademicYear: 'AcademicYear',
     Semester: 'Semester',
@@ -925,10 +941,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "subscription" | "feedback" | "subject" | "academicYear" | "semester" | "course" | "userCourse" | "syllabusConcept" | "videoJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent"
+      modelProps: "subscription" | "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "feedback" | "betaInvitation" | "subject" | "academicYear" | "semester" | "course" | "userCourse" | "syllabusConcept" | "videoJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      subscription: {
+        payload: Prisma.$subscriptionPayload<ExtArgs>
+        fields: Prisma.subscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.subscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.subscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.subscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.subscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.subscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.subscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.subscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.subscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.subscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          update: {
+            args: Prisma.subscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.subscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.subscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.subscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.subscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$subscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscription>
+          }
+          groupBy: {
+            args: Prisma.subscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.subscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1447,80 +1537,6 @@ export namespace Prisma {
           }
         }
       }
-      Subscription: {
-        payload: Prisma.$SubscriptionPayload<ExtArgs>
-        fields: Prisma.SubscriptionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          findFirst: {
-            args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          findMany: {
-            args: Prisma.SubscriptionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
-          }
-          create: {
-            args: Prisma.SubscriptionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          createMany: {
-            args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
-          }
-          delete: {
-            args: Prisma.SubscriptionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          update: {
-            args: Prisma.SubscriptionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          deleteMany: {
-            args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
-          }
-          upsert: {
-            args: Prisma.SubscriptionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-          }
-          aggregate: {
-            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSubscription>
-          }
-          groupBy: {
-            args: Prisma.SubscriptionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SubscriptionCountArgs<ExtArgs>
-            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
-          }
-        }
-      }
       Feedback: {
         payload: Prisma.$FeedbackPayload<ExtArgs>
         fields: Prisma.FeedbackFieldRefs
@@ -1592,6 +1608,80 @@ export namespace Prisma {
           count: {
             args: Prisma.FeedbackCountArgs<ExtArgs>
             result: $Utils.Optional<FeedbackCountAggregateOutputType> | number
+          }
+        }
+      }
+      BetaInvitation: {
+        payload: Prisma.$BetaInvitationPayload<ExtArgs>
+        fields: Prisma.BetaInvitationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BetaInvitationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BetaInvitationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          findFirst: {
+            args: Prisma.BetaInvitationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BetaInvitationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          findMany: {
+            args: Prisma.BetaInvitationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>[]
+          }
+          create: {
+            args: Prisma.BetaInvitationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          createMany: {
+            args: Prisma.BetaInvitationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BetaInvitationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>[]
+          }
+          delete: {
+            args: Prisma.BetaInvitationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          update: {
+            args: Prisma.BetaInvitationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          deleteMany: {
+            args: Prisma.BetaInvitationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BetaInvitationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BetaInvitationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>[]
+          }
+          upsert: {
+            args: Prisma.BetaInvitationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BetaInvitationPayload>
+          }
+          aggregate: {
+            args: Prisma.BetaInvitationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBetaInvitation>
+          }
+          groupBy: {
+            args: Prisma.BetaInvitationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BetaInvitationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BetaInvitationCountArgs<ExtArgs>
+            result: $Utils.Optional<BetaInvitationCountAggregateOutputType> | number
           }
         }
       }
@@ -2575,6 +2665,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    subscription?: subscriptionOmit
     user?: UserOmit
     session?: SessionOmit
     account?: AccountOmit
@@ -2582,8 +2673,8 @@ export namespace Prisma {
     organization?: OrganizationOmit
     member?: MemberOmit
     invitation?: InvitationOmit
-    subscription?: SubscriptionOmit
     feedback?: FeedbackOmit
+    betaInvitation?: BetaInvitationOmit
     subject?: SubjectOmit
     academicYear?: AcademicYearOmit
     semester?: SemesterOmit
@@ -2676,27 +2767,27 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    sessions: number
-    accounts: number
     feedbacks: number
-    members: number
+    accounts: number
+    flashcards: number
     invitations: number
+    members: number
+    reviewSessions: number
+    sessions: number
     userCourses: number
     videoJobs: number
-    flashcards: number
-    reviewSessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     feedbacks?: boolean | UserCountOutputTypeCountFeedbacksArgs
-    members?: boolean | UserCountOutputTypeCountMembersArgs
+    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    flashcards?: boolean | UserCountOutputTypeCountFlashcardsArgs
     invitations?: boolean | UserCountOutputTypeCountInvitationsArgs
+    members?: boolean | UserCountOutputTypeCountMembersArgs
+    reviewSessions?: boolean | UserCountOutputTypeCountReviewSessionsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     userCourses?: boolean | UserCountOutputTypeCountUserCoursesArgs
     videoJobs?: boolean | UserCountOutputTypeCountVideoJobsArgs
-    flashcards?: boolean | UserCountOutputTypeCountFlashcardsArgs
-    reviewSessions?: boolean | UserCountOutputTypeCountReviewSessionsArgs
   }
 
   // Custom InputTypes
@@ -2713,8 +2804,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
+  export type UserCountOutputTypeCountFeedbacksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FeedbackWhereInput
   }
 
   /**
@@ -2727,8 +2818,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountFeedbacksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FeedbackWhereInput
+  export type UserCountOutputTypeCountFlashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashcardWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
   }
 
   /**
@@ -2741,8 +2839,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InvitationWhereInput
+  export type UserCountOutputTypeCountReviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewSessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
   /**
@@ -2759,33 +2864,19 @@ export namespace Prisma {
     where?: VideoJobWhereInput
   }
 
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountFlashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FlashcardWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountReviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewSessionWhereInput
-  }
-
 
   /**
    * Count Type OrganizationCountOutputType
    */
 
   export type OrganizationCountOutputType = {
-    members: number
     invitations: number
+    members: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    members?: boolean | OrganizationCountOutputTypeCountMembersArgs
     invitations?: boolean | OrganizationCountOutputTypeCountInvitationsArgs
+    members?: boolean | OrganizationCountOutputTypeCountMembersArgs
   }
 
   // Custom InputTypes
@@ -2802,15 +2893,15 @@ export namespace Prisma {
   /**
    * OrganizationCountOutputType without action
    */
-  export type OrganizationCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MemberWhereInput
+  export type OrganizationCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
   }
 
   /**
    * OrganizationCountOutputType without action
    */
-  export type OrganizationCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InvitationWhereInput
+  export type OrganizationCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MemberWhereInput
   }
 
 
@@ -2912,15 +3003,15 @@ export namespace Prisma {
    */
 
   export type CourseCountOutputType = {
-    enrollments: number
-    syllabusConcepts: number
     reviewSessions: number
+    syllabusConcepts: number
+    enrollments: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    enrollments?: boolean | CourseCountOutputTypeCountEnrollmentsArgs
-    syllabusConcepts?: boolean | CourseCountOutputTypeCountSyllabusConceptsArgs
     reviewSessions?: boolean | CourseCountOutputTypeCountReviewSessionsArgs
+    syllabusConcepts?: boolean | CourseCountOutputTypeCountSyllabusConceptsArgs
+    enrollments?: boolean | CourseCountOutputTypeCountEnrollmentsArgs
   }
 
   // Custom InputTypes
@@ -2937,8 +3028,8 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountEnrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserCourseWhereInput
+  export type CourseCountOutputTypeCountReviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewSessionWhereInput
   }
 
   /**
@@ -2951,8 +3042,8 @@ export namespace Prisma {
   /**
    * CourseCountOutputType without action
    */
-  export type CourseCountOutputTypeCountReviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReviewSessionWhereInput
+  export type CourseCountOutputTypeCountEnrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserCourseWhereInput
   }
 
 
@@ -3147,6 +3238,1163 @@ export namespace Prisma {
    */
 
   /**
+   * Model subscription
+   */
+
+  export type AggregateSubscription = {
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionAvgAggregateOutputType = {
+    seats: number | null
+  }
+
+  export type SubscriptionSumAggregateOutputType = {
+    seats: number | null
+  }
+
+  export type SubscriptionMinAggregateOutputType = {
+    id: string | null
+    plan: string | null
+    referenceId: string | null
+    stripeCustomerId: string | null
+    stripeSubscriptionId: string | null
+    status: string | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    seats: number | null
+  }
+
+  export type SubscriptionMaxAggregateOutputType = {
+    id: string | null
+    plan: string | null
+    referenceId: string | null
+    stripeCustomerId: string | null
+    stripeSubscriptionId: string | null
+    status: string | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    seats: number | null
+  }
+
+  export type SubscriptionCountAggregateOutputType = {
+    id: number
+    plan: number
+    referenceId: number
+    stripeCustomerId: number
+    stripeSubscriptionId: number
+    status: number
+    periodStart: number
+    periodEnd: number
+    cancelAtPeriodEnd: number
+    seats: number
+    _all: number
+  }
+
+
+  export type SubscriptionAvgAggregateInputType = {
+    seats?: true
+  }
+
+  export type SubscriptionSumAggregateInputType = {
+    seats?: true
+  }
+
+  export type SubscriptionMinAggregateInputType = {
+    id?: true
+    plan?: true
+    referenceId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    cancelAtPeriodEnd?: true
+    seats?: true
+  }
+
+  export type SubscriptionMaxAggregateInputType = {
+    id?: true
+    plan?: true
+    referenceId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    cancelAtPeriodEnd?: true
+    seats?: true
+  }
+
+  export type SubscriptionCountAggregateInputType = {
+    id?: true
+    plan?: true
+    referenceId?: true
+    stripeCustomerId?: true
+    stripeSubscriptionId?: true
+    status?: true
+    periodStart?: true
+    periodEnd?: true
+    cancelAtPeriodEnd?: true
+    seats?: true
+    _all?: true
+  }
+
+  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which subscription to aggregate.
+     */
+    where?: subscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionOrderByWithRelationInput | subscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: subscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned subscriptions
+    **/
+    _count?: true | SubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SubscriptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SubscriptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubscription[P]>
+      : GetScalarType<T[P], AggregateSubscription[P]>
+  }
+
+
+
+
+  export type subscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: subscriptionWhereInput
+    orderBy?: subscriptionOrderByWithAggregationInput | subscriptionOrderByWithAggregationInput[]
+    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
+    having?: subscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubscriptionCountAggregateInputType | true
+    _avg?: SubscriptionAvgAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
+    _min?: SubscriptionMinAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
+  }
+
+  export type SubscriptionGroupByOutputType = {
+    id: string
+    plan: string
+    referenceId: string
+    stripeCustomerId: string | null
+    stripeSubscriptionId: string | null
+    status: string | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
+    seats: number | null
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetSubscriptionGroupByPayload<T extends subscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type subscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plan?: boolean
+    referenceId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    seats?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type subscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plan?: boolean
+    referenceId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    seats?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type subscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plan?: boolean
+    referenceId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    seats?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subscription"]>
+
+  export type subscriptionSelectScalar = {
+    id?: boolean
+    plan?: boolean
+    referenceId?: boolean
+    stripeCustomerId?: boolean
+    stripeSubscriptionId?: boolean
+    status?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    cancelAtPeriodEnd?: boolean
+    seats?: boolean
+  }
+
+  export type subscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "plan" | "referenceId" | "stripeCustomerId" | "stripeSubscriptionId" | "status" | "periodStart" | "periodEnd" | "cancelAtPeriodEnd" | "seats", ExtArgs["result"]["subscription"]>
+  export type subscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type subscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type subscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $subscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "subscription"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      plan: string
+      referenceId: string
+      stripeCustomerId: string | null
+      stripeSubscriptionId: string | null
+      status: string | null
+      periodStart: Date | null
+      periodEnd: Date | null
+      cancelAtPeriodEnd: boolean | null
+      seats: number | null
+    }, ExtArgs["result"]["subscription"]>
+    composites: {}
+  }
+
+  type subscriptionGetPayload<S extends boolean | null | undefined | subscriptionDefaultArgs> = $Result.GetResult<Prisma.$subscriptionPayload, S>
+
+  type subscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<subscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionCountAggregateInputType | true
+    }
+
+  export interface subscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['subscription'], meta: { name: 'subscription' } }
+    /**
+     * Find zero or one Subscription that matches the filter.
+     * @param {subscriptionFindUniqueArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends subscriptionFindUniqueArgs>(args: SelectSubset<T, subscriptionFindUniqueArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {subscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends subscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, subscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionFindFirstArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends subscriptionFindFirstArgs>(args?: SelectSubset<T, subscriptionFindFirstArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Subscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
+     * @example
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends subscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, subscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Subscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscription.findMany()
+     * 
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends subscriptionFindManyArgs>(args?: SelectSubset<T, subscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Subscription.
+     * @param {subscriptionCreateArgs} args - Arguments to create a Subscription.
+     * @example
+     * // Create one Subscription
+     * const Subscription = await prisma.subscription.create({
+     *   data: {
+     *     // ... data to create a Subscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends subscriptionCreateArgs>(args: SelectSubset<T, subscriptionCreateArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Subscriptions.
+     * @param {subscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends subscriptionCreateManyArgs>(args?: SelectSubset<T, subscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {subscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
+     * @example
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends subscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, subscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Subscription.
+     * @param {subscriptionDeleteArgs} args - Arguments to delete one Subscription.
+     * @example
+     * // Delete one Subscription
+     * const Subscription = await prisma.subscription.delete({
+     *   where: {
+     *     // ... filter to delete one Subscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends subscriptionDeleteArgs>(args: SelectSubset<T, subscriptionDeleteArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Subscription.
+     * @param {subscriptionUpdateArgs} args - Arguments to update one Subscription.
+     * @example
+     * // Update one Subscription
+     * const subscription = await prisma.subscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends subscriptionUpdateArgs>(args: SelectSubset<T, subscriptionUpdateArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Subscriptions.
+     * @param {subscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
+     * @example
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends subscriptionDeleteManyArgs>(args?: SelectSubset<T, subscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends subscriptionUpdateManyArgs>(args: SelectSubset<T, subscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {subscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
+     * @example
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends subscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, subscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Subscription.
+     * @param {subscriptionUpsertArgs} args - Arguments to update or create a Subscription.
+     * @example
+     * // Update or create a Subscription
+     * const subscription = await prisma.subscription.upsert({
+     *   create: {
+     *     // ... data to create a Subscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Subscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends subscriptionUpsertArgs>(args: SelectSubset<T, subscriptionUpsertArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Subscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionCountArgs} args - Arguments to filter Subscriptions to count.
+     * @example
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscription.count({
+     *   where: {
+     *     // ... the filter for the Subscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends subscriptionCountArgs>(
+      args?: Subset<T, subscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
+
+    /**
+     * Group by Subscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {subscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends subscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: subscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: subscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, subscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the subscription model
+   */
+  readonly fields: subscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for subscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__subscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the subscription model
+   */
+  interface subscriptionFieldRefs {
+    readonly id: FieldRef<"subscription", 'String'>
+    readonly plan: FieldRef<"subscription", 'String'>
+    readonly referenceId: FieldRef<"subscription", 'String'>
+    readonly stripeCustomerId: FieldRef<"subscription", 'String'>
+    readonly stripeSubscriptionId: FieldRef<"subscription", 'String'>
+    readonly status: FieldRef<"subscription", 'String'>
+    readonly periodStart: FieldRef<"subscription", 'DateTime'>
+    readonly periodEnd: FieldRef<"subscription", 'DateTime'>
+    readonly cancelAtPeriodEnd: FieldRef<"subscription", 'Boolean'>
+    readonly seats: FieldRef<"subscription", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * subscription findUnique
+   */
+  export type subscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which subscription to fetch.
+     */
+    where: subscriptionWhereUniqueInput
+  }
+
+  /**
+   * subscription findUniqueOrThrow
+   */
+  export type subscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which subscription to fetch.
+     */
+    where: subscriptionWhereUniqueInput
+  }
+
+  /**
+   * subscription findFirst
+   */
+  export type subscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which subscription to fetch.
+     */
+    where?: subscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionOrderByWithRelationInput | subscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for subscriptions.
+     */
+    cursor?: subscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * subscription findFirstOrThrow
+   */
+  export type subscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which subscription to fetch.
+     */
+    where?: subscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionOrderByWithRelationInput | subscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for subscriptions.
+     */
+    cursor?: subscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of subscriptions.
+     */
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * subscription findMany
+   */
+  export type subscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which subscriptions to fetch.
+     */
+    where?: subscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of subscriptions to fetch.
+     */
+    orderBy?: subscriptionOrderByWithRelationInput | subscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing subscriptions.
+     */
+    cursor?: subscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` subscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` subscriptions.
+     */
+    skip?: number
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * subscription create
+   */
+  export type subscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a subscription.
+     */
+    data: XOR<subscriptionCreateInput, subscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * subscription createMany
+   */
+  export type subscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many subscriptions.
+     */
+    data: subscriptionCreateManyInput | subscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * subscription createManyAndReturn
+   */
+  export type subscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many subscriptions.
+     */
+    data: subscriptionCreateManyInput | subscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * subscription update
+   */
+  export type subscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a subscription.
+     */
+    data: XOR<subscriptionUpdateInput, subscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which subscription to update.
+     */
+    where: subscriptionWhereUniqueInput
+  }
+
+  /**
+   * subscription updateMany
+   */
+  export type subscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update subscriptions.
+     */
+    data: XOR<subscriptionUpdateManyMutationInput, subscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which subscriptions to update
+     */
+    where?: subscriptionWhereInput
+    /**
+     * Limit how many subscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * subscription updateManyAndReturn
+   */
+  export type subscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update subscriptions.
+     */
+    data: XOR<subscriptionUpdateManyMutationInput, subscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which subscriptions to update
+     */
+    where?: subscriptionWhereInput
+    /**
+     * Limit how many subscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * subscription upsert
+   */
+  export type subscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the subscription to update in case it exists.
+     */
+    where: subscriptionWhereUniqueInput
+    /**
+     * In case the subscription found by the `where` argument doesn't exist, create a new subscription with this data.
+     */
+    create: XOR<subscriptionCreateInput, subscriptionUncheckedCreateInput>
+    /**
+     * In case the subscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<subscriptionUpdateInput, subscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * subscription delete
+   */
+  export type subscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which subscription to delete.
+     */
+    where: subscriptionWhereUniqueInput
+  }
+
+  /**
+   * subscription deleteMany
+   */
+  export type subscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which subscriptions to delete
+     */
+    where?: subscriptionWhereInput
+    /**
+     * Limit how many subscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * subscription without action
+   */
+  export type subscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the subscription
+     */
+    select?: subscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the subscription
+     */
+    omit?: subscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: subscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -3165,10 +4413,10 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     resendContactId: string | null
-    role: string | null
-    banned: boolean | null
-    banReason: string | null
     banExpires: Date | null
+    banReason: string | null
+    banned: boolean | null
+    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3180,10 +4428,10 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     resendContactId: string | null
-    role: string | null
-    banned: boolean | null
-    banReason: string | null
     banExpires: Date | null
+    banReason: string | null
+    banned: boolean | null
+    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3195,10 +4443,10 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     resendContactId: number
-    role: number
-    banned: number
-    banReason: number
     banExpires: number
+    banReason: number
+    banned: number
+    role: number
     _all: number
   }
 
@@ -3212,10 +4460,10 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     resendContactId?: true
-    role?: true
-    banned?: true
-    banReason?: true
     banExpires?: true
+    banReason?: true
+    banned?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3227,10 +4475,10 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     resendContactId?: true
-    role?: true
-    banned?: true
-    banReason?: true
     banExpires?: true
+    banReason?: true
+    banned?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3242,10 +4490,10 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     resendContactId?: true
-    role?: true
-    banned?: true
-    banReason?: true
     banExpires?: true
+    banReason?: true
+    banned?: true
+    role?: true
     _all?: true
   }
 
@@ -3330,10 +4578,10 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     resendContactId: string | null
-    role: string | null
-    banned: boolean | null
-    banReason: string | null
     banExpires: Date | null
+    banReason: string | null
+    banned: boolean | null
+    role: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -3362,19 +4610,19 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     resendContactId?: boolean
-    role?: boolean
-    banned?: boolean
-    banReason?: boolean
     banExpires?: boolean
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    accounts?: boolean | User$accountsArgs<ExtArgs>
+    banReason?: boolean
+    banned?: boolean
+    role?: boolean
     feedbacks?: boolean | User$feedbacksArgs<ExtArgs>
-    members?: boolean | User$membersArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
+    flashcards?: boolean | User$flashcardsArgs<ExtArgs>
     invitations?: boolean | User$invitationsArgs<ExtArgs>
+    members?: boolean | User$membersArgs<ExtArgs>
+    reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
     videoJobs?: boolean | User$videoJobsArgs<ExtArgs>
-    flashcards?: boolean | User$flashcardsArgs<ExtArgs>
-    reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3387,10 +4635,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     resendContactId?: boolean
-    role?: boolean
-    banned?: boolean
-    banReason?: boolean
     banExpires?: boolean
+    banReason?: boolean
+    banned?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3402,10 +4650,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     resendContactId?: boolean
-    role?: boolean
-    banned?: boolean
-    banReason?: boolean
     banExpires?: boolean
+    banReason?: boolean
+    banned?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -3417,23 +4665,23 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     resendContactId?: boolean
-    role?: boolean
-    banned?: boolean
-    banReason?: boolean
     banExpires?: boolean
+    banReason?: boolean
+    banned?: boolean
+    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "resendContactId" | "role" | "banned" | "banReason" | "banExpires", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "resendContactId" | "banExpires" | "banReason" | "banned" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    accounts?: boolean | User$accountsArgs<ExtArgs>
     feedbacks?: boolean | User$feedbacksArgs<ExtArgs>
-    members?: boolean | User$membersArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
+    flashcards?: boolean | User$flashcardsArgs<ExtArgs>
     invitations?: boolean | User$invitationsArgs<ExtArgs>
+    members?: boolean | User$membersArgs<ExtArgs>
+    reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
     videoJobs?: boolean | User$videoJobsArgs<ExtArgs>
-    flashcards?: boolean | User$flashcardsArgs<ExtArgs>
-    reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3442,15 +4690,15 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
-      accounts: Prisma.$AccountPayload<ExtArgs>[]
       feedbacks: Prisma.$FeedbackPayload<ExtArgs>[]
-      members: Prisma.$MemberPayload<ExtArgs>[]
+      accounts: Prisma.$AccountPayload<ExtArgs>[]
+      flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
       invitations: Prisma.$InvitationPayload<ExtArgs>[]
+      members: Prisma.$MemberPayload<ExtArgs>[]
+      reviewSessions: Prisma.$ReviewSessionPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
       userCourses: Prisma.$UserCoursePayload<ExtArgs>[]
       videoJobs: Prisma.$VideoJobPayload<ExtArgs>[]
-      flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
-      reviewSessions: Prisma.$ReviewSessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3461,10 +4709,10 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       resendContactId: string | null
-      role: string | null
-      banned: boolean | null
-      banReason: string | null
       banExpires: Date | null
+      banReason: string | null
+      banned: boolean | null
+      role: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3859,15 +5107,15 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     feedbacks<T extends User$feedbacksArgs<ExtArgs> = {}>(args?: Subset<T, User$feedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    members<T extends User$membersArgs<ExtArgs> = {}>(args?: Subset<T, User$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flashcards<T extends User$flashcardsArgs<ExtArgs> = {}>(args?: Subset<T, User$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invitations<T extends User$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    members<T extends User$membersArgs<ExtArgs> = {}>(args?: Subset<T, User$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewSessions<T extends User$reviewSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userCourses<T extends User$userCoursesArgs<ExtArgs> = {}>(args?: Subset<T, User$userCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     videoJobs<T extends User$videoJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$videoJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    flashcards<T extends User$flashcardsArgs<ExtArgs> = {}>(args?: Subset<T, User$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    reviewSessions<T extends User$reviewSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3905,10 +5153,10 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly resendContactId: FieldRef<"User", 'String'>
-    readonly role: FieldRef<"User", 'String'>
-    readonly banned: FieldRef<"User", 'Boolean'>
-    readonly banReason: FieldRef<"User", 'String'>
     readonly banExpires: FieldRef<"User", 'DateTime'>
+    readonly banReason: FieldRef<"User", 'String'>
+    readonly banned: FieldRef<"User", 'Boolean'>
+    readonly role: FieldRef<"User", 'String'>
   }
     
 
@@ -4297,27 +5545,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.sessions
+   * User.feedbacks
    */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$feedbacksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Session
+     * Select specific fields to fetch from the Feedback
      */
-    select?: SessionSelect<ExtArgs> | null
+    select?: FeedbackSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Session
+     * Omit specific fields from the Feedback
      */
-    omit?: SessionOmit<ExtArgs> | null
+    omit?: FeedbackOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
+    include?: FeedbackInclude<ExtArgs> | null
+    where?: FeedbackWhereInput
+    orderBy?: FeedbackOrderByWithRelationInput | FeedbackOrderByWithRelationInput[]
+    cursor?: FeedbackWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+    distinct?: FeedbackScalarFieldEnum | FeedbackScalarFieldEnum[]
   }
 
   /**
@@ -4345,27 +5593,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.feedbacks
+   * User.flashcards
    */
-  export type User$feedbacksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$flashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Feedback
+     * Select specific fields to fetch from the Flashcard
      */
-    select?: FeedbackSelect<ExtArgs> | null
+    select?: FlashcardSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Feedback
+     * Omit specific fields from the Flashcard
      */
-    omit?: FeedbackOmit<ExtArgs> | null
+    omit?: FlashcardOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: FeedbackInclude<ExtArgs> | null
-    where?: FeedbackWhereInput
-    orderBy?: FeedbackOrderByWithRelationInput | FeedbackOrderByWithRelationInput[]
-    cursor?: FeedbackWhereUniqueInput
+    include?: FlashcardInclude<ExtArgs> | null
+    where?: FlashcardWhereInput
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    cursor?: FlashcardWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FeedbackScalarFieldEnum | FeedbackScalarFieldEnum[]
+    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
+  }
+
+  /**
+   * User.invitations
+   */
+  export type User$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
   }
 
   /**
@@ -4393,27 +5665,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.invitations
+   * User.reviewSessions
    */
-  export type User$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$reviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Invitation
+     * Select specific fields to fetch from the ReviewSession
      */
-    select?: InvitationSelect<ExtArgs> | null
+    select?: ReviewSessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Invitation
+     * Omit specific fields from the ReviewSession
      */
-    omit?: InvitationOmit<ExtArgs> | null
+    omit?: ReviewSessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: InvitationInclude<ExtArgs> | null
-    where?: InvitationWhereInput
-    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
-    cursor?: InvitationWhereUniqueInput
+    include?: ReviewSessionInclude<ExtArgs> | null
+    where?: ReviewSessionWhereInput
+    orderBy?: ReviewSessionOrderByWithRelationInput | ReviewSessionOrderByWithRelationInput[]
+    cursor?: ReviewSessionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+    distinct?: ReviewSessionScalarFieldEnum | ReviewSessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.sessions
+   */
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -4462,54 +5758,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VideoJobScalarFieldEnum | VideoJobScalarFieldEnum[]
-  }
-
-  /**
-   * User.flashcards
-   */
-  export type User$flashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Flashcard
-     */
-    select?: FlashcardSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Flashcard
-     */
-    omit?: FlashcardOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FlashcardInclude<ExtArgs> | null
-    where?: FlashcardWhereInput
-    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
-    cursor?: FlashcardWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
-  }
-
-  /**
-   * User.reviewSessions
-   */
-  export type User$reviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReviewSession
-     */
-    select?: ReviewSessionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReviewSession
-     */
-    omit?: ReviewSessionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReviewSessionInclude<ExtArgs> | null
-    where?: ReviewSessionWhereInput
-    orderBy?: ReviewSessionOrderByWithRelationInput | ReviewSessionOrderByWithRelationInput[]
-    cursor?: ReviewSessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReviewSessionScalarFieldEnum | ReviewSessionScalarFieldEnum[]
   }
 
   /**
@@ -7841,8 +9089,8 @@ export namespace Prisma {
     logo: string | null
     createdAt: Date | null
     metadata: string | null
-    stripeCustomerId: string | null
     email: string | null
+    stripeCustomerId: string | null
   }
 
   export type OrganizationMaxAggregateOutputType = {
@@ -7852,8 +9100,8 @@ export namespace Prisma {
     logo: string | null
     createdAt: Date | null
     metadata: string | null
-    stripeCustomerId: string | null
     email: string | null
+    stripeCustomerId: string | null
   }
 
   export type OrganizationCountAggregateOutputType = {
@@ -7863,8 +9111,8 @@ export namespace Prisma {
     logo: number
     createdAt: number
     metadata: number
-    stripeCustomerId: number
     email: number
+    stripeCustomerId: number
     _all: number
   }
 
@@ -7876,8 +9124,8 @@ export namespace Prisma {
     logo?: true
     createdAt?: true
     metadata?: true
-    stripeCustomerId?: true
     email?: true
+    stripeCustomerId?: true
   }
 
   export type OrganizationMaxAggregateInputType = {
@@ -7887,8 +9135,8 @@ export namespace Prisma {
     logo?: true
     createdAt?: true
     metadata?: true
-    stripeCustomerId?: true
     email?: true
+    stripeCustomerId?: true
   }
 
   export type OrganizationCountAggregateInputType = {
@@ -7898,8 +9146,8 @@ export namespace Prisma {
     logo?: true
     createdAt?: true
     metadata?: true
-    stripeCustomerId?: true
     email?: true
+    stripeCustomerId?: true
     _all?: true
   }
 
@@ -7982,8 +9230,8 @@ export namespace Prisma {
     logo: string | null
     createdAt: Date
     metadata: string | null
-    stripeCustomerId: string | null
     email: string | null
+    stripeCustomerId: string | null
     _count: OrganizationCountAggregateOutputType | null
     _min: OrganizationMinAggregateOutputType | null
     _max: OrganizationMaxAggregateOutputType | null
@@ -8010,10 +9258,10 @@ export namespace Prisma {
     logo?: boolean
     createdAt?: boolean
     metadata?: boolean
-    stripeCustomerId?: boolean
     email?: boolean
-    members?: boolean | Organization$membersArgs<ExtArgs>
+    stripeCustomerId?: boolean
     invitations?: boolean | Organization$invitationsArgs<ExtArgs>
+    members?: boolean | Organization$membersArgs<ExtArgs>
     subscription?: boolean | Organization$subscriptionArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
@@ -8025,8 +9273,8 @@ export namespace Prisma {
     logo?: boolean
     createdAt?: boolean
     metadata?: boolean
-    stripeCustomerId?: boolean
     email?: boolean
+    stripeCustomerId?: boolean
   }, ExtArgs["result"]["organization"]>
 
   export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8036,8 +9284,8 @@ export namespace Prisma {
     logo?: boolean
     createdAt?: boolean
     metadata?: boolean
-    stripeCustomerId?: boolean
     email?: boolean
+    stripeCustomerId?: boolean
   }, ExtArgs["result"]["organization"]>
 
   export type OrganizationSelectScalar = {
@@ -8047,14 +9295,14 @@ export namespace Prisma {
     logo?: boolean
     createdAt?: boolean
     metadata?: boolean
-    stripeCustomerId?: boolean
     email?: boolean
+    stripeCustomerId?: boolean
   }
 
-  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "createdAt" | "metadata" | "stripeCustomerId" | "email", ExtArgs["result"]["organization"]>
+  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "createdAt" | "metadata" | "email" | "stripeCustomerId", ExtArgs["result"]["organization"]>
   export type OrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    members?: boolean | Organization$membersArgs<ExtArgs>
     invitations?: boolean | Organization$invitationsArgs<ExtArgs>
+    members?: boolean | Organization$membersArgs<ExtArgs>
     subscription?: boolean | Organization$subscriptionArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -8064,9 +9312,9 @@ export namespace Prisma {
   export type $OrganizationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Organization"
     objects: {
-      members: Prisma.$MemberPayload<ExtArgs>[]
       invitations: Prisma.$InvitationPayload<ExtArgs>[]
-      subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+      members: Prisma.$MemberPayload<ExtArgs>[]
+      subscription: Prisma.$subscriptionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8075,8 +9323,8 @@ export namespace Prisma {
       logo: string | null
       createdAt: Date
       metadata: string | null
-      stripeCustomerId: string | null
       email: string | null
+      stripeCustomerId: string | null
     }, ExtArgs["result"]["organization"]>
     composites: {}
   }
@@ -8471,9 +9719,9 @@ export namespace Prisma {
    */
   export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    members<T extends Organization$membersArgs<ExtArgs> = {}>(args?: Subset<T, Organization$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invitations<T extends Organization$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    subscription<T extends Organization$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, Organization$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    members<T extends Organization$membersArgs<ExtArgs> = {}>(args?: Subset<T, Organization$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscription<T extends Organization$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, Organization$subscriptionArgs<ExtArgs>>): Prisma__subscriptionClient<$Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8509,8 +9757,8 @@ export namespace Prisma {
     readonly logo: FieldRef<"Organization", 'String'>
     readonly createdAt: FieldRef<"Organization", 'DateTime'>
     readonly metadata: FieldRef<"Organization", 'String'>
-    readonly stripeCustomerId: FieldRef<"Organization", 'String'>
     readonly email: FieldRef<"Organization", 'String'>
+    readonly stripeCustomerId: FieldRef<"Organization", 'String'>
   }
     
 
@@ -8899,30 +10147,6 @@ export namespace Prisma {
   }
 
   /**
-   * Organization.members
-   */
-  export type Organization$membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Member
-     */
-    select?: MemberSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Member
-     */
-    omit?: MemberOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MemberInclude<ExtArgs> | null
-    where?: MemberWhereInput
-    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
-    cursor?: MemberWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
-  }
-
-  /**
    * Organization.invitations
    */
   export type Organization$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8947,22 +10171,46 @@ export namespace Prisma {
   }
 
   /**
+   * Organization.members
+   */
+  export type Organization$membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
+    orderBy?: MemberOrderByWithRelationInput | MemberOrderByWithRelationInput[]
+    cursor?: MemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
    * Organization.subscription
    */
   export type Organization$subscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Subscription
+     * Select specific fields to fetch from the subscription
      */
-    select?: SubscriptionSelect<ExtArgs> | null
+    select?: subscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Subscription
+     * Omit specific fields from the subscription
      */
-    omit?: SubscriptionOmit<ExtArgs> | null
+    omit?: subscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SubscriptionInclude<ExtArgs> | null
-    where?: SubscriptionWhereInput
+    include?: subscriptionInclude<ExtArgs> | null
+    where?: subscriptionWhereInput
   }
 
   /**
@@ -10230,8 +11478,8 @@ export namespace Prisma {
     status?: boolean
     expiresAt?: boolean
     inviterId?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invitation"]>
 
   export type InvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10242,8 +11490,8 @@ export namespace Prisma {
     status?: boolean
     expiresAt?: boolean
     inviterId?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invitation"]>
 
   export type InvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10254,8 +11502,8 @@ export namespace Prisma {
     status?: boolean
     expiresAt?: boolean
     inviterId?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["invitation"]>
 
   export type InvitationSelectScalar = {
@@ -10270,23 +11518,23 @@ export namespace Prisma {
 
   export type InvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "email" | "role" | "status" | "expiresAt" | "inviterId", ExtArgs["result"]["invitation"]>
   export type InvitationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }
   export type InvitationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }
   export type InvitationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }
 
   export type $InvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Invitation"
     objects: {
-      organization: Prisma.$OrganizationPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      organization: Prisma.$OrganizationPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10690,8 +11938,8 @@ export namespace Prisma {
    */
   export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11139,1163 +12387,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: InvitationInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Subscription
-   */
-
-  export type AggregateSubscription = {
-    _count: SubscriptionCountAggregateOutputType | null
-    _avg: SubscriptionAvgAggregateOutputType | null
-    _sum: SubscriptionSumAggregateOutputType | null
-    _min: SubscriptionMinAggregateOutputType | null
-    _max: SubscriptionMaxAggregateOutputType | null
-  }
-
-  export type SubscriptionAvgAggregateOutputType = {
-    seats: number | null
-  }
-
-  export type SubscriptionSumAggregateOutputType = {
-    seats: number | null
-  }
-
-  export type SubscriptionMinAggregateOutputType = {
-    id: string | null
-    plan: string | null
-    referenceId: string | null
-    stripeCustomerId: string | null
-    stripeSubscriptionId: string | null
-    status: string | null
-    periodStart: Date | null
-    periodEnd: Date | null
-    cancelAtPeriodEnd: boolean | null
-    seats: number | null
-  }
-
-  export type SubscriptionMaxAggregateOutputType = {
-    id: string | null
-    plan: string | null
-    referenceId: string | null
-    stripeCustomerId: string | null
-    stripeSubscriptionId: string | null
-    status: string | null
-    periodStart: Date | null
-    periodEnd: Date | null
-    cancelAtPeriodEnd: boolean | null
-    seats: number | null
-  }
-
-  export type SubscriptionCountAggregateOutputType = {
-    id: number
-    plan: number
-    referenceId: number
-    stripeCustomerId: number
-    stripeSubscriptionId: number
-    status: number
-    periodStart: number
-    periodEnd: number
-    cancelAtPeriodEnd: number
-    seats: number
-    _all: number
-  }
-
-
-  export type SubscriptionAvgAggregateInputType = {
-    seats?: true
-  }
-
-  export type SubscriptionSumAggregateInputType = {
-    seats?: true
-  }
-
-  export type SubscriptionMinAggregateInputType = {
-    id?: true
-    plan?: true
-    referenceId?: true
-    stripeCustomerId?: true
-    stripeSubscriptionId?: true
-    status?: true
-    periodStart?: true
-    periodEnd?: true
-    cancelAtPeriodEnd?: true
-    seats?: true
-  }
-
-  export type SubscriptionMaxAggregateInputType = {
-    id?: true
-    plan?: true
-    referenceId?: true
-    stripeCustomerId?: true
-    stripeSubscriptionId?: true
-    status?: true
-    periodStart?: true
-    periodEnd?: true
-    cancelAtPeriodEnd?: true
-    seats?: true
-  }
-
-  export type SubscriptionCountAggregateInputType = {
-    id?: true
-    plan?: true
-    referenceId?: true
-    stripeCustomerId?: true
-    stripeSubscriptionId?: true
-    status?: true
-    periodStart?: true
-    periodEnd?: true
-    cancelAtPeriodEnd?: true
-    seats?: true
-    _all?: true
-  }
-
-  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Subscription to aggregate.
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Subscriptions to fetch.
-     */
-    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SubscriptionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Subscriptions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Subscriptions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Subscriptions
-    **/
-    _count?: true | SubscriptionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: SubscriptionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: SubscriptionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SubscriptionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SubscriptionMaxAggregateInputType
-  }
-
-  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
-        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSubscription[P]>
-      : GetScalarType<T[P], AggregateSubscription[P]>
-  }
-
-
-
-
-  export type SubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SubscriptionWhereInput
-    orderBy?: SubscriptionOrderByWithAggregationInput | SubscriptionOrderByWithAggregationInput[]
-    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
-    having?: SubscriptionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SubscriptionCountAggregateInputType | true
-    _avg?: SubscriptionAvgAggregateInputType
-    _sum?: SubscriptionSumAggregateInputType
-    _min?: SubscriptionMinAggregateInputType
-    _max?: SubscriptionMaxAggregateInputType
-  }
-
-  export type SubscriptionGroupByOutputType = {
-    id: string
-    plan: string
-    referenceId: string
-    stripeCustomerId: string | null
-    stripeSubscriptionId: string | null
-    status: string | null
-    periodStart: Date | null
-    periodEnd: Date | null
-    cancelAtPeriodEnd: boolean | null
-    seats: number | null
-    _count: SubscriptionCountAggregateOutputType | null
-    _avg: SubscriptionAvgAggregateOutputType | null
-    _sum: SubscriptionSumAggregateOutputType | null
-    _min: SubscriptionMinAggregateOutputType | null
-    _max: SubscriptionMaxAggregateOutputType | null
-  }
-
-  type GetSubscriptionGroupByPayload<T extends SubscriptionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
-            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    plan?: boolean
-    referenceId?: boolean
-    stripeCustomerId?: boolean
-    stripeSubscriptionId?: boolean
-    status?: boolean
-    periodStart?: boolean
-    periodEnd?: boolean
-    cancelAtPeriodEnd?: boolean
-    seats?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subscription"]>
-
-  export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    plan?: boolean
-    referenceId?: boolean
-    stripeCustomerId?: boolean
-    stripeSubscriptionId?: boolean
-    status?: boolean
-    periodStart?: boolean
-    periodEnd?: boolean
-    cancelAtPeriodEnd?: boolean
-    seats?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subscription"]>
-
-  export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    plan?: boolean
-    referenceId?: boolean
-    stripeCustomerId?: boolean
-    stripeSubscriptionId?: boolean
-    status?: boolean
-    periodStart?: boolean
-    periodEnd?: boolean
-    cancelAtPeriodEnd?: boolean
-    seats?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subscription"]>
-
-  export type SubscriptionSelectScalar = {
-    id?: boolean
-    plan?: boolean
-    referenceId?: boolean
-    stripeCustomerId?: boolean
-    stripeSubscriptionId?: boolean
-    status?: boolean
-    periodStart?: boolean
-    periodEnd?: boolean
-    cancelAtPeriodEnd?: boolean
-    seats?: boolean
-  }
-
-  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "plan" | "referenceId" | "stripeCustomerId" | "stripeSubscriptionId" | "status" | "periodStart" | "periodEnd" | "cancelAtPeriodEnd" | "seats", ExtArgs["result"]["subscription"]>
-  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }
-  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }
-  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }
-
-  export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Subscription"
-    objects: {
-      organization: Prisma.$OrganizationPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      plan: string
-      referenceId: string
-      stripeCustomerId: string | null
-      stripeSubscriptionId: string | null
-      status: string | null
-      periodStart: Date | null
-      periodEnd: Date | null
-      cancelAtPeriodEnd: boolean | null
-      seats: number | null
-    }, ExtArgs["result"]["subscription"]>
-    composites: {}
-  }
-
-  type SubscriptionGetPayload<S extends boolean | null | undefined | SubscriptionDefaultArgs> = $Result.GetResult<Prisma.$SubscriptionPayload, S>
-
-  type SubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SubscriptionCountAggregateInputType | true
-    }
-
-  export interface SubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Subscription'], meta: { name: 'Subscription' } }
-    /**
-     * Find zero or one Subscription that matches the filter.
-     * @param {SubscriptionFindUniqueArgs} args - Arguments to find a Subscription
-     * @example
-     * // Get one Subscription
-     * const subscription = await prisma.subscription.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SubscriptionFindUniqueArgs>(args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SubscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
-     * @example
-     * // Get one Subscription
-     * const subscription = await prisma.subscription.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Subscription that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionFindFirstArgs} args - Arguments to find a Subscription
-     * @example
-     * // Get one Subscription
-     * const subscription = await prisma.subscription.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SubscriptionFindFirstArgs>(args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Subscription that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
-     * @example
-     * // Get one Subscription
-     * const subscription = await prisma.subscription.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Subscriptions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Subscriptions
-     * const subscriptions = await prisma.subscription.findMany()
-     * 
-     * // Get first 10 Subscriptions
-     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SubscriptionFindManyArgs>(args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Subscription.
-     * @param {SubscriptionCreateArgs} args - Arguments to create a Subscription.
-     * @example
-     * // Create one Subscription
-     * const Subscription = await prisma.subscription.create({
-     *   data: {
-     *     // ... data to create a Subscription
-     *   }
-     * })
-     * 
-     */
-    create<T extends SubscriptionCreateArgs>(args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Subscriptions.
-     * @param {SubscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
-     * @example
-     * // Create many Subscriptions
-     * const subscription = await prisma.subscription.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SubscriptionCreateManyArgs>(args?: SelectSubset<T, SubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Subscriptions and returns the data saved in the database.
-     * @param {SubscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
-     * @example
-     * // Create many Subscriptions
-     * const subscription = await prisma.subscription.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Subscriptions and only return the `id`
-     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, SubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Subscription.
-     * @param {SubscriptionDeleteArgs} args - Arguments to delete one Subscription.
-     * @example
-     * // Delete one Subscription
-     * const Subscription = await prisma.subscription.delete({
-     *   where: {
-     *     // ... filter to delete one Subscription
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SubscriptionDeleteArgs>(args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Subscription.
-     * @param {SubscriptionUpdateArgs} args - Arguments to update one Subscription.
-     * @example
-     * // Update one Subscription
-     * const subscription = await prisma.subscription.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SubscriptionUpdateArgs>(args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Subscriptions.
-     * @param {SubscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
-     * @example
-     * // Delete a few Subscriptions
-     * const { count } = await prisma.subscription.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SubscriptionDeleteManyArgs>(args?: SelectSubset<T, SubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Subscriptions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Subscriptions
-     * const subscription = await prisma.subscription.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SubscriptionUpdateManyArgs>(args: SelectSubset<T, SubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Subscriptions and returns the data updated in the database.
-     * @param {SubscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
-     * @example
-     * // Update many Subscriptions
-     * const subscription = await prisma.subscription.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Subscriptions and only return the `id`
-     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, SubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Subscription.
-     * @param {SubscriptionUpsertArgs} args - Arguments to update or create a Subscription.
-     * @example
-     * // Update or create a Subscription
-     * const subscription = await prisma.subscription.upsert({
-     *   create: {
-     *     // ... data to create a Subscription
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Subscription we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SubscriptionUpsertArgs>(args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Subscriptions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionCountArgs} args - Arguments to filter Subscriptions to count.
-     * @example
-     * // Count the number of Subscriptions
-     * const count = await prisma.subscription.count({
-     *   where: {
-     *     // ... the filter for the Subscriptions we want to count
-     *   }
-     * })
-    **/
-    count<T extends SubscriptionCountArgs>(
-      args?: Subset<T, SubscriptionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Subscription.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
-
-    /**
-     * Group by Subscription.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubscriptionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SubscriptionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SubscriptionGroupByArgs['orderBy'] }
-        : { orderBy?: SubscriptionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Subscription model
-   */
-  readonly fields: SubscriptionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Subscription.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Subscription model
-   */
-  interface SubscriptionFieldRefs {
-    readonly id: FieldRef<"Subscription", 'String'>
-    readonly plan: FieldRef<"Subscription", 'String'>
-    readonly referenceId: FieldRef<"Subscription", 'String'>
-    readonly stripeCustomerId: FieldRef<"Subscription", 'String'>
-    readonly stripeSubscriptionId: FieldRef<"Subscription", 'String'>
-    readonly status: FieldRef<"Subscription", 'String'>
-    readonly periodStart: FieldRef<"Subscription", 'DateTime'>
-    readonly periodEnd: FieldRef<"Subscription", 'DateTime'>
-    readonly cancelAtPeriodEnd: FieldRef<"Subscription", 'Boolean'>
-    readonly seats: FieldRef<"Subscription", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Subscription findUnique
-   */
-  export type SubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter, which Subscription to fetch.
-     */
-    where: SubscriptionWhereUniqueInput
-  }
-
-  /**
-   * Subscription findUniqueOrThrow
-   */
-  export type SubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter, which Subscription to fetch.
-     */
-    where: SubscriptionWhereUniqueInput
-  }
-
-  /**
-   * Subscription findFirst
-   */
-  export type SubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter, which Subscription to fetch.
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Subscriptions to fetch.
-     */
-    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Subscriptions.
-     */
-    cursor?: SubscriptionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Subscriptions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Subscriptions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Subscriptions.
-     */
-    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
-  }
-
-  /**
-   * Subscription findFirstOrThrow
-   */
-  export type SubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter, which Subscription to fetch.
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Subscriptions to fetch.
-     */
-    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Subscriptions.
-     */
-    cursor?: SubscriptionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Subscriptions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Subscriptions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Subscriptions.
-     */
-    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
-  }
-
-  /**
-   * Subscription findMany
-   */
-  export type SubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter, which Subscriptions to fetch.
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Subscriptions to fetch.
-     */
-    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Subscriptions.
-     */
-    cursor?: SubscriptionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Subscriptions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Subscriptions.
-     */
-    skip?: number
-    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
-  }
-
-  /**
-   * Subscription create
-   */
-  export type SubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Subscription.
-     */
-    data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
-  }
-
-  /**
-   * Subscription createMany
-   */
-  export type SubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Subscriptions.
-     */
-    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Subscription createManyAndReturn
-   */
-  export type SubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * The data used to create many Subscriptions.
-     */
-    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Subscription update
-   */
-  export type SubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Subscription.
-     */
-    data: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
-    /**
-     * Choose, which Subscription to update.
-     */
-    where: SubscriptionWhereUniqueInput
-  }
-
-  /**
-   * Subscription updateMany
-   */
-  export type SubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Subscriptions.
-     */
-    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
-    /**
-     * Filter which Subscriptions to update
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * Limit how many Subscriptions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Subscription updateManyAndReturn
-   */
-  export type SubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * The data used to update Subscriptions.
-     */
-    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
-    /**
-     * Filter which Subscriptions to update
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * Limit how many Subscriptions to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Subscription upsert
-   */
-  export type SubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Subscription to update in case it exists.
-     */
-    where: SubscriptionWhereUniqueInput
-    /**
-     * In case the Subscription found by the `where` argument doesn't exist, create a new Subscription with this data.
-     */
-    create: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
-    /**
-     * In case the Subscription was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
-  }
-
-  /**
-   * Subscription delete
-   */
-  export type SubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
-    /**
-     * Filter which Subscription to delete.
-     */
-    where: SubscriptionWhereUniqueInput
-  }
-
-  /**
-   * Subscription deleteMany
-   */
-  export type SubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Subscriptions to delete
-     */
-    where?: SubscriptionWhereInput
-    /**
-     * Limit how many Subscriptions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Subscription without action
-   */
-  export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Subscription
-     */
-    select?: SubscriptionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Subscription
-     */
-    omit?: SubscriptionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubscriptionInclude<ExtArgs> | null
   }
 
 
@@ -13433,6 +13524,1001 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: FeedbackInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BetaInvitation
+   */
+
+  export type AggregateBetaInvitation = {
+    _count: BetaInvitationCountAggregateOutputType | null
+    _min: BetaInvitationMinAggregateOutputType | null
+    _max: BetaInvitationMaxAggregateOutputType | null
+  }
+
+  export type BetaInvitationMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BetaInvitationMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BetaInvitationCountAggregateOutputType = {
+    id: number
+    email: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BetaInvitationMinAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BetaInvitationMaxAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BetaInvitationCountAggregateInputType = {
+    id?: true
+    email?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BetaInvitationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BetaInvitation to aggregate.
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BetaInvitations to fetch.
+     */
+    orderBy?: BetaInvitationOrderByWithRelationInput | BetaInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BetaInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BetaInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BetaInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BetaInvitations
+    **/
+    _count?: true | BetaInvitationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BetaInvitationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BetaInvitationMaxAggregateInputType
+  }
+
+  export type GetBetaInvitationAggregateType<T extends BetaInvitationAggregateArgs> = {
+        [P in keyof T & keyof AggregateBetaInvitation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBetaInvitation[P]>
+      : GetScalarType<T[P], AggregateBetaInvitation[P]>
+  }
+
+
+
+
+  export type BetaInvitationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BetaInvitationWhereInput
+    orderBy?: BetaInvitationOrderByWithAggregationInput | BetaInvitationOrderByWithAggregationInput[]
+    by: BetaInvitationScalarFieldEnum[] | BetaInvitationScalarFieldEnum
+    having?: BetaInvitationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BetaInvitationCountAggregateInputType | true
+    _min?: BetaInvitationMinAggregateInputType
+    _max?: BetaInvitationMaxAggregateInputType
+  }
+
+  export type BetaInvitationGroupByOutputType = {
+    id: string
+    email: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: BetaInvitationCountAggregateOutputType | null
+    _min: BetaInvitationMinAggregateOutputType | null
+    _max: BetaInvitationMaxAggregateOutputType | null
+  }
+
+  type GetBetaInvitationGroupByPayload<T extends BetaInvitationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BetaInvitationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BetaInvitationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BetaInvitationGroupByOutputType[P]>
+            : GetScalarType<T[P], BetaInvitationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BetaInvitationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["betaInvitation"]>
+
+  export type BetaInvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["betaInvitation"]>
+
+  export type BetaInvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["betaInvitation"]>
+
+  export type BetaInvitationSelectScalar = {
+    id?: boolean
+    email?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BetaInvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["betaInvitation"]>
+
+  export type $BetaInvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BetaInvitation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["betaInvitation"]>
+    composites: {}
+  }
+
+  type BetaInvitationGetPayload<S extends boolean | null | undefined | BetaInvitationDefaultArgs> = $Result.GetResult<Prisma.$BetaInvitationPayload, S>
+
+  type BetaInvitationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BetaInvitationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BetaInvitationCountAggregateInputType | true
+    }
+
+  export interface BetaInvitationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BetaInvitation'], meta: { name: 'BetaInvitation' } }
+    /**
+     * Find zero or one BetaInvitation that matches the filter.
+     * @param {BetaInvitationFindUniqueArgs} args - Arguments to find a BetaInvitation
+     * @example
+     * // Get one BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BetaInvitationFindUniqueArgs>(args: SelectSubset<T, BetaInvitationFindUniqueArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BetaInvitation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BetaInvitationFindUniqueOrThrowArgs} args - Arguments to find a BetaInvitation
+     * @example
+     * // Get one BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BetaInvitationFindUniqueOrThrowArgs>(args: SelectSubset<T, BetaInvitationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BetaInvitation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationFindFirstArgs} args - Arguments to find a BetaInvitation
+     * @example
+     * // Get one BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BetaInvitationFindFirstArgs>(args?: SelectSubset<T, BetaInvitationFindFirstArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BetaInvitation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationFindFirstOrThrowArgs} args - Arguments to find a BetaInvitation
+     * @example
+     * // Get one BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BetaInvitationFindFirstOrThrowArgs>(args?: SelectSubset<T, BetaInvitationFindFirstOrThrowArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BetaInvitations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BetaInvitations
+     * const betaInvitations = await prisma.betaInvitation.findMany()
+     * 
+     * // Get first 10 BetaInvitations
+     * const betaInvitations = await prisma.betaInvitation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const betaInvitationWithIdOnly = await prisma.betaInvitation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BetaInvitationFindManyArgs>(args?: SelectSubset<T, BetaInvitationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BetaInvitation.
+     * @param {BetaInvitationCreateArgs} args - Arguments to create a BetaInvitation.
+     * @example
+     * // Create one BetaInvitation
+     * const BetaInvitation = await prisma.betaInvitation.create({
+     *   data: {
+     *     // ... data to create a BetaInvitation
+     *   }
+     * })
+     * 
+     */
+    create<T extends BetaInvitationCreateArgs>(args: SelectSubset<T, BetaInvitationCreateArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BetaInvitations.
+     * @param {BetaInvitationCreateManyArgs} args - Arguments to create many BetaInvitations.
+     * @example
+     * // Create many BetaInvitations
+     * const betaInvitation = await prisma.betaInvitation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BetaInvitationCreateManyArgs>(args?: SelectSubset<T, BetaInvitationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BetaInvitations and returns the data saved in the database.
+     * @param {BetaInvitationCreateManyAndReturnArgs} args - Arguments to create many BetaInvitations.
+     * @example
+     * // Create many BetaInvitations
+     * const betaInvitation = await prisma.betaInvitation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BetaInvitations and only return the `id`
+     * const betaInvitationWithIdOnly = await prisma.betaInvitation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BetaInvitationCreateManyAndReturnArgs>(args?: SelectSubset<T, BetaInvitationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BetaInvitation.
+     * @param {BetaInvitationDeleteArgs} args - Arguments to delete one BetaInvitation.
+     * @example
+     * // Delete one BetaInvitation
+     * const BetaInvitation = await prisma.betaInvitation.delete({
+     *   where: {
+     *     // ... filter to delete one BetaInvitation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BetaInvitationDeleteArgs>(args: SelectSubset<T, BetaInvitationDeleteArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BetaInvitation.
+     * @param {BetaInvitationUpdateArgs} args - Arguments to update one BetaInvitation.
+     * @example
+     * // Update one BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BetaInvitationUpdateArgs>(args: SelectSubset<T, BetaInvitationUpdateArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BetaInvitations.
+     * @param {BetaInvitationDeleteManyArgs} args - Arguments to filter BetaInvitations to delete.
+     * @example
+     * // Delete a few BetaInvitations
+     * const { count } = await prisma.betaInvitation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BetaInvitationDeleteManyArgs>(args?: SelectSubset<T, BetaInvitationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BetaInvitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BetaInvitations
+     * const betaInvitation = await prisma.betaInvitation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BetaInvitationUpdateManyArgs>(args: SelectSubset<T, BetaInvitationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BetaInvitations and returns the data updated in the database.
+     * @param {BetaInvitationUpdateManyAndReturnArgs} args - Arguments to update many BetaInvitations.
+     * @example
+     * // Update many BetaInvitations
+     * const betaInvitation = await prisma.betaInvitation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BetaInvitations and only return the `id`
+     * const betaInvitationWithIdOnly = await prisma.betaInvitation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BetaInvitationUpdateManyAndReturnArgs>(args: SelectSubset<T, BetaInvitationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BetaInvitation.
+     * @param {BetaInvitationUpsertArgs} args - Arguments to update or create a BetaInvitation.
+     * @example
+     * // Update or create a BetaInvitation
+     * const betaInvitation = await prisma.betaInvitation.upsert({
+     *   create: {
+     *     // ... data to create a BetaInvitation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BetaInvitation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BetaInvitationUpsertArgs>(args: SelectSubset<T, BetaInvitationUpsertArgs<ExtArgs>>): Prisma__BetaInvitationClient<$Result.GetResult<Prisma.$BetaInvitationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BetaInvitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationCountArgs} args - Arguments to filter BetaInvitations to count.
+     * @example
+     * // Count the number of BetaInvitations
+     * const count = await prisma.betaInvitation.count({
+     *   where: {
+     *     // ... the filter for the BetaInvitations we want to count
+     *   }
+     * })
+    **/
+    count<T extends BetaInvitationCountArgs>(
+      args?: Subset<T, BetaInvitationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BetaInvitationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BetaInvitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BetaInvitationAggregateArgs>(args: Subset<T, BetaInvitationAggregateArgs>): Prisma.PrismaPromise<GetBetaInvitationAggregateType<T>>
+
+    /**
+     * Group by BetaInvitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BetaInvitationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BetaInvitationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BetaInvitationGroupByArgs['orderBy'] }
+        : { orderBy?: BetaInvitationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BetaInvitationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBetaInvitationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BetaInvitation model
+   */
+  readonly fields: BetaInvitationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BetaInvitation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BetaInvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BetaInvitation model
+   */
+  interface BetaInvitationFieldRefs {
+    readonly id: FieldRef<"BetaInvitation", 'String'>
+    readonly email: FieldRef<"BetaInvitation", 'String'>
+    readonly status: FieldRef<"BetaInvitation", 'String'>
+    readonly createdAt: FieldRef<"BetaInvitation", 'DateTime'>
+    readonly updatedAt: FieldRef<"BetaInvitation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BetaInvitation findUnique
+   */
+  export type BetaInvitationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter, which BetaInvitation to fetch.
+     */
+    where: BetaInvitationWhereUniqueInput
+  }
+
+  /**
+   * BetaInvitation findUniqueOrThrow
+   */
+  export type BetaInvitationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter, which BetaInvitation to fetch.
+     */
+    where: BetaInvitationWhereUniqueInput
+  }
+
+  /**
+   * BetaInvitation findFirst
+   */
+  export type BetaInvitationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter, which BetaInvitation to fetch.
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BetaInvitations to fetch.
+     */
+    orderBy?: BetaInvitationOrderByWithRelationInput | BetaInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BetaInvitations.
+     */
+    cursor?: BetaInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BetaInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BetaInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BetaInvitations.
+     */
+    distinct?: BetaInvitationScalarFieldEnum | BetaInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * BetaInvitation findFirstOrThrow
+   */
+  export type BetaInvitationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter, which BetaInvitation to fetch.
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BetaInvitations to fetch.
+     */
+    orderBy?: BetaInvitationOrderByWithRelationInput | BetaInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BetaInvitations.
+     */
+    cursor?: BetaInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BetaInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BetaInvitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BetaInvitations.
+     */
+    distinct?: BetaInvitationScalarFieldEnum | BetaInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * BetaInvitation findMany
+   */
+  export type BetaInvitationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter, which BetaInvitations to fetch.
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BetaInvitations to fetch.
+     */
+    orderBy?: BetaInvitationOrderByWithRelationInput | BetaInvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BetaInvitations.
+     */
+    cursor?: BetaInvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BetaInvitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BetaInvitations.
+     */
+    skip?: number
+    distinct?: BetaInvitationScalarFieldEnum | BetaInvitationScalarFieldEnum[]
+  }
+
+  /**
+   * BetaInvitation create
+   */
+  export type BetaInvitationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a BetaInvitation.
+     */
+    data: XOR<BetaInvitationCreateInput, BetaInvitationUncheckedCreateInput>
+  }
+
+  /**
+   * BetaInvitation createMany
+   */
+  export type BetaInvitationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BetaInvitations.
+     */
+    data: BetaInvitationCreateManyInput | BetaInvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BetaInvitation createManyAndReturn
+   */
+  export type BetaInvitationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * The data used to create many BetaInvitations.
+     */
+    data: BetaInvitationCreateManyInput | BetaInvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BetaInvitation update
+   */
+  export type BetaInvitationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a BetaInvitation.
+     */
+    data: XOR<BetaInvitationUpdateInput, BetaInvitationUncheckedUpdateInput>
+    /**
+     * Choose, which BetaInvitation to update.
+     */
+    where: BetaInvitationWhereUniqueInput
+  }
+
+  /**
+   * BetaInvitation updateMany
+   */
+  export type BetaInvitationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BetaInvitations.
+     */
+    data: XOR<BetaInvitationUpdateManyMutationInput, BetaInvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which BetaInvitations to update
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * Limit how many BetaInvitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BetaInvitation updateManyAndReturn
+   */
+  export type BetaInvitationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * The data used to update BetaInvitations.
+     */
+    data: XOR<BetaInvitationUpdateManyMutationInput, BetaInvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which BetaInvitations to update
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * Limit how many BetaInvitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BetaInvitation upsert
+   */
+  export type BetaInvitationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the BetaInvitation to update in case it exists.
+     */
+    where: BetaInvitationWhereUniqueInput
+    /**
+     * In case the BetaInvitation found by the `where` argument doesn't exist, create a new BetaInvitation with this data.
+     */
+    create: XOR<BetaInvitationCreateInput, BetaInvitationUncheckedCreateInput>
+    /**
+     * In case the BetaInvitation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BetaInvitationUpdateInput, BetaInvitationUncheckedUpdateInput>
+  }
+
+  /**
+   * BetaInvitation delete
+   */
+  export type BetaInvitationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
+    /**
+     * Filter which BetaInvitation to delete.
+     */
+    where: BetaInvitationWhereUniqueInput
+  }
+
+  /**
+   * BetaInvitation deleteMany
+   */
+  export type BetaInvitationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BetaInvitations to delete
+     */
+    where?: BetaInvitationWhereInput
+    /**
+     * Limit how many BetaInvitations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BetaInvitation without action
+   */
+  export type BetaInvitationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BetaInvitation
+     */
+    select?: BetaInvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BetaInvitation
+     */
+    omit?: BetaInvitationOmit<ExtArgs> | null
   }
 
 
@@ -16845,12 +17931,12 @@ export namespace Prisma {
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
-    enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
-    syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
     reviewSessions?: boolean | Course$reviewSessionsArgs<ExtArgs>
+    syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
+    enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -16864,9 +17950,9 @@ export namespace Prisma {
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16879,9 +17965,9 @@ export namespace Prisma {
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectScalar = {
@@ -16898,34 +17984,34 @@ export namespace Prisma {
 
   export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "subjectId" | "yearId" | "semesterId" | "ueNumber" | "syllabusUrl" | "createdAt", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
-    enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
-    syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
     reviewSessions?: boolean | Course$reviewSessionsArgs<ExtArgs>
+    syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
+    enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
   }
   export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
     year?: boolean | Course$yearArgs<ExtArgs>
-    semester?: boolean | Course$semesterArgs<ExtArgs>
   }
 
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
+      semester: Prisma.$SemesterPayload<ExtArgs> | null
       subject: Prisma.$SubjectPayload<ExtArgs>
       year: Prisma.$AcademicYearPayload<ExtArgs> | null
-      semester: Prisma.$SemesterPayload<ExtArgs> | null
-      enrollments: Prisma.$UserCoursePayload<ExtArgs>[]
-      syllabusConcepts: Prisma.$SyllabusConceptPayload<ExtArgs>[]
       reviewSessions: Prisma.$ReviewSessionPayload<ExtArgs>[]
+      syllabusConcepts: Prisma.$SyllabusConceptPayload<ExtArgs>[]
+      enrollments: Prisma.$UserCoursePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17331,12 +18417,12 @@ export namespace Prisma {
    */
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    semester<T extends Course$semesterArgs<ExtArgs> = {}>(args?: Subset<T, Course$semesterArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subject<T extends SubjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubjectDefaultArgs<ExtArgs>>): Prisma__SubjectClient<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     year<T extends Course$yearArgs<ExtArgs> = {}>(args?: Subset<T, Course$yearArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    semester<T extends Course$semesterArgs<ExtArgs> = {}>(args?: Subset<T, Course$semesterArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    enrollments<T extends Course$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    syllabusConcepts<T extends Course$syllabusConceptsArgs<ExtArgs> = {}>(args?: Subset<T, Course$syllabusConceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewSessions<T extends Course$reviewSessionsArgs<ExtArgs> = {}>(args?: Subset<T, Course$reviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    syllabusConcepts<T extends Course$syllabusConceptsArgs<ExtArgs> = {}>(args?: Subset<T, Course$syllabusConceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    enrollments<T extends Course$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17771,25 +18857,6 @@ export namespace Prisma {
   }
 
   /**
-   * Course.year
-   */
-  export type Course$yearArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    where?: AcademicYearWhereInput
-  }
-
-  /**
    * Course.semester
    */
   export type Course$semesterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17809,27 +18876,46 @@ export namespace Prisma {
   }
 
   /**
-   * Course.enrollments
+   * Course.year
    */
-  export type Course$enrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Course$yearArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserCourse
+     * Select specific fields to fetch from the AcademicYear
      */
-    select?: UserCourseSelect<ExtArgs> | null
+    select?: AcademicYearSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserCourse
+     * Omit specific fields from the AcademicYear
      */
-    omit?: UserCourseOmit<ExtArgs> | null
+    omit?: AcademicYearOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserCourseInclude<ExtArgs> | null
-    where?: UserCourseWhereInput
-    orderBy?: UserCourseOrderByWithRelationInput | UserCourseOrderByWithRelationInput[]
-    cursor?: UserCourseWhereUniqueInput
+    include?: AcademicYearInclude<ExtArgs> | null
+    where?: AcademicYearWhereInput
+  }
+
+  /**
+   * Course.reviewSessions
+   */
+  export type Course$reviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReviewSession
+     */
+    select?: ReviewSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReviewSession
+     */
+    omit?: ReviewSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewSessionInclude<ExtArgs> | null
+    where?: ReviewSessionWhereInput
+    orderBy?: ReviewSessionOrderByWithRelationInput | ReviewSessionOrderByWithRelationInput[]
+    cursor?: ReviewSessionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserCourseScalarFieldEnum | UserCourseScalarFieldEnum[]
+    distinct?: ReviewSessionScalarFieldEnum | ReviewSessionScalarFieldEnum[]
   }
 
   /**
@@ -17857,27 +18943,27 @@ export namespace Prisma {
   }
 
   /**
-   * Course.reviewSessions
+   * Course.enrollments
    */
-  export type Course$reviewSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Course$enrollmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ReviewSession
+     * Select specific fields to fetch from the UserCourse
      */
-    select?: ReviewSessionSelect<ExtArgs> | null
+    select?: UserCourseSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ReviewSession
+     * Omit specific fields from the UserCourse
      */
-    omit?: ReviewSessionOmit<ExtArgs> | null
+    omit?: UserCourseOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ReviewSessionInclude<ExtArgs> | null
-    where?: ReviewSessionWhereInput
-    orderBy?: ReviewSessionOrderByWithRelationInput | ReviewSessionOrderByWithRelationInput[]
-    cursor?: ReviewSessionWhereUniqueInput
+    include?: UserCourseInclude<ExtArgs> | null
+    where?: UserCourseWhereInput
+    orderBy?: UserCourseOrderByWithRelationInput | UserCourseOrderByWithRelationInput[]
+    cursor?: UserCourseWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ReviewSessionScalarFieldEnum | ReviewSessionScalarFieldEnum[]
+    distinct?: UserCourseScalarFieldEnum | UserCourseScalarFieldEnum[]
   }
 
   /**
@@ -18097,8 +19183,8 @@ export namespace Prisma {
     isActive?: boolean
     learnedCount?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userCourse"]>
 
   export type UserCourseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18107,8 +19193,8 @@ export namespace Prisma {
     isActive?: boolean
     learnedCount?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userCourse"]>
 
   export type UserCourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18117,8 +19203,8 @@ export namespace Prisma {
     isActive?: boolean
     learnedCount?: boolean
     createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userCourse"]>
 
   export type UserCourseSelectScalar = {
@@ -18131,23 +19217,23 @@ export namespace Prisma {
 
   export type UserCourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "courseId" | "isActive" | "learnedCount" | "createdAt", ExtArgs["result"]["userCourse"]>
   export type UserCourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserCourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserCourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $UserCoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserCourse"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       course: Prisma.$CoursePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
@@ -18549,8 +19635,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserCourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19217,8 +20303,8 @@ export namespace Prisma {
     importance?: boolean
     order?: boolean
     createdAt?: boolean
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["syllabusConcept"]>
 
@@ -19256,8 +20342,8 @@ export namespace Prisma {
 
   export type SyllabusConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "conceptText" | "category" | "importance" | "order" | "createdAt", ExtArgs["result"]["syllabusConcept"]>
   export type SyllabusConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SyllabusConceptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19270,8 +20356,8 @@ export namespace Prisma {
   export type $SyllabusConceptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SyllabusConcept"
     objects: {
-      course: Prisma.$CoursePayload<ExtArgs>
       conceptMatches: Prisma.$ConceptMatchPayload<ExtArgs>[]
+      course: Prisma.$CoursePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19675,8 +20761,8 @@ export namespace Prisma {
    */
   export interface Prisma__SyllabusConceptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     conceptMatches<T extends SyllabusConcept$conceptMatchesArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$conceptMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20381,8 +21467,8 @@ export namespace Prisma {
     errorMessage?: boolean
     createdAt?: boolean
     completedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | VideoJobCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["videoJob"]>
 
@@ -20426,8 +21512,8 @@ export namespace Prisma {
 
   export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
   export type VideoJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | VideoJobCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VideoJobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20440,8 +21526,8 @@ export namespace Prisma {
   export type $VideoJobPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "VideoJob"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       concepts: Prisma.$ConceptPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20847,8 +21933,8 @@ export namespace Prisma {
    */
   export interface Prisma__VideoJobClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     concepts<T extends VideoJob$conceptsArgs<ExtArgs> = {}>(args?: Subset<T, VideoJob$conceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21539,8 +22625,8 @@ export namespace Prisma {
     timestamp?: boolean
     confidence?: boolean
     createdAt?: boolean
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
+    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
     _count?: boolean | ConceptCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
 
@@ -21578,8 +22664,8 @@ export namespace Prisma {
 
   export type ConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoJobId" | "conceptText" | "definition" | "timestamp" | "confidence" | "createdAt", ExtArgs["result"]["concept"]>
   export type ConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
+    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
     _count?: boolean | ConceptCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConceptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21592,8 +22678,8 @@ export namespace Prisma {
   export type $ConceptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Concept"
     objects: {
-      videoJob: Prisma.$VideoJobPayload<ExtArgs>
       conceptMatches: Prisma.$ConceptMatchPayload<ExtArgs>[]
+      videoJob: Prisma.$VideoJobPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21997,8 +23083,8 @@ export namespace Prisma {
    */
   export interface Prisma__ConceptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    videoJob<T extends VideoJobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VideoJobDefaultArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     conceptMatches<T extends Concept$conceptMatchesArgs<ExtArgs> = {}>(args?: Subset<T, Concept$conceptMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    videoJob<T extends VideoJobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VideoJobDefaultArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25080,9 +26166,9 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     completedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     events?: boolean | ReviewSession$eventsArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ReviewSessionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewSession"]>
 
@@ -25095,8 +26181,8 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     completedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewSession"]>
 
   export type ReviewSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -25108,8 +26194,8 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     completedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewSession"]>
 
   export type ReviewSessionSelectScalar = {
@@ -25125,26 +26211,26 @@ export namespace Prisma {
 
   export type ReviewSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "courseId" | "flashcardCount" | "currentCardIndex" | "status" | "startedAt" | "completedAt", ExtArgs["result"]["reviewSession"]>
   export type ReviewSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    course?: boolean | CourseDefaultArgs<ExtArgs>
     events?: boolean | ReviewSession$eventsArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ReviewSessionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ReviewSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type ReviewSessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $ReviewSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ReviewSession"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      course: Prisma.$CoursePayload<ExtArgs>
       events: Prisma.$ReviewEventPayload<ExtArgs>[]
+      course: Prisma.$CoursePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -25549,9 +26635,9 @@ export namespace Prisma {
    */
   export interface Prisma__ReviewSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     events<T extends ReviewSession$eventsArgs<ExtArgs> = {}>(args?: Subset<T, ReviewSession$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26245,8 +27331,8 @@ export namespace Prisma {
     timeToRevealMs?: boolean
     timeToRateMs?: boolean
     createdAt?: boolean
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewEvent"]>
 
   export type ReviewEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26257,8 +27343,8 @@ export namespace Prisma {
     timeToRevealMs?: boolean
     timeToRateMs?: boolean
     createdAt?: boolean
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewEvent"]>
 
   export type ReviewEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -26269,8 +27355,8 @@ export namespace Prisma {
     timeToRevealMs?: boolean
     timeToRateMs?: boolean
     createdAt?: boolean
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviewEvent"]>
 
   export type ReviewEventSelectScalar = {
@@ -26285,23 +27371,23 @@ export namespace Prisma {
 
   export type ReviewEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "flashcardId" | "difficulty" | "timeToRevealMs" | "timeToRateMs" | "createdAt", ExtArgs["result"]["reviewEvent"]>
   export type ReviewEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }
   export type ReviewEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }
   export type ReviewEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
     flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    session?: boolean | ReviewSessionDefaultArgs<ExtArgs>
   }
 
   export type $ReviewEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ReviewEvent"
     objects: {
-      session: Prisma.$ReviewSessionPayload<ExtArgs>
       flashcard: Prisma.$FlashcardPayload<ExtArgs>
+      session: Prisma.$ReviewSessionPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -26705,8 +27791,8 @@ export namespace Prisma {
    */
   export interface Prisma__ReviewEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    session<T extends ReviewSessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReviewSessionDefaultArgs<ExtArgs>>): Prisma__ReviewSessionClient<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     flashcard<T extends FlashcardDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FlashcardDefaultArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    session<T extends ReviewSessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReviewSessionDefaultArgs<ExtArgs>>): Prisma__ReviewSessionClient<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27171,6 +28257,22 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const SubscriptionScalarFieldEnum: {
+    id: 'id',
+    plan: 'plan',
+    referenceId: 'referenceId',
+    stripeCustomerId: 'stripeCustomerId',
+    stripeSubscriptionId: 'stripeSubscriptionId',
+    status: 'status',
+    periodStart: 'periodStart',
+    periodEnd: 'periodEnd',
+    cancelAtPeriodEnd: 'cancelAtPeriodEnd',
+    seats: 'seats'
+  };
+
+  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -27180,10 +28282,10 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     resendContactId: 'resendContactId',
-    role: 'role',
-    banned: 'banned',
+    banExpires: 'banExpires',
     banReason: 'banReason',
-    banExpires: 'banExpires'
+    banned: 'banned',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -27243,8 +28345,8 @@ export namespace Prisma {
     logo: 'logo',
     createdAt: 'createdAt',
     metadata: 'metadata',
-    stripeCustomerId: 'stripeCustomerId',
-    email: 'email'
+    email: 'email',
+    stripeCustomerId: 'stripeCustomerId'
   };
 
   export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
@@ -27274,22 +28376,6 @@ export namespace Prisma {
   export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
 
 
-  export const SubscriptionScalarFieldEnum: {
-    id: 'id',
-    plan: 'plan',
-    referenceId: 'referenceId',
-    stripeCustomerId: 'stripeCustomerId',
-    stripeSubscriptionId: 'stripeSubscriptionId',
-    status: 'status',
-    periodStart: 'periodStart',
-    periodEnd: 'periodEnd',
-    cancelAtPeriodEnd: 'cancelAtPeriodEnd',
-    seats: 'seats'
-  };
-
-  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
-
-
   export const FeedbackScalarFieldEnum: {
     id: 'id',
     review: 'review',
@@ -27301,6 +28387,17 @@ export namespace Prisma {
   };
 
   export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+  export const BetaInvitationScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BetaInvitationScalarFieldEnum = (typeof BetaInvitationScalarFieldEnum)[keyof typeof BetaInvitationScalarFieldEnum]
 
 
   export const SubjectScalarFieldEnum: {
@@ -27500,13 +28597,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -27517,6 +28607,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -27551,6 +28648,88 @@ export namespace Prisma {
    */
 
 
+  export type subscriptionWhereInput = {
+    AND?: subscriptionWhereInput | subscriptionWhereInput[]
+    OR?: subscriptionWhereInput[]
+    NOT?: subscriptionWhereInput | subscriptionWhereInput[]
+    id?: StringFilter<"subscription"> | string
+    plan?: StringFilter<"subscription"> | string
+    referenceId?: StringFilter<"subscription"> | string
+    stripeCustomerId?: StringNullableFilter<"subscription"> | string | null
+    stripeSubscriptionId?: StringNullableFilter<"subscription"> | string | null
+    status?: StringNullableFilter<"subscription"> | string | null
+    periodStart?: DateTimeNullableFilter<"subscription"> | Date | string | null
+    periodEnd?: DateTimeNullableFilter<"subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolNullableFilter<"subscription"> | boolean | null
+    seats?: IntNullableFilter<"subscription"> | number | null
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }
+
+  export type subscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    plan?: SortOrder
+    referenceId?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    periodStart?: SortOrderInput | SortOrder
+    periodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrderInput | SortOrder
+    seats?: SortOrderInput | SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+  }
+
+  export type subscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    referenceId?: string
+    AND?: subscriptionWhereInput | subscriptionWhereInput[]
+    OR?: subscriptionWhereInput[]
+    NOT?: subscriptionWhereInput | subscriptionWhereInput[]
+    plan?: StringFilter<"subscription"> | string
+    stripeCustomerId?: StringNullableFilter<"subscription"> | string | null
+    stripeSubscriptionId?: StringNullableFilter<"subscription"> | string | null
+    status?: StringNullableFilter<"subscription"> | string | null
+    periodStart?: DateTimeNullableFilter<"subscription"> | Date | string | null
+    periodEnd?: DateTimeNullableFilter<"subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolNullableFilter<"subscription"> | boolean | null
+    seats?: IntNullableFilter<"subscription"> | number | null
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }, "id" | "referenceId">
+
+  export type subscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    plan?: SortOrder
+    referenceId?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    stripeSubscriptionId?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    periodStart?: SortOrderInput | SortOrder
+    periodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrderInput | SortOrder
+    seats?: SortOrderInput | SortOrder
+    _count?: subscriptionCountOrderByAggregateInput
+    _avg?: subscriptionAvgOrderByAggregateInput
+    _max?: subscriptionMaxOrderByAggregateInput
+    _min?: subscriptionMinOrderByAggregateInput
+    _sum?: subscriptionSumOrderByAggregateInput
+  }
+
+  export type subscriptionScalarWhereWithAggregatesInput = {
+    AND?: subscriptionScalarWhereWithAggregatesInput | subscriptionScalarWhereWithAggregatesInput[]
+    OR?: subscriptionScalarWhereWithAggregatesInput[]
+    NOT?: subscriptionScalarWhereWithAggregatesInput | subscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"subscription"> | string
+    plan?: StringWithAggregatesFilter<"subscription"> | string
+    referenceId?: StringWithAggregatesFilter<"subscription"> | string
+    stripeCustomerId?: StringNullableWithAggregatesFilter<"subscription"> | string | null
+    stripeSubscriptionId?: StringNullableWithAggregatesFilter<"subscription"> | string | null
+    status?: StringNullableWithAggregatesFilter<"subscription"> | string | null
+    periodStart?: DateTimeNullableWithAggregatesFilter<"subscription"> | Date | string | null
+    periodEnd?: DateTimeNullableWithAggregatesFilter<"subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolNullableWithAggregatesFilter<"subscription"> | boolean | null
+    seats?: IntNullableWithAggregatesFilter<"subscription"> | number | null
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -27563,19 +28742,19 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     resendContactId?: StringNullableFilter<"User"> | string | null
-    role?: StringNullableFilter<"User"> | string | null
-    banned?: BoolNullableFilter<"User"> | boolean | null
-    banReason?: StringNullableFilter<"User"> | string | null
     banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
-    sessions?: SessionListRelationFilter
-    accounts?: AccountListRelationFilter
+    banReason?: StringNullableFilter<"User"> | string | null
+    banned?: BoolNullableFilter<"User"> | boolean | null
+    role?: StringNullableFilter<"User"> | string | null
     feedbacks?: FeedbackListRelationFilter
-    members?: MemberListRelationFilter
+    accounts?: AccountListRelationFilter
+    flashcards?: FlashcardListRelationFilter
     invitations?: InvitationListRelationFilter
+    members?: MemberListRelationFilter
+    reviewSessions?: ReviewSessionListRelationFilter
+    sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
     videoJobs?: VideoJobListRelationFilter
-    flashcards?: FlashcardListRelationFilter
-    reviewSessions?: ReviewSessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -27587,19 +28766,19 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     resendContactId?: SortOrderInput | SortOrder
-    role?: SortOrderInput | SortOrder
-    banned?: SortOrderInput | SortOrder
-    banReason?: SortOrderInput | SortOrder
     banExpires?: SortOrderInput | SortOrder
-    sessions?: SessionOrderByRelationAggregateInput
-    accounts?: AccountOrderByRelationAggregateInput
+    banReason?: SortOrderInput | SortOrder
+    banned?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
     feedbacks?: FeedbackOrderByRelationAggregateInput
-    members?: MemberOrderByRelationAggregateInput
+    accounts?: AccountOrderByRelationAggregateInput
+    flashcards?: FlashcardOrderByRelationAggregateInput
     invitations?: InvitationOrderByRelationAggregateInput
+    members?: MemberOrderByRelationAggregateInput
+    reviewSessions?: ReviewSessionOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
     userCourses?: UserCourseOrderByRelationAggregateInput
     videoJobs?: VideoJobOrderByRelationAggregateInput
-    flashcards?: FlashcardOrderByRelationAggregateInput
-    reviewSessions?: ReviewSessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -27614,19 +28793,19 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     resendContactId?: StringNullableFilter<"User"> | string | null
-    role?: StringNullableFilter<"User"> | string | null
-    banned?: BoolNullableFilter<"User"> | boolean | null
-    banReason?: StringNullableFilter<"User"> | string | null
     banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
-    sessions?: SessionListRelationFilter
-    accounts?: AccountListRelationFilter
+    banReason?: StringNullableFilter<"User"> | string | null
+    banned?: BoolNullableFilter<"User"> | boolean | null
+    role?: StringNullableFilter<"User"> | string | null
     feedbacks?: FeedbackListRelationFilter
-    members?: MemberListRelationFilter
+    accounts?: AccountListRelationFilter
+    flashcards?: FlashcardListRelationFilter
     invitations?: InvitationListRelationFilter
+    members?: MemberListRelationFilter
+    reviewSessions?: ReviewSessionListRelationFilter
+    sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
     videoJobs?: VideoJobListRelationFilter
-    flashcards?: FlashcardListRelationFilter
-    reviewSessions?: ReviewSessionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -27638,10 +28817,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     resendContactId?: SortOrderInput | SortOrder
-    role?: SortOrderInput | SortOrder
-    banned?: SortOrderInput | SortOrder
-    banReason?: SortOrderInput | SortOrder
     banExpires?: SortOrderInput | SortOrder
+    banReason?: SortOrderInput | SortOrder
+    banned?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -27659,10 +28838,10 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     resendContactId?: StringNullableWithAggregatesFilter<"User"> | string | null
-    role?: StringNullableWithAggregatesFilter<"User"> | string | null
-    banned?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
-    banReason?: StringNullableWithAggregatesFilter<"User"> | string | null
     banExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    banReason?: StringNullableWithAggregatesFilter<"User"> | string | null
+    banned?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    role?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -27907,11 +29086,11 @@ export namespace Prisma {
     logo?: StringNullableFilter<"Organization"> | string | null
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     metadata?: StringNullableFilter<"Organization"> | string | null
-    stripeCustomerId?: StringNullableFilter<"Organization"> | string | null
     email?: StringNullableFilter<"Organization"> | string | null
-    members?: MemberListRelationFilter
+    stripeCustomerId?: StringNullableFilter<"Organization"> | string | null
     invitations?: InvitationListRelationFilter
-    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
+    members?: MemberListRelationFilter
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, subscriptionWhereInput> | null
   }
 
   export type OrganizationOrderByWithRelationInput = {
@@ -27921,11 +29100,11 @@ export namespace Prisma {
     logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
-    stripeCustomerId?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
-    members?: MemberOrderByRelationAggregateInput
+    stripeCustomerId?: SortOrderInput | SortOrder
     invitations?: InvitationOrderByRelationAggregateInput
-    subscription?: SubscriptionOrderByWithRelationInput
+    members?: MemberOrderByRelationAggregateInput
+    subscription?: subscriptionOrderByWithRelationInput
   }
 
   export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -27938,11 +29117,11 @@ export namespace Prisma {
     logo?: StringNullableFilter<"Organization"> | string | null
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     metadata?: StringNullableFilter<"Organization"> | string | null
-    stripeCustomerId?: StringNullableFilter<"Organization"> | string | null
     email?: StringNullableFilter<"Organization"> | string | null
-    members?: MemberListRelationFilter
+    stripeCustomerId?: StringNullableFilter<"Organization"> | string | null
     invitations?: InvitationListRelationFilter
-    subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
+    members?: MemberListRelationFilter
+    subscription?: XOR<SubscriptionNullableScalarRelationFilter, subscriptionWhereInput> | null
   }, "id" | "slug">
 
   export type OrganizationOrderByWithAggregationInput = {
@@ -27952,8 +29131,8 @@ export namespace Prisma {
     logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
-    stripeCustomerId?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
     _count?: OrganizationCountOrderByAggregateInput
     _max?: OrganizationMaxOrderByAggregateInput
     _min?: OrganizationMinOrderByAggregateInput
@@ -27969,8 +29148,8 @@ export namespace Prisma {
     logo?: StringNullableWithAggregatesFilter<"Organization"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
     metadata?: StringNullableWithAggregatesFilter<"Organization"> | string | null
-    stripeCustomerId?: StringNullableWithAggregatesFilter<"Organization"> | string | null
     email?: StringNullableWithAggregatesFilter<"Organization"> | string | null
+    stripeCustomerId?: StringNullableWithAggregatesFilter<"Organization"> | string | null
   }
 
   export type MemberWhereInput = {
@@ -28042,8 +29221,8 @@ export namespace Prisma {
     status?: StringFilter<"Invitation"> | string
     expiresAt?: DateTimeFilter<"Invitation"> | Date | string
     inviterId?: StringFilter<"Invitation"> | string
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
   }
 
   export type InvitationOrderByWithRelationInput = {
@@ -28054,8 +29233,8 @@ export namespace Prisma {
     status?: SortOrder
     expiresAt?: SortOrder
     inviterId?: SortOrder
-    organization?: OrganizationOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    organization?: OrganizationOrderByWithRelationInput
   }
 
   export type InvitationWhereUniqueInput = Prisma.AtLeast<{
@@ -28069,8 +29248,8 @@ export namespace Prisma {
     status?: StringFilter<"Invitation"> | string
     expiresAt?: DateTimeFilter<"Invitation"> | Date | string
     inviterId?: StringFilter<"Invitation"> | string
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
   }, "id">
 
   export type InvitationOrderByWithAggregationInput = {
@@ -28097,88 +29276,6 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Invitation"> | string
     expiresAt?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
     inviterId?: StringWithAggregatesFilter<"Invitation"> | string
-  }
-
-  export type SubscriptionWhereInput = {
-    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
-    OR?: SubscriptionWhereInput[]
-    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
-    id?: StringFilter<"Subscription"> | string
-    plan?: StringFilter<"Subscription"> | string
-    referenceId?: StringFilter<"Subscription"> | string
-    stripeCustomerId?: StringNullableFilter<"Subscription"> | string | null
-    stripeSubscriptionId?: StringNullableFilter<"Subscription"> | string | null
-    status?: StringNullableFilter<"Subscription"> | string | null
-    periodStart?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    periodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: BoolNullableFilter<"Subscription"> | boolean | null
-    seats?: IntNullableFilter<"Subscription"> | number | null
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-  }
-
-  export type SubscriptionOrderByWithRelationInput = {
-    id?: SortOrder
-    plan?: SortOrder
-    referenceId?: SortOrder
-    stripeCustomerId?: SortOrderInput | SortOrder
-    stripeSubscriptionId?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
-    periodStart?: SortOrderInput | SortOrder
-    periodEnd?: SortOrderInput | SortOrder
-    cancelAtPeriodEnd?: SortOrderInput | SortOrder
-    seats?: SortOrderInput | SortOrder
-    organization?: OrganizationOrderByWithRelationInput
-  }
-
-  export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    referenceId?: string
-    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
-    OR?: SubscriptionWhereInput[]
-    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
-    plan?: StringFilter<"Subscription"> | string
-    stripeCustomerId?: StringNullableFilter<"Subscription"> | string | null
-    stripeSubscriptionId?: StringNullableFilter<"Subscription"> | string | null
-    status?: StringNullableFilter<"Subscription"> | string | null
-    periodStart?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    periodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: BoolNullableFilter<"Subscription"> | boolean | null
-    seats?: IntNullableFilter<"Subscription"> | number | null
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-  }, "id" | "referenceId">
-
-  export type SubscriptionOrderByWithAggregationInput = {
-    id?: SortOrder
-    plan?: SortOrder
-    referenceId?: SortOrder
-    stripeCustomerId?: SortOrderInput | SortOrder
-    stripeSubscriptionId?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
-    periodStart?: SortOrderInput | SortOrder
-    periodEnd?: SortOrderInput | SortOrder
-    cancelAtPeriodEnd?: SortOrderInput | SortOrder
-    seats?: SortOrderInput | SortOrder
-    _count?: SubscriptionCountOrderByAggregateInput
-    _avg?: SubscriptionAvgOrderByAggregateInput
-    _max?: SubscriptionMaxOrderByAggregateInput
-    _min?: SubscriptionMinOrderByAggregateInput
-    _sum?: SubscriptionSumOrderByAggregateInput
-  }
-
-  export type SubscriptionScalarWhereWithAggregatesInput = {
-    AND?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
-    OR?: SubscriptionScalarWhereWithAggregatesInput[]
-    NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Subscription"> | string
-    plan?: StringWithAggregatesFilter<"Subscription"> | string
-    referenceId?: StringWithAggregatesFilter<"Subscription"> | string
-    stripeCustomerId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
-    stripeSubscriptionId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
-    status?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
-    periodStart?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
-    periodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: BoolNullableWithAggregatesFilter<"Subscription"> | boolean | null
-    seats?: IntNullableWithAggregatesFilter<"Subscription"> | number | null
   }
 
   export type FeedbackWhereInput = {
@@ -28246,6 +29343,58 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"Feedback"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
+  }
+
+  export type BetaInvitationWhereInput = {
+    AND?: BetaInvitationWhereInput | BetaInvitationWhereInput[]
+    OR?: BetaInvitationWhereInput[]
+    NOT?: BetaInvitationWhereInput | BetaInvitationWhereInput[]
+    id?: StringFilter<"BetaInvitation"> | string
+    email?: StringFilter<"BetaInvitation"> | string
+    status?: StringFilter<"BetaInvitation"> | string
+    createdAt?: DateTimeFilter<"BetaInvitation"> | Date | string
+    updatedAt?: DateTimeFilter<"BetaInvitation"> | Date | string
+  }
+
+  export type BetaInvitationOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BetaInvitationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: BetaInvitationWhereInput | BetaInvitationWhereInput[]
+    OR?: BetaInvitationWhereInput[]
+    NOT?: BetaInvitationWhereInput | BetaInvitationWhereInput[]
+    status?: StringFilter<"BetaInvitation"> | string
+    createdAt?: DateTimeFilter<"BetaInvitation"> | Date | string
+    updatedAt?: DateTimeFilter<"BetaInvitation"> | Date | string
+  }, "id" | "email">
+
+  export type BetaInvitationOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BetaInvitationCountOrderByAggregateInput
+    _max?: BetaInvitationMaxOrderByAggregateInput
+    _min?: BetaInvitationMinOrderByAggregateInput
+  }
+
+  export type BetaInvitationScalarWhereWithAggregatesInput = {
+    AND?: BetaInvitationScalarWhereWithAggregatesInput | BetaInvitationScalarWhereWithAggregatesInput[]
+    OR?: BetaInvitationScalarWhereWithAggregatesInput[]
+    NOT?: BetaInvitationScalarWhereWithAggregatesInput | BetaInvitationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BetaInvitation"> | string
+    email?: StringWithAggregatesFilter<"BetaInvitation"> | string
+    status?: StringWithAggregatesFilter<"BetaInvitation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BetaInvitation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BetaInvitation"> | Date | string
   }
 
   export type SubjectWhereInput = {
@@ -28405,12 +29554,12 @@ export namespace Prisma {
     ueNumber?: StringNullableFilter<"Course"> | string | null
     syllabusUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
     subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
     year?: XOR<AcademicYearNullableScalarRelationFilter, AcademicYearWhereInput> | null
-    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
-    enrollments?: UserCourseListRelationFilter
-    syllabusConcepts?: SyllabusConceptListRelationFilter
     reviewSessions?: ReviewSessionListRelationFilter
+    syllabusConcepts?: SyllabusConceptListRelationFilter
+    enrollments?: UserCourseListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
@@ -28423,12 +29572,12 @@ export namespace Prisma {
     ueNumber?: SortOrderInput | SortOrder
     syllabusUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    semester?: SemesterOrderByWithRelationInput
     subject?: SubjectOrderByWithRelationInput
     year?: AcademicYearOrderByWithRelationInput
-    semester?: SemesterOrderByWithRelationInput
-    enrollments?: UserCourseOrderByRelationAggregateInput
-    syllabusConcepts?: SyllabusConceptOrderByRelationAggregateInput
     reviewSessions?: ReviewSessionOrderByRelationAggregateInput
+    syllabusConcepts?: SyllabusConceptOrderByRelationAggregateInput
+    enrollments?: UserCourseOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -28444,12 +29593,12 @@ export namespace Prisma {
     ueNumber?: StringNullableFilter<"Course"> | string | null
     syllabusUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
+    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
     subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
     year?: XOR<AcademicYearNullableScalarRelationFilter, AcademicYearWhereInput> | null
-    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
-    enrollments?: UserCourseListRelationFilter
-    syllabusConcepts?: SyllabusConceptListRelationFilter
     reviewSessions?: ReviewSessionListRelationFilter
+    syllabusConcepts?: SyllabusConceptListRelationFilter
+    enrollments?: UserCourseListRelationFilter
   }, "id" | "code">
 
   export type CourseOrderByWithAggregationInput = {
@@ -28491,8 +29640,8 @@ export namespace Prisma {
     isActive?: BoolFilter<"UserCourse"> | boolean
     learnedCount?: IntFilter<"UserCourse"> | number
     createdAt?: DateTimeFilter<"UserCourse"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type UserCourseOrderByWithRelationInput = {
@@ -28501,8 +29650,8 @@ export namespace Prisma {
     isActive?: SortOrder
     learnedCount?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     course?: CourseOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type UserCourseWhereUniqueInput = Prisma.AtLeast<{
@@ -28515,8 +29664,8 @@ export namespace Prisma {
     isActive?: BoolFilter<"UserCourse"> | boolean
     learnedCount?: IntFilter<"UserCourse"> | number
     createdAt?: DateTimeFilter<"UserCourse"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "userId_courseId">
 
   export type UserCourseOrderByWithAggregationInput = {
@@ -28554,8 +29703,8 @@ export namespace Prisma {
     importance?: IntNullableFilter<"SyllabusConcept"> | number | null
     order?: IntFilter<"SyllabusConcept"> | number
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
-    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     conceptMatches?: ConceptMatchListRelationFilter
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }
 
   export type SyllabusConceptOrderByWithRelationInput = {
@@ -28566,8 +29715,8 @@ export namespace Prisma {
     importance?: SortOrderInput | SortOrder
     order?: SortOrder
     createdAt?: SortOrder
-    course?: CourseOrderByWithRelationInput
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
+    course?: CourseOrderByWithRelationInput
   }
 
   export type SyllabusConceptWhereUniqueInput = Prisma.AtLeast<{
@@ -28581,8 +29730,8 @@ export namespace Prisma {
     importance?: IntNullableFilter<"SyllabusConcept"> | number | null
     order?: IntFilter<"SyllabusConcept"> | number
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
-    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     conceptMatches?: ConceptMatchListRelationFilter
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
   }, "id">
 
   export type SyllabusConceptOrderByWithAggregationInput = {
@@ -28626,8 +29775,8 @@ export namespace Prisma {
     errorMessage?: StringNullableFilter<"VideoJob"> | string | null
     createdAt?: DateTimeFilter<"VideoJob"> | Date | string
     completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     concepts?: ConceptListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type VideoJobOrderByWithRelationInput = {
@@ -28640,8 +29789,8 @@ export namespace Prisma {
     errorMessage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
     concepts?: ConceptOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type VideoJobWhereUniqueInput = Prisma.AtLeast<{
@@ -28657,8 +29806,8 @@ export namespace Prisma {
     errorMessage?: StringNullableFilter<"VideoJob"> | string | null
     createdAt?: DateTimeFilter<"VideoJob"> | Date | string
     completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     concepts?: ConceptListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type VideoJobOrderByWithAggregationInput = {
@@ -28704,8 +29853,8 @@ export namespace Prisma {
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
     createdAt?: DateTimeFilter<"Concept"> | Date | string
-    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
     conceptMatches?: ConceptMatchListRelationFilter
+    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
   }
 
   export type ConceptOrderByWithRelationInput = {
@@ -28716,8 +29865,8 @@ export namespace Prisma {
     timestamp?: SortOrderInput | SortOrder
     confidence?: SortOrder
     createdAt?: SortOrder
-    videoJob?: VideoJobOrderByWithRelationInput
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
+    videoJob?: VideoJobOrderByWithRelationInput
   }
 
   export type ConceptWhereUniqueInput = Prisma.AtLeast<{
@@ -28731,8 +29880,8 @@ export namespace Prisma {
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
     createdAt?: DateTimeFilter<"Concept"> | Date | string
-    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
     conceptMatches?: ConceptMatchListRelationFilter
+    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
   }, "id">
 
   export type ConceptOrderByWithAggregationInput = {
@@ -28946,9 +30095,9 @@ export namespace Prisma {
     status?: StringFilter<"ReviewSession"> | string
     startedAt?: DateTimeFilter<"ReviewSession"> | Date | string
     completedAt?: DateTimeNullableFilter<"ReviewSession"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     events?: ReviewEventListRelationFilter
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ReviewSessionOrderByWithRelationInput = {
@@ -28960,9 +30109,9 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-    course?: CourseOrderByWithRelationInput
     events?: ReviewEventOrderByRelationAggregateInput
+    course?: CourseOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ReviewSessionWhereUniqueInput = Prisma.AtLeast<{
@@ -28977,9 +30126,9 @@ export namespace Prisma {
     status?: StringFilter<"ReviewSession"> | string
     startedAt?: DateTimeFilter<"ReviewSession"> | Date | string
     completedAt?: DateTimeNullableFilter<"ReviewSession"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     events?: ReviewEventListRelationFilter
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ReviewSessionOrderByWithAggregationInput = {
@@ -29023,8 +30172,8 @@ export namespace Prisma {
     timeToRevealMs?: IntNullableFilter<"ReviewEvent"> | number | null
     timeToRateMs?: IntNullableFilter<"ReviewEvent"> | number | null
     createdAt?: DateTimeFilter<"ReviewEvent"> | Date | string
-    session?: XOR<ReviewSessionScalarRelationFilter, ReviewSessionWhereInput>
     flashcard?: XOR<FlashcardScalarRelationFilter, FlashcardWhereInput>
+    session?: XOR<ReviewSessionScalarRelationFilter, ReviewSessionWhereInput>
   }
 
   export type ReviewEventOrderByWithRelationInput = {
@@ -29035,8 +30184,8 @@ export namespace Prisma {
     timeToRevealMs?: SortOrderInput | SortOrder
     timeToRateMs?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    session?: ReviewSessionOrderByWithRelationInput
     flashcard?: FlashcardOrderByWithRelationInput
+    session?: ReviewSessionOrderByWithRelationInput
   }
 
   export type ReviewEventWhereUniqueInput = Prisma.AtLeast<{
@@ -29050,8 +30199,8 @@ export namespace Prisma {
     timeToRevealMs?: IntNullableFilter<"ReviewEvent"> | number | null
     timeToRateMs?: IntNullableFilter<"ReviewEvent"> | number | null
     createdAt?: DateTimeFilter<"ReviewEvent"> | Date | string
-    session?: XOR<ReviewSessionScalarRelationFilter, ReviewSessionWhereInput>
     flashcard?: XOR<FlashcardScalarRelationFilter, FlashcardWhereInput>
+    session?: XOR<ReviewSessionScalarRelationFilter, ReviewSessionWhereInput>
   }, "id">
 
   export type ReviewEventOrderByWithAggregationInput = {
@@ -29082,6 +30231,96 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ReviewEvent"> | Date | string
   }
 
+  export type subscriptionCreateInput = {
+    id: string
+    plan: string
+    stripeCustomerId?: string | null
+    stripeSubscriptionId?: string | null
+    status?: string | null
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean | null
+    seats?: number | null
+    organization: OrganizationCreateNestedOneWithoutSubscriptionInput
+  }
+
+  export type subscriptionUncheckedCreateInput = {
+    id: string
+    plan: string
+    referenceId: string
+    stripeCustomerId?: string | null
+    stripeSubscriptionId?: string | null
+    status?: string | null
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean | null
+    seats?: number | null
+  }
+
+  export type subscriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seats?: NullableIntFieldUpdateOperationsInput | number | null
+    organization?: OrganizationUpdateOneRequiredWithoutSubscriptionNestedInput
+  }
+
+  export type subscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    referenceId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seats?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type subscriptionCreateManyInput = {
+    id: string
+    plan: string
+    referenceId: string
+    stripeCustomerId?: string | null
+    stripeSubscriptionId?: string | null
+    status?: string | null
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean | null
+    seats?: number | null
+  }
+
+  export type subscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seats?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type subscriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plan?: StringFieldUpdateOperationsInput | string
+    referenceId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    seats?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -29091,19 +30330,19 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -29115,19 +30354,19 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -29139,19 +30378,19 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -29163,19 +30402,19 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -29187,10 +30426,10 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -29202,10 +30441,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -29217,10 +30456,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -29494,11 +30733,11 @@ export namespace Prisma {
     logo?: string | null
     createdAt: Date | string
     metadata?: string | null
-    stripeCustomerId?: string | null
     email?: string | null
-    members?: MemberCreateNestedManyWithoutOrganizationInput
+    stripeCustomerId?: string | null
     invitations?: InvitationCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionCreateNestedOneWithoutOrganizationInput
+    members?: MemberCreateNestedManyWithoutOrganizationInput
+    subscription?: subscriptionCreateNestedOneWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateInput = {
@@ -29508,11 +30747,11 @@ export namespace Prisma {
     logo?: string | null
     createdAt: Date | string
     metadata?: string | null
-    stripeCustomerId?: string | null
     email?: string | null
-    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
+    stripeCustomerId?: string | null
     invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
+    subscription?: subscriptionUncheckedCreateNestedOneWithoutOrganizationInput
   }
 
   export type OrganizationUpdateInput = {
@@ -29522,11 +30761,11 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    members?: MemberUpdateManyWithoutOrganizationNestedInput
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUpdateOneWithoutOrganizationNestedInput
+    members?: MemberUpdateManyWithoutOrganizationNestedInput
+    subscription?: subscriptionUpdateOneWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateInput = {
@@ -29536,11 +30775,11 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    subscription?: subscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateManyInput = {
@@ -29550,8 +30789,8 @@ export namespace Prisma {
     logo?: string | null
     createdAt: Date | string
     metadata?: string | null
-    stripeCustomerId?: string | null
     email?: string | null
+    stripeCustomerId?: string | null
   }
 
   export type OrganizationUpdateManyMutationInput = {
@@ -29561,8 +30800,8 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrganizationUncheckedUpdateManyInput = {
@@ -29572,8 +30811,8 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MemberCreateInput = {
@@ -29636,8 +30875,8 @@ export namespace Prisma {
     role?: string | null
     status: string
     expiresAt: Date | string
-    organization: OrganizationCreateNestedOneWithoutInvitationsInput
     user: UserCreateNestedOneWithoutInvitationsInput
+    organization: OrganizationCreateNestedOneWithoutInvitationsInput
   }
 
   export type InvitationUncheckedCreateInput = {
@@ -29656,8 +30895,8 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    organization?: OrganizationUpdateOneRequiredWithoutInvitationsNestedInput
     user?: UserUpdateOneRequiredWithoutInvitationsNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutInvitationsNestedInput
   }
 
   export type InvitationUncheckedUpdateInput = {
@@ -29696,96 +30935,6 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inviterId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SubscriptionCreateInput = {
-    id: string
-    plan: string
-    stripeCustomerId?: string | null
-    stripeSubscriptionId?: string | null
-    status?: string | null
-    periodStart?: Date | string | null
-    periodEnd?: Date | string | null
-    cancelAtPeriodEnd?: boolean | null
-    seats?: number | null
-    organization: OrganizationCreateNestedOneWithoutSubscriptionInput
-  }
-
-  export type SubscriptionUncheckedCreateInput = {
-    id: string
-    plan: string
-    referenceId: string
-    stripeCustomerId?: string | null
-    stripeSubscriptionId?: string | null
-    status?: string | null
-    periodStart?: Date | string | null
-    periodEnd?: Date | string | null
-    cancelAtPeriodEnd?: boolean | null
-    seats?: number | null
-  }
-
-  export type SubscriptionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plan?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    seats?: NullableIntFieldUpdateOperationsInput | number | null
-    organization?: OrganizationUpdateOneRequiredWithoutSubscriptionNestedInput
-  }
-
-  export type SubscriptionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plan?: StringFieldUpdateOperationsInput | string
-    referenceId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    seats?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type SubscriptionCreateManyInput = {
-    id: string
-    plan: string
-    referenceId: string
-    stripeCustomerId?: string | null
-    stripeSubscriptionId?: string | null
-    status?: string | null
-    periodStart?: Date | string | null
-    periodEnd?: Date | string | null
-    cancelAtPeriodEnd?: boolean | null
-    seats?: number | null
-  }
-
-  export type SubscriptionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plan?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    seats?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type SubscriptionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    plan?: StringFieldUpdateOperationsInput | string
-    referenceId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeSubscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    periodStart?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    periodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    seats?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FeedbackCreateInput = {
@@ -29853,6 +31002,62 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BetaInvitationCreateInput = {
+    id?: string
+    email: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BetaInvitationUncheckedCreateInput = {
+    id?: string
+    email: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BetaInvitationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BetaInvitationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BetaInvitationCreateManyInput = {
+    id?: string
+    email: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BetaInvitationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BetaInvitationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30009,12 +31214,12 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
+    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
     year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
@@ -30027,9 +31232,9 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
@@ -30039,12 +31244,12 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
     year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
@@ -30057,9 +31262,9 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
@@ -30099,8 +31304,8 @@ export namespace Prisma {
     isActive: boolean
     learnedCount?: number
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutUserCoursesInput
     course: CourseCreateNestedOneWithoutEnrollmentsInput
+    user: UserCreateNestedOneWithoutUserCoursesInput
   }
 
   export type UserCourseUncheckedCreateInput = {
@@ -30115,8 +31320,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     learnedCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutUserCoursesNestedInput
     course?: CourseUpdateOneRequiredWithoutEnrollmentsNestedInput
+    user?: UserUpdateOneRequiredWithoutUserCoursesNestedInput
   }
 
   export type UserCourseUncheckedUpdateInput = {
@@ -30156,8 +31361,8 @@ export namespace Prisma {
     importance?: number | null
     order: number
     createdAt?: Date | string
-    course: CourseCreateNestedOneWithoutSyllabusConceptsInput
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    course: CourseCreateNestedOneWithoutSyllabusConceptsInput
   }
 
   export type SyllabusConceptUncheckedCreateInput = {
@@ -30178,8 +31383,8 @@ export namespace Prisma {
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
   }
 
   export type SyllabusConceptUncheckedUpdateInput = {
@@ -30231,8 +31436,8 @@ export namespace Prisma {
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutVideoJobsInput
     concepts?: ConceptCreateNestedManyWithoutVideoJobInput
+    user: UserCreateNestedOneWithoutVideoJobsInput
   }
 
   export type VideoJobUncheckedCreateInput = {
@@ -30257,8 +31462,8 @@ export namespace Prisma {
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutVideoJobsNestedInput
     concepts?: ConceptUpdateManyWithoutVideoJobNestedInput
+    user?: UserUpdateOneRequiredWithoutVideoJobsNestedInput
   }
 
   export type VideoJobUncheckedUpdateInput = {
@@ -30316,8 +31521,8 @@ export namespace Prisma {
     timestamp?: string | null
     confidence: number
     createdAt?: Date | string
-    videoJob: VideoJobCreateNestedOneWithoutConceptsInput
     conceptMatches?: ConceptMatchCreateNestedManyWithoutConceptInput
+    videoJob: VideoJobCreateNestedOneWithoutConceptsInput
   }
 
   export type ConceptUncheckedCreateInput = {
@@ -30338,8 +31543,8 @@ export namespace Prisma {
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    videoJob?: VideoJobUpdateOneRequiredWithoutConceptsNestedInput
     conceptMatches?: ConceptMatchUpdateManyWithoutConceptNestedInput
+    videoJob?: VideoJobUpdateOneRequiredWithoutConceptsNestedInput
   }
 
   export type ConceptUncheckedUpdateInput = {
@@ -30568,9 +31773,9 @@ export namespace Prisma {
     status: string
     startedAt?: Date | string
     completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutReviewSessionsInput
-    course: CourseCreateNestedOneWithoutReviewSessionsInput
     events?: ReviewEventCreateNestedManyWithoutSessionInput
+    course: CourseCreateNestedOneWithoutReviewSessionsInput
+    user: UserCreateNestedOneWithoutReviewSessionsInput
   }
 
   export type ReviewSessionUncheckedCreateInput = {
@@ -30592,9 +31797,9 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
-    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
     events?: ReviewEventUpdateManyWithoutSessionNestedInput
+    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
   }
 
   export type ReviewSessionUncheckedUpdateInput = {
@@ -30646,8 +31851,8 @@ export namespace Prisma {
     timeToRevealMs?: number | null
     timeToRateMs?: number | null
     createdAt?: Date | string
-    session: ReviewSessionCreateNestedOneWithoutEventsInput
     flashcard: FlashcardCreateNestedOneWithoutReviewEventsInput
+    session: ReviewSessionCreateNestedOneWithoutEventsInput
   }
 
   export type ReviewEventUncheckedCreateInput = {
@@ -30666,8 +31871,8 @@ export namespace Prisma {
     timeToRevealMs?: NullableIntFieldUpdateOperationsInput | number | null
     timeToRateMs?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    session?: ReviewSessionUpdateOneRequiredWithoutEventsNestedInput
     flashcard?: FlashcardUpdateOneRequiredWithoutReviewEventsNestedInput
+    session?: ReviewSessionUpdateOneRequiredWithoutEventsNestedInput
   }
 
   export type ReviewEventUncheckedUpdateInput = {
@@ -30723,11 +31928,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -30743,22 +31943,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -30770,58 +31954,25 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type AccountListRelationFilter = {
-    every?: AccountWhereInput
-    some?: AccountWhereInput
-    none?: AccountWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type FeedbackListRelationFilter = {
-    every?: FeedbackWhereInput
-    some?: FeedbackWhereInput
-    none?: FeedbackWhereInput
-  }
-
-  export type MemberListRelationFilter = {
-    every?: MemberWhereInput
-    some?: MemberWhereInput
-    none?: MemberWhereInput
-  }
-
-  export type InvitationListRelationFilter = {
-    every?: InvitationWhereInput
-    some?: InvitationWhereInput
-    none?: InvitationWhereInput
-  }
-
-  export type UserCourseListRelationFilter = {
-    every?: UserCourseWhereInput
-    some?: UserCourseWhereInput
-    none?: UserCourseWhereInput
-  }
-
-  export type VideoJobListRelationFilter = {
-    every?: VideoJobWhereInput
-    some?: VideoJobWhereInput
-    none?: VideoJobWhereInput
-  }
-
-  export type FlashcardListRelationFilter = {
-    every?: FlashcardWhereInput
-    some?: FlashcardWhereInput
-    none?: FlashcardWhereInput
-  }
-
-  export type ReviewSessionListRelationFilter = {
-    every?: ReviewSessionWhereInput
-    some?: ReviewSessionWhereInput
-    none?: ReviewSessionWhereInput
+  export type OrganizationScalarRelationFilter = {
+    is?: OrganizationWhereInput
+    isNot?: OrganizationWhereInput
   }
 
   export type SortOrderInput = {
@@ -30829,85 +31980,51 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type FeedbackOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MemberOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type InvitationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserCourseOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type VideoJobOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type FlashcardOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ReviewSessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserCountOrderByAggregateInput = {
+  export type subscriptionCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    resendContactId?: SortOrder
-    role?: SortOrder
-    banned?: SortOrder
-    banReason?: SortOrder
-    banExpires?: SortOrder
+    plan?: SortOrder
+    referenceId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    seats?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    resendContactId?: SortOrder
-    role?: SortOrder
-    banned?: SortOrder
-    banReason?: SortOrder
-    banExpires?: SortOrder
+  export type subscriptionAvgOrderByAggregateInput = {
+    seats?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type subscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    resendContactId?: SortOrder
-    role?: SortOrder
-    banned?: SortOrder
-    banReason?: SortOrder
-    banExpires?: SortOrder
+    plan?: SortOrder
+    referenceId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    seats?: SortOrder
+  }
+
+  export type subscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    plan?: SortOrder
+    referenceId?: SortOrder
+    stripeCustomerId?: SortOrder
+    stripeSubscriptionId?: SortOrder
+    status?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    cancelAtPeriodEnd?: SortOrder
+    seats?: SortOrder
+  }
+
+  export type subscriptionSumOrderByAggregateInput = {
+    seats?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -30928,14 +32045,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -30954,28 +32063,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -30988,6 +32075,203 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type FeedbackListRelationFilter = {
+    every?: FeedbackWhereInput
+    some?: FeedbackWhereInput
+    none?: FeedbackWhereInput
+  }
+
+  export type AccountListRelationFilter = {
+    every?: AccountWhereInput
+    some?: AccountWhereInput
+    none?: AccountWhereInput
+  }
+
+  export type FlashcardListRelationFilter = {
+    every?: FlashcardWhereInput
+    some?: FlashcardWhereInput
+    none?: FlashcardWhereInput
+  }
+
+  export type InvitationListRelationFilter = {
+    every?: InvitationWhereInput
+    some?: InvitationWhereInput
+    none?: InvitationWhereInput
+  }
+
+  export type MemberListRelationFilter = {
+    every?: MemberWhereInput
+    some?: MemberWhereInput
+    none?: MemberWhereInput
+  }
+
+  export type ReviewSessionListRelationFilter = {
+    every?: ReviewSessionWhereInput
+    some?: ReviewSessionWhereInput
+    none?: ReviewSessionWhereInput
+  }
+
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
+  }
+
+  export type UserCourseListRelationFilter = {
+    every?: UserCourseWhereInput
+    some?: UserCourseWhereInput
+    none?: UserCourseWhereInput
+  }
+
+  export type VideoJobListRelationFilter = {
+    every?: VideoJobWhereInput
+    some?: VideoJobWhereInput
+    none?: VideoJobWhereInput
+  }
+
+  export type FeedbackOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FlashcardOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvitationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReviewSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCourseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VideoJobOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    emailVerified?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resendContactId?: SortOrder
+    banExpires?: SortOrder
+    banReason?: SortOrder
+    banned?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    emailVerified?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resendContactId?: SortOrder
+    banExpires?: SortOrder
+    banReason?: SortOrder
+    banned?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    emailVerified?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resendContactId?: SortOrder
+    banExpires?: SortOrder
+    banReason?: SortOrder
+    banned?: SortOrder
+    role?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -31110,8 +32394,8 @@ export namespace Prisma {
   }
 
   export type SubscriptionNullableScalarRelationFilter = {
-    is?: SubscriptionWhereInput | null
-    isNot?: SubscriptionWhereInput | null
+    is?: subscriptionWhereInput | null
+    isNot?: subscriptionWhereInput | null
   }
 
   export type OrganizationCountOrderByAggregateInput = {
@@ -31121,8 +32405,8 @@ export namespace Prisma {
     logo?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
-    stripeCustomerId?: SortOrder
     email?: SortOrder
+    stripeCustomerId?: SortOrder
   }
 
   export type OrganizationMaxOrderByAggregateInput = {
@@ -31132,8 +32416,8 @@ export namespace Prisma {
     logo?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
-    stripeCustomerId?: SortOrder
     email?: SortOrder
+    stripeCustomerId?: SortOrder
   }
 
   export type OrganizationMinOrderByAggregateInput = {
@@ -31143,13 +32427,8 @@ export namespace Prisma {
     logo?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
-    stripeCustomerId?: SortOrder
     email?: SortOrder
-  }
-
-  export type OrganizationScalarRelationFilter = {
-    is?: OrganizationWhereInput
-    isNot?: OrganizationWhereInput
+    stripeCustomerId?: SortOrder
   }
 
   export type MemberCountOrderByAggregateInput = {
@@ -31204,80 +32483,6 @@ export namespace Prisma {
     status?: SortOrder
     expiresAt?: SortOrder
     inviterId?: SortOrder
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type SubscriptionCountOrderByAggregateInput = {
-    id?: SortOrder
-    plan?: SortOrder
-    referenceId?: SortOrder
-    stripeCustomerId?: SortOrder
-    stripeSubscriptionId?: SortOrder
-    status?: SortOrder
-    periodStart?: SortOrder
-    periodEnd?: SortOrder
-    cancelAtPeriodEnd?: SortOrder
-    seats?: SortOrder
-  }
-
-  export type SubscriptionAvgOrderByAggregateInput = {
-    seats?: SortOrder
-  }
-
-  export type SubscriptionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    plan?: SortOrder
-    referenceId?: SortOrder
-    stripeCustomerId?: SortOrder
-    stripeSubscriptionId?: SortOrder
-    status?: SortOrder
-    periodStart?: SortOrder
-    periodEnd?: SortOrder
-    cancelAtPeriodEnd?: SortOrder
-    seats?: SortOrder
-  }
-
-  export type SubscriptionMinOrderByAggregateInput = {
-    id?: SortOrder
-    plan?: SortOrder
-    referenceId?: SortOrder
-    stripeCustomerId?: SortOrder
-    stripeSubscriptionId?: SortOrder
-    status?: SortOrder
-    periodStart?: SortOrder
-    periodEnd?: SortOrder
-    cancelAtPeriodEnd?: SortOrder
-    seats?: SortOrder
-  }
-
-  export type SubscriptionSumOrderByAggregateInput = {
-    seats?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -31348,6 +32553,30 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BetaInvitationCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BetaInvitationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BetaInvitationMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CourseListRelationFilter = {
@@ -31433,6 +32662,11 @@ export namespace Prisma {
     number?: SortOrder
   }
 
+  export type SemesterNullableScalarRelationFilter = {
+    is?: SemesterWhereInput | null
+    isNot?: SemesterWhereInput | null
+  }
+
   export type SubjectScalarRelationFilter = {
     is?: SubjectWhereInput
     isNot?: SubjectWhereInput
@@ -31441,11 +32675,6 @@ export namespace Prisma {
   export type AcademicYearNullableScalarRelationFilter = {
     is?: AcademicYearWhereInput | null
     isNot?: AcademicYearWhereInput | null
-  }
-
-  export type SemesterNullableScalarRelationFilter = {
-    is?: SemesterWhereInput | null
-    isNot?: SemesterWhereInput | null
   }
 
   export type SyllabusConceptListRelationFilter = {
@@ -31871,14 +33100,14 @@ export namespace Prisma {
     currentCardIndex?: SortOrder
   }
 
-  export type ReviewSessionScalarRelationFilter = {
-    is?: ReviewSessionWhereInput
-    isNot?: ReviewSessionWhereInput
-  }
-
   export type FlashcardScalarRelationFilter = {
     is?: FlashcardWhereInput
     isNot?: FlashcardWhereInput
+  }
+
+  export type ReviewSessionScalarRelationFilter = {
+    is?: ReviewSessionWhereInput
+    isNot?: ReviewSessionWhereInput
   }
 
   export type ReviewEventCountOrderByAggregateInput = {
@@ -31921,18 +33150,42 @@ export namespace Prisma {
     timeToRateMs?: SortOrder
   }
 
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  export type OrganizationCreateNestedOneWithoutSubscriptionInput = {
+    create?: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutSubscriptionInput
+    connect?: OrganizationWhereUniqueInput
   }
 
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutSubscriptionNestedInput = {
+    create?: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutSubscriptionInput
+    upsert?: OrganizationUpsertWithoutSubscriptionInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutSubscriptionInput, OrganizationUpdateWithoutSubscriptionInput>, OrganizationUncheckedUpdateWithoutSubscriptionInput>
   }
 
   export type FeedbackCreateNestedManyWithoutUserInput = {
@@ -31942,11 +33195,18 @@ export namespace Prisma {
     connect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
   }
 
-  export type MemberCreateNestedManyWithoutUserInput = {
-    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
-    createMany?: MemberCreateManyUserInputEnvelope
-    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  export type AccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type FlashcardCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
+    createMany?: FlashcardCreateManyUserInputEnvelope
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
   }
 
   export type InvitationCreateNestedManyWithoutUserInput = {
@@ -31954,6 +33214,27 @@ export namespace Prisma {
     connectOrCreate?: InvitationCreateOrConnectWithoutUserInput | InvitationCreateOrConnectWithoutUserInput[]
     createMany?: InvitationCreateManyUserInputEnvelope
     connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type MemberCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type ReviewSessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewSessionCreateManyUserInputEnvelope
+    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+  }
+
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type UserCourseCreateNestedManyWithoutUserInput = {
@@ -31970,14 +33251,42 @@ export namespace Prisma {
     connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
   }
 
-  export type FlashcardCreateNestedManyWithoutUserInput = {
+  export type FeedbackUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
+    createMany?: FeedbackCreateManyUserInputEnvelope
+    connect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
+  }
+
+  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type FlashcardUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
     connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
     createMany?: FlashcardCreateManyUserInputEnvelope
     connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
   }
 
-  export type ReviewSessionCreateNestedManyWithoutUserInput = {
+  export type InvitationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InvitationCreateWithoutUserInput, InvitationUncheckedCreateWithoutUserInput> | InvitationCreateWithoutUserInput[] | InvitationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutUserInput | InvitationCreateOrConnectWithoutUserInput[]
+    createMany?: InvitationCreateManyUserInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type MemberUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type ReviewSessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
     createMany?: ReviewSessionCreateManyUserInputEnvelope
@@ -31989,34 +33298,6 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
-  export type FeedbackUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
-    createMany?: FeedbackCreateManyUserInputEnvelope
-    connect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
-  }
-
-  export type MemberUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
-    createMany?: MemberCreateManyUserInputEnvelope
-    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-  }
-
-  export type InvitationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<InvitationCreateWithoutUserInput, InvitationUncheckedCreateWithoutUserInput> | InvitationCreateWithoutUserInput[] | InvitationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InvitationCreateOrConnectWithoutUserInput | InvitationCreateOrConnectWithoutUserInput[]
-    createMany?: InvitationCreateManyUserInputEnvelope
-    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
   export type UserCourseUncheckedCreateNestedManyWithoutUserInput = {
@@ -32033,70 +33314,12 @@ export namespace Prisma {
     connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
   }
 
-  export type FlashcardUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
-    createMany?: FlashcardCreateManyUserInputEnvelope
-    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
-  }
-
-  export type ReviewSessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
-    createMany?: ReviewSessionCreateManyUserInputEnvelope
-    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
   export type FeedbackUpdateManyWithoutUserNestedInput = {
@@ -32113,18 +33336,32 @@ export namespace Prisma {
     deleteMany?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
   }
 
-  export type MemberUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
-    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MemberCreateManyUserInputEnvelope
-    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  export type AccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type FlashcardUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
+    upsert?: FlashcardUpsertWithWhereUniqueWithoutUserInput | FlashcardUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashcardCreateManyUserInputEnvelope
+    set?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    disconnect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    delete?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    update?: FlashcardUpdateWithWhereUniqueWithoutUserInput | FlashcardUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashcardUpdateManyWithWhereWithoutUserInput | FlashcardUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
   }
 
   export type InvitationUpdateManyWithoutUserNestedInput = {
@@ -32139,6 +33376,48 @@ export namespace Prisma {
     update?: InvitationUpdateWithWhereUniqueWithoutUserInput | InvitationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: InvitationUpdateManyWithWhereWithoutUserInput | InvitationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type MemberUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type ReviewSessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewSessionUpsertWithWhereUniqueWithoutUserInput | ReviewSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewSessionCreateManyUserInputEnvelope
+    set?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    disconnect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    delete?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    update?: ReviewSessionUpdateWithWhereUniqueWithoutUserInput | ReviewSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewSessionUpdateManyWithWhereWithoutUserInput | ReviewSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
+  }
+
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type UserCourseUpdateManyWithoutUserNestedInput = {
@@ -32169,7 +33448,35 @@ export namespace Prisma {
     deleteMany?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
   }
 
-  export type FlashcardUpdateManyWithoutUserNestedInput = {
+  export type FeedbackUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
+    upsert?: FeedbackUpsertWithWhereUniqueWithoutUserInput | FeedbackUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FeedbackCreateManyUserInputEnvelope
+    set?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
+    disconnect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
+    delete?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
+    connect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
+    update?: FeedbackUpdateWithWhereUniqueWithoutUserInput | FeedbackUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FeedbackUpdateManyWithWhereWithoutUserInput | FeedbackUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
+  }
+
+  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type FlashcardUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
     connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
     upsert?: FlashcardUpsertWithWhereUniqueWithoutUserInput | FlashcardUpsertWithWhereUniqueWithoutUserInput[]
@@ -32183,7 +33490,35 @@ export namespace Prisma {
     deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
   }
 
-  export type ReviewSessionUpdateManyWithoutUserNestedInput = {
+  export type InvitationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InvitationCreateWithoutUserInput, InvitationUncheckedCreateWithoutUserInput> | InvitationCreateWithoutUserInput[] | InvitationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutUserInput | InvitationCreateOrConnectWithoutUserInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutUserInput | InvitationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InvitationCreateManyUserInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutUserInput | InvitationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutUserInput | InvitationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type MemberUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MemberCreateManyUserInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type ReviewSessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
     upsert?: ReviewSessionUpsertWithWhereUniqueWithoutUserInput | ReviewSessionUpsertWithWhereUniqueWithoutUserInput[]
@@ -32209,62 +33544,6 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
-  export type FeedbackUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
-    upsert?: FeedbackUpsertWithWhereUniqueWithoutUserInput | FeedbackUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FeedbackCreateManyUserInputEnvelope
-    set?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
-    disconnect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
-    delete?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
-    connect?: FeedbackWhereUniqueInput | FeedbackWhereUniqueInput[]
-    update?: FeedbackUpdateWithWhereUniqueWithoutUserInput | FeedbackUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FeedbackUpdateManyWithWhereWithoutUserInput | FeedbackUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
-  }
-
-  export type MemberUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput> | MemberCreateWithoutUserInput[] | MemberUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MemberCreateOrConnectWithoutUserInput | MemberCreateOrConnectWithoutUserInput[]
-    upsert?: MemberUpsertWithWhereUniqueWithoutUserInput | MemberUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MemberCreateManyUserInputEnvelope
-    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    update?: MemberUpdateWithWhereUniqueWithoutUserInput | MemberUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MemberUpdateManyWithWhereWithoutUserInput | MemberUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
-  }
-
-  export type InvitationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<InvitationCreateWithoutUserInput, InvitationUncheckedCreateWithoutUserInput> | InvitationCreateWithoutUserInput[] | InvitationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: InvitationCreateOrConnectWithoutUserInput | InvitationCreateOrConnectWithoutUserInput[]
-    upsert?: InvitationUpsertWithWhereUniqueWithoutUserInput | InvitationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: InvitationCreateManyUserInputEnvelope
-    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
-    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
-    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
-    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
-    update?: InvitationUpdateWithWhereUniqueWithoutUserInput | InvitationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: InvitationUpdateManyWithWhereWithoutUserInput | InvitationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
   export type UserCourseUncheckedUpdateManyWithoutUserNestedInput = {
@@ -32295,34 +33574,6 @@ export namespace Prisma {
     deleteMany?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
   }
 
-  export type FlashcardUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput> | FlashcardCreateWithoutUserInput[] | FlashcardUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FlashcardCreateOrConnectWithoutUserInput | FlashcardCreateOrConnectWithoutUserInput[]
-    upsert?: FlashcardUpsertWithWhereUniqueWithoutUserInput | FlashcardUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FlashcardCreateManyUserInputEnvelope
-    set?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
-    disconnect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
-    delete?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
-    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
-    update?: FlashcardUpdateWithWhereUniqueWithoutUserInput | FlashcardUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FlashcardUpdateManyWithWhereWithoutUserInput | FlashcardUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
-  }
-
-  export type ReviewSessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput> | ReviewSessionCreateWithoutUserInput[] | ReviewSessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutUserInput | ReviewSessionCreateOrConnectWithoutUserInput[]
-    upsert?: ReviewSessionUpsertWithWhereUniqueWithoutUserInput | ReviewSessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ReviewSessionCreateManyUserInputEnvelope
-    set?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    disconnect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    delete?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    update?: ReviewSessionUpdateWithWhereUniqueWithoutUserInput | ReviewSessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ReviewSessionUpdateManyWithWhereWithoutUserInput | ReviewSessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
-  }
-
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -32351,13 +33602,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
-  export type MemberCreateNestedManyWithoutOrganizationInput = {
-    create?: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput> | MemberCreateWithoutOrganizationInput[] | MemberUncheckedCreateWithoutOrganizationInput[]
-    connectOrCreate?: MemberCreateOrConnectWithoutOrganizationInput | MemberCreateOrConnectWithoutOrganizationInput[]
-    createMany?: MemberCreateManyOrganizationInputEnvelope
-    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-  }
-
   export type InvitationCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<InvitationCreateWithoutOrganizationInput, InvitationUncheckedCreateWithoutOrganizationInput> | InvitationCreateWithoutOrganizationInput[] | InvitationUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: InvitationCreateOrConnectWithoutOrganizationInput | InvitationCreateOrConnectWithoutOrganizationInput[]
@@ -32365,17 +33609,17 @@ export namespace Prisma {
     connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
-  export type SubscriptionCreateNestedOneWithoutOrganizationInput = {
-    create?: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-    connectOrCreate?: SubscriptionCreateOrConnectWithoutOrganizationInput
-    connect?: SubscriptionWhereUniqueInput
-  }
-
-  export type MemberUncheckedCreateNestedManyWithoutOrganizationInput = {
+  export type MemberCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput> | MemberCreateWithoutOrganizationInput[] | MemberUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: MemberCreateOrConnectWithoutOrganizationInput | MemberCreateOrConnectWithoutOrganizationInput[]
     createMany?: MemberCreateManyOrganizationInputEnvelope
     connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type subscriptionCreateNestedOneWithoutOrganizationInput = {
+    create?: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: subscriptionCreateOrConnectWithoutOrganizationInput
+    connect?: subscriptionWhereUniqueInput
   }
 
   export type InvitationUncheckedCreateNestedManyWithoutOrganizationInput = {
@@ -32385,24 +33629,17 @@ export namespace Prisma {
     connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
-  export type SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput = {
-    create?: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-    connectOrCreate?: SubscriptionCreateOrConnectWithoutOrganizationInput
-    connect?: SubscriptionWhereUniqueInput
-  }
-
-  export type MemberUpdateManyWithoutOrganizationNestedInput = {
+  export type MemberUncheckedCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput> | MemberCreateWithoutOrganizationInput[] | MemberUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: MemberCreateOrConnectWithoutOrganizationInput | MemberCreateOrConnectWithoutOrganizationInput[]
-    upsert?: MemberUpsertWithWhereUniqueWithoutOrganizationInput | MemberUpsertWithWhereUniqueWithoutOrganizationInput[]
     createMany?: MemberCreateManyOrganizationInputEnvelope
-    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
     connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
-    update?: MemberUpdateWithWhereUniqueWithoutOrganizationInput | MemberUpdateWithWhereUniqueWithoutOrganizationInput[]
-    updateMany?: MemberUpdateManyWithWhereWithoutOrganizationInput | MemberUpdateManyWithWhereWithoutOrganizationInput[]
-    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type subscriptionUncheckedCreateNestedOneWithoutOrganizationInput = {
+    create?: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: subscriptionCreateOrConnectWithoutOrganizationInput
+    connect?: subscriptionWhereUniqueInput
   }
 
   export type InvitationUpdateManyWithoutOrganizationNestedInput = {
@@ -32419,17 +33656,7 @@ export namespace Prisma {
     deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
-  export type SubscriptionUpdateOneWithoutOrganizationNestedInput = {
-    create?: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-    connectOrCreate?: SubscriptionCreateOrConnectWithoutOrganizationInput
-    upsert?: SubscriptionUpsertWithoutOrganizationInput
-    disconnect?: SubscriptionWhereInput | boolean
-    delete?: SubscriptionWhereInput | boolean
-    connect?: SubscriptionWhereUniqueInput
-    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutOrganizationInput, SubscriptionUpdateWithoutOrganizationInput>, SubscriptionUncheckedUpdateWithoutOrganizationInput>
-  }
-
-  export type MemberUncheckedUpdateManyWithoutOrganizationNestedInput = {
+  export type MemberUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput> | MemberCreateWithoutOrganizationInput[] | MemberUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: MemberCreateOrConnectWithoutOrganizationInput | MemberCreateOrConnectWithoutOrganizationInput[]
     upsert?: MemberUpsertWithWhereUniqueWithoutOrganizationInput | MemberUpsertWithWhereUniqueWithoutOrganizationInput[]
@@ -32441,6 +33668,16 @@ export namespace Prisma {
     update?: MemberUpdateWithWhereUniqueWithoutOrganizationInput | MemberUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: MemberUpdateManyWithWhereWithoutOrganizationInput | MemberUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type subscriptionUpdateOneWithoutOrganizationNestedInput = {
+    create?: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: subscriptionCreateOrConnectWithoutOrganizationInput
+    upsert?: subscriptionUpsertWithoutOrganizationInput
+    disconnect?: subscriptionWhereInput | boolean
+    delete?: subscriptionWhereInput | boolean
+    connect?: subscriptionWhereUniqueInput
+    update?: XOR<XOR<subscriptionUpdateToOneWithWhereWithoutOrganizationInput, subscriptionUpdateWithoutOrganizationInput>, subscriptionUncheckedUpdateWithoutOrganizationInput>
   }
 
   export type InvitationUncheckedUpdateManyWithoutOrganizationNestedInput = {
@@ -32457,14 +33694,28 @@ export namespace Prisma {
     deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
-  export type SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput = {
-    create?: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-    connectOrCreate?: SubscriptionCreateOrConnectWithoutOrganizationInput
-    upsert?: SubscriptionUpsertWithoutOrganizationInput
-    disconnect?: SubscriptionWhereInput | boolean
-    delete?: SubscriptionWhereInput | boolean
-    connect?: SubscriptionWhereUniqueInput
-    update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutOrganizationInput, SubscriptionUpdateWithoutOrganizationInput>, SubscriptionUncheckedUpdateWithoutOrganizationInput>
+  export type MemberUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput> | MemberCreateWithoutOrganizationInput[] | MemberUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MemberCreateOrConnectWithoutOrganizationInput | MemberCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MemberUpsertWithWhereUniqueWithoutOrganizationInput | MemberUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MemberCreateManyOrganizationInputEnvelope
+    set?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    disconnect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    delete?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+    update?: MemberUpdateWithWhereUniqueWithoutOrganizationInput | MemberUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MemberUpdateManyWithWhereWithoutOrganizationInput | MemberUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type subscriptionUncheckedUpdateOneWithoutOrganizationNestedInput = {
+    create?: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: subscriptionCreateOrConnectWithoutOrganizationInput
+    upsert?: subscriptionUpsertWithoutOrganizationInput
+    disconnect?: subscriptionWhereInput | boolean
+    delete?: subscriptionWhereInput | boolean
+    connect?: subscriptionWhereUniqueInput
+    update?: XOR<XOR<subscriptionUpdateToOneWithWhereWithoutOrganizationInput, subscriptionUpdateWithoutOrganizationInput>, subscriptionUncheckedUpdateWithoutOrganizationInput>
   }
 
   export type OrganizationCreateNestedOneWithoutMembersInput = {
@@ -32495,24 +33746,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMembersInput, UserUpdateWithoutMembersInput>, UserUncheckedUpdateWithoutMembersInput>
   }
 
-  export type OrganizationCreateNestedOneWithoutInvitationsInput = {
-    create?: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
-    connectOrCreate?: OrganizationCreateOrConnectWithoutInvitationsInput
-    connect?: OrganizationWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutInvitationsInput = {
     create?: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutInvitationsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type OrganizationUpdateOneRequiredWithoutInvitationsNestedInput = {
+  export type OrganizationCreateNestedOneWithoutInvitationsInput = {
     create?: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
     connectOrCreate?: OrganizationCreateOrConnectWithoutInvitationsInput
-    upsert?: OrganizationUpsertWithoutInvitationsInput
     connect?: OrganizationWhereUniqueInput
-    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutInvitationsInput, OrganizationUpdateWithoutInvitationsInput>, OrganizationUncheckedUpdateWithoutInvitationsInput>
   }
 
   export type UserUpdateOneRequiredWithoutInvitationsNestedInput = {
@@ -32523,26 +33766,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInvitationsInput, UserUpdateWithoutInvitationsInput>, UserUncheckedUpdateWithoutInvitationsInput>
   }
 
-  export type OrganizationCreateNestedOneWithoutSubscriptionInput = {
-    create?: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
-    connectOrCreate?: OrganizationCreateOrConnectWithoutSubscriptionInput
+  export type OrganizationUpdateOneRequiredWithoutInvitationsNestedInput = {
+    create?: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutInvitationsInput
+    upsert?: OrganizationUpsertWithoutInvitationsInput
     connect?: OrganizationWhereUniqueInput
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type OrganizationUpdateOneRequiredWithoutSubscriptionNestedInput = {
-    create?: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
-    connectOrCreate?: OrganizationCreateOrConnectWithoutSubscriptionInput
-    upsert?: OrganizationUpsertWithoutSubscriptionInput
-    connect?: OrganizationWhereUniqueInput
-    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutSubscriptionInput, OrganizationUpdateWithoutSubscriptionInput>, OrganizationUncheckedUpdateWithoutSubscriptionInput>
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutInvitationsInput, OrganizationUpdateWithoutInvitationsInput>, OrganizationUncheckedUpdateWithoutInvitationsInput>
   }
 
   export type UserCreateNestedOneWithoutFeedbacksInput = {
@@ -32695,6 +33924,12 @@ export namespace Prisma {
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
   }
 
+  export type SemesterCreateNestedOneWithoutCoursesInput = {
+    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
+    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
+    connect?: SemesterWhereUniqueInput
+  }
+
   export type SubjectCreateNestedOneWithoutCoursesInput = {
     create?: XOR<SubjectCreateWithoutCoursesInput, SubjectUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: SubjectCreateOrConnectWithoutCoursesInput
@@ -32707,17 +33942,11 @@ export namespace Prisma {
     connect?: AcademicYearWhereUniqueInput
   }
 
-  export type SemesterCreateNestedOneWithoutCoursesInput = {
-    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
-    connect?: SemesterWhereUniqueInput
-  }
-
-  export type UserCourseCreateNestedManyWithoutCourseInput = {
-    create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
-    createMany?: UserCourseCreateManyCourseInputEnvelope
-    connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+  export type ReviewSessionCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
+    createMany?: ReviewSessionCreateManyCourseInputEnvelope
+    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
   }
 
   export type SyllabusConceptCreateNestedManyWithoutCourseInput = {
@@ -32727,18 +33956,18 @@ export namespace Prisma {
     connect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
   }
 
-  export type ReviewSessionCreateNestedManyWithoutCourseInput = {
-    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
-    createMany?: ReviewSessionCreateManyCourseInputEnvelope
-    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-  }
-
-  export type UserCourseUncheckedCreateNestedManyWithoutCourseInput = {
+  export type UserCourseCreateNestedManyWithoutCourseInput = {
     create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
     createMany?: UserCourseCreateManyCourseInputEnvelope
     connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+  }
+
+  export type ReviewSessionUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
+    createMany?: ReviewSessionCreateManyCourseInputEnvelope
+    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
   }
 
   export type SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput = {
@@ -32748,11 +33977,21 @@ export namespace Prisma {
     connect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
   }
 
-  export type ReviewSessionUncheckedCreateNestedManyWithoutCourseInput = {
-    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
-    createMany?: ReviewSessionCreateManyCourseInputEnvelope
-    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+  export type UserCourseUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
+    createMany?: UserCourseCreateManyCourseInputEnvelope
+    connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+  }
+
+  export type SemesterUpdateOneWithoutCoursesNestedInput = {
+    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
+    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
+    upsert?: SemesterUpsertWithoutCoursesInput
+    disconnect?: SemesterWhereInput | boolean
+    delete?: SemesterWhereInput | boolean
+    connect?: SemesterWhereUniqueInput
+    update?: XOR<XOR<SemesterUpdateToOneWithWhereWithoutCoursesInput, SemesterUpdateWithoutCoursesInput>, SemesterUncheckedUpdateWithoutCoursesInput>
   }
 
   export type SubjectUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -32773,28 +34012,18 @@ export namespace Prisma {
     update?: XOR<XOR<AcademicYearUpdateToOneWithWhereWithoutCoursesInput, AcademicYearUpdateWithoutCoursesInput>, AcademicYearUncheckedUpdateWithoutCoursesInput>
   }
 
-  export type SemesterUpdateOneWithoutCoursesNestedInput = {
-    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
-    upsert?: SemesterUpsertWithoutCoursesInput
-    disconnect?: SemesterWhereInput | boolean
-    delete?: SemesterWhereInput | boolean
-    connect?: SemesterWhereUniqueInput
-    update?: XOR<XOR<SemesterUpdateToOneWithWhereWithoutCoursesInput, SemesterUpdateWithoutCoursesInput>, SemesterUncheckedUpdateWithoutCoursesInput>
-  }
-
-  export type UserCourseUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
-    upsert?: UserCourseUpsertWithWhereUniqueWithoutCourseInput | UserCourseUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: UserCourseCreateManyCourseInputEnvelope
-    set?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
-    disconnect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
-    delete?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
-    connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
-    update?: UserCourseUpdateWithWhereUniqueWithoutCourseInput | UserCourseUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: UserCourseUpdateManyWithWhereWithoutCourseInput | UserCourseUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: UserCourseScalarWhereInput | UserCourseScalarWhereInput[]
+  export type ReviewSessionUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
+    upsert?: ReviewSessionUpsertWithWhereUniqueWithoutCourseInput | ReviewSessionUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ReviewSessionCreateManyCourseInputEnvelope
+    set?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    disconnect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    delete?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
+    update?: ReviewSessionUpdateWithWhereUniqueWithoutCourseInput | ReviewSessionUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ReviewSessionUpdateManyWithWhereWithoutCourseInput | ReviewSessionUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
   }
 
   export type SyllabusConceptUpdateManyWithoutCourseNestedInput = {
@@ -32811,21 +34040,7 @@ export namespace Prisma {
     deleteMany?: SyllabusConceptScalarWhereInput | SyllabusConceptScalarWhereInput[]
   }
 
-  export type ReviewSessionUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput> | ReviewSessionCreateWithoutCourseInput[] | ReviewSessionUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutCourseInput | ReviewSessionCreateOrConnectWithoutCourseInput[]
-    upsert?: ReviewSessionUpsertWithWhereUniqueWithoutCourseInput | ReviewSessionUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: ReviewSessionCreateManyCourseInputEnvelope
-    set?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    disconnect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    delete?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    connect?: ReviewSessionWhereUniqueInput | ReviewSessionWhereUniqueInput[]
-    update?: ReviewSessionUpdateWithWhereUniqueWithoutCourseInput | ReviewSessionUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: ReviewSessionUpdateManyWithWhereWithoutCourseInput | ReviewSessionUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
-  }
-
-  export type UserCourseUncheckedUpdateManyWithoutCourseNestedInput = {
+  export type UserCourseUpdateManyWithoutCourseNestedInput = {
     create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
     upsert?: UserCourseUpsertWithWhereUniqueWithoutCourseInput | UserCourseUpsertWithWhereUniqueWithoutCourseInput[]
@@ -32837,20 +34052,6 @@ export namespace Prisma {
     update?: UserCourseUpdateWithWhereUniqueWithoutCourseInput | UserCourseUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: UserCourseUpdateManyWithWhereWithoutCourseInput | UserCourseUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: UserCourseScalarWhereInput | UserCourseScalarWhereInput[]
-  }
-
-  export type SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput = {
-    create?: XOR<SyllabusConceptCreateWithoutCourseInput, SyllabusConceptUncheckedCreateWithoutCourseInput> | SyllabusConceptCreateWithoutCourseInput[] | SyllabusConceptUncheckedCreateWithoutCourseInput[]
-    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutCourseInput | SyllabusConceptCreateOrConnectWithoutCourseInput[]
-    upsert?: SyllabusConceptUpsertWithWhereUniqueWithoutCourseInput | SyllabusConceptUpsertWithWhereUniqueWithoutCourseInput[]
-    createMany?: SyllabusConceptCreateManyCourseInputEnvelope
-    set?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
-    disconnect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
-    delete?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
-    connect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
-    update?: SyllabusConceptUpdateWithWhereUniqueWithoutCourseInput | SyllabusConceptUpdateWithWhereUniqueWithoutCourseInput[]
-    updateMany?: SyllabusConceptUpdateManyWithWhereWithoutCourseInput | SyllabusConceptUpdateManyWithWhereWithoutCourseInput[]
-    deleteMany?: SyllabusConceptScalarWhereInput | SyllabusConceptScalarWhereInput[]
   }
 
   export type ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput = {
@@ -32867,10 +34068,32 @@ export namespace Prisma {
     deleteMany?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutUserCoursesInput = {
-    create?: XOR<UserCreateWithoutUserCoursesInput, UserUncheckedCreateWithoutUserCoursesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUserCoursesInput
-    connect?: UserWhereUniqueInput
+  export type SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<SyllabusConceptCreateWithoutCourseInput, SyllabusConceptUncheckedCreateWithoutCourseInput> | SyllabusConceptCreateWithoutCourseInput[] | SyllabusConceptUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutCourseInput | SyllabusConceptCreateOrConnectWithoutCourseInput[]
+    upsert?: SyllabusConceptUpsertWithWhereUniqueWithoutCourseInput | SyllabusConceptUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: SyllabusConceptCreateManyCourseInputEnvelope
+    set?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
+    disconnect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
+    delete?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
+    connect?: SyllabusConceptWhereUniqueInput | SyllabusConceptWhereUniqueInput[]
+    update?: SyllabusConceptUpdateWithWhereUniqueWithoutCourseInput | SyllabusConceptUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: SyllabusConceptUpdateManyWithWhereWithoutCourseInput | SyllabusConceptUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: SyllabusConceptScalarWhereInput | SyllabusConceptScalarWhereInput[]
+  }
+
+  export type UserCourseUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput> | UserCourseCreateWithoutCourseInput[] | UserCourseUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: UserCourseCreateOrConnectWithoutCourseInput | UserCourseCreateOrConnectWithoutCourseInput[]
+    upsert?: UserCourseUpsertWithWhereUniqueWithoutCourseInput | UserCourseUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: UserCourseCreateManyCourseInputEnvelope
+    set?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+    disconnect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+    delete?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+    connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
+    update?: UserCourseUpdateWithWhereUniqueWithoutCourseInput | UserCourseUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: UserCourseUpdateManyWithWhereWithoutCourseInput | UserCourseUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: UserCourseScalarWhereInput | UserCourseScalarWhereInput[]
   }
 
   export type CourseCreateNestedOneWithoutEnrollmentsInput = {
@@ -32879,12 +34102,10 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutUserCoursesNestedInput = {
+  export type UserCreateNestedOneWithoutUserCoursesInput = {
     create?: XOR<UserCreateWithoutUserCoursesInput, UserUncheckedCreateWithoutUserCoursesInput>
     connectOrCreate?: UserCreateOrConnectWithoutUserCoursesInput
-    upsert?: UserUpsertWithoutUserCoursesInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserCoursesInput, UserUpdateWithoutUserCoursesInput>, UserUncheckedUpdateWithoutUserCoursesInput>
   }
 
   export type CourseUpdateOneRequiredWithoutEnrollmentsNestedInput = {
@@ -32895,10 +34116,12 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutEnrollmentsInput, CourseUpdateWithoutEnrollmentsInput>, CourseUncheckedUpdateWithoutEnrollmentsInput>
   }
 
-  export type CourseCreateNestedOneWithoutSyllabusConceptsInput = {
-    create?: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSyllabusConceptsInput
-    connect?: CourseWhereUniqueInput
+  export type UserUpdateOneRequiredWithoutUserCoursesNestedInput = {
+    create?: XOR<UserCreateWithoutUserCoursesInput, UserUncheckedCreateWithoutUserCoursesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserCoursesInput
+    upsert?: UserUpsertWithoutUserCoursesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserCoursesInput, UserUpdateWithoutUserCoursesInput>, UserUncheckedUpdateWithoutUserCoursesInput>
   }
 
   export type ConceptMatchCreateNestedManyWithoutSyllabusConceptInput = {
@@ -32908,19 +34131,17 @@ export namespace Prisma {
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
   }
 
+  export type CourseCreateNestedOneWithoutSyllabusConceptsInput = {
+    create?: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSyllabusConceptsInput
+    connect?: CourseWhereUniqueInput
+  }
+
   export type ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput = {
     create?: XOR<ConceptMatchCreateWithoutSyllabusConceptInput, ConceptMatchUncheckedCreateWithoutSyllabusConceptInput> | ConceptMatchCreateWithoutSyllabusConceptInput[] | ConceptMatchUncheckedCreateWithoutSyllabusConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutSyllabusConceptInput | ConceptMatchCreateOrConnectWithoutSyllabusConceptInput[]
     createMany?: ConceptMatchCreateManySyllabusConceptInputEnvelope
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
-  }
-
-  export type CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput = {
-    create?: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSyllabusConceptsInput
-    upsert?: CourseUpsertWithoutSyllabusConceptsInput
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSyllabusConceptsInput, CourseUpdateWithoutSyllabusConceptsInput>, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
   }
 
   export type ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput = {
@@ -32937,6 +34158,14 @@ export namespace Prisma {
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
   }
 
+  export type CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput = {
+    create?: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSyllabusConceptsInput
+    upsert?: CourseUpsertWithoutSyllabusConceptsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSyllabusConceptsInput, CourseUpdateWithoutSyllabusConceptsInput>, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
+  }
+
   export type ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput = {
     create?: XOR<ConceptMatchCreateWithoutSyllabusConceptInput, ConceptMatchUncheckedCreateWithoutSyllabusConceptInput> | ConceptMatchCreateWithoutSyllabusConceptInput[] | ConceptMatchUncheckedCreateWithoutSyllabusConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutSyllabusConceptInput | ConceptMatchCreateOrConnectWithoutSyllabusConceptInput[]
@@ -32951,12 +34180,6 @@ export namespace Prisma {
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutVideoJobsInput = {
-    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ConceptCreateNestedManyWithoutVideoJobInput = {
     create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
     connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
@@ -32964,19 +34187,17 @@ export namespace Prisma {
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutVideoJobsInput = {
+    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ConceptUncheckedCreateNestedManyWithoutVideoJobInput = {
     create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
     connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
     createMany?: ConceptCreateManyVideoJobInputEnvelope
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutVideoJobsNestedInput = {
-    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
-    upsert?: UserUpsertWithoutVideoJobsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideoJobsInput, UserUpdateWithoutVideoJobsInput>, UserUncheckedUpdateWithoutVideoJobsInput>
   }
 
   export type ConceptUpdateManyWithoutVideoJobNestedInput = {
@@ -32993,6 +34214,14 @@ export namespace Prisma {
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
   }
 
+  export type UserUpdateOneRequiredWithoutVideoJobsNestedInput = {
+    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
+    upsert?: UserUpsertWithoutVideoJobsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideoJobsInput, UserUpdateWithoutVideoJobsInput>, UserUncheckedUpdateWithoutVideoJobsInput>
+  }
+
   export type ConceptUncheckedUpdateManyWithoutVideoJobNestedInput = {
     create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
     connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
@@ -33007,17 +34236,17 @@ export namespace Prisma {
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
   }
 
-  export type VideoJobCreateNestedOneWithoutConceptsInput = {
-    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
-    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
-    connect?: VideoJobWhereUniqueInput
-  }
-
   export type ConceptMatchCreateNestedManyWithoutConceptInput = {
     create?: XOR<ConceptMatchCreateWithoutConceptInput, ConceptMatchUncheckedCreateWithoutConceptInput> | ConceptMatchCreateWithoutConceptInput[] | ConceptMatchUncheckedCreateWithoutConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutConceptInput | ConceptMatchCreateOrConnectWithoutConceptInput[]
     createMany?: ConceptMatchCreateManyConceptInputEnvelope
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
+  }
+
+  export type VideoJobCreateNestedOneWithoutConceptsInput = {
+    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
+    connect?: VideoJobWhereUniqueInput
   }
 
   export type ConceptMatchUncheckedCreateNestedManyWithoutConceptInput = {
@@ -33035,14 +34264,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type VideoJobUpdateOneRequiredWithoutConceptsNestedInput = {
-    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
-    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
-    upsert?: VideoJobUpsertWithoutConceptsInput
-    connect?: VideoJobWhereUniqueInput
-    update?: XOR<XOR<VideoJobUpdateToOneWithWhereWithoutConceptsInput, VideoJobUpdateWithoutConceptsInput>, VideoJobUncheckedUpdateWithoutConceptsInput>
-  }
-
   export type ConceptMatchUpdateManyWithoutConceptNestedInput = {
     create?: XOR<ConceptMatchCreateWithoutConceptInput, ConceptMatchUncheckedCreateWithoutConceptInput> | ConceptMatchCreateWithoutConceptInput[] | ConceptMatchUncheckedCreateWithoutConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutConceptInput | ConceptMatchCreateOrConnectWithoutConceptInput[]
@@ -33055,6 +34276,14 @@ export namespace Prisma {
     update?: ConceptMatchUpdateWithWhereUniqueWithoutConceptInput | ConceptMatchUpdateWithWhereUniqueWithoutConceptInput[]
     updateMany?: ConceptMatchUpdateManyWithWhereWithoutConceptInput | ConceptMatchUpdateManyWithWhereWithoutConceptInput[]
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
+  }
+
+  export type VideoJobUpdateOneRequiredWithoutConceptsNestedInput = {
+    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
+    upsert?: VideoJobUpsertWithoutConceptsInput
+    connect?: VideoJobWhereUniqueInput
+    update?: XOR<XOR<VideoJobUpdateToOneWithWhereWithoutConceptsInput, VideoJobUpdateWithoutConceptsInput>, VideoJobUncheckedUpdateWithoutConceptsInput>
   }
 
   export type ConceptMatchUncheckedUpdateManyWithoutConceptNestedInput = {
@@ -33211,10 +34440,11 @@ export namespace Prisma {
     deleteMany?: ReviewEventScalarWhereInput | ReviewEventScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutReviewSessionsInput = {
-    create?: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReviewSessionsInput
-    connect?: UserWhereUniqueInput
+  export type ReviewEventCreateNestedManyWithoutSessionInput = {
+    create?: XOR<ReviewEventCreateWithoutSessionInput, ReviewEventUncheckedCreateWithoutSessionInput> | ReviewEventCreateWithoutSessionInput[] | ReviewEventUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: ReviewEventCreateOrConnectWithoutSessionInput | ReviewEventCreateOrConnectWithoutSessionInput[]
+    createMany?: ReviewEventCreateManySessionInputEnvelope
+    connect?: ReviewEventWhereUniqueInput | ReviewEventWhereUniqueInput[]
   }
 
   export type CourseCreateNestedOneWithoutReviewSessionsInput = {
@@ -33223,11 +34453,10 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
-  export type ReviewEventCreateNestedManyWithoutSessionInput = {
-    create?: XOR<ReviewEventCreateWithoutSessionInput, ReviewEventUncheckedCreateWithoutSessionInput> | ReviewEventCreateWithoutSessionInput[] | ReviewEventUncheckedCreateWithoutSessionInput[]
-    connectOrCreate?: ReviewEventCreateOrConnectWithoutSessionInput | ReviewEventCreateOrConnectWithoutSessionInput[]
-    createMany?: ReviewEventCreateManySessionInputEnvelope
-    connect?: ReviewEventWhereUniqueInput | ReviewEventWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutReviewSessionsInput = {
+    create?: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewSessionsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ReviewEventUncheckedCreateNestedManyWithoutSessionInput = {
@@ -33235,22 +34464,6 @@ export namespace Prisma {
     connectOrCreate?: ReviewEventCreateOrConnectWithoutSessionInput | ReviewEventCreateOrConnectWithoutSessionInput[]
     createMany?: ReviewEventCreateManySessionInputEnvelope
     connect?: ReviewEventWhereUniqueInput | ReviewEventWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutReviewSessionsNestedInput = {
-    create?: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReviewSessionsInput
-    upsert?: UserUpsertWithoutReviewSessionsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewSessionsInput, UserUpdateWithoutReviewSessionsInput>, UserUncheckedUpdateWithoutReviewSessionsInput>
-  }
-
-  export type CourseUpdateOneRequiredWithoutReviewSessionsNestedInput = {
-    create?: XOR<CourseCreateWithoutReviewSessionsInput, CourseUncheckedCreateWithoutReviewSessionsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutReviewSessionsInput
-    upsert?: CourseUpsertWithoutReviewSessionsInput
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutReviewSessionsInput, CourseUpdateWithoutReviewSessionsInput>, CourseUncheckedUpdateWithoutReviewSessionsInput>
   }
 
   export type ReviewEventUpdateManyWithoutSessionNestedInput = {
@@ -33267,6 +34480,22 @@ export namespace Prisma {
     deleteMany?: ReviewEventScalarWhereInput | ReviewEventScalarWhereInput[]
   }
 
+  export type CourseUpdateOneRequiredWithoutReviewSessionsNestedInput = {
+    create?: XOR<CourseCreateWithoutReviewSessionsInput, CourseUncheckedCreateWithoutReviewSessionsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutReviewSessionsInput
+    upsert?: CourseUpsertWithoutReviewSessionsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutReviewSessionsInput, CourseUpdateWithoutReviewSessionsInput>, CourseUncheckedUpdateWithoutReviewSessionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewSessionsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewSessionsInput
+    upsert?: UserUpsertWithoutReviewSessionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewSessionsInput, UserUpdateWithoutReviewSessionsInput>, UserUncheckedUpdateWithoutReviewSessionsInput>
+  }
+
   export type ReviewEventUncheckedUpdateManyWithoutSessionNestedInput = {
     create?: XOR<ReviewEventCreateWithoutSessionInput, ReviewEventUncheckedCreateWithoutSessionInput> | ReviewEventCreateWithoutSessionInput[] | ReviewEventUncheckedCreateWithoutSessionInput[]
     connectOrCreate?: ReviewEventCreateOrConnectWithoutSessionInput | ReviewEventCreateOrConnectWithoutSessionInput[]
@@ -33281,24 +34510,16 @@ export namespace Prisma {
     deleteMany?: ReviewEventScalarWhereInput | ReviewEventScalarWhereInput[]
   }
 
-  export type ReviewSessionCreateNestedOneWithoutEventsInput = {
-    create?: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
-    connectOrCreate?: ReviewSessionCreateOrConnectWithoutEventsInput
-    connect?: ReviewSessionWhereUniqueInput
-  }
-
   export type FlashcardCreateNestedOneWithoutReviewEventsInput = {
     create?: XOR<FlashcardCreateWithoutReviewEventsInput, FlashcardUncheckedCreateWithoutReviewEventsInput>
     connectOrCreate?: FlashcardCreateOrConnectWithoutReviewEventsInput
     connect?: FlashcardWhereUniqueInput
   }
 
-  export type ReviewSessionUpdateOneRequiredWithoutEventsNestedInput = {
+  export type ReviewSessionCreateNestedOneWithoutEventsInput = {
     create?: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
     connectOrCreate?: ReviewSessionCreateOrConnectWithoutEventsInput
-    upsert?: ReviewSessionUpsertWithoutEventsInput
     connect?: ReviewSessionWhereUniqueInput
-    update?: XOR<XOR<ReviewSessionUpdateToOneWithWhereWithoutEventsInput, ReviewSessionUpdateWithoutEventsInput>, ReviewSessionUncheckedUpdateWithoutEventsInput>
   }
 
   export type FlashcardUpdateOneRequiredWithoutReviewEventsNestedInput = {
@@ -33307,6 +34528,14 @@ export namespace Prisma {
     upsert?: FlashcardUpsertWithoutReviewEventsInput
     connect?: FlashcardWhereUniqueInput
     update?: XOR<XOR<FlashcardUpdateToOneWithWhereWithoutReviewEventsInput, FlashcardUpdateWithoutReviewEventsInput>, FlashcardUncheckedUpdateWithoutReviewEventsInput>
+  }
+
+  export type ReviewSessionUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: ReviewSessionCreateOrConnectWithoutEventsInput
+    upsert?: ReviewSessionUpsertWithoutEventsInput
+    connect?: ReviewSessionWhereUniqueInput
+    update?: XOR<XOR<ReviewSessionUpdateToOneWithWhereWithoutEventsInput, ReviewSessionUpdateWithoutEventsInput>, ReviewSessionUncheckedUpdateWithoutEventsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -33323,11 +34552,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -33342,22 +34566,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -33367,6 +34575,22 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -33397,14 +34621,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -33422,39 +34638,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -33467,6 +34650,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -33494,6 +34685,44 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -33539,37 +34768,99 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type SessionCreateWithoutUserInput = {
+  export type OrganizationCreateWithoutSubscriptionInput = {
     id: string
-    expiresAt: Date | string
-    token: string
+    name: string
+    slug?: string | null
+    logo?: string | null
     createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
-    activeOrganizationId?: string | null
-    impersonatedBy?: string | null
+    metadata?: string | null
+    email?: string | null
+    stripeCustomerId?: string | null
+    invitations?: InvitationCreateNestedManyWithoutOrganizationInput
+    members?: MemberCreateNestedManyWithoutOrganizationInput
   }
 
-  export type SessionUncheckedCreateWithoutUserInput = {
+  export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
     id: string
-    expiresAt: Date | string
-    token: string
+    name: string
+    slug?: string | null
+    logo?: string | null
     createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
-    activeOrganizationId?: string | null
-    impersonatedBy?: string | null
+    metadata?: string | null
+    email?: string | null
+    stripeCustomerId?: string | null
+    invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type OrganizationCreateOrConnectWithoutSubscriptionInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
   }
 
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  export type OrganizationUpsertWithoutSubscriptionInput = {
+    update: XOR<OrganizationUpdateWithoutSubscriptionInput, OrganizationUncheckedUpdateWithoutSubscriptionInput>
+    create: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutSubscriptionInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutSubscriptionInput, OrganizationUncheckedUpdateWithoutSubscriptionInput>
+  }
+
+  export type OrganizationUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
+    members?: MemberUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type FeedbackCreateWithoutUserInput = {
+    id?: string
+    review: number
+    message: string
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FeedbackUncheckedCreateWithoutUserInput = {
+    id?: string
+    review: number
+    message: string
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FeedbackCreateOrConnectWithoutUserInput = {
+    where: FeedbackWhereUniqueInput
+    create: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput>
+  }
+
+  export type FeedbackCreateManyUserInputEnvelope = {
+    data: FeedbackCreateManyUserInput | FeedbackCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -33613,55 +34904,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type FeedbackCreateWithoutUserInput = {
+  export type FlashcardCreateWithoutUserInput = {
     id?: string
-    review: number
-    message: string
-    email?: string | null
+    question: string
+    answer: string
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
+    conceptMatch: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
   }
 
-  export type FeedbackUncheckedCreateWithoutUserInput = {
+  export type FlashcardUncheckedCreateWithoutUserInput = {
     id?: string
-    review: number
-    message: string
-    email?: string | null
+    conceptMatchId: string
+    question: string
+    answer: string
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
+    reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
   }
 
-  export type FeedbackCreateOrConnectWithoutUserInput = {
-    where: FeedbackWhereUniqueInput
-    create: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput>
+  export type FlashcardCreateOrConnectWithoutUserInput = {
+    where: FlashcardWhereUniqueInput
+    create: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput>
   }
 
-  export type FeedbackCreateManyUserInputEnvelope = {
-    data: FeedbackCreateManyUserInput | FeedbackCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MemberCreateWithoutUserInput = {
-    id: string
-    role: string
-    createdAt: Date | string
-    organization: OrganizationCreateNestedOneWithoutMembersInput
-  }
-
-  export type MemberUncheckedCreateWithoutUserInput = {
-    id: string
-    organizationId: string
-    role: string
-    createdAt: Date | string
-  }
-
-  export type MemberCreateOrConnectWithoutUserInput = {
-    where: MemberWhereUniqueInput
-    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
-  }
-
-  export type MemberCreateManyUserInputEnvelope = {
-    data: MemberCreateManyUserInput | MemberCreateManyUserInput[]
+  export type FlashcardCreateManyUserInputEnvelope = {
+    data: FlashcardCreateManyUserInput | FlashcardCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -33690,6 +34967,96 @@ export namespace Prisma {
 
   export type InvitationCreateManyUserInputEnvelope = {
     data: InvitationCreateManyUserInput | InvitationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MemberCreateWithoutUserInput = {
+    id: string
+    role: string
+    createdAt: Date | string
+    organization: OrganizationCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateWithoutUserInput = {
+    id: string
+    organizationId: string
+    role: string
+    createdAt: Date | string
+  }
+
+  export type MemberCreateOrConnectWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemberCreateManyUserInputEnvelope = {
+    data: MemberCreateManyUserInput | MemberCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewSessionCreateWithoutUserInput = {
+    id?: string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    events?: ReviewEventCreateNestedManyWithoutSessionInput
+    course: CourseCreateNestedOneWithoutReviewSessionsInput
+  }
+
+  export type ReviewSessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    courseId: string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    events?: ReviewEventUncheckedCreateNestedManyWithoutSessionInput
+  }
+
+  export type ReviewSessionCreateOrConnectWithoutUserInput = {
+    where: ReviewSessionWhereUniqueInput
+    create: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewSessionCreateManyUserInputEnvelope = {
+    data: ReviewSessionCreateManyUserInput | ReviewSessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SessionCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    activeOrganizationId?: string | null
+    impersonatedBy?: string | null
+  }
+
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    activeOrganizationId?: string | null
+    impersonatedBy?: string | null
+  }
+
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -33751,106 +35118,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type FlashcardCreateWithoutUserInput = {
-    id?: string
-    question: string
-    answer: string
-    sourceTimestamp?: string | null
-    timesReviewed?: number
-    timesCorrect?: number
-    lastReviewedAt?: Date | string | null
-    nextReviewAt?: Date | string | null
-    createdAt?: Date | string
-    conceptMatch: ConceptMatchCreateNestedOneWithoutFlashcardsInput
-    reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+  export type FeedbackUpsertWithWhereUniqueWithoutUserInput = {
+    where: FeedbackWhereUniqueInput
+    update: XOR<FeedbackUpdateWithoutUserInput, FeedbackUncheckedUpdateWithoutUserInput>
+    create: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput>
   }
 
-  export type FlashcardUncheckedCreateWithoutUserInput = {
-    id?: string
-    conceptMatchId: string
-    question: string
-    answer: string
-    sourceTimestamp?: string | null
-    timesReviewed?: number
-    timesCorrect?: number
-    lastReviewedAt?: Date | string | null
-    nextReviewAt?: Date | string | null
-    createdAt?: Date | string
-    reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+  export type FeedbackUpdateWithWhereUniqueWithoutUserInput = {
+    where: FeedbackWhereUniqueInput
+    data: XOR<FeedbackUpdateWithoutUserInput, FeedbackUncheckedUpdateWithoutUserInput>
   }
 
-  export type FlashcardCreateOrConnectWithoutUserInput = {
-    where: FlashcardWhereUniqueInput
-    create: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput>
+  export type FeedbackUpdateManyWithWhereWithoutUserInput = {
+    where: FeedbackScalarWhereInput
+    data: XOR<FeedbackUpdateManyMutationInput, FeedbackUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type FlashcardCreateManyUserInputEnvelope = {
-    data: FlashcardCreateManyUserInput | FlashcardCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ReviewSessionCreateWithoutUserInput = {
-    id?: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-    course: CourseCreateNestedOneWithoutReviewSessionsInput
-    events?: ReviewEventCreateNestedManyWithoutSessionInput
-  }
-
-  export type ReviewSessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    courseId: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-    events?: ReviewEventUncheckedCreateNestedManyWithoutSessionInput
-  }
-
-  export type ReviewSessionCreateOrConnectWithoutUserInput = {
-    where: ReviewSessionWhereUniqueInput
-    create: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type ReviewSessionCreateManyUserInputEnvelope = {
-    data: ReviewSessionCreateManyUserInput | ReviewSessionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    expiresAt?: DateTimeFilter<"Session"> | Date | string
-    token?: StringFilter<"Session"> | string
-    createdAt?: DateTimeFilter<"Session"> | Date | string
-    updatedAt?: DateTimeFilter<"Session"> | Date | string
-    ipAddress?: StringNullableFilter<"Session"> | string | null
-    userAgent?: StringNullableFilter<"Session"> | string | null
-    userId?: StringFilter<"Session"> | string
-    activeOrganizationId?: StringNullableFilter<"Session"> | string | null
-    impersonatedBy?: StringNullableFilter<"Session"> | string | null
+  export type FeedbackScalarWhereInput = {
+    AND?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
+    OR?: FeedbackScalarWhereInput[]
+    NOT?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
+    id?: StringFilter<"Feedback"> | string
+    review?: IntFilter<"Feedback"> | number
+    message?: StringFilter<"Feedback"> | string
+    email?: StringNullableFilter<"Feedback"> | string | null
+    userId?: StringNullableFilter<"Feedback"> | string | null
+    createdAt?: DateTimeFilter<"Feedback"> | Date | string
+    updatedAt?: DateTimeFilter<"Feedback"> | Date | string
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -33888,60 +35182,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
-  export type FeedbackUpsertWithWhereUniqueWithoutUserInput = {
-    where: FeedbackWhereUniqueInput
-    update: XOR<FeedbackUpdateWithoutUserInput, FeedbackUncheckedUpdateWithoutUserInput>
-    create: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput>
+  export type FlashcardUpsertWithWhereUniqueWithoutUserInput = {
+    where: FlashcardWhereUniqueInput
+    update: XOR<FlashcardUpdateWithoutUserInput, FlashcardUncheckedUpdateWithoutUserInput>
+    create: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput>
   }
 
-  export type FeedbackUpdateWithWhereUniqueWithoutUserInput = {
-    where: FeedbackWhereUniqueInput
-    data: XOR<FeedbackUpdateWithoutUserInput, FeedbackUncheckedUpdateWithoutUserInput>
+  export type FlashcardUpdateWithWhereUniqueWithoutUserInput = {
+    where: FlashcardWhereUniqueInput
+    data: XOR<FlashcardUpdateWithoutUserInput, FlashcardUncheckedUpdateWithoutUserInput>
   }
 
-  export type FeedbackUpdateManyWithWhereWithoutUserInput = {
-    where: FeedbackScalarWhereInput
-    data: XOR<FeedbackUpdateManyMutationInput, FeedbackUncheckedUpdateManyWithoutUserInput>
+  export type FlashcardUpdateManyWithWhereWithoutUserInput = {
+    where: FlashcardScalarWhereInput
+    data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type FeedbackScalarWhereInput = {
-    AND?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
-    OR?: FeedbackScalarWhereInput[]
-    NOT?: FeedbackScalarWhereInput | FeedbackScalarWhereInput[]
-    id?: StringFilter<"Feedback"> | string
-    review?: IntFilter<"Feedback"> | number
-    message?: StringFilter<"Feedback"> | string
-    email?: StringNullableFilter<"Feedback"> | string | null
-    userId?: StringNullableFilter<"Feedback"> | string | null
-    createdAt?: DateTimeFilter<"Feedback"> | Date | string
-    updatedAt?: DateTimeFilter<"Feedback"> | Date | string
-  }
-
-  export type MemberUpsertWithWhereUniqueWithoutUserInput = {
-    where: MemberWhereUniqueInput
-    update: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
-    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
-  }
-
-  export type MemberUpdateWithWhereUniqueWithoutUserInput = {
-    where: MemberWhereUniqueInput
-    data: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
-  }
-
-  export type MemberUpdateManyWithWhereWithoutUserInput = {
-    where: MemberScalarWhereInput
-    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type MemberScalarWhereInput = {
-    AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
-    OR?: MemberScalarWhereInput[]
-    NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
-    id?: StringFilter<"Member"> | string
-    organizationId?: StringFilter<"Member"> | string
-    userId?: StringFilter<"Member"> | string
-    role?: StringFilter<"Member"> | string
-    createdAt?: DateTimeFilter<"Member"> | Date | string
+  export type FlashcardScalarWhereInput = {
+    AND?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
+    OR?: FlashcardScalarWhereInput[]
+    NOT?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
+    id?: StringFilter<"Flashcard"> | string
+    conceptMatchId?: StringFilter<"Flashcard"> | string
+    userId?: StringFilter<"Flashcard"> | string
+    question?: StringFilter<"Flashcard"> | string
+    answer?: StringFilter<"Flashcard"> | string
+    sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
+    timesReviewed?: IntFilter<"Flashcard"> | number
+    timesCorrect?: IntFilter<"Flashcard"> | number
+    lastReviewedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
+    nextReviewAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
+    createdAt?: DateTimeFilter<"Flashcard"> | Date | string
   }
 
   export type InvitationUpsertWithWhereUniqueWithoutUserInput = {
@@ -33971,6 +35242,95 @@ export namespace Prisma {
     status?: StringFilter<"Invitation"> | string
     expiresAt?: DateTimeFilter<"Invitation"> | Date | string
     inviterId?: StringFilter<"Invitation"> | string
+  }
+
+  export type MemberUpsertWithWhereUniqueWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    update: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
+    create: XOR<MemberCreateWithoutUserInput, MemberUncheckedCreateWithoutUserInput>
+  }
+
+  export type MemberUpdateWithWhereUniqueWithoutUserInput = {
+    where: MemberWhereUniqueInput
+    data: XOR<MemberUpdateWithoutUserInput, MemberUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MemberUpdateManyWithWhereWithoutUserInput = {
+    where: MemberScalarWhereInput
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MemberScalarWhereInput = {
+    AND?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    OR?: MemberScalarWhereInput[]
+    NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
+    id?: StringFilter<"Member"> | string
+    organizationId?: StringFilter<"Member"> | string
+    userId?: StringFilter<"Member"> | string
+    role?: StringFilter<"Member"> | string
+    createdAt?: DateTimeFilter<"Member"> | Date | string
+  }
+
+  export type ReviewSessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReviewSessionWhereUniqueInput
+    update: XOR<ReviewSessionUpdateWithoutUserInput, ReviewSessionUncheckedUpdateWithoutUserInput>
+    create: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewSessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReviewSessionWhereUniqueInput
+    data: XOR<ReviewSessionUpdateWithoutUserInput, ReviewSessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReviewSessionUpdateManyWithWhereWithoutUserInput = {
+    where: ReviewSessionScalarWhereInput
+    data: XOR<ReviewSessionUpdateManyMutationInput, ReviewSessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReviewSessionScalarWhereInput = {
+    AND?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
+    OR?: ReviewSessionScalarWhereInput[]
+    NOT?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
+    id?: StringFilter<"ReviewSession"> | string
+    userId?: StringFilter<"ReviewSession"> | string
+    courseId?: StringFilter<"ReviewSession"> | string
+    flashcardCount?: IntFilter<"ReviewSession"> | number
+    currentCardIndex?: IntFilter<"ReviewSession"> | number
+    status?: StringFilter<"ReviewSession"> | string
+    startedAt?: DateTimeFilter<"ReviewSession"> | Date | string
+    completedAt?: DateTimeNullableFilter<"ReviewSession"> | Date | string | null
+  }
+
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    token?: StringFilter<"Session"> | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
+    activeOrganizationId?: StringNullableFilter<"Session"> | string | null
+    impersonatedBy?: StringNullableFilter<"Session"> | string | null
   }
 
   export type UserCourseUpsertWithWhereUniqueWithoutUserInput = {
@@ -34031,69 +35391,6 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
   }
 
-  export type FlashcardUpsertWithWhereUniqueWithoutUserInput = {
-    where: FlashcardWhereUniqueInput
-    update: XOR<FlashcardUpdateWithoutUserInput, FlashcardUncheckedUpdateWithoutUserInput>
-    create: XOR<FlashcardCreateWithoutUserInput, FlashcardUncheckedCreateWithoutUserInput>
-  }
-
-  export type FlashcardUpdateWithWhereUniqueWithoutUserInput = {
-    where: FlashcardWhereUniqueInput
-    data: XOR<FlashcardUpdateWithoutUserInput, FlashcardUncheckedUpdateWithoutUserInput>
-  }
-
-  export type FlashcardUpdateManyWithWhereWithoutUserInput = {
-    where: FlashcardScalarWhereInput
-    data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type FlashcardScalarWhereInput = {
-    AND?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
-    OR?: FlashcardScalarWhereInput[]
-    NOT?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
-    id?: StringFilter<"Flashcard"> | string
-    conceptMatchId?: StringFilter<"Flashcard"> | string
-    userId?: StringFilter<"Flashcard"> | string
-    question?: StringFilter<"Flashcard"> | string
-    answer?: StringFilter<"Flashcard"> | string
-    sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
-    timesReviewed?: IntFilter<"Flashcard"> | number
-    timesCorrect?: IntFilter<"Flashcard"> | number
-    lastReviewedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
-    nextReviewAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
-    createdAt?: DateTimeFilter<"Flashcard"> | Date | string
-  }
-
-  export type ReviewSessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: ReviewSessionWhereUniqueInput
-    update: XOR<ReviewSessionUpdateWithoutUserInput, ReviewSessionUncheckedUpdateWithoutUserInput>
-    create: XOR<ReviewSessionCreateWithoutUserInput, ReviewSessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type ReviewSessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: ReviewSessionWhereUniqueInput
-    data: XOR<ReviewSessionUpdateWithoutUserInput, ReviewSessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ReviewSessionUpdateManyWithWhereWithoutUserInput = {
-    where: ReviewSessionScalarWhereInput
-    data: XOR<ReviewSessionUpdateManyMutationInput, ReviewSessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ReviewSessionScalarWhereInput = {
-    AND?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
-    OR?: ReviewSessionScalarWhereInput[]
-    NOT?: ReviewSessionScalarWhereInput | ReviewSessionScalarWhereInput[]
-    id?: StringFilter<"ReviewSession"> | string
-    userId?: StringFilter<"ReviewSession"> | string
-    courseId?: StringFilter<"ReviewSession"> | string
-    flashcardCount?: IntFilter<"ReviewSession"> | number
-    currentCardIndex?: IntFilter<"ReviewSession"> | number
-    status?: StringFilter<"ReviewSession"> | string
-    startedAt?: DateTimeFilter<"ReviewSession"> | Date | string
-    completedAt?: DateTimeNullableFilter<"ReviewSession"> | Date | string | null
-  }
-
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -34103,18 +35400,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -34126,18 +35423,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -34165,18 +35462,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -34188,18 +35485,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -34211,18 +35508,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -34234,18 +35531,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -34273,18 +35570,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -34296,42 +35593,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type MemberCreateWithoutOrganizationInput = {
-    id: string
-    role: string
-    createdAt: Date | string
-    user: UserCreateNestedOneWithoutMembersInput
-  }
-
-  export type MemberUncheckedCreateWithoutOrganizationInput = {
-    id: string
-    userId: string
-    role: string
-    createdAt: Date | string
-  }
-
-  export type MemberCreateOrConnectWithoutOrganizationInput = {
-    where: MemberWhereUniqueInput
-    create: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput>
-  }
-
-  export type MemberCreateManyOrganizationInputEnvelope = {
-    data: MemberCreateManyOrganizationInput | MemberCreateManyOrganizationInput[]
-    skipDuplicates?: boolean
   }
 
   export type InvitationCreateWithoutOrganizationInput = {
@@ -34362,49 +35635,57 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SubscriptionCreateWithoutOrganizationInput = {
+  export type MemberCreateWithoutOrganizationInput = {
     id: string
-    plan: string
-    stripeCustomerId?: string | null
-    stripeSubscriptionId?: string | null
-    status?: string | null
-    periodStart?: Date | string | null
-    periodEnd?: Date | string | null
-    cancelAtPeriodEnd?: boolean | null
-    seats?: number | null
+    role: string
+    createdAt: Date | string
+    user: UserCreateNestedOneWithoutMembersInput
   }
 
-  export type SubscriptionUncheckedCreateWithoutOrganizationInput = {
+  export type MemberUncheckedCreateWithoutOrganizationInput = {
     id: string
-    plan: string
-    stripeCustomerId?: string | null
-    stripeSubscriptionId?: string | null
-    status?: string | null
-    periodStart?: Date | string | null
-    periodEnd?: Date | string | null
-    cancelAtPeriodEnd?: boolean | null
-    seats?: number | null
+    userId: string
+    role: string
+    createdAt: Date | string
   }
 
-  export type SubscriptionCreateOrConnectWithoutOrganizationInput = {
-    where: SubscriptionWhereUniqueInput
-    create: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-  }
-
-  export type MemberUpsertWithWhereUniqueWithoutOrganizationInput = {
+  export type MemberCreateOrConnectWithoutOrganizationInput = {
     where: MemberWhereUniqueInput
-    update: XOR<MemberUpdateWithoutOrganizationInput, MemberUncheckedUpdateWithoutOrganizationInput>
     create: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput>
   }
 
-  export type MemberUpdateWithWhereUniqueWithoutOrganizationInput = {
-    where: MemberWhereUniqueInput
-    data: XOR<MemberUpdateWithoutOrganizationInput, MemberUncheckedUpdateWithoutOrganizationInput>
+  export type MemberCreateManyOrganizationInputEnvelope = {
+    data: MemberCreateManyOrganizationInput | MemberCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
   }
 
-  export type MemberUpdateManyWithWhereWithoutOrganizationInput = {
-    where: MemberScalarWhereInput
-    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutOrganizationInput>
+  export type subscriptionCreateWithoutOrganizationInput = {
+    id: string
+    plan: string
+    stripeCustomerId?: string | null
+    stripeSubscriptionId?: string | null
+    status?: string | null
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean | null
+    seats?: number | null
+  }
+
+  export type subscriptionUncheckedCreateWithoutOrganizationInput = {
+    id: string
+    plan: string
+    stripeCustomerId?: string | null
+    stripeSubscriptionId?: string | null
+    status?: string | null
+    periodStart?: Date | string | null
+    periodEnd?: Date | string | null
+    cancelAtPeriodEnd?: boolean | null
+    seats?: number | null
+  }
+
+  export type subscriptionCreateOrConnectWithoutOrganizationInput = {
+    where: subscriptionWhereUniqueInput
+    create: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
   }
 
   export type InvitationUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -34423,18 +35704,34 @@ export namespace Prisma {
     data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutOrganizationInput>
   }
 
-  export type SubscriptionUpsertWithoutOrganizationInput = {
-    update: XOR<SubscriptionUpdateWithoutOrganizationInput, SubscriptionUncheckedUpdateWithoutOrganizationInput>
-    create: XOR<SubscriptionCreateWithoutOrganizationInput, SubscriptionUncheckedCreateWithoutOrganizationInput>
-    where?: SubscriptionWhereInput
+  export type MemberUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: MemberWhereUniqueInput
+    update: XOR<MemberUpdateWithoutOrganizationInput, MemberUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<MemberCreateWithoutOrganizationInput, MemberUncheckedCreateWithoutOrganizationInput>
   }
 
-  export type SubscriptionUpdateToOneWithWhereWithoutOrganizationInput = {
-    where?: SubscriptionWhereInput
-    data: XOR<SubscriptionUpdateWithoutOrganizationInput, SubscriptionUncheckedUpdateWithoutOrganizationInput>
+  export type MemberUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: MemberWhereUniqueInput
+    data: XOR<MemberUpdateWithoutOrganizationInput, MemberUncheckedUpdateWithoutOrganizationInput>
   }
 
-  export type SubscriptionUpdateWithoutOrganizationInput = {
+  export type MemberUpdateManyWithWhereWithoutOrganizationInput = {
+    where: MemberScalarWhereInput
+    data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type subscriptionUpsertWithoutOrganizationInput = {
+    update: XOR<subscriptionUpdateWithoutOrganizationInput, subscriptionUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<subscriptionCreateWithoutOrganizationInput, subscriptionUncheckedCreateWithoutOrganizationInput>
+    where?: subscriptionWhereInput
+  }
+
+  export type subscriptionUpdateToOneWithWhereWithoutOrganizationInput = {
+    where?: subscriptionWhereInput
+    data: XOR<subscriptionUpdateWithoutOrganizationInput, subscriptionUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type subscriptionUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     plan?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34446,7 +35743,7 @@ export namespace Prisma {
     seats?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type SubscriptionUncheckedUpdateWithoutOrganizationInput = {
+  export type subscriptionUncheckedUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     plan?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34465,10 +35762,10 @@ export namespace Prisma {
     logo?: string | null
     createdAt: Date | string
     metadata?: string | null
-    stripeCustomerId?: string | null
     email?: string | null
+    stripeCustomerId?: string | null
     invitations?: InvitationCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionCreateNestedOneWithoutOrganizationInput
+    subscription?: subscriptionCreateNestedOneWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMembersInput = {
@@ -34478,10 +35775,10 @@ export namespace Prisma {
     logo?: string | null
     createdAt: Date | string
     metadata?: string | null
-    stripeCustomerId?: string | null
     email?: string | null
+    stripeCustomerId?: string | null
     invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+    subscription?: subscriptionUncheckedCreateNestedOneWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMembersInput = {
@@ -34498,18 +35795,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMembersInput = {
@@ -34521,18 +35818,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMembersInput = {
@@ -34558,10 +35855,10 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUpdateOneWithoutOrganizationNestedInput
+    subscription?: subscriptionUpdateOneWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMembersInput = {
@@ -34571,10 +35868,10 @@ export namespace Prisma {
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+    subscription?: subscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
   }
 
   export type UserUpsertWithoutMembersInput = {
@@ -34597,18 +35894,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMembersInput = {
@@ -34620,49 +35917,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type OrganizationCreateWithoutInvitationsInput = {
-    id: string
-    name: string
-    slug?: string | null
-    logo?: string | null
-    createdAt: Date | string
-    metadata?: string | null
-    stripeCustomerId?: string | null
-    email?: string | null
-    members?: MemberCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionCreateNestedOneWithoutOrganizationInput
-  }
-
-  export type OrganizationUncheckedCreateWithoutInvitationsInput = {
-    id: string
-    name: string
-    slug?: string | null
-    logo?: string | null
-    createdAt: Date | string
-    metadata?: string | null
-    stripeCustomerId?: string | null
-    email?: string | null
-    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
-  }
-
-  export type OrganizationCreateOrConnectWithoutInvitationsInput = {
-    where: OrganizationWhereUniqueInput
-    create: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
   }
 
   export type UserCreateWithoutInvitationsInput = {
@@ -34674,18 +35940,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInvitationsInput = {
@@ -34697,18 +35963,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInvitationsInput = {
@@ -34716,41 +35982,35 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
   }
 
-  export type OrganizationUpsertWithoutInvitationsInput = {
-    update: XOR<OrganizationUpdateWithoutInvitationsInput, OrganizationUncheckedUpdateWithoutInvitationsInput>
+  export type OrganizationCreateWithoutInvitationsInput = {
+    id: string
+    name: string
+    slug?: string | null
+    logo?: string | null
+    createdAt: Date | string
+    metadata?: string | null
+    email?: string | null
+    stripeCustomerId?: string | null
+    members?: MemberCreateNestedManyWithoutOrganizationInput
+    subscription?: subscriptionCreateNestedOneWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutInvitationsInput = {
+    id: string
+    name: string
+    slug?: string | null
+    logo?: string | null
+    createdAt: Date | string
+    metadata?: string | null
+    email?: string | null
+    stripeCustomerId?: string | null
+    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
+    subscription?: subscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutInvitationsInput = {
+    where: OrganizationWhereUniqueInput
     create: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
-    where?: OrganizationWhereInput
-  }
-
-  export type OrganizationUpdateToOneWithWhereWithoutInvitationsInput = {
-    where?: OrganizationWhereInput
-    data: XOR<OrganizationUpdateWithoutInvitationsInput, OrganizationUncheckedUpdateWithoutInvitationsInput>
-  }
-
-  export type OrganizationUpdateWithoutInvitationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    members?: MemberUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUpdateOneWithoutOrganizationNestedInput
-  }
-
-  export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
   }
 
   export type UserUpsertWithoutInvitationsInput = {
@@ -34773,18 +36033,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInvitationsInput = {
@@ -34796,86 +36056,55 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type OrganizationCreateWithoutSubscriptionInput = {
-    id: string
-    name: string
-    slug?: string | null
-    logo?: string | null
-    createdAt: Date | string
-    metadata?: string | null
-    stripeCustomerId?: string | null
-    email?: string | null
-    members?: MemberCreateNestedManyWithoutOrganizationInput
-    invitations?: InvitationCreateNestedManyWithoutOrganizationInput
-  }
-
-  export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
-    id: string
-    name: string
-    slug?: string | null
-    logo?: string | null
-    createdAt: Date | string
-    metadata?: string | null
-    stripeCustomerId?: string | null
-    email?: string | null
-    members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
-    invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
-  }
-
-  export type OrganizationCreateOrConnectWithoutSubscriptionInput = {
-    where: OrganizationWhereUniqueInput
-    create: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
-  }
-
-  export type OrganizationUpsertWithoutSubscriptionInput = {
-    update: XOR<OrganizationUpdateWithoutSubscriptionInput, OrganizationUncheckedUpdateWithoutSubscriptionInput>
-    create: XOR<OrganizationCreateWithoutSubscriptionInput, OrganizationUncheckedCreateWithoutSubscriptionInput>
+  export type OrganizationUpsertWithoutInvitationsInput = {
+    update: XOR<OrganizationUpdateWithoutInvitationsInput, OrganizationUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<OrganizationCreateWithoutInvitationsInput, OrganizationUncheckedCreateWithoutInvitationsInput>
     where?: OrganizationWhereInput
   }
 
-  export type OrganizationUpdateToOneWithWhereWithoutSubscriptionInput = {
+  export type OrganizationUpdateToOneWithWhereWithoutInvitationsInput = {
     where?: OrganizationWhereInput
-    data: XOR<OrganizationUpdateWithoutSubscriptionInput, OrganizationUncheckedUpdateWithoutSubscriptionInput>
+    data: XOR<OrganizationUpdateWithoutInvitationsInput, OrganizationUncheckedUpdateWithoutInvitationsInput>
   }
 
-  export type OrganizationUpdateWithoutSubscriptionInput = {
+  export type OrganizationUpdateWithoutInvitationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     members?: MemberUpdateManyWithoutOrganizationNestedInput
-    invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
+    subscription?: subscriptionUpdateOneWithoutOrganizationNestedInput
   }
 
-  export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
+  export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
     members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
-    invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+    subscription?: subscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
   }
 
   export type UserCreateWithoutFeedbacksInput = {
@@ -34887,18 +36116,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFeedbacksInput = {
@@ -34910,18 +36139,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFeedbacksInput = {
@@ -34949,18 +36178,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFeedbacksInput = {
@@ -34972,18 +36201,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseCreateWithoutSubjectInput = {
@@ -34993,11 +36222,11 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     semester?: SemesterCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutSubjectInput = {
@@ -35009,9 +36238,9 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutSubjectInput = {
@@ -35062,11 +36291,11 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    subject: SubjectCreateNestedOneWithoutCoursesInput
     semester?: SemesterCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    subject: SubjectCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutYearInput = {
@@ -35078,9 +36307,9 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutYearInput = {
@@ -35118,9 +36347,9 @@ export namespace Prisma {
     createdAt?: Date | string
     subject: SubjectCreateNestedOneWithoutCoursesInput
     year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutSemesterInput = {
@@ -35132,9 +36361,9 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutSemesterInput = {
@@ -35161,6 +36390,23 @@ export namespace Prisma {
   export type CourseUpdateManyWithWhereWithoutSemesterInput = {
     where: CourseScalarWhereInput
     data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutSemesterInput>
+  }
+
+  export type SemesterCreateWithoutCoursesInput = {
+    id?: string
+    number: number
+    createdAt?: Date | string
+  }
+
+  export type SemesterUncheckedCreateWithoutCoursesInput = {
+    id?: string
+    number: number
+    createdAt?: Date | string
+  }
+
+  export type SemesterCreateOrConnectWithoutCoursesInput = {
+    where: SemesterWhereUniqueInput
+    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
   }
 
   export type SubjectCreateWithoutCoursesInput = {
@@ -35199,44 +36445,35 @@ export namespace Prisma {
     create: XOR<AcademicYearCreateWithoutCoursesInput, AcademicYearUncheckedCreateWithoutCoursesInput>
   }
 
-  export type SemesterCreateWithoutCoursesInput = {
+  export type ReviewSessionCreateWithoutCourseInput = {
     id?: string
-    number: number
-    createdAt?: Date | string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    events?: ReviewEventCreateNestedManyWithoutSessionInput
+    user: UserCreateNestedOneWithoutReviewSessionsInput
   }
 
-  export type SemesterUncheckedCreateWithoutCoursesInput = {
+  export type ReviewSessionUncheckedCreateWithoutCourseInput = {
     id?: string
-    number: number
-    createdAt?: Date | string
-  }
-
-  export type SemesterCreateOrConnectWithoutCoursesInput = {
-    where: SemesterWhereUniqueInput
-    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-  }
-
-  export type UserCourseCreateWithoutCourseInput = {
-    isActive: boolean
-    learnedCount?: number
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutUserCoursesInput
-  }
-
-  export type UserCourseUncheckedCreateWithoutCourseInput = {
     userId: string
-    isActive: boolean
-    learnedCount?: number
-    createdAt?: Date | string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    events?: ReviewEventUncheckedCreateNestedManyWithoutSessionInput
   }
 
-  export type UserCourseCreateOrConnectWithoutCourseInput = {
-    where: UserCourseWhereUniqueInput
-    create: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput>
+  export type ReviewSessionCreateOrConnectWithoutCourseInput = {
+    where: ReviewSessionWhereUniqueInput
+    create: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput>
   }
 
-  export type UserCourseCreateManyCourseInputEnvelope = {
-    data: UserCourseCreateManyCourseInput | UserCourseCreateManyCourseInput[]
+  export type ReviewSessionCreateManyCourseInputEnvelope = {
+    data: ReviewSessionCreateManyCourseInput | ReviewSessionCreateManyCourseInput[]
     skipDuplicates?: boolean
   }
 
@@ -35270,36 +36507,51 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ReviewSessionCreateWithoutCourseInput = {
-    id?: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutReviewSessionsInput
-    events?: ReviewEventCreateNestedManyWithoutSessionInput
+  export type UserCourseCreateWithoutCourseInput = {
+    isActive: boolean
+    learnedCount?: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutUserCoursesInput
   }
 
-  export type ReviewSessionUncheckedCreateWithoutCourseInput = {
-    id?: string
+  export type UserCourseUncheckedCreateWithoutCourseInput = {
     userId: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-    events?: ReviewEventUncheckedCreateNestedManyWithoutSessionInput
+    isActive: boolean
+    learnedCount?: number
+    createdAt?: Date | string
   }
 
-  export type ReviewSessionCreateOrConnectWithoutCourseInput = {
-    where: ReviewSessionWhereUniqueInput
-    create: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput>
+  export type UserCourseCreateOrConnectWithoutCourseInput = {
+    where: UserCourseWhereUniqueInput
+    create: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput>
   }
 
-  export type ReviewSessionCreateManyCourseInputEnvelope = {
-    data: ReviewSessionCreateManyCourseInput | ReviewSessionCreateManyCourseInput[]
+  export type UserCourseCreateManyCourseInputEnvelope = {
+    data: UserCourseCreateManyCourseInput | UserCourseCreateManyCourseInput[]
     skipDuplicates?: boolean
+  }
+
+  export type SemesterUpsertWithoutCoursesInput = {
+    update: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
+    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
+    where?: SemesterWhereInput
+  }
+
+  export type SemesterUpdateToOneWithWhereWithoutCoursesInput = {
+    where?: SemesterWhereInput
+    data: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
+  }
+
+  export type SemesterUpdateWithoutCoursesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SemesterUncheckedUpdateWithoutCoursesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SubjectUpsertWithoutCoursesInput = {
@@ -35350,43 +36602,20 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SemesterUpsertWithoutCoursesInput = {
-    update: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
-    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    where?: SemesterWhereInput
+  export type ReviewSessionUpsertWithWhereUniqueWithoutCourseInput = {
+    where: ReviewSessionWhereUniqueInput
+    update: XOR<ReviewSessionUpdateWithoutCourseInput, ReviewSessionUncheckedUpdateWithoutCourseInput>
+    create: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput>
   }
 
-  export type SemesterUpdateToOneWithWhereWithoutCoursesInput = {
-    where?: SemesterWhereInput
-    data: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
+  export type ReviewSessionUpdateWithWhereUniqueWithoutCourseInput = {
+    where: ReviewSessionWhereUniqueInput
+    data: XOR<ReviewSessionUpdateWithoutCourseInput, ReviewSessionUncheckedUpdateWithoutCourseInput>
   }
 
-  export type SemesterUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SemesterUncheckedUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCourseUpsertWithWhereUniqueWithoutCourseInput = {
-    where: UserCourseWhereUniqueInput
-    update: XOR<UserCourseUpdateWithoutCourseInput, UserCourseUncheckedUpdateWithoutCourseInput>
-    create: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput>
-  }
-
-  export type UserCourseUpdateWithWhereUniqueWithoutCourseInput = {
-    where: UserCourseWhereUniqueInput
-    data: XOR<UserCourseUpdateWithoutCourseInput, UserCourseUncheckedUpdateWithoutCourseInput>
-  }
-
-  export type UserCourseUpdateManyWithWhereWithoutCourseInput = {
-    where: UserCourseScalarWhereInput
-    data: XOR<UserCourseUpdateManyMutationInput, UserCourseUncheckedUpdateManyWithoutCourseInput>
+  export type ReviewSessionUpdateManyWithWhereWithoutCourseInput = {
+    where: ReviewSessionScalarWhereInput
+    data: XOR<ReviewSessionUpdateManyMutationInput, ReviewSessionUncheckedUpdateManyWithoutCourseInput>
   }
 
   export type SyllabusConceptUpsertWithWhereUniqueWithoutCourseInput = {
@@ -35418,71 +36647,20 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
   }
 
-  export type ReviewSessionUpsertWithWhereUniqueWithoutCourseInput = {
-    where: ReviewSessionWhereUniqueInput
-    update: XOR<ReviewSessionUpdateWithoutCourseInput, ReviewSessionUncheckedUpdateWithoutCourseInput>
-    create: XOR<ReviewSessionCreateWithoutCourseInput, ReviewSessionUncheckedCreateWithoutCourseInput>
+  export type UserCourseUpsertWithWhereUniqueWithoutCourseInput = {
+    where: UserCourseWhereUniqueInput
+    update: XOR<UserCourseUpdateWithoutCourseInput, UserCourseUncheckedUpdateWithoutCourseInput>
+    create: XOR<UserCourseCreateWithoutCourseInput, UserCourseUncheckedCreateWithoutCourseInput>
   }
 
-  export type ReviewSessionUpdateWithWhereUniqueWithoutCourseInput = {
-    where: ReviewSessionWhereUniqueInput
-    data: XOR<ReviewSessionUpdateWithoutCourseInput, ReviewSessionUncheckedUpdateWithoutCourseInput>
+  export type UserCourseUpdateWithWhereUniqueWithoutCourseInput = {
+    where: UserCourseWhereUniqueInput
+    data: XOR<UserCourseUpdateWithoutCourseInput, UserCourseUncheckedUpdateWithoutCourseInput>
   }
 
-  export type ReviewSessionUpdateManyWithWhereWithoutCourseInput = {
-    where: ReviewSessionScalarWhereInput
-    data: XOR<ReviewSessionUpdateManyMutationInput, ReviewSessionUncheckedUpdateManyWithoutCourseInput>
-  }
-
-  export type UserCreateWithoutUserCoursesInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
-    invitations?: InvitationCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutUserCoursesInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
-    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutUserCoursesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUserCoursesInput, UserUncheckedCreateWithoutUserCoursesInput>
+  export type UserCourseUpdateManyWithWhereWithoutCourseInput = {
+    where: UserCourseScalarWhereInput
+    data: XOR<UserCourseUpdateManyMutationInput, UserCourseUncheckedUpdateManyWithoutCourseInput>
   }
 
   export type CourseCreateWithoutEnrollmentsInput = {
@@ -35492,11 +36670,11 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
+    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
     year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutEnrollmentsInput = {
@@ -35509,13 +36687,103 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutEnrollmentsInput = {
     where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
+  }
+
+  export type UserCreateWithoutUserCoursesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
+    invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserCoursesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserCoursesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserCoursesInput, UserUncheckedCreateWithoutUserCoursesInput>
+  }
+
+  export type CourseUpsertWithoutEnrollmentsInput = {
+    update: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
+    create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutEnrollmentsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
+  }
+
+  export type CourseUpdateWithoutEnrollmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    semester?: SemesterUpdateOneWithoutCoursesNestedInput
+    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
+    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    yearId?: NullableStringFieldUpdateOperationsInput | string | null
+    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
+    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type UserUpsertWithoutUserCoursesInput = {
@@ -35538,18 +36806,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
     flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserCoursesInput = {
@@ -35561,90 +36829,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type CourseUpsertWithoutEnrollmentsInput = {
-    update: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
-    create: XOR<CourseCreateWithoutEnrollmentsInput, CourseUncheckedCreateWithoutEnrollmentsInput>
-    where?: CourseWhereInput
-  }
-
-  export type CourseUpdateToOneWithWhereWithoutEnrollmentsInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutEnrollmentsInput, CourseUncheckedUpdateWithoutEnrollmentsInput>
-  }
-
-  export type CourseUpdateWithoutEnrollmentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseCreateWithoutSyllabusConceptsInput = {
-    id?: string
-    code: string
-    name: string
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutSyllabusConceptsInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutSyllabusConceptsInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConceptMatchCreateWithoutSyllabusConceptInput = {
@@ -35679,43 +36875,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CourseUpsertWithoutSyllabusConceptsInput = {
-    update: XOR<CourseUpdateWithoutSyllabusConceptsInput, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
+  export type CourseCreateWithoutSyllabusConceptsInput = {
+    id?: string
+    code: string
+    name: string
+    ueNumber?: string | null
+    syllabusUrl?: string | null
+    createdAt?: Date | string
+    semester?: SemesterCreateNestedOneWithoutCoursesInput
+    subject: SubjectCreateNestedOneWithoutCoursesInput
+    year?: AcademicYearCreateNestedOneWithoutCoursesInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutSyllabusConceptsInput = {
+    id?: string
+    code: string
+    name: string
+    subjectId: string
+    yearId?: string | null
+    semesterId?: string | null
+    ueNumber?: string | null
+    syllabusUrl?: string | null
+    createdAt?: Date | string
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutSyllabusConceptsInput = {
+    where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
-    where?: CourseWhereInput
-  }
-
-  export type CourseUpdateToOneWithWhereWithoutSyllabusConceptsInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutSyllabusConceptsInput, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
-  }
-
-  export type CourseUpdateWithoutSyllabusConceptsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutSyllabusConceptsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type ConceptMatchUpsertWithWhereUniqueWithoutSyllabusConceptInput = {
@@ -35748,55 +36938,43 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ConceptMatch"> | Date | string
   }
 
-  export type UserCreateWithoutVideoJobsInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
-    invitations?: InvitationCreateNestedManyWithoutUserInput
-    userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+  export type CourseUpsertWithoutSyllabusConceptsInput = {
+    update: XOR<CourseUpdateWithoutSyllabusConceptsInput, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
+    create: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
+    where?: CourseWhereInput
   }
 
-  export type UserUncheckedCreateWithoutVideoJobsInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
-    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
-    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+  export type CourseUpdateToOneWithWhereWithoutSyllabusConceptsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutSyllabusConceptsInput, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
   }
 
-  export type UserCreateOrConnectWithoutVideoJobsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+  export type CourseUpdateWithoutSyllabusConceptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    semester?: SemesterUpdateOneWithoutCoursesNestedInput
+    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
+    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutSyllabusConceptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    yearId?: NullableStringFieldUpdateOperationsInput | string | null
+    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
+    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type ConceptCreateWithoutVideoJobInput = {
@@ -35829,61 +37007,55 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutVideoJobsInput = {
-    update: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
+  export type UserCreateWithoutVideoJobsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
+    invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutVideoJobsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutVideoJobsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutVideoJobsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
-  }
-
-  export type UserUpdateWithoutVideoJobsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
-    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUpdateManyWithoutUserNestedInput
-    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutVideoJobsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
-    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
-    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConceptUpsertWithWhereUniqueWithoutVideoJobInput = {
@@ -35915,33 +37087,61 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Concept"> | Date | string
   }
 
-  export type VideoJobCreateWithoutConceptsInput = {
-    id?: string
-    url: string
-    youtubeVideoId?: string | null
-    status: string
-    processedConceptsCount?: number | null
-    errorMessage?: string | null
-    createdAt?: Date | string
-    completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutVideoJobsInput
+  export type UserUpsertWithoutVideoJobsInput = {
+    update: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
+    create: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+    where?: UserWhereInput
   }
 
-  export type VideoJobUncheckedCreateWithoutConceptsInput = {
-    id?: string
-    userId: string
-    url: string
-    youtubeVideoId?: string | null
-    status: string
-    processedConceptsCount?: number | null
-    errorMessage?: string | null
-    createdAt?: Date | string
-    completedAt?: Date | string | null
+  export type UserUpdateToOneWithWhereWithoutVideoJobsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
   }
 
-  export type VideoJobCreateOrConnectWithoutConceptsInput = {
-    where: VideoJobWhereUniqueInput
-    create: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
+  export type UserUpdateWithoutVideoJobsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVideoJobsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConceptMatchCreateWithoutConceptInput = {
@@ -35974,6 +37174,51 @@ export namespace Prisma {
   export type ConceptMatchCreateManyConceptInputEnvelope = {
     data: ConceptMatchCreateManyConceptInput | ConceptMatchCreateManyConceptInput[]
     skipDuplicates?: boolean
+  }
+
+  export type VideoJobCreateWithoutConceptsInput = {
+    id?: string
+    url: string
+    youtubeVideoId?: string | null
+    status: string
+    processedConceptsCount?: number | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutVideoJobsInput
+  }
+
+  export type VideoJobUncheckedCreateWithoutConceptsInput = {
+    id?: string
+    userId: string
+    url: string
+    youtubeVideoId?: string | null
+    status: string
+    processedConceptsCount?: number | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type VideoJobCreateOrConnectWithoutConceptsInput = {
+    where: VideoJobWhereUniqueInput
+    create: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
+  }
+
+  export type ConceptMatchUpsertWithWhereUniqueWithoutConceptInput = {
+    where: ConceptMatchWhereUniqueInput
+    update: XOR<ConceptMatchUpdateWithoutConceptInput, ConceptMatchUncheckedUpdateWithoutConceptInput>
+    create: XOR<ConceptMatchCreateWithoutConceptInput, ConceptMatchUncheckedCreateWithoutConceptInput>
+  }
+
+  export type ConceptMatchUpdateWithWhereUniqueWithoutConceptInput = {
+    where: ConceptMatchWhereUniqueInput
+    data: XOR<ConceptMatchUpdateWithoutConceptInput, ConceptMatchUncheckedUpdateWithoutConceptInput>
+  }
+
+  export type ConceptMatchUpdateManyWithWhereWithoutConceptInput = {
+    where: ConceptMatchScalarWhereInput
+    data: XOR<ConceptMatchUpdateManyMutationInput, ConceptMatchUncheckedUpdateManyWithoutConceptInput>
   }
 
   export type VideoJobUpsertWithoutConceptsInput = {
@@ -36009,22 +37254,6 @@ export namespace Prisma {
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ConceptMatchUpsertWithWhereUniqueWithoutConceptInput = {
-    where: ConceptMatchWhereUniqueInput
-    update: XOR<ConceptMatchUpdateWithoutConceptInput, ConceptMatchUncheckedUpdateWithoutConceptInput>
-    create: XOR<ConceptMatchCreateWithoutConceptInput, ConceptMatchUncheckedCreateWithoutConceptInput>
-  }
-
-  export type ConceptMatchUpdateWithWhereUniqueWithoutConceptInput = {
-    where: ConceptMatchWhereUniqueInput
-    data: XOR<ConceptMatchUpdateWithoutConceptInput, ConceptMatchUncheckedUpdateWithoutConceptInput>
-  }
-
-  export type ConceptMatchUpdateManyWithWhereWithoutConceptInput = {
-    where: ConceptMatchScalarWhereInput
-    data: XOR<ConceptMatchUpdateManyMutationInput, ConceptMatchUncheckedUpdateManyWithoutConceptInput>
   }
 
   export type ConceptCreateWithoutConceptMatchesInput = {
@@ -36229,18 +37458,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
     invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFlashcardsInput = {
@@ -36252,18 +37481,18 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
     banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
     feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFlashcardsInput = {
@@ -36352,18 +37581,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
     invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFlashcardsInput = {
@@ -36375,18 +37604,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewEventUpsertWithWhereUniqueWithoutFlashcardInput = {
@@ -36418,90 +37647,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ReviewEvent"> | Date | string
   }
 
-  export type UserCreateWithoutReviewSessionsInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
-    members?: MemberCreateNestedManyWithoutUserInput
-    invitations?: InvitationCreateNestedManyWithoutUserInput
-    userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutReviewSessionsInput = {
-    id: string
-    name: string
-    email: string
-    emailVerified: boolean
-    image?: string | null
-    createdAt: Date | string
-    updatedAt: Date | string
-    resendContactId?: string | null
-    role?: string | null
-    banned?: boolean | null
-    banReason?: string | null
-    banExpires?: Date | string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
-    members?: MemberUncheckedCreateNestedManyWithoutUserInput
-    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
-    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
-    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutReviewSessionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
-  }
-
-  export type CourseCreateWithoutReviewSessionsInput = {
-    id?: string
-    code: string
-    name: string
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutReviewSessionsInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutReviewSessionsInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutReviewSessionsInput, CourseUncheckedCreateWithoutReviewSessionsInput>
-  }
-
   export type ReviewEventCreateWithoutSessionInput = {
     id?: string
     difficulty: string
@@ -36530,61 +37675,104 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutReviewSessionsInput = {
-    update: XOR<UserUpdateWithoutReviewSessionsInput, UserUncheckedUpdateWithoutReviewSessionsInput>
+  export type CourseCreateWithoutReviewSessionsInput = {
+    id?: string
+    code: string
+    name: string
+    ueNumber?: string | null
+    syllabusUrl?: string | null
+    createdAt?: Date | string
+    semester?: SemesterCreateNestedOneWithoutCoursesInput
+    subject: SubjectCreateNestedOneWithoutCoursesInput
+    year?: AcademicYearCreateNestedOneWithoutCoursesInput
+    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutReviewSessionsInput = {
+    id?: string
+    code: string
+    name: string
+    subjectId: string
+    yearId?: string | null
+    semesterId?: string | null
+    ueNumber?: string | null
+    syllabusUrl?: string | null
+    createdAt?: Date | string
+    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutReviewSessionsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutReviewSessionsInput, CourseUncheckedCreateWithoutReviewSessionsInput>
+  }
+
+  export type UserCreateWithoutReviewSessionsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
+    invitations?: InvitationCreateNestedManyWithoutUserInput
+    members?: MemberCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseCreateNestedManyWithoutUserInput
+    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewSessionsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutUserInput
+    members?: MemberUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
+    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewSessionsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
-    where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutReviewSessionsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutReviewSessionsInput, UserUncheckedUpdateWithoutReviewSessionsInput>
+  export type ReviewEventUpsertWithWhereUniqueWithoutSessionInput = {
+    where: ReviewEventWhereUniqueInput
+    update: XOR<ReviewEventUpdateWithoutSessionInput, ReviewEventUncheckedUpdateWithoutSessionInput>
+    create: XOR<ReviewEventCreateWithoutSessionInput, ReviewEventUncheckedCreateWithoutSessionInput>
   }
 
-  export type UserUpdateWithoutReviewSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
-    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
-    members?: MemberUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUpdateManyWithoutUserNestedInput
-    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+  export type ReviewEventUpdateWithWhereUniqueWithoutSessionInput = {
+    where: ReviewEventWhereUniqueInput
+    data: XOR<ReviewEventUpdateWithoutSessionInput, ReviewEventUncheckedUpdateWithoutSessionInput>
   }
 
-  export type UserUncheckedUpdateWithoutReviewSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableStringFieldUpdateOperationsInput | string | null
-    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    banReason?: NullableStringFieldUpdateOperationsInput | string | null
-    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
-    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
-    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
-    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
-    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+  export type ReviewEventUpdateManyWithWhereWithoutSessionInput = {
+    where: ReviewEventScalarWhereInput
+    data: XOR<ReviewEventUpdateManyMutationInput, ReviewEventUncheckedUpdateManyWithoutSessionInput>
   }
 
   export type CourseUpsertWithoutReviewSessionsInput = {
@@ -36605,11 +37793,11 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
     year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
     syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutReviewSessionsInput = {
@@ -36622,51 +37810,65 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
     syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
-  export type ReviewEventUpsertWithWhereUniqueWithoutSessionInput = {
-    where: ReviewEventWhereUniqueInput
-    update: XOR<ReviewEventUpdateWithoutSessionInput, ReviewEventUncheckedUpdateWithoutSessionInput>
-    create: XOR<ReviewEventCreateWithoutSessionInput, ReviewEventUncheckedCreateWithoutSessionInput>
+  export type UserUpsertWithoutReviewSessionsInput = {
+    update: XOR<UserUpdateWithoutReviewSessionsInput, UserUncheckedUpdateWithoutReviewSessionsInput>
+    create: XOR<UserCreateWithoutReviewSessionsInput, UserUncheckedCreateWithoutReviewSessionsInput>
+    where?: UserWhereInput
   }
 
-  export type ReviewEventUpdateWithWhereUniqueWithoutSessionInput = {
-    where: ReviewEventWhereUniqueInput
-    data: XOR<ReviewEventUpdateWithoutSessionInput, ReviewEventUncheckedUpdateWithoutSessionInput>
+  export type UserUpdateToOneWithWhereWithoutReviewSessionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewSessionsInput, UserUncheckedUpdateWithoutReviewSessionsInput>
   }
 
-  export type ReviewEventUpdateManyWithWhereWithoutSessionInput = {
-    where: ReviewEventScalarWhereInput
-    data: XOR<ReviewEventUpdateManyMutationInput, ReviewEventUncheckedUpdateManyWithoutSessionInput>
+  export type UserUpdateWithoutReviewSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUpdateManyWithoutUserNestedInput
+    members?: MemberUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
+    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
   }
 
-  export type ReviewSessionCreateWithoutEventsInput = {
-    id?: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutReviewSessionsInput
-    course: CourseCreateNestedOneWithoutReviewSessionsInput
-  }
-
-  export type ReviewSessionUncheckedCreateWithoutEventsInput = {
-    id?: string
-    userId: string
-    courseId: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-  }
-
-  export type ReviewSessionCreateOrConnectWithoutEventsInput = {
-    where: ReviewSessionWhereUniqueInput
-    create: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
+  export type UserUncheckedUpdateWithoutReviewSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutUserNestedInput
+    members?: MemberUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
+    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FlashcardCreateWithoutReviewEventsInput = {
@@ -36702,37 +37904,31 @@ export namespace Prisma {
     create: XOR<FlashcardCreateWithoutReviewEventsInput, FlashcardUncheckedCreateWithoutReviewEventsInput>
   }
 
-  export type ReviewSessionUpsertWithoutEventsInput = {
-    update: XOR<ReviewSessionUpdateWithoutEventsInput, ReviewSessionUncheckedUpdateWithoutEventsInput>
+  export type ReviewSessionCreateWithoutEventsInput = {
+    id?: string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+    course: CourseCreateNestedOneWithoutReviewSessionsInput
+    user: UserCreateNestedOneWithoutReviewSessionsInput
+  }
+
+  export type ReviewSessionUncheckedCreateWithoutEventsInput = {
+    id?: string
+    userId: string
+    courseId: string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type ReviewSessionCreateOrConnectWithoutEventsInput = {
+    where: ReviewSessionWhereUniqueInput
     create: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
-    where?: ReviewSessionWhereInput
-  }
-
-  export type ReviewSessionUpdateToOneWithWhereWithoutEventsInput = {
-    where?: ReviewSessionWhereInput
-    data: XOR<ReviewSessionUpdateWithoutEventsInput, ReviewSessionUncheckedUpdateWithoutEventsInput>
-  }
-
-  export type ReviewSessionUpdateWithoutEventsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
-    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
-  }
-
-  export type ReviewSessionUncheckedUpdateWithoutEventsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FlashcardUpsertWithoutReviewEventsInput = {
@@ -36774,16 +37970,46 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionCreateManyUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt: Date | string
-    updatedAt: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
-    activeOrganizationId?: string | null
-    impersonatedBy?: string | null
+  export type ReviewSessionUpsertWithoutEventsInput = {
+    update: XOR<ReviewSessionUpdateWithoutEventsInput, ReviewSessionUncheckedUpdateWithoutEventsInput>
+    create: XOR<ReviewSessionCreateWithoutEventsInput, ReviewSessionUncheckedCreateWithoutEventsInput>
+    where?: ReviewSessionWhereInput
+  }
+
+  export type ReviewSessionUpdateToOneWithWhereWithoutEventsInput = {
+    where?: ReviewSessionWhereInput
+    data: XOR<ReviewSessionUpdateWithoutEventsInput, ReviewSessionUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type ReviewSessionUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
+  }
+
+  export type ReviewSessionUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FeedbackCreateManyUserInput = {
+    id?: string
+    review: number
+    message: string
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountCreateManyUserInput = {
@@ -36801,20 +38027,17 @@ export namespace Prisma {
     updatedAt: Date | string
   }
 
-  export type FeedbackCreateManyUserInput = {
+  export type FlashcardCreateManyUserInput = {
     id?: string
-    review: number
-    message: string
-    email?: string | null
+    conceptMatchId: string
+    question: string
+    answer: string
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MemberCreateManyUserInput = {
-    id: string
-    organizationId: string
-    role: string
-    createdAt: Date | string
   }
 
   export type InvitationCreateManyUserInput = {
@@ -36824,6 +38047,35 @@ export namespace Prisma {
     role?: string | null
     status: string
     expiresAt: Date | string
+  }
+
+  export type MemberCreateManyUserInput = {
+    id: string
+    organizationId: string
+    role: string
+    createdAt: Date | string
+  }
+
+  export type ReviewSessionCreateManyUserInput = {
+    id?: string
+    courseId: string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type SessionCreateManyUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt: Date | string
+    updatedAt: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+    activeOrganizationId?: string | null
+    impersonatedBy?: string | null
   }
 
   export type UserCourseCreateManyUserInput = {
@@ -36844,63 +38096,31 @@ export namespace Prisma {
     completedAt?: Date | string | null
   }
 
-  export type FlashcardCreateManyUserInput = {
-    id?: string
-    conceptMatchId: string
-    question: string
-    answer: string
-    sourceTimestamp?: string | null
-    timesReviewed?: number
-    timesCorrect?: number
-    lastReviewedAt?: Date | string | null
-    nextReviewAt?: Date | string | null
-    createdAt?: Date | string
-  }
-
-  export type ReviewSessionCreateManyUserInput = {
-    id?: string
-    courseId: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
-  }
-
-  export type SessionUpdateWithoutUserInput = {
+  export type FeedbackUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
+    review?: IntFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
-    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUncheckedUpdateWithoutUserInput = {
+  export type FeedbackUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
+    review?: IntFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
-    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
+  export type FeedbackUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
+    review?: IntFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
-    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -36948,51 +38168,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type FeedbackUpdateWithoutUserInput = {
+  export type FlashcardUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    review?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput
+    reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
   }
 
-  export type FeedbackUncheckedUpdateWithoutUserInput = {
+  export type FlashcardUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    review?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
   }
 
-  export type FeedbackUncheckedUpdateManyWithoutUserInput = {
+  export type FlashcardUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    review?: IntFieldUpdateOperationsInput | number
-    message?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MemberUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
-  }
-
-  export type MemberUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MemberUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: StringFieldUpdateOperationsInput | string
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -37021,6 +38234,95 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewSessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    events?: ReviewEventUpdateManyWithoutSessionNestedInput
+    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
+  }
+
+  export type ReviewSessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    events?: ReviewEventUncheckedUpdateManyWithoutSessionNestedInput
+  }
+
+  export type ReviewSessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    activeOrganizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    impersonatedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCourseUpdateWithoutUserInput = {
@@ -37079,86 +38381,6 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type FlashcardUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
-    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
-    timesReviewed?: IntFieldUpdateOperationsInput | number
-    timesCorrect?: IntFieldUpdateOperationsInput | number
-    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput
-    reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
-  }
-
-  export type FlashcardUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
-    question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
-    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
-    timesReviewed?: IntFieldUpdateOperationsInput | number
-    timesCorrect?: IntFieldUpdateOperationsInput | number
-    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
-  }
-
-  export type FlashcardUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
-    question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
-    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
-    timesReviewed?: IntFieldUpdateOperationsInput | number
-    timesCorrect?: IntFieldUpdateOperationsInput | number
-    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReviewSessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    course?: CourseUpdateOneRequiredWithoutReviewSessionsNestedInput
-    events?: ReviewEventUpdateManyWithoutSessionNestedInput
-  }
-
-  export type ReviewSessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    events?: ReviewEventUncheckedUpdateManyWithoutSessionNestedInput
-  }
-
-  export type ReviewSessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type MemberCreateManyOrganizationInput = {
-    id: string
-    userId: string
-    role: string
-    createdAt: Date | string
-  }
-
   export type InvitationCreateManyOrganizationInput = {
     id: string
     email: string
@@ -37168,25 +38390,11 @@ export namespace Prisma {
     inviterId: string
   }
 
-  export type MemberUpdateWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMembersNestedInput
-  }
-
-  export type MemberUncheckedUpdateWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MemberUncheckedUpdateManyWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type MemberCreateManyOrganizationInput = {
+    id: string
+    userId: string
+    role: string
+    createdAt: Date | string
   }
 
   export type InvitationUpdateWithoutOrganizationInput = {
@@ -37216,6 +38424,27 @@ export namespace Prisma {
     inviterId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type MemberUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MemberUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CourseCreateManySubjectInput = {
     id?: string
     code: string
@@ -37234,11 +38463,11 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutSubjectInput = {
@@ -37250,9 +38479,9 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutSubjectInput = {
@@ -37284,11 +38513,11 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
     semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutYearInput = {
@@ -37300,9 +38529,9 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutYearInput = {
@@ -37336,9 +38565,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
     year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutSemesterInput = {
@@ -37350,9 +38579,9 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
+    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateManyWithoutSemesterInput = {
@@ -37366,11 +38595,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCourseCreateManyCourseInput = {
+  export type ReviewSessionCreateManyCourseInput = {
+    id?: string
     userId: string
-    isActive: boolean
-    learnedCount?: number
-    createdAt?: Date | string
+    flashcardCount: number
+    currentCardIndex?: number
+    status: string
+    startedAt?: Date | string
+    completedAt?: Date | string | null
   }
 
   export type SyllabusConceptCreateManyCourseInput = {
@@ -37382,35 +38614,43 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type ReviewSessionCreateManyCourseInput = {
-    id?: string
+  export type UserCourseCreateManyCourseInput = {
     userId: string
-    flashcardCount: number
-    currentCardIndex?: number
-    status: string
-    startedAt?: Date | string
-    completedAt?: Date | string | null
+    isActive: boolean
+    learnedCount?: number
+    createdAt?: Date | string
   }
 
-  export type UserCourseUpdateWithoutCourseInput = {
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    learnedCount?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutUserCoursesNestedInput
+  export type ReviewSessionUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    events?: ReviewEventUpdateManyWithoutSessionNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
   }
 
-  export type UserCourseUncheckedUpdateWithoutCourseInput = {
+  export type ReviewSessionUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    learnedCount?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    events?: ReviewEventUncheckedUpdateManyWithoutSessionNestedInput
   }
 
-  export type UserCourseUncheckedUpdateManyWithoutCourseInput = {
+  export type ReviewSessionUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    learnedCount?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcardCount?: IntFieldUpdateOperationsInput | number
+    currentCardIndex?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SyllabusConceptUpdateWithoutCourseInput = {
@@ -37442,36 +38682,25 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReviewSessionUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutReviewSessionsNestedInput
-    events?: ReviewEventUpdateManyWithoutSessionNestedInput
+  export type UserCourseUpdateWithoutCourseInput = {
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    learnedCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserCoursesNestedInput
   }
 
-  export type ReviewSessionUncheckedUpdateWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
+  export type UserCourseUncheckedUpdateWithoutCourseInput = {
     userId?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    events?: ReviewEventUncheckedUpdateManyWithoutSessionNestedInput
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    learnedCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReviewSessionUncheckedUpdateManyWithoutCourseInput = {
-    id?: StringFieldUpdateOperationsInput | string
+  export type UserCourseUncheckedUpdateManyWithoutCourseInput = {
     userId?: StringFieldUpdateOperationsInput | string
-    flashcardCount?: IntFieldUpdateOperationsInput | number
-    currentCardIndex?: IntFieldUpdateOperationsInput | number
-    status?: StringFieldUpdateOperationsInput | string
-    startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    learnedCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConceptMatchCreateManySyllabusConceptInput = {
