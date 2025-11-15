@@ -21262,6 +21262,7 @@ export namespace Prisma {
     userId: string | null
     url: string | null
     youtubeVideoId: string | null
+    transcript: string | null
     status: string | null
     processedConceptsCount: number | null
     errorMessage: string | null
@@ -21274,6 +21275,7 @@ export namespace Prisma {
     userId: string | null
     url: string | null
     youtubeVideoId: string | null
+    transcript: string | null
     status: string | null
     processedConceptsCount: number | null
     errorMessage: string | null
@@ -21286,6 +21288,7 @@ export namespace Prisma {
     userId: number
     url: number
     youtubeVideoId: number
+    transcript: number
     status: number
     processedConceptsCount: number
     errorMessage: number
@@ -21308,6 +21311,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    transcript?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -21320,6 +21324,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    transcript?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -21332,6 +21337,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    transcript?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -21431,6 +21437,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId: string | null
+    transcript: string | null
     status: string
     processedConceptsCount: number | null
     errorMessage: string | null
@@ -21462,6 +21469,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
@@ -21477,6 +21485,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
@@ -21490,6 +21499,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
@@ -21503,6 +21513,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
@@ -21510,7 +21521,7 @@ export namespace Prisma {
     completedAt?: boolean
   }
 
-  export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
+  export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "transcript" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
   export type VideoJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -21534,6 +21545,7 @@ export namespace Prisma {
       userId: string
       url: string
       youtubeVideoId: string | null
+      transcript: string | null
       status: string
       processedConceptsCount: number | null
       errorMessage: string | null
@@ -21968,6 +21980,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"VideoJob", 'String'>
     readonly url: FieldRef<"VideoJob", 'String'>
     readonly youtubeVideoId: FieldRef<"VideoJob", 'String'>
+    readonly transcript: FieldRef<"VideoJob", 'String'>
     readonly status: FieldRef<"VideoJob", 'String'>
     readonly processedConceptsCount: FieldRef<"VideoJob", 'Int'>
     readonly errorMessage: FieldRef<"VideoJob", 'String'>
@@ -28472,6 +28485,7 @@ export namespace Prisma {
     userId: 'userId',
     url: 'url',
     youtubeVideoId: 'youtubeVideoId',
+    transcript: 'transcript',
     status: 'status',
     processedConceptsCount: 'processedConceptsCount',
     errorMessage: 'errorMessage',
@@ -29770,6 +29784,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
     errorMessage?: StringNullableFilter<"VideoJob"> | string | null
@@ -29784,6 +29799,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
+    transcript?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
     errorMessage?: SortOrderInput | SortOrder
@@ -29801,6 +29817,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
     errorMessage?: StringNullableFilter<"VideoJob"> | string | null
@@ -29815,6 +29832,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
+    transcript?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
     errorMessage?: SortOrderInput | SortOrder
@@ -29835,6 +29853,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"VideoJob"> | string
     url?: StringWithAggregatesFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
+    transcript?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
     status?: StringWithAggregatesFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableWithAggregatesFilter<"VideoJob"> | number | null
     errorMessage?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
@@ -31431,6 +31450,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -31445,6 +31465,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -31457,6 +31478,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31471,6 +31493,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31484,6 +31507,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -31495,6 +31519,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31507,6 +31532,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32830,6 +32856,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -32846,6 +32873,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -32858,6 +32886,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -35088,6 +35117,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -35100,6 +35130,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -35384,6 +35415,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
     errorMessage?: StringNullableFilter<"VideoJob"> | string | null
@@ -37180,6 +37212,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -37193,6 +37226,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -37236,6 +37270,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37249,6 +37284,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38089,6 +38125,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    transcript?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -38350,6 +38387,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38362,6 +38400,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38374,6 +38413,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null

@@ -11,7 +11,7 @@
 | Database | PostgreSQL, MySQL, MongoDB | **Supabase** (PostgreSQL) | Managed Postgres with real-time, auth, storage. Free tier sufficient for MVP. | Generous free tier, real-time subscriptions, built-in auth (not using), PostGIS support | Vendor lock-in, limited control over DB config | Managed convenience vs self-hosted control | Risk: Supabase outage. Mitigation: Connection pooling, fallback to direct Postgres if needed | Using Prisma as ORM |
 | ORM | TypeORM, Drizzle, Kysely | **Prisma 6.14** | Type-safe queries, great DX, migrations, schema-first design. Boilerplate already configured. | Excellent TypeScript support, auto-generated types, migration tooling | Can be slow for complex queries, abstracts SQL | Type safety vs raw SQL performance | Risk: Performance bottlenecks. Mitigation: Use raw queries for complex operations, optimize indexes | Schema split: better-auth.prisma + schema.prisma |
 | Auth | Clerk, Auth.js, Supabase Auth | **Better-Auth 1.3** | Modern auth library with org/team support, social providers, session management. Boilerplate integrated. | Multi-tenant ready, flexible, open-source, no vendor lock-in | Newer library (less battle-tested than Auth.js) | Flexibility vs maturity | Risk: Auth bugs. Mitigation: Thorough testing, fallback to email/password only for MVP | Supports Google, GitHub, email/password |
-| AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** | GPT-4 for concept extraction, embeddings for matching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache aggressively, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package |
+| AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** + **SocialKit API** | GPT-4 for concept extraction, embeddings for matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs, reliable transcript API | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package. SocialKit: /youtube/transcript endpoint |
 | File/Blob Storage | Vercel Blob, Cloudflare R2, AWS S3 | **TBD** (disabled for MVP) | Not needed for MVP (YouTube URLs only). Post-MVP: Vercel Blob or R2. | N/A | N/A | N/A | N/A | Feature flag: enableImageUpload = false |
 | Queue/Events | BullMQ, Inngest, Trigger.dev | **TBD** (post-MVP) | Not needed for MVP (synchronous processing). Post-MVP: Consider Inngest for video processing queue. | N/A | N/A | N/A | Risk: Video processing blocks UI. Mitigation: Show progress, allow cancellation | MVP uses synchronous API routes |
 | Infra/Hosting | Vercel, Railway, Fly.io | **Vercel** | Next.js native platform, zero-config deployment, edge functions, preview deployments. | Seamless Next.js integration, great DX, automatic scaling | Expensive at scale, vendor lock-in | Convenience vs cost | Risk: Costs spike. Mitigation: Monitor usage, optimize edge functions, consider Railway for DB-heavy workloads | Free tier sufficient for MVP |
@@ -43,6 +43,7 @@ flowchart TB
     subgraph External["External Services"]
         DB[(Supabase PostgreSQL)]
         AI[OpenAI API]
+        SK[SocialKit API]
         Email[Resend]
         Auth[Better-Auth]
     end
@@ -58,6 +59,7 @@ flowchart TB
     
     API --> AI
     SA --> AI
+    SA --> SK
     
     API --> Email
     SA --> Auth

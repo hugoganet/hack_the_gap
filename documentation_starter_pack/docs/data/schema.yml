@@ -181,9 +181,13 @@ properties:
     type: string
   youtube_video_id:
     type: ["string", "null"]
+  transcript:
+    type: ["string", "null"]
+    description: "Full transcript text from video (stored before AI processing)"
   status:
     type: string
-    enum: [processing, completed, failed, cancelled]
+    enum: [transcript_fetched, processing, completed, failed, cancelled]
+    description: "transcript_fetched = Phase 1 complete, processing = AI extraction in progress"
   processed_concepts_count:
     type: ["integer", "null"]
     description: "For 'Extracted 4 concepts' message"

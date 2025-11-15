@@ -29,7 +29,12 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 
 - [ ] US-0012: Admin pre-load syllabi (seed data script) → See `docs/specs/`
 - [ ] US-0001: Course selection UI → See `docs/specs/us-0001-course-selection.md`
-- [ ] US-0002: Video URL submission → See `docs/specs/us-0002-video-url-submission.md`
+- [x] US-0002: Video URL submission (Phase 1: Transcript Storage) ✅ 2025-11-15 → See `docs/specs/us-0002-video-url-submission.md`
+  - ✅ Database: Added `transcript` field to `VideoJob` model
+  - ✅ Backend: Implemented `processContent` server action with SocialKit API
+  - ✅ Frontend: Transformed organization card into content inbox with drag-and-drop
+  - ✅ Authentication: Added user authentication requirement
+  - ⏳ Phase 2 TODO: AI concept extraction from stored transcripts
 - [ ] US-0003: Concept extraction ⚠️ CRITICAL → See `docs/specs/us-0003-concept-extraction.md`
 - [ ] US-0004: Concept-to-syllabus matching ⚠️ CRITICAL → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
 
@@ -63,6 +68,15 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] None currently
 
 ## Done
+
+### Implementation (2025-11-15)
+
+- [x] US-0002 Phase 1: Transcript storage implementation ✅ 2025-11-15
+  - Database schema updated (transcript field added)
+  - SocialKit API integration for YouTube transcripts
+  - Content inbox UI with drag-and-drop functionality
+  - Server action with user authentication
+  - Two-phase processing architecture established
 
 ### Documentation (2025-11-13 - 2025-11-14)
 

@@ -120,6 +120,7 @@ model VideoJob {
   userId                 String
   url                    String
   youtubeVideoId         String?
+  transcript             String?   @db.Text
   status                 String
   processedConceptsCount Int?
   errorMessage           String?

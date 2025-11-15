@@ -287,6 +287,7 @@ exports.Prisma.VideoJobScalarFieldEnum = {
   userId: 'userId',
   url: 'url',
   youtubeVideoId: 'youtubeVideoId',
+  transcript: 'transcript',
   status: 'status',
   processedConceptsCount: 'processedConceptsCount',
   errorMessage: 'errorMessage',

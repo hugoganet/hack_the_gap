@@ -178,7 +178,7 @@ syllabus_concepts:
       required: true
 
 video_jobs:
-  description: "YouTube video processing pipeline"
+  description: "YouTube video processing pipeline (two-phase: transcript fetch → AI processing)"
   source: "student-submitted URLs"
   fields:
     id:
@@ -198,9 +198,14 @@ video_jobs:
       type: string
       description: "Extracted video ID for API calls"
       required: false
+    transcript:
+      type: text
+      description: "Full transcript text from SocialKit API. Stored before AI processing for data preservation and reprocessing capability."
+      required: false
+      pii: false
     status:
       type: string
-      description: "processing | completed | failed | cancelled"
+      description: "transcript_fetched | processing | completed | failed | cancelled. Phase 1 (transcript_fetched) → Phase 2 (processing/completed)"
       required: true
       index: true
     processed_concepts_count:

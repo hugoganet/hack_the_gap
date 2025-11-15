@@ -1,4 +1,4 @@
-# Changelog
+tger# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -8,17 +8,30 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Transcript Storage Feature (Phase 1 - US-0002)**
+  - Database: Added `transcript` field to `VideoJob` model (TEXT type)
+  - Backend: Implemented `processContent` server action with SocialKit API integration
+  - Frontend: Transformed organization card into content inbox with drag-and-drop UI
+  - Authentication: Added user authentication requirement for content processing
+  - API Integration: SocialKit YouTube transcript API (`/youtube/transcript` endpoint)
+  - Documentation: Created `TRANSCRIPT_STORAGE_IMPLEMENTATION.md` with implementation details
+
 - Pre-hackathon validation checklist in `docs/tasks.md`
 - ADR placeholders for key architectural decisions (ADR-0010 to ADR-0014)
 - Sprint planning with effort estimates and risk assessment
 
 ### Changed - Unreleased
 
+- **US-0002 Progress:** Video URL submission now fetches and stores transcripts (Phase 1 complete)
+- **UI Transformation:** Users page organization card replaced with modern inbox interface
+- **Data Flow:** Implemented two-phase processing (fetch transcript → AI processing)
 - Updated project stage from "discovery" to "pre-implementation"
 - Refined implementation priority order based on critical path analysis
 
 ### Fixed - Unreleased
 
+- Corrected SocialKit API response structure handling (transcript is string, not array)
+- Fixed Prisma client cache issue requiring dev server restart after schema changes
 - Corrected user story count (9 stories, not 12) in documentation
 
 ## [0.2.0] - 2025-11-14

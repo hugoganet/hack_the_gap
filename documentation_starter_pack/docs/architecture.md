@@ -11,7 +11,7 @@
 
 **External Systems:**
 
-- YouTube API - video transcripts
+- SocialKit API - YouTube video transcripts
 - OpenAI API - concept extraction, embeddings, matching
 - Supabase - PostgreSQL database
 - Resend - email notifications (post-MVP)
@@ -31,14 +31,14 @@ flowchart TB
     
     System[Hack the Gap System]
     
-    YouTube[YouTube API]
+    SocialKit[SocialKit API]
     OpenAI[OpenAI API]
     Supabase[(Supabase PostgreSQL)]
     
     Student -->|Watch videos, review flashcards| System
     Admin -->|Pre-load syllabi| System
     
-    System -->|Fetch transcripts| YouTube
+    System -->|Fetch transcripts| SocialKit
     System -->|Extract concepts, match| OpenAI
     System -->|Store data| Supabase
     
@@ -64,7 +64,7 @@ flowchart TB
     subgraph External["External Services"]
         DB[(Supabase PostgreSQL<br/>Prisma ORM)]
         AI[OpenAI API<br/>GPT-4 + Embeddings]
-        YT[YouTube API<br/>Transcripts]
+        SK[SocialKit API<br/>YouTube Transcripts]
         Auth[Better-Auth<br/>Sessions]
     end
     
@@ -77,7 +77,7 @@ flowchart TB
     SA --> DB
     
     API --> AI
-    API --> YT
+    SA --> SK
     SA --> Auth
     
     style Browser fill:#e1f5ff
@@ -113,7 +113,7 @@ src/
 ├── features/
 │   ├── videos/
 │   │   ├── videoProcessor.ts      # US-0002: Video URL submission
-│   │   └── transcriptService.ts   # YouTube API integration
+│   │   └── transcriptService.ts   # SocialKit API integration
 │   ├── concepts/
 │   │   ├── conceptExtractor.ts    # US-0003: AI extraction
 │   │   ├── conceptMatcher.ts      # US-0004: Syllabus matching
@@ -180,17 +180,21 @@ See `./tech_stack.md` for detailed stack choices, rationale, and tradeoffs.
 sequenceDiagram
     participant Student
     participant UI
-    participant API
-    participant YouTube
+    participant SA as Server Action
+    participant SocialKit
     participant OpenAI
     participant DB
     
-    Student->>UI: Paste YouTube URL
-    UI->>API: POST /api/videos/submit
-    API->>DB: Create video_job (status: processing)
-    API->>YouTube: Fetch transcript
-    YouTube-->>API: Transcript text
-    API->>OpenAI: Extract concepts (GPT-4)
+    Student->>UI: Drop/paste YouTube URL
+    UI->>SA: processContent(url)
+    SA->>DB: Create video_job (status: transcript_fetched)
+    SA->>SocialKit: GET /youtube/transcript
+    SocialKit-->>SA: Transcript text (1526 words)
+    SA->>DB: Store transcript in video_job
+    SA-->>UI: Phase 1 complete (videoJobId)
+    
+    Note over SA,OpenAI: Phase 2 (TODO): AI Processing
+    SA->>OpenAI: Extract concepts (GPT-4)
     OpenAI-->>API: Extracted concepts
     API->>DB: Store concepts
     API->>OpenAI: Generate embeddings

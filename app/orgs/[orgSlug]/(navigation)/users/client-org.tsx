@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { useCurrentOrg } from "../../use-current-org";
 import { cn } from "@/lib/utils";
+import { processContent } from "@app/actions/process-content.action";
+import { toast } from "sonner";
 
 export const ClientOrg = () => {
   const org = useCurrentOrg();
@@ -62,18 +64,28 @@ export const ClientOrg = () => {
     }
   };
 
-  const handleProcess = () => {
+  const handleProcess = async () => {
     if (!url.trim()) return;
     
     setIsProcessing(true);
-    // TODO: Implement actual processing logic
-    console.log("Processing URL:", url);
     
-    // Simulate processing
-    void setTimeout(() => {
+    try {
+      const result = await processContent(url);
+      
+      if (result.success) {
+        const message = "message" in result ? result.message : "Content processed successfully!";
+        toast.success(message);
+        setUrl("");
+      } else {
+        const error = "error" in result ? result.error : "Failed to process content";
+        toast.error(error);
+      }
+    } catch (error) {
+      console.error("Error processing content:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
       setIsProcessing(false);
-      setUrl("");
-    }, 2000);
+    }
   };
 
   const getContentTypeIcon = () => {
@@ -153,7 +165,7 @@ export const ClientOrg = () => {
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !isProcessing) {
-                    handleProcess();
+                    void handleProcess();
                   }
                 }}
                 className="pr-8"

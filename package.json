@@ -26,9 +26,6 @@
     "prisma:migrate": "pnpm prisma migrate dev",
     "prisma:generate": "pnpm prism generate"
   },
-  "prisma": {
-    "seed": "pnpm tsx prisma/seed.ts"
-  },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.19",
     "@hookform/resolvers": "^4.1.3",
