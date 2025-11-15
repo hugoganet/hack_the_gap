@@ -31,6 +31,7 @@ services:
       # Database
       DATABASE_URL: postgresql://postgres:postgres@db:5432/hack_the_gap
       DATABASE_URL_UNPOOLED: postgresql://postgres:postgres@db:5432/hack_the_gap
+      DIRECT_URL: postgresql://postgres:postgres@db:5432/hack_the_gap
 
       # Auth (à configurer)
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-changeme-generate-a-secure-secret-with-openssl-rand-base64-32}
@@ -73,6 +74,7 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/hack_the_gap_dev
       DATABASE_URL_UNPOOLED: postgresql://postgres:postgres@db:5432/hack_the_gap_dev
+      DIRECT_URL: postgresql://postgres:postgres@db:5432/hack_the_gap_dev
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-dev-secret-key}
       BETTER_AUTH_URL: http://localhost:3001
       RESEND_API_KEY: ${RESEND_API_KEY:-re_test_key}
