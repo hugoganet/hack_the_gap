@@ -4,7 +4,7 @@ import { LandingHeader } from "@/features/landing/landing-header";
 import { Footer } from "@/features/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TypographyH1, TypographyH2, TypographyH3, TypographyP } from "@/components/ui/typography";
+import { TypographyH1, TypographyH2, TypographyP } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Brain, Calendar, Zap, Clock, Mail, Loader2 } from "lucide-react";
@@ -61,7 +61,7 @@ export default function HomePage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!email || !email.includes('@')) {
+    if (!email.includes('@')) {
       toast.error("Please enter a valid email address");
       return;
     }
@@ -80,7 +80,7 @@ export default function HomePage() {
       } else {
         toast.error(result.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);

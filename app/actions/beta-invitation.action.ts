@@ -45,8 +45,9 @@ export async function submitBetaInvitation(formData: FormData) {
       success: true,
       message: "Thank you! We'll send you an invitation soon.",
     };
-  } catch (error) {
-    console.error("Beta invitation error:", error);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Beta invitation error:", err);
     return {
       success: false,
       error: "Something went wrong. Please try again.",
