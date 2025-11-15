@@ -18,7 +18,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormAutoSave } from "@/features/form/form-auto-save";
 import { FormAutoSaveStickyBar } from "@/features/form/form-auto-save-sticky-bar";
-import { ImageFormItem } from "@/features/images/image-form-item";
 import { authClient } from "@/lib/auth-client";
 import { unwrapSafePromise } from "@/lib/promises";
 import { useMutation } from "@tanstack/react-query";
@@ -50,8 +49,8 @@ export const OrgDetailsForm = ({ defaultValues }: ProductFormProps) => {
       return unwrapSafePromise(
         authClient.organization.update({
           data: {
-            logo: values.logo ?? undefined,
             name: values.name,
+            // Image upload disabled for hackathon
           },
           organizationId: org.id,
         }),
@@ -75,32 +74,7 @@ export const OrgDetailsForm = ({ defaultValues }: ProductFormProps) => {
       className="flex w-full flex-col gap-6 lg:gap-8"
     >
       <FormAutoSaveStickyBar />
-      <Card>
-        <CardHeader>
-          <CardTitle>Image</CardTitle>
-          <CardDescription>
-            Add a custom image to your organization.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <FormField
-            control={form.control}
-            name="logo"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <ImageFormItem
-                    className="size-32 rounded-full"
-                    onChange={(url) => field.onChange(url)}
-                    imageUrl={field.value}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </CardContent>
-      </Card>
+      {/* Image upload removed for hackathon - keep it simple */}
       <Card>
         <CardHeader>
           <CardTitle>Name</CardTitle>

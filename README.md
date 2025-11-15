@@ -2,6 +2,8 @@
 
 AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition.
 
+> **🚀 HACKATHON MODE**: Ce template a été simplifié pour le hackathon. Consultez **[HACKATHON_QUICKSTART.md](./HACKATHON_QUICKSTART.md)** pour démarrer rapidement.
+
 > **Note**: This project is built on the [NOW.TS](https://nowts.app) boilerplate template.
 
 ## 🚀 Quick Start

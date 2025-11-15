@@ -4,7 +4,6 @@ import { auth } from "../auth";
 import type { AuthPermission, AuthRole } from "../auth/auth-permissions";
 import { getSession } from "../auth/auth-user";
 import { prisma } from "../prisma";
-import { getOrgActiveSubscription } from "./get-org-subscription";
 import { isInRoles } from "./is-in-roles";
 
 type OrgParams = {
@@ -67,7 +66,7 @@ export const getCurrentOrg = async (params?: OrgParams) => {
     }
   }
 
-  const currentSubscription = await getOrgActiveSubscription(org.id);
+  // Subscription removed - not needed for hackathon
 
   const OWNER = org.members.find((m) => m.role === "owner");
 
@@ -77,7 +76,7 @@ export const getCurrentOrg = async (params?: OrgParams) => {
     user: user.user,
     email: (OWNER?.user.email ?? null) as string | null,
     memberRoles: memberRoles,
-    subscription: currentSubscription ?? null,
+    subscription: null, // Always null - subscriptions removed
   };
 };
 

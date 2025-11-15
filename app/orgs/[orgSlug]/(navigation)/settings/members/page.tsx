@@ -1,4 +1,3 @@
-import { getPlanLimits } from "@/lib/auth/stripe/auth-plans";
 import { combineWithParentMetadata } from "@/lib/metadata";
 import { prisma } from "@/lib/prisma";
 import { getRequiredCurrentOrgCache } from "@/lib/react/cache";
@@ -20,7 +19,8 @@ export default async function RoutePage(props: PageParams) {
 
   const members = await getOrgsMembers(org.id);
 
-  const maxMembers = getPlanLimits(org.subscription?.plan).members;
+  // No subscription limits for hackathon - set generous default
+  const maxMembers = 100;
 
   const invitations = await prisma.invitation.findMany({
     where: {

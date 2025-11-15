@@ -1,0 +1,139 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 500B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.87kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:20-alpine
+#3 DONE 0.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 778B done
+#4 DONE 0.0s
+
+#5 [base 1/1] FROM docker.io/library/node:20-alpine@sha256:6178e78b972f79c335df281f4b7674a2d85071aae2af020ffa39f0a770265435
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 26.54kB 0.0s done
+#6 DONE 0.0s
+
+#7 [deps 3/8] RUN corepack enable && corepack prepare pnpm@10.14.0 --activate
+#7 CACHED
+
+#8 [deps 4/8] COPY package.json pnpm-lock.yaml ./
+#8 CACHED
+
+#9 [deps 5/8] COPY prisma.config.ts ./
+#9 CACHED
+
+#10 [builder 1/6] WORKDIR /app
+#10 CACHED
+
+#11 [deps 1/8] RUN apk add --no-cache libc6-compat
+#11 CACHED
+
+#12 [deps 2/8] WORKDIR /app
+#12 CACHED
+
+#13 [deps 7/8] COPY .npmrc ./
+#13 CACHED
+
+#14 [builder 2/6] RUN corepack enable && corepack prepare pnpm@10.14.0 --activate
+#14 CACHED
+
+#15 [deps 6/8] COPY prisma ./prisma
+#15 CACHED
+
+#16 [deps 8/8] RUN pnpm install --frozen-lockfile --ignore-scripts=false || pnpm install --frozen-lockfile
+#16 CACHED
+
+#17 [builder 3/6] COPY --from=deps /app/node_modules ./node_modules
+#17 CACHED
+
+#18 [builder 4/6] COPY . .
+#18 DONE 0.0s
+
+#19 [builder 5/6] RUN pnpm prisma generate
+#19 1.209 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+#19 1.209 For more information, see: https://pris.ly/prisma-config
+#19 1.209 
+#19 1.210 Loaded Prisma config from prisma.config.ts.
+#19 1.210 
+#19 1.210 warn The Prisma config file in prisma.config.ts overrides the deprecated `package.json#prisma` property in package.json.
+#19 1.210   For more information, see: https://pris.ly/prisma-config
+#19 1.210 
+#19 1.259 Prisma config detected, skipping environment variable loading.
+#19 1.260 Prisma schema loaded from prisma
+#19 1.409 
+#19 1.409 ✔ Generated Prisma Client (v6.14.0) to ./src/generated/prisma in 79ms
+#19 1.409 
+#19 1.409 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+#19 1.409 
+#19 1.409 Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+#19 1.409 
+#19 DONE 1.4s
+
+#20 [builder 6/6] RUN pnpm build
+#20 0.419 
+#20 0.419 > nowts@0.1.0 build /app
+#20 0.419 > next build
+#20 0.419 
+#20 1.072    ▲ Next.js 15.5.0
+#20 1.073    - Environments: .env
+#20 1.073    - Experiments (use with caution):
+#20 1.073      ✓ authInterrupts
+#20 1.073 
+#20 1.108    Creating an optimized production build ...
+#20 35.87  ✓ Compiled successfully in 32.6s
+#20 35.87    Linting and checking validity of types ...
+#20 36.62 
+#20 36.62  ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/app/api-reference/config/eslint#migrating-existing-config
+#20 43.42 Failed to compile.
+#20 43.42 
+#20 43.42 ./app/orgs/[orgSlug]/(navigation)/_navigation/upgrade-org-card.tsx:17:11
+#20 43.42 Type error: Property 'subscription' does not exist on type 'CurrentOrgStore'.
+#20 43.42 
+#20 43.42 [0m [90m 15 |[39m   [36mif[39m ([33m![39morg) [36mreturn[39m [36mnull[39m[33m;[39m
+#20 43.42  [90m 16 |[39m
+#20 43.42 [31m[1m>[22m[39m[90m 17 |[39m   [36mif[39m (org[33m.[39msubscription) [36mreturn[39m [36mnull[39m[33m;[39m
+#20 43.42  [90m    |[39m           [31m[1m^[22m[39m
+#20 43.42  [90m 18 |[39m
+#20 43.42  [90m 19 |[39m   [36mreturn[39m (
+#20 43.42  [90m 20 |[39m     [33m<[39m[33mCard[39m className[33m=[39m[32m""[39m[33m>[39m[0m
+#20 43.48 Next.js build worker exited with code: 1 and signal: null
+#20 43.50  ELIFECYCLE  Command failed with exit code 1.
+#20 ERROR: process "/bin/sh -c pnpm build" did not complete successfully: exit code: 1
+------
+ > [builder 6/6] RUN pnpm build:
+43.42 
+43.42 [0m [90m 15 |[39m   [36mif[39m ([33m![39morg) [36mreturn[39m [36mnull[39m[33m;[39m
+43.42  [90m 16 |[39m
+43.42 [31m[1m>[22m[39m[90m 17 |[39m   [36mif[39m (org[33m.[39msubscription) [36mreturn[39m [36mnull[39m[33m;[39m
+43.42  [90m    |[39m           [31m[1m^[22m[39m
+43.42  [90m 18 |[39m
+43.42  [90m 19 |[39m   [36mreturn[39m (
+43.42  [90m 20 |[39m     [33m<[39m[33mCard[39m className[33m=[39m[32m""[39m[33m>[39m[0m
+43.48 Next.js build worker exited with code: 1 and signal: null
+43.50  ELIFECYCLE  Command failed with exit code 1.
+------
+Dockerfile:40
+
+--------------------
+
+  38 |     
+
+  39 |     # Build Next.js application
+
+  40 | >>> RUN pnpm build
+
+  41 |     
+
+  42 |     # Production image, copy all the files and run next
+
+--------------------
+
+failed to solve: process "/bin/sh -c pnpm build" did not complete successfully: exit code: 1
+
