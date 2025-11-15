@@ -1,30 +1,355 @@
-# Canonical schema for primary records (JSON Schema expressed in YAML)
-# Extend or add new schemas per-entity as needed.
+# Hackathon MVP Schema - 10 Tables
+# JSON Schema format for database tables
 
 ---
-$id: "https://example.com/schemas/users.schema.json"
+$id: "https://hackthegap.com/schemas/users.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: users
 type: object
-required:
-  - id
-  - email
-  - created_at
+required: [id, email, created_at]
 properties:
   id:
     type: string
     format: uuid
-    description: "v4 UUID"
   email:
     type: string
     format: email
-    description: "User email (PII)"
-  display_name:
+    description: "PII"
+  name:
     type: ["string", "null"]
-    description: "Public name"
   created_at:
     type: string
     format: date-time
-    description: "ISO 8601 timestamp"
 
-# You can add additional entity schemas in the same file or split per-entity into files
+---
+$id: "https://hackthegap.com/schemas/subjects.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: subjects
+type: object
+required: [id, name]
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+    description: "Subject name (Philosophy, Biology, Economics)"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/academic_years.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: academic_years
+type: object
+required: [id, name, level]
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+    description: "Year name (Licence 1, Licence 2, Licence 3, Master 1, etc.)"
+  level:
+    type: integer
+    description: "Numeric level (1-6) for sorting"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/semesters.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: semesters
+type: object
+required: [id, number]
+properties:
+  id:
+    type: string
+    format: uuid
+  number:
+    type: integer
+    description: "Semester number (1-6)"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/courses.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: courses
+type: object
+required: [id, code, name, subject_id]
+properties:
+  id:
+    type: string
+    format: uuid
+  code:
+    type: string
+    description: "Official course code (LU1PH51F, BIOL2001, ECON1101)"
+  name:
+    type: string
+    description: "Course name (Métaphysique, Cell Biology, Intro to Microeconomics)"
+  subject_id:
+    type: string
+    format: uuid
+    description: "FK to subjects"
+  year_id:
+    type: ["string", "null"]
+    format: uuid
+    description: "FK to academic_years"
+  semester_id:
+    type: ["string", "null"]
+    format: uuid
+    description: "FK to semesters"
+  ue_number:
+    type: ["string", "null"]
+    description: "UE number (UE 1, UE 2, etc.) for French system"
+  syllabus_url:
+    type: ["string", "null"]
+    description: "Link to syllabus PDF"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/user_courses.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: user_courses
+type: object
+required: [user_id, course_id, is_active, learned_count]
+properties:
+  user_id:
+    type: string
+    format: uuid
+  course_id:
+    type: string
+    format: uuid
+  is_active:
+    type: boolean
+    description: "Only one active course per user for MVP"
+  learned_count:
+    type: integer
+    description: "Pre-computed count of matched concepts (confidence >=0.8)"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/syllabus_concepts.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: syllabus_concepts
+type: object
+required: [id, course_id, concept_text, order]
+properties:
+  id:
+    type: string
+    format: uuid
+  course_id:
+    type: string
+  concept_text:
+    type: string
+  category:
+    type: ["string", "null"]
+    description: "Ethics, Epistemology, etc."
+  importance:
+    type: integer
+    minimum: 1
+    maximum: 3
+    description: "1=supplemental, 2=important, 3=core"
+  order:
+    type: integer
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/video_jobs.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: video_jobs
+type: object
+required: [id, user_id, url, status]
+properties:
+  id:
+    type: string
+    format: uuid
+  user_id:
+    type: string
+    format: uuid
+  url:
+    type: string
+  youtube_video_id:
+    type: ["string", "null"]
+  status:
+    type: string
+    enum: [processing, completed, failed, cancelled]
+  processed_concepts_count:
+    type: ["integer", "null"]
+    description: "For 'Extracted 4 concepts' message"
+  error_message:
+    type: ["string", "null"]
+  created_at:
+    type: string
+    format: date-time
+  completed_at:
+    type: ["string", "null"]
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/concepts.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: concepts
+type: object
+required: [id, video_job_id, concept_text, confidence]
+properties:
+  id:
+    type: string
+    format: uuid
+  video_job_id:
+    type: string
+    format: uuid
+  concept_text:
+    type: string
+  definition:
+    type: ["string", "null"]
+  timestamp:
+    type: ["string", "null"]
+    description: "MM:SS format"
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 1
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/concept_matches.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: concept_matches
+type: object
+required: [id, concept_id, syllabus_concept_id, confidence]
+properties:
+  id:
+    type: string
+    format: uuid
+  concept_id:
+    type: string
+    format: uuid
+  syllabus_concept_id:
+    type: string
+    format: uuid
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 1
+  match_type:
+    type: ["string", "null"]
+    enum: [exact, related, example-of, no-match]
+  rationale:
+    type: ["string", "null"]
+  user_feedback:
+    type: ["string", "null"]
+    enum: [correct, incorrect, uncertain]
+    description: "MVP: data collection only"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/flashcards.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: flashcards
+type: object
+required: [id, concept_match_id, user_id, question, answer]
+properties:
+  id:
+    type: string
+    format: uuid
+  concept_match_id:
+    type: string
+    format: uuid
+  user_id:
+    type: string
+    format: uuid
+  question:
+    type: string
+  answer:
+    type: string
+  source_timestamp:
+    type: ["string", "null"]
+    description: "Link back to video moment"
+  times_reviewed:
+    type: integer
+    default: 0
+  times_correct:
+    type: integer
+    default: 0
+  last_reviewed_at:
+    type: ["string", "null"]
+    format: date-time
+  next_review_at:
+    type: ["string", "null"]
+    format: date-time
+    description: "For spaced repetition scheduling"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/review_sessions.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: review_sessions
+type: object
+required: [id, user_id, course_id, flashcard_count, status]
+properties:
+  id:
+    type: string
+    format: uuid
+  user_id:
+    type: string
+    format: uuid
+  course_id:
+    type: string
+  flashcard_count:
+    type: integer
+  current_card_index:
+    type: integer
+    default: 0
+  status:
+    type: string
+    enum: [in-progress, completed, abandoned]
+  started_at:
+    type: string
+    format: date-time
+  completed_at:
+    type: ["string", "null"]
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/review_events.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: review_events
+type: object
+required: [id, session_id, flashcard_id, difficulty]
+properties:
+  id:
+    type: string
+    format: uuid
+  session_id:
+    type: string
+    format: uuid
+  flashcard_id:
+    type: string
+    format: uuid
+  difficulty:
+    type: string
+    enum: [easy, medium, hard]
+  time_to_reveal_ms:
+    type: ["integer", "null"]
+  time_to_rate_ms:
+    type: ["integer", "null"]
+  created_at:
+    type: string
+    format: date-time

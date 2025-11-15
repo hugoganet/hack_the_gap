@@ -1,49 +1,419 @@
-# Data dictionary
-# Top-level structure: a map of entities (tables/records) with fields and metadata.
+# Data Dictionary - Hackathon MVP
+# Minimal documentation for 10 core tables
 
 users:
-  description: "Primary user record stored for authentication and profile features. Avoid storing PII in sample data."
-  source: "auth-service / users table"
+  description: "Student accounts with basic auth info"
+  source: "auth system"
   fields:
     id:
       type: uuid
-      description: "Primary key (v4 UUID)."
+      description: "Primary key"
       required: true
     email:
       type: string
-      description: "User email address. Treated as PII. Use hashed emails for analytics."
+      description: "Student email for login"
       required: true
       pii: true
-    display_name:
+    name:
       type: string
-      description: "Public display name; may be empty."
+      description: "Display name"
       required: false
     created_at:
       type: timestamp
-      description: "Record creation timestamp (ISO 8601)."
+      description: "Account creation time"
       required: true
 
-events:
-  description: "High-level event stream records for product analytics and integrations."
-  source: "events topic / events table"
+subjects:
+  description: "Academic subjects (Philosophy, Biology, Economics, etc.)"
+  source: "admin seed data"
   fields:
-    event_id:
+    id:
       type: uuid
-      description: "Event id."
+      description: "Primary key"
+      required: true
+    name:
+      type: string
+      description: "Subject name"
+      required: true
+    created_at:
+      type: timestamp
+      required: true
+
+academic_years:
+  description: "University years (Licence 1-3, Master 1-2, etc.)"
+  source: "admin seed data"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    name:
+      type: string
+      description: "Year name (Licence 1, Licence 2, Master 1, etc.)"
+      required: true
+    level:
+      type: integer
+      description: "Numeric level 1-6 for sorting"
+      required: true
+    created_at:
+      type: timestamp
+      required: true
+
+semesters:
+  description: "Academic semesters (1-6)"
+  source: "admin seed data"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    number:
+      type: integer
+      description: "Semester number (1-6)"
+      required: true
+    created_at:
+      type: timestamp
+      required: true
+
+courses:
+  description: "Individual courses (UEs) within subject/year/semester structure"
+  source: "admin seed data + syllabus PDF processing"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    code:
+      type: string
+      description: "Official course code (LU1PH51F, BIOL2001, ECON1101)"
+      required: true
+    name:
+      type: string
+      description: "Course name (Métaphysique, Cell Biology, etc.)"
+      required: true
+    subject_id:
+      type: uuid
+      description: "FK to subjects"
+      required: true
+      index: true
+    year_id:
+      type: uuid
+      description: "FK to academic_years (optional)"
+      required: false
+      index: true
+    semester_id:
+      type: uuid
+      description: "FK to semesters (optional)"
+      required: false
+      index: true
+    ue_number:
+      type: string
+      description: "UE number for French system (UE 1, UE 2, etc.)"
+      required: false
+    syllabus_url:
+      type: string
+      description: "Link to syllabus PDF"
+      required: false
+    created_at:
+      type: timestamp
+      required: true
+
+user_courses:
+  description: "Student enrollment in courses with progress tracking"
+  source: "enrollment actions"
+  fields:
+    user_id:
+      type: uuid
+      description: "FK to users"
+      required: true
+    course_id:
+      type: uuid
+      description: "FK to courses"
+      required: true
+      index: true
+    is_active:
+      type: boolean
+      description: "Only one active course per user for MVP"
+      required: true
+    learned_count:
+      type: integer
+      description: "Pre-computed count of matched concepts (confidence >=0.8). For 'X learned' display."
+      required: true
+      index: true
+    created_at:
+      type: timestamp
+      required: true
+
+syllabus_concepts:
+  description: "Required concepts per course (extracted from syllabus)"
+  source: "admin pre-load before hackathon"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    course_id:
+      type: string
+      description: "FK to courses"
+      required: true
+      index: true
+    concept_text:
+      type: string
+      description: "Concept name (Categorical Imperative, Mitosis, Supply and Demand)"
+      required: true
+    category:
+      type: string
+      description: "Optional grouping (Ethics, Epistemology, Cell Biology)"
+      required: false
+    importance:
+      type: integer
+      description: "1=supplemental, 2=important, 3=core"
+      required: false
+    order:
+      type: integer
+      description: "Display order in syllabus"
+      required: true
+    created_at:
+      type: timestamp
+      required: true
+
+video_jobs:
+  description: "YouTube video processing pipeline"
+  source: "student-submitted URLs"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
       required: true
     user_id:
       type: uuid
-      description: "If present, the user associated with the event."
-      required: false
-    name:
-      type: string
-      description: "Event name (kebab-case)."
+      description: "FK to users"
       required: true
-    properties:
-      type: object
-      description: "Free-form event properties. Keep small and typed when possible."
+      index: true
+    url:
+      type: string
+      description: "Full YouTube URL"
+      required: true
+    youtube_video_id:
+      type: string
+      description: "Extracted video ID for API calls"
       required: false
-    occurred_at:
+    status:
+      type: string
+      description: "processing | completed | failed | cancelled"
+      required: true
+      index: true
+    processed_concepts_count:
+      type: integer
+      description: "For 'Extracted 4 concepts' message in UI"
+      required: false
+    error_message:
+      type: string
+      description: "Error details if status=failed"
+      required: false
+    created_at:
       type: timestamp
-      description: "When the event occurred."
+      required: true
+    completed_at:
+      type: timestamp
+      description: "When processing finished"
+      required: false
+
+concepts:
+  description: "AI-extracted atomic concepts from videos"
+  source: "GPT-4/Claude extraction"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    video_job_id:
+      type: uuid
+      description: "FK to video_jobs"
+      required: true
+      index: true
+    concept_text:
+      type: string
+      description: "Extracted concept name"
+      required: true
+    definition:
+      type: string
+      description: "1-2 sentence definition from AI"
+      required: false
+    timestamp:
+      type: string
+      description: "MM:SS format linking to video moment"
+      required: false
+    confidence:
+      type: decimal
+      description: "AI confidence score (0.0-1.0)"
+      required: true
+      index: true
+    created_at:
+      type: timestamp
+      required: true
+
+concept_matches:
+  description: "Matches between extracted concepts and syllabus requirements"
+  source: "embedding similarity + AI reasoning"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    concept_id:
+      type: uuid
+      description: "FK to concepts"
+      required: true
+      index: true
+    syllabus_concept_id:
+      type: uuid
+      description: "FK to syllabus_concepts"
+      required: true
+      index: true
+    confidence:
+      type: decimal
+      description: "Match confidence (0.0-1.0). >=0.8 = matched"
+      required: true
+      index: true
+    match_type:
+      type: string
+      description: "exact | related | example-of | no-match"
+      required: false
+    rationale:
+      type: string
+      description: "AI explanation of why concepts match"
+      required: false
+    user_feedback:
+      type: string
+      description: "correct | incorrect | uncertain (MVP: data collection only)"
+      required: false
+    created_at:
+      type: timestamp
+      required: true
+
+flashcards:
+  description: "Auto-generated Q&A flashcards for spaced repetition"
+  source: "GPT-4/Claude generation from concept_matches"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    concept_match_id:
+      type: uuid
+      description: "FK to concept_matches"
+      required: true
+      index: true
+    user_id:
+      type: uuid
+      description: "FK to users (flashcards are per-user)"
+      required: true
+      index: true
+    question:
+      type: string
+      description: "Active recall question (not yes/no)"
+      required: true
+    answer:
+      type: string
+      description: "Concise answer (1-3 sentences)"
+      required: true
+    source_timestamp:
+      type: string
+      description: "Link back to video moment (MM:SS)"
+      required: false
+    times_reviewed:
+      type: integer
+      description: "Total review count"
+      required: false
+      default: 0
+    times_correct:
+      type: integer
+      description: "Count of 'easy' ratings"
+      required: false
+      default: 0
+    last_reviewed_at:
+      type: timestamp
+      description: "Most recent review"
+      required: false
+    next_review_at:
+      type: timestamp
+      description: "When card is due for review (spaced repetition)"
+      required: false
+      index: true
+    created_at:
+      type: timestamp
+      required: true
+
+review_sessions:
+  description: "Review session tracking"
+  source: "student review UI"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    user_id:
+      type: uuid
+      description: "FK to users"
+      required: true
+      index: true
+    course_id:
+      type: string
+      description: "FK to courses"
+      required: true
+    flashcard_count:
+      type: integer
+      description: "Total cards in this session"
+      required: true
+    current_card_index:
+      type: integer
+      description: "Current position in session (0-indexed)"
+      required: false
+      default: 0
+    status:
+      type: string
+      description: "in-progress | completed | abandoned"
+      required: true
+      index: true
+    started_at:
+      type: timestamp
+      required: true
+    completed_at:
+      type: timestamp
+      description: "When session finished"
+      required: false
+
+review_events:
+  description: "Individual flashcard review events for analytics"
+  source: "student review actions"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    session_id:
+      type: uuid
+      description: "FK to review_sessions"
+      required: true
+      index: true
+    flashcard_id:
+      type: uuid
+      description: "FK to flashcards"
+      required: true
+      index: true
+    difficulty:
+      type: string
+      description: "easy | medium | hard (for spaced repetition)"
+      required: true
+    time_to_reveal_ms:
+      type: integer
+      description: "Time from show to reveal answer (milliseconds)"
+      required: false
+    time_to_rate_ms:
+      type: integer
+      description: "Time from reveal to difficulty rating (milliseconds)"
+      required: false
+    created_at:
+      type: timestamp
       required: true
