@@ -5,7 +5,7 @@ import {
   LayoutTitle,
 } from "@/features/page/layout";
 import { ClientOrg } from "./client-org";
-import { DonutChart } from "./donuts-chart";
+import { CardsToReviewToday } from "./cards-to-review-today";
 import { CourseSelectionCard } from "./course-selection-card";
 
 export default function RoutePage() {
@@ -19,7 +19,7 @@ export default function RoutePage() {
           <CourseSelectionCard />
           <ClientOrg />
         </div>
-        <DonutChart />
+        <CardsToReviewToday />
       </LayoutContent>
     </Layout>
   );

@@ -30,7 +30,6 @@ Auto-generate flashcards from matched concepts for spaced repetition review. Eac
 
 **Detailed Acceptance Criteria:**
 
-- [ ] Only matched concepts (confidence ≥80%) generate flashcards
 - [ ] Questions are clear, testable, and use active recall format
 - [ ] Answers include the concept definition plus context from video
 - [ ] Flashcards include source link back to video timestamp

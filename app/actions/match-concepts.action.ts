@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
 import { writeConceptMatches } from "@/features/matching/write-concept-matches";
+import { generateFlashcardsForVideoJob } from "@/features/flashcards/flashcard-generator";
 
 const MatchConceptsSchema = z.object({
   videoJobId: z.string().uuid("Invalid video job ID"),
@@ -185,17 +186,49 @@ export async function matchConceptsAction(input: {
       where: { id: videoJobId },
       data: {
         status: "matched",
-        completedAt: new Date(),
       },
     });
 
-    // 10. Calculate duration
-    const durationMs = Date.now() - startTime;
-
-    console.log(`[Matching] ✓ Matching completed successfully in ${durationMs}ms`);
+    console.log(`[Matching] ✓ Matching completed successfully`);
     console.log(`[Matching] Summary: ${matchResult.summary.high} high confidence, ${matchResult.summary.medium} medium confidence matches`);
 
-    // 11. Return summary
+    // 10. Auto-generate flashcards for high-confidence matches
+    console.log(`[Matching] Starting automatic flashcard generation...`);
+    try {
+      const flashcardSummary = await generateFlashcardsForVideoJob(videoJobId, user.id);
+      console.log(`[Matching] ✓ Flashcard generation completed:`, {
+        successful: flashcardSummary.successful,
+        failed: flashcardSummary.failed,
+        skipped: flashcardSummary.skipped,
+      });
+
+      // Update video job status to "completed" after flashcard generation
+      await prisma.videoJob.update({
+        where: { id: videoJobId },
+        data: {
+          status: "completed",
+          completedAt: new Date(),
+        },
+      });
+    } catch (flashcardError) {
+      console.error("[Matching] Flashcard generation error:", flashcardError);
+      // Don't fail the entire operation if flashcard generation fails
+      // Just update status to "matched" (flashcards can be generated later)
+      console.warn("[Matching] Continuing despite flashcard generation error");
+      
+      await prisma.videoJob.update({
+        where: { id: videoJobId },
+        data: {
+          status: "matched",
+          completedAt: new Date(),
+        },
+      });
+    }
+
+    // 11. Calculate duration
+    const durationMs = Date.now() - startTime;
+
+    // 12. Return summary
     return {
       success: true,
       data: {

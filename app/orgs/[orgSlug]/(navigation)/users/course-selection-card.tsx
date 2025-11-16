@@ -49,75 +49,63 @@ export function CourseSelectionCard({
     }
   };
 
-  // Show first 3 active courses
-  const displayedCourses = activeCourses.slice(0, 3);
-  
-  // Fill empty slots
-  const emptySlots = Math.max(0, 3 - displayedCourses.length);
+  // Show all active courses (no limit)
+  const displayedCourses = activeCourses;
 
   const handleCourseClick = (course: Course) => {
-    // TODO: Navigate to course details or show course info
-    console.log("Course clicked:", course);
+    // Navigate to course details page
+    window.location.href = `/orgs/${window.location.pathname.split('/')[2]}/courses/${course.id}`;
   };
 
   return (
     <>
-      <Card className="w-full">
-        <CardContent className="p-6">
+      <Card className="w-full h-[360px] flex flex-col">
+        <CardContent className="p-6 flex-1 overflow-hidden flex flex-col">
           {isLoading ? (
-            <div className="flex items-center justify-center py-16">
+            <div className="flex items-center justify-center flex-1">
               <Loader2 className="size-8 animate-spin text-muted-foreground" />
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {/* Add Course Button - Top Left */}
-            <Button
-              variant="outline"
-              onClick={() => setIsDialogOpen(true)}
-              className={cn(
-                "h-32 flex-col gap-2 border-2 border-dashed",
-                "border-muted-foreground/25 bg-muted/20",
-                "hover:border-muted-foreground/50 hover:bg-muted/30",
-                "transition-all"
-              )}
-            >
-              <Plus className="size-8 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">
-                Add Course
-              </span>
-            </Button>
-
-            {/* Active Courses */}
-            {displayedCourses.map((course) => (
-              <Button
-                key={course.id}
-                variant="outline"
-                onClick={() => handleCourseClick(course)}
-                className={cn(
-                  "h-32 flex-col gap-2 border-2 p-3",
-                  "bg-card hover:bg-accent",
-                  "transition-all"
-                )}
-              >
-                <BookOpen className="size-6 text-primary flex-shrink-0" />
-                <div className="flex flex-col items-center gap-1 w-full overflow-hidden">
-                  <span className="text-sm font-semibold line-clamp-3 text-center break-words w-full px-1">
-                    {course.name}
+            <div className="flex-1 overflow-y-auto pr-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {/* Add Course Button - Top Left */}
+                <Button
+                  variant="outline"
+                  onClick={() => setIsDialogOpen(true)}
+                  className={cn(
+                    "h-32 flex-col gap-2 border-2 border-dashed",
+                    "border-muted-foreground/25 bg-muted/20",
+                    "hover:border-muted-foreground/50 hover:bg-muted/30",
+                    "transition-all"
+                  )}
+                >
+                  <Plus className="size-8 text-muted-foreground" />
+                  <span className="text-sm font-medium text-muted-foreground">
+                    Add Course
                   </span>
-                </div>
-              </Button>
-            ))}
+                </Button>
 
-            {/* Empty Slots */}
-            {Array.from({ length: emptySlots }).map((_, index) => (
-              <div
-                key={`empty-${index}`}
-                className={cn(
-                  "h-32 rounded-lg border-2 border-dashed",
-                  "border-muted-foreground/15 bg-muted/10"
-                )}
-              />
-            ))}
+                {/* Active Courses */}
+                {displayedCourses.map((course) => (
+                  <Button
+                    key={course.id}
+                    variant="outline"
+                    onClick={() => handleCourseClick(course)}
+                    className={cn(
+                      "h-32 flex-col gap-2 border-2 p-3",
+                      "bg-card hover:bg-accent",
+                      "transition-all"
+                    )}
+                  >
+                    <BookOpen className="size-6 text-primary flex-shrink-0" />
+                    <div className="flex flex-col items-center gap-1 w-full overflow-hidden">
+                      <span className="text-sm font-semibold line-clamp-3 text-center break-words w-full px-1">
+                        {course.name}
+                      </span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
             </div>
           )}
         </CardContent>
