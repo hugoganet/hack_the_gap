@@ -4,8 +4,6 @@ import { nanoid } from "nanoid";
 // Minimal type declarations to avoid implicit any (avoid depending on generated Prisma types here)
 type User = { id: string; name: string; email: string };
 type Subject = { id: string; name: string };
-type AcademicYear = { id: string; name: string; level: number };
-type Semester = { id: string; number: number };
 type Course = { id: string; code: string; name: string }; // only fields we use later
 type SyllabusConcept = { id: string; courseId: string; conceptText: string };
 type UserCourse = { userId: string; courseId: string };
@@ -150,38 +148,8 @@ async function main() {
   );
   subjects.forEach((s: Subject) => logger.info(`🧪 Subject: ${s.name}`));
 
-  // Academic Years
-  const yearsData = [
-    { name: "Licence 1", level: 1 },
-    { name: "Licence 2", level: 2 },
-    { name: "Licence 3", level: 3 },
-  ];
-  const years: AcademicYear[] = await Promise.all(
-    yearsData.map(async (y) =>
-      prisma.academicYear.upsert({
-        where: { name: y.name }, // assume unique name
-        update: { level: y.level },
-        create: { id: `year-${y.level}`, name: y.name, level: y.level },
-      }),
-    ),
-  );
-
-  // Semesters
-  const semestersData = [1, 5, 6];
-  const semesters: Semester[] = await Promise.all(
-    semestersData.map(async (n) =>
-      prisma.semester.upsert({
-        where: { id: `sem-${n}` }, // id used as unique key
-        update: { number: n },
-        create: { id: `sem-${n}`, number: n },
-      }),
-    ),
-  );
-
   // Helper lookup maps
   const subjectByName: Record<string, Subject> = Object.fromEntries(subjects.map((s) => [s.name, s]));
-  const yearByLevel: Record<number, AcademicYear> = Object.fromEntries(years.map((y) => [y.level, y]));
-  const semesterByNumber: Record<number, Semester> = Object.fromEntries(semesters.map((s) => [s.number, s]));
 
   // Courses (sample from data dictionary/sample records)
   const coursesData = [
@@ -189,8 +157,6 @@ async function main() {
       code: "LU1PH51F",
       name: "Métaphysique",
       subject: "Philosophy",
-      yearLevel: 3,
-      semesterNumber: 5,
       ueNumber: "UE 1",
       syllabusUrl: "https://example.edu/syllabi/LU1PH51F.pdf",
     },
@@ -198,8 +164,6 @@ async function main() {
       code: "BIOL2001",
       name: "Cell Biology",
       subject: "Biology",
-      yearLevel: 2,
-      semesterNumber: 1,
       ueNumber: null,
       syllabusUrl: "https://example.edu/syllabi/BIOL2001.pdf",
     },
@@ -207,8 +171,6 @@ async function main() {
       code: "ECON1101",
       name: "Intro to Microeconomics",
       subject: "Economics",
-      yearLevel: 1,
-      semesterNumber: 1,
       ueNumber: null,
       syllabusUrl: null,
     },
@@ -220,8 +182,6 @@ async function main() {
         update: {
           name: c.name,
           subjectId: subjectByName[c.subject].id,
-          yearId: yearByLevel[c.yearLevel].id,
-          semesterId: semesterByNumber[c.semesterNumber].id,
           ueNumber: c.ueNumber ?? undefined,
           syllabusUrl: c.syllabusUrl ?? undefined,
         },
@@ -230,8 +190,6 @@ async function main() {
           code: c.code,
           name: c.name,
           subjectId: subjectByName[c.subject].id,
-          yearId: yearByLevel[c.yearLevel].id,
-          semesterId: semesterByNumber[c.semesterNumber].id,
           ueNumber: c.ueNumber ?? undefined,
           syllabusUrl: c.syllabusUrl ?? undefined,
         },

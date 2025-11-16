@@ -17,8 +17,6 @@ export async function GET() {
     const courses = await prisma.course.findMany({
       include: {
         subject: true,
-        year: true,
-        semester: true,
         syllabusConcepts: {
           select: {
             id: true,
@@ -27,8 +25,6 @@ export async function GET() {
       },
       orderBy: [
         { subject: { name: "asc" } },
-        { year: { level: "asc" } },
-        { semester: { number: "asc" } },
         { name: "asc" },
       ],
     });
@@ -39,25 +35,10 @@ export async function GET() {
       code: course.code,
       name: course.name,
       subjectId: course.subjectId,
-      yearId: course.yearId,
-      semesterId: course.semesterId,
       subject: {
         id: course.subject.id,
         name: course.subject.name,
       },
-      year: course.year
-        ? {
-            id: course.year.id,
-            name: course.year.name,
-            level: course.year.level,
-          }
-        : null,
-      semester: course.semester
-        ? {
-            id: course.semester.id,
-            number: course.semester.number,
-          }
-        : null,
       totalConcepts: course.syllabusConcepts.length,
     }));
 

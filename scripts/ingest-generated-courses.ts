@@ -7,8 +7,6 @@ import { PrismaClient } from '../src/generated/prisma';
   Ingest all syllabus JSON files from src/generated into the database.
   Idempotent behavior:
   - Upsert Subject (by name)
-  - Upsert AcademicYear (by name)
-  - Find-or-create Semester (by number)
   - Upsert Course (by code) and link relationships
   - Replace SyllabusConcepts for the course (delete + createMany)
 
@@ -20,8 +18,6 @@ const prisma = new PrismaClient();
 
 type GeneratedSyllabus = {
   subject: { name: string };
-  academicYear: { name: string; level: number };
-  semester: { number: number };
   course: {
     code: string;
     name: string;
@@ -57,34 +53,18 @@ async function upsertSubject(name: string) {
   });
 }
 
-async function upsertAcademicYear(name: string, level: number) {
-  return prisma.academicYear.upsert({
-    where: { name },
-    update: { level },
-    create: { name, level },
-  });
-}
-
-async function getOrCreateSemester(number: number) {
-  const existing = await prisma.semester.findFirst({ where: { number } });
-  if (existing) return existing;
-  return prisma.semester.create({ data: { number } });
-}
-
 async function upsertCourse(input: {
   code: string;
   name: string;
   subjectId: string;
-  yearId?: string | null;
-  semesterId?: string | null;
   ueNumber?: string | null;
   syllabusUrl?: string | null;
 }) {
-  const { code, name, subjectId, yearId, semesterId, ueNumber, syllabusUrl } = input;
+  const { code, name, subjectId, ueNumber, syllabusUrl } = input;
   return prisma.course.upsert({
     where: { code },
-    update: { name, subjectId, yearId: yearId ?? null, semesterId: semesterId ?? null, ueNumber: ueNumber ?? null, syllabusUrl: syllabusUrl ?? null },
-    create: { code, name, subjectId, yearId: yearId ?? null, semesterId: semesterId ?? null, ueNumber: ueNumber ?? null, syllabusUrl: syllabusUrl ?? null },
+    update: { name, subjectId, ueNumber: ueNumber ?? null, syllabusUrl: syllabusUrl ?? null },
+    create: { code, name, subjectId, ueNumber: ueNumber ?? null, syllabusUrl: syllabusUrl ?? null },
   });
 }
 
@@ -106,15 +86,11 @@ async function ingestFile(filePath: string) {
   const payload = await readJson<GeneratedSyllabus>(filePath);
 
   const subject = await upsertSubject(payload.subject.name);
-  const year = await upsertAcademicYear(payload.academicYear.name, payload.academicYear.level);
-  const semester = await getOrCreateSemester(payload.semester.number);
 
   const course = await upsertCourse({
     code: payload.course.code,
     name: payload.course.name,
     subjectId: subject.id,
-    yearId: year.id,
-    semesterId: semester.id,
     ueNumber: payload.course.ueNumber ?? null,
     syllabusUrl: payload.course.syllabusUrl ?? null,
   });
@@ -124,8 +100,6 @@ async function ingestFile(filePath: string) {
   return {
     file: path.basename(filePath),
     subject: subject.name,
-    year: year.name,
-    semester: semester.number,
     courseCode: course.code,
     courseName: course.name,
     conceptsCreated: created,
@@ -137,8 +111,6 @@ type IngestResult = {
   results: {
     file: string;
     subject: string;
-    year: string;
-    semester: number;
     courseCode: string;
     courseName: string;
     conceptsCreated: number;

@@ -49,16 +49,6 @@ export type BetaInvitation = $Result.DefaultSelection<Prisma.$BetaInvitationPayl
  */
 export type Subject = $Result.DefaultSelection<Prisma.$SubjectPayload>
 /**
- * Model AcademicYear
- * 
- */
-export type AcademicYear = $Result.DefaultSelection<Prisma.$AcademicYearPayload>
-/**
- * Model Semester
- * 
- */
-export type Semester = $Result.DefaultSelection<Prisma.$SemesterPayload>
-/**
  * Model Course
  * 
  */
@@ -103,6 +93,16 @@ export type ReviewSession = $Result.DefaultSelection<Prisma.$ReviewSessionPayloa
  * 
  */
 export type ReviewEvent = $Result.DefaultSelection<Prisma.$ReviewEventPayload>
+/**
+ * Model KnowledgeNode
+ * 
+ */
+export type KnowledgeNode = $Result.DefaultSelection<Prisma.$KnowledgeNodePayload>
+/**
+ * Model NodeSyllabusConcept
+ * 
+ */
+export type NodeSyllabusConcept = $Result.DefaultSelection<Prisma.$NodeSyllabusConceptPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -293,26 +293,6 @@ export class PrismaClient<
   get subject(): Prisma.SubjectDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.academicYear`: Exposes CRUD operations for the **AcademicYear** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more AcademicYears
-    * const academicYears = await prisma.academicYear.findMany()
-    * ```
-    */
-  get academicYear(): Prisma.AcademicYearDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.semester`: Exposes CRUD operations for the **Semester** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Semesters
-    * const semesters = await prisma.semester.findMany()
-    * ```
-    */
-  get semester(): Prisma.SemesterDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.course`: Exposes CRUD operations for the **Course** model.
     * Example usage:
     * ```ts
@@ -401,6 +381,26 @@ export class PrismaClient<
     * ```
     */
   get reviewEvent(): Prisma.ReviewEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.knowledgeNode`: Exposes CRUD operations for the **KnowledgeNode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more KnowledgeNodes
+    * const knowledgeNodes = await prisma.knowledgeNode.findMany()
+    * ```
+    */
+  get knowledgeNode(): Prisma.KnowledgeNodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nodeSyllabusConcept`: Exposes CRUD operations for the **NodeSyllabusConcept** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NodeSyllabusConcepts
+    * const nodeSyllabusConcepts = await prisma.nodeSyllabusConcept.findMany()
+    * ```
+    */
+  get nodeSyllabusConcept(): Prisma.NodeSyllabusConceptDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -848,8 +848,6 @@ export namespace Prisma {
     Feedback: 'Feedback',
     BetaInvitation: 'BetaInvitation',
     Subject: 'Subject',
-    AcademicYear: 'AcademicYear',
-    Semester: 'Semester',
     Course: 'Course',
     UserCourse: 'UserCourse',
     SyllabusConcept: 'SyllabusConcept',
@@ -858,7 +856,9 @@ export namespace Prisma {
     ConceptMatch: 'ConceptMatch',
     Flashcard: 'Flashcard',
     ReviewSession: 'ReviewSession',
-    ReviewEvent: 'ReviewEvent'
+    ReviewEvent: 'ReviewEvent',
+    KnowledgeNode: 'KnowledgeNode',
+    NodeSyllabusConcept: 'NodeSyllabusConcept'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -877,7 +877,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "betaInvitation" | "subject" | "academicYear" | "semester" | "course" | "userCourse" | "syllabusConcept" | "videoJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent"
+      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "betaInvitation" | "subject" | "course" | "userCourse" | "syllabusConcept" | "videoJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent" | "knowledgeNode" | "nodeSyllabusConcept"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1396,154 +1396,6 @@ export namespace Prisma {
           count: {
             args: Prisma.SubjectCountArgs<ExtArgs>
             result: $Utils.Optional<SubjectCountAggregateOutputType> | number
-          }
-        }
-      }
-      AcademicYear: {
-        payload: Prisma.$AcademicYearPayload<ExtArgs>
-        fields: Prisma.AcademicYearFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AcademicYearFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AcademicYearFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          findFirst: {
-            args: Prisma.AcademicYearFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AcademicYearFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          findMany: {
-            args: Prisma.AcademicYearFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>[]
-          }
-          create: {
-            args: Prisma.AcademicYearCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          createMany: {
-            args: Prisma.AcademicYearCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AcademicYearCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>[]
-          }
-          delete: {
-            args: Prisma.AcademicYearDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          update: {
-            args: Prisma.AcademicYearUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          deleteMany: {
-            args: Prisma.AcademicYearDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AcademicYearUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AcademicYearUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>[]
-          }
-          upsert: {
-            args: Prisma.AcademicYearUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AcademicYearPayload>
-          }
-          aggregate: {
-            args: Prisma.AcademicYearAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAcademicYear>
-          }
-          groupBy: {
-            args: Prisma.AcademicYearGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AcademicYearGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AcademicYearCountArgs<ExtArgs>
-            result: $Utils.Optional<AcademicYearCountAggregateOutputType> | number
-          }
-        }
-      }
-      Semester: {
-        payload: Prisma.$SemesterPayload<ExtArgs>
-        fields: Prisma.SemesterFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SemesterFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SemesterFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          findFirst: {
-            args: Prisma.SemesterFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SemesterFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          findMany: {
-            args: Prisma.SemesterFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>[]
-          }
-          create: {
-            args: Prisma.SemesterCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          createMany: {
-            args: Prisma.SemesterCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SemesterCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>[]
-          }
-          delete: {
-            args: Prisma.SemesterDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          update: {
-            args: Prisma.SemesterUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          deleteMany: {
-            args: Prisma.SemesterDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SemesterUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.SemesterUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>[]
-          }
-          upsert: {
-            args: Prisma.SemesterUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SemesterPayload>
-          }
-          aggregate: {
-            args: Prisma.SemesterAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSemester>
-          }
-          groupBy: {
-            args: Prisma.SemesterGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SemesterGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SemesterCountArgs<ExtArgs>
-            result: $Utils.Optional<SemesterCountAggregateOutputType> | number
           }
         }
       }
@@ -2213,6 +2065,154 @@ export namespace Prisma {
           }
         }
       }
+      KnowledgeNode: {
+        payload: Prisma.$KnowledgeNodePayload<ExtArgs>
+        fields: Prisma.KnowledgeNodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KnowledgeNodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KnowledgeNodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          findFirst: {
+            args: Prisma.KnowledgeNodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KnowledgeNodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          findMany: {
+            args: Prisma.KnowledgeNodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>[]
+          }
+          create: {
+            args: Prisma.KnowledgeNodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          createMany: {
+            args: Prisma.KnowledgeNodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KnowledgeNodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>[]
+          }
+          delete: {
+            args: Prisma.KnowledgeNodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          update: {
+            args: Prisma.KnowledgeNodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          deleteMany: {
+            args: Prisma.KnowledgeNodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KnowledgeNodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KnowledgeNodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>[]
+          }
+          upsert: {
+            args: Prisma.KnowledgeNodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KnowledgeNodePayload>
+          }
+          aggregate: {
+            args: Prisma.KnowledgeNodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKnowledgeNode>
+          }
+          groupBy: {
+            args: Prisma.KnowledgeNodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KnowledgeNodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KnowledgeNodeCountArgs<ExtArgs>
+            result: $Utils.Optional<KnowledgeNodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      NodeSyllabusConcept: {
+        payload: Prisma.$NodeSyllabusConceptPayload<ExtArgs>
+        fields: Prisma.NodeSyllabusConceptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NodeSyllabusConceptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NodeSyllabusConceptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          findFirst: {
+            args: Prisma.NodeSyllabusConceptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NodeSyllabusConceptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          findMany: {
+            args: Prisma.NodeSyllabusConceptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>[]
+          }
+          create: {
+            args: Prisma.NodeSyllabusConceptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          createMany: {
+            args: Prisma.NodeSyllabusConceptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NodeSyllabusConceptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>[]
+          }
+          delete: {
+            args: Prisma.NodeSyllabusConceptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          update: {
+            args: Prisma.NodeSyllabusConceptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          deleteMany: {
+            args: Prisma.NodeSyllabusConceptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NodeSyllabusConceptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NodeSyllabusConceptUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>[]
+          }
+          upsert: {
+            args: Prisma.NodeSyllabusConceptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NodeSyllabusConceptPayload>
+          }
+          aggregate: {
+            args: Prisma.NodeSyllabusConceptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNodeSyllabusConcept>
+          }
+          groupBy: {
+            args: Prisma.NodeSyllabusConceptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NodeSyllabusConceptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NodeSyllabusConceptCountArgs<ExtArgs>
+            result: $Utils.Optional<NodeSyllabusConceptCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2312,8 +2312,6 @@ export namespace Prisma {
     feedback?: FeedbackOmit
     betaInvitation?: BetaInvitationOmit
     subject?: SubjectOmit
-    academicYear?: AcademicYearOmit
-    semester?: SemesterOmit
     course?: CourseOmit
     userCourse?: UserCourseOmit
     syllabusConcept?: SyllabusConceptOmit
@@ -2323,6 +2321,8 @@ export namespace Prisma {
     flashcard?: FlashcardOmit
     reviewSession?: ReviewSessionOmit
     reviewEvent?: ReviewEventOmit
+    knowledgeNode?: KnowledgeNodeOmit
+    nodeSyllabusConcept?: NodeSyllabusConceptOmit
   }
 
   /* Types for Logging */
@@ -2489,10 +2489,12 @@ export namespace Prisma {
 
   export type SubjectCountOutputType = {
     courses: number
+    nodes: number
   }
 
   export type SubjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     courses?: boolean | SubjectCountOutputTypeCountCoursesArgs
+    nodes?: boolean | SubjectCountOutputTypeCountNodesArgs
   }
 
   // Custom InputTypes
@@ -2513,66 +2515,11 @@ export namespace Prisma {
     where?: CourseWhereInput
   }
 
-
   /**
-   * Count Type AcademicYearCountOutputType
+   * SubjectCountOutputType without action
    */
-
-  export type AcademicYearCountOutputType = {
-    courses: number
-  }
-
-  export type AcademicYearCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    courses?: boolean | AcademicYearCountOutputTypeCountCoursesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AcademicYearCountOutputType without action
-   */
-  export type AcademicYearCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYearCountOutputType
-     */
-    select?: AcademicYearCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AcademicYearCountOutputType without action
-   */
-  export type AcademicYearCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CourseWhereInput
-  }
-
-
-  /**
-   * Count Type SemesterCountOutputType
-   */
-
-  export type SemesterCountOutputType = {
-    courses: number
-  }
-
-  export type SemesterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    courses?: boolean | SemesterCountOutputTypeCountCoursesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * SemesterCountOutputType without action
-   */
-  export type SemesterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SemesterCountOutputType
-     */
-    select?: SemesterCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * SemesterCountOutputType without action
-   */
-  export type SemesterCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CourseWhereInput
+  export type SubjectCountOutputTypeCountNodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KnowledgeNodeWhereInput
   }
 
 
@@ -2631,10 +2578,12 @@ export namespace Prisma {
 
   export type SyllabusConceptCountOutputType = {
     conceptMatches: number
+    nodeAttachments: number
   }
 
   export type SyllabusConceptCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | SyllabusConceptCountOutputTypeCountConceptMatchesArgs
+    nodeAttachments?: boolean | SyllabusConceptCountOutputTypeCountNodeAttachmentsArgs
   }
 
   // Custom InputTypes
@@ -2653,6 +2602,13 @@ export namespace Prisma {
    */
   export type SyllabusConceptCountOutputTypeCountConceptMatchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConceptMatchWhereInput
+  }
+
+  /**
+   * SyllabusConceptCountOutputType without action
+   */
+  export type SyllabusConceptCountOutputTypeCountNodeAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NodeSyllabusConceptWhereInput
   }
 
 
@@ -2808,6 +2764,46 @@ export namespace Prisma {
    */
   export type ReviewSessionCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewEventWhereInput
+  }
+
+
+  /**
+   * Count Type KnowledgeNodeCountOutputType
+   */
+
+  export type KnowledgeNodeCountOutputType = {
+    children: number
+    concepts: number
+  }
+
+  export type KnowledgeNodeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    children?: boolean | KnowledgeNodeCountOutputTypeCountChildrenArgs
+    concepts?: boolean | KnowledgeNodeCountOutputTypeCountConceptsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * KnowledgeNodeCountOutputType without action
+   */
+  export type KnowledgeNodeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNodeCountOutputType
+     */
+    select?: KnowledgeNodeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * KnowledgeNodeCountOutputType without action
+   */
+  export type KnowledgeNodeCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KnowledgeNodeWhereInput
+  }
+
+  /**
+   * KnowledgeNodeCountOutputType without action
+   */
+  export type KnowledgeNodeCountOutputTypeCountConceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NodeSyllabusConceptWhereInput
   }
 
 
@@ -9705,6 +9701,7 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     courses?: boolean | Subject$coursesArgs<ExtArgs>
+    nodes?: boolean | Subject$nodesArgs<ExtArgs>
     _count?: boolean | SubjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
 
@@ -9729,6 +9726,7 @@ export namespace Prisma {
   export type SubjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt", ExtArgs["result"]["subject"]>
   export type SubjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     courses?: boolean | Subject$coursesArgs<ExtArgs>
+    nodes?: boolean | Subject$nodesArgs<ExtArgs>
     _count?: boolean | SubjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SubjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -9738,6 +9736,7 @@ export namespace Prisma {
     name: "Subject"
     objects: {
       courses: Prisma.$CoursePayload<ExtArgs>[]
+      nodes: Prisma.$KnowledgeNodePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10138,6 +10137,7 @@ export namespace Prisma {
   export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     courses<T extends Subject$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Subject$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    nodes<T extends Subject$nodesArgs<ExtArgs> = {}>(args?: Subset<T, Subject$nodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10582,6 +10582,30 @@ export namespace Prisma {
   }
 
   /**
+   * Subject.nodes
+   */
+  export type Subject$nodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    where?: KnowledgeNodeWhereInput
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    cursor?: KnowledgeNodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KnowledgeNodeScalarFieldEnum | KnowledgeNodeScalarFieldEnum[]
+  }
+
+  /**
    * Subject without action
    */
   export type SubjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10601,2175 +10625,6 @@ export namespace Prisma {
 
 
   /**
-   * Model AcademicYear
-   */
-
-  export type AggregateAcademicYear = {
-    _count: AcademicYearCountAggregateOutputType | null
-    _avg: AcademicYearAvgAggregateOutputType | null
-    _sum: AcademicYearSumAggregateOutputType | null
-    _min: AcademicYearMinAggregateOutputType | null
-    _max: AcademicYearMaxAggregateOutputType | null
-  }
-
-  export type AcademicYearAvgAggregateOutputType = {
-    level: number | null
-  }
-
-  export type AcademicYearSumAggregateOutputType = {
-    level: number | null
-  }
-
-  export type AcademicYearMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    level: number | null
-    createdAt: Date | null
-  }
-
-  export type AcademicYearMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    level: number | null
-    createdAt: Date | null
-  }
-
-  export type AcademicYearCountAggregateOutputType = {
-    id: number
-    name: number
-    level: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type AcademicYearAvgAggregateInputType = {
-    level?: true
-  }
-
-  export type AcademicYearSumAggregateInputType = {
-    level?: true
-  }
-
-  export type AcademicYearMinAggregateInputType = {
-    id?: true
-    name?: true
-    level?: true
-    createdAt?: true
-  }
-
-  export type AcademicYearMaxAggregateInputType = {
-    id?: true
-    name?: true
-    level?: true
-    createdAt?: true
-  }
-
-  export type AcademicYearCountAggregateInputType = {
-    id?: true
-    name?: true
-    level?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type AcademicYearAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AcademicYear to aggregate.
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AcademicYears to fetch.
-     */
-    orderBy?: AcademicYearOrderByWithRelationInput | AcademicYearOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AcademicYearWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AcademicYears from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AcademicYears.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned AcademicYears
-    **/
-    _count?: true | AcademicYearCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: AcademicYearAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AcademicYearSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AcademicYearMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AcademicYearMaxAggregateInputType
-  }
-
-  export type GetAcademicYearAggregateType<T extends AcademicYearAggregateArgs> = {
-        [P in keyof T & keyof AggregateAcademicYear]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAcademicYear[P]>
-      : GetScalarType<T[P], AggregateAcademicYear[P]>
-  }
-
-
-
-
-  export type AcademicYearGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AcademicYearWhereInput
-    orderBy?: AcademicYearOrderByWithAggregationInput | AcademicYearOrderByWithAggregationInput[]
-    by: AcademicYearScalarFieldEnum[] | AcademicYearScalarFieldEnum
-    having?: AcademicYearScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AcademicYearCountAggregateInputType | true
-    _avg?: AcademicYearAvgAggregateInputType
-    _sum?: AcademicYearSumAggregateInputType
-    _min?: AcademicYearMinAggregateInputType
-    _max?: AcademicYearMaxAggregateInputType
-  }
-
-  export type AcademicYearGroupByOutputType = {
-    id: string
-    name: string
-    level: number
-    createdAt: Date
-    _count: AcademicYearCountAggregateOutputType | null
-    _avg: AcademicYearAvgAggregateOutputType | null
-    _sum: AcademicYearSumAggregateOutputType | null
-    _min: AcademicYearMinAggregateOutputType | null
-    _max: AcademicYearMaxAggregateOutputType | null
-  }
-
-  type GetAcademicYearGroupByPayload<T extends AcademicYearGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AcademicYearGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AcademicYearGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AcademicYearGroupByOutputType[P]>
-            : GetScalarType<T[P], AcademicYearGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AcademicYearSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    level?: boolean
-    createdAt?: boolean
-    courses?: boolean | AcademicYear$coursesArgs<ExtArgs>
-    _count?: boolean | AcademicYearCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["academicYear"]>
-
-  export type AcademicYearSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    level?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["academicYear"]>
-
-  export type AcademicYearSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    level?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["academicYear"]>
-
-  export type AcademicYearSelectScalar = {
-    id?: boolean
-    name?: boolean
-    level?: boolean
-    createdAt?: boolean
-  }
-
-  export type AcademicYearOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "level" | "createdAt", ExtArgs["result"]["academicYear"]>
-  export type AcademicYearInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    courses?: boolean | AcademicYear$coursesArgs<ExtArgs>
-    _count?: boolean | AcademicYearCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type AcademicYearIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AcademicYearIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $AcademicYearPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "AcademicYear"
-    objects: {
-      courses: Prisma.$CoursePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      level: number
-      createdAt: Date
-    }, ExtArgs["result"]["academicYear"]>
-    composites: {}
-  }
-
-  type AcademicYearGetPayload<S extends boolean | null | undefined | AcademicYearDefaultArgs> = $Result.GetResult<Prisma.$AcademicYearPayload, S>
-
-  type AcademicYearCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AcademicYearFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AcademicYearCountAggregateInputType | true
-    }
-
-  export interface AcademicYearDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AcademicYear'], meta: { name: 'AcademicYear' } }
-    /**
-     * Find zero or one AcademicYear that matches the filter.
-     * @param {AcademicYearFindUniqueArgs} args - Arguments to find a AcademicYear
-     * @example
-     * // Get one AcademicYear
-     * const academicYear = await prisma.academicYear.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AcademicYearFindUniqueArgs>(args: SelectSubset<T, AcademicYearFindUniqueArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one AcademicYear that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AcademicYearFindUniqueOrThrowArgs} args - Arguments to find a AcademicYear
-     * @example
-     * // Get one AcademicYear
-     * const academicYear = await prisma.academicYear.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AcademicYearFindUniqueOrThrowArgs>(args: SelectSubset<T, AcademicYearFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AcademicYear that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearFindFirstArgs} args - Arguments to find a AcademicYear
-     * @example
-     * // Get one AcademicYear
-     * const academicYear = await prisma.academicYear.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AcademicYearFindFirstArgs>(args?: SelectSubset<T, AcademicYearFindFirstArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AcademicYear that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearFindFirstOrThrowArgs} args - Arguments to find a AcademicYear
-     * @example
-     * // Get one AcademicYear
-     * const academicYear = await prisma.academicYear.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AcademicYearFindFirstOrThrowArgs>(args?: SelectSubset<T, AcademicYearFindFirstOrThrowArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more AcademicYears that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all AcademicYears
-     * const academicYears = await prisma.academicYear.findMany()
-     * 
-     * // Get first 10 AcademicYears
-     * const academicYears = await prisma.academicYear.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const academicYearWithIdOnly = await prisma.academicYear.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AcademicYearFindManyArgs>(args?: SelectSubset<T, AcademicYearFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a AcademicYear.
-     * @param {AcademicYearCreateArgs} args - Arguments to create a AcademicYear.
-     * @example
-     * // Create one AcademicYear
-     * const AcademicYear = await prisma.academicYear.create({
-     *   data: {
-     *     // ... data to create a AcademicYear
-     *   }
-     * })
-     * 
-     */
-    create<T extends AcademicYearCreateArgs>(args: SelectSubset<T, AcademicYearCreateArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many AcademicYears.
-     * @param {AcademicYearCreateManyArgs} args - Arguments to create many AcademicYears.
-     * @example
-     * // Create many AcademicYears
-     * const academicYear = await prisma.academicYear.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AcademicYearCreateManyArgs>(args?: SelectSubset<T, AcademicYearCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many AcademicYears and returns the data saved in the database.
-     * @param {AcademicYearCreateManyAndReturnArgs} args - Arguments to create many AcademicYears.
-     * @example
-     * // Create many AcademicYears
-     * const academicYear = await prisma.academicYear.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many AcademicYears and only return the `id`
-     * const academicYearWithIdOnly = await prisma.academicYear.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AcademicYearCreateManyAndReturnArgs>(args?: SelectSubset<T, AcademicYearCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a AcademicYear.
-     * @param {AcademicYearDeleteArgs} args - Arguments to delete one AcademicYear.
-     * @example
-     * // Delete one AcademicYear
-     * const AcademicYear = await prisma.academicYear.delete({
-     *   where: {
-     *     // ... filter to delete one AcademicYear
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AcademicYearDeleteArgs>(args: SelectSubset<T, AcademicYearDeleteArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one AcademicYear.
-     * @param {AcademicYearUpdateArgs} args - Arguments to update one AcademicYear.
-     * @example
-     * // Update one AcademicYear
-     * const academicYear = await prisma.academicYear.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AcademicYearUpdateArgs>(args: SelectSubset<T, AcademicYearUpdateArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more AcademicYears.
-     * @param {AcademicYearDeleteManyArgs} args - Arguments to filter AcademicYears to delete.
-     * @example
-     * // Delete a few AcademicYears
-     * const { count } = await prisma.academicYear.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AcademicYearDeleteManyArgs>(args?: SelectSubset<T, AcademicYearDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AcademicYears.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many AcademicYears
-     * const academicYear = await prisma.academicYear.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AcademicYearUpdateManyArgs>(args: SelectSubset<T, AcademicYearUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AcademicYears and returns the data updated in the database.
-     * @param {AcademicYearUpdateManyAndReturnArgs} args - Arguments to update many AcademicYears.
-     * @example
-     * // Update many AcademicYears
-     * const academicYear = await prisma.academicYear.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more AcademicYears and only return the `id`
-     * const academicYearWithIdOnly = await prisma.academicYear.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AcademicYearUpdateManyAndReturnArgs>(args: SelectSubset<T, AcademicYearUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one AcademicYear.
-     * @param {AcademicYearUpsertArgs} args - Arguments to update or create a AcademicYear.
-     * @example
-     * // Update or create a AcademicYear
-     * const academicYear = await prisma.academicYear.upsert({
-     *   create: {
-     *     // ... data to create a AcademicYear
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the AcademicYear we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AcademicYearUpsertArgs>(args: SelectSubset<T, AcademicYearUpsertArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of AcademicYears.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearCountArgs} args - Arguments to filter AcademicYears to count.
-     * @example
-     * // Count the number of AcademicYears
-     * const count = await prisma.academicYear.count({
-     *   where: {
-     *     // ... the filter for the AcademicYears we want to count
-     *   }
-     * })
-    **/
-    count<T extends AcademicYearCountArgs>(
-      args?: Subset<T, AcademicYearCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AcademicYearCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a AcademicYear.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AcademicYearAggregateArgs>(args: Subset<T, AcademicYearAggregateArgs>): Prisma.PrismaPromise<GetAcademicYearAggregateType<T>>
-
-    /**
-     * Group by AcademicYear.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AcademicYearGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AcademicYearGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AcademicYearGroupByArgs['orderBy'] }
-        : { orderBy?: AcademicYearGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AcademicYearGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAcademicYearGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the AcademicYear model
-   */
-  readonly fields: AcademicYearFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for AcademicYear.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AcademicYearClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    courses<T extends AcademicYear$coursesArgs<ExtArgs> = {}>(args?: Subset<T, AcademicYear$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the AcademicYear model
-   */
-  interface AcademicYearFieldRefs {
-    readonly id: FieldRef<"AcademicYear", 'String'>
-    readonly name: FieldRef<"AcademicYear", 'String'>
-    readonly level: FieldRef<"AcademicYear", 'Int'>
-    readonly createdAt: FieldRef<"AcademicYear", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * AcademicYear findUnique
-   */
-  export type AcademicYearFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter, which AcademicYear to fetch.
-     */
-    where: AcademicYearWhereUniqueInput
-  }
-
-  /**
-   * AcademicYear findUniqueOrThrow
-   */
-  export type AcademicYearFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter, which AcademicYear to fetch.
-     */
-    where: AcademicYearWhereUniqueInput
-  }
-
-  /**
-   * AcademicYear findFirst
-   */
-  export type AcademicYearFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter, which AcademicYear to fetch.
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AcademicYears to fetch.
-     */
-    orderBy?: AcademicYearOrderByWithRelationInput | AcademicYearOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AcademicYears.
-     */
-    cursor?: AcademicYearWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AcademicYears from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AcademicYears.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AcademicYears.
-     */
-    distinct?: AcademicYearScalarFieldEnum | AcademicYearScalarFieldEnum[]
-  }
-
-  /**
-   * AcademicYear findFirstOrThrow
-   */
-  export type AcademicYearFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter, which AcademicYear to fetch.
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AcademicYears to fetch.
-     */
-    orderBy?: AcademicYearOrderByWithRelationInput | AcademicYearOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AcademicYears.
-     */
-    cursor?: AcademicYearWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AcademicYears from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AcademicYears.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AcademicYears.
-     */
-    distinct?: AcademicYearScalarFieldEnum | AcademicYearScalarFieldEnum[]
-  }
-
-  /**
-   * AcademicYear findMany
-   */
-  export type AcademicYearFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter, which AcademicYears to fetch.
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AcademicYears to fetch.
-     */
-    orderBy?: AcademicYearOrderByWithRelationInput | AcademicYearOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing AcademicYears.
-     */
-    cursor?: AcademicYearWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AcademicYears from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AcademicYears.
-     */
-    skip?: number
-    distinct?: AcademicYearScalarFieldEnum | AcademicYearScalarFieldEnum[]
-  }
-
-  /**
-   * AcademicYear create
-   */
-  export type AcademicYearCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * The data needed to create a AcademicYear.
-     */
-    data: XOR<AcademicYearCreateInput, AcademicYearUncheckedCreateInput>
-  }
-
-  /**
-   * AcademicYear createMany
-   */
-  export type AcademicYearCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many AcademicYears.
-     */
-    data: AcademicYearCreateManyInput | AcademicYearCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * AcademicYear createManyAndReturn
-   */
-  export type AcademicYearCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * The data used to create many AcademicYears.
-     */
-    data: AcademicYearCreateManyInput | AcademicYearCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * AcademicYear update
-   */
-  export type AcademicYearUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * The data needed to update a AcademicYear.
-     */
-    data: XOR<AcademicYearUpdateInput, AcademicYearUncheckedUpdateInput>
-    /**
-     * Choose, which AcademicYear to update.
-     */
-    where: AcademicYearWhereUniqueInput
-  }
-
-  /**
-   * AcademicYear updateMany
-   */
-  export type AcademicYearUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update AcademicYears.
-     */
-    data: XOR<AcademicYearUpdateManyMutationInput, AcademicYearUncheckedUpdateManyInput>
-    /**
-     * Filter which AcademicYears to update
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * Limit how many AcademicYears to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * AcademicYear updateManyAndReturn
-   */
-  export type AcademicYearUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * The data used to update AcademicYears.
-     */
-    data: XOR<AcademicYearUpdateManyMutationInput, AcademicYearUncheckedUpdateManyInput>
-    /**
-     * Filter which AcademicYears to update
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * Limit how many AcademicYears to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * AcademicYear upsert
-   */
-  export type AcademicYearUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * The filter to search for the AcademicYear to update in case it exists.
-     */
-    where: AcademicYearWhereUniqueInput
-    /**
-     * In case the AcademicYear found by the `where` argument doesn't exist, create a new AcademicYear with this data.
-     */
-    create: XOR<AcademicYearCreateInput, AcademicYearUncheckedCreateInput>
-    /**
-     * In case the AcademicYear was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AcademicYearUpdateInput, AcademicYearUncheckedUpdateInput>
-  }
-
-  /**
-   * AcademicYear delete
-   */
-  export type AcademicYearDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    /**
-     * Filter which AcademicYear to delete.
-     */
-    where: AcademicYearWhereUniqueInput
-  }
-
-  /**
-   * AcademicYear deleteMany
-   */
-  export type AcademicYearDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AcademicYears to delete
-     */
-    where?: AcademicYearWhereInput
-    /**
-     * Limit how many AcademicYears to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * AcademicYear.courses
-   */
-  export type AcademicYear$coursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Course
-     */
-    select?: CourseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Course
-     */
-    omit?: CourseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CourseInclude<ExtArgs> | null
-    where?: CourseWhereInput
-    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
-    cursor?: CourseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
-  }
-
-  /**
-   * AcademicYear without action
-   */
-  export type AcademicYearDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Semester
-   */
-
-  export type AggregateSemester = {
-    _count: SemesterCountAggregateOutputType | null
-    _avg: SemesterAvgAggregateOutputType | null
-    _sum: SemesterSumAggregateOutputType | null
-    _min: SemesterMinAggregateOutputType | null
-    _max: SemesterMaxAggregateOutputType | null
-  }
-
-  export type SemesterAvgAggregateOutputType = {
-    number: number | null
-  }
-
-  export type SemesterSumAggregateOutputType = {
-    number: number | null
-  }
-
-  export type SemesterMinAggregateOutputType = {
-    id: string | null
-    number: number | null
-    createdAt: Date | null
-  }
-
-  export type SemesterMaxAggregateOutputType = {
-    id: string | null
-    number: number | null
-    createdAt: Date | null
-  }
-
-  export type SemesterCountAggregateOutputType = {
-    id: number
-    number: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type SemesterAvgAggregateInputType = {
-    number?: true
-  }
-
-  export type SemesterSumAggregateInputType = {
-    number?: true
-  }
-
-  export type SemesterMinAggregateInputType = {
-    id?: true
-    number?: true
-    createdAt?: true
-  }
-
-  export type SemesterMaxAggregateInputType = {
-    id?: true
-    number?: true
-    createdAt?: true
-  }
-
-  export type SemesterCountAggregateInputType = {
-    id?: true
-    number?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type SemesterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Semester to aggregate.
-     */
-    where?: SemesterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Semesters to fetch.
-     */
-    orderBy?: SemesterOrderByWithRelationInput | SemesterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SemesterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Semesters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Semesters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Semesters
-    **/
-    _count?: true | SemesterCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: SemesterAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: SemesterSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SemesterMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SemesterMaxAggregateInputType
-  }
-
-  export type GetSemesterAggregateType<T extends SemesterAggregateArgs> = {
-        [P in keyof T & keyof AggregateSemester]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSemester[P]>
-      : GetScalarType<T[P], AggregateSemester[P]>
-  }
-
-
-
-
-  export type SemesterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SemesterWhereInput
-    orderBy?: SemesterOrderByWithAggregationInput | SemesterOrderByWithAggregationInput[]
-    by: SemesterScalarFieldEnum[] | SemesterScalarFieldEnum
-    having?: SemesterScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SemesterCountAggregateInputType | true
-    _avg?: SemesterAvgAggregateInputType
-    _sum?: SemesterSumAggregateInputType
-    _min?: SemesterMinAggregateInputType
-    _max?: SemesterMaxAggregateInputType
-  }
-
-  export type SemesterGroupByOutputType = {
-    id: string
-    number: number
-    createdAt: Date
-    _count: SemesterCountAggregateOutputType | null
-    _avg: SemesterAvgAggregateOutputType | null
-    _sum: SemesterSumAggregateOutputType | null
-    _min: SemesterMinAggregateOutputType | null
-    _max: SemesterMaxAggregateOutputType | null
-  }
-
-  type GetSemesterGroupByPayload<T extends SemesterGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SemesterGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SemesterGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SemesterGroupByOutputType[P]>
-            : GetScalarType<T[P], SemesterGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SemesterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    number?: boolean
-    createdAt?: boolean
-    courses?: boolean | Semester$coursesArgs<ExtArgs>
-    _count?: boolean | SemesterCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["semester"]>
-
-  export type SemesterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    number?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["semester"]>
-
-  export type SemesterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    number?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["semester"]>
-
-  export type SemesterSelectScalar = {
-    id?: boolean
-    number?: boolean
-    createdAt?: boolean
-  }
-
-  export type SemesterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "createdAt", ExtArgs["result"]["semester"]>
-  export type SemesterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    courses?: boolean | Semester$coursesArgs<ExtArgs>
-    _count?: boolean | SemesterCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type SemesterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type SemesterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $SemesterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Semester"
-    objects: {
-      courses: Prisma.$CoursePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      number: number
-      createdAt: Date
-    }, ExtArgs["result"]["semester"]>
-    composites: {}
-  }
-
-  type SemesterGetPayload<S extends boolean | null | undefined | SemesterDefaultArgs> = $Result.GetResult<Prisma.$SemesterPayload, S>
-
-  type SemesterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SemesterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SemesterCountAggregateInputType | true
-    }
-
-  export interface SemesterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Semester'], meta: { name: 'Semester' } }
-    /**
-     * Find zero or one Semester that matches the filter.
-     * @param {SemesterFindUniqueArgs} args - Arguments to find a Semester
-     * @example
-     * // Get one Semester
-     * const semester = await prisma.semester.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SemesterFindUniqueArgs>(args: SelectSubset<T, SemesterFindUniqueArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Semester that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SemesterFindUniqueOrThrowArgs} args - Arguments to find a Semester
-     * @example
-     * // Get one Semester
-     * const semester = await prisma.semester.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SemesterFindUniqueOrThrowArgs>(args: SelectSubset<T, SemesterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Semester that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterFindFirstArgs} args - Arguments to find a Semester
-     * @example
-     * // Get one Semester
-     * const semester = await prisma.semester.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SemesterFindFirstArgs>(args?: SelectSubset<T, SemesterFindFirstArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Semester that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterFindFirstOrThrowArgs} args - Arguments to find a Semester
-     * @example
-     * // Get one Semester
-     * const semester = await prisma.semester.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SemesterFindFirstOrThrowArgs>(args?: SelectSubset<T, SemesterFindFirstOrThrowArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Semesters that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Semesters
-     * const semesters = await prisma.semester.findMany()
-     * 
-     * // Get first 10 Semesters
-     * const semesters = await prisma.semester.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const semesterWithIdOnly = await prisma.semester.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SemesterFindManyArgs>(args?: SelectSubset<T, SemesterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Semester.
-     * @param {SemesterCreateArgs} args - Arguments to create a Semester.
-     * @example
-     * // Create one Semester
-     * const Semester = await prisma.semester.create({
-     *   data: {
-     *     // ... data to create a Semester
-     *   }
-     * })
-     * 
-     */
-    create<T extends SemesterCreateArgs>(args: SelectSubset<T, SemesterCreateArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Semesters.
-     * @param {SemesterCreateManyArgs} args - Arguments to create many Semesters.
-     * @example
-     * // Create many Semesters
-     * const semester = await prisma.semester.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SemesterCreateManyArgs>(args?: SelectSubset<T, SemesterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Semesters and returns the data saved in the database.
-     * @param {SemesterCreateManyAndReturnArgs} args - Arguments to create many Semesters.
-     * @example
-     * // Create many Semesters
-     * const semester = await prisma.semester.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Semesters and only return the `id`
-     * const semesterWithIdOnly = await prisma.semester.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SemesterCreateManyAndReturnArgs>(args?: SelectSubset<T, SemesterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Semester.
-     * @param {SemesterDeleteArgs} args - Arguments to delete one Semester.
-     * @example
-     * // Delete one Semester
-     * const Semester = await prisma.semester.delete({
-     *   where: {
-     *     // ... filter to delete one Semester
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SemesterDeleteArgs>(args: SelectSubset<T, SemesterDeleteArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Semester.
-     * @param {SemesterUpdateArgs} args - Arguments to update one Semester.
-     * @example
-     * // Update one Semester
-     * const semester = await prisma.semester.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SemesterUpdateArgs>(args: SelectSubset<T, SemesterUpdateArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Semesters.
-     * @param {SemesterDeleteManyArgs} args - Arguments to filter Semesters to delete.
-     * @example
-     * // Delete a few Semesters
-     * const { count } = await prisma.semester.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SemesterDeleteManyArgs>(args?: SelectSubset<T, SemesterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Semesters.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Semesters
-     * const semester = await prisma.semester.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SemesterUpdateManyArgs>(args: SelectSubset<T, SemesterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Semesters and returns the data updated in the database.
-     * @param {SemesterUpdateManyAndReturnArgs} args - Arguments to update many Semesters.
-     * @example
-     * // Update many Semesters
-     * const semester = await prisma.semester.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Semesters and only return the `id`
-     * const semesterWithIdOnly = await prisma.semester.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SemesterUpdateManyAndReturnArgs>(args: SelectSubset<T, SemesterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Semester.
-     * @param {SemesterUpsertArgs} args - Arguments to update or create a Semester.
-     * @example
-     * // Update or create a Semester
-     * const semester = await prisma.semester.upsert({
-     *   create: {
-     *     // ... data to create a Semester
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Semester we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SemesterUpsertArgs>(args: SelectSubset<T, SemesterUpsertArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Semesters.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterCountArgs} args - Arguments to filter Semesters to count.
-     * @example
-     * // Count the number of Semesters
-     * const count = await prisma.semester.count({
-     *   where: {
-     *     // ... the filter for the Semesters we want to count
-     *   }
-     * })
-    **/
-    count<T extends SemesterCountArgs>(
-      args?: Subset<T, SemesterCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SemesterCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Semester.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SemesterAggregateArgs>(args: Subset<T, SemesterAggregateArgs>): Prisma.PrismaPromise<GetSemesterAggregateType<T>>
-
-    /**
-     * Group by Semester.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SemesterGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SemesterGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SemesterGroupByArgs['orderBy'] }
-        : { orderBy?: SemesterGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SemesterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSemesterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Semester model
-   */
-  readonly fields: SemesterFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Semester.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SemesterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    courses<T extends Semester$coursesArgs<ExtArgs> = {}>(args?: Subset<T, Semester$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Semester model
-   */
-  interface SemesterFieldRefs {
-    readonly id: FieldRef<"Semester", 'String'>
-    readonly number: FieldRef<"Semester", 'Int'>
-    readonly createdAt: FieldRef<"Semester", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Semester findUnique
-   */
-  export type SemesterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter, which Semester to fetch.
-     */
-    where: SemesterWhereUniqueInput
-  }
-
-  /**
-   * Semester findUniqueOrThrow
-   */
-  export type SemesterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter, which Semester to fetch.
-     */
-    where: SemesterWhereUniqueInput
-  }
-
-  /**
-   * Semester findFirst
-   */
-  export type SemesterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter, which Semester to fetch.
-     */
-    where?: SemesterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Semesters to fetch.
-     */
-    orderBy?: SemesterOrderByWithRelationInput | SemesterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Semesters.
-     */
-    cursor?: SemesterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Semesters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Semesters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Semesters.
-     */
-    distinct?: SemesterScalarFieldEnum | SemesterScalarFieldEnum[]
-  }
-
-  /**
-   * Semester findFirstOrThrow
-   */
-  export type SemesterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter, which Semester to fetch.
-     */
-    where?: SemesterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Semesters to fetch.
-     */
-    orderBy?: SemesterOrderByWithRelationInput | SemesterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Semesters.
-     */
-    cursor?: SemesterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Semesters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Semesters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Semesters.
-     */
-    distinct?: SemesterScalarFieldEnum | SemesterScalarFieldEnum[]
-  }
-
-  /**
-   * Semester findMany
-   */
-  export type SemesterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter, which Semesters to fetch.
-     */
-    where?: SemesterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Semesters to fetch.
-     */
-    orderBy?: SemesterOrderByWithRelationInput | SemesterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Semesters.
-     */
-    cursor?: SemesterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Semesters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Semesters.
-     */
-    skip?: number
-    distinct?: SemesterScalarFieldEnum | SemesterScalarFieldEnum[]
-  }
-
-  /**
-   * Semester create
-   */
-  export type SemesterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Semester.
-     */
-    data: XOR<SemesterCreateInput, SemesterUncheckedCreateInput>
-  }
-
-  /**
-   * Semester createMany
-   */
-  export type SemesterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Semesters.
-     */
-    data: SemesterCreateManyInput | SemesterCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Semester createManyAndReturn
-   */
-  export type SemesterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * The data used to create many Semesters.
-     */
-    data: SemesterCreateManyInput | SemesterCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Semester update
-   */
-  export type SemesterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Semester.
-     */
-    data: XOR<SemesterUpdateInput, SemesterUncheckedUpdateInput>
-    /**
-     * Choose, which Semester to update.
-     */
-    where: SemesterWhereUniqueInput
-  }
-
-  /**
-   * Semester updateMany
-   */
-  export type SemesterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Semesters.
-     */
-    data: XOR<SemesterUpdateManyMutationInput, SemesterUncheckedUpdateManyInput>
-    /**
-     * Filter which Semesters to update
-     */
-    where?: SemesterWhereInput
-    /**
-     * Limit how many Semesters to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Semester updateManyAndReturn
-   */
-  export type SemesterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * The data used to update Semesters.
-     */
-    data: XOR<SemesterUpdateManyMutationInput, SemesterUncheckedUpdateManyInput>
-    /**
-     * Filter which Semesters to update
-     */
-    where?: SemesterWhereInput
-    /**
-     * Limit how many Semesters to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Semester upsert
-   */
-  export type SemesterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Semester to update in case it exists.
-     */
-    where: SemesterWhereUniqueInput
-    /**
-     * In case the Semester found by the `where` argument doesn't exist, create a new Semester with this data.
-     */
-    create: XOR<SemesterCreateInput, SemesterUncheckedCreateInput>
-    /**
-     * In case the Semester was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SemesterUpdateInput, SemesterUncheckedUpdateInput>
-  }
-
-  /**
-   * Semester delete
-   */
-  export type SemesterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    /**
-     * Filter which Semester to delete.
-     */
-    where: SemesterWhereUniqueInput
-  }
-
-  /**
-   * Semester deleteMany
-   */
-  export type SemesterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Semesters to delete
-     */
-    where?: SemesterWhereInput
-    /**
-     * Limit how many Semesters to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Semester.courses
-   */
-  export type Semester$coursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Course
-     */
-    select?: CourseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Course
-     */
-    omit?: CourseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CourseInclude<ExtArgs> | null
-    where?: CourseWhereInput
-    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
-    cursor?: CourseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
-  }
-
-  /**
-   * Semester without action
-   */
-  export type SemesterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Course
    */
 
@@ -12784,8 +10639,6 @@ export namespace Prisma {
     code: string | null
     name: string | null
     subjectId: string | null
-    yearId: string | null
-    semesterId: string | null
     ueNumber: string | null
     syllabusUrl: string | null
     createdAt: Date | null
@@ -12796,8 +10649,6 @@ export namespace Prisma {
     code: string | null
     name: string | null
     subjectId: string | null
-    yearId: string | null
-    semesterId: string | null
     ueNumber: string | null
     syllabusUrl: string | null
     createdAt: Date | null
@@ -12808,8 +10659,6 @@ export namespace Prisma {
     code: number
     name: number
     subjectId: number
-    yearId: number
-    semesterId: number
     ueNumber: number
     syllabusUrl: number
     createdAt: number
@@ -12822,8 +10671,6 @@ export namespace Prisma {
     code?: true
     name?: true
     subjectId?: true
-    yearId?: true
-    semesterId?: true
     ueNumber?: true
     syllabusUrl?: true
     createdAt?: true
@@ -12834,8 +10681,6 @@ export namespace Prisma {
     code?: true
     name?: true
     subjectId?: true
-    yearId?: true
-    semesterId?: true
     ueNumber?: true
     syllabusUrl?: true
     createdAt?: true
@@ -12846,8 +10691,6 @@ export namespace Prisma {
     code?: true
     name?: true
     subjectId?: true
-    yearId?: true
-    semesterId?: true
     ueNumber?: true
     syllabusUrl?: true
     createdAt?: true
@@ -12931,8 +10774,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId: string | null
-    semesterId: string | null
     ueNumber: string | null
     syllabusUrl: string | null
     createdAt: Date
@@ -12960,14 +10801,10 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     subjectId?: boolean
-    yearId?: boolean
-    semesterId?: boolean
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
     reviewSessions?: boolean | Course$reviewSessionsArgs<ExtArgs>
     syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
@@ -12979,14 +10816,10 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     subjectId?: boolean
-    yearId?: boolean
-    semesterId?: boolean
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12994,14 +10827,10 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     subjectId?: boolean
-    yearId?: boolean
-    semesterId?: boolean
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectScalar = {
@@ -13009,40 +10838,30 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     subjectId?: boolean
-    yearId?: boolean
-    semesterId?: boolean
     ueNumber?: boolean
     syllabusUrl?: boolean
     createdAt?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "subjectId" | "yearId" | "semesterId" | "ueNumber" | "syllabusUrl" | "createdAt", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "name" | "subjectId" | "ueNumber" | "syllabusUrl" | "createdAt", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
     reviewSessions?: boolean | Course$reviewSessionsArgs<ExtArgs>
     syllabusConcepts?: boolean | Course$syllabusConceptsArgs<ExtArgs>
     enrollments?: boolean | Course$enrollmentsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
   }
   export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    semester?: boolean | Course$semesterArgs<ExtArgs>
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
-    year?: boolean | Course$yearArgs<ExtArgs>
   }
 
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
-      semester: Prisma.$SemesterPayload<ExtArgs> | null
       subject: Prisma.$SubjectPayload<ExtArgs>
-      year: Prisma.$AcademicYearPayload<ExtArgs> | null
       reviewSessions: Prisma.$ReviewSessionPayload<ExtArgs>[]
       syllabusConcepts: Prisma.$SyllabusConceptPayload<ExtArgs>[]
       enrollments: Prisma.$UserCoursePayload<ExtArgs>[]
@@ -13052,8 +10871,6 @@ export namespace Prisma {
       code: string
       name: string
       subjectId: string
-      yearId: string | null
-      semesterId: string | null
       ueNumber: string | null
       syllabusUrl: string | null
       createdAt: Date
@@ -13451,9 +11268,7 @@ export namespace Prisma {
    */
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    semester<T extends Course$semesterArgs<ExtArgs> = {}>(args?: Subset<T, Course$semesterArgs<ExtArgs>>): Prisma__SemesterClient<$Result.GetResult<Prisma.$SemesterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subject<T extends SubjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubjectDefaultArgs<ExtArgs>>): Prisma__SubjectClient<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    year<T extends Course$yearArgs<ExtArgs> = {}>(args?: Subset<T, Course$yearArgs<ExtArgs>>): Prisma__AcademicYearClient<$Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     reviewSessions<T extends Course$reviewSessionsArgs<ExtArgs> = {}>(args?: Subset<T, Course$reviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     syllabusConcepts<T extends Course$syllabusConceptsArgs<ExtArgs> = {}>(args?: Subset<T, Course$syllabusConceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends Course$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13490,8 +11305,6 @@ export namespace Prisma {
     readonly code: FieldRef<"Course", 'String'>
     readonly name: FieldRef<"Course", 'String'>
     readonly subjectId: FieldRef<"Course", 'String'>
-    readonly yearId: FieldRef<"Course", 'String'>
-    readonly semesterId: FieldRef<"Course", 'String'>
     readonly ueNumber: FieldRef<"Course", 'String'>
     readonly syllabusUrl: FieldRef<"Course", 'String'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
@@ -13888,44 +11701,6 @@ export namespace Prisma {
      * Limit how many Courses to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Course.semester
-   */
-  export type Course$semesterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Semester
-     */
-    select?: SemesterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Semester
-     */
-    omit?: SemesterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SemesterInclude<ExtArgs> | null
-    where?: SemesterWhereInput
-  }
-
-  /**
-   * Course.year
-   */
-  export type Course$yearArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AcademicYear
-     */
-    select?: AcademicYearSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AcademicYear
-     */
-    omit?: AcademicYearOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AcademicYearInclude<ExtArgs> | null
-    where?: AcademicYearWhereInput
   }
 
   /**
@@ -15339,6 +13114,7 @@ export namespace Prisma {
     createdAt?: boolean
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    nodeAttachments?: boolean | SyllabusConcept$nodeAttachmentsArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["syllabusConcept"]>
 
@@ -15378,6 +13154,7 @@ export namespace Prisma {
   export type SyllabusConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    nodeAttachments?: boolean | SyllabusConcept$nodeAttachmentsArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SyllabusConceptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15392,6 +13169,7 @@ export namespace Prisma {
     objects: {
       conceptMatches: Prisma.$ConceptMatchPayload<ExtArgs>[]
       course: Prisma.$CoursePayload<ExtArgs>
+      nodeAttachments: Prisma.$NodeSyllabusConceptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15797,6 +13575,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     conceptMatches<T extends SyllabusConcept$conceptMatchesArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$conceptMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    nodeAttachments<T extends SyllabusConcept$nodeAttachmentsArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$nodeAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16250,6 +14029,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ConceptMatchScalarFieldEnum | ConceptMatchScalarFieldEnum[]
+  }
+
+  /**
+   * SyllabusConcept.nodeAttachments
+   */
+  export type SyllabusConcept$nodeAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    where?: NodeSyllabusConceptWhereInput
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NodeSyllabusConceptScalarFieldEnum | NodeSyllabusConceptScalarFieldEnum[]
   }
 
   /**
@@ -23291,6 +21094,2284 @@ export namespace Prisma {
 
 
   /**
+   * Model KnowledgeNode
+   */
+
+  export type AggregateKnowledgeNode = {
+    _count: KnowledgeNodeCountAggregateOutputType | null
+    _avg: KnowledgeNodeAvgAggregateOutputType | null
+    _sum: KnowledgeNodeSumAggregateOutputType | null
+    _min: KnowledgeNodeMinAggregateOutputType | null
+    _max: KnowledgeNodeMaxAggregateOutputType | null
+  }
+
+  export type KnowledgeNodeAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type KnowledgeNodeSumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type KnowledgeNodeMinAggregateOutputType = {
+    id: string | null
+    subjectId: string | null
+    parentId: string | null
+    name: string | null
+    slug: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type KnowledgeNodeMaxAggregateOutputType = {
+    id: string | null
+    subjectId: string | null
+    parentId: string | null
+    name: string | null
+    slug: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type KnowledgeNodeCountAggregateOutputType = {
+    id: number
+    subjectId: number
+    parentId: number
+    name: number
+    slug: number
+    order: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type KnowledgeNodeAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type KnowledgeNodeSumAggregateInputType = {
+    order?: true
+  }
+
+  export type KnowledgeNodeMinAggregateInputType = {
+    id?: true
+    subjectId?: true
+    parentId?: true
+    name?: true
+    slug?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type KnowledgeNodeMaxAggregateInputType = {
+    id?: true
+    subjectId?: true
+    parentId?: true
+    name?: true
+    slug?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type KnowledgeNodeCountAggregateInputType = {
+    id?: true
+    subjectId?: true
+    parentId?: true
+    name?: true
+    slug?: true
+    order?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type KnowledgeNodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KnowledgeNode to aggregate.
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KnowledgeNodes to fetch.
+     */
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KnowledgeNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KnowledgeNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KnowledgeNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned KnowledgeNodes
+    **/
+    _count?: true | KnowledgeNodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: KnowledgeNodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: KnowledgeNodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KnowledgeNodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KnowledgeNodeMaxAggregateInputType
+  }
+
+  export type GetKnowledgeNodeAggregateType<T extends KnowledgeNodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateKnowledgeNode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKnowledgeNode[P]>
+      : GetScalarType<T[P], AggregateKnowledgeNode[P]>
+  }
+
+
+
+
+  export type KnowledgeNodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KnowledgeNodeWhereInput
+    orderBy?: KnowledgeNodeOrderByWithAggregationInput | KnowledgeNodeOrderByWithAggregationInput[]
+    by: KnowledgeNodeScalarFieldEnum[] | KnowledgeNodeScalarFieldEnum
+    having?: KnowledgeNodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KnowledgeNodeCountAggregateInputType | true
+    _avg?: KnowledgeNodeAvgAggregateInputType
+    _sum?: KnowledgeNodeSumAggregateInputType
+    _min?: KnowledgeNodeMinAggregateInputType
+    _max?: KnowledgeNodeMaxAggregateInputType
+  }
+
+  export type KnowledgeNodeGroupByOutputType = {
+    id: string
+    subjectId: string
+    parentId: string | null
+    name: string
+    slug: string | null
+    order: number
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: KnowledgeNodeCountAggregateOutputType | null
+    _avg: KnowledgeNodeAvgAggregateOutputType | null
+    _sum: KnowledgeNodeSumAggregateOutputType | null
+    _min: KnowledgeNodeMinAggregateOutputType | null
+    _max: KnowledgeNodeMaxAggregateOutputType | null
+  }
+
+  type GetKnowledgeNodeGroupByPayload<T extends KnowledgeNodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KnowledgeNodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KnowledgeNodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KnowledgeNodeGroupByOutputType[P]>
+            : GetScalarType<T[P], KnowledgeNodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KnowledgeNodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subjectId?: boolean
+    parentId?: boolean
+    name?: boolean
+    slug?: boolean
+    order?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+    children?: boolean | KnowledgeNode$childrenArgs<ExtArgs>
+    concepts?: boolean | KnowledgeNode$conceptsArgs<ExtArgs>
+    _count?: boolean | KnowledgeNodeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["knowledgeNode"]>
+
+  export type KnowledgeNodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subjectId?: boolean
+    parentId?: boolean
+    name?: boolean
+    slug?: boolean
+    order?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["knowledgeNode"]>
+
+  export type KnowledgeNodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subjectId?: boolean
+    parentId?: boolean
+    name?: boolean
+    slug?: boolean
+    order?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["knowledgeNode"]>
+
+  export type KnowledgeNodeSelectScalar = {
+    id?: boolean
+    subjectId?: boolean
+    parentId?: boolean
+    name?: boolean
+    slug?: boolean
+    order?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type KnowledgeNodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subjectId" | "parentId" | "name" | "slug" | "order" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["knowledgeNode"]>
+  export type KnowledgeNodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+    children?: boolean | KnowledgeNode$childrenArgs<ExtArgs>
+    concepts?: boolean | KnowledgeNode$conceptsArgs<ExtArgs>
+    _count?: boolean | KnowledgeNodeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type KnowledgeNodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+  }
+  export type KnowledgeNodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    subject?: boolean | SubjectDefaultArgs<ExtArgs>
+    parent?: boolean | KnowledgeNode$parentArgs<ExtArgs>
+  }
+
+  export type $KnowledgeNodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KnowledgeNode"
+    objects: {
+      subject: Prisma.$SubjectPayload<ExtArgs>
+      parent: Prisma.$KnowledgeNodePayload<ExtArgs> | null
+      children: Prisma.$KnowledgeNodePayload<ExtArgs>[]
+      concepts: Prisma.$NodeSyllabusConceptPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      subjectId: string
+      parentId: string | null
+      name: string
+      slug: string | null
+      order: number
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["knowledgeNode"]>
+    composites: {}
+  }
+
+  type KnowledgeNodeGetPayload<S extends boolean | null | undefined | KnowledgeNodeDefaultArgs> = $Result.GetResult<Prisma.$KnowledgeNodePayload, S>
+
+  type KnowledgeNodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KnowledgeNodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KnowledgeNodeCountAggregateInputType | true
+    }
+
+  export interface KnowledgeNodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KnowledgeNode'], meta: { name: 'KnowledgeNode' } }
+    /**
+     * Find zero or one KnowledgeNode that matches the filter.
+     * @param {KnowledgeNodeFindUniqueArgs} args - Arguments to find a KnowledgeNode
+     * @example
+     * // Get one KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KnowledgeNodeFindUniqueArgs>(args: SelectSubset<T, KnowledgeNodeFindUniqueArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one KnowledgeNode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KnowledgeNodeFindUniqueOrThrowArgs} args - Arguments to find a KnowledgeNode
+     * @example
+     * // Get one KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KnowledgeNodeFindUniqueOrThrowArgs>(args: SelectSubset<T, KnowledgeNodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KnowledgeNode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeFindFirstArgs} args - Arguments to find a KnowledgeNode
+     * @example
+     * // Get one KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KnowledgeNodeFindFirstArgs>(args?: SelectSubset<T, KnowledgeNodeFindFirstArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KnowledgeNode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeFindFirstOrThrowArgs} args - Arguments to find a KnowledgeNode
+     * @example
+     * // Get one KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KnowledgeNodeFindFirstOrThrowArgs>(args?: SelectSubset<T, KnowledgeNodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more KnowledgeNodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all KnowledgeNodes
+     * const knowledgeNodes = await prisma.knowledgeNode.findMany()
+     * 
+     * // Get first 10 KnowledgeNodes
+     * const knowledgeNodes = await prisma.knowledgeNode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const knowledgeNodeWithIdOnly = await prisma.knowledgeNode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KnowledgeNodeFindManyArgs>(args?: SelectSubset<T, KnowledgeNodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a KnowledgeNode.
+     * @param {KnowledgeNodeCreateArgs} args - Arguments to create a KnowledgeNode.
+     * @example
+     * // Create one KnowledgeNode
+     * const KnowledgeNode = await prisma.knowledgeNode.create({
+     *   data: {
+     *     // ... data to create a KnowledgeNode
+     *   }
+     * })
+     * 
+     */
+    create<T extends KnowledgeNodeCreateArgs>(args: SelectSubset<T, KnowledgeNodeCreateArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many KnowledgeNodes.
+     * @param {KnowledgeNodeCreateManyArgs} args - Arguments to create many KnowledgeNodes.
+     * @example
+     * // Create many KnowledgeNodes
+     * const knowledgeNode = await prisma.knowledgeNode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KnowledgeNodeCreateManyArgs>(args?: SelectSubset<T, KnowledgeNodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many KnowledgeNodes and returns the data saved in the database.
+     * @param {KnowledgeNodeCreateManyAndReturnArgs} args - Arguments to create many KnowledgeNodes.
+     * @example
+     * // Create many KnowledgeNodes
+     * const knowledgeNode = await prisma.knowledgeNode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many KnowledgeNodes and only return the `id`
+     * const knowledgeNodeWithIdOnly = await prisma.knowledgeNode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KnowledgeNodeCreateManyAndReturnArgs>(args?: SelectSubset<T, KnowledgeNodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a KnowledgeNode.
+     * @param {KnowledgeNodeDeleteArgs} args - Arguments to delete one KnowledgeNode.
+     * @example
+     * // Delete one KnowledgeNode
+     * const KnowledgeNode = await prisma.knowledgeNode.delete({
+     *   where: {
+     *     // ... filter to delete one KnowledgeNode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KnowledgeNodeDeleteArgs>(args: SelectSubset<T, KnowledgeNodeDeleteArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one KnowledgeNode.
+     * @param {KnowledgeNodeUpdateArgs} args - Arguments to update one KnowledgeNode.
+     * @example
+     * // Update one KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KnowledgeNodeUpdateArgs>(args: SelectSubset<T, KnowledgeNodeUpdateArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more KnowledgeNodes.
+     * @param {KnowledgeNodeDeleteManyArgs} args - Arguments to filter KnowledgeNodes to delete.
+     * @example
+     * // Delete a few KnowledgeNodes
+     * const { count } = await prisma.knowledgeNode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KnowledgeNodeDeleteManyArgs>(args?: SelectSubset<T, KnowledgeNodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KnowledgeNodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many KnowledgeNodes
+     * const knowledgeNode = await prisma.knowledgeNode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KnowledgeNodeUpdateManyArgs>(args: SelectSubset<T, KnowledgeNodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KnowledgeNodes and returns the data updated in the database.
+     * @param {KnowledgeNodeUpdateManyAndReturnArgs} args - Arguments to update many KnowledgeNodes.
+     * @example
+     * // Update many KnowledgeNodes
+     * const knowledgeNode = await prisma.knowledgeNode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more KnowledgeNodes and only return the `id`
+     * const knowledgeNodeWithIdOnly = await prisma.knowledgeNode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KnowledgeNodeUpdateManyAndReturnArgs>(args: SelectSubset<T, KnowledgeNodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one KnowledgeNode.
+     * @param {KnowledgeNodeUpsertArgs} args - Arguments to update or create a KnowledgeNode.
+     * @example
+     * // Update or create a KnowledgeNode
+     * const knowledgeNode = await prisma.knowledgeNode.upsert({
+     *   create: {
+     *     // ... data to create a KnowledgeNode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the KnowledgeNode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KnowledgeNodeUpsertArgs>(args: SelectSubset<T, KnowledgeNodeUpsertArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of KnowledgeNodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeCountArgs} args - Arguments to filter KnowledgeNodes to count.
+     * @example
+     * // Count the number of KnowledgeNodes
+     * const count = await prisma.knowledgeNode.count({
+     *   where: {
+     *     // ... the filter for the KnowledgeNodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends KnowledgeNodeCountArgs>(
+      args?: Subset<T, KnowledgeNodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KnowledgeNodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a KnowledgeNode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KnowledgeNodeAggregateArgs>(args: Subset<T, KnowledgeNodeAggregateArgs>): Prisma.PrismaPromise<GetKnowledgeNodeAggregateType<T>>
+
+    /**
+     * Group by KnowledgeNode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KnowledgeNodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KnowledgeNodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KnowledgeNodeGroupByArgs['orderBy'] }
+        : { orderBy?: KnowledgeNodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KnowledgeNodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKnowledgeNodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the KnowledgeNode model
+   */
+  readonly fields: KnowledgeNodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for KnowledgeNode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KnowledgeNodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    subject<T extends SubjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubjectDefaultArgs<ExtArgs>>): Prisma__SubjectClient<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    parent<T extends KnowledgeNode$parentArgs<ExtArgs> = {}>(args?: Subset<T, KnowledgeNode$parentArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    children<T extends KnowledgeNode$childrenArgs<ExtArgs> = {}>(args?: Subset<T, KnowledgeNode$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    concepts<T extends KnowledgeNode$conceptsArgs<ExtArgs> = {}>(args?: Subset<T, KnowledgeNode$conceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the KnowledgeNode model
+   */
+  interface KnowledgeNodeFieldRefs {
+    readonly id: FieldRef<"KnowledgeNode", 'String'>
+    readonly subjectId: FieldRef<"KnowledgeNode", 'String'>
+    readonly parentId: FieldRef<"KnowledgeNode", 'String'>
+    readonly name: FieldRef<"KnowledgeNode", 'String'>
+    readonly slug: FieldRef<"KnowledgeNode", 'String'>
+    readonly order: FieldRef<"KnowledgeNode", 'Int'>
+    readonly metadata: FieldRef<"KnowledgeNode", 'Json'>
+    readonly createdAt: FieldRef<"KnowledgeNode", 'DateTime'>
+    readonly updatedAt: FieldRef<"KnowledgeNode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * KnowledgeNode findUnique
+   */
+  export type KnowledgeNodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which KnowledgeNode to fetch.
+     */
+    where: KnowledgeNodeWhereUniqueInput
+  }
+
+  /**
+   * KnowledgeNode findUniqueOrThrow
+   */
+  export type KnowledgeNodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which KnowledgeNode to fetch.
+     */
+    where: KnowledgeNodeWhereUniqueInput
+  }
+
+  /**
+   * KnowledgeNode findFirst
+   */
+  export type KnowledgeNodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which KnowledgeNode to fetch.
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KnowledgeNodes to fetch.
+     */
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KnowledgeNodes.
+     */
+    cursor?: KnowledgeNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KnowledgeNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KnowledgeNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KnowledgeNodes.
+     */
+    distinct?: KnowledgeNodeScalarFieldEnum | KnowledgeNodeScalarFieldEnum[]
+  }
+
+  /**
+   * KnowledgeNode findFirstOrThrow
+   */
+  export type KnowledgeNodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which KnowledgeNode to fetch.
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KnowledgeNodes to fetch.
+     */
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KnowledgeNodes.
+     */
+    cursor?: KnowledgeNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KnowledgeNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KnowledgeNodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KnowledgeNodes.
+     */
+    distinct?: KnowledgeNodeScalarFieldEnum | KnowledgeNodeScalarFieldEnum[]
+  }
+
+  /**
+   * KnowledgeNode findMany
+   */
+  export type KnowledgeNodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter, which KnowledgeNodes to fetch.
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KnowledgeNodes to fetch.
+     */
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing KnowledgeNodes.
+     */
+    cursor?: KnowledgeNodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KnowledgeNodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KnowledgeNodes.
+     */
+    skip?: number
+    distinct?: KnowledgeNodeScalarFieldEnum | KnowledgeNodeScalarFieldEnum[]
+  }
+
+  /**
+   * KnowledgeNode create
+   */
+  export type KnowledgeNodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a KnowledgeNode.
+     */
+    data: XOR<KnowledgeNodeCreateInput, KnowledgeNodeUncheckedCreateInput>
+  }
+
+  /**
+   * KnowledgeNode createMany
+   */
+  export type KnowledgeNodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many KnowledgeNodes.
+     */
+    data: KnowledgeNodeCreateManyInput | KnowledgeNodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * KnowledgeNode createManyAndReturn
+   */
+  export type KnowledgeNodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many KnowledgeNodes.
+     */
+    data: KnowledgeNodeCreateManyInput | KnowledgeNodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KnowledgeNode update
+   */
+  export type KnowledgeNodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a KnowledgeNode.
+     */
+    data: XOR<KnowledgeNodeUpdateInput, KnowledgeNodeUncheckedUpdateInput>
+    /**
+     * Choose, which KnowledgeNode to update.
+     */
+    where: KnowledgeNodeWhereUniqueInput
+  }
+
+  /**
+   * KnowledgeNode updateMany
+   */
+  export type KnowledgeNodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update KnowledgeNodes.
+     */
+    data: XOR<KnowledgeNodeUpdateManyMutationInput, KnowledgeNodeUncheckedUpdateManyInput>
+    /**
+     * Filter which KnowledgeNodes to update
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * Limit how many KnowledgeNodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * KnowledgeNode updateManyAndReturn
+   */
+  export type KnowledgeNodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * The data used to update KnowledgeNodes.
+     */
+    data: XOR<KnowledgeNodeUpdateManyMutationInput, KnowledgeNodeUncheckedUpdateManyInput>
+    /**
+     * Filter which KnowledgeNodes to update
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * Limit how many KnowledgeNodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KnowledgeNode upsert
+   */
+  export type KnowledgeNodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the KnowledgeNode to update in case it exists.
+     */
+    where: KnowledgeNodeWhereUniqueInput
+    /**
+     * In case the KnowledgeNode found by the `where` argument doesn't exist, create a new KnowledgeNode with this data.
+     */
+    create: XOR<KnowledgeNodeCreateInput, KnowledgeNodeUncheckedCreateInput>
+    /**
+     * In case the KnowledgeNode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KnowledgeNodeUpdateInput, KnowledgeNodeUncheckedUpdateInput>
+  }
+
+  /**
+   * KnowledgeNode delete
+   */
+  export type KnowledgeNodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    /**
+     * Filter which KnowledgeNode to delete.
+     */
+    where: KnowledgeNodeWhereUniqueInput
+  }
+
+  /**
+   * KnowledgeNode deleteMany
+   */
+  export type KnowledgeNodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KnowledgeNodes to delete
+     */
+    where?: KnowledgeNodeWhereInput
+    /**
+     * Limit how many KnowledgeNodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * KnowledgeNode.parent
+   */
+  export type KnowledgeNode$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    where?: KnowledgeNodeWhereInput
+  }
+
+  /**
+   * KnowledgeNode.children
+   */
+  export type KnowledgeNode$childrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+    where?: KnowledgeNodeWhereInput
+    orderBy?: KnowledgeNodeOrderByWithRelationInput | KnowledgeNodeOrderByWithRelationInput[]
+    cursor?: KnowledgeNodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KnowledgeNodeScalarFieldEnum | KnowledgeNodeScalarFieldEnum[]
+  }
+
+  /**
+   * KnowledgeNode.concepts
+   */
+  export type KnowledgeNode$conceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    where?: NodeSyllabusConceptWhereInput
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NodeSyllabusConceptScalarFieldEnum | NodeSyllabusConceptScalarFieldEnum[]
+  }
+
+  /**
+   * KnowledgeNode without action
+   */
+  export type KnowledgeNodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KnowledgeNode
+     */
+    select?: KnowledgeNodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KnowledgeNode
+     */
+    omit?: KnowledgeNodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KnowledgeNodeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NodeSyllabusConcept
+   */
+
+  export type AggregateNodeSyllabusConcept = {
+    _count: NodeSyllabusConceptCountAggregateOutputType | null
+    _min: NodeSyllabusConceptMinAggregateOutputType | null
+    _max: NodeSyllabusConceptMaxAggregateOutputType | null
+  }
+
+  export type NodeSyllabusConceptMinAggregateOutputType = {
+    nodeId: string | null
+    syllabusConceptId: string | null
+    addedByUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type NodeSyllabusConceptMaxAggregateOutputType = {
+    nodeId: string | null
+    syllabusConceptId: string | null
+    addedByUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type NodeSyllabusConceptCountAggregateOutputType = {
+    nodeId: number
+    syllabusConceptId: number
+    addedByUserId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NodeSyllabusConceptMinAggregateInputType = {
+    nodeId?: true
+    syllabusConceptId?: true
+    addedByUserId?: true
+    createdAt?: true
+  }
+
+  export type NodeSyllabusConceptMaxAggregateInputType = {
+    nodeId?: true
+    syllabusConceptId?: true
+    addedByUserId?: true
+    createdAt?: true
+  }
+
+  export type NodeSyllabusConceptCountAggregateInputType = {
+    nodeId?: true
+    syllabusConceptId?: true
+    addedByUserId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NodeSyllabusConceptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NodeSyllabusConcept to aggregate.
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeSyllabusConcepts to fetch.
+     */
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeSyllabusConcepts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeSyllabusConcepts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NodeSyllabusConcepts
+    **/
+    _count?: true | NodeSyllabusConceptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NodeSyllabusConceptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NodeSyllabusConceptMaxAggregateInputType
+  }
+
+  export type GetNodeSyllabusConceptAggregateType<T extends NodeSyllabusConceptAggregateArgs> = {
+        [P in keyof T & keyof AggregateNodeSyllabusConcept]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNodeSyllabusConcept[P]>
+      : GetScalarType<T[P], AggregateNodeSyllabusConcept[P]>
+  }
+
+
+
+
+  export type NodeSyllabusConceptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NodeSyllabusConceptWhereInput
+    orderBy?: NodeSyllabusConceptOrderByWithAggregationInput | NodeSyllabusConceptOrderByWithAggregationInput[]
+    by: NodeSyllabusConceptScalarFieldEnum[] | NodeSyllabusConceptScalarFieldEnum
+    having?: NodeSyllabusConceptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NodeSyllabusConceptCountAggregateInputType | true
+    _min?: NodeSyllabusConceptMinAggregateInputType
+    _max?: NodeSyllabusConceptMaxAggregateInputType
+  }
+
+  export type NodeSyllabusConceptGroupByOutputType = {
+    nodeId: string
+    syllabusConceptId: string
+    addedByUserId: string | null
+    createdAt: Date
+    _count: NodeSyllabusConceptCountAggregateOutputType | null
+    _min: NodeSyllabusConceptMinAggregateOutputType | null
+    _max: NodeSyllabusConceptMaxAggregateOutputType | null
+  }
+
+  type GetNodeSyllabusConceptGroupByPayload<T extends NodeSyllabusConceptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NodeSyllabusConceptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NodeSyllabusConceptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NodeSyllabusConceptGroupByOutputType[P]>
+            : GetScalarType<T[P], NodeSyllabusConceptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NodeSyllabusConceptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    nodeId?: boolean
+    syllabusConceptId?: boolean
+    addedByUserId?: boolean
+    createdAt?: boolean
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeSyllabusConcept"]>
+
+  export type NodeSyllabusConceptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    nodeId?: boolean
+    syllabusConceptId?: boolean
+    addedByUserId?: boolean
+    createdAt?: boolean
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeSyllabusConcept"]>
+
+  export type NodeSyllabusConceptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    nodeId?: boolean
+    syllabusConceptId?: boolean
+    addedByUserId?: boolean
+    createdAt?: boolean
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["nodeSyllabusConcept"]>
+
+  export type NodeSyllabusConceptSelectScalar = {
+    nodeId?: boolean
+    syllabusConceptId?: boolean
+    addedByUserId?: boolean
+    createdAt?: boolean
+  }
+
+  export type NodeSyllabusConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"nodeId" | "syllabusConceptId" | "addedByUserId" | "createdAt", ExtArgs["result"]["nodeSyllabusConcept"]>
+  export type NodeSyllabusConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }
+  export type NodeSyllabusConceptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }
+  export type NodeSyllabusConceptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    node?: boolean | KnowledgeNodeDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+  }
+
+  export type $NodeSyllabusConceptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NodeSyllabusConcept"
+    objects: {
+      node: Prisma.$KnowledgeNodePayload<ExtArgs>
+      syllabusConcept: Prisma.$SyllabusConceptPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      nodeId: string
+      syllabusConceptId: string
+      addedByUserId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["nodeSyllabusConcept"]>
+    composites: {}
+  }
+
+  type NodeSyllabusConceptGetPayload<S extends boolean | null | undefined | NodeSyllabusConceptDefaultArgs> = $Result.GetResult<Prisma.$NodeSyllabusConceptPayload, S>
+
+  type NodeSyllabusConceptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NodeSyllabusConceptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NodeSyllabusConceptCountAggregateInputType | true
+    }
+
+  export interface NodeSyllabusConceptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NodeSyllabusConcept'], meta: { name: 'NodeSyllabusConcept' } }
+    /**
+     * Find zero or one NodeSyllabusConcept that matches the filter.
+     * @param {NodeSyllabusConceptFindUniqueArgs} args - Arguments to find a NodeSyllabusConcept
+     * @example
+     * // Get one NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NodeSyllabusConceptFindUniqueArgs>(args: SelectSubset<T, NodeSyllabusConceptFindUniqueArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NodeSyllabusConcept that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NodeSyllabusConceptFindUniqueOrThrowArgs} args - Arguments to find a NodeSyllabusConcept
+     * @example
+     * // Get one NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NodeSyllabusConceptFindUniqueOrThrowArgs>(args: SelectSubset<T, NodeSyllabusConceptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NodeSyllabusConcept that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptFindFirstArgs} args - Arguments to find a NodeSyllabusConcept
+     * @example
+     * // Get one NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NodeSyllabusConceptFindFirstArgs>(args?: SelectSubset<T, NodeSyllabusConceptFindFirstArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NodeSyllabusConcept that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptFindFirstOrThrowArgs} args - Arguments to find a NodeSyllabusConcept
+     * @example
+     * // Get one NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NodeSyllabusConceptFindFirstOrThrowArgs>(args?: SelectSubset<T, NodeSyllabusConceptFindFirstOrThrowArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NodeSyllabusConcepts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NodeSyllabusConcepts
+     * const nodeSyllabusConcepts = await prisma.nodeSyllabusConcept.findMany()
+     * 
+     * // Get first 10 NodeSyllabusConcepts
+     * const nodeSyllabusConcepts = await prisma.nodeSyllabusConcept.findMany({ take: 10 })
+     * 
+     * // Only select the `nodeId`
+     * const nodeSyllabusConceptWithNodeIdOnly = await prisma.nodeSyllabusConcept.findMany({ select: { nodeId: true } })
+     * 
+     */
+    findMany<T extends NodeSyllabusConceptFindManyArgs>(args?: SelectSubset<T, NodeSyllabusConceptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NodeSyllabusConcept.
+     * @param {NodeSyllabusConceptCreateArgs} args - Arguments to create a NodeSyllabusConcept.
+     * @example
+     * // Create one NodeSyllabusConcept
+     * const NodeSyllabusConcept = await prisma.nodeSyllabusConcept.create({
+     *   data: {
+     *     // ... data to create a NodeSyllabusConcept
+     *   }
+     * })
+     * 
+     */
+    create<T extends NodeSyllabusConceptCreateArgs>(args: SelectSubset<T, NodeSyllabusConceptCreateArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NodeSyllabusConcepts.
+     * @param {NodeSyllabusConceptCreateManyArgs} args - Arguments to create many NodeSyllabusConcepts.
+     * @example
+     * // Create many NodeSyllabusConcepts
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NodeSyllabusConceptCreateManyArgs>(args?: SelectSubset<T, NodeSyllabusConceptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NodeSyllabusConcepts and returns the data saved in the database.
+     * @param {NodeSyllabusConceptCreateManyAndReturnArgs} args - Arguments to create many NodeSyllabusConcepts.
+     * @example
+     * // Create many NodeSyllabusConcepts
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NodeSyllabusConcepts and only return the `nodeId`
+     * const nodeSyllabusConceptWithNodeIdOnly = await prisma.nodeSyllabusConcept.createManyAndReturn({
+     *   select: { nodeId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NodeSyllabusConceptCreateManyAndReturnArgs>(args?: SelectSubset<T, NodeSyllabusConceptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NodeSyllabusConcept.
+     * @param {NodeSyllabusConceptDeleteArgs} args - Arguments to delete one NodeSyllabusConcept.
+     * @example
+     * // Delete one NodeSyllabusConcept
+     * const NodeSyllabusConcept = await prisma.nodeSyllabusConcept.delete({
+     *   where: {
+     *     // ... filter to delete one NodeSyllabusConcept
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NodeSyllabusConceptDeleteArgs>(args: SelectSubset<T, NodeSyllabusConceptDeleteArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NodeSyllabusConcept.
+     * @param {NodeSyllabusConceptUpdateArgs} args - Arguments to update one NodeSyllabusConcept.
+     * @example
+     * // Update one NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NodeSyllabusConceptUpdateArgs>(args: SelectSubset<T, NodeSyllabusConceptUpdateArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NodeSyllabusConcepts.
+     * @param {NodeSyllabusConceptDeleteManyArgs} args - Arguments to filter NodeSyllabusConcepts to delete.
+     * @example
+     * // Delete a few NodeSyllabusConcepts
+     * const { count } = await prisma.nodeSyllabusConcept.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NodeSyllabusConceptDeleteManyArgs>(args?: SelectSubset<T, NodeSyllabusConceptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NodeSyllabusConcepts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NodeSyllabusConcepts
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NodeSyllabusConceptUpdateManyArgs>(args: SelectSubset<T, NodeSyllabusConceptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NodeSyllabusConcepts and returns the data updated in the database.
+     * @param {NodeSyllabusConceptUpdateManyAndReturnArgs} args - Arguments to update many NodeSyllabusConcepts.
+     * @example
+     * // Update many NodeSyllabusConcepts
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NodeSyllabusConcepts and only return the `nodeId`
+     * const nodeSyllabusConceptWithNodeIdOnly = await prisma.nodeSyllabusConcept.updateManyAndReturn({
+     *   select: { nodeId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NodeSyllabusConceptUpdateManyAndReturnArgs>(args: SelectSubset<T, NodeSyllabusConceptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NodeSyllabusConcept.
+     * @param {NodeSyllabusConceptUpsertArgs} args - Arguments to update or create a NodeSyllabusConcept.
+     * @example
+     * // Update or create a NodeSyllabusConcept
+     * const nodeSyllabusConcept = await prisma.nodeSyllabusConcept.upsert({
+     *   create: {
+     *     // ... data to create a NodeSyllabusConcept
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NodeSyllabusConcept we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NodeSyllabusConceptUpsertArgs>(args: SelectSubset<T, NodeSyllabusConceptUpsertArgs<ExtArgs>>): Prisma__NodeSyllabusConceptClient<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NodeSyllabusConcepts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptCountArgs} args - Arguments to filter NodeSyllabusConcepts to count.
+     * @example
+     * // Count the number of NodeSyllabusConcepts
+     * const count = await prisma.nodeSyllabusConcept.count({
+     *   where: {
+     *     // ... the filter for the NodeSyllabusConcepts we want to count
+     *   }
+     * })
+    **/
+    count<T extends NodeSyllabusConceptCountArgs>(
+      args?: Subset<T, NodeSyllabusConceptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NodeSyllabusConceptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NodeSyllabusConcept.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NodeSyllabusConceptAggregateArgs>(args: Subset<T, NodeSyllabusConceptAggregateArgs>): Prisma.PrismaPromise<GetNodeSyllabusConceptAggregateType<T>>
+
+    /**
+     * Group by NodeSyllabusConcept.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NodeSyllabusConceptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NodeSyllabusConceptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NodeSyllabusConceptGroupByArgs['orderBy'] }
+        : { orderBy?: NodeSyllabusConceptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NodeSyllabusConceptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNodeSyllabusConceptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NodeSyllabusConcept model
+   */
+  readonly fields: NodeSyllabusConceptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NodeSyllabusConcept.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NodeSyllabusConceptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    node<T extends KnowledgeNodeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KnowledgeNodeDefaultArgs<ExtArgs>>): Prisma__KnowledgeNodeClient<$Result.GetResult<Prisma.$KnowledgeNodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    syllabusConcept<T extends SyllabusConceptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConceptDefaultArgs<ExtArgs>>): Prisma__SyllabusConceptClient<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NodeSyllabusConcept model
+   */
+  interface NodeSyllabusConceptFieldRefs {
+    readonly nodeId: FieldRef<"NodeSyllabusConcept", 'String'>
+    readonly syllabusConceptId: FieldRef<"NodeSyllabusConcept", 'String'>
+    readonly addedByUserId: FieldRef<"NodeSyllabusConcept", 'String'>
+    readonly createdAt: FieldRef<"NodeSyllabusConcept", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NodeSyllabusConcept findUnique
+   */
+  export type NodeSyllabusConceptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeSyllabusConcept to fetch.
+     */
+    where: NodeSyllabusConceptWhereUniqueInput
+  }
+
+  /**
+   * NodeSyllabusConcept findUniqueOrThrow
+   */
+  export type NodeSyllabusConceptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeSyllabusConcept to fetch.
+     */
+    where: NodeSyllabusConceptWhereUniqueInput
+  }
+
+  /**
+   * NodeSyllabusConcept findFirst
+   */
+  export type NodeSyllabusConceptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeSyllabusConcept to fetch.
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeSyllabusConcepts to fetch.
+     */
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NodeSyllabusConcepts.
+     */
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeSyllabusConcepts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeSyllabusConcepts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NodeSyllabusConcepts.
+     */
+    distinct?: NodeSyllabusConceptScalarFieldEnum | NodeSyllabusConceptScalarFieldEnum[]
+  }
+
+  /**
+   * NodeSyllabusConcept findFirstOrThrow
+   */
+  export type NodeSyllabusConceptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeSyllabusConcept to fetch.
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeSyllabusConcepts to fetch.
+     */
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NodeSyllabusConcepts.
+     */
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeSyllabusConcepts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeSyllabusConcepts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NodeSyllabusConcepts.
+     */
+    distinct?: NodeSyllabusConceptScalarFieldEnum | NodeSyllabusConceptScalarFieldEnum[]
+  }
+
+  /**
+   * NodeSyllabusConcept findMany
+   */
+  export type NodeSyllabusConceptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter, which NodeSyllabusConcepts to fetch.
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NodeSyllabusConcepts to fetch.
+     */
+    orderBy?: NodeSyllabusConceptOrderByWithRelationInput | NodeSyllabusConceptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NodeSyllabusConcepts.
+     */
+    cursor?: NodeSyllabusConceptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NodeSyllabusConcepts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NodeSyllabusConcepts.
+     */
+    skip?: number
+    distinct?: NodeSyllabusConceptScalarFieldEnum | NodeSyllabusConceptScalarFieldEnum[]
+  }
+
+  /**
+   * NodeSyllabusConcept create
+   */
+  export type NodeSyllabusConceptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NodeSyllabusConcept.
+     */
+    data: XOR<NodeSyllabusConceptCreateInput, NodeSyllabusConceptUncheckedCreateInput>
+  }
+
+  /**
+   * NodeSyllabusConcept createMany
+   */
+  export type NodeSyllabusConceptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NodeSyllabusConcepts.
+     */
+    data: NodeSyllabusConceptCreateManyInput | NodeSyllabusConceptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NodeSyllabusConcept createManyAndReturn
+   */
+  export type NodeSyllabusConceptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * The data used to create many NodeSyllabusConcepts.
+     */
+    data: NodeSyllabusConceptCreateManyInput | NodeSyllabusConceptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NodeSyllabusConcept update
+   */
+  export type NodeSyllabusConceptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NodeSyllabusConcept.
+     */
+    data: XOR<NodeSyllabusConceptUpdateInput, NodeSyllabusConceptUncheckedUpdateInput>
+    /**
+     * Choose, which NodeSyllabusConcept to update.
+     */
+    where: NodeSyllabusConceptWhereUniqueInput
+  }
+
+  /**
+   * NodeSyllabusConcept updateMany
+   */
+  export type NodeSyllabusConceptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NodeSyllabusConcepts.
+     */
+    data: XOR<NodeSyllabusConceptUpdateManyMutationInput, NodeSyllabusConceptUncheckedUpdateManyInput>
+    /**
+     * Filter which NodeSyllabusConcepts to update
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * Limit how many NodeSyllabusConcepts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NodeSyllabusConcept updateManyAndReturn
+   */
+  export type NodeSyllabusConceptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * The data used to update NodeSyllabusConcepts.
+     */
+    data: XOR<NodeSyllabusConceptUpdateManyMutationInput, NodeSyllabusConceptUncheckedUpdateManyInput>
+    /**
+     * Filter which NodeSyllabusConcepts to update
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * Limit how many NodeSyllabusConcepts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NodeSyllabusConcept upsert
+   */
+  export type NodeSyllabusConceptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NodeSyllabusConcept to update in case it exists.
+     */
+    where: NodeSyllabusConceptWhereUniqueInput
+    /**
+     * In case the NodeSyllabusConcept found by the `where` argument doesn't exist, create a new NodeSyllabusConcept with this data.
+     */
+    create: XOR<NodeSyllabusConceptCreateInput, NodeSyllabusConceptUncheckedCreateInput>
+    /**
+     * In case the NodeSyllabusConcept was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NodeSyllabusConceptUpdateInput, NodeSyllabusConceptUncheckedUpdateInput>
+  }
+
+  /**
+   * NodeSyllabusConcept delete
+   */
+  export type NodeSyllabusConceptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+    /**
+     * Filter which NodeSyllabusConcept to delete.
+     */
+    where: NodeSyllabusConceptWhereUniqueInput
+  }
+
+  /**
+   * NodeSyllabusConcept deleteMany
+   */
+  export type NodeSyllabusConceptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NodeSyllabusConcepts to delete
+     */
+    where?: NodeSyllabusConceptWhereInput
+    /**
+     * Limit how many NodeSyllabusConcepts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NodeSyllabusConcept without action
+   */
+  export type NodeSyllabusConceptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NodeSyllabusConcept
+     */
+    select?: NodeSyllabusConceptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NodeSyllabusConcept
+     */
+    omit?: NodeSyllabusConceptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NodeSyllabusConceptInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -23401,32 +23482,11 @@ export namespace Prisma {
   export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
 
 
-  export const AcademicYearScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    level: 'level',
-    createdAt: 'createdAt'
-  };
-
-  export type AcademicYearScalarFieldEnum = (typeof AcademicYearScalarFieldEnum)[keyof typeof AcademicYearScalarFieldEnum]
-
-
-  export const SemesterScalarFieldEnum: {
-    id: 'id',
-    number: 'number',
-    createdAt: 'createdAt'
-  };
-
-  export type SemesterScalarFieldEnum = (typeof SemesterScalarFieldEnum)[keyof typeof SemesterScalarFieldEnum]
-
-
   export const CourseScalarFieldEnum: {
     id: 'id',
     code: 'code',
     name: 'name',
     subjectId: 'subjectId',
-    yearId: 'yearId',
-    semesterId: 'semesterId',
     ueNumber: 'ueNumber',
     syllabusUrl: 'syllabusUrl',
     createdAt: 'createdAt'
@@ -23546,12 +23606,45 @@ export namespace Prisma {
   export type ReviewEventScalarFieldEnum = (typeof ReviewEventScalarFieldEnum)[keyof typeof ReviewEventScalarFieldEnum]
 
 
+  export const KnowledgeNodeScalarFieldEnum: {
+    id: 'id',
+    subjectId: 'subjectId',
+    parentId: 'parentId',
+    name: 'name',
+    slug: 'slug',
+    order: 'order',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type KnowledgeNodeScalarFieldEnum = (typeof KnowledgeNodeScalarFieldEnum)[keyof typeof KnowledgeNodeScalarFieldEnum]
+
+
+  export const NodeSyllabusConceptScalarFieldEnum: {
+    nodeId: 'nodeId',
+    syllabusConceptId: 'syllabusConceptId',
+    addedByUserId: 'addedByUserId',
+    createdAt: 'createdAt'
+  };
+
+  export type NodeSyllabusConceptScalarFieldEnum = (typeof NodeSyllabusConceptScalarFieldEnum)[keyof typeof NodeSyllabusConceptScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -23568,6 +23661,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -23635,6 +23737,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
   /**
    * Deep Input Types
@@ -24103,6 +24219,7 @@ export namespace Prisma {
     name?: StringFilter<"Subject"> | string
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     courses?: CourseListRelationFilter
+    nodes?: KnowledgeNodeListRelationFilter
   }
 
   export type SubjectOrderByWithRelationInput = {
@@ -24110,6 +24227,7 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     courses?: CourseOrderByRelationAggregateInput
+    nodes?: KnowledgeNodeOrderByRelationAggregateInput
   }
 
   export type SubjectWhereUniqueInput = Prisma.AtLeast<{
@@ -24120,6 +24238,7 @@ export namespace Prisma {
     NOT?: SubjectWhereInput | SubjectWhereInput[]
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     courses?: CourseListRelationFilter
+    nodes?: KnowledgeNodeListRelationFilter
   }, "id" | "name">
 
   export type SubjectOrderByWithAggregationInput = {
@@ -24140,105 +24259,6 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Subject"> | Date | string
   }
 
-  export type AcademicYearWhereInput = {
-    AND?: AcademicYearWhereInput | AcademicYearWhereInput[]
-    OR?: AcademicYearWhereInput[]
-    NOT?: AcademicYearWhereInput | AcademicYearWhereInput[]
-    id?: StringFilter<"AcademicYear"> | string
-    name?: StringFilter<"AcademicYear"> | string
-    level?: IntFilter<"AcademicYear"> | number
-    createdAt?: DateTimeFilter<"AcademicYear"> | Date | string
-    courses?: CourseListRelationFilter
-  }
-
-  export type AcademicYearOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    level?: SortOrder
-    createdAt?: SortOrder
-    courses?: CourseOrderByRelationAggregateInput
-  }
-
-  export type AcademicYearWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    name?: string
-    AND?: AcademicYearWhereInput | AcademicYearWhereInput[]
-    OR?: AcademicYearWhereInput[]
-    NOT?: AcademicYearWhereInput | AcademicYearWhereInput[]
-    level?: IntFilter<"AcademicYear"> | number
-    createdAt?: DateTimeFilter<"AcademicYear"> | Date | string
-    courses?: CourseListRelationFilter
-  }, "id" | "name">
-
-  export type AcademicYearOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    level?: SortOrder
-    createdAt?: SortOrder
-    _count?: AcademicYearCountOrderByAggregateInput
-    _avg?: AcademicYearAvgOrderByAggregateInput
-    _max?: AcademicYearMaxOrderByAggregateInput
-    _min?: AcademicYearMinOrderByAggregateInput
-    _sum?: AcademicYearSumOrderByAggregateInput
-  }
-
-  export type AcademicYearScalarWhereWithAggregatesInput = {
-    AND?: AcademicYearScalarWhereWithAggregatesInput | AcademicYearScalarWhereWithAggregatesInput[]
-    OR?: AcademicYearScalarWhereWithAggregatesInput[]
-    NOT?: AcademicYearScalarWhereWithAggregatesInput | AcademicYearScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AcademicYear"> | string
-    name?: StringWithAggregatesFilter<"AcademicYear"> | string
-    level?: IntWithAggregatesFilter<"AcademicYear"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"AcademicYear"> | Date | string
-  }
-
-  export type SemesterWhereInput = {
-    AND?: SemesterWhereInput | SemesterWhereInput[]
-    OR?: SemesterWhereInput[]
-    NOT?: SemesterWhereInput | SemesterWhereInput[]
-    id?: StringFilter<"Semester"> | string
-    number?: IntFilter<"Semester"> | number
-    createdAt?: DateTimeFilter<"Semester"> | Date | string
-    courses?: CourseListRelationFilter
-  }
-
-  export type SemesterOrderByWithRelationInput = {
-    id?: SortOrder
-    number?: SortOrder
-    createdAt?: SortOrder
-    courses?: CourseOrderByRelationAggregateInput
-  }
-
-  export type SemesterWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: SemesterWhereInput | SemesterWhereInput[]
-    OR?: SemesterWhereInput[]
-    NOT?: SemesterWhereInput | SemesterWhereInput[]
-    number?: IntFilter<"Semester"> | number
-    createdAt?: DateTimeFilter<"Semester"> | Date | string
-    courses?: CourseListRelationFilter
-  }, "id">
-
-  export type SemesterOrderByWithAggregationInput = {
-    id?: SortOrder
-    number?: SortOrder
-    createdAt?: SortOrder
-    _count?: SemesterCountOrderByAggregateInput
-    _avg?: SemesterAvgOrderByAggregateInput
-    _max?: SemesterMaxOrderByAggregateInput
-    _min?: SemesterMinOrderByAggregateInput
-    _sum?: SemesterSumOrderByAggregateInput
-  }
-
-  export type SemesterScalarWhereWithAggregatesInput = {
-    AND?: SemesterScalarWhereWithAggregatesInput | SemesterScalarWhereWithAggregatesInput[]
-    OR?: SemesterScalarWhereWithAggregatesInput[]
-    NOT?: SemesterScalarWhereWithAggregatesInput | SemesterScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Semester"> | string
-    number?: IntWithAggregatesFilter<"Semester"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"Semester"> | Date | string
-  }
-
   export type CourseWhereInput = {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
@@ -24247,14 +24267,10 @@ export namespace Prisma {
     code?: StringFilter<"Course"> | string
     name?: StringFilter<"Course"> | string
     subjectId?: StringFilter<"Course"> | string
-    yearId?: StringNullableFilter<"Course"> | string | null
-    semesterId?: StringNullableFilter<"Course"> | string | null
     ueNumber?: StringNullableFilter<"Course"> | string | null
     syllabusUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
-    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
     subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
-    year?: XOR<AcademicYearNullableScalarRelationFilter, AcademicYearWhereInput> | null
     reviewSessions?: ReviewSessionListRelationFilter
     syllabusConcepts?: SyllabusConceptListRelationFilter
     enrollments?: UserCourseListRelationFilter
@@ -24265,14 +24281,10 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     subjectId?: SortOrder
-    yearId?: SortOrderInput | SortOrder
-    semesterId?: SortOrderInput | SortOrder
     ueNumber?: SortOrderInput | SortOrder
     syllabusUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    semester?: SemesterOrderByWithRelationInput
     subject?: SubjectOrderByWithRelationInput
-    year?: AcademicYearOrderByWithRelationInput
     reviewSessions?: ReviewSessionOrderByRelationAggregateInput
     syllabusConcepts?: SyllabusConceptOrderByRelationAggregateInput
     enrollments?: UserCourseOrderByRelationAggregateInput
@@ -24286,14 +24298,10 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     name?: StringFilter<"Course"> | string
     subjectId?: StringFilter<"Course"> | string
-    yearId?: StringNullableFilter<"Course"> | string | null
-    semesterId?: StringNullableFilter<"Course"> | string | null
     ueNumber?: StringNullableFilter<"Course"> | string | null
     syllabusUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
-    semester?: XOR<SemesterNullableScalarRelationFilter, SemesterWhereInput> | null
     subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
-    year?: XOR<AcademicYearNullableScalarRelationFilter, AcademicYearWhereInput> | null
     reviewSessions?: ReviewSessionListRelationFilter
     syllabusConcepts?: SyllabusConceptListRelationFilter
     enrollments?: UserCourseListRelationFilter
@@ -24304,8 +24312,6 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     subjectId?: SortOrder
-    yearId?: SortOrderInput | SortOrder
-    semesterId?: SortOrderInput | SortOrder
     ueNumber?: SortOrderInput | SortOrder
     syllabusUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -24322,8 +24328,6 @@ export namespace Prisma {
     code?: StringWithAggregatesFilter<"Course"> | string
     name?: StringWithAggregatesFilter<"Course"> | string
     subjectId?: StringWithAggregatesFilter<"Course"> | string
-    yearId?: StringNullableWithAggregatesFilter<"Course"> | string | null
-    semesterId?: StringNullableWithAggregatesFilter<"Course"> | string | null
     ueNumber?: StringNullableWithAggregatesFilter<"Course"> | string | null
     syllabusUrl?: StringNullableWithAggregatesFilter<"Course"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
@@ -24403,6 +24407,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    nodeAttachments?: NodeSyllabusConceptListRelationFilter
   }
 
   export type SyllabusConceptOrderByWithRelationInput = {
@@ -24415,6 +24420,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
     course?: CourseOrderByWithRelationInput
+    nodeAttachments?: NodeSyllabusConceptOrderByRelationAggregateInput
   }
 
   export type SyllabusConceptWhereUniqueInput = Prisma.AtLeast<{
@@ -24430,6 +24436,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    nodeAttachments?: NodeSyllabusConceptListRelationFilter
   }, "id">
 
   export type SyllabusConceptOrderByWithAggregationInput = {
@@ -24932,6 +24939,147 @@ export namespace Prisma {
     timeToRevealMs?: IntNullableWithAggregatesFilter<"ReviewEvent"> | number | null
     timeToRateMs?: IntNullableWithAggregatesFilter<"ReviewEvent"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"ReviewEvent"> | Date | string
+  }
+
+  export type KnowledgeNodeWhereInput = {
+    AND?: KnowledgeNodeWhereInput | KnowledgeNodeWhereInput[]
+    OR?: KnowledgeNodeWhereInput[]
+    NOT?: KnowledgeNodeWhereInput | KnowledgeNodeWhereInput[]
+    id?: StringFilter<"KnowledgeNode"> | string
+    subjectId?: StringFilter<"KnowledgeNode"> | string
+    parentId?: StringNullableFilter<"KnowledgeNode"> | string | null
+    name?: StringFilter<"KnowledgeNode"> | string
+    slug?: StringNullableFilter<"KnowledgeNode"> | string | null
+    order?: IntFilter<"KnowledgeNode"> | number
+    metadata?: JsonNullableFilter<"KnowledgeNode">
+    createdAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
+    updatedAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
+    subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
+    parent?: XOR<KnowledgeNodeNullableScalarRelationFilter, KnowledgeNodeWhereInput> | null
+    children?: KnowledgeNodeListRelationFilter
+    concepts?: NodeSyllabusConceptListRelationFilter
+  }
+
+  export type KnowledgeNodeOrderByWithRelationInput = {
+    id?: SortOrder
+    subjectId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    slug?: SortOrderInput | SortOrder
+    order?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    subject?: SubjectOrderByWithRelationInput
+    parent?: KnowledgeNodeOrderByWithRelationInput
+    children?: KnowledgeNodeOrderByRelationAggregateInput
+    concepts?: NodeSyllabusConceptOrderByRelationAggregateInput
+  }
+
+  export type KnowledgeNodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    subjectId_slug?: KnowledgeNodeSubjectIdSlugCompoundUniqueInput
+    AND?: KnowledgeNodeWhereInput | KnowledgeNodeWhereInput[]
+    OR?: KnowledgeNodeWhereInput[]
+    NOT?: KnowledgeNodeWhereInput | KnowledgeNodeWhereInput[]
+    subjectId?: StringFilter<"KnowledgeNode"> | string
+    parentId?: StringNullableFilter<"KnowledgeNode"> | string | null
+    name?: StringFilter<"KnowledgeNode"> | string
+    slug?: StringNullableFilter<"KnowledgeNode"> | string | null
+    order?: IntFilter<"KnowledgeNode"> | number
+    metadata?: JsonNullableFilter<"KnowledgeNode">
+    createdAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
+    updatedAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
+    subject?: XOR<SubjectScalarRelationFilter, SubjectWhereInput>
+    parent?: XOR<KnowledgeNodeNullableScalarRelationFilter, KnowledgeNodeWhereInput> | null
+    children?: KnowledgeNodeListRelationFilter
+    concepts?: NodeSyllabusConceptListRelationFilter
+  }, "id" | "subjectId_slug">
+
+  export type KnowledgeNodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    subjectId?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    slug?: SortOrderInput | SortOrder
+    order?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: KnowledgeNodeCountOrderByAggregateInput
+    _avg?: KnowledgeNodeAvgOrderByAggregateInput
+    _max?: KnowledgeNodeMaxOrderByAggregateInput
+    _min?: KnowledgeNodeMinOrderByAggregateInput
+    _sum?: KnowledgeNodeSumOrderByAggregateInput
+  }
+
+  export type KnowledgeNodeScalarWhereWithAggregatesInput = {
+    AND?: KnowledgeNodeScalarWhereWithAggregatesInput | KnowledgeNodeScalarWhereWithAggregatesInput[]
+    OR?: KnowledgeNodeScalarWhereWithAggregatesInput[]
+    NOT?: KnowledgeNodeScalarWhereWithAggregatesInput | KnowledgeNodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"KnowledgeNode"> | string
+    subjectId?: StringWithAggregatesFilter<"KnowledgeNode"> | string
+    parentId?: StringNullableWithAggregatesFilter<"KnowledgeNode"> | string | null
+    name?: StringWithAggregatesFilter<"KnowledgeNode"> | string
+    slug?: StringNullableWithAggregatesFilter<"KnowledgeNode"> | string | null
+    order?: IntWithAggregatesFilter<"KnowledgeNode"> | number
+    metadata?: JsonNullableWithAggregatesFilter<"KnowledgeNode">
+    createdAt?: DateTimeWithAggregatesFilter<"KnowledgeNode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"KnowledgeNode"> | Date | string
+  }
+
+  export type NodeSyllabusConceptWhereInput = {
+    AND?: NodeSyllabusConceptWhereInput | NodeSyllabusConceptWhereInput[]
+    OR?: NodeSyllabusConceptWhereInput[]
+    NOT?: NodeSyllabusConceptWhereInput | NodeSyllabusConceptWhereInput[]
+    nodeId?: StringFilter<"NodeSyllabusConcept"> | string
+    syllabusConceptId?: StringFilter<"NodeSyllabusConcept"> | string
+    addedByUserId?: StringNullableFilter<"NodeSyllabusConcept"> | string | null
+    createdAt?: DateTimeFilter<"NodeSyllabusConcept"> | Date | string
+    node?: XOR<KnowledgeNodeScalarRelationFilter, KnowledgeNodeWhereInput>
+    syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
+  }
+
+  export type NodeSyllabusConceptOrderByWithRelationInput = {
+    nodeId?: SortOrder
+    syllabusConceptId?: SortOrder
+    addedByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    node?: KnowledgeNodeOrderByWithRelationInput
+    syllabusConcept?: SyllabusConceptOrderByWithRelationInput
+  }
+
+  export type NodeSyllabusConceptWhereUniqueInput = Prisma.AtLeast<{
+    nodeId_syllabusConceptId?: NodeSyllabusConceptNodeIdSyllabusConceptIdCompoundUniqueInput
+    AND?: NodeSyllabusConceptWhereInput | NodeSyllabusConceptWhereInput[]
+    OR?: NodeSyllabusConceptWhereInput[]
+    NOT?: NodeSyllabusConceptWhereInput | NodeSyllabusConceptWhereInput[]
+    nodeId?: StringFilter<"NodeSyllabusConcept"> | string
+    syllabusConceptId?: StringFilter<"NodeSyllabusConcept"> | string
+    addedByUserId?: StringNullableFilter<"NodeSyllabusConcept"> | string | null
+    createdAt?: DateTimeFilter<"NodeSyllabusConcept"> | Date | string
+    node?: XOR<KnowledgeNodeScalarRelationFilter, KnowledgeNodeWhereInput>
+    syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
+  }, "nodeId_syllabusConceptId">
+
+  export type NodeSyllabusConceptOrderByWithAggregationInput = {
+    nodeId?: SortOrder
+    syllabusConceptId?: SortOrder
+    addedByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: NodeSyllabusConceptCountOrderByAggregateInput
+    _max?: NodeSyllabusConceptMaxOrderByAggregateInput
+    _min?: NodeSyllabusConceptMinOrderByAggregateInput
+  }
+
+  export type NodeSyllabusConceptScalarWhereWithAggregatesInput = {
+    AND?: NodeSyllabusConceptScalarWhereWithAggregatesInput | NodeSyllabusConceptScalarWhereWithAggregatesInput[]
+    OR?: NodeSyllabusConceptScalarWhereWithAggregatesInput[]
+    NOT?: NodeSyllabusConceptScalarWhereWithAggregatesInput | NodeSyllabusConceptScalarWhereWithAggregatesInput[]
+    nodeId?: StringWithAggregatesFilter<"NodeSyllabusConcept"> | string
+    syllabusConceptId?: StringWithAggregatesFilter<"NodeSyllabusConcept"> | string
+    addedByUserId?: StringNullableWithAggregatesFilter<"NodeSyllabusConcept"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"NodeSyllabusConcept"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -25454,6 +25602,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     courses?: CourseCreateNestedManyWithoutSubjectInput
+    nodes?: KnowledgeNodeCreateNestedManyWithoutSubjectInput
   }
 
   export type SubjectUncheckedCreateInput = {
@@ -25461,6 +25610,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     courses?: CourseUncheckedCreateNestedManyWithoutSubjectInput
+    nodes?: KnowledgeNodeUncheckedCreateNestedManyWithoutSubjectInput
   }
 
   export type SubjectUpdateInput = {
@@ -25468,6 +25618,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUpdateManyWithoutSubjectNestedInput
+    nodes?: KnowledgeNodeUpdateManyWithoutSubjectNestedInput
   }
 
   export type SubjectUncheckedUpdateInput = {
@@ -25475,6 +25626,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CourseUncheckedUpdateManyWithoutSubjectNestedInput
+    nodes?: KnowledgeNodeUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
   export type SubjectCreateManyInput = {
@@ -25495,105 +25647,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AcademicYearCreateInput = {
-    id?: string
-    name: string
-    level: number
-    createdAt?: Date | string
-    courses?: CourseCreateNestedManyWithoutYearInput
-  }
-
-  export type AcademicYearUncheckedCreateInput = {
-    id?: string
-    name: string
-    level: number
-    createdAt?: Date | string
-    courses?: CourseUncheckedCreateNestedManyWithoutYearInput
-  }
-
-  export type AcademicYearUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUpdateManyWithoutYearNestedInput
-  }
-
-  export type AcademicYearUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUncheckedUpdateManyWithoutYearNestedInput
-  }
-
-  export type AcademicYearCreateManyInput = {
-    id?: string
-    name: string
-    level: number
-    createdAt?: Date | string
-  }
-
-  export type AcademicYearUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AcademicYearUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SemesterCreateInput = {
-    id?: string
-    number: number
-    createdAt?: Date | string
-    courses?: CourseCreateNestedManyWithoutSemesterInput
-  }
-
-  export type SemesterUncheckedCreateInput = {
-    id?: string
-    number: number
-    createdAt?: Date | string
-    courses?: CourseUncheckedCreateNestedManyWithoutSemesterInput
-  }
-
-  export type SemesterUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUpdateManyWithoutSemesterNestedInput
-  }
-
-  export type SemesterUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    courses?: CourseUncheckedUpdateManyWithoutSemesterNestedInput
-  }
-
-  export type SemesterCreateManyInput = {
-    id?: string
-    number: number
-    createdAt?: Date | string
-  }
-
-  export type SemesterUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SemesterUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type CourseCreateInput = {
     id?: string
     code: string
@@ -25601,9 +25654,7 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
     syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     enrollments?: UserCourseCreateNestedManyWithoutCourseInput
@@ -25614,8 +25665,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -25631,9 +25680,7 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
     syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
     enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
@@ -25644,8 +25691,6 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25659,8 +25704,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -25680,8 +25723,6 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25750,6 +25791,7 @@ export namespace Prisma {
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
+    nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptUncheckedCreateInput = {
@@ -25761,6 +25803,7 @@ export namespace Prisma {
     order: number
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptUpdateInput = {
@@ -25772,6 +25815,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
+    nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type SyllabusConceptUncheckedUpdateInput = {
@@ -25783,6 +25827,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type SyllabusConceptCreateManyInput = {
@@ -26307,6 +26352,143 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type KnowledgeNodeCreateInput = {
+    id?: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subject: SubjectCreateNestedOneWithoutNodesInput
+    parent?: KnowledgeNodeCreateNestedOneWithoutChildrenInput
+    children?: KnowledgeNodeCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeUncheckedCreateInput = {
+    id?: string
+    subjectId: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: KnowledgeNodeUncheckedCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subject?: SubjectUpdateOneRequiredWithoutNodesNestedInput
+    parent?: KnowledgeNodeUpdateOneWithoutChildrenNestedInput
+    children?: KnowledgeNodeUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: KnowledgeNodeUncheckedUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUncheckedUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeCreateManyInput = {
+    id?: string
+    subjectId: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type KnowledgeNodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KnowledgeNodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptCreateInput = {
+    addedByUserId?: string | null
+    createdAt?: Date | string
+    node: KnowledgeNodeCreateNestedOneWithoutConceptsInput
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutNodeAttachmentsInput
+  }
+
+  export type NodeSyllabusConceptUncheckedCreateInput = {
+    nodeId: string
+    syllabusConceptId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type NodeSyllabusConceptUpdateInput = {
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    node?: KnowledgeNodeUpdateOneRequiredWithoutConceptsNestedInput
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutNodeAttachmentsNestedInput
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateInput = {
+    nodeId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptCreateManyInput = {
+    nodeId: string
+    syllabusConceptId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type NodeSyllabusConceptUpdateManyMutationInput = {
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateManyInput = {
+    nodeId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -26785,7 +26967,17 @@ export namespace Prisma {
     none?: CourseWhereInput
   }
 
+  export type KnowledgeNodeListRelationFilter = {
+    every?: KnowledgeNodeWhereInput
+    some?: KnowledgeNodeWhereInput
+    none?: KnowledgeNodeWhereInput
+  }
+
   export type CourseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type KnowledgeNodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26807,74 +26999,9 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type AcademicYearCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    level?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AcademicYearAvgOrderByAggregateInput = {
-    level?: SortOrder
-  }
-
-  export type AcademicYearMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    level?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AcademicYearMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    level?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AcademicYearSumOrderByAggregateInput = {
-    level?: SortOrder
-  }
-
-  export type SemesterCountOrderByAggregateInput = {
-    id?: SortOrder
-    number?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type SemesterAvgOrderByAggregateInput = {
-    number?: SortOrder
-  }
-
-  export type SemesterMaxOrderByAggregateInput = {
-    id?: SortOrder
-    number?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type SemesterMinOrderByAggregateInput = {
-    id?: SortOrder
-    number?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type SemesterSumOrderByAggregateInput = {
-    number?: SortOrder
-  }
-
-  export type SemesterNullableScalarRelationFilter = {
-    is?: SemesterWhereInput | null
-    isNot?: SemesterWhereInput | null
-  }
-
   export type SubjectScalarRelationFilter = {
     is?: SubjectWhereInput
     isNot?: SubjectWhereInput
-  }
-
-  export type AcademicYearNullableScalarRelationFilter = {
-    is?: AcademicYearWhereInput | null
-    isNot?: AcademicYearWhereInput | null
   }
 
   export type SyllabusConceptListRelationFilter = {
@@ -26892,8 +27019,6 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     subjectId?: SortOrder
-    yearId?: SortOrder
-    semesterId?: SortOrder
     ueNumber?: SortOrder
     syllabusUrl?: SortOrder
     createdAt?: SortOrder
@@ -26904,8 +27029,6 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     subjectId?: SortOrder
-    yearId?: SortOrder
-    semesterId?: SortOrder
     ueNumber?: SortOrder
     syllabusUrl?: SortOrder
     createdAt?: SortOrder
@@ -26916,8 +27039,6 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     subjectId?: SortOrder
-    yearId?: SortOrder
-    semesterId?: SortOrder
     ueNumber?: SortOrder
     syllabusUrl?: SortOrder
     createdAt?: SortOrder
@@ -26982,7 +27103,17 @@ export namespace Prisma {
     none?: ConceptMatchWhereInput
   }
 
+  export type NodeSyllabusConceptListRelationFilter = {
+    every?: NodeSyllabusConceptWhereInput
+    some?: NodeSyllabusConceptWhereInput
+    none?: NodeSyllabusConceptWhereInput
+  }
+
   export type ConceptMatchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NodeSyllabusConceptOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27379,6 +27510,138 @@ export namespace Prisma {
     timeToRevealMs?: SortOrder
     timeToRateMs?: SortOrder
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type KnowledgeNodeNullableScalarRelationFilter = {
+    is?: KnowledgeNodeWhereInput | null
+    isNot?: KnowledgeNodeWhereInput | null
+  }
+
+  export type KnowledgeNodeSubjectIdSlugCompoundUniqueInput = {
+    subjectId: string
+    slug: string
+  }
+
+  export type KnowledgeNodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    subjectId?: SortOrder
+    parentId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    order?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type KnowledgeNodeAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type KnowledgeNodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    subjectId?: SortOrder
+    parentId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type KnowledgeNodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    subjectId?: SortOrder
+    parentId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type KnowledgeNodeSumOrderByAggregateInput = {
+    order?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type KnowledgeNodeScalarRelationFilter = {
+    is?: KnowledgeNodeWhereInput
+    isNot?: KnowledgeNodeWhereInput
+  }
+
+  export type NodeSyllabusConceptNodeIdSyllabusConceptIdCompoundUniqueInput = {
+    nodeId: string
+    syllabusConceptId: string
+  }
+
+  export type NodeSyllabusConceptCountOrderByAggregateInput = {
+    nodeId?: SortOrder
+    syllabusConceptId?: SortOrder
+    addedByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NodeSyllabusConceptMaxOrderByAggregateInput = {
+    nodeId?: SortOrder
+    syllabusConceptId?: SortOrder
+    addedByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NodeSyllabusConceptMinOrderByAggregateInput = {
+    nodeId?: SortOrder
+    syllabusConceptId?: SortOrder
+    addedByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
 
   export type FeedbackCreateNestedManyWithoutUserInput = {
     create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
@@ -27757,11 +28020,25 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
+  export type KnowledgeNodeCreateNestedManyWithoutSubjectInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput> | KnowledgeNodeCreateWithoutSubjectInput[] | KnowledgeNodeUncheckedCreateWithoutSubjectInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutSubjectInput | KnowledgeNodeCreateOrConnectWithoutSubjectInput[]
+    createMany?: KnowledgeNodeCreateManySubjectInputEnvelope
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+  }
+
   export type CourseUncheckedCreateNestedManyWithoutSubjectInput = {
     create?: XOR<CourseCreateWithoutSubjectInput, CourseUncheckedCreateWithoutSubjectInput> | CourseCreateWithoutSubjectInput[] | CourseUncheckedCreateWithoutSubjectInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutSubjectInput | CourseCreateOrConnectWithoutSubjectInput[]
     createMany?: CourseCreateManySubjectInputEnvelope
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
+  }
+
+  export type KnowledgeNodeUncheckedCreateNestedManyWithoutSubjectInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput> | KnowledgeNodeCreateWithoutSubjectInput[] | KnowledgeNodeUncheckedCreateWithoutSubjectInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutSubjectInput | KnowledgeNodeCreateOrConnectWithoutSubjectInput[]
+    createMany?: KnowledgeNodeCreateManySubjectInputEnvelope
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
   }
 
   export type CourseUpdateManyWithoutSubjectNestedInput = {
@@ -27778,6 +28055,20 @@ export namespace Prisma {
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
   }
 
+  export type KnowledgeNodeUpdateManyWithoutSubjectNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput> | KnowledgeNodeCreateWithoutSubjectInput[] | KnowledgeNodeUncheckedCreateWithoutSubjectInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutSubjectInput | KnowledgeNodeCreateOrConnectWithoutSubjectInput[]
+    upsert?: KnowledgeNodeUpsertWithWhereUniqueWithoutSubjectInput | KnowledgeNodeUpsertWithWhereUniqueWithoutSubjectInput[]
+    createMany?: KnowledgeNodeCreateManySubjectInputEnvelope
+    set?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    disconnect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    delete?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    update?: KnowledgeNodeUpdateWithWhereUniqueWithoutSubjectInput | KnowledgeNodeUpdateWithWhereUniqueWithoutSubjectInput[]
+    updateMany?: KnowledgeNodeUpdateManyWithWhereWithoutSubjectInput | KnowledgeNodeUpdateManyWithWhereWithoutSubjectInput[]
+    deleteMany?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
+  }
+
   export type CourseUncheckedUpdateManyWithoutSubjectNestedInput = {
     create?: XOR<CourseCreateWithoutSubjectInput, CourseUncheckedCreateWithoutSubjectInput> | CourseCreateWithoutSubjectInput[] | CourseUncheckedCreateWithoutSubjectInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutSubjectInput | CourseCreateOrConnectWithoutSubjectInput[]
@@ -27792,106 +28083,24 @@ export namespace Prisma {
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
   }
 
-  export type CourseCreateNestedManyWithoutYearInput = {
-    create?: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput> | CourseCreateWithoutYearInput[] | CourseUncheckedCreateWithoutYearInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutYearInput | CourseCreateOrConnectWithoutYearInput[]
-    createMany?: CourseCreateManyYearInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type CourseUncheckedCreateNestedManyWithoutYearInput = {
-    create?: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput> | CourseCreateWithoutYearInput[] | CourseUncheckedCreateWithoutYearInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutYearInput | CourseCreateOrConnectWithoutYearInput[]
-    createMany?: CourseCreateManyYearInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type CourseUpdateManyWithoutYearNestedInput = {
-    create?: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput> | CourseCreateWithoutYearInput[] | CourseUncheckedCreateWithoutYearInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutYearInput | CourseCreateOrConnectWithoutYearInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutYearInput | CourseUpsertWithWhereUniqueWithoutYearInput[]
-    createMany?: CourseCreateManyYearInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutYearInput | CourseUpdateWithWhereUniqueWithoutYearInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutYearInput | CourseUpdateManyWithWhereWithoutYearInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
-  }
-
-  export type CourseUncheckedUpdateManyWithoutYearNestedInput = {
-    create?: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput> | CourseCreateWithoutYearInput[] | CourseUncheckedCreateWithoutYearInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutYearInput | CourseCreateOrConnectWithoutYearInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutYearInput | CourseUpsertWithWhereUniqueWithoutYearInput[]
-    createMany?: CourseCreateManyYearInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutYearInput | CourseUpdateWithWhereUniqueWithoutYearInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutYearInput | CourseUpdateManyWithWhereWithoutYearInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
-  }
-
-  export type CourseCreateNestedManyWithoutSemesterInput = {
-    create?: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput> | CourseCreateWithoutSemesterInput[] | CourseUncheckedCreateWithoutSemesterInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutSemesterInput | CourseCreateOrConnectWithoutSemesterInput[]
-    createMany?: CourseCreateManySemesterInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type CourseUncheckedCreateNestedManyWithoutSemesterInput = {
-    create?: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput> | CourseCreateWithoutSemesterInput[] | CourseUncheckedCreateWithoutSemesterInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutSemesterInput | CourseCreateOrConnectWithoutSemesterInput[]
-    createMany?: CourseCreateManySemesterInputEnvelope
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-  }
-
-  export type CourseUpdateManyWithoutSemesterNestedInput = {
-    create?: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput> | CourseCreateWithoutSemesterInput[] | CourseUncheckedCreateWithoutSemesterInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutSemesterInput | CourseCreateOrConnectWithoutSemesterInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutSemesterInput | CourseUpsertWithWhereUniqueWithoutSemesterInput[]
-    createMany?: CourseCreateManySemesterInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutSemesterInput | CourseUpdateWithWhereUniqueWithoutSemesterInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutSemesterInput | CourseUpdateManyWithWhereWithoutSemesterInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
-  }
-
-  export type CourseUncheckedUpdateManyWithoutSemesterNestedInput = {
-    create?: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput> | CourseCreateWithoutSemesterInput[] | CourseUncheckedCreateWithoutSemesterInput[]
-    connectOrCreate?: CourseCreateOrConnectWithoutSemesterInput | CourseCreateOrConnectWithoutSemesterInput[]
-    upsert?: CourseUpsertWithWhereUniqueWithoutSemesterInput | CourseUpsertWithWhereUniqueWithoutSemesterInput[]
-    createMany?: CourseCreateManySemesterInputEnvelope
-    set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
-    update?: CourseUpdateWithWhereUniqueWithoutSemesterInput | CourseUpdateWithWhereUniqueWithoutSemesterInput[]
-    updateMany?: CourseUpdateManyWithWhereWithoutSemesterInput | CourseUpdateManyWithWhereWithoutSemesterInput[]
-    deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
-  }
-
-  export type SemesterCreateNestedOneWithoutCoursesInput = {
-    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
-    connect?: SemesterWhereUniqueInput
+  export type KnowledgeNodeUncheckedUpdateManyWithoutSubjectNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput> | KnowledgeNodeCreateWithoutSubjectInput[] | KnowledgeNodeUncheckedCreateWithoutSubjectInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutSubjectInput | KnowledgeNodeCreateOrConnectWithoutSubjectInput[]
+    upsert?: KnowledgeNodeUpsertWithWhereUniqueWithoutSubjectInput | KnowledgeNodeUpsertWithWhereUniqueWithoutSubjectInput[]
+    createMany?: KnowledgeNodeCreateManySubjectInputEnvelope
+    set?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    disconnect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    delete?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    update?: KnowledgeNodeUpdateWithWhereUniqueWithoutSubjectInput | KnowledgeNodeUpdateWithWhereUniqueWithoutSubjectInput[]
+    updateMany?: KnowledgeNodeUpdateManyWithWhereWithoutSubjectInput | KnowledgeNodeUpdateManyWithWhereWithoutSubjectInput[]
+    deleteMany?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
   }
 
   export type SubjectCreateNestedOneWithoutCoursesInput = {
     create?: XOR<SubjectCreateWithoutCoursesInput, SubjectUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: SubjectCreateOrConnectWithoutCoursesInput
     connect?: SubjectWhereUniqueInput
-  }
-
-  export type AcademicYearCreateNestedOneWithoutCoursesInput = {
-    create?: XOR<AcademicYearCreateWithoutCoursesInput, AcademicYearUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: AcademicYearCreateOrConnectWithoutCoursesInput
-    connect?: AcademicYearWhereUniqueInput
   }
 
   export type ReviewSessionCreateNestedManyWithoutCourseInput = {
@@ -27936,32 +28145,12 @@ export namespace Prisma {
     connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
   }
 
-  export type SemesterUpdateOneWithoutCoursesNestedInput = {
-    create?: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: SemesterCreateOrConnectWithoutCoursesInput
-    upsert?: SemesterUpsertWithoutCoursesInput
-    disconnect?: SemesterWhereInput | boolean
-    delete?: SemesterWhereInput | boolean
-    connect?: SemesterWhereUniqueInput
-    update?: XOR<XOR<SemesterUpdateToOneWithWhereWithoutCoursesInput, SemesterUpdateWithoutCoursesInput>, SemesterUncheckedUpdateWithoutCoursesInput>
-  }
-
   export type SubjectUpdateOneRequiredWithoutCoursesNestedInput = {
     create?: XOR<SubjectCreateWithoutCoursesInput, SubjectUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: SubjectCreateOrConnectWithoutCoursesInput
     upsert?: SubjectUpsertWithoutCoursesInput
     connect?: SubjectWhereUniqueInput
     update?: XOR<XOR<SubjectUpdateToOneWithWhereWithoutCoursesInput, SubjectUpdateWithoutCoursesInput>, SubjectUncheckedUpdateWithoutCoursesInput>
-  }
-
-  export type AcademicYearUpdateOneWithoutCoursesNestedInput = {
-    create?: XOR<AcademicYearCreateWithoutCoursesInput, AcademicYearUncheckedCreateWithoutCoursesInput>
-    connectOrCreate?: AcademicYearCreateOrConnectWithoutCoursesInput
-    upsert?: AcademicYearUpsertWithoutCoursesInput
-    disconnect?: AcademicYearWhereInput | boolean
-    delete?: AcademicYearWhereInput | boolean
-    connect?: AcademicYearWhereUniqueInput
-    update?: XOR<XOR<AcademicYearUpdateToOneWithWhereWithoutCoursesInput, AcademicYearUpdateWithoutCoursesInput>, AcademicYearUncheckedUpdateWithoutCoursesInput>
   }
 
   export type ReviewSessionUpdateManyWithoutCourseNestedInput = {
@@ -28089,11 +28278,25 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
+  export type NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput> | NodeSyllabusConceptCreateWithoutSyllabusConceptInput[] | NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput | NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput[]
+    createMany?: NodeSyllabusConceptCreateManySyllabusConceptInputEnvelope
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+  }
+
   export type ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput = {
     create?: XOR<ConceptMatchCreateWithoutSyllabusConceptInput, ConceptMatchUncheckedCreateWithoutSyllabusConceptInput> | ConceptMatchCreateWithoutSyllabusConceptInput[] | ConceptMatchUncheckedCreateWithoutSyllabusConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutSyllabusConceptInput | ConceptMatchCreateOrConnectWithoutSyllabusConceptInput[]
     createMany?: ConceptMatchCreateManySyllabusConceptInputEnvelope
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
+  }
+
+  export type NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput> | NodeSyllabusConceptCreateWithoutSyllabusConceptInput[] | NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput | NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput[]
+    createMany?: NodeSyllabusConceptCreateManySyllabusConceptInputEnvelope
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -28126,6 +28329,20 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSyllabusConceptsInput, CourseUpdateWithoutSyllabusConceptsInput>, CourseUncheckedUpdateWithoutSyllabusConceptsInput>
   }
 
+  export type NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput> | NodeSyllabusConceptCreateWithoutSyllabusConceptInput[] | NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput | NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput[]
+    upsert?: NodeSyllabusConceptUpsertWithWhereUniqueWithoutSyllabusConceptInput | NodeSyllabusConceptUpsertWithWhereUniqueWithoutSyllabusConceptInput[]
+    createMany?: NodeSyllabusConceptCreateManySyllabusConceptInputEnvelope
+    set?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    disconnect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    delete?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    update?: NodeSyllabusConceptUpdateWithWhereUniqueWithoutSyllabusConceptInput | NodeSyllabusConceptUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
+    updateMany?: NodeSyllabusConceptUpdateManyWithWhereWithoutSyllabusConceptInput | NodeSyllabusConceptUpdateManyWithWhereWithoutSyllabusConceptInput[]
+    deleteMany?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
+  }
+
   export type ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput = {
     create?: XOR<ConceptMatchCreateWithoutSyllabusConceptInput, ConceptMatchUncheckedCreateWithoutSyllabusConceptInput> | ConceptMatchCreateWithoutSyllabusConceptInput[] | ConceptMatchUncheckedCreateWithoutSyllabusConceptInput[]
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutSyllabusConceptInput | ConceptMatchCreateOrConnectWithoutSyllabusConceptInput[]
@@ -28138,6 +28355,20 @@ export namespace Prisma {
     update?: ConceptMatchUpdateWithWhereUniqueWithoutSyllabusConceptInput | ConceptMatchUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
     updateMany?: ConceptMatchUpdateManyWithWhereWithoutSyllabusConceptInput | ConceptMatchUpdateManyWithWhereWithoutSyllabusConceptInput[]
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput> | NodeSyllabusConceptCreateWithoutSyllabusConceptInput[] | NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput | NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput[]
+    upsert?: NodeSyllabusConceptUpsertWithWhereUniqueWithoutSyllabusConceptInput | NodeSyllabusConceptUpsertWithWhereUniqueWithoutSyllabusConceptInput[]
+    createMany?: NodeSyllabusConceptCreateManySyllabusConceptInputEnvelope
+    set?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    disconnect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    delete?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    update?: NodeSyllabusConceptUpdateWithWhereUniqueWithoutSyllabusConceptInput | NodeSyllabusConceptUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
+    updateMany?: NodeSyllabusConceptUpdateManyWithWhereWithoutSyllabusConceptInput | NodeSyllabusConceptUpdateManyWithWhereWithoutSyllabusConceptInput[]
+    deleteMany?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
   }
 
   export type ConceptCreateNestedManyWithoutVideoJobInput = {
@@ -28498,6 +28729,148 @@ export namespace Prisma {
     update?: XOR<XOR<ReviewSessionUpdateToOneWithWhereWithoutEventsInput, ReviewSessionUpdateWithoutEventsInput>, ReviewSessionUncheckedUpdateWithoutEventsInput>
   }
 
+  export type SubjectCreateNestedOneWithoutNodesInput = {
+    create?: XOR<SubjectCreateWithoutNodesInput, SubjectUncheckedCreateWithoutNodesInput>
+    connectOrCreate?: SubjectCreateOrConnectWithoutNodesInput
+    connect?: SubjectWhereUniqueInput
+  }
+
+  export type KnowledgeNodeCreateNestedOneWithoutChildrenInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutChildrenInput, KnowledgeNodeUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutChildrenInput
+    connect?: KnowledgeNodeWhereUniqueInput
+  }
+
+  export type KnowledgeNodeCreateNestedManyWithoutParentInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput> | KnowledgeNodeCreateWithoutParentInput[] | KnowledgeNodeUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutParentInput | KnowledgeNodeCreateOrConnectWithoutParentInput[]
+    createMany?: KnowledgeNodeCreateManyParentInputEnvelope
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+  }
+
+  export type NodeSyllabusConceptCreateNestedManyWithoutNodeInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput> | NodeSyllabusConceptCreateWithoutNodeInput[] | NodeSyllabusConceptUncheckedCreateWithoutNodeInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutNodeInput | NodeSyllabusConceptCreateOrConnectWithoutNodeInput[]
+    createMany?: NodeSyllabusConceptCreateManyNodeInputEnvelope
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+  }
+
+  export type KnowledgeNodeUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput> | KnowledgeNodeCreateWithoutParentInput[] | KnowledgeNodeUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutParentInput | KnowledgeNodeCreateOrConnectWithoutParentInput[]
+    createMany?: KnowledgeNodeCreateManyParentInputEnvelope
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+  }
+
+  export type NodeSyllabusConceptUncheckedCreateNestedManyWithoutNodeInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput> | NodeSyllabusConceptCreateWithoutNodeInput[] | NodeSyllabusConceptUncheckedCreateWithoutNodeInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutNodeInput | NodeSyllabusConceptCreateOrConnectWithoutNodeInput[]
+    createMany?: NodeSyllabusConceptCreateManyNodeInputEnvelope
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+  }
+
+  export type SubjectUpdateOneRequiredWithoutNodesNestedInput = {
+    create?: XOR<SubjectCreateWithoutNodesInput, SubjectUncheckedCreateWithoutNodesInput>
+    connectOrCreate?: SubjectCreateOrConnectWithoutNodesInput
+    upsert?: SubjectUpsertWithoutNodesInput
+    connect?: SubjectWhereUniqueInput
+    update?: XOR<XOR<SubjectUpdateToOneWithWhereWithoutNodesInput, SubjectUpdateWithoutNodesInput>, SubjectUncheckedUpdateWithoutNodesInput>
+  }
+
+  export type KnowledgeNodeUpdateOneWithoutChildrenNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutChildrenInput, KnowledgeNodeUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutChildrenInput
+    upsert?: KnowledgeNodeUpsertWithoutChildrenInput
+    disconnect?: KnowledgeNodeWhereInput | boolean
+    delete?: KnowledgeNodeWhereInput | boolean
+    connect?: KnowledgeNodeWhereUniqueInput
+    update?: XOR<XOR<KnowledgeNodeUpdateToOneWithWhereWithoutChildrenInput, KnowledgeNodeUpdateWithoutChildrenInput>, KnowledgeNodeUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type KnowledgeNodeUpdateManyWithoutParentNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput> | KnowledgeNodeCreateWithoutParentInput[] | KnowledgeNodeUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutParentInput | KnowledgeNodeCreateOrConnectWithoutParentInput[]
+    upsert?: KnowledgeNodeUpsertWithWhereUniqueWithoutParentInput | KnowledgeNodeUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: KnowledgeNodeCreateManyParentInputEnvelope
+    set?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    disconnect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    delete?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    update?: KnowledgeNodeUpdateWithWhereUniqueWithoutParentInput | KnowledgeNodeUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: KnowledgeNodeUpdateManyWithWhereWithoutParentInput | KnowledgeNodeUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
+  }
+
+  export type NodeSyllabusConceptUpdateManyWithoutNodeNestedInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput> | NodeSyllabusConceptCreateWithoutNodeInput[] | NodeSyllabusConceptUncheckedCreateWithoutNodeInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutNodeInput | NodeSyllabusConceptCreateOrConnectWithoutNodeInput[]
+    upsert?: NodeSyllabusConceptUpsertWithWhereUniqueWithoutNodeInput | NodeSyllabusConceptUpsertWithWhereUniqueWithoutNodeInput[]
+    createMany?: NodeSyllabusConceptCreateManyNodeInputEnvelope
+    set?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    disconnect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    delete?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    update?: NodeSyllabusConceptUpdateWithWhereUniqueWithoutNodeInput | NodeSyllabusConceptUpdateWithWhereUniqueWithoutNodeInput[]
+    updateMany?: NodeSyllabusConceptUpdateManyWithWhereWithoutNodeInput | NodeSyllabusConceptUpdateManyWithWhereWithoutNodeInput[]
+    deleteMany?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
+  }
+
+  export type KnowledgeNodeUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput> | KnowledgeNodeCreateWithoutParentInput[] | KnowledgeNodeUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutParentInput | KnowledgeNodeCreateOrConnectWithoutParentInput[]
+    upsert?: KnowledgeNodeUpsertWithWhereUniqueWithoutParentInput | KnowledgeNodeUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: KnowledgeNodeCreateManyParentInputEnvelope
+    set?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    disconnect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    delete?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    connect?: KnowledgeNodeWhereUniqueInput | KnowledgeNodeWhereUniqueInput[]
+    update?: KnowledgeNodeUpdateWithWhereUniqueWithoutParentInput | KnowledgeNodeUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: KnowledgeNodeUpdateManyWithWhereWithoutParentInput | KnowledgeNodeUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateManyWithoutNodeNestedInput = {
+    create?: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput> | NodeSyllabusConceptCreateWithoutNodeInput[] | NodeSyllabusConceptUncheckedCreateWithoutNodeInput[]
+    connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutNodeInput | NodeSyllabusConceptCreateOrConnectWithoutNodeInput[]
+    upsert?: NodeSyllabusConceptUpsertWithWhereUniqueWithoutNodeInput | NodeSyllabusConceptUpsertWithWhereUniqueWithoutNodeInput[]
+    createMany?: NodeSyllabusConceptCreateManyNodeInputEnvelope
+    set?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    disconnect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    delete?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    connect?: NodeSyllabusConceptWhereUniqueInput | NodeSyllabusConceptWhereUniqueInput[]
+    update?: NodeSyllabusConceptUpdateWithWhereUniqueWithoutNodeInput | NodeSyllabusConceptUpdateWithWhereUniqueWithoutNodeInput[]
+    updateMany?: NodeSyllabusConceptUpdateManyWithWhereWithoutNodeInput | NodeSyllabusConceptUpdateManyWithWhereWithoutNodeInput[]
+    deleteMany?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
+  }
+
+  export type KnowledgeNodeCreateNestedOneWithoutConceptsInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutConceptsInput, KnowledgeNodeUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutConceptsInput
+    connect?: KnowledgeNodeWhereUniqueInput
+  }
+
+  export type SyllabusConceptCreateNestedOneWithoutNodeAttachmentsInput = {
+    create?: XOR<SyllabusConceptCreateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedCreateWithoutNodeAttachmentsInput>
+    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutNodeAttachmentsInput
+    connect?: SyllabusConceptWhereUniqueInput
+  }
+
+  export type KnowledgeNodeUpdateOneRequiredWithoutConceptsNestedInput = {
+    create?: XOR<KnowledgeNodeCreateWithoutConceptsInput, KnowledgeNodeUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: KnowledgeNodeCreateOrConnectWithoutConceptsInput
+    upsert?: KnowledgeNodeUpsertWithoutConceptsInput
+    connect?: KnowledgeNodeWhereUniqueInput
+    update?: XOR<XOR<KnowledgeNodeUpdateToOneWithWhereWithoutConceptsInput, KnowledgeNodeUpdateWithoutConceptsInput>, KnowledgeNodeUncheckedUpdateWithoutConceptsInput>
+  }
+
+  export type SyllabusConceptUpdateOneRequiredWithoutNodeAttachmentsNestedInput = {
+    create?: XOR<SyllabusConceptCreateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedCreateWithoutNodeAttachmentsInput>
+    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutNodeAttachmentsInput
+    upsert?: SyllabusConceptUpsertWithoutNodeAttachmentsInput
+    connect?: SyllabusConceptWhereUniqueInput
+    update?: XOR<XOR<SyllabusConceptUpdateToOneWithWhereWithoutNodeAttachmentsInput, SyllabusConceptUpdateWithoutNodeAttachmentsInput>, SyllabusConceptUncheckedUpdateWithoutNodeAttachmentsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -28726,6 +29099,29 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type FeedbackCreateWithoutUserInput = {
@@ -29482,8 +29878,6 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
     syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     enrollments?: UserCourseCreateNestedManyWithoutCourseInput
@@ -29493,8 +29887,6 @@ export namespace Prisma {
     id?: string
     code: string
     name: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -29510,6 +29902,42 @@ export namespace Prisma {
 
   export type CourseCreateManySubjectInputEnvelope = {
     data: CourseCreateManySubjectInput | CourseCreateManySubjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type KnowledgeNodeCreateWithoutSubjectInput = {
+    id?: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: KnowledgeNodeCreateNestedOneWithoutChildrenInput
+    children?: KnowledgeNodeCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeUncheckedCreateWithoutSubjectInput = {
+    id?: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: KnowledgeNodeUncheckedCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeCreateOrConnectWithoutSubjectInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    create: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput>
+  }
+
+  export type KnowledgeNodeCreateManySubjectInputEnvelope = {
+    data: KnowledgeNodeCreateManySubjectInput | KnowledgeNodeCreateManySubjectInput[]
     skipDuplicates?: boolean
   }
 
@@ -29537,172 +29965,59 @@ export namespace Prisma {
     code?: StringFilter<"Course"> | string
     name?: StringFilter<"Course"> | string
     subjectId?: StringFilter<"Course"> | string
-    yearId?: StringNullableFilter<"Course"> | string | null
-    semesterId?: StringNullableFilter<"Course"> | string | null
     ueNumber?: StringNullableFilter<"Course"> | string | null
     syllabusUrl?: StringNullableFilter<"Course"> | string | null
     createdAt?: DateTimeFilter<"Course"> | Date | string
   }
 
-  export type CourseCreateWithoutYearInput = {
-    id?: string
-    code: string
-    name: string
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
-    subject: SubjectCreateNestedOneWithoutCoursesInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
+  export type KnowledgeNodeUpsertWithWhereUniqueWithoutSubjectInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    update: XOR<KnowledgeNodeUpdateWithoutSubjectInput, KnowledgeNodeUncheckedUpdateWithoutSubjectInput>
+    create: XOR<KnowledgeNodeCreateWithoutSubjectInput, KnowledgeNodeUncheckedCreateWithoutSubjectInput>
   }
 
-  export type CourseUncheckedCreateWithoutYearInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    semesterId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
+  export type KnowledgeNodeUpdateWithWhereUniqueWithoutSubjectInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    data: XOR<KnowledgeNodeUpdateWithoutSubjectInput, KnowledgeNodeUncheckedUpdateWithoutSubjectInput>
   }
 
-  export type CourseCreateOrConnectWithoutYearInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput>
+  export type KnowledgeNodeUpdateManyWithWhereWithoutSubjectInput = {
+    where: KnowledgeNodeScalarWhereInput
+    data: XOR<KnowledgeNodeUpdateManyMutationInput, KnowledgeNodeUncheckedUpdateManyWithoutSubjectInput>
   }
 
-  export type CourseCreateManyYearInputEnvelope = {
-    data: CourseCreateManyYearInput | CourseCreateManyYearInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CourseUpsertWithWhereUniqueWithoutYearInput = {
-    where: CourseWhereUniqueInput
-    update: XOR<CourseUpdateWithoutYearInput, CourseUncheckedUpdateWithoutYearInput>
-    create: XOR<CourseCreateWithoutYearInput, CourseUncheckedCreateWithoutYearInput>
-  }
-
-  export type CourseUpdateWithWhereUniqueWithoutYearInput = {
-    where: CourseWhereUniqueInput
-    data: XOR<CourseUpdateWithoutYearInput, CourseUncheckedUpdateWithoutYearInput>
-  }
-
-  export type CourseUpdateManyWithWhereWithoutYearInput = {
-    where: CourseScalarWhereInput
-    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutYearInput>
-  }
-
-  export type CourseCreateWithoutSemesterInput = {
-    id?: string
-    code: string
-    name: string
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
-    reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
-    enrollments?: UserCourseCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseUncheckedCreateWithoutSemesterInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    yearId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutCourseInput
-    syllabusConcepts?: SyllabusConceptUncheckedCreateNestedManyWithoutCourseInput
-    enrollments?: UserCourseUncheckedCreateNestedManyWithoutCourseInput
-  }
-
-  export type CourseCreateOrConnectWithoutSemesterInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput>
-  }
-
-  export type CourseCreateManySemesterInputEnvelope = {
-    data: CourseCreateManySemesterInput | CourseCreateManySemesterInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CourseUpsertWithWhereUniqueWithoutSemesterInput = {
-    where: CourseWhereUniqueInput
-    update: XOR<CourseUpdateWithoutSemesterInput, CourseUncheckedUpdateWithoutSemesterInput>
-    create: XOR<CourseCreateWithoutSemesterInput, CourseUncheckedCreateWithoutSemesterInput>
-  }
-
-  export type CourseUpdateWithWhereUniqueWithoutSemesterInput = {
-    where: CourseWhereUniqueInput
-    data: XOR<CourseUpdateWithoutSemesterInput, CourseUncheckedUpdateWithoutSemesterInput>
-  }
-
-  export type CourseUpdateManyWithWhereWithoutSemesterInput = {
-    where: CourseScalarWhereInput
-    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyWithoutSemesterInput>
-  }
-
-  export type SemesterCreateWithoutCoursesInput = {
-    id?: string
-    number: number
-    createdAt?: Date | string
-  }
-
-  export type SemesterUncheckedCreateWithoutCoursesInput = {
-    id?: string
-    number: number
-    createdAt?: Date | string
-  }
-
-  export type SemesterCreateOrConnectWithoutCoursesInput = {
-    where: SemesterWhereUniqueInput
-    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
+  export type KnowledgeNodeScalarWhereInput = {
+    AND?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
+    OR?: KnowledgeNodeScalarWhereInput[]
+    NOT?: KnowledgeNodeScalarWhereInput | KnowledgeNodeScalarWhereInput[]
+    id?: StringFilter<"KnowledgeNode"> | string
+    subjectId?: StringFilter<"KnowledgeNode"> | string
+    parentId?: StringNullableFilter<"KnowledgeNode"> | string | null
+    name?: StringFilter<"KnowledgeNode"> | string
+    slug?: StringNullableFilter<"KnowledgeNode"> | string | null
+    order?: IntFilter<"KnowledgeNode"> | number
+    metadata?: JsonNullableFilter<"KnowledgeNode">
+    createdAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
+    updatedAt?: DateTimeFilter<"KnowledgeNode"> | Date | string
   }
 
   export type SubjectCreateWithoutCoursesInput = {
     id?: string
     name: string
     createdAt?: Date | string
+    nodes?: KnowledgeNodeCreateNestedManyWithoutSubjectInput
   }
 
   export type SubjectUncheckedCreateWithoutCoursesInput = {
     id?: string
     name: string
     createdAt?: Date | string
+    nodes?: KnowledgeNodeUncheckedCreateNestedManyWithoutSubjectInput
   }
 
   export type SubjectCreateOrConnectWithoutCoursesInput = {
     where: SubjectWhereUniqueInput
     create: XOR<SubjectCreateWithoutCoursesInput, SubjectUncheckedCreateWithoutCoursesInput>
-  }
-
-  export type AcademicYearCreateWithoutCoursesInput = {
-    id?: string
-    name: string
-    level: number
-    createdAt?: Date | string
-  }
-
-  export type AcademicYearUncheckedCreateWithoutCoursesInput = {
-    id?: string
-    name: string
-    level: number
-    createdAt?: Date | string
-  }
-
-  export type AcademicYearCreateOrConnectWithoutCoursesInput = {
-    where: AcademicYearWhereUniqueInput
-    create: XOR<AcademicYearCreateWithoutCoursesInput, AcademicYearUncheckedCreateWithoutCoursesInput>
   }
 
   export type ReviewSessionCreateWithoutCourseInput = {
@@ -29745,6 +30060,7 @@ export namespace Prisma {
     order: number
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptUncheckedCreateWithoutCourseInput = {
@@ -29755,6 +30071,7 @@ export namespace Prisma {
     order: number
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptCreateOrConnectWithoutCourseInput = {
@@ -29791,29 +30108,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SemesterUpsertWithoutCoursesInput = {
-    update: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
-    create: XOR<SemesterCreateWithoutCoursesInput, SemesterUncheckedCreateWithoutCoursesInput>
-    where?: SemesterWhereInput
-  }
-
-  export type SemesterUpdateToOneWithWhereWithoutCoursesInput = {
-    where?: SemesterWhereInput
-    data: XOR<SemesterUpdateWithoutCoursesInput, SemesterUncheckedUpdateWithoutCoursesInput>
-  }
-
-  export type SemesterUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SemesterUncheckedUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type SubjectUpsertWithoutCoursesInput = {
     update: XOR<SubjectUpdateWithoutCoursesInput, SubjectUncheckedUpdateWithoutCoursesInput>
     create: XOR<SubjectCreateWithoutCoursesInput, SubjectUncheckedCreateWithoutCoursesInput>
@@ -29829,37 +30123,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nodes?: KnowledgeNodeUpdateManyWithoutSubjectNestedInput
   }
 
   export type SubjectUncheckedUpdateWithoutCoursesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AcademicYearUpsertWithoutCoursesInput = {
-    update: XOR<AcademicYearUpdateWithoutCoursesInput, AcademicYearUncheckedUpdateWithoutCoursesInput>
-    create: XOR<AcademicYearCreateWithoutCoursesInput, AcademicYearUncheckedCreateWithoutCoursesInput>
-    where?: AcademicYearWhereInput
-  }
-
-  export type AcademicYearUpdateToOneWithWhereWithoutCoursesInput = {
-    where?: AcademicYearWhereInput
-    data: XOR<AcademicYearUpdateWithoutCoursesInput, AcademicYearUncheckedUpdateWithoutCoursesInput>
-  }
-
-  export type AcademicYearUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AcademicYearUncheckedUpdateWithoutCoursesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    level?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nodes?: KnowledgeNodeUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
   export type ReviewSessionUpsertWithWhereUniqueWithoutCourseInput = {
@@ -29930,9 +30201,7 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
     syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
   }
@@ -29942,8 +30211,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -30021,9 +30288,7 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
     syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
   }
@@ -30033,8 +30298,6 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30134,9 +30397,7 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutCourseInput
     enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
@@ -30146,8 +30407,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -30158,6 +30417,28 @@ export namespace Prisma {
   export type CourseCreateOrConnectWithoutSyllabusConceptsInput = {
     where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
+  }
+
+  export type NodeSyllabusConceptCreateWithoutSyllabusConceptInput = {
+    addedByUserId?: string | null
+    createdAt?: Date | string
+    node: KnowledgeNodeCreateNestedOneWithoutConceptsInput
+  }
+
+  export type NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput = {
+    nodeId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    create: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput>
+  }
+
+  export type NodeSyllabusConceptCreateManySyllabusConceptInputEnvelope = {
+    data: NodeSyllabusConceptCreateManySyllabusConceptInput | NodeSyllabusConceptCreateManySyllabusConceptInput[]
+    skipDuplicates?: boolean
   }
 
   export type ConceptMatchUpsertWithWhereUniqueWithoutSyllabusConceptInput = {
@@ -30208,9 +30489,7 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
     enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
@@ -30220,13 +30499,37 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type NodeSyllabusConceptUpsertWithWhereUniqueWithoutSyllabusConceptInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    update: XOR<NodeSyllabusConceptUpdateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedUpdateWithoutSyllabusConceptInput>
+    create: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput>
+  }
+
+  export type NodeSyllabusConceptUpdateWithWhereUniqueWithoutSyllabusConceptInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    data: XOR<NodeSyllabusConceptUpdateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedUpdateWithoutSyllabusConceptInput>
+  }
+
+  export type NodeSyllabusConceptUpdateManyWithWhereWithoutSyllabusConceptInput = {
+    where: NodeSyllabusConceptScalarWhereInput
+    data: XOR<NodeSyllabusConceptUpdateManyMutationInput, NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptInput>
+  }
+
+  export type NodeSyllabusConceptScalarWhereInput = {
+    AND?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
+    OR?: NodeSyllabusConceptScalarWhereInput[]
+    NOT?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
+    nodeId?: StringFilter<"NodeSyllabusConcept"> | string
+    syllabusConceptId?: StringFilter<"NodeSyllabusConcept"> | string
+    addedByUserId?: StringNullableFilter<"NodeSyllabusConcept"> | string | null
+    createdAt?: DateTimeFilter<"NodeSyllabusConcept"> | Date | string
   }
 
   export type ConceptCreateWithoutVideoJobInput = {
@@ -30537,6 +30840,7 @@ export namespace Prisma {
     order: number
     createdAt?: Date | string
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
+    nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptUncheckedCreateWithoutConceptMatchesInput = {
@@ -30547,6 +30851,7 @@ export namespace Prisma {
     importance?: number | null
     order: number
     createdAt?: Date | string
+    nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptCreateOrConnectWithoutConceptMatchesInput = {
@@ -30642,6 +30947,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
+    nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type SyllabusConceptUncheckedUpdateWithoutConceptMatchesInput = {
@@ -30652,6 +30958,7 @@ export namespace Prisma {
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type FlashcardUpsertWithWhereUniqueWithoutConceptMatchInput = {
@@ -30922,9 +31229,7 @@ export namespace Prisma {
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
-    semester?: SemesterCreateNestedOneWithoutCoursesInput
     subject: SubjectCreateNestedOneWithoutCoursesInput
-    year?: AcademicYearCreateNestedOneWithoutCoursesInput
     syllabusConcepts?: SyllabusConceptCreateNestedManyWithoutCourseInput
     enrollments?: UserCourseCreateNestedManyWithoutCourseInput
   }
@@ -30934,8 +31239,6 @@ export namespace Prisma {
     code: string
     name: string
     subjectId: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
@@ -31029,9 +31332,7 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
     subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
     enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
   }
@@ -31041,8 +31342,6 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31233,6 +31532,336 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     startedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubjectCreateWithoutNodesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    courses?: CourseCreateNestedManyWithoutSubjectInput
+  }
+
+  export type SubjectUncheckedCreateWithoutNodesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    courses?: CourseUncheckedCreateNestedManyWithoutSubjectInput
+  }
+
+  export type SubjectCreateOrConnectWithoutNodesInput = {
+    where: SubjectWhereUniqueInput
+    create: XOR<SubjectCreateWithoutNodesInput, SubjectUncheckedCreateWithoutNodesInput>
+  }
+
+  export type KnowledgeNodeCreateWithoutChildrenInput = {
+    id?: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subject: SubjectCreateNestedOneWithoutNodesInput
+    parent?: KnowledgeNodeCreateNestedOneWithoutChildrenInput
+    concepts?: NodeSyllabusConceptCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeUncheckedCreateWithoutChildrenInput = {
+    id?: string
+    subjectId: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    concepts?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeCreateOrConnectWithoutChildrenInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    create: XOR<KnowledgeNodeCreateWithoutChildrenInput, KnowledgeNodeUncheckedCreateWithoutChildrenInput>
+  }
+
+  export type KnowledgeNodeCreateWithoutParentInput = {
+    id?: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subject: SubjectCreateNestedOneWithoutNodesInput
+    children?: KnowledgeNodeCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeUncheckedCreateWithoutParentInput = {
+    id?: string
+    subjectId: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: KnowledgeNodeUncheckedCreateNestedManyWithoutParentInput
+    concepts?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutNodeInput
+  }
+
+  export type KnowledgeNodeCreateOrConnectWithoutParentInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    create: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput>
+  }
+
+  export type KnowledgeNodeCreateManyParentInputEnvelope = {
+    data: KnowledgeNodeCreateManyParentInput | KnowledgeNodeCreateManyParentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NodeSyllabusConceptCreateWithoutNodeInput = {
+    addedByUserId?: string | null
+    createdAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutNodeAttachmentsInput
+  }
+
+  export type NodeSyllabusConceptUncheckedCreateWithoutNodeInput = {
+    syllabusConceptId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type NodeSyllabusConceptCreateOrConnectWithoutNodeInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    create: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput>
+  }
+
+  export type NodeSyllabusConceptCreateManyNodeInputEnvelope = {
+    data: NodeSyllabusConceptCreateManyNodeInput | NodeSyllabusConceptCreateManyNodeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SubjectUpsertWithoutNodesInput = {
+    update: XOR<SubjectUpdateWithoutNodesInput, SubjectUncheckedUpdateWithoutNodesInput>
+    create: XOR<SubjectCreateWithoutNodesInput, SubjectUncheckedCreateWithoutNodesInput>
+    where?: SubjectWhereInput
+  }
+
+  export type SubjectUpdateToOneWithWhereWithoutNodesInput = {
+    where?: SubjectWhereInput
+    data: XOR<SubjectUpdateWithoutNodesInput, SubjectUncheckedUpdateWithoutNodesInput>
+  }
+
+  export type SubjectUpdateWithoutNodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUpdateManyWithoutSubjectNestedInput
+  }
+
+  export type SubjectUncheckedUpdateWithoutNodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    courses?: CourseUncheckedUpdateManyWithoutSubjectNestedInput
+  }
+
+  export type KnowledgeNodeUpsertWithoutChildrenInput = {
+    update: XOR<KnowledgeNodeUpdateWithoutChildrenInput, KnowledgeNodeUncheckedUpdateWithoutChildrenInput>
+    create: XOR<KnowledgeNodeCreateWithoutChildrenInput, KnowledgeNodeUncheckedCreateWithoutChildrenInput>
+    where?: KnowledgeNodeWhereInput
+  }
+
+  export type KnowledgeNodeUpdateToOneWithWhereWithoutChildrenInput = {
+    where?: KnowledgeNodeWhereInput
+    data: XOR<KnowledgeNodeUpdateWithoutChildrenInput, KnowledgeNodeUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type KnowledgeNodeUpdateWithoutChildrenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subject?: SubjectUpdateOneRequiredWithoutNodesNestedInput
+    parent?: KnowledgeNodeUpdateOneWithoutChildrenNestedInput
+    concepts?: NodeSyllabusConceptUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeUncheckedUpdateWithoutChildrenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    concepts?: NodeSyllabusConceptUncheckedUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeUpsertWithWhereUniqueWithoutParentInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    update: XOR<KnowledgeNodeUpdateWithoutParentInput, KnowledgeNodeUncheckedUpdateWithoutParentInput>
+    create: XOR<KnowledgeNodeCreateWithoutParentInput, KnowledgeNodeUncheckedCreateWithoutParentInput>
+  }
+
+  export type KnowledgeNodeUpdateWithWhereUniqueWithoutParentInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    data: XOR<KnowledgeNodeUpdateWithoutParentInput, KnowledgeNodeUncheckedUpdateWithoutParentInput>
+  }
+
+  export type KnowledgeNodeUpdateManyWithWhereWithoutParentInput = {
+    where: KnowledgeNodeScalarWhereInput
+    data: XOR<KnowledgeNodeUpdateManyMutationInput, KnowledgeNodeUncheckedUpdateManyWithoutParentInput>
+  }
+
+  export type NodeSyllabusConceptUpsertWithWhereUniqueWithoutNodeInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    update: XOR<NodeSyllabusConceptUpdateWithoutNodeInput, NodeSyllabusConceptUncheckedUpdateWithoutNodeInput>
+    create: XOR<NodeSyllabusConceptCreateWithoutNodeInput, NodeSyllabusConceptUncheckedCreateWithoutNodeInput>
+  }
+
+  export type NodeSyllabusConceptUpdateWithWhereUniqueWithoutNodeInput = {
+    where: NodeSyllabusConceptWhereUniqueInput
+    data: XOR<NodeSyllabusConceptUpdateWithoutNodeInput, NodeSyllabusConceptUncheckedUpdateWithoutNodeInput>
+  }
+
+  export type NodeSyllabusConceptUpdateManyWithWhereWithoutNodeInput = {
+    where: NodeSyllabusConceptScalarWhereInput
+    data: XOR<NodeSyllabusConceptUpdateManyMutationInput, NodeSyllabusConceptUncheckedUpdateManyWithoutNodeInput>
+  }
+
+  export type KnowledgeNodeCreateWithoutConceptsInput = {
+    id?: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subject: SubjectCreateNestedOneWithoutNodesInput
+    parent?: KnowledgeNodeCreateNestedOneWithoutChildrenInput
+    children?: KnowledgeNodeCreateNestedManyWithoutParentInput
+  }
+
+  export type KnowledgeNodeUncheckedCreateWithoutConceptsInput = {
+    id?: string
+    subjectId: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: KnowledgeNodeUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type KnowledgeNodeCreateOrConnectWithoutConceptsInput = {
+    where: KnowledgeNodeWhereUniqueInput
+    create: XOR<KnowledgeNodeCreateWithoutConceptsInput, KnowledgeNodeUncheckedCreateWithoutConceptsInput>
+  }
+
+  export type SyllabusConceptCreateWithoutNodeAttachmentsInput = {
+    id?: string
+    conceptText: string
+    category?: string | null
+    importance?: number | null
+    order: number
+    createdAt?: Date | string
+    conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    course: CourseCreateNestedOneWithoutSyllabusConceptsInput
+  }
+
+  export type SyllabusConceptUncheckedCreateWithoutNodeAttachmentsInput = {
+    id?: string
+    courseId: string
+    conceptText: string
+    category?: string | null
+    importance?: number | null
+    order: number
+    createdAt?: Date | string
+    conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+  }
+
+  export type SyllabusConceptCreateOrConnectWithoutNodeAttachmentsInput = {
+    where: SyllabusConceptWhereUniqueInput
+    create: XOR<SyllabusConceptCreateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedCreateWithoutNodeAttachmentsInput>
+  }
+
+  export type KnowledgeNodeUpsertWithoutConceptsInput = {
+    update: XOR<KnowledgeNodeUpdateWithoutConceptsInput, KnowledgeNodeUncheckedUpdateWithoutConceptsInput>
+    create: XOR<KnowledgeNodeCreateWithoutConceptsInput, KnowledgeNodeUncheckedCreateWithoutConceptsInput>
+    where?: KnowledgeNodeWhereInput
+  }
+
+  export type KnowledgeNodeUpdateToOneWithWhereWithoutConceptsInput = {
+    where?: KnowledgeNodeWhereInput
+    data: XOR<KnowledgeNodeUpdateWithoutConceptsInput, KnowledgeNodeUncheckedUpdateWithoutConceptsInput>
+  }
+
+  export type KnowledgeNodeUpdateWithoutConceptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subject?: SubjectUpdateOneRequiredWithoutNodesNestedInput
+    parent?: KnowledgeNodeUpdateOneWithoutChildrenNestedInput
+    children?: KnowledgeNodeUpdateManyWithoutParentNestedInput
+  }
+
+  export type KnowledgeNodeUncheckedUpdateWithoutConceptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: KnowledgeNodeUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type SyllabusConceptUpsertWithoutNodeAttachmentsInput = {
+    update: XOR<SyllabusConceptUpdateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedUpdateWithoutNodeAttachmentsInput>
+    create: XOR<SyllabusConceptCreateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedCreateWithoutNodeAttachmentsInput>
+    where?: SyllabusConceptWhereInput
+  }
+
+  export type SyllabusConceptUpdateToOneWithWhereWithoutNodeAttachmentsInput = {
+    where?: SyllabusConceptWhereInput
+    data: XOR<SyllabusConceptUpdateWithoutNodeAttachmentsInput, SyllabusConceptUncheckedUpdateWithoutNodeAttachmentsInput>
+  }
+
+  export type SyllabusConceptUpdateWithoutNodeAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conceptText?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    importance?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
+  }
+
+  export type SyllabusConceptUncheckedUpdateWithoutNodeAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    conceptText?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    importance?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type FeedbackCreateManyUserInput = {
@@ -31553,11 +32182,20 @@ export namespace Prisma {
     id?: string
     code: string
     name: string
-    yearId?: string | null
-    semesterId?: string | null
     ueNumber?: string | null
     syllabusUrl?: string | null
     createdAt?: Date | string
+  }
+
+  export type KnowledgeNodeCreateManySubjectInput = {
+    id?: string
+    parentId?: string | null
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CourseUpdateWithoutSubjectInput = {
@@ -31567,8 +32205,6 @@ export namespace Prisma {
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
     syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
     enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
@@ -31578,8 +32214,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31592,111 +32226,46 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
     ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
     syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CourseCreateManyYearInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    semesterId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-  }
-
-  export type CourseUpdateWithoutYearInput = {
+  export type KnowledgeNodeUpdateWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    semester?: SemesterUpdateOneWithoutCoursesNestedInput
-    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: KnowledgeNodeUpdateOneWithoutChildrenNestedInput
+    children?: KnowledgeNodeUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUpdateManyWithoutNodeNestedInput
   }
 
-  export type CourseUncheckedUpdateWithoutYearInput = {
+  export type KnowledgeNodeUncheckedUpdateWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: KnowledgeNodeUncheckedUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUncheckedUpdateManyWithoutNodeNestedInput
   }
 
-  export type CourseUncheckedUpdateManyWithoutYearInput = {
+  export type KnowledgeNodeUncheckedUpdateManyWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    semesterId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CourseCreateManySemesterInput = {
-    id?: string
-    code: string
-    name: string
-    subjectId: string
-    yearId?: string | null
-    ueNumber?: string | null
-    syllabusUrl?: string | null
-    createdAt?: Date | string
-  }
-
-  export type CourseUpdateWithoutSemesterInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subject?: SubjectUpdateOneRequiredWithoutCoursesNestedInput
-    year?: AcademicYearUpdateOneWithoutCoursesNestedInput
-    reviewSessions?: ReviewSessionUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUpdateManyWithoutCourseNestedInput
-    enrollments?: UserCourseUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutSemesterInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutCourseNestedInput
-    syllabusConcepts?: SyllabusConceptUncheckedUpdateManyWithoutCourseNestedInput
-    enrollments?: UserCourseUncheckedUpdateManyWithoutCourseNestedInput
-  }
-
-  export type CourseUncheckedUpdateManyWithoutSemesterInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    subjectId?: StringFieldUpdateOperationsInput | string
-    yearId?: NullableStringFieldUpdateOperationsInput | string | null
-    ueNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    syllabusUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewSessionCreateManyCourseInput = {
@@ -31765,6 +32334,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type SyllabusConceptUncheckedUpdateWithoutCourseInput = {
@@ -31775,6 +32345,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
   export type SyllabusConceptUncheckedUpdateManyWithoutCourseInput = {
@@ -31817,6 +32388,12 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type NodeSyllabusConceptCreateManySyllabusConceptInput = {
+    nodeId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
   export type ConceptMatchUpdateWithoutSyllabusConceptInput = {
     id?: StringFieldUpdateOperationsInput | string
     confidence?: FloatFieldUpdateOperationsInput | number
@@ -31846,6 +32423,24 @@ export namespace Prisma {
     matchType?: NullableStringFieldUpdateOperationsInput | string | null
     rationale?: NullableStringFieldUpdateOperationsInput | string | null
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptUpdateWithoutSyllabusConceptInput = {
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    node?: KnowledgeNodeUpdateOneRequiredWithoutConceptsNestedInput
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateWithoutSyllabusConceptInput = {
+    nodeId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptInput = {
+    nodeId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32052,6 +32647,78 @@ export namespace Prisma {
     difficulty?: StringFieldUpdateOperationsInput | string
     timeToRevealMs?: NullableIntFieldUpdateOperationsInput | number | null
     timeToRateMs?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KnowledgeNodeCreateManyParentInput = {
+    id?: string
+    subjectId: string
+    name: string
+    slug?: string | null
+    order?: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NodeSyllabusConceptCreateManyNodeInput = {
+    syllabusConceptId: string
+    addedByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type KnowledgeNodeUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subject?: SubjectUpdateOneRequiredWithoutNodesNestedInput
+    children?: KnowledgeNodeUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeUncheckedUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: KnowledgeNodeUncheckedUpdateManyWithoutParentNestedInput
+    concepts?: NodeSyllabusConceptUncheckedUpdateManyWithoutNodeNestedInput
+  }
+
+  export type KnowledgeNodeUncheckedUpdateManyWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subjectId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptUpdateWithoutNodeInput = {
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutNodeAttachmentsNestedInput
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateWithoutNodeInput = {
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NodeSyllabusConceptUncheckedUpdateManyWithoutNodeInput = {
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    addedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

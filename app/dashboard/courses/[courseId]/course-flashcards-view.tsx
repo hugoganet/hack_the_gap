@@ -15,12 +15,6 @@ type Course = {
   subject: {
     name: string;
   };
-  year?: {
-    name: string;
-  } | null;
-  semester?: {
-    number: number;
-  } | null;
 };
 
 type Flashcard = {
@@ -82,8 +76,6 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <BookOpen className="size-4" />
           <span>{course.subject.name}</span>
-          {course.year && <span>• {course.year.name}</span>}
-          {course.semester && <span>• Semester {course.semester.number}</span>}
         </div>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">{course.name}</h1>

@@ -16,8 +16,6 @@ export async function GET() {
         course: {
           include: {
             subject: true,
-            year: true,
-            semester: true,
             syllabusConcepts: {
               select: {
                 id: true,
@@ -36,25 +34,10 @@ export async function GET() {
       code: uc.course.code,
       name: uc.course.name,
       subjectId: uc.course.subjectId,
-      yearId: uc.course.yearId,
-      semesterId: uc.course.semesterId,
       subject: {
         id: uc.course.subject.id,
         name: uc.course.subject.name,
       },
-      year: uc.course.year
-        ? {
-            id: uc.course.year.id,
-            name: uc.course.year.name,
-            level: uc.course.year.level,
-          }
-        : null,
-      semester: uc.course.semester
-        ? {
-            id: uc.course.semester.id,
-            number: uc.course.semester.number,
-          }
-        : null,
       totalConcepts: uc.course.syllabusConcepts.length,
       learnedCount: uc.learnedCount,
     }));
@@ -87,8 +70,6 @@ export async function POST(request: Request) {
       where: { id: courseId },
       include: {
         subject: true,
-        year: true,
-        semester: true,
       },
     });
 
@@ -125,8 +106,6 @@ export async function POST(request: Request) {
         code: course.code,
         name: course.name,
         subject: course.subject,
-        year: course.year,
-        semester: course.semester,
       },
     });
   } catch (error) {

@@ -1,72 +1,8 @@
-model User {
-  id              String          @id
-  name            String
-  email           String          @unique
-  emailVerified   Boolean
-  image           String?
-  createdAt       DateTime
-  updatedAt       DateTime
-  resendContactId String?
-  banExpires      DateTime?
-  banReason       String?
-  banned          Boolean?
-  role            String?
-  feedbacks       Feedback[]
-  accounts        Account[]
-  flashcards      Flashcard[]
-  reviewSessions  ReviewSession[]
-  sessions        Session[]
-  userCourses     UserCourse[]
-  videoJobs       VideoJob[]
+# Prisma Target Schema (Documentation)
 
-  @@map("user")
-}
+Note: This is a documentation-only file. Use this schema as a reference for implementing the migration. Keep the active Prisma schema in prisma/schema/schema.prisma. To avoid IDE duplicate model errors, this documentation is saved with .md extension.
 
-model Session {
-  id             String   @id
-  expiresAt      DateTime
-  token          String   @unique
-  createdAt      DateTime
-  updatedAt      DateTime
-  ipAddress      String?
-  userAgent      String?
-  userId         String
-  impersonatedBy String?
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("session")
-}
-
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime
-  updatedAt             DateTime
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("account")
-}
-
-model Verification {
-  id         String    @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime?
-  updatedAt  DateTime?
-
-  @@map("verification")
-}
-
+```prisma
 generator client {
   provider = "prisma-client-js"
   output   = "../../src/generated/prisma"
@@ -77,6 +13,15 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+/*
+Target schema after migration:
+- Remove AcademicYear and Semester models entirely
+- Update Course: drop yearId and semesterId and their relations/indexes
+- Add KnowledgeNode (tree-only hierarchy under Subject) with unique slug per subject
+- Add NodeSyllabusConcept (junction between KnowledgeNode and SyllabusConcept)
+- Keep other domain models unchanged
+*/
 
 model Feedback {
   id        String   @id @default(nanoid(11))
@@ -105,11 +50,15 @@ model Subject {
   name      String          @unique
   createdAt DateTime        @default(now())
   courses   Course[]
-  nodes     KnowledgeNode[]
+  nodes     KnowledgeNode[]  // NEW: tree nodes under this subject
 
   @@index([name])
   @@map("subjects")
 }
+
+// REMOVED models (for reference)
+// model AcademicYear { ... }  // deleted
+// model Semester { ... }      // deleted
 
 model Course {
   id               String            @id @default(uuid())
@@ -143,16 +92,16 @@ model UserCourse {
 }
 
 model SyllabusConcept {
-  id              String                @id @default(uuid())
-  courseId        String
-  conceptText     String
-  category        String?
-  importance      Int?
-  order           Int
-  createdAt       DateTime              @default(now())
-  conceptMatches  ConceptMatch[]
-  course          Course                @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  nodeAttachments NodeSyllabusConcept[]
+  id             String         @id @default(uuid())
+  courseId       String
+  conceptText    String
+  category       String?
+  importance     Int?
+  order          Int
+  createdAt      DateTime       @default(now())
+  conceptMatches ConceptMatch[]
+  course         Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  // Note: attachments to KnowledgeNode via NodeSyllabusConcept
 
   @@index([courseId])
   @@index([importance])
@@ -269,25 +218,30 @@ model ReviewEvent {
   @@map("review_events")
 }
 
-model KnowledgeNode {
-  id        String                @id @default(uuid())
-  subjectId String
-  parentId  String?
-  name      String
-  slug      String?
-  order     Int                   @default(0)
-  metadata  Json?
-  createdAt DateTime              @default(now())
-  updatedAt DateTime              @updatedAt
-  subject   Subject               @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  parent    KnowledgeNode?        @relation("NodeToParent", fields: [parentId], references: [id])
-  children  KnowledgeNode[]       @relation("NodeToParent")
-  concepts  NodeSyllabusConcept[]
+/*
+NEW MODELS
+*/
 
-  @@unique([subjectId, slug])
+model KnowledgeNode {
+  id         String          @id @default(uuid())
+  subjectId  String
+  parentId   String?
+  name       String
+  slug       String?         // Unique within subject when present
+  order      Int             @default(0)
+  metadata   Json?
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  subject    Subject         @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  parent     KnowledgeNode?  @relation("NodeToParent", fields: [parentId], references: [id])
+  children   KnowledgeNode[] @relation("NodeToParent")
+  concepts   NodeSyllabusConcept[]
+
   @@index([subjectId, parentId, order])
   @@index([subjectId])
   @@index([parentId])
+  @@unique([subjectId, slug])
   @@map("knowledge_nodes")
 }
 
@@ -295,9 +249,10 @@ model NodeSyllabusConcept {
   nodeId            String
   syllabusConceptId String
   addedByUserId     String?
-  createdAt         DateTime        @default(now())
-  node              KnowledgeNode   @relation(fields: [nodeId], references: [id], onDelete: Cascade)
-  syllabusConcept   SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+
+  node             KnowledgeNode   @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  syllabusConcept  SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
 
   @@id([nodeId, syllabusConceptId])
   @@index([nodeId])

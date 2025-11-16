@@ -196,26 +196,11 @@ exports.Prisma.SubjectScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.AcademicYearScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  level: 'level',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.SemesterScalarFieldEnum = {
-  id: 'id',
-  number: 'number',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
   subjectId: 'subjectId',
-  yearId: 'yearId',
-  semesterId: 'semesterId',
   ueNumber: 'ueNumber',
   syllabusUrl: 'syllabusUrl',
   createdAt: 'createdAt'
@@ -308,9 +293,33 @@ exports.Prisma.ReviewEventScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.KnowledgeNodeScalarFieldEnum = {
+  id: 'id',
+  subjectId: 'subjectId',
+  parentId: 'parentId',
+  name: 'name',
+  slug: 'slug',
+  order: 'order',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NodeSyllabusConceptScalarFieldEnum = {
+  nodeId: 'nodeId',
+  syllabusConceptId: 'syllabusConceptId',
+  addedByUserId: 'addedByUserId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -323,6 +332,12 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -332,8 +347,6 @@ exports.Prisma.ModelName = {
   Feedback: 'Feedback',
   BetaInvitation: 'BetaInvitation',
   Subject: 'Subject',
-  AcademicYear: 'AcademicYear',
-  Semester: 'Semester',
   Course: 'Course',
   UserCourse: 'UserCourse',
   SyllabusConcept: 'SyllabusConcept',
@@ -342,7 +355,9 @@ exports.Prisma.ModelName = {
   ConceptMatch: 'ConceptMatch',
   Flashcard: 'Flashcard',
   ReviewSession: 'ReviewSession',
-  ReviewEvent: 'ReviewEvent'
+  ReviewEvent: 'ReviewEvent',
+  KnowledgeNode: 'KnowledgeNode',
+  NodeSyllabusConcept: 'NodeSyllabusConcept'
 };
 
 /**

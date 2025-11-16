@@ -19,8 +19,6 @@ export default async function CourseDetailPage({ params }: PageProps) {
     where: { id: courseId },
     include: {
       subject: true,
-      year: true,
-      semester: true,
       syllabusConcepts: {
         orderBy: { order: "asc" },
       },

@@ -32,34 +32,14 @@ model BetaInvitation {
 }
 
 model Subject {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
+  id        String          @id @default(uuid())
+  name      String          @unique
+  createdAt DateTime        @default(now())
   courses   Course[]
+  nodes     KnowledgeNode[]
 
   @@index([name])
   @@map("subjects")
-}
-
-model AcademicYear {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  level     Int
-  createdAt DateTime @default(now())
-  courses   Course[]
-
-  @@index([level])
-  @@map("academic_years")
-}
-
-model Semester {
-  id        String   @id @default(uuid())
-  number    Int
-  createdAt DateTime @default(now())
-  courses   Course[]
-
-  @@index([number])
-  @@map("semesters")
 }
 
 model Course {
@@ -67,21 +47,15 @@ model Course {
   code             String            @unique
   name             String
   subjectId        String
-  yearId           String?
-  semesterId       String?
   ueNumber         String?
   syllabusUrl      String?
   createdAt        DateTime          @default(now())
-  semester         Semester?         @relation(fields: [semesterId], references: [id])
   subject          Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  year             AcademicYear?     @relation(fields: [yearId], references: [id])
   reviewSessions   ReviewSession[]
   syllabusConcepts SyllabusConcept[]
   enrollments      UserCourse[]
 
   @@index([subjectId])
-  @@index([yearId])
-  @@index([semesterId])
   @@map("courses")
 }
 
@@ -100,15 +74,16 @@ model UserCourse {
 }
 
 model SyllabusConcept {
-  id             String         @id @default(uuid())
+  id             String                @id @default(uuid())
   courseId       String
   conceptText    String
   category       String?
   importance     Int?
   order          Int
-  createdAt      DateTime       @default(now())
+  createdAt      DateTime              @default(now())
   conceptMatches ConceptMatch[]
-  course         Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course         Course                @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  nodeAttachments NodeSyllabusConcept[]
 
   @@index([courseId])
   @@index([importance])
@@ -223,4 +198,40 @@ model ReviewEvent {
   @@index([sessionId])
   @@index([flashcardId])
   @@map("review_events")
+}
+
+model KnowledgeNode {
+  id        String                @id @default(uuid())
+  subjectId String
+  parentId  String?
+  name      String
+  slug      String?
+  order     Int                   @default(0)
+  metadata  Json?
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+  subject   Subject               @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  parent    KnowledgeNode?        @relation("NodeToParent", fields: [parentId], references: [id])
+  children  KnowledgeNode[]       @relation("NodeToParent")
+  concepts  NodeSyllabusConcept[]
+
+  @@unique([subjectId, slug])
+  @@index([subjectId, parentId, order])
+  @@index([subjectId])
+  @@index([parentId])
+  @@map("knowledge_nodes")
+}
+
+model NodeSyllabusConcept {
+  nodeId            String
+  syllabusConceptId String
+  addedByUserId     String?
+  createdAt         DateTime        @default(now())
+  node              KnowledgeNode   @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  syllabusConcept   SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
+
+  @@id([nodeId, syllabusConceptId])
+  @@index([nodeId])
+  @@index([syllabusConceptId])
+  @@map("node_syllabus_concepts")
 }

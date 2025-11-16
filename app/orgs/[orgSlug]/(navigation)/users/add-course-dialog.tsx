@@ -26,24 +26,11 @@ type Subject = {
   name: string;
 };
 
-type AcademicYear = {
-  id: string;
-  name: string;
-  level: number;
-};
-
-type Semester = {
-  id: string;
-  number: number;
-};
-
 type Course = {
   id: string;
   code: string;
   name: string;
   subjectId: string;
-  yearId?: string;
-  semesterId?: string;
 };
 
 type AddCourseDialogProps = {
@@ -51,21 +38,17 @@ type AddCourseDialogProps = {
   onOpenChange: (open: boolean) => void;
 };
 
-type SelectionStep = "subject" | "year" | "semester" | "course";
+type SelectionStep = "subject" | "course";
 
 export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentStep, setCurrentStep] = useState<SelectionStep>("subject");
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
-  const [selectedYear, setSelectedYear] = useState<AcademicYear | null>(null);
-  const [selectedSemester, setSelectedSemester] = useState<Semester | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
   // Data from API
   const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [years, setYears] = useState<AcademicYear[]>([]);
-  const [semesters, setSemesters] = useState<Semester[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
 
   // Fetch data when dialog opens
@@ -78,23 +61,17 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [subjectsRes, yearsRes, semestersRes, coursesRes] = await Promise.all([
+      const [subjectsRes, coursesRes] = await Promise.all([
         fetch("/api/subjects"),
-        fetch("/api/years"),
-        fetch("/api/semesters"),
         fetch("/api/courses"),
       ]);
 
-      const [subjectsData, yearsData, semestersData, coursesData] = await Promise.all([
+      const [subjectsData, coursesData] = await Promise.all([
         subjectsRes.json(),
-        yearsRes.json(),
-        semestersRes.json(),
         coursesRes.json(),
       ]);
 
       setSubjects(subjectsData.subjects ?? []);
-      setYears(yearsData.years ?? []);
-      setSemesters(semestersData.semesters ?? []);
       setCourses(coursesData.courses ?? []);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -108,8 +85,6 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
     setSearchQuery("");
     setCurrentStep("subject");
     setSelectedSubject(null);
-    setSelectedYear(null);
-    setSelectedSemester(null);
   };
 
   const handleClose = () => {
@@ -119,16 +94,6 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
 
   const handleSubjectSelect = (subject: Subject) => {
     setSelectedSubject(subject);
-    setCurrentStep("year");
-  };
-
-  const handleYearSelect = (year: AcademicYear) => {
-    setSelectedYear(year);
-    setCurrentStep("semester");
-  };
-
-  const handleSemesterSelect = (semester: Semester) => {
-    setSelectedSemester(semester);
     setCurrentStep("course");
   };
 
@@ -163,22 +128,14 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
 
   const handleBack = () => {
     if (currentStep === "course") {
-      setCurrentStep("semester");
-      setSelectedSemester(null);
-    } else if (currentStep === "semester") {
-      setCurrentStep("year");
-      setSelectedYear(null);
-    } else if (currentStep === "year") {
       setCurrentStep("subject");
-      setSelectedYear(null);
+      setSelectedSubject(null);
     }
   };
 
   const getBreadcrumb = () => {
     const parts = [];
     if (selectedSubject) parts.push(selectedSubject.name);
-    if (selectedYear) parts.push(selectedYear.name);
-    if (selectedSemester) parts.push(`Semester ${selectedSemester.number}`);
     return parts.join(" → ");
   };
 
@@ -188,7 +145,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
         <DialogHeader>
           <DialogTitle>Add Course</DialogTitle>
           <DialogDescription>
-            Search for a course or browse by subject, year, and semester
+            Search for a course or browse by subject
           </DialogDescription>
         </DialogHeader>
 
@@ -263,44 +220,12 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
                     </CommandGroup>
                   )}
 
-                  {currentStep === "year" && (
-                    <CommandGroup heading="Select Year">
-                      {years.map((year) => (
-                        <CommandItem
-                          key={year.id}
-                          onSelect={() => handleYearSelect(year)}
-                          className="flex items-center justify-between"
-                        >
-                          <span>{year.name}</span>
-                          <ChevronRight className="size-4 text-muted-foreground" />
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  )}
-
-                  {currentStep === "semester" && (
-                    <CommandGroup heading="Select Semester">
-                      {semesters.map((semester) => (
-                        <CommandItem
-                          key={semester.id}
-                          onSelect={() => handleSemesterSelect(semester)}
-                          className="flex items-center justify-between"
-                        >
-                          <span>Semester {semester.number}</span>
-                          <ChevronRight className="size-4 text-muted-foreground" />
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  )}
-
                   {currentStep === "course" && (
                     <CommandGroup heading="Select Course">
                       {courses
                         .filter(
                           (course) =>
-                            course.subjectId === selectedSubject?.id &&
-                            course.yearId === selectedYear?.id &&
-                            course.semesterId === selectedSemester?.id
+                            course.subjectId === selectedSubject?.id
                         )
                         .map((course) => (
                           <CommandItem
