@@ -8,6 +8,8 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { generateText } from "ai";
 import { getBlackboxModel } from "@/lib/blackbox";
+import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
+import { MATCH_THRESHOLDS } from "@/features/matching/config";
 import { matchConceptsAction } from "./match-concepts.action";
 
 const ProcessContentSchema = z.object({
@@ -300,6 +302,161 @@ export async function processContent(url: string) {
         console.error("Concept extraction error:", aiErr);
       }
 
+      // Step 3: Match concepts against ALL active courses
+      let matchData = null;
+      if (processedConceptsCount && processedConceptsCount > 0) {
+        try {
+          // Fetch user's active courses
+          const activeCourses = await prisma.userCourse.findMany({
+            where: {
+              userId: user.id,
+              isActive: true,
+            },
+            select: {
+              courseId: true,
+            },
+          });
+
+          if (activeCourses.length > 0) {
+            console.log(`Matching ${processedConceptsCount} concepts against ${activeCourses.length} active courses...`);
+            
+            // Match against each course and aggregate results
+            const allResults = [];
+            let totalDurationMs = 0;
+            
+            // Process courses sequentially to avoid overwhelming the system
+            for (const { courseId } of activeCourses) {
+              const startTime = Date.now();
+              const { results } = await matchConceptsToSyllabus(videoJob.id, courseId);
+              const durationMs = Date.now() - startTime;
+              totalDurationMs += durationMs;
+              
+              // Store matches in database (batch create for better performance)
+              if (results.length > 0) {
+                await prisma.conceptMatch.createMany({
+                  data: results.map(match => ({
+                    conceptId: match.conceptId,
+                    syllabusConceptId: match.syllabusConceptId,
+                    confidence: match.confidence,
+                    matchType: match.matchType,
+                    rationale: match.rationale,
+                  })),
+                  skipDuplicates: true,
+                });
+              }
+              
+              allResults.push(...results);
+            }
+            
+            // Aggregate results across all courses
+            // Treat "exact" matches as high confidence even if slightly below threshold
+            const high = allResults.filter(
+              r => r.confidence >= MATCH_THRESHOLDS.HIGH || r.matchType === "exact"
+            ).length;
+            const medium = allResults.filter(
+              r => r.confidence >= MATCH_THRESHOLDS.MEDIUM && 
+                   r.confidence < MATCH_THRESHOLDS.HIGH && 
+                   r.matchType !== "exact"
+            ).length;
+            const created = allResults.length;
+            const avgConfidence = created > 0 
+              ? allResults.reduce((sum, r) => sum + r.confidence, 0) / created 
+              : 0;
+            
+            // Fetch concept and syllabus details for the dialog
+            // Include "exact" matches in high confidence even if slightly below threshold
+            const highMatches = await Promise.all(
+              allResults
+                .filter(r => r.confidence >= MATCH_THRESHOLDS.HIGH || r.matchType === "exact")
+                .map(async (r) => {
+                  const concept = await prisma.concept.findUnique({
+                    where: { id: r.conceptId },
+                    select: { conceptText: true },
+                  });
+                  const syllabusConcept = await prisma.syllabusConcept.findUnique({
+                    where: { id: r.syllabusConceptId },
+                    select: { conceptText: true },
+                  });
+                  const match = await prisma.conceptMatch.findFirst({
+                    where: {
+                      conceptId: r.conceptId,
+                      syllabusConceptId: r.syllabusConceptId,
+                    },
+                    select: { id: true, userFeedback: true },
+                  });
+                  return {
+                    id: match?.id ?? r.conceptId,
+                    conceptId: r.conceptId,
+                    syllabusConceptId: r.syllabusConceptId,
+                    extractedConcept: concept?.conceptText ?? "",
+                    matchedConcept: syllabusConcept?.conceptText ?? "",
+                    confidence: r.confidence,
+                    matchType: r.matchType,
+                    rationale: r.rationale,
+                    userFeedback: match?.userFeedback,
+                  };
+                })
+            );
+            
+            const mediumMatches = await Promise.all(
+              allResults
+                .filter(r => 
+                  r.confidence >= MATCH_THRESHOLDS.MEDIUM && 
+                  r.confidence < MATCH_THRESHOLDS.HIGH && 
+                  r.matchType !== "exact"
+                )
+                .map(async (r) => {
+                  const concept = await prisma.concept.findUnique({
+                    where: { id: r.conceptId },
+                    select: { conceptText: true },
+                  });
+                  const syllabusConcept = await prisma.syllabusConcept.findUnique({
+                    where: { id: r.syllabusConceptId },
+                    select: { conceptText: true },
+                  });
+                  const match = await prisma.conceptMatch.findFirst({
+                    where: {
+                      conceptId: r.conceptId,
+                      syllabusConceptId: r.syllabusConceptId,
+                    },
+                    select: { id: true, userFeedback: true },
+                  });
+                  return {
+                    id: match?.id ?? r.conceptId,
+                    conceptId: r.conceptId,
+                    syllabusConceptId: r.syllabusConceptId,
+                    extractedConcept: concept?.conceptText ?? "",
+                    matchedConcept: syllabusConcept?.conceptText ?? "",
+                    confidence: r.confidence,
+                    matchType: r.matchType,
+                    rationale: r.rationale,
+                    userFeedback: match?.userFeedback,
+                  };
+                })
+            );
+            
+            matchData = {
+              totalConcepts: processedConceptsCount,
+              created,
+              high,
+              medium,
+              avgConfidence,
+              durationMs: totalDurationMs,
+              highMatches,
+              mediumMatches,
+            };
+            
+            const message = `Matching complete: ${high} high, ${medium} medium, ${created} total matches`;
+            console.log(message);
+          } else {
+            console.log("No active courses found for user, skipping matching");
+          }
+        } catch (matchError) {
+          console.error("Error during concept matching:", matchError);
+          // Don't fail the entire request if matching fails
+        }
+      }
+
       return {
         success: true,
         message: `Successfully fetched transcript! (${apiResponse.data.wordCount} words)` +
@@ -310,9 +467,10 @@ export async function processContent(url: string) {
           wordCount: apiResponse.data.wordCount,
           segments: apiResponse.data.segments,
           processedConceptsCount: processedConceptsCount ?? 0,
+          matchData,
         },
       };
-    } catch (dbError) {
+    } catch (dbError: unknown) {
       console.error("Database error:", dbError);
       return {
         success: false,

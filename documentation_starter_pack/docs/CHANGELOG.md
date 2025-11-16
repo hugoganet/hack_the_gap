@@ -31,7 +31,7 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
     - Empty slots with dashed borders (no text)
     - Responsive design with proper overflow handling
 
-- **Concept-to-Syllabus Matching Feature (US-0004)** ⚠️ HIGHEST VALUE
+- **Concept-to-Syllabus Matching Feature (US-0004)** ⚠️ HIGHEST VALUE ✅ COMPLETE
   - **Matching System** (`src/features/matching/`)
     - `config.ts`: Thresholds (HIGH=0.80, MEDIUM=0.60), blend weights (0.6 sim + 0.4 LLM), concurrency limits
     - `ai-reasoning.ts`: LLM-based concept verification (Blackbox/OpenAI fallback)
@@ -52,14 +52,30 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
     - Smart logic: 0 courses (skip), 1 course (auto-match), N courses (parallel match to all)
     - Graceful error handling (doesn't break video processing)
     - Detailed [Auto-Match] console logging
+    - Fetches match details for celebration dialog (highMatches, mediumMatches)
+    - Smart categorization: "exact" matches promoted to High Confidence even if <80%
+  - **Interactive Match Review UI** (`app/orgs/[orgSlug]/(navigation)/users/`)
+    - `match-results-dialog.tsx`: Celebration dialog with expandable match sections
+    - High Confidence section: Shows ≥80% confidence OR "exact" match type
+    - Partial Matches section: Shows 60-79% confidence (excluding "exact" types)
+    - Each match displays: extracted concept → matched concept, rationale, confidence %, match type
+    - Feedback buttons: 👍 (confirm) / 👎 (reject) with optimistic UI updates
+    - Responsive design with scrollable sections for many matches
+  - **Feedback API** (`app/api/concept-matches/[matchId]/feedback/`)
+    - PATCH endpoint for user feedback ("correct" or "incorrect")
+    - User ownership validation
+    - Database persistence of feedback
+    - Next.js 15 compatible (awaits dynamic params)
   - **Comprehensive Testing** (`__tests__/matching/`)
     - 27 unit tests: similarity, blending, thresholds, edge cases
     - 6 integration tests: DB operations, batch processing, idempotency
     - All 33 tests passing ✓
+    - Manual testing: Dialog opens, sections expand, feedback works, API functional
   - **Architectural Decisions**
     - ADR-0005: OpenAI embeddings (text-embedding-3-small) for semantic similarity
     - ADR-0006: Hybrid matching algorithm (0.6 × embeddings + 0.4 × LLM reasoning)
     - ADR-0007: Confidence thresholds (≥0.80 HIGH, ≥0.60 MEDIUM, <0.60 rejected)
+    - Smart categorization: "exact" match type overrides confidence threshold for better UX
 
 - **Transcript Storage Feature (Phase 1 - US-0002)**
   - Database: Added `transcript` field to `VideoJob` model (TEXT type)
@@ -76,9 +92,11 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 ### Changed - Unreleased
 
 - **US-0001 Status:** ✅ Implemented and functional (Course selection with hybrid UX)
-- **US-0004 Status:** Implemented with automatic triggering (⚠️ Pending full end-to-end testing - requires active course enrollment)
-- **Video Processing Pipeline:** Now includes automatic concept-to-syllabus matching after extraction
-- **ConceptMatch Schema:** Added `matchType` and `rationale` fields for explainability
+- **US-0004 Status:** ✅ Complete with interactive review UI and feedback system
+- **Video Processing Pipeline:** Now includes automatic concept-to-syllabus matching after extraction with celebration dialog
+- **ConceptMatch Schema:** Added `matchType`, `rationale`, and `userFeedback` fields for explainability and learning
+- **Content Inbox UX:** Removed course selection requirement - auto-matches to all active courses
+- **Celebration Dialog:** Interactive expandable sections for reviewing matches with optional feedback
 - **US-0002 Progress:** Video URL submission now fetches and stores transcripts (Phase 1 complete)
 - **UI Transformation:** Users page organization card replaced with modern inbox interface
 - **Data Flow:** Implemented two-phase processing (fetch transcript → AI processing → auto-match)
@@ -92,6 +110,9 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 - Corrected SocialKit API response structure handling (transcript is string, not array)
 - Fixed Prisma client cache issue requiring dev server restart after schema changes
 - Corrected user story count (9 stories, not 12) in documentation
+- Smart categorization logic: "exact" matches now appear in High Confidence even if confidence <80%
+- Next.js 15 compatibility: Dynamic route params properly awaited in feedback API
+- TypeScript errors in client components (proper null checks and type guards)
 
 ## [0.2.0] - 2025-11-14
 

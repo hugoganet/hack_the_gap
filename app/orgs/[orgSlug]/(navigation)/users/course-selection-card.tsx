@@ -26,9 +26,10 @@ type CourseSelectionCardProps = {
   activeCourses?: Course[];
 };
 
-export function CourseSelectionCard({ activeCourses: initialCourses = [] }: CourseSelectionCardProps) {
+export function CourseSelectionCard({ 
+  activeCourses: initialCourses = []
+}: CourseSelectionCardProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [activeCourses, setActiveCourses] = useState<Course[]>(initialCourses);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -55,8 +56,7 @@ export function CourseSelectionCard({ activeCourses: initialCourses = [] }: Cour
   const emptySlots = Math.max(0, 3 - displayedCourses.length);
 
   const handleCourseClick = (course: Course) => {
-    setSelectedCourse(course);
-    // TODO: Show course details dialog
+    // TODO: Navigate to course details or show course info
     console.log("Course clicked:", course);
   };
 

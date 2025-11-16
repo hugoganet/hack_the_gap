@@ -15,26 +15,22 @@ import {
   Link2, 
   Video, 
   FileText, 
-  Loader2 
+  Loader2,
+  Sparkles
 } from "lucide-react";
-import { useCurrentOrg } from "../../use-current-org";
 import { cn } from "@/lib/utils";
 import { processContent } from "@app/actions/process-content.action";
+import { matchConceptsAction } from "@app/actions/match-concepts.action";
 import { toast } from "sonner";
+import { MatchResultsDialog, type MatchResultsData } from "./match-results-dialog";
 
 export const ClientOrg = () => {
-  const org = useCurrentOrg();
   const [dragActive, setDragActive] = useState(false);
   const [url, setUrl] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [matchResults, setMatchResults] = useState<MatchResultsData | null>(null);
+  const [showMatchDialog, setShowMatchDialog] = useState(false);
 
-  if (!org) {
-    return (
-      <Card>
-        <CardHeader>No orgy</CardHeader>
-      </Card>
-    );
-  }
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -70,19 +66,35 @@ export const ClientOrg = () => {
     setIsProcessing(true);
     
     try {
+      // Step 1: Process content and extract concepts
       const result = await processContent(url);
       
       if (result.success) {
-        const message = "message" in result ? result.message : "Content processed successfully!";
-        const concepts = (result as any).data?.processedConceptsCount ?? 0;
-        const toastMessage = concepts > 0
-          ? `${message} Extracted ${concepts} concept${concepts === 1 ? "" : "s"}.`
-          : `${message} No concepts extracted.`;
-        toast.success(toastMessage);
+        const concepts = result.data?.processedConceptsCount ?? 0;
+        
+        // Show success toast
+        toast.success(`✅ Processing complete!`, {
+          description: `Extracted ${concepts} concept${concepts === 1 ? "" : "s"} and matched to your courses`,
+          duration: 3000,
+        });
+        
+        // Step 2: Get match results from the processing (matching happens in process-content.action)
+        if (result.data && concepts > 0) {
+          const data = result.data;
+          
+          // If we have match data, show the celebration dialog
+          if (typeof data === "object" && "matchData" in data && data.matchData) {
+            setTimeout(() => {
+              setMatchResults(data.matchData as MatchResultsData);
+              setShowMatchDialog(true);
+            }, 500);
+          }
+        }
+        
         setUrl("");
       } else {
-        const error = "error" in result ? result.error : "Failed to process content";
-        toast.error(error);
+        const error = "error" in result ? result.error : undefined;
+        toast.error(error ?? "Failed to process content");
       }
     } catch (error) {
       console.error("Error processing content:", error);
@@ -109,16 +121,17 @@ export const ClientOrg = () => {
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Upload className="size-5" />
-          Content Inbox
-        </CardTitle>
-        <CardDescription>
-          Drop a URL or file to process content
-        </CardDescription>
-      </CardHeader>
+    <>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Upload className="size-5" />
+            Content Inbox
+          </CardTitle>
+          <CardDescription>
+            Drop a URL or file to process content
+          </CardDescription>
+        </CardHeader>
       <CardContent className="space-y-4">
         {/* Drag and Drop Zone */}
         <div
@@ -219,5 +232,12 @@ export const ClientOrg = () => {
         </div>
       </CardContent>
     </Card>
+
+    <MatchResultsDialog
+      open={showMatchDialog}
+      onOpenChange={setShowMatchDialog}
+      data={matchResults}
+    />
+    </>
   );
 };
