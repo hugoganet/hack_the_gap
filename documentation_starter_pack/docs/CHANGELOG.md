@@ -8,6 +8,13 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **AI Documentation Workflow** (ADR-0008)
+  - Created ADR-0008 documenting AI-assisted documentation update workflow
+  - Formalized diff-to-patch approach for maintaining documentation
+  - Documented mapping matrix (change types → affected docs)
+  - Established validation checklist and safety guidelines
+  - Updated `docs/decisions/README.md` with complete ADR index
+
 - **Course Selection Feature (US-0001)** ✅ IMPLEMENTED
   - **UI Components** (`app/orgs/[orgSlug]/(navigation)/users/`)
     - `course-selection-card.tsx`: 2x2 grid card interface with "Add Course" button and active course slots

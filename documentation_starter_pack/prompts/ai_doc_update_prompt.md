@@ -1,5 +1,9 @@
 # 🧠 AI Doc Updater Prompt
 
+> **Documentation:** See [ADR-0008](../docs/decisions/ADR-0008-ai-doc-update-workflow.md) for architectural rationale and workflow design.
+> 
+> **Version:** 1.0.0 (2025-11-16)
+
 ---
 
 ## 🎯 Purpose

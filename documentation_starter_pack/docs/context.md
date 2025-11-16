@@ -97,6 +97,7 @@ See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-16**: ADR-0008: AI-assisted documentation update workflow formalized (diff-to-patch approach)
 - **2025-11-16**: US-0004 implemented - Hybrid matching (0.6 × embeddings + 0.4 × LLM), automatic triggering, 33 tests passing
 - **2025-11-16**: ADR-0005: OpenAI embeddings (text-embedding-3-small) for semantic similarity
 - **2025-11-16**: ADR-0006: Hybrid matching algorithm balances speed (embeddings) with accuracy (LLM)
