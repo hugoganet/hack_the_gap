@@ -1,16 +1,13 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
-import { admin, emailOTP, organization } from "better-auth/plugins";
-import { ac, roles } from "./auth/auth-permissions";
+import { admin, emailOTP } from "better-auth/plugins";
 
 import { sendEmail } from "@/lib/mail/send-email";
 import { SiteConfig } from "@/site-config";
 import MarkdownEmail from "@email/markdown.email";
 import { setupResendCustomer } from "./auth/auth-config-setup";
 import { env } from "./env";
-import { generateSlug } from "./format/id";
-import { logger } from "./logger";
 import { prisma } from "./prisma";
 import { getServerUrl } from "./server-url";
 
@@ -46,21 +43,6 @@ export const auth = betterAuth({
       create: {
         after: async (user, _req) => {
           await setupResendCustomer(user);
-
-          const emailName = user.email.slice(0, 8);
-          try {
-            await auth.api.createOrganization({
-              body: {
-                name: `${emailName}'s org`, // required
-                slug: generateSlug(emailName), // required
-                logo: `${getServerUrl()}/images/org-logo.png`,
-                userId: user.id,
-                keepCurrentActiveOrganization: false,
-              },
-            });
-          } catch (err) {
-            logger.error("Failed to create org", { err });
-          }
         },
       },
     },
@@ -148,32 +130,6 @@ export const auth = betterAuth({
   },
   socialProviders: SocialProviders,
   plugins: [
-    organization({
-      ac: ac,
-      roles: roles,
-      organizationLimit: 5,
-      membershipLimit: 10,
-      autoCreateOrganizationOnSignUp: true,
-
-      // Removed Stripe customer creation - not needed for hackathon
-      async sendInvitationEmail({ id, email }) {
-        const inviteLink = `${getServerUrl()}/orgs/accept-invitation/${id}`;
-        await sendEmail({
-          to: email,
-          subject: "You are invited to join an organization",
-          html: MarkdownEmail({
-            preview: `Join an organization on ${SiteConfig.title}`,
-            markdown: `
-            Hello,
-
-            You have been invited to join an organization on ${SiteConfig.title}.
-
-            [Click here to accept the invitation](${inviteLink})
-            `,
-          }),
-        });
-      },
-    }),
     emailOTP({
       sendVerificationOTP: async ({ email, otp }) => {
         await sendEmail({
