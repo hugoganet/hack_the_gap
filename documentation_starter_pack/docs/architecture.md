@@ -111,12 +111,17 @@ app/
 ```typescript
 src/
 ├── features/
+│   ├── matching/                  # ✅ US-0004: IMPLEMENTED
+│   │   ├── config.ts              # Thresholds, blend weights, concurrency
+│   │   ├── ai-reasoning.ts        # LLM-based concept verification
+│   │   ├── concept-matcher.ts     # Hybrid two-stage orchestrator
+│   │   ├── write-concept-matches.ts # Idempotent DB writer
+│   │   └── README.md              # Technical architecture docs
 │   ├── videos/
 │   │   ├── videoProcessor.ts      # US-0002: Video URL submission
 │   │   └── transcriptService.ts   # SocialKit API integration
 │   ├── concepts/
 │   │   ├── conceptExtractor.ts    # US-0003: AI extraction
-│   │   ├── conceptMatcher.ts      # US-0004: Syllabus matching
 │   │   └── embeddingService.ts    # OpenAI embeddings
 │   ├── flashcards/
 │   │   ├── flashcardGenerator.ts  # US-0005: Auto-generation
@@ -126,11 +131,86 @@ src/
 │   │   └── gapAnalyzer.ts         # US-0009: Gap analysis
 │   └── courses/
 │       └── courseService.ts       # US-0001: Course selection
-└── lib/
-    ├── prisma.ts                  # Prisma client
-    ├── openai.ts                  # OpenAI client
-    └── youtube.ts                 # YouTube client
+├── lib/
+│   ├── ai/
+│   │   └── embeddings.ts          # ✅ OpenAI embeddings service
+│   ├── prisma.ts                  # Prisma client
+│   ├── ai.ts                      # OpenAI client
+│   ├── blackbox.ts                # Blackbox AI client
+│   └── youtube.ts                 # YouTube client
+└── app/actions/
+    ├── process-content.action.ts  # ✅ Video processing + auto-match
+    └── match-concepts.action.ts   # ✅ Manual matching trigger
 ```
+=======
+### Concept-to-Syllabus Matching Architecture (US-0004)
+
+**Implementation Status:** ✅ Complete (Pending E2E Testing)
+
+**Hybrid Two-Stage Algorithm:**
+
+```
+Stage 1: Embedding-Based Shortlisting
+├─ Compute cosine similarity (all pairs)
+├─ Filter candidates ≥ 0.60 threshold
+└─ Select top-K=5 per extracted concept
+
+Stage 2: LLM Reasoning on Shortlist
+├─ Call Blackbox/OpenAI for each candidate
+├─ Get: isMatch, confidence, matchType, rationale
+└─ Concurrency limit: 3 parallel calls
+
+Final Blending:
+└─ confidence = 0.6 × similarity + 0.4 × llm_confidence
+```
+
+**Components:**
+
+1. **Config** (`src/features/matching/config.ts`)
+   - Thresholds: HIGH=0.80, MEDIUM=0.60
+   - Blend weights: 0.6 sim + 0.4 LLM
+   - Concurrency: 3 parallel LLM calls
+
+2. **Embeddings Service** (`src/lib/ai/embeddings.ts`)
+   - OpenAI text-embedding-3-small (1536 dims)
+   - Batch processing via Vercel AI SDK
+   - Cosine similarity helper
+
+3. **AI Reasoning** (`src/features/matching/ai-reasoning.ts`)
+   - LLM verification (Blackbox preferred, OpenAI fallback)
+   - Returns: isMatch, confidence, matchType, rationale
+   - Low temperature (0.2) for consistency
+
+4. **Concept Matcher** (`src/features/matching/concept-matcher.ts`)
+   - Orchestrates two-stage pipeline
+   - Handles shortlisting + LLM calls
+   - Blends scores and selects best match
+
+5. **DB Writer** (`src/features/matching/write-concept-matches.ts`)
+   - Idempotent upserts (one match per concept)
+   - Batch operations for performance
+   - Cleanup utilities
+
+6. **Server Action** (`app/actions/match-concepts.action.ts`)
+   - Authentication & authorization
+   - Status tracking (matching → matched/failed)
+   - Comprehensive logging
+
+7. **Automatic Triggering** (`app/actions/process-content.action.ts`)
+   - Auto-match after concept extraction
+   - Smart logic: 0/1/N courses
+   - Graceful error handling
+
+**Performance:**
+- Target: <20 seconds per video
+- Typical: 10-15 seconds (10-50 concepts)
+- Cost: ~$0.10 per video (1 course)
+
+**See Also:**
+- ADR-0005: Embedding provider selection
+- ADR-0006: Hybrid matching algorithm
+- ADR-0007: Confidence threshold calibration
+- `src/features/matching/README.md`: Technical details
 
 ## Tech Stack
 
@@ -187,28 +267,43 @@ sequenceDiagram
     
     Student->>UI: Drop/paste YouTube URL
     UI->>SA: processContent(url)
+    
+    Note over SA,DB: Phase 1: Transcript Fetching ✅
     SA->>DB: Create video_job (status: transcript_fetched)
     SA->>SocialKit: GET /youtube/transcript
     SocialKit-->>SA: Transcript text (1526 words)
     SA->>DB: Store transcript in video_job
-    SA-->>UI: Phase 1 complete (videoJobId)
     
-    Note over SA,OpenAI: Phase 2 (TODO): AI Processing
-    SA->>OpenAI: Extract concepts (GPT-4)
-    OpenAI-->>API: Extracted concepts
-    API->>DB: Store concepts
-    API->>OpenAI: Generate embeddings
-    OpenAI-->>API: Concept embeddings
-    API->>DB: Fetch syllabus concepts
-    API->>OpenAI: Match concepts (embeddings + reasoning)
-    OpenAI-->>API: Concept matches
-    API->>DB: Store matches
-    API->>OpenAI: Generate flashcards
-    OpenAI-->>API: Flashcards
-    API->>DB: Store flashcards
-    API->>DB: Update video_job (status: completed)
-    API-->>UI: Processing complete
-    UI-->>Student: Show results (3 concepts matched)
+    Note over SA,OpenAI: Phase 2: Concept Extraction ✅
+    SA->>OpenAI: Extract concepts (Blackbox/GPT-4)
+    OpenAI-->>SA: Extracted concepts (JSON)
+    SA->>DB: Store concepts (10 concepts)
+    SA->>DB: Update status: concepts_extracted
+    
+    Note over SA,OpenAI: Phase 3: Auto-Match ✅
+    SA->>DB: Fetch user's active courses
+    SA->>DB: Fetch syllabus concepts (per course)
+    SA->>OpenAI: Generate embeddings (batch)
+    OpenAI-->>SA: Embeddings (Float32Array[])
+    SA->>SA: Compute cosine similarity
+    SA->>SA: Shortlist top-K candidates (≥0.60)
+    
+    loop For each shortlisted candidate
+        SA->>OpenAI: LLM reasoning (Blackbox/GPT-4)
+        OpenAI-->>SA: isMatch, confidence, matchType, rationale
+    end
+    
+    SA->>SA: Blend scores (0.6×sim + 0.4×llm)
+    SA->>DB: Store concept_matches (10 matches)
+    SA->>DB: Update status: matched
+    SA-->>UI: Processing complete
+    UI-->>Student: Show results (10 concepts matched, 7 high confidence)
+    
+    Note over SA,OpenAI: Phase 4: Flashcard Generation (TODO)
+    SA->>OpenAI: Generate flashcards
+    OpenAI-->>SA: Flashcards
+    SA->>DB: Store flashcards
+    SA->>DB: Update video_job (status: completed)
 ```
 
 ## Interfaces & Contracts

@@ -6,8 +6,8 @@ This is the single entry point for reconstructing project context. AI tools and 
 
 - Name: hack the gap (temporary - name TBD)
 - Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition
-- Stage: Pre-implementation (boilerplate ready, about to start business logic)
-- Last updated: 2025-11-14
+- Stage: Implementation (Core matching pipeline complete)
+- Last updated: 2025-11-16
 
 ## Core Documents
 
@@ -42,10 +42,11 @@ Then record ADRs and Specs as needed under `./decisions/` and `./specs/`.
 
 ## Current Focus
 
-- **Current Phase:** Pre-implementation - boilerplate configured, data schema complete, ready to implement business logic
+- **Current Phase:** Implementation - Core matching pipeline complete (US-0002 ✓, US-0003 ✓, US-0004 ✓)
 - **High-level goal:** Build 48-hour hackathon MVP proving that auto-generated Zettelkasten from passive content consumption improves student retention
 - **Key risks:** Concept matching accuracy (<50% = lost trust), retention validation in 4 days, AI extraction quality from varied YouTube content
-- **Next milestone:** Start implementing core pipeline (US-0002 → US-0003 → US-0004)
+- **Next milestone:** Complete flashcard generation (US-0005) and review system (US-0006, US-0007)
+- **Recent achievement:** Automatic concept-to-syllabus matching with hybrid algorithm (embeddings + LLM)
 
 ## Tech Stack Summary
 
@@ -81,19 +82,25 @@ See `./data/` for:
 ✅ **9 MVP stories documented** (US-0001 to US-0009):
 
 - US-0001: Course Selection ✅ Spec complete
-- US-0002: Video URL Submission ✅ Spec complete
-- US-0003: Concept Extraction ⚠️ HIGHEST RISK - Spec complete
-- US-0004: Concept-to-Syllabus Matching ⚠️ HIGHEST VALUE - Spec complete
+- US-0002: Video URL Submission ✅ **IMPLEMENTED** - Transcript fetching complete
+- US-0003: Concept Extraction ⚠️ HIGHEST RISK - ✅ **IMPLEMENTED** - AI extraction working
+- US-0004: Concept-to-Syllabus Matching ⚠️ HIGHEST VALUE - ✅ **IMPLEMENTED** (Pending E2E testing)
 - US-0005: Flashcard Generation ✅ Spec complete
 - US-0006: First Review Session ✅ Spec complete
 - US-0007: Review Scheduling ✅ Spec complete
 - US-0008: Progress Dashboard ✅ Spec complete
 - US-0009: Gap Analysis ✅ Spec complete
 
+**Implementation Progress:** 3/9 core stories complete (US-0002, US-0003, US-0004)
+
 See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-16**: US-0004 implemented - Hybrid matching (0.6 × embeddings + 0.4 × LLM), automatic triggering, 33 tests passing
+- **2025-11-16**: ADR-0005: OpenAI embeddings (text-embedding-3-small) for semantic similarity
+- **2025-11-16**: ADR-0006: Hybrid matching algorithm balances speed (embeddings) with accuracy (LLM)
+- **2025-11-16**: ADR-0007: Confidence thresholds calibrated (≥0.80 HIGH, ≥0.60 MEDIUM)
 - **2025-11-14**: Data schema completed - 13 tables, normalized structure, French UE system support
 - **2025-11-14**: Tech stack finalized - Next.js 15.5, Supabase, Prisma, Better-Auth, OpenAI
 - **2025-11-14**: Architecture documented - Monolith approach, synchronous processing for MVP
@@ -104,12 +111,17 @@ See `./specs/` for detailed specifications.
 ## Recent Sessions
 
 - See `./ai_sessions/`. Latest: 2025-11-13-session-002.md (Product Vision Definition)
+- **2025-11-16**: US-0004 implementation session (concept-to-syllabus matching with automatic triggering)
 - **2025-11-14**: Documentation update session (tech stack, architecture, data schema sync)
 
 ## ADRs to Draft
 
-Priority ADRs needed:
+**Completed:**
+- ✅ **ADR-0005**: Embedding provider selection (OpenAI text-embedding-3-small)
+- ✅ **ADR-0006**: Hybrid matching algorithm (0.6 × embeddings + 0.4 × LLM reasoning)
+- ✅ **ADR-0007**: Confidence threshold calibration (≥0.80 HIGH, ≥0.60 MEDIUM, <0.60 rejected)
 
+**Priority ADRs needed:**
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives
 - **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)

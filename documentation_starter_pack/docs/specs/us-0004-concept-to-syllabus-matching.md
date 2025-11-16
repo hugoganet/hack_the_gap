@@ -1,9 +1,36 @@
 # Feature Spec: US-0004 - Concept-to-Syllabus Matching
 
 Owner: Founder
-Status: Draft
-Last Updated: 2025-11-14
+Status: Implemented (Pending Full E2E Testing)
+Last Updated: 2025-11-16
 **⚠️ HIGHEST VALUE STORY - Core differentiator!**
+
+## Implementation Status
+
+✅ **Core Implementation Complete** (2025-11-16)
+- Hybrid two-stage matching algorithm (embeddings + LLM reasoning)
+- Automatic triggering after concept extraction
+- Comprehensive testing (33 tests passing)
+- Database operations with idempotency
+- Authentication & authorization
+- Console logging & observability
+
+⚠️ **Pending Full End-to-End Testing**
+- Requires active course enrollment to test auto-match flow
+- Manual testing needed with real YouTube videos
+- Performance validation (< 20s target)
+- Accuracy validation (≥ 68% target)
+
+**Implementation Files:**
+- `src/features/matching/` - Core matching system
+- `app/actions/match-concepts.action.ts` - Server action
+- `src/lib/ai/embeddings.ts` - Embeddings service
+- `__tests__/matching/` - Test suite (33 tests)
+
+**See Also:**
+- ADR-0005: Embedding provider selection
+- ADR-0006: Hybrid matching algorithm
+- ADR-0007: Confidence threshold calibration
 
 ## Summary
 
