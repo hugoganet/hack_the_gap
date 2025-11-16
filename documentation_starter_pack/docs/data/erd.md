@@ -1,5 +1,7 @@
 # Entity Relationship Diagram
 
+> Updated: 2025-11-16 - Knowledge Tree Migration
+
 ```mermaid
 erDiagram
     USERS {
@@ -15,17 +17,16 @@ erDiagram
         datetime created_at
     }
 
-    ACADEMIC_YEARS {
+    KNOWLEDGE_NODES {
         uuid id PK
+        uuid subject_id FK
+        uuid parent_id FK
         string name
-        int level
+        string slug
+        int order
+        json metadata
         datetime created_at
-    }
-
-    SEMESTERS {
-        uuid id PK
-        int number
-        datetime created_at
+        datetime updated_at
     }
 
     COURSES {
@@ -33,8 +34,6 @@ erDiagram
         string code
         string name
         uuid subject_id FK
-        uuid year_id FK
-        uuid semester_id FK
         string ue_number
         string syllabus_url
         datetime created_at
@@ -55,6 +54,13 @@ erDiagram
         string category
         int importance
         int order
+        datetime created_at
+    }
+
+    NODE_SYLLABUS_CONCEPTS {
+        uuid node_id FK
+        uuid syllabus_concept_id FK
+        uuid added_by_user_id FK
         datetime created_at
     }
 
@@ -130,13 +136,18 @@ erDiagram
     USERS ||--o{ VIDEO_JOBS : submits
     USERS ||--o{ FLASHCARDS : owns
     USERS ||--o{ REVIEW_SESSIONS : completes
+    USERS ||--o{ NODE_SYLLABUS_CONCEPTS : "attaches (optional)"
 
     SUBJECTS ||--o{ COURSES : categorizes
-    ACADEMIC_YEARS ||--o{ COURSES : "belongs to"
-    SEMESTERS ||--o{ COURSES : "scheduled in"
+    SUBJECTS ||--o{ KNOWLEDGE_NODES : "organizes into"
+
+    KNOWLEDGE_NODES ||--o{ KNOWLEDGE_NODES : "parent of"
+    KNOWLEDGE_NODES ||--o{ NODE_SYLLABUS_CONCEPTS : "contains"
 
     COURSES ||--o{ USER_COURSES : has
     COURSES ||--o{ SYLLABUS_CONCEPTS : contains
+
+    SYLLABUS_CONCEPTS ||--o{ NODE_SYLLABUS_CONCEPTS : "attached to"
 
     VIDEO_JOBS ||--o{ CONCEPTS : extracts
 
@@ -151,11 +162,32 @@ erDiagram
 
 ## Notes
 
-- **Normalized schema**: 13 tables (3 new: subjects, academic_years, semesters)
-- **French university structure**: Courses reference subject, year, semester for proper UE organization
+- **Normalized schema**: 12 tables (removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts)
+- **Simplified hierarchy**: Courses now only reference subject (no year/semester)
+- **Flexible knowledge tree**: `knowledge_nodes` provides arbitrary-depth organization within subjects
+- **Tree structure**: Self-referential `parent_id` in `knowledge_nodes` enables hierarchical organization
+- **Optional concept organization**: `node_syllabus_concepts` junction allows attaching concepts to tree nodes
 - **Dynamic concept counts**: Total concepts per course computed from `COUNT(syllabus_concepts)`, not hardcoded
 - **Syllabus-driven**: Concept counts emerge from AI processing of actual syllabus PDFs
 - **Hard deletes**: No soft delete columns (`deleted_at`)
 - **No retention policies**: Keep all data for demo
 - **Single active course**: `user_courses.is_active` flag
 - **Pre-computed learned_count**: `user_courses.learned_count` for dashboard performance ("12 learned")
+
+## Migration Notes (2025-11-16)
+
+**Removed:**
+- `academic_years` table (rigid calendar structure)
+- `semesters` table (rigid calendar structure)
+- `courses.year_id` field
+- `courses.semester_id` field
+
+**Added:**
+- `knowledge_nodes` table (flexible tree hierarchy)
+- `node_syllabus_concepts` junction table (organize concepts into tree)
+
+**Rationale:**
+- Calendar-based organization (Year/Semester) was too rigid for diverse content
+- Knowledge tree allows flexible, domain-driven organization (e.g., Philosophy → Epistemology → Kant)
+- Courses remain as containers, but knowledge is organized via tree structure
+- Enables better concept discovery and navigation

@@ -1,5 +1,6 @@
 # Data Dictionary - Hackathon MVP
-# Minimal documentation for 10 core tables
+# Minimal documentation for 12 core tables (Updated: 2025-11-16)
+# MIGRATION: Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
 
 users:
   description: "Student accounts with basic auth info"
@@ -39,44 +40,8 @@ subjects:
       type: timestamp
       required: true
 
-academic_years:
-  description: "University years (Licence 1-3, Master 1-2, etc.)"
-  source: "admin seed data"
-  fields:
-    id:
-      type: uuid
-      description: "Primary key"
-      required: true
-    name:
-      type: string
-      description: "Year name (Licence 1, Licence 2, Master 1, etc.)"
-      required: true
-    level:
-      type: integer
-      description: "Numeric level 1-6 for sorting"
-      required: true
-    created_at:
-      type: timestamp
-      required: true
-
-semesters:
-  description: "Academic semesters (1-6)"
-  source: "admin seed data"
-  fields:
-    id:
-      type: uuid
-      description: "Primary key"
-      required: true
-    number:
-      type: integer
-      description: "Semester number (1-6)"
-      required: true
-    created_at:
-      type: timestamp
-      required: true
-
 courses:
-  description: "Individual courses (UEs) within subject/year/semester structure"
+  description: "Individual courses (UEs) within subject structure - simplified hierarchy"
   source: "admin seed data + syllabus PDF processing"
   fields:
     id:
@@ -95,16 +60,6 @@ courses:
       type: uuid
       description: "FK to subjects"
       required: true
-      index: true
-    year_id:
-      type: uuid
-      description: "FK to academic_years (optional)"
-      required: false
-      index: true
-    semester_id:
-      type: uuid
-      description: "FK to semesters (optional)"
-      required: false
       index: true
     ue_number:
       type: string
@@ -144,9 +99,73 @@ user_courses:
       type: timestamp
       required: true
 
+knowledge_nodes:
+  description: "Flexible tree-based knowledge hierarchy within subjects (e.g., Epistemology → Kant → Categorical Imperative)"
+  source: "admin seed data or AI-generated from content"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    subject_id:
+      type: uuid
+      description: "FK to subjects"
+      required: true
+      index: true
+    parent_id:
+      type: uuid
+      description: "FK to knowledge_nodes (self-referential for tree structure). NULL = root node"
+      required: false
+      index: true
+    name:
+      type: string
+      description: "Node name (Epistemology, Ethics, Kant, Categorical Imperative, etc.)"
+      required: true
+    slug:
+      type: string
+      description: "URL-friendly identifier, unique per subject (e.g., 'epistemology', 'kant')"
+      required: false
+    order:
+      type: integer
+      description: "Display order among siblings for consistent tree rendering"
+      required: true
+      default: 0
+    metadata:
+      type: json
+      description: "Flexible JSON metadata for future extensions (descriptions, icons, etc.)"
+      required: false
+    created_at:
+      type: timestamp
+      required: true
+    updated_at:
+      type: timestamp
+      required: true
+
+node_syllabus_concepts:
+  description: "Junction table linking syllabus concepts to knowledge tree nodes for organization"
+  source: "admin curation or AI-suggested attachments"
+  fields:
+    node_id:
+      type: uuid
+      description: "FK to knowledge_nodes"
+      required: true
+      index: true
+    syllabus_concept_id:
+      type: uuid
+      description: "FK to syllabus_concepts"
+      required: true
+      index: true
+    added_by_user_id:
+      type: uuid
+      description: "User who attached this concept (optional, for tracking)"
+      required: false
+    created_at:
+      type: timestamp
+      required: true
+
 syllabus_concepts:
-  description: "Required concepts per course (extracted from syllabus)"
-  source: "admin pre-load before hackathon"
+  description: "Required concepts per course (extracted from syllabus). Can optionally be organized into knowledge tree via node_syllabus_concepts"
+  source: "admin pre-load before hackathon or AI extraction"
   fields:
     id:
       type: uuid

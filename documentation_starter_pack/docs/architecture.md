@@ -102,13 +102,11 @@ app/
 │   ├── course-selection-card.tsx       # 2x2 grid course interface
 │   ├── add-course-dialog.tsx           # Hybrid search dialog
 │   └── page.tsx                        # Users page with course selection
-├── api/                 # API routes
-│   ├── courses/         # ✅ Course management (US-0001)
-│   ├── user/courses/    # ✅ User course enrollment
-│   ├── subjects/        # ✅ Subject data
-│   ├── years/           # ✅ Academic year data
-│   ├── semesters/       # ✅ Semester data
-│   ├── videos/          # Video processing
+    ├── api/                 # API routes
+    │   ├── courses/         # ✅ Course management (US-0001) - Updated 2025-11-16
+    │   ├── user/courses/    # ✅ User course enrollment - Updated 2025-11-16
+    │   ├── subjects/        # ✅ Subject data
+    │   ├── videos/          # Video processing
 │   ├── concepts/        # Concept extraction
 │   ├── flashcards/      # Flashcard generation
 │   └── reviews/         # Review sessions
@@ -319,14 +317,24 @@ sequenceDiagram
 
 ### Public APIs
 
-**Course Management:** ✅ IMPLEMENTED (US-0001)
+**Course Management:** ✅ IMPLEMENTED (US-0001) - Updated 2025-11-16
 
-- `GET /api/courses` - List all available courses with relationships (subject, year, semester, concept count)
-- `GET /api/user/courses` - Get user's active courses with progress
+- `GET /api/courses` - List all available courses with relationships (subject, concept count) - **year/semester removed**
+- `GET /api/user/courses` - Get user's active courses with progress - **year/semester removed**
 - `POST /api/user/courses` - Add course to user's active courses (body: `{ courseId: string }`)
 - `GET /api/subjects` - List all subjects ordered alphabetically
-- `GET /api/years` - List all academic years ordered by level
-- `GET /api/semesters` - List all semesters ordered by number
+- ~~`GET /api/years`~~ - **REMOVED** (calendar structure deprecated)
+- ~~`GET /api/semesters`~~ - **REMOVED** (calendar structure deprecated)
+
+**Knowledge Tree Management:** ⚠️ NOT YET IMPLEMENTED (Future)
+
+- `GET /api/subjects/:subjectId/nodes` - List child nodes (query: `?parentId=uuid|null`)
+- `GET /api/subjects/:subjectId/nodes/tree` - Get subtree (query: `?parentId=uuid&depth=int|full`)
+- `POST /api/subjects/:subjectId/nodes` - Create node
+- `PATCH /api/subjects/:subjectId/nodes/:nodeId` - Update node (rename, reparent, reorder)
+- `DELETE /api/subjects/:subjectId/nodes/:nodeId` - Delete empty node
+- `POST /api/subjects/:subjectId/nodes/:nodeId/concepts` - Attach syllabus concepts
+- `DELETE /api/subjects/:subjectId/nodes/:nodeId/concepts/:syllabusConceptId` - Detach concept
 
 **Video Processing:**
 

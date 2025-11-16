@@ -8,6 +8,46 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Knowledge Tree Migration** (2025-11-16) 🌳
+  - **Database Schema Changes** (`prisma/schema/schema.prisma`)
+    - Added `KnowledgeNode` model: Flexible tree-based hierarchy within subjects
+      - Fields: id, subjectId, parentId (self-referential), name, slug (unique per subject), order, metadata, timestamps
+      - Indexes: (subjectId, parentId, order), (subjectId), (parentId)
+      - Unique constraint: (subjectId, slug)
+    - Added `NodeSyllabusConcept` junction table: Links syllabus concepts to knowledge tree nodes
+      - Composite PK: (nodeId, syllabusConceptId)
+      - Optional: addedByUserId for tracking
+    - Removed `AcademicYear` model (rigid calendar structure)
+    - Removed `Semester` model (rigid calendar structure)
+    - Updated `Course` model: Removed yearId and semesterId fields
+    - Updated `Subject` model: Added nodes relation to KnowledgeNode
+    - Migration: `20251116180216_knowledge_tree_init`
+  - **API Changes**
+    - Deleted `/api/years/route.ts` (no longer needed)
+    - Deleted `/api/semesters/route.ts` (no longer needed)
+    - Updated `/api/courses/route.ts`: Removed year/semester includes and fields from responses
+    - Updated `/api/user/courses/route.ts`: Removed year/semester includes and fields from GET/POST
+  - **Frontend Simplification**
+    - Updated `app/dashboard/users/add-course-dialog.tsx`: Removed year/semester selection steps
+    - Updated `app/orgs/[orgSlug]/(navigation)/users/add-course-dialog.tsx`: Removed year/semester selection steps
+    - Updated course flashcards views: Removed year/semester display from both dashboard and org routes
+    - Updated course detail pages: Removed year/semester includes
+    - Simplified course selection flow: Subject → Course (no more Year/Semester intermediary steps)
+  - **Scripts & Data**
+    - Updated `prisma/seed.ts`: Removed AcademicYear/Semester seeding logic
+    - Updated `scripts/ingest-generated-courses.ts`: Removed year/semester handling
+  - **Documentation**
+    - Created comprehensive migration guide: `docs/migrations/knowledge-tree/MAIN_MIGRATION_GUIDE.md`
+    - Added supporting docs: API specs, SQL recipes, frontend changes, task checklist, test plan
+    - Updated `docs/data/schema.yml`: Removed academic_years/semesters, added knowledge_nodes/node_syllabus_concepts
+    - Updated `docs/data/data_dictionary.yml`: Updated field definitions for new models
+    - Updated `docs/data/erd.md`: Updated ERD with new relationships and migration notes
+  - **Architecture Decision**
+    - Rationale: Calendar-based organization (Year/Semester) was too rigid for diverse content types
+    - New approach: Flexible, domain-driven knowledge tree (e.g., Philosophy → Epistemology → Kant → Categorical Imperative)
+    - Benefits: Arbitrary depth, subject-centric organization, better concept discovery
+    - Hierarchy: Subject → Course → KnowledgeNodes (tree) → SyllabusConcepts
+
 - **AI Documentation Workflow** (ADR-0008)
   - Created ADR-0008 documenting AI-assisted documentation update workflow
   - Formalized diff-to-patch approach for maintaining documentation

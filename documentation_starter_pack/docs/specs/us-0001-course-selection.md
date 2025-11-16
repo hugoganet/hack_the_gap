@@ -1,12 +1,14 @@
 # Feature Spec: US-0001 - Course Selection
 
 Owner: Founder
-Status: ✅ Implemented
+Status: ✅ Implemented (Updated 2025-11-16 - Simplified hierarchy)
 Last Updated: 2025-11-16
 
 ## Summary
 
-Enable first-time users to select which course they're studying from a dropdown of pre-loaded courses. This is the entry point for the entire MVP flow - students must select a course before submitting content for processing.
+Enable first-time users to select which course they're studying from a list of pre-loaded courses. This is the entry point for the entire MVP flow - students must select a course before submitting content for processing.
+
+**Implementation:** Hybrid search dialog with progressive selection (Subject → Course). Calendar-based organization (Year/Semester) removed in 2025-11-16 migration.
 
 **Why now:** Required for hackathon demo. Students need context (which syllabus to match against) before processing videos.
 
@@ -38,28 +40,37 @@ Enable first-time users to select which course they're studying from a dropdown 
 
 ## UX & Flows
 
+**Updated Flow (2025-11-16):**
+
 ```
-[Landing Page]
+[Course Selection Card - 2x2 Grid]
     ↓
-[Welcome Screen]
-"Select your course to get started"
+[Click "Add Course" Button]
     ↓
-[Dropdown: Select Course ▾]
-  - Philosophy 101 (30 concepts)
-  - Biology 101 (35 concepts)
-  - Economics 101 (28 concepts)
+[Hybrid Search Dialog Opens]
     ↓
-[Button: Start Learning →]
+Option 1: Quick Search
+  - Type course name
+  - Instant filtering
+  - Select from results
+    ↓
+Option 2: Progressive Selection
+  - Step 1: Select Subject (Philosophy, Biology, Economics)
+  - Step 2: Select Course from filtered list
+    ↓
+[Course Added to Active Courses]
     ↓
 [Dashboard: "0/30 concepts for Philosophy 101"]
 ```
 
-**Mobile-first wireframe:**
+**Implemented UI:**
 
-- Large dropdown (easy to tap)
-- Course names clearly visible
-- Concept count shown for transparency
-- Prominent "Start Learning" CTA button
+- 2x2 grid layout (desktop), 1 column (mobile)
+- Hybrid search: Type-ahead + progressive selection
+- Breadcrumb navigation with back button
+- Empty slots with dashed borders
+- Course names with line-clamp-3 (no truncation issues)
+- Toast notifications for success/errors
 
 ## Scope
 
@@ -87,53 +98,94 @@ Enable first-time users to select which course they're studying from a dropdown 
 - `Dashboard.tsx` (consumes selected course)
 - `AppContext.tsx` (stores selected course state)
 
-**API contracts:**
+**API contracts (Updated 2025-11-16):**
 
 ```typescript
 // GET /api/courses
 Response: {
   courses: [
     {
-      id: "phil-101",
-      name: "Philosophy 101",
-      totalConcepts: 30,
-      syllabusId: "syllabus-phil-101"
-    },
-    // ... other courses
+      id: string,
+      code: string,
+      name: string,
+      subjectId: string,
+      subject: { id: string, name: string },
+      conceptCount: number
+      // year and semester fields REMOVED
+    }
   ]
 }
 
-// POST /api/user/select-course
+// GET /api/subjects
+Response: {
+  subjects: [
+    { id: string, name: string }
+  ]
+}
+
+// POST /api/user/courses
 Request: {
-  courseId: "phil-101"
+  courseId: string
 }
 Response: {
   success: true,
-  course: { id, name, totalConcepts },
-  userProgress: { learnedConcepts: 0, totalConcepts: 30 }
+  course: { id, code, name, subject },
+  userProgress: { learnedCount: number }
+}
+
+// GET /api/user/courses
+Response: {
+  courses: [
+    {
+      course: { id, code, name, subject },
+      isActive: boolean,
+      learnedCount: number
+    }
+  ]
 }
 ```
 
-**Data model changes:**
+**Removed APIs (2025-11-16):**
+- `GET /api/years` - No longer needed
+- `GET /api/semesters` - No longer needed
+
+**Data model changes (Updated 2025-11-16):**
 
 ```sql
--- Courses table (pre-populated for MVP)
+-- Courses table (simplified - no year/semester)
 CREATE TABLE courses (
-  id VARCHAR(50) PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  syllabus_id VARCHAR(50) NOT NULL,
-  total_concepts INT NOT NULL,
+  id UUID PRIMARY KEY,
+  code VARCHAR(50) UNIQUE NOT NULL,
+  name VARCHAR(200) NOT NULL,
+  subject_id UUID NOT NULL REFERENCES subjects(id),
+  ue_number VARCHAR(50),
+  syllabus_url TEXT,
   created_at TIMESTAMP DEFAULT NOW()
 );
 
--- User course selection
+-- Subjects table
+CREATE TABLE subjects (
+  id UUID PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- User course enrollment
 CREATE TABLE user_courses (
-  user_id VARCHAR(50),
-  course_id VARCHAR(50),
-  selected_at TIMESTAMP DEFAULT NOW(),
+  user_id UUID NOT NULL,
+  course_id UUID NOT NULL,
+  is_active BOOLEAN NOT NULL,
+  learned_count INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW(),
   PRIMARY KEY (user_id, course_id)
 );
 ```
+
+**Removed (2025-11-16):**
+- `academic_years` table
+- `semesters` table
+- `courses.year_id` field
+- `courses.semester_id` field
 
 **State management:**
 
@@ -153,9 +205,10 @@ interface AppState {
 
 **Risks:**
 
-- **Low complexity**: Straightforward dropdown, minimal risk
+- **Low complexity**: Straightforward selection, minimal risk
 - **Dependency**: All other features depend on course being selected first
-- **Persistence**: If localStorage is cleared, user loses selection (acceptable for MVP)
+- **Breaking change (2025-11-16)**: Removed year/semester - simplified but required migration
+- **No UI for knowledge tree**: Tree structure exists but no management UI yet
 
 ## Rollout
 
@@ -181,6 +234,9 @@ interface AppState {
 **Post-MVP improvements:**
 
 - Add manual syllabus upload
-- Support multiple active courses per user
-- Add course search for larger catalog
+- ✅ Support multiple active courses per user (implemented)
+- ✅ Add course search for larger catalog (hybrid search implemented)
 - Show syllabus preview before selection
+- **New (2025-11-16):** Build knowledge tree management UI
+- **New (2025-11-16):** Implement KnowledgeNode CRUD APIs
+- **New (2025-11-16):** Add tree-based navigation for concepts

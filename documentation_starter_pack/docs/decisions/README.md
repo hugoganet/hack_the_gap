@@ -13,3 +13,4 @@ Index:
 - ADR-0006: Hybrid matching algorithm (embeddings + LLM reasoning)
 - ADR-0007: Confidence threshold calibration (≥0.80 HIGH, ≥0.60 MEDIUM)
 - ADR-0008: AI-assisted documentation update workflow
+- ADR-0009: Knowledge tree migration (removed calendar structure, added flexible tree hierarchy)

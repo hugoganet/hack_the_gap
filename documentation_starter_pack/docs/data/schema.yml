@@ -1,5 +1,6 @@
-# Hackathon MVP Schema - 10 Tables
+# Hackathon MVP Schema - 12 Tables (Updated: 2025-11-16)
 # JSON Schema format for database tables
+# MIGRATION: Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
 
 ---
 $id: "https://hackthegap.com/schemas/users.schema.json"
@@ -39,43 +40,6 @@ properties:
     format: date-time
 
 ---
-$id: "https://hackthegap.com/schemas/academic_years.schema.json"
-$schema: "http://json-schema.org/draft-07/schema#"
-title: academic_years
-type: object
-required: [id, name, level]
-properties:
-  id:
-    type: string
-    format: uuid
-  name:
-    type: string
-    description: "Year name (Licence 1, Licence 2, Licence 3, Master 1, etc.)"
-  level:
-    type: integer
-    description: "Numeric level (1-6) for sorting"
-  created_at:
-    type: string
-    format: date-time
-
----
-$id: "https://hackthegap.com/schemas/semesters.schema.json"
-$schema: "http://json-schema.org/draft-07/schema#"
-title: semesters
-type: object
-required: [id, number]
-properties:
-  id:
-    type: string
-    format: uuid
-  number:
-    type: integer
-    description: "Semester number (1-6)"
-  created_at:
-    type: string
-    format: date-time
-
----
 $id: "https://hackthegap.com/schemas/courses.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: courses
@@ -95,14 +59,6 @@ properties:
     type: string
     format: uuid
     description: "FK to subjects"
-  year_id:
-    type: ["string", "null"]
-    format: uuid
-    description: "FK to academic_years"
-  semester_id:
-    type: ["string", "null"]
-    format: uuid
-    description: "FK to semesters"
   ue_number:
     type: ["string", "null"]
     description: "UE number (UE 1, UE 2, etc.) for French system"
@@ -110,6 +66,44 @@ properties:
     type: ["string", "null"]
     description: "Link to syllabus PDF"
   created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/knowledge_nodes.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: knowledge_nodes
+type: object
+required: [id, subject_id, name, order]
+properties:
+  id:
+    type: string
+    format: uuid
+  subject_id:
+    type: string
+    format: uuid
+    description: "FK to subjects"
+  parent_id:
+    type: ["string", "null"]
+    format: uuid
+    description: "FK to knowledge_nodes (self-referential for tree structure)"
+  name:
+    type: string
+    description: "Node name (Epistemology, Ethics, Kant, etc.)"
+  slug:
+    type: ["string", "null"]
+    description: "URL-friendly identifier, unique per subject"
+  order:
+    type: integer
+    description: "Display order among siblings"
+    default: 0
+  metadata:
+    type: ["object", "null"]
+    description: "Flexible JSON metadata for future extensions"
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
     type: string
     format: date-time
 
@@ -160,6 +154,29 @@ properties:
     description: "1=supplemental, 2=important, 3=core"
   order:
     type: integer
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/node_syllabus_concepts.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: node_syllabus_concepts
+type: object
+required: [node_id, syllabus_concept_id]
+properties:
+  node_id:
+    type: string
+    format: uuid
+    description: "FK to knowledge_nodes"
+  syllabus_concept_id:
+    type: string
+    format: uuid
+    description: "FK to syllabus_concepts"
+  added_by_user_id:
+    type: ["string", "null"]
+    format: uuid
+    description: "User who attached this concept (optional)"
   created_at:
     type: string
     format: date-time
