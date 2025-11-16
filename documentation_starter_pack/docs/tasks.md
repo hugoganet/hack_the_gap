@@ -28,7 +28,12 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 ### MVP Implementation - Core Pipeline
 
 - [ ] US-0012: Admin pre-load syllabi (seed data script) → See `docs/specs/`
-- [ ] US-0001: Course selection UI → See `docs/specs/us-0001-course-selection.md`
+- [x] US-0001: Course selection UI ✅ 2025-11-16 → See `docs/specs/us-0001-course-selection.md`
+  - ✅ CourseSelectionCard component (2x2 grid with "Add Course" button)
+  - ✅ AddCourseDialog component (hybrid search: quick search + progressive selection)
+  - ✅ 5 API routes: /api/courses, /api/user/courses, /api/subjects, /api/years, /api/semesters
+  - ✅ Mobile-responsive design with text truncation
+  - ✅ Breadcrumb navigation and loading states
 - [x] US-0002: Video URL submission (Phase 1: Transcript Storage) ✅ 2025-11-15 → See `docs/specs/us-0002-video-url-submission.md`
   - ✅ Database: Added `transcript` field to `VideoJob` model
   - ✅ Backend: Implemented `processContent` server action with SocialKit API
@@ -68,6 +73,15 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] None currently
 
 ## Done
+
+### Implementation (2025-11-16)
+
+- [x] US-0001: Course selection feature ✅ 2025-11-16
+  - CourseSelectionCard component with 2x2 grid layout
+  - AddCourseDialog with hybrid UX (search + progressive selection)
+  - 5 new API routes for course management
+  - Mobile-responsive design with text truncation
+  - Bug fixes: course filtering, text wrapping
 
 ### Implementation (2025-11-15)
 

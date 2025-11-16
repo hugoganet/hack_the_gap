@@ -8,6 +8,29 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Course Selection Feature (US-0001)** ✅ IMPLEMENTED
+  - **UI Components** (`app/orgs/[orgSlug]/(navigation)/users/`)
+    - `course-selection-card.tsx`: 2x2 grid card interface with "Add Course" button and active course slots
+    - `add-course-dialog.tsx`: Hybrid search dialog (command palette + progressive selection)
+  - **API Routes** (`app/api/`)
+    - `GET /api/courses`: Fetch all available courses with relationships (subject, year, semester, concept count)
+    - `GET /api/user/courses`: Fetch user's active courses with progress
+    - `POST /api/user/courses`: Add course to user's active courses
+    - `GET /api/subjects`: Fetch all subjects ordered alphabetically
+    - `GET /api/years`: Fetch all academic years ordered by level
+    - `GET /api/semesters`: Fetch all semesters ordered by number
+  - **UX Design**
+    - Hybrid approach: Quick search (type-ahead) + progressive selection (Subject → Year → Semester → Course)
+    - Mobile-first: 2x2 grid on desktop, 1 column on mobile
+    - Text truncation: Course names truncate with line-clamp-3, wrap properly
+    - Clean design: Course codes removed from display, focus on course names only
+  - **Features**
+    - Breadcrumb navigation with back button in progressive selection
+    - Loading states and success feedback (toast notifications)
+    - Auto-refresh after adding course
+    - Empty slots with dashed borders (no text)
+    - Responsive design with proper overflow handling
+
 - **Concept-to-Syllabus Matching Feature (US-0004)** ⚠️ HIGHEST VALUE
   - **Matching System** (`src/features/matching/`)
     - `config.ts`: Thresholds (HIGH=0.80, MEDIUM=0.60), blend weights (0.6 sim + 0.4 LLM), concurrency limits
@@ -52,6 +75,7 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Changed - Unreleased
 
+- **US-0001 Status:** ✅ Implemented and functional (Course selection with hybrid UX)
 - **US-0004 Status:** Implemented with automatic triggering (⚠️ Pending full end-to-end testing - requires active course enrollment)
 - **Video Processing Pipeline:** Now includes automatic concept-to-syllabus matching after extraction
 - **ConceptMatch Schema:** Added `matchType` and `rationale` fields for explainability

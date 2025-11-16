@@ -12,7 +12,7 @@ import { serverToast } from "@/lib/server-toast";
 import type { PageParams } from "@/types/next";
 import { ClientOrg } from "./client-org";
 import { DonutChart } from "./donuts-chart";
-import { UsersChart } from "./users-chart";
+import { CourseSelectionCard } from "./course-selection-card";
 
 export const generateMetadata = combineWithParentMetadata({
   title: "Users",
@@ -46,7 +46,7 @@ export default async function RoutePage(props: PageParams) {
       </LayoutActions>
       <LayoutContent className="flex flex-col gap-4 lg:gap-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-          <UsersChart />
+          <CourseSelectionCard />
           <ClientOrg />
         </div>
         <DonutChart />

@@ -94,11 +94,20 @@ app/
 ├── (auth)/              # Auth pages (signin, signup)
 ├── (logged-in)/         # Protected routes
 │   ├── dashboard/       # Progress dashboard (US-0008)
-│   ├── courses/         # Course selection (US-0001)
+│   ├── courses/         # Course selection (US-0001) ✅ IMPLEMENTED
 │   ├── videos/          # Video submission (US-0002)
 │   ├── review/          # Flashcard review (US-0006)
 │   └── gaps/            # Gap analysis (US-0009)
+├── orgs/[orgSlug]/(navigation)/users/  # ✅ IMPLEMENTED
+│   ├── course-selection-card.tsx       # 2x2 grid course interface
+│   ├── add-course-dialog.tsx           # Hybrid search dialog
+│   └── page.tsx                        # Users page with course selection
 ├── api/                 # API routes
+│   ├── courses/         # ✅ Course management (US-0001)
+│   ├── user/courses/    # ✅ User course enrollment
+│   ├── subjects/        # ✅ Subject data
+│   ├── years/           # ✅ Academic year data
+│   ├── semesters/       # ✅ Semester data
 │   ├── videos/          # Video processing
 │   ├── concepts/        # Concept extraction
 │   ├── flashcards/      # Flashcard generation
@@ -310,6 +319,15 @@ sequenceDiagram
 
 ### Public APIs
 
+**Course Management:** ✅ IMPLEMENTED (US-0001)
+
+- `GET /api/courses` - List all available courses with relationships (subject, year, semester, concept count)
+- `GET /api/user/courses` - Get user's active courses with progress
+- `POST /api/user/courses` - Add course to user's active courses (body: `{ courseId: string }`)
+- `GET /api/subjects` - List all subjects ordered alphabetically
+- `GET /api/years` - List all academic years ordered by level
+- `GET /api/semesters` - List all semesters ordered by number
+
 **Video Processing:**
 
 - `POST /api/videos/submit` - Submit YouTube URL (US-0002)
@@ -326,11 +344,6 @@ sequenceDiagram
 
 - `GET /api/progress/:courseId` - Get progress stats (US-0008)
 - `GET /api/gaps/:courseId` - Get gap analysis (US-0009)
-
-**Course Management:**
-
-- `GET /api/courses` - List available courses (US-0001)
-- `POST /api/user/select-course` - Select active course
 
 ### Data Schema
 
