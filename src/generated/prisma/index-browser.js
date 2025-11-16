@@ -120,19 +120,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.SubscriptionScalarFieldEnum = {
-  id: 'id',
-  plan: 'plan',
-  referenceId: 'referenceId',
-  stripeCustomerId: 'stripeCustomerId',
-  stripeSubscriptionId: 'stripeSubscriptionId',
-  status: 'status',
-  periodStart: 'periodStart',
-  periodEnd: 'periodEnd',
-  cancelAtPeriodEnd: 'cancelAtPeriodEnd',
-  seats: 'seats'
-};
-
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -157,7 +144,6 @@ exports.Prisma.SessionScalarFieldEnum = {
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
   userId: 'userId',
-  activeOrganizationId: 'activeOrganizationId',
   impersonatedBy: 'impersonatedBy'
 };
 
@@ -184,35 +170,6 @@ exports.Prisma.VerificationScalarFieldEnum = {
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.OrganizationScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  logo: 'logo',
-  createdAt: 'createdAt',
-  metadata: 'metadata',
-  email: 'email',
-  stripeCustomerId: 'stripeCustomerId'
-};
-
-exports.Prisma.MemberScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  userId: 'userId',
-  role: 'role',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.InvitationScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  email: 'email',
-  role: 'role',
-  status: 'status',
-  expiresAt: 'expiresAt',
-  inviterId: 'inviterId'
 };
 
 exports.Prisma.FeedbackScalarFieldEnum = {
@@ -368,14 +325,10 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  subscription: 'subscription',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Organization: 'Organization',
-  Member: 'Member',
-  Invitation: 'Invitation',
   Feedback: 'Feedback',
   BetaInvitation: 'BetaInvitation',
   Subject: 'Subject',
