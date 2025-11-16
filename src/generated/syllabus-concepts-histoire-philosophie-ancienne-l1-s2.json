@@ -1,0 +1,172 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 1",
+    "level": 1
+  },
+  "semester": {
+    "number": 2
+  },
+  "course": {
+    "code": "L1PHILANCS2",
+    "name": "Le souverain bien : bonheur, vertu et plaisir",
+    "ueNumber": null,
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Sovereign Good",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Happiness",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Virtue",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Pleasure",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 4
+    },
+    {
+      "conceptText": "Nature of Goods",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 5
+    },
+    {
+      "conceptText": "Essence of Happiness",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 6
+    },
+    {
+      "conceptText": "True Goods",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 7
+    },
+    {
+      "conceptText": "Conditions of Happiness",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Supreme Good",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 9
+    },
+    {
+      "conceptText": "Happiness as State",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 10
+    },
+    {
+      "conceptText": "Happiness as Process",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 11
+    },
+    {
+      "conceptText": "Means and Ends",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 12
+    },
+    {
+      "conceptText": "Way of Life",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 13
+    },
+    {
+      "conceptText": "Ultimate End",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 14
+    },
+    {
+      "conceptText": "Role of Knowledge",
+      "category": "Epistemology",
+      "importance": 2,
+      "order": 15
+    },
+    {
+      "conceptText": "Pleasure vs Virtue Controversy",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 16
+    },
+    {
+      "conceptText": "Hedonism",
+      "category": "Ethical Theories",
+      "importance": 2,
+      "order": 17
+    },
+    {
+      "conceptText": "Virtue Ethics",
+      "category": "Ethical Theories",
+      "importance": 3,
+      "order": 18
+    },
+    {
+      "conceptText": "Platonic Good",
+      "category": "Platonic Philosophy",
+      "importance": 2,
+      "order": 19
+    },
+    {
+      "conceptText": "Aristotelian Eudaimonia",
+      "category": "Aristotelian Philosophy",
+      "importance": 3,
+      "order": 20
+    },
+    {
+      "conceptText": "Epicurean Pleasure",
+      "category": "Epicurean Philosophy",
+      "importance": 3,
+      "order": 21
+    },
+    {
+      "conceptText": "Stoic Virtue",
+      "category": "Stoic Philosophy",
+      "importance": 2,
+      "order": 22
+    },
+    {
+      "conceptText": "Successful Life",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 23
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 23,
+    "categoriesFound": [
+      "Ethics",
+      "Epistemology",
+      "Ethical Theories",
+      "Platonic Philosophy",
+      "Aristotelian Philosophy",
+      "Epicurean Philosophy",
+      "Stoic Philosophy"
+    ],
+    "extractionConfidence": 0.88,
+    "notes": "Syllabus in French, concepts translated to English. Well-structured course on ancient ethics focusing on the sovereign good, happiness, virtue, and pleasure. Clear three-part structure: 1) identifying the supreme good, 2) understanding how it produces happiness, 3) determining means to obtain it. Course examines major ancient philosophical schools (Platonism, Aristotelianism, Epicureanism, Stoicism). Required readings include Plato's Republic (Books VI-VII), Aristotle's Nicomachean Ethics (Books I-II), Cicero's De Finibus (Books II-III), and Epicurus' Letter to Menoeceus. Strong emphasis on the relationship between knowledge, virtue, pleasure, and the good life."
+  }
+}

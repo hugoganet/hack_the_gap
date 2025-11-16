@@ -57,7 +57,7 @@ postgres_data
 # Generated files
 .claude
 .conductor
-src/generated
+
 
 # OS
 .DS_Store

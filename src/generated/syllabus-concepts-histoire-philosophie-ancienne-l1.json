@@ -1,0 +1,167 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 1",
+    "level": 1
+  },
+  "semester": {
+    "number": 1
+  },
+  "course": {
+    "code": "L1PHILANC",
+    "name": "Les fondateurs de la philosophie (philosophie ancienne)",
+    "ueNumber": "UE 1",
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Philosophy Definition",
+      "category": "Foundations of Philosophy",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Knowledge of Ignorance",
+      "category": "Epistemology",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Desire for Knowledge",
+      "category": "Epistemology",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Reality Investigation",
+      "category": "Epistemology",
+      "importance": 3,
+      "order": 4
+    },
+    {
+      "conceptText": "Epistemic Goals",
+      "category": "Foundations of Philosophy",
+      "importance": 2,
+      "order": 5
+    },
+    {
+      "conceptText": "Ethical Goals",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 6
+    },
+    {
+      "conceptText": "Political Goals",
+      "category": "Political Philosophy",
+      "importance": 2,
+      "order": 7
+    },
+    {
+      "conceptText": "Political Obstacles to Philosophy",
+      "category": "Political Philosophy",
+      "importance": 2,
+      "order": 8
+    },
+    {
+      "conceptText": "Psychic Obstacles to Philosophy",
+      "category": "Psychology",
+      "importance": 2,
+      "order": 9
+    },
+    {
+      "conceptText": "Nature of Knowledge",
+      "category": "Epistemology",
+      "importance": 3,
+      "order": 10
+    },
+    {
+      "conceptText": "Methods of Knowing Reality",
+      "category": "Epistemology",
+      "importance": 3,
+      "order": 11
+    },
+    {
+      "conceptText": "Human Existence Purpose",
+      "category": "Ethics",
+      "importance": 3,
+      "order": 12
+    },
+    {
+      "conceptText": "Individual Realization",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 13
+    },
+    {
+      "conceptText": "Political Realization",
+      "category": "Political Philosophy",
+      "importance": 2,
+      "order": 14
+    },
+    {
+      "conceptText": "Emergence of Ancient Philosophy",
+      "category": "History of Philosophy",
+      "importance": 2,
+      "order": 15
+    },
+    {
+      "conceptText": "Platonic Principles",
+      "category": "Platonic Philosophy",
+      "importance": 3,
+      "order": 16
+    },
+    {
+      "conceptText": "Aristotelian Principles",
+      "category": "Aristotelian Philosophy",
+      "importance": 3,
+      "order": 17
+    },
+    {
+      "conceptText": "Categorical Imperative",
+      "category": "Ethics",
+      "importance": 2,
+      "order": 18
+    },
+    {
+      "conceptText": "Socratic Method",
+      "category": "Foundations of Philosophy",
+      "importance": 3,
+      "order": 19
+    },
+    {
+      "conceptText": "Theory of Forms",
+      "category": "Platonic Philosophy",
+      "importance": 3,
+      "order": 20
+    },
+    {
+      "conceptText": "Cave Allegory",
+      "category": "Platonic Philosophy",
+      "importance": 2,
+      "order": 21
+    },
+    {
+      "conceptText": "Aristotelian Metaphysics",
+      "category": "Aristotelian Philosophy",
+      "importance": 3,
+      "order": 22
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 22,
+    "categoriesFound": [
+      "Foundations of Philosophy",
+      "Epistemology",
+      "Ethics",
+      "Political Philosophy",
+      "Psychology",
+      "History of Philosophy",
+      "Platonic Philosophy",
+      "Aristotelian Philosophy"
+    ],
+    "extractionConfidence": 0.82,
+    "notes": "Syllabus in French, concepts translated to English. Well-structured course focusing on foundational questions in ancient philosophy through Plato and Aristotle. Three main questions clearly identified: What is philosophy? What is knowledge? What is the purpose of human existence? Course includes both historical context and contemporary relevance. Bibliographic references include primary sources (Plato's Republic, Apology, Gorgias, Laws; Aristotle's Metaphysics) and secondary literature."
+  }
+}

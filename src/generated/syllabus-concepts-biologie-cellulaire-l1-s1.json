@@ -1,0 +1,111 @@
+{
+  "subject": {
+    "name": "Biology"
+  },
+  "academicYear": {
+    "name": "Licence 1",
+    "level": 1
+  },
+  "semester": {
+    "number": 1
+  },
+  "course": {
+    "code": "ULCB112",
+    "name": "Biologie cellulaire",
+    "ueNumber": "UE 1",
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Animal Cell",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Plasma Membrane",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Transmembrane Exchanges",
+      "category": "Cell Physiology",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Membrane Junctions",
+      "category": "Cell Structure",
+      "importance": 2,
+      "order": 4
+    },
+    {
+      "conceptText": "Nucleus",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 5
+    },
+    {
+      "conceptText": "Cytoskeleton",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 6
+    },
+    {
+      "conceptText": "Intracellular Organelles",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 7
+    },
+    {
+      "conceptText": "Mitochondria",
+      "category": "Cell Structure",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Oxidative Phosphorylation",
+      "category": "Cell Metabolism",
+      "importance": 3,
+      "order": 9
+    },
+    {
+      "conceptText": "Four Major Animal Tissues",
+      "category": "Histology",
+      "importance": 3,
+      "order": 10
+    },
+    {
+      "conceptText": "Histological Methods",
+      "category": "Research Methods",
+      "importance": 2,
+      "order": 11
+    },
+    {
+      "conceptText": "Cytological Methods",
+      "category": "Research Methods",
+      "importance": 2,
+      "order": 12
+    },
+    {
+      "conceptText": "Organization of Living Things",
+      "category": "General Biology",
+      "importance": 3,
+      "order": 13
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 13,
+    "categoriesFound": [
+      "Cell Structure",
+      "Cell Physiology",
+      "Cell Metabolism",
+      "Histology",
+      "Research Methods",
+      "General Biology"
+    ],
+    "extractionConfidence": 0.92,
+    "notes": "Well-structured introductory cell biology course for L1 students. Clear focus on animal cell structure and function. Covers fundamental concepts: membrane structure and function, major organelles (nucleus, mitochondria, cytoskeleton), cellular metabolism (oxidative phosphorylation), and tissue organization. Includes practical methods (histological and cytological techniques). Course provides essential foundation for advanced biology studies. 3 ECTS, 21 CM + 4 TD hours."
+  }
+}

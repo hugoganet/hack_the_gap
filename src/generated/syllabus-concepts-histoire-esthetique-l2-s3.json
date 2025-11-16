@@ -1,0 +1,185 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 2",
+    "level": 2
+  },
+  "semester": {
+    "number": 3
+  },
+  "course": {
+    "code": "L2ESTHETS3",
+    "name": "L'art et le miroir",
+    "ueNumber": "UE 1",
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Mirror as Artistic Device",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Reflection and Depth",
+      "category": "Art Theory",
+      "importance": 2,
+      "order": 2
+    },
+    {
+      "conceptText": "Imitation in Art",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Mimetic Nature of Art",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 4
+    },
+    {
+      "conceptText": "Faithful Representation",
+      "category": "Art Theory",
+      "importance": 2,
+      "order": 5
+    },
+    {
+      "conceptText": "Deforming Representation",
+      "category": "Art Theory",
+      "importance": 2,
+      "order": 6
+    },
+    {
+      "conceptText": "Art as Double",
+      "category": "Art Theory",
+      "importance": 2,
+      "order": 7
+    },
+    {
+      "conceptText": "Art and Knowledge",
+      "category": "Epistemology of Art",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Illusory Character of Art",
+      "category": "Art Theory",
+      "importance": 2,
+      "order": 9
+    },
+    {
+      "conceptText": "Surface vs Essence",
+      "category": "Metaphysics of Art",
+      "importance": 3,
+      "order": 10
+    },
+    {
+      "conceptText": "Function of Art",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 11
+    },
+    {
+      "conceptText": "Interpretation in Art",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 12
+    },
+    {
+      "conceptText": "Art and Nature Relationship",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 13
+    },
+    {
+      "conceptText": "Art and Truth Relationship",
+      "category": "Epistemology of Art",
+      "importance": 3,
+      "order": 14
+    },
+    {
+      "conceptText": "Status of Art",
+      "category": "Art Theory",
+      "importance": 3,
+      "order": 15
+    },
+    {
+      "conceptText": "Hegelian Aesthetics",
+      "category": "19th Century Art Theory",
+      "importance": 2,
+      "order": 16
+    },
+    {
+      "conceptText": "20th Century Art Theories",
+      "category": "Contemporary Art Theory",
+      "importance": 2,
+      "order": 17
+    },
+    {
+      "conceptText": "Poetry and Mirror",
+      "category": "Literary Theory",
+      "importance": 2,
+      "order": 18
+    },
+    {
+      "conceptText": "Painting and Mirror",
+      "category": "Visual Arts Theory",
+      "importance": 2,
+      "order": 19
+    },
+    {
+      "conceptText": "Sculpture and Mirror",
+      "category": "Visual Arts Theory",
+      "importance": 2,
+      "order": 20
+    },
+    {
+      "conceptText": "Photography and Mirror",
+      "category": "Visual Arts Theory",
+      "importance": 2,
+      "order": 21
+    },
+    {
+      "conceptText": "Van Eyck's Arnolfini Portrait",
+      "category": "Art History",
+      "importance": 1,
+      "order": 22
+    },
+    {
+      "conceptText": "Parmigianino's Self-Portrait",
+      "category": "Art History",
+      "importance": 1,
+      "order": 23
+    },
+    {
+      "conceptText": "Magritte's Surrealism",
+      "category": "Art History",
+      "importance": 1,
+      "order": 24
+    },
+    {
+      "conceptText": "Stendhal's Mirror Metaphor",
+      "category": "Literary Theory",
+      "importance": 2,
+      "order": 25
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 25,
+    "categoriesFound": [
+      "Art Theory",
+      "Epistemology of Art",
+      "Metaphysics of Art",
+      "19th Century Art Theory",
+      "Contemporary Art Theory",
+      "Literary Theory",
+      "Visual Arts Theory",
+      "Art History"
+    ],
+    "extractionConfidence": 0.87,
+    "notes": "Syllabus in French, concepts translated to English. Course uses mirror as central metaphor to explore fundamental questions in philosophy of art. Strong historical progression from Hegel to 20th century theories. Interdisciplinary approach covering poetry, painting, sculpture, and photography. Key philosophical questions: Is art imitative? Does art provide knowledge? What is art's relationship to truth and nature? Extensive bibliography including Plato, Hegel, Nietzsche, Merleau-Ponty, Baudelaire, Panofsky, and Danto. Course combines art history examples with philosophical analysis."
+  }
+}

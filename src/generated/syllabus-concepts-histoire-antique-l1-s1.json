@@ -1,0 +1,118 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 1",
+    "level": 1
+  },
+  "semester": {
+    "number": 1
+  },
+  "course": {
+    "code": "FDL_HIST_GEO_L1_S1_CM_HIST_ANTIQUE",
+    "name": "Le monde grec archaïque : émergence, diffusion et mutation de la polis (VIIIe -VIe siècle avant notre ère)",
+    "ueNumber": "UE 1",
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Archaic Greece",
+      "category": "Ancient Greek History",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Greek Polis",
+      "category": "Political Organization",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Emergence of Polis",
+      "category": "Political Organization",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "8th Century BCE Greece",
+      "category": "Chronology",
+      "importance": 2,
+      "order": 4
+    },
+    {
+      "conceptText": "Greek Colonization",
+      "category": "Expansion and Migration",
+      "importance": 3,
+      "order": 5
+    },
+    {
+      "conceptText": "Mediterranean Basin",
+      "category": "Geography",
+      "importance": 2,
+      "order": 6
+    },
+    {
+      "conceptText": "Social Tensions in Greek Cities",
+      "category": "Social History",
+      "importance": 3,
+      "order": 7
+    },
+    {
+      "conceptText": "Political Innovations",
+      "category": "Political Organization",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Institutional Innovations",
+      "category": "Political Organization",
+      "importance": 2,
+      "order": 9
+    },
+    {
+      "conceptText": "Diffusion of Polis",
+      "category": "Political Organization",
+      "importance": 2,
+      "order": 10
+    },
+    {
+      "conceptText": "Mutation of Polis",
+      "category": "Political Organization",
+      "importance": 2,
+      "order": 11
+    },
+    {
+      "conceptText": "Cross-Source Analysis",
+      "category": "Historical Methodology",
+      "importance": 2,
+      "order": 12
+    },
+    {
+      "conceptText": "Anthropological Methods",
+      "category": "Historical Methodology",
+      "importance": 2,
+      "order": 13
+    },
+    {
+      "conceptText": "Document Commentary Method",
+      "category": "Historical Methodology",
+      "importance": 3,
+      "order": 14
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 14,
+    "categoriesFound": [
+      "Ancient Greek History",
+      "Political Organization",
+      "Chronology",
+      "Expansion and Migration",
+      "Geography",
+      "Social History",
+      "Historical Methodology"
+    ],
+    "extractionConfidence": 0.90,
+    "notes": "Syllabus in French, concepts translated to English. Focused course on Archaic Greece (8th-6th century BCE). Core themes: emergence and diffusion of the polis (Greek city-state), Greek colonization across Mediterranean, social tensions and resulting political/institutional innovations. Strong methodological component emphasizing cross-source analysis and anthropological approaches. 4 ECTS total (2 CM + 2 TD), 12h CM + 24h TD. Assessment: TD continuous assessment, CM terminal exam (commentary or dissertation). Excellent introduction to ancient Greek political and social history with emphasis on critical methodology."
+  }
+}

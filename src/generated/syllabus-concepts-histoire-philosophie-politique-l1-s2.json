@@ -1,0 +1,183 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 1",
+    "level": 1
+  },
+  "semester": {
+    "number": 2
+  },
+  "course": {
+    "code": "L1PHILPOLS2",
+    "name": "Le républicanisme et l'idée de République",
+    "ueNumber": null,
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Republicanism",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Republic",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Common Good",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Civic Virtues",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 4
+    },
+    {
+      "conceptText": "Political Participation",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 5
+    },
+    {
+      "conceptText": "Greek Politeia",
+      "category": "Ancient Political Thought",
+      "importance": 2,
+      "order": 6
+    },
+    {
+      "conceptText": "Aristotelian Politics",
+      "category": "Ancient Political Thought",
+      "importance": 2,
+      "order": 7
+    },
+    {
+      "conceptText": "French Revolution",
+      "category": "Modern Political History",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Democratic Republic",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 9
+    },
+    {
+      "conceptText": "Social Republic",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 10
+    },
+    {
+      "conceptText": "Neo-Republicanism",
+      "category": "Contemporary Political Thought",
+      "importance": 2,
+      "order": 11
+    },
+    {
+      "conceptText": "Machiavellian Republicanism",
+      "category": "Renaissance Political Thought",
+      "importance": 2,
+      "order": 12
+    },
+    {
+      "conceptText": "Hobbesian Political Theory",
+      "category": "Modern Political Thought",
+      "importance": 2,
+      "order": 13
+    },
+    {
+      "conceptText": "Nature of Freedom",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 14
+    },
+    {
+      "conceptText": "Extension of Freedom",
+      "category": "Political Philosophy",
+      "importance": 2,
+      "order": 15
+    },
+    {
+      "conceptText": "Egalitarian Ideals",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 16
+    },
+    {
+      "conceptText": "Best Political Regime",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 17
+    },
+    {
+      "conceptText": "Individual vs Society",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 18
+    },
+    {
+      "conceptText": "Liberalism",
+      "category": "Modern Political Thought",
+      "importance": 3,
+      "order": 19
+    },
+    {
+      "conceptText": "Socialism",
+      "category": "Modern Political Thought",
+      "importance": 3,
+      "order": 20
+    },
+    {
+      "conceptText": "Monarchy vs Republic",
+      "category": "Political Philosophy",
+      "importance": 2,
+      "order": 21
+    },
+    {
+      "conceptText": "19th Century Revolutions",
+      "category": "Modern Political History",
+      "importance": 2,
+      "order": 22
+    },
+    {
+      "conceptText": "Social Contract",
+      "category": "Modern Political Thought",
+      "importance": 3,
+      "order": 23
+    },
+    {
+      "conceptText": "General Will",
+      "category": "Modern Political Thought",
+      "importance": 3,
+      "order": 24
+    },
+    {
+      "conceptText": "Popular Sovereignty",
+      "category": "Political Philosophy",
+      "importance": 3,
+      "order": 25
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 25,
+    "categoriesFound": [
+      "Political Philosophy",
+      "Ancient Political Thought",
+      "Modern Political History",
+      "Contemporary Political Thought",
+      "Renaissance Political Thought",
+      "Modern Political Thought"
+    ],
+    "extractionConfidence": 0.90,
+    "notes": "Syllabus in French, concepts translated to English. Comprehensive historical survey of republicanism from ancient Greece to contemporary Western societies. Course structured as introduction to political philosophy through historical lens. Covers major periods: Greek antiquity (Aristotle), Renaissance (Machiavelli), Early Modern (Hobbes, Rousseau), French Revolution and 19th century revolutionary movements, contemporary neo-republicanism. Key themes: nature and extension of freedom, reconciliation of freedom with equality, best political regime, individual-society relationship, liberalism vs socialism debate. Primary text for TD: Rousseau's Social Contract Book I. Strong emphasis on historical development of political concepts and their contemporary relevance."
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "subject": {
+    "name": "History"
+  },
+  "academicYear": {
+    "name": "Licence 3",
+    "level": 3
+  },
+  "semester": {
+    "number": 5
+  },
+  "course": {
+    "code": "L3VOLONTES5",
+    "name": "Force et faiblesse de la volonté",
+    "ueNumber": "UE 1",
+    "syllabusUrl": null
+  },
+  "concepts": [
+    {
+      "conceptText": "Will as Psychological Faculty",
+      "category": "Psychology of Will",
+      "importance": 3,
+      "order": 1
+    },
+    {
+      "conceptText": "Moral Psychology",
+      "category": "Psychology of Will",
+      "importance": 3,
+      "order": 2
+    },
+    {
+      "conceptText": "Metaphysical Questions of Will",
+      "category": "Metaphysics of Will",
+      "importance": 3,
+      "order": 3
+    },
+    {
+      "conceptText": "Aristotelian Ethics",
+      "category": "Ancient Philosophy",
+      "importance": 3,
+      "order": 4
+    },
+    {
+      "conceptText": "Aristotelian Action Theory",
+      "category": "Ancient Philosophy",
+      "importance": 3,
+      "order": 5
+    },
+    {
+      "conceptText": "Christian Conception of Will",
+      "category": "Medieval Philosophy",
+      "importance": 3,
+      "order": 6
+    },
+    {
+      "conceptText": "Weakness of Will",
+      "category": "Moral Psychology",
+      "importance": 3,
+      "order": 7
+    },
+    {
+      "conceptText": "Strength of Will",
+      "category": "Moral Psychology",
+      "importance": 3,
+      "order": 8
+    },
+    {
+      "conceptText": "Schopenhauerian Will",
+      "category": "19th Century Philosophy",
+      "importance": 3,
+      "order": 9
+    },
+    {
+      "conceptText": "Nietzschean Will",
+      "category": "19th Century Philosophy",
+      "importance": 3,
+      "order": 10
+    },
+    {
+      "conceptText": "Metaphysical Dimension of Willing",
+      "category": "Metaphysics of Will",
+      "importance": 3,
+      "order": 11
+    },
+    {
+      "conceptText": "Akrasia",
+      "category": "Ancient Philosophy",
+      "importance": 2,
+      "order": 12
+    },
+    {
+      "conceptText": "Pauline Conception of Will",
+      "category": "Medieval Philosophy",
+      "importance": 2,
+      "order": 13
+    },
+    {
+      "conceptText": "Augustinian Will",
+      "category": "Medieval Philosophy",
+      "importance": 2,
+      "order": 14
+    },
+    {
+      "conceptText": "Kantian Practical Reason",
+      "category": "Modern Philosophy",
+      "importance": 3,
+      "order": 15
+    },
+    {
+      "conceptText": "Kierkegaardian Despair",
+      "category": "19th Century Philosophy",
+      "importance": 2,
+      "order": 16
+    },
+    {
+      "conceptText": "Will to Will",
+      "category": "Contemporary Philosophy",
+      "importance": 2,
+      "order": 17
+    },
+    {
+      "conceptText": "Heideggerian Will Analysis",
+      "category": "Contemporary Philosophy",
+      "importance": 2,
+      "order": 18
+    },
+    {
+      "conceptText": "Jankélévitch on Volition",
+      "category": "Contemporary Philosophy",
+      "importance": 2,
+      "order": 19
+    },
+    {
+      "conceptText": "Rylean Concept of Mind",
+      "category": "Analytic Philosophy",
+      "importance": 2,
+      "order": 20
+    },
+    {
+      "conceptText": "Austin on Excuses",
+      "category": "Analytic Philosophy",
+      "importance": 2,
+      "order": 21
+    },
+    {
+      "conceptText": "Lockean Power",
+      "category": "Early Modern Philosophy",
+      "importance": 2,
+      "order": 22
+    },
+    {
+      "conceptText": "Humean Necessity and Liberty",
+      "category": "Early Modern Philosophy",
+      "importance": 2,
+      "order": 23
+    },
+    {
+      "conceptText": "Reidian Active Powers",
+      "category": "Early Modern Philosophy",
+      "importance": 2,
+      "order": 24
+    },
+    {
+      "conceptText": "Moral Agency",
+      "category": "Moral Psychology",
+      "importance": 3,
+      "order": 25
+    }
+  ],
+  "metadata": {
+    "totalConcepts": 25,
+    "categoriesFound": [
+      "Psychology of Will",
+      "Metaphysics of Will",
+      "Ancient Philosophy",
+      "Medieval Philosophy",
+      "Moral Psychology",
+      "19th Century Philosophy",
+      "Modern Philosophy",
+      "Contemporary Philosophy",
+      "Analytic Philosophy",
+      "Early Modern Philosophy"
+    ],
+    "extractionConfidence": 0.90,
+    "notes": "Syllabus in French, concepts translated to English. Comprehensive historical survey of the concept of will from Aristotle to contemporary philosophy. Course structured chronologically covering Ancient (Aristotle), Medieval (Paul, Augustine), Modern (Kant, Locke, Hume, Reid), 19th century (Schopenhauer, Nietzsche, Kierkegaard), and Contemporary (Heidegger, Jankélévitch, Ryle, Austin) periods. Strong emphasis on both psychological and metaphysical dimensions of will. TD focuses on 18th century debate between Locke, Hume, and Reid. Extensive bibliography covering primary and secondary sources. Course bridges moral psychology, action theory, and metaphysics."
+  }
+}
