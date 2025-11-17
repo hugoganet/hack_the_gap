@@ -49,9 +49,6 @@ export function CourseCard({ course, progress }: CourseCardProps) {
             <Badge variant="secondary">{course.subject.name}</Badge>
           </div>
           <CardTitle className="line-clamp-1">{course.name}</CardTitle>
-          <CardDescription className="line-clamp-1">
-            {course.code}
-          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -61,14 +58,14 @@ export function CourseCard({ course, progress }: CourseCardProps) {
             </div>
             <Progress value={progressPercentage} className="h-2" />
           </div>
-          <div className="flex items-center justify-between text-sm">
+          {/* <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-1.5 text-muted-foreground">
               <Calendar className="size-4" />
               <span>
                 Added {formatDistanceToNow(new Date(course.enrolledAt), { addSuffix: true })}
               </span>
             </div>
-          </div>
+          </div> */}
           <div className="text-muted-foreground text-sm">
             {conceptsText}
           </div>

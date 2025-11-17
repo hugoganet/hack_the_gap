@@ -12,7 +12,7 @@ export default function RoutePage() {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>Videos</LayoutTitle>
+        <LayoutTitle>Never lose what you learn</LayoutTitle>
       </LayoutHeader>
       <LayoutContent className="flex flex-col gap-4 lg:gap-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
