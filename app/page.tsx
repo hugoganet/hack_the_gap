@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { TypographyH1, TypographyH2, TypographyP } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Brain, Calendar, Zap, Clock, Mail, Loader2 } from "lucide-react";
+import { Brain, Calendar, Zap, Clock, Mail, Loader2, Eye, FileText, Timer } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { submitBetaInvitation } from "@app/actions/beta-invitation.action";
@@ -92,143 +92,72 @@ export default function HomePage() {
       <LandingHeader />
 
       {/* Hero Section */}
-      <section className="container mx-auto flex flex-col items-center justify-center gap-8 px-4 py-24 text-center">
-        <div className="max-w-3xl space-y-4">
-          <TypographyH1 
-            className="dynamic-gradient bg-gradient-to-r from-foreground via-primary to-foreground"
-            style={{
-              backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-            }}
+      <section className="container mx-auto flex flex-col items-center justify-center gap-8 px-4 py-40 text-center">
+        <div className="max-w-4xl space-y-12">
+          <TypographyH1
+            className="text-black text-6xl md:text-7xl lg:text-6xl font-bold"
           >
-            Transform Passive Learning into Active Retention
+            Transform Passive Learning <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse">into Active Retention</span>
           </TypographyH1>
           <TypographyP className="text-muted-foreground text-lg">
-            AI-powered system that automatically converts your YouTube videos, lectures, and articles
-            into personalized flashcards with spaced repetition. Remember what you learn, forever.
+          We turn your videos into atomic notes mapped to your study plan, 
+          with interactive flashcards to keep the important stuff alive.
           </TypographyP>
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button size="lg" asChild>
-              <Link href="/auth/signup">Get Started</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/auth/signin">Sign In</Link>
-            </Button>
-          </div>
+         
+    
         </div>
       </section>
 
-      {/* Beta Timer Banner */}
-      <section className="relative overflow-hidden border-y border-primary/20 bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16">
-        <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
-        <div className="container relative mx-auto px-4">
-          <Card className="mx-auto max-w-3xl border-primary/30 bg-gradient-to-br from-background/95 to-background/80 shadow-2xl shadow-primary/10 backdrop-blur-xl">
-            <CardHeader className="space-y-6 pb-8 text-center">
-              <div className="inline-flex items-center justify-center gap-3 rounded-full bg-primary/10 px-6 py-2 mx-auto">
-                <Clock className="h-5 w-5 text-primary animate-pulse" />
-                <span className="text-sm font-semibold text-primary">Free Beta Test Ends</span>
-              </div>
-              
-              <div className="flex items-center justify-center gap-3 sm:gap-6">
-                <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
-                  <span 
-                    className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
-                    style={{
-                      backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-                    }}
-                  >
-                    {timeLeft.days}
-                  </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">days</span>
+      {/* Pains Section */}
+      <section className="container mx-auto px-4 py-16  from-blue-50/30 via-primary/5 to-blue-50/20">
+      <div className="mb-12">
+          <TypographyH2 className="mb-8 text-blue-900 text-center">Sound Familiar?</TypographyH2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card className="border-primary/20 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
+                  <Eye className="h-8 w-8 text-primary" />
                 </div>
-                <span className="text-3xl font-bold text-primary/40">:</span>
-                <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
-                  <span 
-                    className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
-                    style={{
-                      backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-                    }}
-                  >
-                    {timeLeft.hours}
-                  </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">hours</span>
-                </div>
-                <span className="text-3xl font-bold text-primary/40">:</span>
-                <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
-                  <span 
-                    className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
-                    style={{
-                      backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-                    }}
-                  >
-                    {timeLeft.minutes}
-                  </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">minutes</span>
-                </div>
-                <span className="text-3xl font-bold text-primary/40">:</span>
-                <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
-                  <span 
-                    className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
-                    style={{
-                      backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-                    }}
-                  >
-                    {timeLeft.seconds}
-                  </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">seconds</span>
-                </div>
-              </div>
+                <CardTitle>Passive Watching</CardTitle>
+                <CardDescription>
+                  You watch hours of educational content, but remember nothing after a week
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-              <TypographyP className="text-muted-foreground text-sm">
-                November 17, 2025 at 10:00 AM
-              </TypographyP>
-            </CardHeader>
-
-            <CardContent className="space-y-6 pt-0">
-              <div className="space-y-3 text-center">
-                <TypographyH2 
-                  className="dynamic-gradient bg-gradient-to-r from-primary via-primary/80 to-primary/60"
-                  style={{
-                    backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
-                  }}
-                >
-                  Get Early Access!
-                </TypographyH2>
-                <TypographyP className="text-muted-foreground mx-auto max-w-md">
-                  Sign up now and get early access to the platform with exclusive features
-                </TypographyP>
-              </div>
-
-              <form onSubmit={handleSubmit} className="mx-auto flex max-w-lg flex-col gap-3 sm:flex-row">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-primary/60" />
-                  <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={isSubmitting}
-                    className="h-12 border-primary/30 bg-background/50 pl-12 text-base focus-visible:ring-primary/50"
-                  />
+            <Card className="border-primary/20 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
+                  <FileText className="h-8 w-8 text-primary" />
                 </div>
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isSubmitting}
-                  className="h-12 bg-gradient-to-r from-primary to-primary/80 px-8 font-semibold shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    "Get Invitation"
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                <CardTitle>No Structure</CardTitle>
+                <CardDescription>
+                  Knowledge is scattered, no system for reviewing and reinforcing material
+                </CardDescription>
+              </CardHeader>
+            </Card>
+
+            <Card className="border-primary/20 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
+                  <Timer className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle>Time Wasted</CardTitle>
+                <CardDescription>
+                  Spending time watching but not getting real learning results
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+          <div className="mt-12 text-center">
+            <Button
+              size="lg"
+              onClick={() => document.getElementById('beta-timer')?.scrollIntoView({ behavior: 'smooth' })}
+              className="h-12 bg-gradient-to-r from-primary to-primary/80 px-8 font-semibold shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
+            >
+              Stop Waste Your Time
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -293,6 +222,119 @@ export default function HomePage() {
           <Button size="lg" asChild>
             <Link href="/auth/signup">Start Learning Smarter</Link>
           </Button>
+        </div>
+      </section>
+            {/* Beta Timer Banner */}
+            <section id="beta-timer" className="relative overflow-hidden border-y border-primary/20 bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16">
+            <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
+            <div className="container relative mx-auto px-4">
+              <Card className="mx-auto max-w-3xl border-primary/30 bg-gradient-to-br from-background/95 to-background/80 shadow-2xl shadow-primary/10 backdrop-blur-xl">
+                <CardHeader className="space-y-6 pb-8 text-center">
+                  <div className="inline-flex items-center justify-center gap-3 rounded-full bg-primary/10 px-6 py-2 mx-auto">
+                    <Clock className="h-5 w-5 text-primary animate-pulse" />
+                    <span className="text-sm font-semibold text-primary">Free Beta Test Ends</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-center gap-3 sm:gap-6">
+                    <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
+                      <span 
+                        className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
+                        style={{
+                          backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
+                        }}
+                      >
+                        {timeLeft.days}
+                      </span>
+                      <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">days</span>
+                    </div>
+                    <span className="text-3xl font-bold text-primary/40">:</span>
+                    <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
+                      <span 
+                        className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
+                        style={{
+                          backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
+                        }}
+                      >
+                        {timeLeft.hours}
+                      </span>
+                      <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">hours</span>
+                    </div>
+                    <span className="text-3xl font-bold text-primary/40">:</span>
+                    <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
+                      <span 
+                        className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
+                        style={{
+                          backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
+                        }}
+                      >
+                        {timeLeft.minutes}
+                      </span>
+                      <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">minutes</span>
+                    </div>
+                    <span className="text-3xl font-bold text-primary/40">:</span>
+                    <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
+                      <span 
+                        className="text-4xl sm:text-5xl font-bold dynamic-gradient bg-gradient-to-br from-primary to-primary/60"
+                        style={{
+                          backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
+                        }}
+                      >
+                        {timeLeft.seconds}
+                      </span>
+                      <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">seconds</span>
+                    </div>
+                  </div>
+    
+                  <TypographyP className="text-muted-foreground text-sm">
+                    November 17, 2025 at 10:00 AM
+                  </TypographyP>
+                </CardHeader>
+    
+                <CardContent className="space-y-6 pt-0">
+                  <div className="space-y-3 text-center">
+                    <TypographyH2 
+                      className="dynamic-gradient bg-gradient-to-r from-primary via-primary/80 to-primary/60"
+                      style={{
+                        backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
+                      }}
+                    >
+                      Get Early Access!
+                    </TypographyH2>
+                    <TypographyP className="text-muted-foreground mx-auto max-w-md">
+                      Sign up now and get early access to the platform with exclusive features
+                    </TypographyP>
+                  </div>
+                  <form onSubmit={handleSubmit} className="mx-auto flex max-w-lg flex-col gap-3 sm:flex-row">
+                <div className="relative flex-1">
+                  <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-primary/60" />
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isSubmitting}
+                    className="h-12 border-primary/30 bg-background/50 pl-12 text-base focus-visible:ring-primary/50"
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  disabled={isSubmitting}
+                  className="h-12 bg-gradient-to-r from-primary to-primary/80 px-8 font-semibold shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Get Invitation"
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
