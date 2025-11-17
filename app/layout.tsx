@@ -13,6 +13,8 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { type ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Providers } from "./providers";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: SiteConfig.title,
@@ -72,12 +74,14 @@ const GeistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   modal,
 }: LayoutParams & { modal?: ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html lang={locale} className="h-full" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={cn(
@@ -89,18 +93,20 @@ export default function RootLayout({
       >
         <NuqsAdapter>
           <Providers>
-            <NextTopLoader
-              delay={100}
-              showSpinner={false}
-              color="hsl(var(--primary))"
-            />
-            {children}
-            {modal}
-            <TailwindIndicator />
-            <FloatingLegalFooter />
-            <Suspense>
-              <ServerToaster />
-            </Suspense>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <NextTopLoader
+                delay={100}
+                showSpinner={false}
+                color="hsl(var(--primary))"
+              />
+              {children}
+              {modal}
+              <TailwindIndicator />
+              <FloatingLegalFooter />
+              <Suspense>
+                <ServerToaster />
+              </Suspense>
+            </NextIntlClientProvider>
           </Providers>
         </NuqsAdapter>
       </body>

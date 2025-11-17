@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Layout, LayoutContent } from "@/features/page/layout";
 import { SiteConfig } from "@/site-config";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 export function Footer() {
+  const locale = useLocale();
   return (
     <footer className="bg-background border-t pb-8">
       <Layout className="my-14">
@@ -30,28 +32,28 @@ export function Footer() {
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/posts">Blog</Link>
+                      <Link href={`/${locale}/posts`}>Blog</Link>
                     </Button>
                     <Button
                       asChild
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/docs">Documentation</Link>
+                      <Link href={`/${locale}/docs`}>Documentation</Link>
                     </Button>
                     <Button
                       asChild
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/orgs">Dashboard</Link>
+                      <Link href={`/${locale}/orgs`}>Dashboard</Link>
                     </Button>
                     <Button
                       asChild
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/account">Account</Link>
+                      <Link href={`/${locale}/account`}>Account</Link>
                     </Button>
                   </nav>
                 </div>
@@ -64,14 +66,14 @@ export function Footer() {
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/about">About</Link>
+                      <Link href={`/${locale}/about`}>About</Link>
                     </Button>
                     <Button
                       asChild
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/contact">Contact</Link>
+                      <Link href={`/${locale}/contact`}>Contact</Link>
                     </Button>
                   </nav>
                 </div>
@@ -84,14 +86,14 @@ export function Footer() {
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/legal/terms">Terms</Link>
+                      <Link href={`/${locale}/legal/terms`}>Terms</Link>
                     </Button>
                     <Button
                       asChild
                       variant="link"
                       className="h-auto justify-start p-0"
                     >
-                      <Link href="/legal/privacy">Privacy</Link>
+                      <Link href={`/${locale}/legal/privacy`}>Privacy</Link>
                     </Button>
                   </nav>
                 </div>

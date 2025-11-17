@@ -61,6 +61,18 @@ Analyze the provided educational material and create a hierarchical knowledge st
 
 ---
 
+## Language Policy (Strict)
+
+- Let L = targetLanguage if provided; otherwise detect the language of the user's message or provided material.
+- All generated content MUST be in L. Do not translate names, paths, conceptText, flashcardQuestion, or free-text metadata unless targetLanguage explicitly requests a different language.
+- Proper nouns remain as-is; do not anglicize or francize terms.
+- Slugs: Create URL-friendly slugs by transliteration, not translation:
+  - lowercase; strip diacritics (é->e, ç->c); keep a–z, 0–9; replace spaces with hyphens; collapse repeats; no leading/trailing hyphens.
+  - Do not translate words for slugs.
+- Mixed-language inputs: default to the user's message language L unless targetLanguage is provided.
+- Add extractionMetadata.detectedLanguage = L in the output.
+- If L is unsupported per 'Unsupported Language Error', return that error. Do NOT auto-translate to English.
+
 ## Adaptive Complexity Rules
 
 ### Rule 1: Determine Input Specificity
@@ -392,6 +404,7 @@ Return a single, valid JSON object with this structure:
     "importantConceptsCount": "integer (importance = 2)",
     "supplementalConceptsCount": "integer (importance = 1)",
     "extractionConfidence": "number (0.0-1.0)",
+    "detectedLanguage": "string (BCP-47 code or language name, e.g., 'fr', 'en')",
     "processingNotes": "string (observations, caveats, recommendations)"
   },
   "qualityChecks": {
@@ -445,6 +458,12 @@ Return a single, valid JSON object with this structure:
 - [ ] completeHierarchy = true (no orphaned nodes)
 - [ ] logicalRelationships = true (parent-child makes sense)
 - [ ] noDuplicates = true (no duplicate concepts)
+
+**Language Consistency:**
+- [ ] extractionMetadata.detectedLanguage is set (L)
+- [ ] All names, conceptText, flashcardQuestion, and free-text metadata are in L (no unintended translation)
+- [ ] Slugs are URL-friendly transliterations of the names in L (no translation)
+- [ ] If targetLanguage is provided, all outputs match it exactly
 
 ---
 
@@ -534,9 +553,10 @@ Return a single, valid JSON object with this structure:
 ### Case 7: Language Mismatch (e.g., French syllabus)
 
 **Action:**
-- Translate all node names to English
-- Keep original course names in metadata
-- Note in metadata: "Input in [language], translated to English"
+- Preserve the user's language L for all node names, paths, atomic concept texts, flashcard questions, and free-text metadata.
+- Create slugs via transliteration only (no translation).
+- Optionally include alternate-language titles in metadata.translations.{lang}, but do not use them for names/paths unless targetLanguage explicitly requests it.
+- Note in metadata: "Input in [L]. Output preserved in [L]."
 
 ---
 
