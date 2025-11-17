@@ -25,6 +25,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Command, CommandList, CommandEmpty, CommandItem } from "@/components/ui/command";
+import { useDebounceFn } from "@/hooks/use-debounce-fn";
+import { Popover, PopoverContent, PopoverAnchor } from "@/components/ui/popover";
 
 const createCourseSchema = z.object({
   subject: z.string().min(1, "Subject is required"),
@@ -54,6 +57,41 @@ export function CreateCourseDialog({
       learningGoal: "",
     },
   });
+
+  type SubjectOption = { id: string; name: string };
+
+  const [subjectOpen, setSubjectOpen] = useState(false);
+  const [subjectLoading, setSubjectLoading] = useState(false);
+  const [subjectOptions, setSubjectOptions] = useState<SubjectOption[]>([]);
+
+  const searchSubjects = async (q: string) => {
+    const query = q.trim();
+    if (!query) {
+      setSubjectOptions([]);
+      setSubjectOpen(false);
+      return;
+    }
+    try {
+      setSubjectLoading(true);
+      const res = await fetch(`/api/subjects?q=${encodeURIComponent(query)}&take=8`);
+      if (!res.ok) {
+        throw new Error("Failed to search subjects");
+      }
+      const data = (await res.json()) as SubjectOption[];
+      setSubjectOptions(data);
+      setSubjectOpen(data.length > 0);
+    } catch {
+      // keep UX non-blocking on errors
+      setSubjectOptions([]);
+      setSubjectOpen(false);
+    } finally {
+      setSubjectLoading(false);
+    }
+  };
+
+  const debouncedSearchSubjects = useDebounceFn((q: string) => {
+    void searchSubjects(q);
+  }, 300);
 
   const onSubmit = async (data: CreateCourseFormData) => {
     setIsSubmitting(true);
@@ -101,10 +139,63 @@ export function CreateCourseDialog({
                 <FormItem>
                   <FormLabel>Subject</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="e.g., Philosophy, Mathematics, History"
-                      {...field}
-                    />
+                    <Popover open={subjectOpen} onOpenChange={setSubjectOpen}>
+                      <PopoverAnchor asChild>
+                        <Input
+                          placeholder="e.g., Philosophy, Mathematics, History"
+                          {...field}
+                          onKeyDown={(e) => {
+                            // Prevent nested components (e.g., Command/cmdk) from capturing typing (bubble phase)
+                            e.stopPropagation();
+                          }}
+                          onKeyDownCapture={(e) => {
+                            // Prevent capture-phase listeners (cmdk) from intercepting typing
+                            e.stopPropagation();
+                          }}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            debouncedSearchSubjects(e.target.value);
+                          }}
+                          onFocus={() => {
+                            if (field.value?.trim()) {
+                              debouncedSearchSubjects(field.value);
+                            }
+                          }}
+                        />
+                      </PopoverAnchor>
+                      <PopoverContent
+                        className="p-0 w-[300px]"
+                        align="start"
+                        side="bottom"
+                        onOpenAutoFocus={(e) => e.preventDefault()}
+                        onCloseAutoFocus={(e) => e.preventDefault()}
+                      >
+                        <Command shouldFilter={false}>
+                          <CommandList>
+                            <CommandEmpty>No subjects found.</CommandEmpty>
+                            {subjectLoading ? (
+                              <div className="p-2 text-sm text-muted-foreground">Searching...</div>
+                            ) : null}
+                            {subjectOptions.map((s) => (
+                              <CommandItem
+                                key={s.id}
+                                value={s.name}
+                                onSelect={() => {
+                                  form.setValue("subject", s.name, {
+                                    shouldDirty: true,
+                                    shouldTouch: true,
+                                    shouldValidate: true,
+                                  });
+                                  setSubjectOpen(false);
+                                }}
+                              >
+                                {s.name}
+                              </CommandItem>
+                            ))}
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
