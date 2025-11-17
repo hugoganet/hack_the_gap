@@ -50,26 +50,44 @@ export async function processContent(url: string) {
 
     const validatedUrl = validation.data.url;
 
-    // Check if it's a YouTube URL
-    const isYouTube = 
-      validatedUrl.includes("youtube.com") || 
+    // Determine content type (YouTube or TikTok)
+    const isYouTube =
+      validatedUrl.includes("youtube.com") ||
       validatedUrl.includes("youtu.be");
 
-    if (!isYouTube) {
+    const isTikTok = validatedUrl.includes("tiktok.com");
+
+    if (!isYouTube && !isTikTok) {
       return {
         success: false,
-        error: "Currently only YouTube videos are supported",
+        error: "Currently only YouTube and TikTok videos are supported",
       };
     }
 
-    // Extract video ID from YouTube URL
-    const videoId = extractYouTubeVideoId(validatedUrl);
-    
-    if (!videoId) {
-      return {
-        success: false,
-        error: "Could not extract video ID from YouTube URL",
-      };
+    // Extract video ID based on platform
+    let videoId: string | null = null;
+    let platform: "youtube" | "tiktok";
+
+    if (isYouTube) {
+      videoId = extractYouTubeVideoId(validatedUrl);
+      platform = "youtube";
+
+      if (!videoId) {
+        return {
+          success: false,
+          error: "Could not extract video ID from YouTube URL",
+        };
+      }
+    } else {
+      videoId = extractTikTokVideoId(validatedUrl);
+      platform = "tiktok";
+
+      if (!videoId) {
+        return {
+          success: false,
+          error: "Could not extract video ID from TikTok URL",
+        };
+      }
     }
 
     // Check if API key is available
@@ -81,8 +99,9 @@ export async function processContent(url: string) {
       };
     }
 
-    // Based on SocialKit docs: GET /youtube/transcript?access_key=<key>&url=<youtube-url>
-    const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${env.SOCIALKIT_API_KEY}&url=${encodeURIComponent(validatedUrl)}`;
+    // Build API URL based on platform
+    const apiEndpoint = platform === "youtube" ? "youtube" : "tiktok";
+    const apiUrl = `https://api.socialkit.dev/${apiEndpoint}/transcript?access_key=${env.SOCIALKIT_API_KEY}&url=${encodeURIComponent(validatedUrl)}`;
     console.log("Calling SocialKit API:", apiUrl.replace(env.SOCIALKIT_API_KEY, "***"));
 
     // Call SocialKit API
@@ -144,7 +163,8 @@ export async function processContent(url: string) {
         data: {
           userId: user.id,
           url: validatedUrl,
-          youtubeVideoId: videoId,
+          youtubeVideoId: platform === "youtube" ? videoId : null,
+          tiktokVideoId: platform === "tiktok" ? videoId : null,
           transcript: fullTranscript,
           status: "transcript_fetched",
         },
@@ -492,12 +512,12 @@ export async function processContent(url: string) {
 function extractYouTubeVideoId(url: string): string | null {
   try {
     const urlObj = new URL(url);
-    
+
     // Handle youtu.be format
     if (urlObj.hostname === "youtu.be") {
       return urlObj.pathname.slice(1);
     }
-    
+
     // Handle youtube.com format
     if (urlObj.hostname.includes("youtube.com")) {
       // Check for /watch?v= format
@@ -505,23 +525,53 @@ function extractYouTubeVideoId(url: string): string | null {
       if (vParam) {
         return vParam;
       }
-      
+
+      // Check for /shorts/ format (YouTube Shorts)
+      const shortsMatch = urlObj.pathname.match(/\/shorts\/([^/?]+)/);
+      if (shortsMatch?.[1]) {
+        return shortsMatch[1];
+      }
+
       // Check for /embed/ format
       const embedMatch = urlObj.pathname.match(/\/embed\/([^/?]+)/);
       if (embedMatch?.[1]) {
         return embedMatch[1];
       }
-      
+
       // Check for /v/ format
       const vMatch = urlObj.pathname.match(/\/v\/([^/?]+)/);
       if (vMatch?.[1]) {
         return vMatch[1];
       }
     }
-    
+
     return null;
   } catch (error) {
     console.error("Error extracting YouTube video ID:", error);
+    return null;
+  }
+}
+
+/**
+ * Extract TikTok video ID from URL
+ * Format: https://www.tiktok.com/@username/video/VIDEO_ID
+ */
+function extractTikTokVideoId(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+
+    // Check if it's a TikTok URL
+    if (urlObj.hostname.includes("tiktok.com")) {
+      // Extract from /video/VIDEO_ID format
+      const videoMatch = urlObj.pathname.match(/\/video\/(\d+)/);
+      if (videoMatch?.[1]) {
+        return videoMatch[1];
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error extracting TikTok video ID:", error);
     return null;
   }
 }

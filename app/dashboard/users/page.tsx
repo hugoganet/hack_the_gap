@@ -6,7 +6,7 @@ import {
 } from "@/features/page/layout";
 import { ClientOrg } from "./client-org";
 import { CardsToReviewToday } from "./cards-to-review-today";
-import { CourseSelectionCard } from "./course-selection-card";
+// import { CourseSelectionCard } from "./course-selection-card";
 
 export default function RoutePage() {
   return (
@@ -16,7 +16,7 @@ export default function RoutePage() {
       </LayoutHeader>
       <LayoutContent className="flex flex-col gap-4 lg:gap-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-          <CourseSelectionCard />
+          {/* <CourseSelectionCard /> */}
           <ClientOrg />
         </div>
         <CardsToReviewToday />
