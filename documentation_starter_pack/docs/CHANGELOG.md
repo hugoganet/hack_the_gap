@@ -8,6 +8,12 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- Validation & Planning (2025-11-17)
+  - Validated hierarchical extraction output against quality gates (structure + atomicity + completeness) with excellent metrics (confidence=0.87, treeDepth=5, totalAtomicConcepts=55).
+  - Decision recorded to extend prompt + schema to support inline flashcard generation and bilingual concepts/flashcards.
+  - See ADR-0010: documentation_starter_pack/docs/decisions/ADR-0010-inline-flashcards-and-bilingual-concepts.md
+  - Session log: documentation_starter_pack/docs/ai_sessions/2025-11-17-session-005-validation-and-next-steps.md
+
 - **Knowledge Tree Migration** (2025-11-16) 🌳
   - **Database Schema Changes** (`prisma/schema/schema.prisma`)
     - Added `KnowledgeNode` model: Flexible tree-based hierarchy within subjects

@@ -84,6 +84,32 @@ Generated 3 flashcards from this video:
 - Flashcard difficulty adjustment based on performance - post-MVP
 - Manual flashcard creation by user - post-MVP
 
+## Upcoming Changes (2025-11-17)
+
+Planned update aligned with ADR-0010 — Inline Flashcards and Bilingual Concepts:
+
+- Inline generation:
+  - Flashcards will be created at the same time atomic concepts are extracted (during course/goal creation), removing the separate “generation” step.
+  - Pipeline impact: extract → validate → persist concepts AND flashcards in the same transaction.
+- Bilingual content (EN + FR) by design:
+  - Concepts will have localized text via concept_localizations (locale: en, fr).
+  - Flashcards will have localized content via flashcard_localizations (question, answer, hint?, explanation?).
+- Data model alignment (see docs/data/schema.yml):
+  - concepts (canonical) + concept_localizations (EN/FR)
+  - flashcards (canonical) + flashcard_localizations (EN/FR)
+- API/service impacts:
+  - createKnowledgeStructure will be extended to persist localized concepts and flashcards inline.
+  - Minimal validation will ensure required locales are present for concept_text, question, and answer.
+- Acceptance criteria additions (to be reflected when implemented):
+  - [ ] Each atomic concept produces at least one bilingual flashcard (EN+FR) inline
+  - [ ] flashcard_localizations[en|fr] include question and answer (hint/explanation optional)
+  - [ ] Transaction persists concepts, localizations, flashcards, and their localizations atomically
+  - [ ] UI can select/display locale-appropriate card content
+
+See also:
+- ADR-0010: documentation_starter_pack/docs/decisions/ADR-0010-inline-flashcards-and-bilingual-concepts.md
+- Roadmap: Planned Prompt + Schema Update (2025-11-17)
+
 ## Technical Design
 
 **Components impacted:**

@@ -21,7 +21,7 @@ export const models = {
 } as const;
 
 /** Default model to use for text generation */
-export const DEFAULT_MODEL: string = models.anthropic.sonnet4;
+export const DEFAULT_MODEL: string = models.anthropic.sonnet45;
 
 /** Blackbox AI provider (lazy-initialized) */
 let _provider: ReturnType<typeof createOpenAI> | null = null;

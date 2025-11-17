@@ -260,6 +260,13 @@ See `./tech_stack.md` for detailed stack choices, rationale, and tradeoffs.
 **Rationale:** Type safety for 90% of queries, performance for critical paths.  
 **Tradeoffs:** Mixed query patterns, but optimizes for both DX and performance.
 
+### 5. Inline Flashcards + Bilingual Content (ADR-0010)
+
+**Decision:** Generate flashcards inline during extraction and persist bilingual content (EN/FR) for concepts and flashcards.  
+**Rationale:** Immediate study readiness and accessibility; eliminates separate generation step and reduces friction.  
+**Tradeoffs:** Larger AI payloads and more complex transactions/migrations; parser robustness requirements increase.  
+**References:** ADR-0010 and docs/data/schema.yml additions (concept_localizations, flashcard_localizations).
+
 ## Data Flow: Complete Pipeline (Updated 2025-11-17)
 
 ### Phase 0: Syllabus Upload (NEW - US-0001) 🚧 IN PROGRESS

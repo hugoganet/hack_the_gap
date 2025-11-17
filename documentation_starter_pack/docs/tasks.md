@@ -14,6 +14,14 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 
 ## Backlog
 
+### Prompt + Schema Update (Planned 2025-11-17)
+- [ ] Update hierarchical extraction prompt to include inline flashcards and bilingual EN/FR blocks
+- [ ] Extend createKnowledgeStructure to write concepts + concept_localizations + flashcards + flashcard_localizations in one transaction
+- [ ] Add minimal validation enforcing required locales for concept_text, question, answer
+- [ ] Design migrations for new tables and map syllabus_concepts → concepts
+- [ ] Feature flag rollout plan and migration/backfill scripts
+
+
 ### Pre-Hackathon Validation (Priority: P0)
 
 - [ ] Test concept extraction on 20 videos → validate 70%+ accuracy (US-0003)

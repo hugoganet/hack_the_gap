@@ -52,6 +52,21 @@
 - [ ] Mobile responsiveness
 - [ ] Demo script preparation
 
+#### Planned Prompt + Schema Update (2025-11-17)
+
+- [ ] Update hierarchical extraction prompt to return:
+  - [ ] Inline flashcard candidates per atomic concept
+  - [ ] Bilingual content blocks (EN + FR) for concept text and flashcard fields (question/answer/hint/explanation)
+- [ ] Design and apply DB schema changes to support:
+  - [ ] concepts (canonical) + concept_localizations (EN/FR)
+  - [ ] flashcards (canonical) + flashcard_localizations (EN/FR)
+  - [ ] Transactional creation during course/goal creation
+- [ ] Extend createKnowledgeStructure pipeline to persist flashcards + localizations inline
+- [ ] Add minimal validation that required locales are present for core fields
+- [ ] Feature flag rollout plan for inline flashcards + bilingual content
+
+(See ADR-0010 for details: documentation_starter_pack/docs/decisions/ADR-0010-inline-flashcards-and-bilingual-concepts.md)
+
 **Success Criteria:**
 
 - [x] Full pipeline works end-to-end (video → concepts → flashcards → review) ✅ DONE

@@ -1,0 +1,209 @@
+{
+  "inputAnalysis": {
+    "inputType": "moderate",
+    "detectedScope": "Single course syllabus with combined lecture and tutorial hours",
+    "recommendedDepth": 4,
+    "estimatedConceptCount": 40
+  },
+  "knowledgeTree": {
+    "subject": {
+      "name": "History",
+      "slug": "history",
+      "metadata": {
+        "description": "Study of past events, particularly in human affairs",
+        "academicLevel": "Licence 1"
+      }
+    },
+    "courses": [
+      {
+        "name": "Ancient Greek History",
+        "slug": "ancient-greek-history",
+        "code": "FDL_HIST_GEO_L1_S1_CM_HIST_ANTIQUE",
+        "path": "History/Ancient Greek History",
+        "order": 1,
+        "metadata": {
+          "description": "Focus on the emergence, diffusion, and mutation of the Greek polis during the Archaic period",
+          "credits": "2 CM + 2 TD",
+          "semester": "S1"
+        },
+        "subdirectories": [
+          {
+            "name": "Emergence of the Polis",
+            "slug": "emergence-of-the-polis",
+            "path": "History/Ancient Greek History/Emergence of the Polis",
+            "order": 1,
+            "metadata": {
+              "description": "Study of the origins and development of the Greek polis in the 8th century BCE"
+            },
+            "children": [
+              {
+                "name": "Definition of Polis",
+                "slug": "definition-of-polis",
+                "path": "History/Ancient Greek History/Emergence of the Polis/Definition of Polis",
+                "order": 1,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 3,
+                "category": "Core Concepts"
+              },
+              {
+                "name": "Political Organization",
+                "slug": "political-organization",
+                "path": "History/Ancient Greek History/Emergence of the Polis/Political Organization",
+                "order": 2,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 3,
+                "category": "Core Concepts"
+              }
+            ]
+          },
+          {
+            "name": "Diffusion of the Polis",
+            "slug": "diffusion-of-the-polis",
+            "path": "History/Ancient Greek History/Diffusion of the Polis",
+            "order": 2,
+            "metadata": {
+              "description": "Examination of the spread of the Greek polis across the Mediterranean during colonization"
+            },
+            "children": [
+              {
+                "name": "Colonization Movements",
+                "slug": "colonization-movements",
+                "path": "History/Ancient Greek History/Diffusion of the Polis/Colonization Movements",
+                "order": 1,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 3,
+                "category": "Historical Events"
+              },
+              {
+                "name": "Cultural Exchange",
+                "slug": "cultural-exchange",
+                "path": "History/Ancient Greek History/Diffusion of the Polis/Cultural Exchange",
+                "order": 2,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 2,
+                "category": "Cultural Dynamics"
+              }
+            ]
+          },
+          {
+            "name": "Social Tensions and Innovations",
+            "slug": "social-tensions-and-innovations",
+            "path": "History/Ancient Greek History/Social Tensions and Innovations",
+            "order": 3,
+            "metadata": {
+              "description": "Analysis of social conflicts and resulting political and institutional changes in Greek city-states"
+            },
+            "children": [
+              {
+                "name": "Social Conflicts",
+                "slug": "social-conflicts",
+                "path": "History/Ancient Greek History/Social Tensions and Innovations/Social Conflicts",
+                "order": 1,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 3,
+                "category": "Core Concepts"
+              },
+              {
+                "name": "Institutional Innovations",
+                "slug": "institutional-innovations",
+                "path": "History/Ancient Greek History/Social Tensions and Innovations/Institutional Innovations",
+                "order": 2,
+                "nodeType": "concept",
+                "isAtomic": true,
+                "importance": 3,
+                "category": "Political Dynamics"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "atomicConcepts": [
+    {
+      "conceptText": "Definition of Polis",
+      "path": "History/Ancient Greek History/Emergence of the Polis/Definition of Polis",
+      "parentPath": "History/Ancient Greek History/Emergence of the Polis",
+      "importance": 3,
+      "category": "Core Concepts",
+      "order": 1,
+      "isAtomic": true,
+      "flashcardQuestion": "What is the definition of a Greek polis?"
+    },
+    {
+      "conceptText": "Political Organization",
+      "path": "History/Ancient Greek History/Emergence of the Polis/Political Organization",
+      "parentPath": "History/Ancient Greek History/Emergence of the Polis",
+      "importance": 3,
+      "category": "Core Concepts",
+      "order": 2,
+      "isAtomic": true,
+      "flashcardQuestion": "How was political organization structured in the Greek polis?"
+    },
+    {
+      "conceptText": "Colonization Movements",
+      "path": "History/Ancient Greek History/Diffusion of the Polis/Colonization Movements",
+      "parentPath": "History/Ancient Greek History/Diffusion of the Polis",
+      "importance": 3,
+      "category": "Historical Events",
+      "order": 1,
+      "isAtomic": true,
+      "flashcardQuestion": "What were the key colonization movements of the Greek polis?"
+    },
+    {
+      "conceptText": "Cultural Exchange",
+      "path": "History/Ancient Greek History/Diffusion of the Polis/Cultural Exchange",
+      "parentPath": "History/Ancient Greek History/Diffusion of the Polis",
+      "importance": 2,
+      "category": "Cultural Dynamics",
+      "order": 2,
+      "isAtomic": true,
+      "flashcardQuestion": "What role did cultural exchange play in the diffusion of the Greek polis?"
+    },
+    {
+      "conceptText": "Social Conflicts",
+      "path": "History/Ancient Greek History/Social Tensions and Innovations/Social Conflicts",
+      "parentPath": "History/Ancient Greek History/Social Tensions and Innovations",
+      "importance": 3,
+      "category": "Core Concepts",
+      "order": 1,
+      "isAtomic": true,
+      "flashcardQuestion": "What were the major social conflicts in Greek city-states during the Archaic period?"
+    },
+    {
+      "conceptText": "Institutional Innovations",
+      "path": "History/Ancient Greek History/Social Tensions and Innovations/Institutional Innovations",
+      "parentPath": "History/Ancient Greek History/Social Tensions and Innovations",
+      "importance": 3,
+      "category": "Political Dynamics",
+      "order": 2,
+      "isAtomic": true,
+      "flashcardQuestion": "What institutional innovations arose from social tensions in Greek city-states?"
+    }
+  ],
+  "extractionMetadata": {
+    "totalNodes": 12,
+    "totalAtomicConcepts": 6,
+    "treeDepth": 4,
+    "coursesCount": 1,
+    "subdirectoriesCount": 3,
+    "coreConceptsCount": 5,
+    "importantConceptsCount": 1,
+    "supplementalConceptsCount": 0,
+    "extractionConfidence": 0.9,
+    "processingNotes": "Moderate input with clear course description. Created 4-level hierarchy with 3 subdirectories and 6 atomic concepts."
+  },
+  "qualityChecks": {
+    "allConceptsAtomic": true,
+    "appropriateDepth": true,
+    "completeHierarchy": true,
+    "logicalRelationships": true,
+    "noDuplicates": true,
+    "requiresReview": false
+  }
+}

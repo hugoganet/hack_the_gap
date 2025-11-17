@@ -374,3 +374,61 @@ properties:
   created_at:
     type: string
     format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/concept_localizations.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: concept_localizations
+type: object
+description: "TODO (2025-11-17): Planned table for bilingual concept text (EN/FR)"
+required: [id, concept_id, locale, concept_text]
+properties:
+  id:
+    type: string
+    format: uuid
+  concept_id:
+    type: string
+    format: uuid
+    description: "FK to concepts (canonical)"
+  locale:
+    type: string
+    enum: [en, fr]
+  concept_text:
+    type: string
+  metadata:
+    type: ["object", "null"]
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/flashcard_localizations.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: flashcard_localizations
+type: object
+description: "TODO (2025-11-17): Planned table for bilingual flashcards (EN/FR)"
+required: [id, flashcard_id, locale, question, answer]
+properties:
+  id:
+    type: string
+    format: uuid
+  flashcard_id:
+    type: string
+    format: uuid
+    description: "FK to flashcards (canonical)"
+  locale:
+    type: string
+    enum: [en, fr]
+  question:
+    type: string
+  answer:
+    type: string
+  hint:
+    type: ["string", "null"]
+  explanation:
+    type: ["string", "null"]
+  metadata:
+    type: ["object", "null"]
+  created_at:
+    type: string
+    format: date-time
