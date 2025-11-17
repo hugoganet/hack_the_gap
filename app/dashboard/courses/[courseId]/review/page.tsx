@@ -20,7 +20,6 @@ export default function ReviewSessionPage() {
   const router = useRouter();
   const params = useParams();
   const courseId = params.courseId as string;
-  const orgSlug = params.orgSlug as string;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -147,11 +146,11 @@ export default function ReviewSessionPage() {
     if (sessionId && !isComplete) {
       await abandonReviewSessionAction({ sessionId });
     }
-    router.push(`/orgs/${orgSlug}/courses/${courseId}`);
+    router.push(`/dashboard/courses/${courseId}`);
   };
 
   const handleBackToCourse = () => {
-    router.push(`/orgs/${orgSlug}/courses/${courseId}`);
+    router.push(`/dashboard/courses/${courseId}`);
   };
 
   // Loading state

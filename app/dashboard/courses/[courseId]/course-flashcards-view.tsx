@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -48,7 +48,6 @@ type CourseFlashcardsViewProps = {
 
 export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcardsViewProps) {
   const router = useRouter();
-  const params = useParams();
   const [selectedConcept, setSelectedConcept] = useState<ConceptMatch | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -65,8 +64,7 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
   const flashcard = selectedConcept?.flashcards[0];
 
   const handleStartReview = () => {
-    const orgSlug = params.orgSlug as string;
-    router.push(`/orgs/${orgSlug}/courses/${course.id}/review`);
+    router.push(`/dashboard/courses/${course.id}/review`);
   };
 
   return (

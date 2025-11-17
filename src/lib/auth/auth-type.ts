@@ -1,5 +1,6 @@
-import type { auth } from "../auth";
-
-export type AuthOrganization = Awaited<
-  ReturnType<typeof auth.api.listOrganizations>
->[number];
+export type AuthOrganization = {
+  id: string;
+  name: string;
+  slug: string;
+  logo?: string | null;
+};

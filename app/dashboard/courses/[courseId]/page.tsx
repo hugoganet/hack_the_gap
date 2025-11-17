@@ -2,6 +2,17 @@ import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { CourseFlashcardsView } from "./course-flashcards-view";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { FolderTree } from "lucide-react";
+
+function getNodeDescription(meta: unknown): string | undefined {
+  if (meta && typeof meta === "object") {
+    const maybeObj = meta as { description?: unknown };
+    const desc = maybeObj.description;
+    if (typeof desc === "string") return desc;
+  }
+  return undefined;
+}
 
 type PageProps = {
   params: Promise<{
@@ -88,8 +99,89 @@ export default async function CourseDetailPage({ params }: PageProps) {
     },
   });
 
+  const topSubdirectories = await prisma.knowledgeNode.findMany({
+    where: {
+      parentId: null,
+      subjectId: course.subjectId,
+    },
+    orderBy: { order: "asc" },
+    include: {
+      concepts: {
+        where: {
+          syllabusConcept: { courseId: course.id },
+        },
+        select: { syllabusConceptId: true },
+      },
+      children: {
+        include: {
+          concepts: {
+            where: {
+              syllabusConcept: { courseId: course.id },
+            },
+            select: { syllabusConceptId: true },
+          },
+        },
+        orderBy: { order: "asc" },
+      },
+    },
+  });
+
+  // Only display top-level nodes that are relevant to this course:
+  // - either the node itself has linked concepts for this course
+  // - or at least one of its direct children has linked concepts for this course
+  const visibleTopSubdirectories = topSubdirectories.filter(
+    (node) =>
+      node.concepts.length > 0 ||
+      node.children.some((child) => child.concepts.length > 0),
+  );
+
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 space-y-6">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FolderTree className="size-5" />
+            Subdirectories
+          </CardTitle>
+          <CardDescription>Browse the course structure</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {visibleTopSubdirectories.length === 0 ? (
+            <div className="py-8 text-center text-sm text-muted-foreground">
+              No subdirectories found for this course.
+            </div>
+          ) : (
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {visibleTopSubdirectories.map((node) => {
+                const directCount = node.concepts.length;
+                const childCount = node.children.reduce(
+                  (acc, child) => acc + child.concepts.length,
+                  0,
+                );
+                const totalCount = directCount + childCount;
+                return (
+                  <Card key={node.id} className="hover:border-primary transition-all">
+                    <CardHeader>
+                      <CardTitle className="line-clamp-1">{node.name}</CardTitle>
+                      {getNodeDescription(node.metadata) ? (
+                        <CardDescription className="line-clamp-2">
+                          {getNodeDescription(node.metadata)}
+                        </CardDescription>
+                      ) : null}
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-sm text-muted-foreground">
+                        {totalCount} concepts
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
       <CourseFlashcardsView
         course={course}
         conceptMatches={conceptMatches}

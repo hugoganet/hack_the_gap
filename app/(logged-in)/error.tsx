@@ -1,5 +1,3 @@
-"use client";
-
 import { NavigationWrapper } from "@/features/navigation/navigation-wrapper";
 import { Page400 } from "@/features/page/page-400";
 
