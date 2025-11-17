@@ -182,14 +182,6 @@ exports.Prisma.FeedbackScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.BetaInvitationScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.SubjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -345,7 +337,6 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Feedback: 'Feedback',
-  BetaInvitation: 'BetaInvitation',
   Subject: 'Subject',
   Course: 'Course',
   UserCourse: 'UserCourse',

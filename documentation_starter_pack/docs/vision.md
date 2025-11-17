@@ -4,15 +4,15 @@
 
 ## One-liner
 
-An AI-powered knowledge retention system that automatically converts students' passive content consumption (lectures, YouTube, TikTok) into an active Zettelkasten-based learning system with spaced repetition, eliminating manual note-taking while ensuring long-term memory encoding.
+An AI-powered Zettelkasten system that automatically breaks down students' learning materials into atomic concepts (each learnable with ONE flashcard), then matches consumed content to these goals using spaced repetition for long-term retention.
 
 ## Problem & Opportunity
 
 **Problem:**
-Students consume educational content everywhere (lectures, YouTube explainers, TikTok summaries, articles, newsletters) but retain only ~15% after two weeks. They know they're forgetting but have no system for long-term encoding. Current solution is panic-cramming before exams, which fails. The root cause: passive consumption without active encoding.
+Students worldwide consume educational content everywhere (YouTube explainers, articles, podcasts, online courses) but retain only ~15% after two weeks. They know they're forgetting but have no system for long-term encoding. Current solution is panic-cramming before exams, which fails. The root cause: passive consumption without active encoding.
 
 **Who cares:**
-University students in conceptually dense fields (philosophy, sciences, economics) where you need to understand AND remember fundamentals to build on them. Specifically: students who already supplement lectures with YouTube/TikTok/articles but can't recall the content when needed.
+Students globally in any field of study who want to actually retain what they learn. Not limited to traditional university students - includes self-learners, online course students, bootcamp participants, and anyone with learning goals. Specifically: students who already consume educational content but can't recall it when needed.
 
 **Why now:**
 Gen Z is now the majority of university students and represents the first cohort that genuinely cannot power through traditional reading/studying (post-COVID shift). The educational system broke in the last 3 years:
@@ -79,25 +79,33 @@ Students get Zettelkasten benefits (retention, conceptual connections, deep unde
 
 **How it Works:**
 
-1. Professor uploads course syllabus (or use pre-populated public syllabi)
-2. AI extracts 30-50 required concepts from syllabus
-3. Student watches YouTube video, reads article, or attends lecture
-4. AI extracts atomic concepts from content, creates knowledge graph (hidden backend)
-5. AI matches concepts to syllabus requirements with confidence scores
-6. System generates flashcards for matched concepts
-7. Student reviews via spaced repetition (3-5 min/day)
-8. Dashboard shows: "12/45 concepts mastered" and "You're missing: [specific gaps]"
+1. **Student uploads their syllabus** (PDF/text) OR **talks to AI** to define learning goals
+2. **AI creates hierarchical knowledge structure** (Subject → Course(s) → Subdirectories → Atomic Concepts)
+   - **CORE PRINCIPLE**: Each atomic concept must be learnable with ONE flashcard
+   - AI determines appropriate number of concepts (no arbitrary limits)
+   - Follows Zettelkasten principles: atomic, connected, hierarchical
+3. **Student consumes content** (YouTube videos, articles, podcasts)
+4. **Student uploads content** to the app
+5. **AI extracts atomic concepts** from content (each = ONE flashcard)
+6. **AI matches** content concepts to learning goals with confidence scores
+7. **System generates flashcards** (one per atomic concept)
+8. **Student reviews** via spaced repetition (3-5 min/day)
+9. **Dashboard shows**: "12/45 concepts mastered" and "You're missing: [specific gaps]"
 
 **Magic Moment:**
-Watch a video → see it auto-convert to flashcards matched to course objectives within 60 seconds → progress bar updates → review tomorrow → ace a quiz on that material.
+Upload your syllabus → watch a video → see it auto-convert to flashcards matched to YOUR learning goals within 60 seconds → progress bar updates → review tomorrow → actually remember the material.
 
 **Differentiators:**
 
-1. **Zero manual work**: No note-taking, no card creation, no organizing - just consume content you're already consuming
-2. **Concept matching**: Connects what you're learning to what the professor actually requires (syllabus mapping)
-3. **Gap analysis**: Shows exactly what you know vs don't know before exams
-4. **Zettelkasten engine**: Uses proven knowledge graph methodology (atomic notes, typed links) as backend, but hides complexity from students
-5. **Intercepts passive flow**: Works with content students already consume (YouTube, TikTok, articles) rather than requiring behavior change
+1. **Truly atomic concepts**: AI breaks down learning materials into concepts that can each be learned with ONE flashcard (not arbitrary chunks)
+2. **Hierarchical knowledge structure**: Subject → Course(s) → Subdirectories → Atomic Concepts (Zettelkasten methodology)
+3. **Zero manual work**: No note-taking, no card creation, no organizing - just consume content you're already consuming
+4. **Your own learning goals**: Upload your syllabus or define goals with AI - works for any educational system worldwide
+5. **Concept matching**: Connects what you're learning to what YOU want to learn (not limited to institutional syllabi)
+6. **Gap analysis**: Shows exactly what you know vs don't know before exams/goals
+7. **Zettelkasten engine**: Uses proven knowledge graph methodology (atomic notes, typed links) as backend, but hides complexity from students
+8. **Intercepts passive flow**: Works with content students already consume (YouTube, articles, podcasts) rather than requiring behavior change
+9. **Global flexibility**: Not tied to any specific educational system - works for students worldwide
 
 **vs Competitors:**
 
@@ -112,11 +120,14 @@ None connect: "what professor requires" + "what student actually consumes" + "sp
 
 **In Scope (MVP - 48 hours):**
 
-- Pre-populate 3 public course syllabi (philosophy, biology, economics)
-- Process YouTube video URLs → extract atomic concepts via AI
-- Match extracted concepts to syllabus with confidence scores (>80% = learned, <80% = partial)
-- Generate flashcards from matched concepts
-- Spaced repetition scheduling (basic algorithm)
+- **Student uploads syllabus** (PDF/text) OR defines learning goals via AI conversation
+- **AI creates hierarchical knowledge structure** (Subject → Course(s) → Subdirectories → Atomic Concepts)
+- **CORE: Each atomic concept = ONE flashcard** (AI's primary responsibility)
+- AI determines appropriate number of concepts (no arbitrary limits)
+- Process YouTube video URLs → extract atomic concepts via AI ✅ DONE
+- Match extracted concepts to learning goals with confidence scores (>80% = learned, <80% = partial) ✅ DONE
+- Generate flashcards from matched concepts (one per atomic concept) ✅ DONE
+- Spaced repetition scheduling (basic algorithm) ✅ DONE
 - Progress dashboard: "X/Y concepts mastered"
 - Gap analysis: "You're missing: [list of concepts]"
 - Student feedback: "This match is wrong" button (data collection only)
@@ -126,32 +137,34 @@ None connect: "what professor requires" + "what student actually consumes" + "sp
 **In Scope (Post-MVP):**
 
 - Graph visualization (simplified for students, power users get full view)
-- Manual syllabus PDF upload and parsing
 - Multiple content sources: TikTok, articles, lecture recordings, PDFs
 - Student editing: Delete/edit flashcards, add custom notes
 - Prerequisite relationship detection ("learn X before Y")
 - Export to Obsidian format (markdown + frontmatter)
-- Professor dashboard: Upload syllabus, see class progress
 - Improved AI accuracy via feedback loop
 - Mobile app (native iOS/Android)
+- Collaborative learning goals (share syllabi with friends)
+- AI tutor chat (answer questions about concepts)
 
 **Out of Scope:**
 
-- Fine-tuned models (use prompt engineering + chatGPT/Claude)
-- Social features, collaboration, sharing (focus on individual learning)
+- Fine-tuned models (use prompt engineering + GPT-4/Claude)
+- Social features, collaboration (focus on individual learning for MVP)
 - Content creation (not a MOOC platform)
-- Replacing professors or lectures (augmentation, not replacement)
+- Replacing teachers or courses (augmentation, not replacement)
 - Perfect AI accuracy (acknowledge limitations, show improvement path)
 - Multi-language support (English only for MVP)
 - Desktop apps (web-first for speed)
+- Institutional integrations (LMS, university systems) - focus on individual students
 
 **Critical MVP Boundaries:**
 
 - ONE student journey end-to-end that works flawlessly
-- ONE course syllabus fully mapped
+- ONE student-uploaded syllabus fully processed
 - 10 videos processed successfully
 - 3 test students showing improved retention
 - Not breadth (many features) but depth (core pipeline proven)
+- Works for any student worldwide (not limited to specific educational systems)
 
 ## Success Criteria (Leading Indicators)
 
@@ -193,23 +206,28 @@ None connect: "what professor requires" + "what student actually consumes" + "sp
 
 **Critical Assumptions:**
 
-1. Students will trust AI-generated flashcards without manual verification
-2. Concept matching at 70%+ accuracy is "good enough" to be useful
-3. Students care more about retention than understanding the underlying Zettelkasten methodology
-4. YouTube/TikTok content contains sufficient depth to extract meaningful atomic concepts
-5. Professors will share syllabi (or public syllabi are accessible)
-6. Spaced repetition works even with auto-generated content (not just manually created)
-7. Students will review daily if the friction is low enough (<5 min)
+1. **AI can reliably break down materials into truly atomic concepts** (each = ONE flashcard) ← CORE ASSUMPTION
+2. Students will trust AI-generated flashcards without manual verification
+3. Concept matching at 70%+ accuracy is "good enough" to be useful
+4. Students care more about retention than understanding the underlying Zettelkasten methodology
+5. YouTube/podcast/article content contains sufficient depth to extract meaningful atomic concepts
+6. Students can provide their own syllabi or define learning goals with AI assistance
+7. Spaced repetition works even with auto-generated content (not just manually created)
+8. Students will review daily if the friction is low enough (<5 min)
+9. Students worldwide have learning goals they want to track (not just institutional students)
+10. Hierarchical structure (Subject → Course → Subdirectories → Concepts) makes sense to students
 
 **Top Risks:**
 
-1. **Concept matching accuracy**: False positives (student thinks they know something they don't) are dangerous. Mitigation: Show confidence scores, allow flagging, accept 20-30% error for MVP
-2. **Retention validation**: Hard to prove retention improvement in 4 days. Mitigation: Spot quizzes before/after, focus on user testimonials, show data even if imperfect
-3. **AI extraction quality**: YouTube content varies wildly (some is shallow, clickbait). Mitigation: Test with high-quality educational channels first (CrashCourse, Khan Academy)
-4. **Chicken-egg (syllabus)**: Need professor to upload syllabus before students can use it. Mitigation: Pre-populate public syllabi for MVP, don't require prof partnership in 48h
-5. **Behavior change**: Students need to review daily, which is a habit. Mitigation: Push notifications, make reviews <3 min, show progress gamification
-6. **Content variety**: MVP only supports YouTube URLs. Real students consume TikTok, PDFs, articles. Mitigation: Expand post-MVP, focus on proof of concept first
-7. **Technical complexity**: Building concept extraction + matching + graph + spaced repetition in 48h is ambitious. Mitigation: Use existing APIs (GPT-4 for extraction, simple graph DB, basic SM-2 algorithm)
+1. **Atomic concept quality** ← HIGHEST RISK: AI may create concepts that require multiple flashcards or are too broad. Mitigation: Strict prompt engineering, validation layer, manual editing, continuous feedback loop. **This is the CORE of the system - must get this right.**
+2. **Concept matching accuracy**: False positives (student thinks they know something they don't) are dangerous. Mitigation: Show confidence scores, allow flagging, accept 20-30% error for MVP
+3. **Retention validation**: Hard to prove retention improvement in 4 days. Mitigation: Spot quizzes before/after, focus on user testimonials, show data even if imperfect
+4. **AI extraction quality**: Content varies wildly (some is shallow, clickbait). Mitigation: Test with high-quality educational content first
+5. **Syllabus upload friction**: Students may not have digital syllabi or may struggle to define goals. Mitigation: AI conversation to help define goals, accept various formats (PDF, text, images)
+6. **Behavior change**: Students need to review daily, which is a habit. Mitigation: Push notifications, make reviews <3 min, show progress gamification
+7. **Content variety**: MVP only supports YouTube URLs. Real students consume articles, PDFs, podcasts. Mitigation: Expand post-MVP, focus on proof of concept first
+8. **Global diversity**: Students worldwide have different educational systems and learning styles. Mitigation: Flexible goal definition, not tied to specific curriculum structures
+9. **Hierarchical complexity**: Students may find tree structure confusing. Mitigation: Hide complexity in UI, show flat list by default, tree view optional
 
 **Known Constraints:**
 
@@ -221,16 +239,23 @@ None connect: "what professor requires" + "what student actually consumes" + "sp
 
 **What Could Kill This:**
 
+- **Concepts are not truly atomic** (<95% atomic) → flashcards don't work, students lose trust ← CRITICAL
 - Concept matching <50% accurate → students lose trust
 - Retention doesn't improve within 7 days → no value prop
 - Review friction >30 min/day → students abandon
-- Can't find public syllabi → no seed data for MVP
+- Syllabus upload too complex → students can't get started
 - AI costs >$10/student/month → unit economics broken
+- Students don't have clear learning goals → can't define what to track
+- Hierarchical structure is too complex → students confused
 
 **De-Risking Plan:**
 
-- Test concept extraction on 20 videos BEFORE hackathon (validate feasibility)
+- **Test atomic concept generation on 10 syllabi BEFORE implementation** (validate AI can create truly atomic concepts) ← CRITICAL
+- Manually verify: Can each concept be learned with ONE flashcard?
+- Test concept extraction on 20 videos BEFORE hackathon (validate feasibility) ✅ DONE
 - Partner with 3 students NOW for beta testing during hackathon
-- Pre-download 5 public syllabi (philosophy, biology, economics, psychology, history)
-- Build feedback loop from day 1 (track bad matches, use for improvement)
+- Test syllabus upload with 5 different formats (PDF, Word, text, images, handwritten)
+- Build AI conversation flow for goal definition (fallback if upload fails)
+- Build feedback loop from day 1 (track bad matches, track non-atomic concepts)
 - Set expectations: "70% accurate MVP, improving with use" vs "perfect AI"
+- **Continuous monitoring of concept atomicity** (most important metric)

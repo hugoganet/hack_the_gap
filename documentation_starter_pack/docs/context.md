@@ -5,9 +5,10 @@ This is the single entry point for reconstructing project context. AI tools and 
 ## Project Snapshot
 
 - Name: hack the gap (temporary - name TBD)
-- Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition
-- Stage: Implementation (Core matching pipeline complete)
-- Last updated: 2025-11-16
+- Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals
+- Stage: Implementation (Core pipeline complete, syllabus upload in progress)
+- Last updated: 2025-11-17
+- **Major Pivot (2025-11-17)**: Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses.
 
 ## Core Documents
 
@@ -42,11 +43,11 @@ Then record ADRs and Specs as needed under `./decisions/` and `./specs/`.
 
 ## Current Focus
 
-- **Current Phase:** Implementation - Core matching pipeline complete (US-0002 ✓, US-0003 ✓, US-0004 ✓)
+- **Current Phase:** Implementation - Core pipeline complete, syllabus upload feature in progress
 - **High-level goal:** Build 48-hour hackathon MVP proving that auto-generated Zettelkasten from passive content consumption improves student retention
-- **Key risks:** Concept matching accuracy (<50% = lost trust), retention validation in 4 days, AI extraction quality from varied YouTube content
-- **Next milestone:** Complete flashcard generation (US-0005) and review system (US-0006, US-0007)
-- **Recent achievement:** Automatic concept-to-syllabus matching with hybrid algorithm (embeddings + LLM)
+- **Key risks:** Syllabus upload friction, concept matching accuracy (<50% = lost trust), retention validation in 4 days
+- **Next milestone:** Complete syllabus upload feature (NEW US-0001), progress dashboard (US-0008), gap analysis (US-0009)
+- **Recent achievement:** Core pipeline working end-to-end (video processing → concept extraction → matching → flashcards → review)
 
 ## Tech Stack Summary
 
@@ -79,41 +80,50 @@ See `./data/` for:
 
 ## User Stories Status
 
-✅ **9 MVP stories documented** (US-0001 to US-0009):
+✅ **Core pipeline stories (US-0002 to US-0007) COMPLETE**:
 
-- US-0001: Course Selection ✅ Spec complete
-- US-0002: Video URL Submission ✅ **IMPLEMENTED** - Transcript fetching complete
-- US-0003: Concept Extraction ⚠️ HIGHEST RISK - ✅ **IMPLEMENTED** - AI extraction working
-- US-0004: Concept-to-Syllabus Matching ⚠️ HIGHEST VALUE - ✅ **IMPLEMENTED** (Pending E2E testing)
-- US-0005: Flashcard Generation ✅ Spec complete
-- US-0006: First Review Session ✅ Spec complete
-- US-0007: Review Scheduling ✅ Spec complete
-- US-0008: Progress Dashboard ✅ Spec complete
-- US-0009: Gap Analysis ✅ Spec complete
+- ~~US-0001: Course Selection~~ **DEPRECATED** - Replaced with syllabus upload
+- **NEW US-0001: Syllabus Upload** 🚧 IN PROGRESS - Student uploads syllabus or defines goals with AI
+- US-0002: Video URL Submission ✅ **IMPLEMENTED**
+- US-0003: Concept Extraction ✅ **IMPLEMENTED**
+- US-0004: Concept-to-Syllabus Matching ✅ **IMPLEMENTED**
+- US-0005: Flashcard Generation ✅ **IMPLEMENTED**
+- US-0006: First Review Session ✅ **IMPLEMENTED**
+- US-0007: Review Scheduling ✅ **IMPLEMENTED**
+- US-0008: Progress Dashboard 🚧 TODO
+- US-0009: Gap Analysis 🚧 TODO
+- ~~US-0012: Admin Pre-load Syllabi~~ **DEPRECATED** - No longer needed (students upload their own)
 
-**Implementation Progress:** 3/9 core stories complete (US-0002, US-0003, US-0004)
+**Implementation Progress:** 6/9 core stories complete (US-0002 through US-0007)
 
 See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-17**: **MAJOR PIVOT** - Shifted from institution-centric to student-centric approach. Students now upload their own syllabi instead of selecting from pre-loaded courses. Removed academic year/semester structure for global flexibility.
+- **2025-11-17**: Deprecated US-0001 (Course Selection) and US-0012 (Admin Pre-load Syllabi)
+- **2025-11-17**: New US-0001: Student syllabus upload (PDF/text) or AI conversation to define learning goals
+- **2025-11-16**: Core pipeline complete - US-0002 through US-0007 implemented and working
 - **2025-11-16**: ADR-0008: AI-assisted documentation update workflow formalized (diff-to-patch approach)
 - **2025-11-16**: US-0004 implemented - Hybrid matching (0.6 × embeddings + 0.4 × LLM), automatic triggering, 33 tests passing
 - **2025-11-16**: ADR-0005: OpenAI embeddings (text-embedding-3-small) for semantic similarity
 - **2025-11-16**: ADR-0006: Hybrid matching algorithm balances speed (embeddings) with accuracy (LLM)
 - **2025-11-16**: ADR-0007: Confidence thresholds calibrated (≥0.80 HIGH, ≥0.60 MEDIUM)
-- **2025-11-14**: Data schema completed - 13 tables, normalized structure, French UE system support
+- **2025-11-16**: Simplified data schema - Removed academic_years and semesters tables for global flexibility
 - **2025-11-14**: Tech stack finalized - Next.js 15.5, Supabase, Prisma, Better-Auth, OpenAI
 - **2025-11-14**: Architecture documented - Monolith approach, synchronous processing for MVP
 - **2025-11-13**: Product vision defined - Zettelkasten as backend engine, simple UX for students
-- **2025-11-13**: MVP scope - 48h hackathon, accept 20-30% error rate, YouTube only, 3 pre-populated syllabi
+- **2025-11-13**: MVP scope - 48h hackathon, accept 20-30% error rate, YouTube only
 - **2025-11-13**: Validation criteria - 70%+ concept extraction accuracy, 80%+ retention after 24h (vs 20% baseline)
 
 ## Recent Sessions
 
-- See `./ai_sessions/`. Latest: 2025-11-13-session-002.md (Product Vision Definition)
+- See `./ai_sessions/`. Latest: 2025-11-17 (Documentation update - major pivot to student-centric approach)
+- **2025-11-17**: Documentation overhaul session (reflect pivot from institution-centric to student-centric)
 - **2025-11-16**: US-0004 implementation session (concept-to-syllabus matching with automatic triggering)
+- **2025-11-16**: Core pipeline completion (US-0002 through US-0007)
 - **2025-11-14**: Documentation update session (tech stack, architecture, data schema sync)
+- **2025-11-13**: Product Vision Definition session
 
 ## ADRs to Draft
 
@@ -133,18 +143,23 @@ See `./specs/` for detailed specifications.
 
 **Before starting implementation:**
 
-- [ ] Test concept extraction on 20 videos (validate 70%+ accuracy)
+- [x] Test concept extraction on 20 videos (validate 70%+ accuracy) ✅ DONE
 - [ ] Recruit 3 beta test students
-- [ ] Pre-download 5 public course syllabi
-- [ ] Set up OpenAI API account and test quota
-- [ ] Configure Supabase project and run migrations
-- [ ] Deploy boilerplate to Vercel (verify deployment works)
+- [ ] Test syllabus upload with 5 different formats (PDF, Word, text, images, handwritten)
+- [x] Set up OpenAI API account and test quota ✅ DONE
+- [x] Configure Supabase project and run migrations ✅ DONE
+- [x] Deploy boilerplate to Vercel (verify deployment works) ✅ DONE
 
 **Implementation priority:**
 
-1. US-0012: Admin pre-load syllabi (seed data)
-2. US-0001: Course selection UI
-3. US-0002: Video URL submission
-4. US-0003: Concept extraction ⚠️ CRITICAL PATH
-5. US-0004: Concept matching ⚠️ CRITICAL PATH
-6. US-0005-0009: Review system + dashboard
+1. ~~US-0012: Admin pre-load syllabi~~ **DEPRECATED**
+2. **NEW US-0001: Student syllabus upload** 🚧 IN PROGRESS
+3. ~~US-0001: Course selection UI~~ **DEPRECATED**
+4. US-0002: Video URL submission ✅ DONE
+5. US-0003: Concept extraction ✅ DONE
+6. US-0004: Concept matching ✅ DONE
+7. US-0005: Flashcard generation ✅ DONE
+8. US-0006: First review session ✅ DONE
+9. US-0007: Review scheduling ✅ DONE
+10. US-0008: Progress dashboard 🚧 TODO
+11. US-0009: Gap analysis 🚧 TODO

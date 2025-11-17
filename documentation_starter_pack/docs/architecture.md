@@ -6,8 +6,8 @@
 
 **Primary Users:**
 
-- Students (Motivated Strugglers) - consume content, review flashcards, track progress
-- Admin/Founder - pre-load syllabi, monitor system health
+- Students (Self-Directed Learners) - upload syllabi, consume content, review flashcards, track progress
+- ~~Admin/Founder~~ - No longer needed (students upload their own syllabi)
 
 **External Systems:**
 
@@ -93,25 +93,24 @@ flowchart TB
 app/
 ├── (auth)/              # Auth pages (signin, signup)
 ├── (logged-in)/         # Protected routes
-│   ├── dashboard/       # Progress dashboard (US-0008)
-│   ├── courses/         # Course selection (US-0001) ✅ IMPLEMENTED
-│   ├── videos/          # Video submission (US-0002)
-│   ├── review/          # Flashcard review (US-0006)
-│   └── gaps/            # Gap analysis (US-0009)
-├── orgs/[orgSlug]/(navigation)/users/  # ✅ IMPLEMENTED
-│   ├── course-selection-card.tsx       # 2x2 grid course interface
-│   ├── add-course-dialog.tsx           # Hybrid search dialog
-│   └── page.tsx                        # Users page with course selection
-    ├── api/                 # API routes
-    │   ├── courses/         # ✅ Course management (US-0001) - Updated 2025-11-16
-    │   ├── user/courses/    # ✅ User course enrollment - Updated 2025-11-16
-    │   ├── subjects/        # ✅ Subject data
-    │   ├── videos/          # Video processing
-│   ├── concepts/        # Concept extraction
-│   ├── flashcards/      # Flashcard generation
-│   └── reviews/         # Review sessions
+│   ├── dashboard/       # Progress dashboard (US-0008) 🚧 TODO
+│   ├── syllabus/        # NEW: Syllabus upload (US-0001) 🚧 IN PROGRESS
+│   ├── videos/          # Video submission (US-0002) ✅ DONE
+│   ├── review/          # Flashcard review (US-0006) ✅ DONE
+│   └── gaps/            # Gap analysis (US-0009) 🚧 TODO
+├── api/                 # API routes
+│   ├── syllabus/        # NEW: Syllabus upload & parsing (US-0001)
+│   ├── videos/          # Video processing (US-0002) ✅ DONE
+│   ├── concepts/        # Concept extraction (US-0003) ✅ DONE
+│   ├── matches/         # Concept matching (US-0004) ✅ DONE
+│   ├── flashcards/      # Flashcard generation (US-0005) ✅ DONE
+│   └── reviews/         # Review sessions (US-0006, US-0007) ✅ DONE
 └── _components/         # Shared UI components
 ```
+
+**Deprecated (2025-11-17):**
+- ~~`courses/`~~ - Course selection no longer needed
+- ~~`orgs/[orgSlug]/(navigation)/users/`~~ - Course selection UI removed
 
 ### Backend Services (Collocated)
 
@@ -261,7 +260,32 @@ See `./tech_stack.md` for detailed stack choices, rationale, and tradeoffs.
 **Rationale:** Type safety for 90% of queries, performance for critical paths.  
 **Tradeoffs:** Mixed query patterns, but optimizes for both DX and performance.
 
-## Data Flow: Video Processing Pipeline
+## Data Flow: Complete Pipeline (Updated 2025-11-17)
+
+### Phase 0: Syllabus Upload (NEW - US-0001) 🚧 IN PROGRESS
+
+```mermaid
+sequenceDiagram
+    participant Student
+    participant UI
+    participant SA as Server Action
+    participant OpenAI
+    participant DB
+    
+    Student->>UI: Upload syllabus (PDF/text/image)
+    UI->>SA: uploadSyllabus(file)
+    
+    Note over SA,DB: Parse & Extract
+    SA->>SA: Parse file (PDF/OCR if needed)
+    SA->>OpenAI: Extract concepts (using syllabus-concept-extraction-prompt)
+    OpenAI-->>SA: 20-50 atomic concepts (JSON)
+    SA->>DB: Store user_syllabus
+    SA->>DB: Store syllabus_concepts (learning goals)
+    SA-->>UI: Upload complete
+    UI-->>Student: Show "0/X concepts" dashboard
+```
+
+### Phase 1-4: Content Processing (COMPLETE - US-0002 through US-0007) ✅
 
 ```mermaid
 sequenceDiagram
@@ -276,65 +300,59 @@ sequenceDiagram
     UI->>SA: processContent(url)
     
     Note over SA,DB: Phase 1: Transcript Fetching ✅
-    SA->>DB: Create video_job (status: transcript_fetched)
+    SA->>DB: Create video_job
     SA->>SocialKit: GET /youtube/transcript
-    SocialKit-->>SA: Transcript text (1526 words)
-    SA->>DB: Store transcript in video_job
+    SocialKit-->>SA: Transcript text
+    SA->>DB: Store transcript
     
     Note over SA,OpenAI: Phase 2: Concept Extraction ✅
     SA->>OpenAI: Extract concepts (Blackbox/GPT-4)
     OpenAI-->>SA: Extracted concepts (JSON)
-    SA->>DB: Store concepts (10 concepts)
-    SA->>DB: Update status: concepts_extracted
+    SA->>DB: Store concepts
     
     Note over SA,OpenAI: Phase 3: Auto-Match ✅
-    SA->>DB: Fetch user's active courses
-    SA->>DB: Fetch syllabus concepts (per course)
+    SA->>DB: Fetch user's learning goals (syllabus_concepts)
     SA->>OpenAI: Generate embeddings (batch)
-    OpenAI-->>SA: Embeddings (Float32Array[])
+    OpenAI-->>SA: Embeddings
     SA->>SA: Compute cosine similarity
-    SA->>SA: Shortlist top-K candidates (≥0.60)
+    SA->>SA: Shortlist top-K candidates
     
-    loop For each shortlisted candidate
-        SA->>OpenAI: LLM reasoning (Blackbox/GPT-4)
-        OpenAI-->>SA: isMatch, confidence, matchType, rationale
+    loop For each candidate
+        SA->>OpenAI: LLM reasoning
+        OpenAI-->>SA: isMatch, confidence, rationale
     end
     
     SA->>SA: Blend scores (0.6×sim + 0.4×llm)
-    SA->>DB: Store concept_matches (10 matches)
-    SA->>DB: Update status: matched
-    SA-->>UI: Processing complete
-    UI-->>Student: Show results (10 concepts matched, 7 high confidence)
+    SA->>DB: Store concept_matches
     
-    Note over SA,OpenAI: Phase 4: Flashcard Generation (TODO)
+    Note over SA,OpenAI: Phase 4: Flashcard Generation ✅
     SA->>OpenAI: Generate flashcards
     OpenAI-->>SA: Flashcards
     SA->>DB: Store flashcards
     SA->>DB: Update video_job (status: completed)
+    SA-->>UI: Processing complete
+    UI-->>Student: Show matched concepts + flashcards
 ```
 
 ## Interfaces & Contracts
 
 ### Public APIs
 
-**Course Management:** ✅ IMPLEMENTED (US-0001) - Updated 2025-11-16
+**Syllabus Management:** 🚧 IN PROGRESS (NEW US-0001)
 
-- `GET /api/courses` - List all available courses with relationships (subject, concept count) - **year/semester removed**
-- `GET /api/user/courses` - Get user's active courses with progress - **year/semester removed**
-- `POST /api/user/courses` - Add course to user's active courses (body: `{ courseId: string }`)
-- `GET /api/subjects` - List all subjects ordered alphabetically
-- ~~`GET /api/years`~~ - **REMOVED** (calendar structure deprecated)
-- ~~`GET /api/semesters`~~ - **REMOVED** (calendar structure deprecated)
+- `POST /api/syllabus/upload` - Upload syllabus file (PDF, Word, text, image)
+- `POST /api/syllabus/extract` - Extract concepts from uploaded syllabus using AI
+- `POST /api/syllabus/conversation` - AI conversation to define learning goals (alternative to upload)
+- `GET /api/syllabus/:userId` - Get user's uploaded syllabi and extracted concepts
+- `DELETE /api/syllabus/:syllabusId` - Delete syllabus and associated concepts
 
-**Knowledge Tree Management:** ⚠️ NOT YET IMPLEMENTED (Future)
-
-- `GET /api/subjects/:subjectId/nodes` - List child nodes (query: `?parentId=uuid|null`)
-- `GET /api/subjects/:subjectId/nodes/tree` - Get subtree (query: `?parentId=uuid&depth=int|full`)
-- `POST /api/subjects/:subjectId/nodes` - Create node
-- `PATCH /api/subjects/:subjectId/nodes/:nodeId` - Update node (rename, reparent, reorder)
-- `DELETE /api/subjects/:subjectId/nodes/:nodeId` - Delete empty node
-- `POST /api/subjects/:subjectId/nodes/:nodeId/concepts` - Attach syllabus concepts
-- `DELETE /api/subjects/:subjectId/nodes/:nodeId/concepts/:syllabusConceptId` - Detach concept
+**Deprecated (2025-11-17):**
+- ~~`GET /api/courses`~~ - No longer needed (students upload their own)
+- ~~`GET /api/user/courses`~~ - No longer needed
+- ~~`POST /api/user/courses`~~ - No longer needed
+- ~~`GET /api/subjects`~~ - May be repurposed for categorization
+- ~~`GET /api/years`~~ - Removed
+- ~~`GET /api/semesters`~~ - Removed
 
 **Video Processing:**
 
@@ -365,13 +383,20 @@ See `./data/` for complete schema documentation:
 **Key entities:**
 
 - `users` - Student accounts
-- `courses` - Pre-loaded courses (3 for MVP)
-- `syllabus_concepts` - Required concepts per course
+- `user_syllabi` - NEW: User-uploaded syllabi
+- `syllabus_concepts` - Learning goal concepts (extracted from user syllabi)
 - `video_jobs` - Processing pipeline tracking
-- `concepts` - AI-extracted concepts
-- `concept_matches` - Concept-to-syllabus matches
+- `concepts` - AI-extracted concepts from content
+- `concept_matches` - Concept-to-goal matches
 - `flashcards` - Auto-generated review cards
 - `review_sessions` - Review tracking
+- `review_events` - Individual review attempts
+
+**Deprecated (2025-11-17):**
+- ~~`courses`~~ - No longer needed (students upload their own)
+- ~~`user_courses`~~ - No longer needed
+- ~~`academic_years`~~ - Removed for global flexibility
+- ~~`semesters`~~ - Removed for global flexibility
 
 ## Operational Concerns
 

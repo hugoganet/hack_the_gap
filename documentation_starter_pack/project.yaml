@@ -1,9 +1,9 @@
 project:
   name: "hack the gap (temporary - name TBD)"
-  summary: "AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition."
+  summary: "AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals."
   owner: Hugo Ganet
-  stage: discovery # discovery | build | alpha | beta | prod | sunset
-  tags: [ai-first, hackathon, edtech, zettelkasten, spaced-repetition]
+  stage: build # discovery | build | alpha | beta | prod | sunset
+  tags: [ai-first, hackathon, edtech, zettelkasten, spaced-repetition, student-centric, global]
 
 repositories:
   - url: https://github.com/REPLACE_ME
@@ -20,12 +20,15 @@ environments:
     url: TBD
 
 status:
-  current_sprint: 0
-  last_updated: 2025-11-13
+  current_sprint: 1
+  last_updated: 2025-11-17
+  major_pivot: "2025-11-17 - Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses."
 
 notes:
-  naming: "Product name needed - 'hack the gap' is temporary placeholder. Consider: Retention, SyncGraph, ConceptFlow, MemoryMap, etc."
+  naming: "Product name needed - 'hack the gap' is temporary placeholder. Consider: Retention, SyncGraph, ConceptFlow, MemoryMap, LearnFlow, GoalKeeper, etc."
   hackathon: "48-hour MVP timeline - focus on proof of concept, not production quality"
+  pivot: "Major architectural change: removed academic year/semester structure for global flexibility. Students worldwide can now use the app with their own syllabi."
+  implementation_status: "Core pipeline complete (US-0002 through US-0007). Syllabus upload feature (NEW US-0001) in progress. Dashboard features (US-0008, US-0009) remaining."
 
 conventions:
   sessions_pattern: "YYYY-MM-DD-session-###.md"

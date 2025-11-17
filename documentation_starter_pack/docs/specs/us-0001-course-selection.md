@@ -1,8 +1,22 @@
 # Feature Spec: US-0001 - Course Selection
 
-Owner: Founder
-Status: ✅ Implemented (Updated 2025-11-16 - Simplified hierarchy)
-Last Updated: 2025-11-16
+**⚠️ DEPRECATED (2025-11-17)**
+
+**Reason**: Major product pivot from institution-centric to student-centric approach. Students now upload their own syllabi instead of selecting from pre-loaded courses.
+
+**Replaced by**: NEW US-0001 - Syllabus Upload & Goal Definition (see `us-0001-syllabus-upload.md`)
+
+**Original Status**: ✅ Implemented (Updated 2025-11-16 - Simplified hierarchy)  
+**Deprecated**: 2025-11-17  
+**Original Owner**: Founder
+
+---
+
+## ARCHIVED CONTENT BELOW
+
+This spec is kept for historical reference only. The feature described below has been removed from the product.
+
+---
 
 ## Summary
 
