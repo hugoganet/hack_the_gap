@@ -96,29 +96,53 @@ Search & discoverability
 
 ### Core Pipeline - Learning Goals Setup
 
-#### US-0001: Syllabus Upload & Goal Definition (NEW - Replaces old Course Selection)
+#### US-0001a: Add Learning Goal via AI Conversation ✅ READY FOR IMPLEMENTATION
 
-- ID: US-0001
+- ID: US-0001a
 - Persona: Self-Directed Learner
-- Title: As a self-directed learner, I want to upload my syllabus or define my learning goals with AI assistance so that the system knows what concepts I need to master.
-- Priority: P0
-- Estimate: 6h
+- Title: As a self-directed learner, I want to define my learning goals through an AI conversation so that the system can create a personalized knowledge structure for me to master.
+- Priority: P0 (Critical Path - First User Action)
+- Estimate: 8h
 - Status: 🚧 IN PROGRESS
 - Acceptance Criteria:
-  - [ ] Student can upload syllabus (PDF, Word, text, or image)
-  - [ ] AI extracts 20-50 atomic concepts from syllabus using existing prompt
-  - [ ] Alternative: Student can have AI conversation to define learning goals
-  - [ ] Concepts are stored and linked to student's learning profile
-  - [ ] Dashboard shows "0/X concepts" after upload
-  - [ ] Student can upload multiple syllabi for different subjects
-  - [ ] Works for any educational system worldwide (not limited to specific curriculum)
-- Notes: This replaces the old US-0001 (Course Selection). Uses existing `syllabus-concept-extraction-prompt.md` but triggered by student upload instead of admin.
-- Spec: [us-0001-syllabus-upload.md](../specs/us-0001-syllabus-upload.md) (TODO: Create new spec)
+  - [ ] User can fill form with subject, course name, and learning goal text
+  - [ ] AI processes input using hierarchical-knowledge-extraction-prompt.md
+  - [ ] System creates hierarchical structure: Subject → Course → KnowledgeNodes → SyllabusConcepts
+  - [ ] All concepts are atomic (each = ONE flashcard)
+  - [ ] Extraction confidence ≥ 0.7 (minimum acceptable)
+  - [ ] Database records created in transaction (rollback on failure)
+  - [ ] User enrolled in course (UserCourse record)
+  - [ ] User navigates to course detail page showing "0/X concepts mastered"
+  - [ ] Processing completes within 40s (p95)
+  - [ ] Error handling for insufficient data, ambiguous input, AI failures
+- Notes: This is the FIRST action a new user takes. Uses existing `create-course-dialog.tsx` form. Replaces deprecated US-0001 (Course Selection).
+- Spec: [us-0001a-add-learning-goal-ai-conversation.md](us-0001a-add-learning-goal-ai-conversation.md)
 
-#### ~~US-0001: Course Selection~~ **DEPRECATED (2025-11-17)**
+#### US-0001b: Add Learning Goal via Document Upload 📋 TODO
+
+- ID: US-0001b
+- Persona: Self-Directed Learner
+- Title: As a self-directed learner, I want to upload my syllabus document (PDF, Word, text, or image) so that the system can extract my learning goals and create a personalized knowledge structure.
+- Priority: P0 (Critical Path - Alternative Input Method)
+- Estimate: 10h
+- Status: 📋 TODO
+- Acceptance Criteria:
+  - [ ] User can upload PDF, Word (.docx), Text (.txt), or Image (.jpg, .png) files
+  - [ ] File validation: type, size (≤10MB), integrity
+  - [ ] Text extraction: PDF (with OCR fallback), Word, Text, Image (OCR)
+  - [ ] AI extracts subject/course name from document (or user provides manually)
+  - [ ] AI processes using hierarchical-knowledge-extraction-prompt.md (same as US-0001a)
+  - [ ] File stored securely with access control (virus scanning)
+  - [ ] User can download original syllabus from course page
+  - [ ] Processing completes within 60s (p95), 120s (p99) for OCR
+  - [ ] Error handling for invalid files, extraction failures, insufficient data
+- Notes: Alternative to US-0001a for users with digital syllabi. Requires file upload infrastructure, OCR, and storage.
+- Spec: [us-0001b-add-learning-goal-document-upload.md](us-0001b-add-learning-goal-document-upload.md)
+
+#### ~~US-0001: Course Selection~~ **DEPRECATED (2025-01-17)**
 
 - **Reason**: Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi)
-- **Replaced by**: NEW US-0001 (Syllabus Upload & Goal Definition)
+- **Replaced by**: US-0001a (AI Conversation) and US-0001b (Document Upload)
 - Old spec archived: [us-0001-course-selection.md](../specs/us-0001-course-selection.md)
 
 ### Core Pipeline - Content Processing
@@ -299,9 +323,8 @@ Search & discoverability
 
 **Day 1 (Friday):**
 
-- ~~US-0012: Pre-load syllabi~~ **DEPRECATED**
-- NEW US-0001: Syllabus upload feature 🚧 IN PROGRESS
-- ~~US-0001: Course selection~~ **DEPRECATED**
+- US-0001a: AI Conversation learning goal 🚧 IN PROGRESS (8h)
+- US-0001b: Document upload learning goal 📋 TODO (10h)
 - US-0002: Video URL input ✅ DONE
 
 **Day 2 (Saturday) - CORE:**
@@ -322,8 +345,10 @@ Search & discoverability
 - US-0009: Gap analysis 🚧 TODO
 - Polish and test demo flow
 
-**Total estimated effort:** ~48-60 hours (core pipeline complete, dashboard remaining)
+**Total estimated effort:** ~66-78 hours (core pipeline + learning goal setup)
 
-**Implementation Status:** 6/9 core stories complete (US-0002 through US-0007). Syllabus upload (NEW US-0001) in progress. Dashboard features (US-0008, US-0009) remaining.
+**Implementation Status:** 6/9 core stories complete (US-0002 through US-0007). Learning goal setup (US-0001a, US-0001b) in progress. Dashboard features (US-0008, US-0009) remaining.
+
+**Critical Path:** US-0001a → US-0002 → US-0003 → US-0004 → US-0005 → US-0006 → US-0007 → US-0008 → US-0009
 
 ---
