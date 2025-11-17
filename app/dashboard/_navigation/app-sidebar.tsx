@@ -32,7 +32,7 @@ export function AppSidebar() {
     <Sidebar variant="inset">
       <SidebarHeader className="flex flex-col gap-2">
         <div className="flex items-center gap-2 px-2 py-1.5">
-          <h2 className="text-lg font-semibold">Hack the Gap</h2>
+          <h2 className="text-lg font-semibold">Recall</h2>
         </div>
       </SidebarHeader>
       <SidebarContent>

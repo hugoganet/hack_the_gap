@@ -1,12 +1,12 @@
 export const SiteConfig = {
-  title: "Hack the Gap",
+  title: "Recall",
   description: "AI-powered learning system that converts passive content into active retention",
   prodUrl: "http://localhost:3000",
   appId: "hackthegap",
   domain: "localhost",
   appIcon: "/images/icon.png",
   company: {
-    name: "Hack the Gap",
+    name: "Recall",
     address: "", // Not needed for hackathon
   },
   brand: {
@@ -16,7 +16,7 @@ export const SiteConfig = {
     image: "/images/icon.png",
     website: "https://github.com/hugoganet/hack_the_gap",
     twitter: "",
-    name: "Hack the Gap Team",
+    name: "Recall Team",
   },
   features: {
     /**
