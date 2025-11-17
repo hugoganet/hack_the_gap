@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CourseFlashcardsView } from "./course-flashcards-view";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FolderTree } from "lucide-react";
+import Link from "next/link";
 
 function getNodeDescription(meta: unknown): string | undefined {
   if (meta && typeof meta === "object") {
@@ -137,20 +138,22 @@ export default async function CourseDetailPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto py-8 space-y-6">
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FolderTree className="size-5" />
-            Subdirectories
-          </CardTitle>
-          <CardDescription>Browse the course structure</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {visibleTopSubdirectories.length === 0 ? (
-            <div className="py-8 text-center text-sm text-muted-foreground">
-              No subdirectories found for this course.
-            </div>
-          ) : (
+
+      <CourseFlashcardsView
+        course={course}
+        conceptMatches={conceptMatches}
+      />
+
+      {visibleTopSubdirectories.length > 0 && (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FolderTree className="size-5" />
+              Subdirectories
+            </CardTitle>
+            <CardDescription>Browse the course structure</CardDescription>
+          </CardHeader>
+          <CardContent>
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {visibleTopSubdirectories.map((node) => {
                 const directCount = node.concepts.length;
@@ -160,32 +163,32 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 );
                 const totalCount = directCount + childCount;
                 return (
-                  <Card key={node.id} className="hover:border-primary transition-all">
-                    <CardHeader>
-                      <CardTitle className="line-clamp-1">{node.name}</CardTitle>
-                      {getNodeDescription(node.metadata) ? (
-                        <CardDescription className="line-clamp-2">
-                          {getNodeDescription(node.metadata)}
-                        </CardDescription>
-                      ) : null}
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-sm text-muted-foreground">
-                        {totalCount} concepts
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <Link
+                    key={node.id}
+                    href={`/dashboard/courses/${course.id}/nodes/${node.id}`}
+                  >
+                    <Card className="hover:border-primary transition-all cursor-pointer">
+                      <CardHeader>
+                        <CardTitle className="line-clamp-1">{node.name}</CardTitle>
+                        {getNodeDescription(node.metadata) ? (
+                          <CardDescription className="line-clamp-2">
+                            {getNodeDescription(node.metadata)}
+                          </CardDescription>
+                        ) : null}
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-sm text-muted-foreground">
+                          {totalCount} concepts
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 );
               })}
             </div>
-          )}
-        </CardContent>
-      </Card>
-
-      <CourseFlashcardsView
-        course={course}
-        conceptMatches={conceptMatches}
-      />
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

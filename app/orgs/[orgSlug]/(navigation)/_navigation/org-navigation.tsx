@@ -7,7 +7,6 @@ import { Layout } from "@/features/page/layout";
 import { getRequiredCurrentOrgCache } from "@/lib/react/cache";
 import { getUsersOrgs } from "@/query/org/get-users-orgs.query";
 import type { PropsWithChildren } from "react";
-import OrgBreadcrumb from "./org-breadcrumb";
 import { OrgSidebar } from "./org-sidebar";
 
 export async function OrgNavigation({ children }: PropsWithChildren) {
@@ -30,7 +29,6 @@ export async function OrgNavigation({ children }: PropsWithChildren) {
               variant="outline"
               className="size-9 cursor-pointer"
             />
-            <OrgBreadcrumb />
           </Layout>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>

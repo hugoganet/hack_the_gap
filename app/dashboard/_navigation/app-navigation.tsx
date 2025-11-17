@@ -5,7 +5,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Layout } from "@/features/page/layout";
 import type { PropsWithChildren } from "react";
-import AppBreadcrumb from "./app-breadcrumb";
 import { AppSidebar } from "./app-sidebar";
 
 export async function AppNavigation({ children }: PropsWithChildren) {
@@ -20,7 +19,6 @@ export async function AppNavigation({ children }: PropsWithChildren) {
               variant="outline"
               className="size-9 cursor-pointer"
             />
-            <AppBreadcrumb />
           </Layout>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>

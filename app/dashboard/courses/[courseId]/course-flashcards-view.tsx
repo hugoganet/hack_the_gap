@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { BookOpen, Brain, ChevronRight, Clock, CheckCircle2, Play } from "lucide-react";
+import { BookOpen, Brain, ChevronRight, Clock, CheckCircle2, Play, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type Course = {
   id: string;
@@ -71,9 +72,17 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
     <div className="space-y-6">
       {/* Course Header */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <BookOpen className="size-4" />
-          <span>{course.subject.name}</span>
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <BookOpen className="size-4" />
+            <span>{course.subject.name}</span>
+          </div>
+          <Link href="/dashboard/courses">
+            <Button variant="outline" className="gap-2">
+              <ArrowLeft className="size-4" />
+              Back to courses
+            </Button>
+          </Link>
         </div>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">{course.name}</h1>

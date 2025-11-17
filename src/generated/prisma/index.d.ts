@@ -13013,6 +13013,7 @@ export namespace Prisma {
     userId: string | null
     url: string | null
     youtubeVideoId: string | null
+    tiktokVideoId: string | null
     transcript: string | null
     status: string | null
     processedConceptsCount: number | null
@@ -13026,6 +13027,7 @@ export namespace Prisma {
     userId: string | null
     url: string | null
     youtubeVideoId: string | null
+    tiktokVideoId: string | null
     transcript: string | null
     status: string | null
     processedConceptsCount: number | null
@@ -13039,6 +13041,7 @@ export namespace Prisma {
     userId: number
     url: number
     youtubeVideoId: number
+    tiktokVideoId: number
     transcript: number
     status: number
     processedConceptsCount: number
@@ -13062,6 +13065,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    tiktokVideoId?: true
     transcript?: true
     status?: true
     processedConceptsCount?: true
@@ -13075,6 +13079,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    tiktokVideoId?: true
     transcript?: true
     status?: true
     processedConceptsCount?: true
@@ -13088,6 +13093,7 @@ export namespace Prisma {
     userId?: true
     url?: true
     youtubeVideoId?: true
+    tiktokVideoId?: true
     transcript?: true
     status?: true
     processedConceptsCount?: true
@@ -13188,6 +13194,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId: string | null
+    tiktokVideoId: string | null
     transcript: string | null
     status: string
     processedConceptsCount: number | null
@@ -13220,6 +13227,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    tiktokVideoId?: boolean
     transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
@@ -13236,6 +13244,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    tiktokVideoId?: boolean
     transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
@@ -13250,6 +13259,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    tiktokVideoId?: boolean
     transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
@@ -13264,6 +13274,7 @@ export namespace Prisma {
     userId?: boolean
     url?: boolean
     youtubeVideoId?: boolean
+    tiktokVideoId?: boolean
     transcript?: boolean
     status?: boolean
     processedConceptsCount?: boolean
@@ -13272,7 +13283,7 @@ export namespace Prisma {
     completedAt?: boolean
   }
 
-  export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "transcript" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
+  export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "tiktokVideoId" | "transcript" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
   export type VideoJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -13296,6 +13307,7 @@ export namespace Prisma {
       userId: string
       url: string
       youtubeVideoId: string | null
+      tiktokVideoId: string | null
       transcript: string | null
       status: string
       processedConceptsCount: number | null
@@ -13731,6 +13743,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"VideoJob", 'String'>
     readonly url: FieldRef<"VideoJob", 'String'>
     readonly youtubeVideoId: FieldRef<"VideoJob", 'String'>
+    readonly tiktokVideoId: FieldRef<"VideoJob", 'String'>
     readonly transcript: FieldRef<"VideoJob", 'String'>
     readonly status: FieldRef<"VideoJob", 'String'>
     readonly processedConceptsCount: FieldRef<"VideoJob", 'Int'>
@@ -22427,6 +22440,7 @@ export namespace Prisma {
     userId: 'userId',
     url: 'url',
     youtubeVideoId: 'youtubeVideoId',
+    tiktokVideoId: 'tiktokVideoId',
     transcript: 'transcript',
     status: 'status',
     processedConceptsCount: 'processedConceptsCount',
@@ -23326,6 +23340,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
     transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
@@ -23341,6 +23356,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
+    tiktokVideoId?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
@@ -23359,6 +23375,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
     transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
@@ -23374,6 +23391,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
+    tiktokVideoId?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
@@ -23395,6 +23413,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"VideoJob"> | string
     url?: StringWithAggregatesFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
+    tiktokVideoId?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
     transcript?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
     status?: StringWithAggregatesFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableWithAggregatesFilter<"VideoJob"> | number | null
@@ -24658,6 +24677,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -24673,6 +24693,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -24686,6 +24707,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24701,6 +24723,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24715,6 +24738,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -24727,6 +24751,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24740,6 +24765,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25959,6 +25985,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    tiktokVideoId?: SortOrder
     transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
@@ -25976,6 +26003,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    tiktokVideoId?: SortOrder
     transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
@@ -25989,6 +26017,7 @@ export namespace Prisma {
     userId?: SortOrder
     url?: SortOrder
     youtubeVideoId?: SortOrder
+    tiktokVideoId?: SortOrder
     transcript?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
@@ -28093,6 +28122,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -28106,6 +28136,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -28334,6 +28365,7 @@ export namespace Prisma {
     userId?: StringFilter<"VideoJob"> | string
     url?: StringFilter<"VideoJob"> | string
     youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
     transcript?: StringNullableFilter<"VideoJob"> | string | null
     status?: StringFilter<"VideoJob"> | string
     processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
@@ -29498,6 +29530,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -29512,6 +29545,7 @@ export namespace Prisma {
     userId: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -29556,6 +29590,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29570,6 +29605,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30704,6 +30740,7 @@ export namespace Prisma {
     id?: string
     url: string
     youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
     transcript?: string | null
     status: string
     processedConceptsCount?: number | null
@@ -30915,6 +30952,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30928,6 +30966,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30941,6 +30980,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null

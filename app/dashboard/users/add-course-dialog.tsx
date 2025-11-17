@@ -16,9 +16,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
 import { ChevronRight, BookOpen, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 type Subject = {
@@ -126,18 +124,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
     }
   };
 
-  const handleBack = () => {
-    if (currentStep === "course") {
-      setCurrentStep("subject");
-      setSelectedSubject(null);
-    }
-  };
 
-  const getBreadcrumb = () => {
-    const parts = [];
-    if (selectedSubject) parts.push(selectedSubject.name);
-    return parts.join(" → ");
-  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -149,20 +136,6 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        {/* Breadcrumb */}
-        {getBreadcrumb() && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleBack}
-              className="h-7 px-2"
-            >
-              ← Back
-            </Button>
-            <span className="font-medium">{getBreadcrumb()}</span>
-          </div>
-        )}
 
         <div className="flex-1 overflow-hidden">
           {isLoading ? (
