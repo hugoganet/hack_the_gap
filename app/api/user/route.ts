@@ -1,6 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
 import { getUser } from "@/lib/auth/auth-user";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -13,17 +12,15 @@ export async function GET() {
       );
     }
 
-    const subjects = await prisma.subject.findMany({
-      orderBy: {
-        name: "asc",
-      },
+    return NextResponse.json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
     });
-
-    return NextResponse.json(subjects);
   } catch (error) {
-    console.error("Error fetching subjects:", error);
+    console.error("Error fetching user:", error);
     return NextResponse.json(
-      { error: "Failed to fetch subjects" },
+      { error: "Failed to fetch user" },
       { status: 500 }
     );
   }
