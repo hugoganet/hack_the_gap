@@ -100,12 +100,12 @@ export async function CardsToReviewToday() {
         {flashcardsToday.length === 0 ? (
           <div className="py-8 text-center space-y-3">
             <div className="flex justify-center">
-              <div className="rounded-full bg-success/10 p-3">
-                <Brain className="size-8 text-success" />
+              <div className="rounded-full bg-muted p-3">
+                <Brain className="size-8 text-foreground" />
               </div>
             </div>
             <div>
-              <p className="font-medium text-success">
+              <p className="font-medium text-foreground">
                 Tu es à jour de tes répétitions pour aujourd'hui ! 🎉
               </p>
               {flashcardsTomorrow > 0 && (
@@ -121,7 +121,7 @@ export async function CardsToReviewToday() {
             {coursesWithFlashcards.map(({ course, flashcards }) => (
               <Link
                 key={course.id}
-                href={`/orgs/${user.id}/courses/${course.id}/review`}
+                href={`/dashboard/courses/${course.id}/review`}
                 className="block"
               >
                 <Button
