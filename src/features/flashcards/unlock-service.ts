@@ -1,0 +1,347 @@
+/**
+ * Flashcard Answer Unlock Service
+ * Unlocks flashcard answers when high-confidence concept matches are found
+ */
+
+import { prisma } from "@/lib/db";
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
+import type { ConceptMatch, Concept, SyllabusConcept } from "@/generated/prisma";
+
+export interface UnlockResult {
+  flashcardId: string;
+  question: string;
+  answer: string;
+  conceptText: string;
+  unlockedAt: Date;
+  source: string;
+  confidence: number;
+}
+
+/**
+ * Unlock flashcard answers for high-confidence concept matches
+ * Returns array of unlocked flashcards for notification
+ */
+export async function unlockFlashcardAnswers(
+  matches: ConceptMatch[],
+  contentJobId: string,
+  userId: string
+): Promise<UnlockResult[]> {
+  console.log(`🔓 Unlock service: Processing ${matches.length} matches for user ${userId}`);
+  
+  const unlocked: UnlockResult[] = [];
+
+  for (const match of matches) {
+    // Only unlock for high-confidence matches (≥80%)
+    if (match.confidence < 0.8) {
+      console.log(`  ⏭️  Skipping match (confidence ${match.confidence} < 0.8)`);
+      continue;
+    }
+
+    console.log(`  🔍 Processing match: ${match.id} (confidence: ${match.confidence})`);
+
+    // Find locked flashcard for this syllabus concept
+    const flashcard = await prisma.flashcard.findFirst({
+      where: {
+        syllabusConceptId: match.syllabusConceptId,
+        userId,
+        state: "locked",
+      },
+      include: {
+        syllabusConcept: true,
+      },
+    });
+
+    if (!flashcard) {
+      console.log(`  ⏭️  No locked flashcard found for syllabus concept ${match.syllabusConceptId}`);
+      continue;
+    }
+
+    console.log(`  📝 Found locked flashcard: ${flashcard.id} - "${flashcard.question}"`);
+
+    // Get extracted concept details
+    const extractedConcept = await prisma.concept.findUnique({
+      where: { id: match.conceptId },
+    });
+
+    if (!extractedConcept) {
+      console.log(`  ⚠️  Extracted concept not found: ${match.conceptId}`);
+      continue;
+    }
+
+    console.log(`  🤖 Generating answer from content...`);
+
+    // Generate answer from matched content
+    const answer = await generateAnswerFromContent(
+      extractedConcept,
+      flashcard.syllabusConcept,
+      match.rationale || ""
+    );
+
+    console.log(`  ✅ Answer generated: "${answer.substring(0, 50)}..."`);
+
+    // UNLOCK: Add answer and update state
+    const unlockedFlashcard = await prisma.flashcard.update({
+      where: { id: flashcard.id },
+      data: {
+        answer,
+        conceptMatchId: match.id,
+        state: "unlocked",
+        unlockedAt: new Date(),
+        unlockedBy: contentJobId,
+        nextReviewAt: new Date(), // Ready for immediate review
+      },
+    });
+
+    console.log(`  🔓 Flashcard unlocked: ${unlockedFlashcard.id}`);
+
+    // Create unlock event (for analytics)
+    await prisma.unlockEvent.create({
+      data: {
+        userId,
+        flashcardId: unlockedFlashcard.id,
+        contentJobId,
+        conceptMatchId: match.id,
+        confidence: match.confidence,
+      },
+    });
+
+    console.log(`  📊 Unlock event recorded`);
+
+    // Get content job details for source attribution
+    const contentJob = await prisma.contentJob.findUnique({
+      where: { id: contentJobId },
+      select: { url: true, fileName: true, contentType: true },
+    });
+
+    const source =
+      contentJob?.fileName ||
+      contentJob?.url ||
+      "Unknown source";
+
+    unlocked.push({
+      flashcardId: unlockedFlashcard.id,
+      question: flashcard.question,
+      answer,
+      conceptText: flashcard.syllabusConcept.conceptText,
+      unlockedAt: unlockedFlashcard.unlockedAt!,
+      source,
+      confidence: match.confidence,
+    });
+  }
+
+  console.log(`🎉 Unlocked ${unlocked.length} flashcards total`);
+
+  // Update user stats
+  if (unlocked.length > 0) {
+    await updateUserStatsAfterUnlock(userId, unlocked.length);
+  }
+
+  return unlocked;
+}
+
+/**
+ * Generate answer from matched content using AI
+ */
+async function generateAnswerFromContent(
+  extractedConcept: Concept,
+  syllabusConcept: SyllabusConcept,
+  matchRationale: string
+): Promise<string> {
+  const prompt = `You are generating a flashcard answer based on content the student consumed.
+
+QUESTION CONTEXT (from syllabus):
+- Concept: ${syllabusConcept.conceptText}
+- Category: ${syllabusConcept.category || "N/A"}
+- Importance: ${syllabusConcept.importance || "N/A"}
+
+CONTENT CONTEXT (from video/PDF):
+- Extracted concept: ${extractedConcept.conceptText}
+- Definition: ${extractedConcept.definition || "N/A"}
+
+MATCHING RATIONALE:
+${matchRationale}
+
+Generate a concise, accurate answer (1-3 sentences) that:
+1. Directly answers the question about the syllabus concept
+2. Incorporates specific details from the content consumed
+3. Includes a concrete example if available in the content
+4. Is suitable for flashcard review (clear and memorable)
+
+ANSWER:`;
+
+  try {
+    const { text } = await generateText({
+      model: openai("gpt-4"),
+      prompt,
+      temperature: 0.3,
+      maxTokens: 200,
+    });
+
+    return text.trim();
+  } catch (error) {
+    console.error("Error generating answer:", error);
+    // Fallback to basic answer
+    return extractedConcept.definition || "Answer generation failed";
+  }
+}
+
+/**
+ * Update user stats after unlocking flashcards
+ * Handles streaks, milestones, and unlock rate
+ */
+async function updateUserStatsAfterUnlock(
+  userId: string,
+  unlockCount: number
+): Promise<void> {
+  console.log(`📊 Updating user stats for ${unlockCount} unlocks...`);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const stats = await prisma.userStats.findUnique({
+    where: { userId },
+  });
+
+  if (!stats) {
+    console.log(`  Creating new user stats...`);
+    // Create stats if not exists
+    await prisma.userStats.create({
+      data: {
+        userId,
+        totalUnlocks: unlockCount,
+        totalLocked: 0,
+        totalMastered: 0,
+        unlockRate: 0.0,
+        currentStreak: 1,
+        longestStreak: 1,
+        lastUnlockDate: today,
+        firstUnlockAt: new Date(),
+      },
+    });
+    console.log(`  ✓ User stats created`);
+    return;
+  }
+
+  // Check if last unlock was yesterday (streak continues)
+  const lastUnlock = stats.lastUnlockDate;
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  let newStreak = stats.currentStreak;
+  if (!lastUnlock || lastUnlock < yesterday) {
+    // Streak broken, reset to 1
+    newStreak = 1;
+    console.log(`  🔥 Streak reset to 1 (last unlock was ${lastUnlock?.toISOString() || "never"})`);
+  } else if (lastUnlock.getTime() === yesterday.getTime()) {
+    // Streak continues
+    newStreak = stats.currentStreak + 1;
+    console.log(`  🔥 Streak continues: ${newStreak} days`);
+  } else {
+    // Already unlocked today, don't increment
+    console.log(`  🔥 Already unlocked today, streak stays at ${stats.currentStreak}`);
+  }
+
+  const newLongestStreak = Math.max(stats.longestStreak, newStreak);
+
+  // Calculate new unlock rate
+  const totalFlashcards = await prisma.flashcard.count({
+    where: { userId },
+  });
+  const totalUnlocked = stats.totalUnlocks + unlockCount;
+  const unlockRate = totalFlashcards > 0 ? totalUnlocked / totalFlashcards : 0;
+
+  console.log(`  📈 Unlock rate: ${Math.round(unlockRate * 100)}% (${totalUnlocked}/${totalFlashcards})`);
+
+  // Update stats
+  await prisma.userStats.update({
+    where: { userId },
+    data: {
+      totalUnlocks: { increment: unlockCount },
+      totalLocked: { decrement: unlockCount },
+      unlockRate,
+      currentStreak: newStreak,
+      longestStreak: newLongestStreak,
+      lastUnlockDate: today,
+      firstUnlockAt: stats.firstUnlockAt || new Date(),
+    },
+  });
+
+  console.log(`  ✓ User stats updated`);
+
+  // Check milestones
+  const previousTotal = stats.totalUnlocks;
+  const newTotal = totalUnlocked;
+
+  if (previousTotal < 10 && newTotal >= 10) {
+    await prisma.userStats.update({
+      where: { userId },
+      data: { milestone10: new Date() },
+    });
+    console.log(`  🎯 Milestone reached: 10 unlocks!`);
+  }
+  if (previousTotal < 50 && newTotal >= 50) {
+    await prisma.userStats.update({
+      where: { userId },
+      data: { milestone50: new Date() },
+    });
+    console.log(`  🚀 Milestone reached: 50 unlocks!`);
+  }
+  if (previousTotal < 100 && newTotal >= 100) {
+    await prisma.userStats.update({
+      where: { userId },
+      data: { milestone100: new Date() },
+    });
+    console.log(`  🏆 Milestone reached: 100 unlocks!`);
+  }
+}
+
+/**
+ * Get unlock statistics for a user
+ */
+export async function getUserUnlockStats(userId: string) {
+  const stats = await prisma.userStats.findUnique({
+    where: { userId },
+  });
+
+  if (!stats) {
+    // Return default stats if not found
+    return {
+      totalUnlocks: 0,
+      totalLocked: 0,
+      totalMastered: 0,
+      unlockRate: 0,
+      currentStreak: 0,
+      longestStreak: 0,
+      lastUnlockDate: null,
+      firstUnlockAt: null,
+    };
+  }
+
+  return stats;
+}
+
+/**
+ * Get recent unlock events for a user
+ */
+export async function getRecentUnlocks(userId: string, limit = 10) {
+  return prisma.unlockEvent.findMany({
+    where: { userId },
+    include: {
+      flashcard: {
+        include: {
+          syllabusConcept: true,
+        },
+      },
+      contentJob: {
+        select: {
+          url: true,
+          fileName: true,
+          contentType: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+  });
+}
