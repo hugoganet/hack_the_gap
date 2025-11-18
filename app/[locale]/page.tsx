@@ -12,6 +12,7 @@ import { ReviewGrid } from "@/features/landing/review/review-grid";
 import { FAQSection } from "@/features/landing/faq-section";
 import { CtaSection } from "@/features/landing/cta/cta-section";
 import { BetaAlert } from "@/features/landing/beta-alert";
+import { ReviewsAlert } from "@/features/landing/reviews-alert";
 import { useTranslations } from "next-intl";
 
 export default function HomePage() {
@@ -44,6 +45,7 @@ export default function HomePage() {
       <HowItWorksSection />
       <BentoGridSection />
       <TrustSignalsSection />
+      <ReviewsAlert />
       <ReviewGrid reviews={reviews} />
       <FAQSection faq={faq} />
       <BetaAlert />

@@ -285,7 +285,12 @@
         "question": "En quoi est-ce différent d'Anki ou Quizlet ?",
         "answer": "**Zéro travail manuel.** Anki/Quizlet nécessitent de créer des fiches manuellement (les étudiants ne le font pas). Recall extrait automatiquement les concepts du contenu que vous consommez déjà et les associe à vos objectifs d'apprentissage. C'est la méthodologie Zettelkasten avec automatisation IA."
       }
-    ]
+    ],
+    "reviewsNotice": {
+      "badge": "Cas d’usage",
+      "title": "Cas d’usage illustratifs",
+      "description": "Les témoignages affichés sont fictifs et servent uniquement à illustrer des cas d’usage et des résultats. Ce ne sont pas des avis réels d’utilisateurs."
+    }
   },
   "footer": {
     "sections": {

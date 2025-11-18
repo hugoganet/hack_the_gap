@@ -285,7 +285,12 @@
         "question": "How is this different from Anki or Quizlet?",
         "answer": "**Zero manual work.** Anki/Quizlet require you to create flashcards manually (students won't do it). Recall automatically extracts concepts from content you're already consuming and matches them to your learning goals. It's Zettelkasten methodology with AI automation."
       }
-    ]
+    ],
+    "reviewsNotice": {
+      "badge": "Use Cases",
+      "title": "Illustrative Use Cases",
+      "description": "The testimonials shown are fictional and provided solely to illustrate use cases and outcomes. They are not from real users."
+    }
   },
   "footer": {
     "sections": {
