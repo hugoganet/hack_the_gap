@@ -3,6 +3,7 @@ import type { Concept, SyllabusConcept } from "@/generated/prisma";
 import { BLEND_WEIGHTS, MATCH_SHORTLIST_TOP_K, MATCH_THRESHOLDS, type MatchType } from "./config";
 import { buildExtractedText, buildSyllabusText, cosineSimilarity, embedTextsOrNull } from "@/lib/ai/embeddings";
 import { verifyWithLLM } from "./ai-reasoning";
+import { unlockFlashcardAnswers, type UnlockResult } from "@/features/flashcards/unlock-service";
 
 export type MatchResultDTO = {
   conceptId: string;
@@ -14,7 +15,22 @@ export type MatchResultDTO = {
   llmConfidence: number | null;
 };
 
-export async function matchConceptsToSyllabus(contentJobId: string, courseId: string) {
+export async function matchConceptsToSyllabus(
+  contentJobId: string, 
+  courseId: string,
+  userId: string
+): Promise<{
+  results: MatchResultDTO[];
+  summary: {
+    totalConcepts: number;
+    candidatesEvaluated: number;
+    created: number;
+    high: number;
+    medium: number;
+    avgConfidence: number;
+  };
+  unlocked: UnlockResult[];
+}> {
   const concepts = await prisma.concept.findMany({
     where: { contentJobId },
     orderBy: { createdAt: "asc" },
@@ -100,5 +116,28 @@ export async function matchConceptsToSyllabus(contentJobId: string, courseId: st
   const medium = results.filter((r) => r.confidence >= MATCH_THRESHOLDS.MEDIUM && r.confidence < MATCH_THRESHOLDS.HIGH).length;
   const avgConfidence = results.length ? results.reduce((a, b) => a + b.confidence, 0) / results.length : 0;
 
-  return { results, summary: { totalConcepts: concepts.length, candidatesEvaluated: simMatrix.length, created, high, medium, avgConfidence } };
+  // 🆕 UNLOCK FLASHCARDS: After matching, unlock answers for high-confidence matches
+  console.log(`🔓 Attempting to unlock flashcards for ${results.length} matches...`);
+  
+  // First, write matches to database (needed for unlock service)
+  const { writeConceptMatches } = await import("./write-concept-matches");
+  const writtenMatches = await writeConceptMatches(results, contentJobId, userId);
+  
+  // Then unlock flashcards
+  const unlocked = await unlockFlashcardAnswers(writtenMatches, contentJobId, userId);
+  
+  console.log(`✅ Unlocked ${unlocked.length} flashcards`);
+
+  return { 
+    results, 
+    summary: { 
+      totalConcepts: concepts.length, 
+      candidatesEvaluated: simMatrix.length, 
+      created, 
+      high, 
+      medium, 
+      avgConfidence 
+    },
+    unlocked, // Return unlock results for notification
+  };
 }

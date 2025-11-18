@@ -34,7 +34,7 @@
 - [x] **STEP 3:** Update Zod Validation Schema - COMPLETED
 - [x] **STEP 4:** Update Knowledge Structure Creation - COMPLETED
 - [x] **STEP 5:** Create Answer Unlock Service - COMPLETED
-- [ ] **STEP 6:** Integrate Unlock Service
+- [x] **STEP 6:** Integrate Unlock Service - COMPLETED
 - [ ] **STEP 7:** Create UI Components
 - [ ] **STEP 8:** Create Progress Dashboard
 - [ ] **STEP 9:** Create Notification System
@@ -782,10 +782,10 @@ async function updateUserStatsAfterUnlock(userId: string, unlockCount: number) {
 
 ---
 
-### **STEP 6: Integrate Unlock Service into Content Processing**
+### **STEP 6: Integrate Unlock Service into Content Processing** ✅ COMPLETED
 
 **Duration:** 30 minutes  
-**Files:** `src/features/matching/concept-matcher.ts`, `app/api/process-content/route.ts`
+**Files:** `src/features/matching/concept-matcher.ts`, `src/features/matching/write-concept-matches.ts`
 
 #### 6.1 Update Concept Matcher to Trigger Unlocks
 

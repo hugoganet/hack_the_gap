@@ -1,16 +1,20 @@
 import { prisma } from "@/lib/prisma";
 import type { MatchResultDTO } from "./concept-matcher";
+import type { ConceptMatch } from "@/generated/prisma";
 
 /**
  * Writes concept matches to the database with idempotency.
  * For each conceptId, we upsert (replace) any existing match.
  * Only creates records if confidence >= MEDIUM threshold (0.60).
+ * Returns the created/updated ConceptMatch objects for unlock service.
  */
 export async function writeConceptMatches(
-  results: MatchResultDTO[]
-): Promise<{ created: number; updated: number }> {
+  results: MatchResultDTO[],
+  contentJobId: string,
+  userId: string
+): Promise<ConceptMatch[]> {
   if (results.length === 0) {
-    return { created: 0, updated: 0 };
+    return [];
   }
 
   // Get all existing matches for these concepts in one query
@@ -28,28 +32,28 @@ export async function writeConceptMatches(
   const toUpdate = results.filter((r) => existingMap.has(r.conceptId));
   const toCreate = results.filter((r) => !existingMap.has(r.conceptId));
 
-  // Batch update using transactions
-  const updatePromises = toUpdate.map(async (result) => {
-    const matchId = existingMap.get(result.conceptId);
-    if (!matchId) return;
-    
-    return prisma.conceptMatch.update({
-      where: { id: matchId },
-      data: {
-        syllabusConceptId: result.syllabusConceptId,
-        confidence: result.confidence,
-        matchType: result.matchType,
-        rationale: result.rationale,
-      },
-    });
-  });
+  // Batch update and collect updated matches
+  const updatedMatches = await Promise.all(
+    toUpdate.map(async (result) => {
+      const matchId = existingMap.get(result.conceptId);
+      if (!matchId) return null;
+      
+      return prisma.conceptMatch.update({
+        where: { id: matchId },
+        data: {
+          syllabusConceptId: result.syllabusConceptId,
+          confidence: result.confidence,
+          matchType: result.matchType,
+          rationale: result.rationale,
+        },
+      });
+    })
+  );
 
-  // Batch create
-  const createPromise = async () => {
-    if (toCreate.length === 0) {
-      return { count: 0 };
-    }
-    return prisma.conceptMatch.createMany({
+  // Batch create and then fetch created matches
+  let createdMatches: ConceptMatch[] = [];
+  if (toCreate.length > 0) {
+    await prisma.conceptMatch.createMany({
       data: toCreate.map((result) => ({
         conceptId: result.conceptId,
         syllabusConceptId: result.syllabusConceptId,
@@ -58,18 +62,24 @@ export async function writeConceptMatches(
         rationale: result.rationale,
       })),
     });
-  };
 
-  // Execute all operations in parallel
-  const [, createResult] = await Promise.all([
-    Promise.all(updatePromises),
-    createPromise(),
-  ]);
+    // Fetch the created matches
+    createdMatches = await prisma.conceptMatch.findMany({
+      where: {
+        conceptId: { in: toCreate.map((r) => r.conceptId) },
+      },
+    });
+  }
 
-  return {
-    created: createResult.count,
-    updated: toUpdate.length,
-  };
+  // Combine updated and created matches
+  const allMatches = [
+    ...updatedMatches.filter((m): m is ConceptMatch => m !== null),
+    ...createdMatches,
+  ];
+
+  console.log(`📝 Wrote ${allMatches.length} concept matches (${createdMatches.length} created, ${updatedMatches.filter(m => m !== null).length} updated)`);
+
+  return allMatches;
 }
 
 /**
