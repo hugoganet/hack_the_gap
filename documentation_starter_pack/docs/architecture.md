@@ -11,7 +11,7 @@
 
 **External Systems:**
 
-- SocialKit API - YouTube video transcripts
+- SocialKit API - YouTube & TikTok video transcripts
 - OpenAI API - concept extraction, embeddings, matching
 - Supabase - PostgreSQL database
 - Resend - email notifications (post-MVP)
@@ -19,7 +19,7 @@
 **System Boundaries:**
 
 - MVP: Single-tenant web app (no multi-org yet)
-- Scope: YouTube videos only (no TikTok, PDFs, articles)
+- Scope: **YouTube, TikTok, PDFs** (URLs + file upload), articles/podcasts (placeholders)
 - Processing: Synchronous (no background jobs)
 
 ## C4 System Context Diagram
@@ -508,3 +508,48 @@ pnpm prisma migrate deploy
 - Data Schema: `./data/`
 - User Stories: `./specs/`
 - Vision: `./vision.md`
+
+## Content Extraction Architecture (2025-11-18)
+
+### Unified Content Processor
+
+All content types flow through a unified pipeline:
+
+```
+Content Input → Type Detection → Extraction → ContentJob → AI Processing → Flashcards
+```
+
+**Module:** `/src/features/content-extraction/`
+
+**Supported Types:**
+- `youtube`: SocialKit API transcript extraction
+- `tiktok`: SocialKit API transcript extraction  
+- `pdf`: pdf-parse text extraction (URL + file upload)
+- `url`: Article text extraction (placeholder)
+- `podcast`: Audio transcription (placeholder)
+
+**Key Components:**
+- `index.ts`: Auto-detection + unified interface (`extractContent()`)
+- `video-extractor.ts`: YouTube/TikTok via SocialKit
+- `pdf-extractor.ts`: PDF text via pdf-parse (supports Buffer + URL)
+- `url-extractor.ts`: Article extraction (TODO: Jina AI Reader)
+- `podcast-extractor.ts`: Podcast transcription (TODO: Whisper)
+
+**Database:** `ContentJob` model (replaces `VideoJob`)
+- Polymorphic: content-type specific fields (youtubeVideoId, fileName, pageCount, etc.)
+- Common fields: extractedText, status, processedConceptsCount
+- Backward compatible: table name `video_jobs`, column mappings
+
+**Processing Flow:**
+1. URL/File → Type detection
+2. Extract text (video transcript, PDF text, etc.)
+3. Store in ContentJob
+4. AI concept extraction (same prompt for all types)
+5. Match to course syllabus
+6. Generate flashcards
+
+**Upload Endpoint:** `/api/upload-pdf`
+- Max 10MB
+- PDF validation
+- Returns extracted text + metadata
+- Client calls `processUploadedPDF()` action

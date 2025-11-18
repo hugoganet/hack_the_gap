@@ -10,7 +10,7 @@ import Link from "next/link";
 import { Brain, Calendar, Zap, Clock, Mail, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { submitBetaInvitation } from "@app/actions/beta-invitation.action";
+// import { submitBetaInvitation } from "@app/actions/beta-invitation.action";
 import { useLocale } from "next-intl";
 
 export default function HomePage() {
@@ -62,7 +62,7 @@ export default function HomePage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!email.includes('@')) {
       toast.error("Please enter a valid email address");
       return;
@@ -71,17 +71,13 @@ export default function HomePage() {
     setIsSubmitting(true);
 
     try {
-      const formData = new FormData();
-      formData.append("email", email);
-      
-      const result = await submitBetaInvitation(formData);
-      
-      if (result.success) {
-        toast.success(result.message);
-        setEmail(""); // Clear the input
-      } else {
-        toast.error(result.error);
-      }
+      // TODO: Implement beta invitation submission
+      // const formData = new FormData();
+      // formData.append("email", email);
+      // const result = await submitBetaInvitation(formData);
+
+      toast.success("Thanks for your interest! We'll be in touch soon.");
+      setEmail(""); // Clear the input
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {

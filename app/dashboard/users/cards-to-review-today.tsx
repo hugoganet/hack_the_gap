@@ -35,7 +35,7 @@ export async function CardsToReviewToday() {
           concept: {
             select: {
               conceptText: true,
-              videoJob: {
+              contentJob: {
                 select: {
                   id: true,
                 },

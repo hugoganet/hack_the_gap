@@ -8,6 +8,36 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Unified Content Processor + PDF Upload** (2025-11-18) 📄
+  - **Database Schema**: Migrated `VideoJob` → `ContentJob` with `ContentType` enum (youtube, tiktok, pdf, url, podcast)
+    - Migration: `20251118035542_unified_content_processor`
+    - Added content-type specific fields: fileName, fileSize, pageCount
+    - Backward compatible: table still named `video_jobs`, column `transcript` maps to `extractedText`
+  - **PDF Processing**: Full text extraction using pdf-parse library
+    - URL-based: Auto-detect PDF URLs and extract text
+    - File upload: Drag & drop + click to browse (max 10MB)
+    - API endpoint: `/api/upload-pdf` for file uploads
+    - Server action: `process-uploaded-pdf.action.ts`
+  - **Architecture**: Created `/src/features/content-extraction/` module
+    - `video-extractor.ts`: YouTube & TikTok (refactored from existing)
+    - `pdf-extractor.ts`: PDF text extraction (new)
+    - `url-extractor.ts`: Article extraction (placeholder)
+    - `podcast-extractor.ts`: Podcast transcription (placeholder)
+    - `index.ts`: Unified interface with auto content-type detection
+  - **UI Updates**: Enhanced content inbox with file upload
+    - Drag & drop zone with visual feedback
+    - Click to upload with file picker
+    - Real-time progress indicators ("Uploading...", "Extracting concepts...")
+    - File validation (type, size)
+  - **Pipeline**: All content types (videos, PDFs) flow through same AI pipeline
+    - Text extraction → Concept extraction → Course matching → Flashcard generation
+  - **Code Updates**: Updated all references from `VideoJob` to `ContentJob`
+    - Actions: process-content, match-concepts, generate-flashcards
+    - API routes: flashcards/preview, concept-matches/feedback
+    - Components: cards-to-review-today, dashboard-stats
+    - Features: flashcard-generator, concept-matcher
+  - **Docs**: Created `UPLOAD_FEATURE.md` and `/src/features/content-extraction/README.md`
+
 - Validation & Planning (2025-11-17)
   - Validated hierarchical extraction output against quality gates (structure + atomicity + completeness) with excellent metrics (confidence=0.87, treeDepth=5, totalAtomicConcepts=55).
   - Decision recorded to extend prompt + schema to support inline flashcard generation and bilingual concepts/flashcards.

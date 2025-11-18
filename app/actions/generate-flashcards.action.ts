@@ -49,47 +49,47 @@ export async function generateFlashcardsAction(input: {
 
     const { videoJobId } = validation.data;
 
-    // 3. Check video job ownership and status
-    const videoJob = await prisma.videoJob.findUnique({
+    // 3. Check content job ownership and status
+    const contentJob = await prisma.contentJob.findUnique({
       where: { id: videoJobId },
-      select: { 
-        userId: true, 
+      select: {
+        userId: true,
         status: true,
         processedConceptsCount: true,
       },
     });
 
-    if (!videoJob) {
+    if (!contentJob) {
       return {
         success: false,
-        error: "Video job not found",
+        error: "Content job not found",
       };
     }
 
-    if (videoJob.userId !== user.id) {
+    if (contentJob.userId !== user.id) {
       return {
         success: false,
-        error: "You don't have permission to access this video job",
+        error: "You don't have permission to access this content job",
       };
     }
 
-    // 4. Verify video job is in correct state
-    if (videoJob.status !== "matched") {
+    // 4. Verify content job is in correct state
+    if (contentJob.status !== "matched") {
       return {
         success: false,
-        error: `Cannot generate flashcards: video job status is "${videoJob.status}". Concepts must be matched first.`,
+        error: `Cannot generate flashcards: content job status is "${contentJob.status}". Concepts must be matched first.`,
       };
     }
 
-    if (!videoJob.processedConceptsCount || videoJob.processedConceptsCount === 0) {
+    if (!contentJob.processedConceptsCount || contentJob.processedConceptsCount === 0) {
       return {
         success: false,
-        error: "No concepts found for this video. Cannot generate flashcards.",
+        error: "No concepts found for this content. Cannot generate flashcards.",
       };
     }
 
-    // 5. Update video job status to "generating_flashcards"
-    await prisma.videoJob.update({
+    // 5. Update content job status to "generating_flashcards"
+    await prisma.contentJob.update({
       where: { id: videoJobId },
       data: { status: "generating_flashcards" },
     });
@@ -109,7 +109,7 @@ export async function generateFlashcardsAction(input: {
       console.error("[Generate Flashcards Action] Generation error:", generationError);
       
       // Update status to failed
-      await prisma.videoJob.update({
+      await prisma.contentJob.update({
         where: { id: videoJobId },
         data: {
           status: "flashcard_generation_failed",
@@ -123,8 +123,8 @@ export async function generateFlashcardsAction(input: {
       };
     }
 
-    // 7. Update video job status to "completed"
-    await prisma.videoJob.update({
+    // 7. Update content job status to "completed"
+    await prisma.contentJob.update({
       where: { id: videoJobId },
       data: {
         status: "completed",

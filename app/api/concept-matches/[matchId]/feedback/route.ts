@@ -26,7 +26,7 @@ export async function PATCH(
       include: {
         concept: {
           include: {
-            videoJob: true,
+            contentJob: true,
           },
         },
       },
@@ -39,7 +39,7 @@ export async function PATCH(
       );
     }
 
-    if (match.concept.videoJob.userId !== user.id) {
+    if (match.concept.contentJob.userId !== user.id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }

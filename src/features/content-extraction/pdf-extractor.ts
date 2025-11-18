@@ -1,5 +1,7 @@
-import pdfParse from "pdf-parse";
 import type { PDFExtractionResult } from "./types";
+
+// Dynamic import for pdf-parse (CommonJS module)
+const pdfParsePromise = import("pdf-parse").then(mod => mod.default || mod);
 
 /**
  * Extract text from PDF URL
@@ -39,6 +41,9 @@ export async function extractPDFText(url: string): Promise<PDFExtractionResult> 
       size: buffer.length,
       sizeFromHeader: fileSize,
     });
+
+    // Load pdf-parse dynamically
+    const pdfParse = await pdfParsePromise;
 
     // Parse the PDF
     const data = await pdfParse(buffer);
@@ -97,6 +102,9 @@ export async function extractPDFTextFromBuffer(
       fileName,
       size: buffer.length,
     });
+
+    // Load pdf-parse dynamically
+    const pdfParse = await pdfParsePromise;
 
     // Parse the PDF
     const data = await pdfParse(buffer);

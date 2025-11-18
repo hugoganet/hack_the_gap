@@ -28,10 +28,10 @@ function isHierarchicalExtractionResponse(
   if (!obj || typeof obj !== "object") return false;
   const o = obj as Record<string, unknown>;
   return (
-    "inputAnalysis" in o &amp;&amp;
-    "knowledgeTree" in o &amp;&amp;
-    "atomicConcepts" in o &amp;&amp;
-    "extractionMetadata" in o &amp;&amp;
+    "inputAnalysis" in o &&
+    "knowledgeTree" in o &&
+    "atomicConcepts" in o &&
+    "extractionMetadata" in o &&
     "qualityChecks" in o
   );
 }
@@ -53,7 +53,7 @@ async function main(): Promise<void> {
   }
 
   // Guard against error-shaped responses
-  if (parsed &amp;&amp; typeof parsed === "object" &amp;&amp; "error" in (parsed as any)) {
+  if (parsed && typeof parsed === "object" && "error" in (parsed as any)) {
     console.error("ERROR: Extraction contains an error payload:", (parsed as any).error);
     process.exit(1);
   }

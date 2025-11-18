@@ -23,33 +23,33 @@ export async function GET(
       );
     }
 
-    // Check video job ownership
-    const videoJob = await prisma.videoJob.findUnique({
+    // Check content job ownership
+    const contentJob = await prisma.contentJob.findUnique({
       where: { id: videoJobId },
       select: { userId: true, status: true },
     });
 
-    if (!videoJob) {
+    if (!contentJob) {
       return NextResponse.json(
-        { error: "Video job not found" },
+        { error: "Content job not found" },
         { status: 404 }
       );
     }
 
-    if (videoJob.userId !== user.id) {
+    if (contentJob.userId !== user.id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }
       );
     }
 
-    // Get flashcards for this video job
+    // Get flashcards for this content job
     const flashcards = await prisma.flashcard.findMany({
       where: {
         userId: user.id,
         conceptMatch: {
           concept: {
-            videoJobId,
+            contentJobId: videoJobId,
           },
         },
       },

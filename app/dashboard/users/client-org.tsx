@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { processContent } from "@app/actions/process-content.action";
+import { processUploadedPDF } from "@app/actions/process-uploaded-pdf.action";
 import { matchConceptsAction } from "@app/actions/match-concepts.action";
 import { toast } from "sonner";
 import { MatchResultsDialog, type MatchResultsData } from "./match-results-dialog";
@@ -33,6 +34,7 @@ export const ClientOrg = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [matchResults, setMatchResults] = useState<MatchResultsData | null>(null);
   const [showMatchDialog, setShowMatchDialog] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<string | null>(null);
 
 
   const handleDrag = (e: React.DragEvent) => {
@@ -45,7 +47,7 @@ export const ClientOrg = () => {
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -54,12 +56,93 @@ export const ClientOrg = () => {
     if (files.length > 0) {
       // Handle file drop
       const file = files[0];
-      console.log("File dropped:", file.name);
-      // TODO: Handle file upload
+      await handleFileUpload(file);
     } else if (e.dataTransfer.getData("text")) {
       // Handle URL drop
       const droppedUrl = e.dataTransfer.getData("text");
       setUrl(droppedUrl);
+    }
+  };
+
+  const handleFileUpload = async (file: File) => {
+    // Validate file type
+    if (!file.type.includes("pdf")) {
+      toast.error("Only PDF files are supported");
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error("File size must be less than 10MB");
+      return;
+    }
+
+    setIsProcessing(true);
+    setUploadProgress("Uploading PDF...");
+
+    try {
+      // Upload PDF to extract text
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const uploadResponse = await fetch("/api/upload-pdf", {
+        method: "POST",
+        body: formData,
+      });
+
+      const uploadResult = await uploadResponse.json();
+
+      if (!uploadResult.success) {
+        toast.error(uploadResult.error ?? "Failed to upload PDF");
+        return;
+      }
+
+      setUploadProgress("Extracting concepts...");
+
+      // Process the extracted PDF data
+      const result = await processUploadedPDF({
+        fileName: uploadResult.data.fileName,
+        fileSize: uploadResult.data.fileSize,
+        pageCount: uploadResult.data.metadata.pageCount,
+        extractedText: uploadResult.data.extractedText,
+      });
+
+      if (result.success) {
+        const concepts = result.data?.processedConceptsCount ?? 0;
+
+        toast.success(t("toast.successTitle"), {
+          description: `Processed ${uploadResult.data.metadata.pageCount} pages • Extracted ${concepts} concepts`,
+          duration: 3000,
+        });
+
+        // Show match results if available
+        if (result.data && concepts > 0) {
+          const data = result.data;
+
+          if (typeof data === "object" && "matchData" in data && data.matchData) {
+            setTimeout(() => {
+              setMatchResults(data.matchData as MatchResultsData);
+              setShowMatchDialog(true);
+            }, 500);
+          }
+        }
+      } else {
+        toast.error(result.error ?? t("toast.processFailed"));
+      }
+    } catch (error) {
+      console.error("Error uploading PDF:", error);
+      toast.error(t("toast.unexpected"));
+    } finally {
+      setIsProcessing(false);
+      setUploadProgress(null);
+    }
+  };
+
+  const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      await handleFileUpload(file);
     }
   };
 
@@ -142,13 +225,23 @@ export const ClientOrg = () => {
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
+          onClick={() => document.getElementById("file-upload")?.click()}
           className={cn(
-            "relative flex min-h-[160px] flex-col items-center justify-center rounded-lg border-2 border-dashed transition-all",
+            "relative flex min-h-[160px] flex-col items-center justify-center rounded-lg border-2 border-dashed transition-all cursor-pointer",
             dragActive
               ? "border-primary bg-primary/5"
               : "border-muted-foreground/25 hover:border-muted-foreground/50",
+            isProcessing && "opacity-50 cursor-not-allowed"
           )}
         >
+          <input
+            id="file-upload"
+            type="file"
+            accept=".pdf"
+            onChange={handleFileInputChange}
+            disabled={isProcessing}
+            className="hidden"
+          />
           <div className="flex flex-col items-center gap-2 text-center p-6">
             <div
               className={cn(
@@ -156,19 +249,23 @@ export const ClientOrg = () => {
                 dragActive ? "bg-primary/10" : "bg-muted",
               )}
             >
-              <Upload
-                className={cn(
-                  "size-6 transition-colors",
-                  dragActive ? "text-primary" : "text-muted-foreground",
-                )}
-              />
+              {isProcessing ? (
+                <Loader2 className="size-6 animate-spin text-primary" />
+              ) : (
+                <Upload
+                  className={cn(
+                    "size-6 transition-colors",
+                    dragActive ? "text-primary" : "text-muted-foreground",
+                  )}
+                />
+              )}
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium">
-                {dragActive ? t("drag.dropHere") : t("drag.dragDrop")}
+                {uploadProgress || (dragActive ? t("drag.dropHere") : t("drag.dragDrop"))}
               </p>
               <p className="text-xs text-muted-foreground">
-                {t("drag.supported")}
+                {!isProcessing && t("drag.supported")}
               </p>
             </div>
           </div>

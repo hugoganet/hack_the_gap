@@ -39,17 +39,17 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
     completedSessions,
     sessionsLastMonth,
   ] = await Promise.all([
-    // Total concepts from user's video jobs
+    // Total concepts from user's content jobs
     prisma.concept.count({
       where: {
-        videoJob: {
+        contentJob: {
           userId,
         },
       },
     }),
     prisma.concept.count({
       where: {
-        videoJob: {
+        contentJob: {
           userId,
         },
         createdAt: {
