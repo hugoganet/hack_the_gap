@@ -7,7 +7,7 @@ This is the single entry point for reconstructing project context. AI tools and 
 - Name: Recall (formerly "hack the gap")
 - Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals
 - Stage: Implementation (Core pipeline complete, i18n + PDF upload added, flashcard unlock system complete, syllabus upload in progress)
-- Last updated: 2025-11-18 (Flashcard unlock system added)
+- Last updated: 2025-11-18 (Landing page transparency + build config updates)
 - **Major Pivot (2025-11-17)**: Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses.
 
 ## Core Documents
@@ -108,6 +108,8 @@ See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-18**: **Build Configuration for CI/CD** - Ignore ESLint/TypeScript errors during Vercel builds to prioritize deployment velocity (errors caught via pre-commit hooks)
+- **2025-11-18**: **Landing Page Transparency** - Added ReviewsAlert component to disclose fictional testimonials, improving trust and compliance
 - **2025-11-18**: **Flashcard Unlock System** - Gamified learning with locked flashcards (question-only) that unlock at 70% confidence matches
 - **2025-11-18**: **Multilingual Embeddings** - Upgraded to text-embedding-3-large for cross-lingual semantic matching (100+ languages, ~95% similarity for equivalent concepts)
 - **2025-11-18**: **Language Support** - Added language fields to concepts, syllabus_concepts, flashcards for bilingual flashcard generation
