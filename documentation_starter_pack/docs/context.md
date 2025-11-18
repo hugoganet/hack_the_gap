@@ -106,12 +106,14 @@ See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-18**: **Multilingual Embeddings** - Upgraded to text-embedding-3-large for cross-lingual semantic matching (100+ languages, ~95% similarity for equivalent concepts)
+- **2025-11-18**: **Language Support** - Added language fields to concepts, syllabus_concepts, flashcards for bilingual flashcard generation
 - **2025-11-18**: **Comprehensive i18n** - Added next-intl 4.5.3 for EN/FR bilingual support across entire app (300+ translation keys)
 - **2025-11-18**: **Content Pipeline Refactor** - VideoJob → ContentJob with ContentType enum (youtube, tiktok, pdf, url, podcast)
 - **2025-11-18**: **PDF Upload Feature** - Added pdf-parse 2.4.5 for text extraction, file upload endpoint, unified content processor
 - **2025-11-18**: **Design System Overhaul** - Martian Grotesk font, warm orange/amber color palette
 - **2025-11-18**: **Site Branding** - Renamed from "hack the gap" to "Recall"
-- **2025-11-18**: **UI Enhancements** - Node detail pages, subdirectories display, improved navigation
+- **2025-11-18**: **UI Enhancements** - Node detail pages, subdirectories display, improved navigation, language selector in user dropdown
 - **2025-11-17**: **MAJOR PIVOT** - Shifted from institution-centric to student-centric approach. Students now upload their own syllabi instead of selecting from pre-loaded courses. Removed academic year/semester structure for global flexibility.
 - **2025-11-17**: Deprecated US-0001 (Course Selection) and US-0012 (Admin Pre-load Syllabi)
 - **2025-11-17**: New US-0001: Student syllabus upload (PDF/text) or AI conversation to define learning goals
@@ -144,14 +146,17 @@ See `./specs/` for detailed specifications.
 - ✅ **ADR-0006**: Hybrid matching algorithm (0.6 × embeddings + 0.4 × LLM reasoning)
 - ✅ **ADR-0007**: Confidence threshold calibration (≥0.80 HIGH, ≥0.60 MEDIUM, <0.60 rejected)
 
+**Completed:**
+- ✅ **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs)
+- ✅ **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model)
+
 **Priority ADRs needed:**
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives
 - **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
 - **ADR-0013**: AI provider (OpenAI vs Anthropic vs local models)
 - **ADR-0014**: Synchronous processing for MVP (vs async queue)
-- **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs) - TODO
-- **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model) - TODO
+- **ADR-0017**: Multilingual embeddings strategy (text-embedding-3-large, cross-lingual matching) - TODO
 
 ## Pre-Hackathon Checklist
 

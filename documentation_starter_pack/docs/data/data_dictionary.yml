@@ -296,6 +296,12 @@ concepts:
       description: "AI confidence score (0.0-1.0)"
       required: true
       index: true
+    language:
+      type: string
+      description: "Detected language of concept (en, fr, es, de, etc.). Preserved from original content. Used for cross-lingual matching with multilingual embeddings."
+      required: true
+      default: en
+      index: true
     created_at:
       type: timestamp
       required: true

@@ -11,7 +11,7 @@
 | Database | PostgreSQL, MySQL, MongoDB | **Supabase** (PostgreSQL) | Managed Postgres with real-time, auth, storage. Free tier sufficient for MVP. | Generous free tier, real-time subscriptions, built-in auth (not using), PostGIS support | Vendor lock-in, limited control over DB config | Managed convenience vs self-hosted control | Risk: Supabase outage. Mitigation: Connection pooling, fallback to direct Postgres if needed | Using Prisma as ORM |
 | ORM | TypeORM, Drizzle, Kysely | **Prisma 6.14** | Type-safe queries, great DX, migrations, schema-first design. Boilerplate already configured. | Excellent TypeScript support, auto-generated types, migration tooling | Can be slow for complex queries, abstracts SQL | Type safety vs raw SQL performance | Risk: Performance bottlenecks. Mitigation: Use raw queries for complex operations, optimize indexes | Schema split: better-auth.prisma + schema.prisma |
 | Auth | Clerk, Auth.js, Supabase Auth | **Better-Auth 1.3** | Modern auth library with org/team support, social providers, session management. Boilerplate integrated. | Multi-tenant ready, flexible, open-source, no vendor lock-in | Newer library (less battle-tested than Auth.js) | Flexibility vs maturity | Risk: Auth bugs. Mitigation: Thorough testing, fallback to email/password only for MVP | Supports Google, GitHub, email/password |
-| AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** + **SocialKit API** | GPT-4 for concept extraction, embeddings for matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs, reliable transcript API | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package. SocialKit: /youtube/transcript endpoint |
+| AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** + **SocialKit API** | GPT-4 for concept extraction, text-embedding-3-large for multilingual semantic matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs, reliable transcript API, multilingual embeddings (100+ languages) | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package. SocialKit: /youtube/transcript endpoint. Embedding model upgraded 2025-11-18 |
 | Internationalization | i18next, react-intl, next-intl | **next-intl 4.5.3** | Next.js-native i18n with App Router support, type-safe translations, locale routing. | Excellent Next.js integration, type safety, minimal config, server/client support | Smaller ecosystem than i18next | Next.js optimization vs flexibility | Risk: Limited community resources. Mitigation: Well-documented, active maintenance | Supports EN/FR, middleware-based locale detection |
 | PDF Processing | pdf.js, pdfjs-dist, pdf-parse | **pdf-parse 2.4.5** | Simple text extraction from PDFs, works with Buffer and URL inputs. | Lightweight, easy to use, no external dependencies | Limited to text extraction (no OCR) | Simplicity vs advanced features | Risk: Fails on scanned PDFs. Mitigation: Add OCR (Tesseract.js) post-MVP if needed | Using @types/pdf-parse for TypeScript |
 | File/Blob Storage | Vercel Blob, Cloudflare R2, AWS S3 | **TBD** (disabled for MVP) | Not needed for MVP (YouTube URLs only). Post-MVP: Vercel Blob or R2. | N/A | N/A | N/A | N/A | Feature flag: enableImageUpload = false |
@@ -98,6 +98,27 @@ flowchart TB
 
 ## Recent Tech Stack Additions (2025-11-18)
 
+### Multilingual Embeddings (text-embedding-3-large)
+
+**Upgraded:** text-embedding-3-small → text-embedding-3-large (2025-11-18)
+
+**Key Features:**
+- Cross-lingual semantic matching (100+ languages)
+- ~95% cosine similarity for equivalent concepts across languages
+- Example: "Photosynthèse" (FR) ↔ "Photosynthesis" (EN) = 0.96 similarity
+- 3072 dimensions (vs 1536 in text-embedding-3-small)
+- No translation required during concept extraction
+
+**Integration:**
+- `src/lib/ai/embeddings.ts`: Embedding service with multilingual model
+- `prisma/schema/schema.prisma`: Added language fields to concepts, syllabus_concepts, flashcards
+- `src/features/flashcards/flashcard-generator.ts`: Bilingual flashcard generation
+- Migration: `20251118050709_add_language_support`
+
+**Rationale:** Enable French and English students to use the same system with high accuracy. Students can consume content in one language and match to syllabi in another without manual translation.
+
+**Cost Impact:** +10% per video (~$0.11 vs $0.10)
+
 ### Internationalization (next-intl)
 
 **Added:** next-intl 4.5.3 for comprehensive EN/FR bilingual support
@@ -151,6 +172,7 @@ flowchart TB
 - **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
 - **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs)
 - **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model)
+- **ADR-0017**: Multilingual embeddings strategy (text-embedding-3-large, cross-lingual matching) - TODO
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
 - **ADR-0013**: AI provider (OpenAI vs Anthropic vs local models)
 - **ADR-0014**: Synchronous processing for MVP (vs async queue)

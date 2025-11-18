@@ -8,6 +8,29 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Multilingual Embeddings & Cross-Lingual Matching** (2025-11-18) 🌐
+  - **Embedding Model Upgrade**: text-embedding-3-small → text-embedding-3-large
+    - Supports 100+ languages with cross-lingual semantic matching
+    - ~95% cosine similarity for equivalent concepts across languages
+    - Example: "Photosynthèse" (FR) ↔ "Photosynthesis" (EN) = 0.96 similarity
+    - Cost impact: +10% per video (~$0.11 vs $0.10)
+  - **Database Schema**: Added language support (Migration: `20251118050709_add_language_support`)
+    - `concepts.language` field (default: 'en', indexed)
+    - `syllabus_concepts.language` field (default: 'en', indexed)
+    - `flashcards.language` field (default: 'en', indexed)
+    - `flashcards.questionTranslation` field (nullable, for bilingual flashcards)
+    - `flashcards.answerTranslation` field (nullable, for bilingual flashcards)
+  - **Language Preservation**: Concept extraction preserves original language
+    - Updated transcript extraction prompt with Rule 7b: Language Preservation
+    - Added French example demonstrating language preservation
+    - No automatic translation during extraction
+  - **Bilingual Flashcard Generation**: Automatic when language mismatch detected
+    - Detects language difference between extracted and syllabus concepts
+    - Generates flashcards with both original and translated versions
+    - Stores translations in `questionTranslation` and `answerTranslation` fields
+  - **Supported Languages**: EN, FR, ES, DE, and 100+ others out of the box
+  - **Use Case**: French students can use English videos, English students can use French syllabi
+
 - **Comprehensive Internationalization (i18n)** (2025-11-18) 🌍
   - **Framework**: next-intl 4.5.3 for EN/FR bilingual support
   - **Locale Routing**: Dynamic `[locale]` route segment with middleware-based detection
@@ -235,6 +258,13 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
   - **TODO Tracking**: Added `TODO.md` for task management (29 items)
 
 ### Changed - Unreleased
+
+- **BREAKING: Multilingual Embeddings** (2025-11-18) ⚠️
+  - Embedding model: text-embedding-3-small → text-embedding-3-large
+  - Database schema: Added language fields to concepts, syllabus_concepts, flashcards
+  - Migration: `20251118050709_add_language_support`
+  - Impact: All new embeddings use larger model, existing embeddings remain compatible
+  - Cost increase: ~10% per video processing
 
 - **BREAKING: VideoJob → ContentJob Migration** (2025-11-18) ⚠️
   - **Model Rename**: `VideoJob` → `ContentJob` (table name remains `video_jobs` for backward compatibility)

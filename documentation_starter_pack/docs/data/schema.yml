@@ -2,6 +2,7 @@
 # JSON Schema format for database tables
 # MIGRATION (2025-11-16): Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
 # MIGRATION (2025-11-18): VideoJob → ContentJob with ContentType enum, added PDF-specific fields
+# MIGRATION (2025-11-18): Added language support for multilingual embeddings (concepts, syllabus_concepts, flashcards)
 
 ---
 $id: "https://hackthegap.com/schemas/users.schema.json"
@@ -136,7 +137,7 @@ $id: "https://hackthegap.com/schemas/syllabus_concepts.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: syllabus_concepts
 type: object
-required: [id, course_id, concept_text, order]
+required: [id, course_id, concept_text, order, language]
 properties:
   id:
     type: string
@@ -155,6 +156,10 @@ properties:
     description: "1=supplemental, 2=important, 3=core"
   order:
     type: integer
+  language:
+    type: string
+    default: en
+    description: "Language of syllabus concept (en, fr, es, de, etc.). Used for cross-lingual matching."
   created_at:
     type: string
     format: date-time
@@ -243,7 +248,7 @@ $id: "https://hackthegap.com/schemas/concepts.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: concepts
 type: object
-required: [id, content_job_id, concept_text, confidence]
+required: [id, content_job_id, concept_text, confidence, language]
 properties:
   id:
     type: string
@@ -263,6 +268,10 @@ properties:
     type: number
     minimum: 0
     maximum: 1
+  language:
+    type: string
+    default: en
+    description: "Detected language of concept (en, fr, es, de, etc.). Preserved from original content."
   created_at:
     type: string
     format: date-time
@@ -305,7 +314,7 @@ $id: "https://hackthegap.com/schemas/flashcards.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: flashcards
 type: object
-required: [id, concept_match_id, user_id, question, answer]
+required: [id, concept_match_id, user_id, question, answer, language]
 properties:
   id:
     type: string
@@ -320,6 +329,16 @@ properties:
     type: string
   answer:
     type: string
+  question_translation:
+    type: ["string", "null"]
+    description: "Translation of question (for bilingual flashcards when language mismatch detected)"
+  answer_translation:
+    type: ["string", "null"]
+    description: "Translation of answer (for bilingual flashcards when language mismatch detected)"
+  language:
+    type: string
+    default: en
+    description: "Primary language of flashcard (en, fr, es, de, etc.)"
   source_timestamp:
     type: ["string", "null"]
     description: "Link back to video moment"
