@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { AuthButtonClient } from "../auth/auth-button-client";
 import { ThemeToggle } from "../theme/theme-toggle";
-import { useLocale } from "next-intl";
-import { LanguageSwitcher } from "@/features/i18n/language-switcher";
 
 function useBoundedScroll(threshold: number) {
   const { scrollY } = useScroll();
@@ -48,7 +46,6 @@ function useBoundedScroll(threshold: number) {
 }
 
 export function LandingHeader() {
-  const locale = useLocale();
   const { scrollYBoundedProgress } = useBoundedScroll(400);
   const router = useRouter();
   const scrollYBoundedProgressDelayed = useTransform(
@@ -69,7 +66,7 @@ export function LandingHeader() {
           <LogoSvg
             size={24}
             onClick={() => {
-              router.push(`/${locale}`);
+              router.push("/");
             }}
           />
           <motion.p
@@ -98,7 +95,6 @@ export function LandingHeader() {
 
           <AuthButtonClient />
           <ThemeToggle />
-          <LanguageSwitcher />
         </motion.nav>
       </div>
     </motion.header>

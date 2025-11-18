@@ -16,7 +16,7 @@ export function Footer() {
           <div className="flex flex-col gap-12">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_2fr]">
               <div className="flex flex-col gap-3">
-                <h3 className="text-lg font-semibold tracking-tight">
+                <h3 className="text-lg font-semibold tracking-tight font-brand">
                   {SiteConfig.title}
                 </h3>
                 <p className="text-muted-foreground max-w-xs text-sm">

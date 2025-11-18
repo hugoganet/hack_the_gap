@@ -16,7 +16,7 @@ export function HeaderBase({ children }: PropsWithChildren) {
             width={32}
             height={32}
           />
-          <Link href="/" className="text-base font-bold">
+          <Link href="/" className="text-base font-bold font-brand">
             {SiteConfig.title}
           </Link>
         </div>

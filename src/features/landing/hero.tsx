@@ -44,13 +44,6 @@ export const Hero = () => {
               </Link>
             </div>
           </div>
-          <Image
-            alt="App screenshot"
-            src="/images/screenshot.png"
-            width={1280}
-            height={720}
-            className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-24"
-          />
         </div>
       </main>
     </div>

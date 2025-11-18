@@ -75,10 +75,21 @@ const MartianGroteskDisplay = localFont({
   display: "swap",
 });
 
-// Monospace for code
+ // Monospace for code
 const GeistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+});
+
+// Brand font for site name "Recall"
+const BrandFont = localFont({
+  src: [
+    { path: "../public/fonts/Bangers-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/Bangers-Regular.ttf", weight: "600", style: "normal" },
+    { path: "../public/fonts/Bangers-Regular.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-brand",
+  display: "swap",
 });
 
 export default async function RootLayout({
@@ -96,6 +107,7 @@ export default async function RootLayout({
           GeistMono.variable,
           MartianGrotesk.variable,
           MartianGroteskDisplay.variable,
+          BrandFont.variable,
         )}
       >
         <NuqsAdapter>
