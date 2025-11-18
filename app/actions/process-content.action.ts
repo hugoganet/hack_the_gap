@@ -4,14 +4,13 @@ import { env } from "@/lib/env";
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import path from "node:path";
-import fs from "node:fs/promises";
 import { generateText } from "ai";
 import { getBlackboxModel } from "@/lib/blackbox";
 import { MATCH_THRESHOLDS } from "@/features/matching/config";
 import { matchConceptsAction } from "./match-concepts.action";
 import { extractContent, detectContentType } from "@/features/content-extraction";
 import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
+import { TRANSCRIPT_CONCEPT_EXTRACTION_PROMPT } from "@/master-prompts/transcript-concept-extraction-prompt";
 
 const ProcessContentSchema = z.object({
   url: z.string().url("Invalid URL format"),
@@ -125,11 +124,9 @@ export async function processContent(url: string) {
         }
 
         if (model) {
-          const promptPath = path.resolve(
-            process.cwd(),
-            "src/master-prompts/transcript-concept-extraction-prompt.md"
-          );
-          const promptContent = await fs.readFile(promptPath, "utf8");
+          // Use the TypeScript constant instead of reading from file system
+          // This ensures compatibility with Vercel's serverless environment
+          const promptContent = TRANSCRIPT_CONCEPT_EXTRACTION_PROMPT;
 
           // Build user message using the template defined in the prompt
           const transcriptBlock = [

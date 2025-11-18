@@ -3,14 +3,13 @@
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import path from "node:path";
-import fs from "node:fs/promises";
 import { generateText } from "ai";
 import { getBlackboxModel } from "@/lib/blackbox";
 import { env } from "@/lib/env";
 import { MATCH_THRESHOLDS } from "@/features/matching/config";
 import { matchConceptsAction } from "./match-concepts.action";
 import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
+import { TRANSCRIPT_CONCEPT_EXTRACTION_PROMPT } from "@/master-prompts/transcript-concept-extraction-prompt";
 
 const ProcessUploadedPDFSchema = z.object({
   fileName: z.string(),
@@ -86,11 +85,9 @@ export async function processUploadedPDF(data: {
         }
 
         if (model) {
-          const promptPath = path.resolve(
-            process.cwd(),
-            "src/master-prompts/transcript-concept-extraction-prompt.md"
-          );
-          const promptContent = await fs.readFile(promptPath, "utf8");
+          // Use the TypeScript constant instead of reading from file system
+          // This ensures compatibility with Vercel's serverless environment
+          const promptContent = TRANSCRIPT_CONCEPT_EXTRACTION_PROMPT;
 
           // Build user message using the template defined in the prompt
           const transcriptBlock = [
