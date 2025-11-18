@@ -119,17 +119,37 @@
         "cta": {
           "ingestContent": "Ajouter du contenu"
         },
+        "state": {
+          "locked": "Verrouillée",
+          "unlocked": "Débloquée",
+          "mastered": "Maîtrisée"
+        },
+        "actions": {
+          "reviewAgain": "Revoir à nouveau"
+        },
+        "unlocked": {
+          "title": "Débloquée le {date}",
+          "fromContent": "Depuis le contenu"
+        },
+        "locked": {
+          "title": "Réponse verrouillée",
+          "description": "Ajoutez ou regardez du contenu d'apprentissage pour ce cours afin de débloquer cette réponse.",
+          "cta": "Accéder au contenu →",
+          "hints": "Astuces :"
+        },
         "reviewedShort": "Révisé {count}×",
         "accuracyShort": "{percent} % correct",
         "dialog": {
           "question": "Question",
           "showAnswer": "Afficher la réponse",
+          "hideAnswer": "Masquer la réponse",
           "answer": "Réponse"
         },
         "meta": {
           "source": "Source : {timestamp}",
           "reviewedTimes": "Révisé {count} fois",
-          "correctCount": "{correct}/{reviewed} bonnes réponses"
+          "correctCount": "{correct}/{reviewed} bonnes réponses",
+          "masteredBadge": "⭐ Maîtrisée"
         }
       }
     },

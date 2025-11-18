@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,11 +45,13 @@ export function FlashcardCard({
   showAnswer = false,
 }: FlashcardCardProps) {
   const [isAnswerVisible, setIsAnswerVisible] = useState(showAnswer);
-  
+  const t = useTranslations("dashboard.courses.flashcards");
+  const locale = useLocale();
+
   const isLocked = state === "locked";
   const isMastered = state === "mastered";
-  const successRate = timesReviewed > 0 
-    ? Math.round((timesCorrect / timesReviewed) * 100) 
+  const successRate = timesReviewed > 0
+    ? Math.round((timesCorrect / timesReviewed) * 100)
     : null;
 
   return (
@@ -70,7 +74,7 @@ export function FlashcardCard({
             {isLocked && <Lock className="w-3 h-3" />}
             {!isLocked && !isMastered && <Unlock className="w-3 h-3" />}
             {isMastered && <Star className="w-3 h-3" />}
-            {state}
+            {t(`state.${state}`)}
           </Badge>
         </div>
         <div className="flex flex-wrap items-center gap-2 mt-2">
@@ -113,7 +117,7 @@ export function FlashcardCard({
 
         {!isLocked && onReview && (
           <Button onClick={onReview} className="w-full">
-            {isMastered ? "Review again" : "Start reviewing"}
+            {isMastered ? t("actions.reviewAgain") : t("startReview")}
           </Button>
         )}
       </CardContent>
@@ -122,30 +126,27 @@ export function FlashcardCard({
 }
 
 function LockedContent({ hints }: { hints?: string[] }) {
+  const t = useTranslations("dashboard.courses.flashcards");
+  const locale = useLocale();
   return (
     <div className="bg-secondary/40 p-4 rounded-lg space-y-3">
       <div className="flex items-center gap-2 text-foreground">
         <Lock className="w-5 h-5" />
-        <p className="font-medium">Answer locked</p>
+        <p className="font-medium">{t("locked.title")}</p>
       </div>
       <p className="text-sm text-muted-foreground">
-        Add or watch learning content for this course to unlock this answer.
+        {t("locked.description")}
       </p>
-      <Button
-        variant="outline"
-        className="w-full text-sm"
-        onClick={() => {
-          const localePrefix = window.location.pathname.startsWith('/fr/') ? '/fr' : '';
-          window.location.href = `${localePrefix}/dashboard/users`;
-        }}
-      >
-        Engage with content →
+      <Button variant="outline" className="w-full text-sm" asChild>
+        <Link href={`/${locale}/dashboard/users`}>
+          {t("locked.cta")}
+        </Link>
       </Button>
       {hints && hints.length > 0 && (
         <div className="space-y-2 mt-4">
           <div className="flex items-center gap-2 text-sm font-medium">
             <Lightbulb className="w-4 h-4" />
-            <span>Hints:</span>
+            <span>{t("locked.hints")}</span>
           </div>
           <ul className="space-y-1 text-sm text-muted-foreground">
             {hints.map((hint, i) => (
@@ -182,50 +183,50 @@ function UnlockedContent({
   successRate: number | null;
   isMastered: boolean;
 }) {
+  const t = useTranslations("dashboard.courses.flashcards");
+  const locale = useLocale();
+  const fmt = new Intl.DateTimeFormat(locale);
+
   return (
     <div className="space-y-3">
       {unlockedAt && (
         <div className="flex items-center gap-2 text-sm text-success">
           <Unlock className="w-4 h-4" />
           <span>
-            Unlocked {new Date(unlockedAt).toLocaleDateString()}
-            {unlockedBy && ` • From content`}
+            {t("unlocked.title", { date: fmt.format(new Date(unlockedAt)) })}
+            {unlockedBy && ` • ${t("unlocked.fromContent")}`}
           </span>
         </div>
       )}
 
-      <Button
-        variant="outline"
-        className="w-full"
-        onClick={onToggleAnswer}
-      >
+      <Button variant="outline" className="w-full" onClick={onToggleAnswer}>
         {isAnswerVisible ? (
           <>
             <ChevronUp className="mr-2 h-4 w-4" />
-            Hide Answer
+            {t("dialog.hideAnswer")}
           </>
         ) : (
           <>
             <ChevronDown className="mr-2 h-4 w-4" />
-            Show Answer
+            {t("dialog.showAnswer")}
           </>
         )}
       </Button>
 
       {isAnswerVisible && (
         <div className="rounded-lg border border-learning/30 bg-learning/10 p-4">
-          <p className="text-sm font-medium mb-2">Answer:</p>
+          <p className="text-sm font-medium mb-2">{t("dialog.answer")}</p>
           <p className="text-sm leading-relaxed">{answer}</p>
         </div>
       )}
 
       {timesReviewed > 0 && (
         <div className="text-xs text-muted-foreground flex items-center justify-between">
-          <span>Reviewed: {timesReviewed} times</span>
+          <span>{t("meta.reviewedTimes", { count: timesReviewed })}</span>
           {successRate !== null && (
             <span className={successRate >= 70 ? "text-success" : "text-needs-work"}>
-              {timesCorrect}/{timesReviewed} ({successRate}%)
-              {isMastered && " • ⭐ Mastered"}
+              {t("meta.correctCount", { correct: timesCorrect, reviewed: timesReviewed })}
+              {isMastered && ` • ${t("meta.masteredBadge")}`}
             </span>
           )}
         </div>

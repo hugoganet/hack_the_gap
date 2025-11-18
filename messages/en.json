@@ -119,17 +119,37 @@
         "cta": {
           "ingestContent": "Add content"
         },
+        "state": {
+          "locked": "Locked",
+          "unlocked": "Unlocked",
+          "mastered": "Mastered"
+        },
+        "actions": {
+          "reviewAgain": "Review again"
+        },
+        "unlocked": {
+          "title": "Unlocked {date}",
+          "fromContent": "From content"
+        },
+        "locked": {
+          "title": "Answer locked",
+          "description": "Add or watch learning content for this course to unlock this answer.",
+          "cta": "Engage with content →",
+          "hints": "Hints:"
+        },
         "reviewedShort": "Reviewed {count}x",
         "accuracyShort": "{percent}% correct",
         "dialog": {
           "question": "Question",
           "showAnswer": "Show Answer",
+          "hideAnswer": "Hide Answer",
           "answer": "Answer"
         },
         "meta": {
           "source": "Source: {timestamp}",
           "reviewedTimes": "Reviewed {count} times",
-          "correctCount": "{correct}/{reviewed} correct"
+          "correctCount": "{correct}/{reviewed} correct",
+          "masteredBadge": "⭐ Mastered"
         }
       }
     },
