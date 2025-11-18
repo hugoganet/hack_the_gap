@@ -108,11 +108,16 @@
         "startReview": "Start Review Session",
         "section": {
           "title": "Concepts & Flashcards",
-          "description": "Click on a concept to view its flashcard"
+          "description": "Click on a concept to view its flashcard",
+          "descriptionFlashcards": "Click on a concept to view its flashcard"
         },
         "empty": {
           "title": "No flashcards available yet for this course.",
-          "hint": "Flashcards will be generated automatically when you upload and process videos."
+          "hint": "Flashcards will be generated automatically when you upload and process videos.",
+          "hintFlashcards": "Flashcards will be generated automatically when you upload and process videos."
+        },
+        "cta": {
+          "ingestContent": "Add content"
         },
         "reviewedShort": "Reviewed {count}x",
         "accuracyShort": "{percent}% correct",

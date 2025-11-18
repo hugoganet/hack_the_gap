@@ -108,11 +108,16 @@
         "startReview": "Démarrer une session de révision",
         "section": {
           "title": "Concepts et fiches",
-          "description": "Cliquez sur un concept pour afficher sa fiche"
+          "description": "Cliquez sur un concept pour afficher sa fiche",
+          "descriptionFlashcards": "Cliquez sur un concept pour afficher sa fiche"
         },
         "empty": {
           "title": "Aucune fiche disponible pour ce cours.",
-          "hint": "Les fiches seront générées automatiquement lorsque vous importerez et traiterez des vidéos."
+          "hint": "Les fiches seront générées automatiquement lorsque vous importerez et traiterez des vidéos.",
+          "hintFlashcards": "Les fiches seront générées automatiquement lorsque vous importerez et traiterez des vidéos."
+        },
+        "cta": {
+          "ingestContent": "Ajouter du contenu"
         },
         "reviewedShort": "Révisé {count}×",
         "accuracyShort": "{percent} % correct",
