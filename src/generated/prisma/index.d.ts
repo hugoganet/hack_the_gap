@@ -11857,6 +11857,7 @@ export namespace Prisma {
     category: string | null
     importance: number | null
     order: number | null
+    language: string | null
     createdAt: Date | null
   }
 
@@ -11867,6 +11868,7 @@ export namespace Prisma {
     category: string | null
     importance: number | null
     order: number | null
+    language: string | null
     createdAt: Date | null
   }
 
@@ -11877,6 +11879,7 @@ export namespace Prisma {
     category: number
     importance: number
     order: number
+    language: number
     createdAt: number
     _all: number
   }
@@ -11899,6 +11902,7 @@ export namespace Prisma {
     category?: true
     importance?: true
     order?: true
+    language?: true
     createdAt?: true
   }
 
@@ -11909,6 +11913,7 @@ export namespace Prisma {
     category?: true
     importance?: true
     order?: true
+    language?: true
     createdAt?: true
   }
 
@@ -11919,6 +11924,7 @@ export namespace Prisma {
     category?: true
     importance?: true
     order?: true
+    language?: true
     createdAt?: true
     _all?: true
   }
@@ -12016,6 +12022,7 @@ export namespace Prisma {
     category: string | null
     importance: number | null
     order: number
+    language: string
     createdAt: Date
     _count: SyllabusConceptCountAggregateOutputType | null
     _avg: SyllabusConceptAvgAggregateOutputType | null
@@ -12045,6 +12052,7 @@ export namespace Prisma {
     category?: boolean
     importance?: boolean
     order?: boolean
+    language?: boolean
     createdAt?: boolean
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
@@ -12059,6 +12067,7 @@ export namespace Prisma {
     category?: boolean
     importance?: boolean
     order?: boolean
+    language?: boolean
     createdAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["syllabusConcept"]>
@@ -12070,6 +12079,7 @@ export namespace Prisma {
     category?: boolean
     importance?: boolean
     order?: boolean
+    language?: boolean
     createdAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["syllabusConcept"]>
@@ -12081,10 +12091,11 @@ export namespace Prisma {
     category?: boolean
     importance?: boolean
     order?: boolean
+    language?: boolean
     createdAt?: boolean
   }
 
-  export type SyllabusConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "conceptText" | "category" | "importance" | "order" | "createdAt", ExtArgs["result"]["syllabusConcept"]>
+  export type SyllabusConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "conceptText" | "category" | "importance" | "order" | "language" | "createdAt", ExtArgs["result"]["syllabusConcept"]>
   export type SyllabusConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
@@ -12112,6 +12123,7 @@ export namespace Prisma {
       category: string | null
       importance: number | null
       order: number
+      language: string
       createdAt: Date
     }, ExtArgs["result"]["syllabusConcept"]>
     composites: {}
@@ -12545,6 +12557,7 @@ export namespace Prisma {
     readonly category: FieldRef<"SyllabusConcept", 'String'>
     readonly importance: FieldRef<"SyllabusConcept", 'Int'>
     readonly order: FieldRef<"SyllabusConcept", 'Int'>
+    readonly language: FieldRef<"SyllabusConcept", 'String'>
     readonly createdAt: FieldRef<"SyllabusConcept", 'DateTime'>
   }
     
@@ -14295,6 +14308,7 @@ export namespace Prisma {
     definition: string | null
     timestamp: string | null
     confidence: number | null
+    language: string | null
     createdAt: Date | null
   }
 
@@ -14305,6 +14319,7 @@ export namespace Prisma {
     definition: string | null
     timestamp: string | null
     confidence: number | null
+    language: string | null
     createdAt: Date | null
   }
 
@@ -14315,6 +14330,7 @@ export namespace Prisma {
     definition: number
     timestamp: number
     confidence: number
+    language: number
     createdAt: number
     _all: number
   }
@@ -14335,6 +14351,7 @@ export namespace Prisma {
     definition?: true
     timestamp?: true
     confidence?: true
+    language?: true
     createdAt?: true
   }
 
@@ -14345,6 +14362,7 @@ export namespace Prisma {
     definition?: true
     timestamp?: true
     confidence?: true
+    language?: true
     createdAt?: true
   }
 
@@ -14355,6 +14373,7 @@ export namespace Prisma {
     definition?: true
     timestamp?: true
     confidence?: true
+    language?: true
     createdAt?: true
     _all?: true
   }
@@ -14452,6 +14471,7 @@ export namespace Prisma {
     definition: string | null
     timestamp: string | null
     confidence: number
+    language: string
     createdAt: Date
     _count: ConceptCountAggregateOutputType | null
     _avg: ConceptAvgAggregateOutputType | null
@@ -14481,6 +14501,7 @@ export namespace Prisma {
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
+    language?: boolean
     createdAt?: boolean
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
     contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
@@ -14494,6 +14515,7 @@ export namespace Prisma {
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
+    language?: boolean
     createdAt?: boolean
     contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
@@ -14505,6 +14527,7 @@ export namespace Prisma {
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
+    language?: boolean
     createdAt?: boolean
     contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
@@ -14516,10 +14539,11 @@ export namespace Prisma {
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
+    language?: boolean
     createdAt?: boolean
   }
 
-  export type ConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contentJobId" | "conceptText" | "definition" | "timestamp" | "confidence" | "createdAt", ExtArgs["result"]["concept"]>
+  export type ConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contentJobId" | "conceptText" | "definition" | "timestamp" | "confidence" | "language" | "createdAt", ExtArgs["result"]["concept"]>
   export type ConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
     contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
@@ -14545,6 +14569,7 @@ export namespace Prisma {
       definition: string | null
       timestamp: string | null
       confidence: number
+      language: string
       createdAt: Date
     }, ExtArgs["result"]["concept"]>
     composites: {}
@@ -14977,6 +15002,7 @@ export namespace Prisma {
     readonly definition: FieldRef<"Concept", 'String'>
     readonly timestamp: FieldRef<"Concept", 'String'>
     readonly confidence: FieldRef<"Concept", 'Float'>
+    readonly language: FieldRef<"Concept", 'String'>
     readonly createdAt: FieldRef<"Concept", 'DateTime'>
   }
     
@@ -16613,6 +16639,9 @@ export namespace Prisma {
     userId: string | null
     question: string | null
     answer: string | null
+    questionTranslation: string | null
+    answerTranslation: string | null
+    language: string | null
     sourceTimestamp: string | null
     timesReviewed: number | null
     timesCorrect: number | null
@@ -16627,6 +16656,9 @@ export namespace Prisma {
     userId: string | null
     question: string | null
     answer: string | null
+    questionTranslation: string | null
+    answerTranslation: string | null
+    language: string | null
     sourceTimestamp: string | null
     timesReviewed: number | null
     timesCorrect: number | null
@@ -16641,6 +16673,9 @@ export namespace Prisma {
     userId: number
     question: number
     answer: number
+    questionTranslation: number
+    answerTranslation: number
+    language: number
     sourceTimestamp: number
     timesReviewed: number
     timesCorrect: number
@@ -16667,6 +16702,9 @@ export namespace Prisma {
     userId?: true
     question?: true
     answer?: true
+    questionTranslation?: true
+    answerTranslation?: true
+    language?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
@@ -16681,6 +16719,9 @@ export namespace Prisma {
     userId?: true
     question?: true
     answer?: true
+    questionTranslation?: true
+    answerTranslation?: true
+    language?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
@@ -16695,6 +16736,9 @@ export namespace Prisma {
     userId?: true
     question?: true
     answer?: true
+    questionTranslation?: true
+    answerTranslation?: true
+    language?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
@@ -16796,6 +16840,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation: string | null
+    answerTranslation: string | null
+    language: string
     sourceTimestamp: string | null
     timesReviewed: number
     timesCorrect: number
@@ -16829,6 +16876,9 @@ export namespace Prisma {
     userId?: boolean
     question?: boolean
     answer?: boolean
+    questionTranslation?: boolean
+    answerTranslation?: boolean
+    language?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
@@ -16847,6 +16897,9 @@ export namespace Prisma {
     userId?: boolean
     question?: boolean
     answer?: boolean
+    questionTranslation?: boolean
+    answerTranslation?: boolean
+    language?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
@@ -16863,6 +16916,9 @@ export namespace Prisma {
     userId?: boolean
     question?: boolean
     answer?: boolean
+    questionTranslation?: boolean
+    answerTranslation?: boolean
+    language?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
@@ -16879,6 +16935,9 @@ export namespace Prisma {
     userId?: boolean
     question?: boolean
     answer?: boolean
+    questionTranslation?: boolean
+    answerTranslation?: boolean
+    language?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
@@ -16887,7 +16946,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type FlashcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conceptMatchId" | "userId" | "question" | "answer" | "sourceTimestamp" | "timesReviewed" | "timesCorrect" | "lastReviewedAt" | "nextReviewAt" | "createdAt", ExtArgs["result"]["flashcard"]>
+  export type FlashcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conceptMatchId" | "userId" | "question" | "answer" | "questionTranslation" | "answerTranslation" | "language" | "sourceTimestamp" | "timesReviewed" | "timesCorrect" | "lastReviewedAt" | "nextReviewAt" | "createdAt", ExtArgs["result"]["flashcard"]>
   export type FlashcardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16916,6 +16975,9 @@ export namespace Prisma {
       userId: string
       question: string
       answer: string
+      questionTranslation: string | null
+      answerTranslation: string | null
+      language: string
       sourceTimestamp: string | null
       timesReviewed: number
       timesCorrect: number
@@ -17353,6 +17415,9 @@ export namespace Prisma {
     readonly userId: FieldRef<"Flashcard", 'String'>
     readonly question: FieldRef<"Flashcard", 'String'>
     readonly answer: FieldRef<"Flashcard", 'String'>
+    readonly questionTranslation: FieldRef<"Flashcard", 'String'>
+    readonly answerTranslation: FieldRef<"Flashcard", 'String'>
+    readonly language: FieldRef<"Flashcard", 'String'>
     readonly sourceTimestamp: FieldRef<"Flashcard", 'String'>
     readonly timesReviewed: FieldRef<"Flashcard", 'Int'>
     readonly timesCorrect: FieldRef<"Flashcard", 'Int'>
@@ -22509,6 +22574,7 @@ export namespace Prisma {
     category: 'category',
     importance: 'importance',
     order: 'order',
+    language: 'language',
     createdAt: 'createdAt'
   };
 
@@ -22543,6 +22609,7 @@ export namespace Prisma {
     definition: 'definition',
     timestamp: 'timestamp',
     confidence: 'confidence',
+    language: 'language',
     createdAt: 'createdAt'
   };
 
@@ -22569,6 +22636,9 @@ export namespace Prisma {
     userId: 'userId',
     question: 'question',
     answer: 'answer',
+    questionTranslation: 'questionTranslation',
+    answerTranslation: 'answerTranslation',
+    language: 'language',
     sourceTimestamp: 'sourceTimestamp',
     timesReviewed: 'timesReviewed',
     timesCorrect: 'timesCorrect',
@@ -23367,6 +23437,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"SyllabusConcept"> | string | null
     importance?: IntNullableFilter<"SyllabusConcept"> | number | null
     order?: IntFilter<"SyllabusConcept"> | number
+    language?: StringFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
@@ -23380,6 +23451,7 @@ export namespace Prisma {
     category?: SortOrderInput | SortOrder
     importance?: SortOrderInput | SortOrder
     order?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
     course?: CourseOrderByWithRelationInput
@@ -23396,6 +23468,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"SyllabusConcept"> | string | null
     importance?: IntNullableFilter<"SyllabusConcept"> | number | null
     order?: IntFilter<"SyllabusConcept"> | number
+    language?: StringFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
@@ -23409,6 +23482,7 @@ export namespace Prisma {
     category?: SortOrderInput | SortOrder
     importance?: SortOrderInput | SortOrder
     order?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
     _count?: SyllabusConceptCountOrderByAggregateInput
     _avg?: SyllabusConceptAvgOrderByAggregateInput
@@ -23427,6 +23501,7 @@ export namespace Prisma {
     category?: StringNullableWithAggregatesFilter<"SyllabusConcept"> | string | null
     importance?: IntNullableWithAggregatesFilter<"SyllabusConcept"> | number | null
     order?: IntWithAggregatesFilter<"SyllabusConcept"> | number
+    language?: StringWithAggregatesFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeWithAggregatesFilter<"SyllabusConcept"> | Date | string
   }
 
@@ -23550,6 +23625,7 @@ export namespace Prisma {
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
+    language?: StringFilter<"Concept"> | string
     createdAt?: DateTimeFilter<"Concept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
@@ -23562,6 +23638,7 @@ export namespace Prisma {
     definition?: SortOrderInput | SortOrder
     timestamp?: SortOrderInput | SortOrder
     confidence?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
     contentJob?: ContentJobOrderByWithRelationInput
@@ -23577,6 +23654,7 @@ export namespace Prisma {
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
+    language?: StringFilter<"Concept"> | string
     createdAt?: DateTimeFilter<"Concept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
     contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
@@ -23589,6 +23667,7 @@ export namespace Prisma {
     definition?: SortOrderInput | SortOrder
     timestamp?: SortOrderInput | SortOrder
     confidence?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
     _count?: ConceptCountOrderByAggregateInput
     _avg?: ConceptAvgOrderByAggregateInput
@@ -23607,6 +23686,7 @@ export namespace Prisma {
     definition?: StringNullableWithAggregatesFilter<"Concept"> | string | null
     timestamp?: StringNullableWithAggregatesFilter<"Concept"> | string | null
     confidence?: FloatWithAggregatesFilter<"Concept"> | number
+    language?: StringWithAggregatesFilter<"Concept"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Concept"> | Date | string
   }
 
@@ -23697,6 +23777,9 @@ export namespace Prisma {
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
     answer?: StringFilter<"Flashcard"> | string
+    questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    language?: StringFilter<"Flashcard"> | string
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
@@ -23714,6 +23797,9 @@ export namespace Prisma {
     userId?: SortOrder
     question?: SortOrder
     answer?: SortOrder
+    questionTranslation?: SortOrderInput | SortOrder
+    answerTranslation?: SortOrderInput | SortOrder
+    language?: SortOrder
     sourceTimestamp?: SortOrderInput | SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
@@ -23734,6 +23820,9 @@ export namespace Prisma {
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
     answer?: StringFilter<"Flashcard"> | string
+    questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    language?: StringFilter<"Flashcard"> | string
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
@@ -23751,6 +23840,9 @@ export namespace Prisma {
     userId?: SortOrder
     question?: SortOrder
     answer?: SortOrder
+    questionTranslation?: SortOrderInput | SortOrder
+    answerTranslation?: SortOrderInput | SortOrder
+    language?: SortOrder
     sourceTimestamp?: SortOrderInput | SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
@@ -23773,6 +23865,9 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Flashcard"> | string
     question?: StringWithAggregatesFilter<"Flashcard"> | string
     answer?: StringWithAggregatesFilter<"Flashcard"> | string
+    questionTranslation?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
+    answerTranslation?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
+    language?: StringWithAggregatesFilter<"Flashcard"> | string
     sourceTimestamp?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     timesReviewed?: IntWithAggregatesFilter<"Flashcard"> | number
     timesCorrect?: IntWithAggregatesFilter<"Flashcard"> | number
@@ -24720,6 +24815,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
@@ -24733,6 +24829,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
@@ -24744,6 +24841,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
@@ -24757,6 +24855,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
@@ -24769,6 +24868,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
   }
 
@@ -24778,6 +24878,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -24788,6 +24889,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -24926,6 +25028,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutConceptInput
     contentJob: ContentJobCreateNestedOneWithoutConceptsInput
@@ -24938,6 +25041,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutConceptInput
   }
@@ -24948,6 +25052,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutConceptNestedInput
     contentJob?: ContentJobUpdateOneRequiredWithoutConceptsNestedInput
@@ -24960,6 +25065,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutConceptNestedInput
   }
@@ -24971,6 +25077,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
   }
 
@@ -24980,6 +25087,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -24990,6 +25098,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -25076,6 +25185,9 @@ export namespace Prisma {
     id?: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -25093,6 +25205,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -25106,6 +25221,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -25123,6 +25241,9 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -25138,6 +25259,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -25150,6 +25274,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -25164,6 +25291,9 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -26067,6 +26197,7 @@ export namespace Prisma {
     category?: SortOrder
     importance?: SortOrder
     order?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26082,6 +26213,7 @@ export namespace Prisma {
     category?: SortOrder
     importance?: SortOrder
     order?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26092,6 +26224,7 @@ export namespace Prisma {
     category?: SortOrder
     importance?: SortOrder
     order?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26232,6 +26365,7 @@ export namespace Prisma {
     definition?: SortOrder
     timestamp?: SortOrder
     confidence?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26246,6 +26380,7 @@ export namespace Prisma {
     definition?: SortOrder
     timestamp?: SortOrder
     confidence?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26256,6 +26391,7 @@ export namespace Prisma {
     definition?: SortOrder
     timestamp?: SortOrder
     confidence?: SortOrder
+    language?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26351,6 +26487,9 @@ export namespace Prisma {
     userId?: SortOrder
     question?: SortOrder
     answer?: SortOrder
+    questionTranslation?: SortOrder
+    answerTranslation?: SortOrder
+    language?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
@@ -26370,6 +26509,9 @@ export namespace Prisma {
     userId?: SortOrder
     question?: SortOrder
     answer?: SortOrder
+    questionTranslation?: SortOrder
+    answerTranslation?: SortOrder
+    language?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
@@ -26384,6 +26526,9 @@ export namespace Prisma {
     userId?: SortOrder
     question?: SortOrder
     answer?: SortOrder
+    questionTranslation?: SortOrder
+    answerTranslation?: SortOrder
+    language?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
@@ -28196,6 +28341,9 @@ export namespace Prisma {
     id?: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -28211,6 +28359,9 @@ export namespace Prisma {
     conceptMatchId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -28453,6 +28604,9 @@ export namespace Prisma {
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
     answer?: StringFilter<"Flashcard"> | string
+    questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
+    language?: StringFilter<"Flashcard"> | string
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
@@ -29073,6 +29227,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
@@ -29084,6 +29239,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
@@ -29190,6 +29346,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"SyllabusConcept"> | string | null
     importance?: IntNullableFilter<"SyllabusConcept"> | number | null
     order?: IntFilter<"SyllabusConcept"> | number
+    language?: StringFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
   }
 
@@ -29553,6 +29710,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutConceptInput
   }
@@ -29563,6 +29721,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutConceptInput
   }
@@ -29650,6 +29809,7 @@ export namespace Prisma {
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
+    language?: StringFilter<"Concept"> | string
     createdAt?: DateTimeFilter<"Concept"> | Date | string
   }
 
@@ -29848,6 +30008,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
     contentJob: ContentJobCreateNestedOneWithoutConceptsInput
   }
@@ -29859,6 +30020,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
   }
 
@@ -29873,6 +30035,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
     nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
@@ -29885,6 +30048,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
@@ -29898,6 +30062,9 @@ export namespace Prisma {
     id?: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -29913,6 +30080,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -29949,6 +30119,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contentJob?: ContentJobUpdateOneRequiredWithoutConceptsNestedInput
   }
@@ -29960,6 +30131,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -29980,6 +30152,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
     nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
@@ -29992,6 +30165,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
@@ -30441,6 +30615,9 @@ export namespace Prisma {
     id?: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -30457,6 +30634,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -30512,6 +30692,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -30528,6 +30711,9 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -30808,6 +30994,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
@@ -30820,6 +31007,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
@@ -30883,6 +31071,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
@@ -30895,6 +31084,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
@@ -30928,6 +31118,9 @@ export namespace Prisma {
     conceptMatchId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -31057,6 +31250,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -31072,6 +31268,9 @@ export namespace Prisma {
     conceptMatchId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -31086,6 +31285,9 @@ export namespace Prisma {
     conceptMatchId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -31339,6 +31541,7 @@ export namespace Prisma {
     category?: string | null
     importance?: number | null
     order: number
+    language?: string
     createdAt?: Date | string
   }
 
@@ -31387,6 +31590,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
@@ -31398,6 +31602,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
@@ -31409,6 +31614,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     importance?: NullableIntFieldUpdateOperationsInput | number | null
     order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31505,6 +31711,7 @@ export namespace Prisma {
     definition?: string | null
     timestamp?: string | null
     confidence: number
+    language?: string
     createdAt?: Date | string
   }
 
@@ -31514,6 +31721,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutConceptNestedInput
   }
@@ -31524,6 +31732,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutConceptNestedInput
   }
@@ -31534,6 +31743,7 @@ export namespace Prisma {
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31584,6 +31794,9 @@ export namespace Prisma {
     userId: string
     question: string
     answer: string
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
@@ -31596,6 +31809,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -31611,6 +31827,9 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
@@ -31625,6 +31844,9 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
     answer?: StringFieldUpdateOperationsInput | string
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number

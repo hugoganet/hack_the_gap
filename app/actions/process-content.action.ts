@@ -153,6 +153,9 @@ export async function processContent(url: string) {
           // Extract JSON from model response
           const jsonText = extractJson(text);
           const parsed = JSON.parse(jsonText) as {
+            videoMetadata?: {
+              language?: string;
+            };
             concepts?: {
               conceptText: string;
               definition?: string | null;
@@ -165,6 +168,10 @@ export async function processContent(url: string) {
           if (parsed.error) {
             console.warn("Concept extraction returned error:", parsed.error);
           } else if (parsed.concepts && parsed.concepts.length > 0) {
+            // Extract language from videoMetadata (default to 'en' if not provided)
+            const detectedLanguage = parsed.videoMetadata?.language ?? "en";
+            console.log(`Detected content language: ${detectedLanguage}`);
+            
             // Normalize and clamp fields to Prisma constraints
             const conceptsData = parsed.concepts
               .map(c => ({
@@ -175,6 +182,7 @@ export async function processContent(url: string) {
                 confidence: Number.isFinite(c.confidence)
                   ? Math.max(0, Math.min(1, c.confidence))
                   : 0.0,
+                language: detectedLanguage, // Store detected language
               }))
               .filter(c => c.conceptText.length >= 3);
 

@@ -2,8 +2,11 @@ import { embedMany } from "ai";
 import { openai } from "@ai-sdk/openai";
 import type { SyllabusConcept, Concept } from "@/generated/prisma";
 
-// Use a cost-effective default embedding model
-const embeddingModel = openai.embedding("text-embedding-3-small");
+// Use multilingual embedding model for cross-lingual semantic matching
+// text-embedding-3-large supports 100+ languages and maps semantically equivalent
+// concepts to nearby points in vector space regardless of language.
+// Example: "Photosynthèse" (FR) and "Photosynthesis" (EN) have ~0.95 cosine similarity
+const embeddingModel = openai.embedding("text-embedding-3-large");
 
 export function buildExtractedText(c: Pick<Concept, "conceptText" | "definition">) {
   const parts = [c.conceptText];

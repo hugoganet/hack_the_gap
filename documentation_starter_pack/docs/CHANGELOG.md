@@ -13,16 +13,19 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
   - **Locale Routing**: Dynamic `[locale]` route segment with middleware-based detection
     - Supported locales: `en` (default), `fr`
     - Automatic locale detection from Accept-Language header
-    - Locale switcher component in navigation
+    - Language selector in user settings dropdown (🇬🇧 🇫🇷 flag emojis)
+    - Locale switcher preserves current page context
   - **Message Catalogs**: Comprehensive translations in `messages/en.json` and `messages/fr.json`
-    - Namespaces: `dashboard.*`, `auth.signin`, `auth.signup`, `footer`, `sidebar`, `navigation`, `charts`
+    - Namespaces: `dashboard.*`, `auth.signin`, `auth.signup`, `footer`, `sidebar`, `navigation`, `charts`, `settings.*`
     - 300+ translation keys covering entire application
+    - Latest additions: `settings.theme.*`, `settings.language.*` (2025-11-18)
   - **Localized Components**: All user-facing text translated
     - Dashboard: courses, users, stats, charts, empty states
     - Auth: sign-in, sign-up, password forms, providers
     - Navigation: sidebar, app navigation, breadcrumbs
     - Charts: donut chart, users chart, cards-to-review widget
-    - Footer: links, copyright, language switcher
+    - Footer: links, copyright
+    - Settings: theme selector, language selector (user dropdown menu)
   - **Locale-Aware Routing**: All internal links include locale prefix
     - Pattern: `/{locale}/dashboard`, `/{locale}/courses/{courseId}`
     - Review sessions: `/{locale}/dashboard/courses/{courseId}/review`

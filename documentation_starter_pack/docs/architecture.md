@@ -668,8 +668,14 @@ import { Link } from '@/i18n/routing';
 
 ### Language Switcher
 
-**Component:** `src/features/i18n/language-switcher.tsx`
-- Dropdown in navigation
-- Switches between EN/FR
-- Updates cookie and redirects to localized route
-- Preserves current page path
+**Primary Component:** User Settings Dropdown (`src/features/auth/user-dropdown.tsx`)
+- Integrated in user dropdown menu (below theme selector)
+- Flag emojis for visual identification: 🇬🇧 English, 🇫🇷 Français
+- Switches between EN/FR with `changeLanguage()` function
+- Preserves current page path (removes old locale, adds new locale)
+- Uses next-intl's locale switching mechanism
+- Updates URL immediately: `/en/dashboard` ↔ `/fr/dashboard`
+
+**Alternative Component:** `src/features/i18n/language-switcher.tsx`
+- Standalone language switcher component (if needed in other locations)
+- Can be placed in navigation, footer, or other UI areas

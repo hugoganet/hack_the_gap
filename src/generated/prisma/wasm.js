@@ -213,6 +213,7 @@ exports.Prisma.SyllabusConceptScalarFieldEnum = {
   category: 'category',
   importance: 'importance',
   order: 'order',
+  language: 'language',
   createdAt: 'createdAt'
 };
 
@@ -241,6 +242,7 @@ exports.Prisma.ConceptScalarFieldEnum = {
   definition: 'definition',
   timestamp: 'timestamp',
   confidence: 'confidence',
+  language: 'language',
   createdAt: 'createdAt'
 };
 
@@ -261,6 +263,9 @@ exports.Prisma.FlashcardScalarFieldEnum = {
   userId: 'userId',
   question: 'question',
   answer: 'answer',
+  questionTranslation: 'questionTranslation',
+  answerTranslation: 'answerTranslation',
+  language: 'language',
   sourceTimestamp: 'sourceTimestamp',
   timesReviewed: 'timesReviewed',
   timesCorrect: 'timesCorrect',

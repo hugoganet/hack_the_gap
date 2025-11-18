@@ -83,6 +83,10 @@ export async function createKnowledgeStructure(
     // 4. Create SyllabusConcepts
     console.log(`Creating ${atomicConcepts.length} syllabus concepts...`);
     const conceptIdMap = new Map<string, string>(); // path -> conceptId
+    
+    // Extract language from extraction metadata (default to 'en' if not provided)
+    const detectedLanguage = extractionMetadata.detectedLanguage ?? "en";
+    console.log(`Detected syllabus language: ${detectedLanguage}`);
 
     const concepts = await Promise.all(
       atomicConcepts.map(async (concept, index) => {
@@ -94,6 +98,7 @@ export async function createKnowledgeStructure(
             category: concept.category,
             importance: concept.importance,
             order: concept.order,
+            language: detectedLanguage, // Store detected language
           },
         });
       })

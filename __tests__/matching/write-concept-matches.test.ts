@@ -179,20 +179,22 @@ describe("deleteConceptMatchesByVideoJob", () => {
     vi.mocked(prisma.concept.findMany).mockResolvedValue([
       {
         id: "concept-1",
-        videoJobId: "video-job-1",
+        contentJobId: "video-job-1",
         conceptText: "Test",
         definition: null,
         timestamp: null,
         confidence: 0.8,
+        language: "en",
         createdAt: new Date(),
       },
       {
         id: "concept-2",
-        videoJobId: "video-job-1",
+        contentJobId: "video-job-1",
         conceptText: "Test 2",
         definition: null,
         timestamp: null,
         confidence: 0.8,
+        language: "en",
         createdAt: new Date(),
       },
     ]);

@@ -22,11 +22,13 @@ export type ConceptMatchInput = {
     definition: string | null;
     timestamp: string | null;
     confidence: number;
+    language?: string; // Language of the extracted concept (e.g., 'en', 'fr')
   };
   syllabusConcept: {
     conceptText: string;
     category: string | null;
     importance: number | null;
+    language?: string; // Language of the syllabus concept (e.g., 'en', 'fr')
   };
   course: {
     code: string;
@@ -73,6 +75,9 @@ export type FlashcardMetadata = {
 export type GeneratedFlashcard = {
   question: string;
   answer: string;
+  questionTranslation?: string | null; // Translation for bilingual support
+  answerTranslation?: string | null; // Translation for bilingual support
+  language?: string; // Primary language of the flashcard
   sourceTimestamp: string | null;
   difficultyHint: DifficultyHint;
 };
@@ -108,6 +113,9 @@ export type FlashcardDTO = {
   userId: string;
   question: string;
   answer: string;
+  questionTranslation?: string | null; // Translation for bilingual support
+  answerTranslation?: string | null; // Translation for bilingual support
+  language?: string; // Primary language of the flashcard
   sourceTimestamp: string | null;
   // Note: difficultyHint is used for initial scheduling but not stored in DB
 };

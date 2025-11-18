@@ -54,18 +54,26 @@ You must respond with valid JSON only, following the exact schema provided.`;
  * Generates a user prompt for flashcard generation
  */
 function buildUserPrompt(input: ConceptMatchInput): string {
-  return `Generate a flashcard for spaced repetition learning.
+  // Determine languages for bilingual support
+  const extractedLang = input.extractedConcept.language ?? "en";
+  const syllabusLang = input.syllabusConcept.language ?? "en";
+  const primaryLang = syllabusLang; // Use syllabus language as primary
+  const needsTranslation = extractedLang !== syllabusLang;
+  
+  return `Generate a ${needsTranslation ? "BILINGUAL " : ""}flashcard for spaced repetition learning.
 
 **EXTRACTED CONCEPT (from student's video):**
 Name: ${input.extractedConcept.conceptText}
 Definition: ${input.extractedConcept.definition ?? "(none provided)"}
 Timestamp: ${input.extractedConcept.timestamp ?? "(none)"}
 Confidence: ${(input.extractedConcept.confidence * 100).toFixed(0)}%
+Language: ${extractedLang}
 
 **SYLLABUS CONCEPT (from course requirements):**
 Name: ${input.syllabusConcept.conceptText}
 Category: ${input.syllabusConcept.category ?? "(none)"}
 Importance: ${input.syllabusConcept.importance ?? "(not specified)"}
+Language: ${syllabusLang}
 
 **COURSE CONTEXT:**
 Code: ${input.course.code}
@@ -77,6 +85,15 @@ Academic Level: ${input.course.academicLevel} (1=Freshman, 6=PhD)
 Confidence: ${(input.match.confidence * 100).toFixed(0)}%
 Match Type: ${input.match.matchType ?? "semantic"}
 Rationale: ${input.match.rationale ?? "Matched based on similarity"}
+
+**LANGUAGE INSTRUCTIONS:**
+${needsTranslation ? 
+  `- Primary language: ${primaryLang}
+- Create question and answer in ${primaryLang}
+- ALSO provide translations in ${extractedLang} (use "questionTranslation" and "answerTranslation" fields)
+- This enables students to review in both languages` :
+  `- Create question and answer in ${primaryLang}
+- No translation needed (both concepts are in the same language)`}
 
 **TASK:**
 Create a question that tests understanding and recall (not recognition).
@@ -92,8 +109,11 @@ Create a question that tests understanding and recall (not recognition).
 **OUTPUT FORMAT (strict JSON):**
 {
   "flashcard": {
-    "question": "Clear, testable question",
-    "answer": "Concise, accurate answer",
+    "question": "Clear, testable question in primary language",
+    "answer": "Concise, accurate answer in primary language",
+    "questionTranslation": "Translation of question (if bilingual, otherwise null)",
+    "answerTranslation": "Translation of answer (if bilingual, otherwise null)",
+    "language": "${primaryLang}",
     "sourceTimestamp": "${input.extractedConcept.timestamp ?? null}",
     "difficultyHint": "easy" | "medium" | "hard"
   },
@@ -269,11 +289,13 @@ async function prepareConceptMatchInput(conceptMatchId: string): Promise<Concept
       definition: match.concept.definition,
       timestamp: match.concept.timestamp,
       confidence: match.concept.confidence,
+      language: match.concept.language, // Include language for bilingual support
     },
     syllabusConcept: {
       conceptText: match.syllabusConcept.conceptText,
       category: match.syllabusConcept.category,
       importance: match.syllabusConcept.importance,
+      language: match.syllabusConcept.language, // Include language for bilingual support
     },
     course: {
       code: match.syllabusConcept.course.code,
@@ -385,6 +407,9 @@ export async function generateFlashcardsForVideoJob(
             userId,
             question: result.flashcard.question,
             answer: result.flashcard.answer,
+            questionTranslation: result.flashcard.questionTranslation ?? null,
+            answerTranslation: result.flashcard.answerTranslation ?? null,
+            language: result.flashcard.language ?? "en",
             sourceTimestamp: result.flashcard.sourceTimestamp,
           },
         });

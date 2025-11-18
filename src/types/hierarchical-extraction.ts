@@ -87,6 +87,7 @@ export type ExtractionMetadata = {
   supplementalConceptsCount: number;
   extractionConfidence: number;
   processingNotes: string;
+  detectedLanguage?: string; // BCP-47 language code (e.g., 'en', 'fr')
 };
 
 export type QualityChecks = {
