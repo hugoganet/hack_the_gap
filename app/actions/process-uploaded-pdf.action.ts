@@ -234,7 +234,7 @@ export async function processUploadedPDF(data: {
 
             for (const { courseId } of activeCourses) {
               const startTime = Date.now();
-              const { results } = await matchConceptsToSyllabus(contentJob.id, courseId);
+              const { results } = await matchConceptsToSyllabus(contentJob.id, courseId, user.id);
               totalDurationMs += Date.now() - startTime;
 
               if (results.length > 0) {

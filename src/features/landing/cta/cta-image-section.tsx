@@ -1,9 +1,13 @@
+"use client";
+
 import { Typography } from "@/components/nowts/typography";
 import { buttonVariants } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { SectionLayout } from "../section-layout";
 
 export const CTAImageSection = () => {
+  const t = useTranslations("landing.ctaImage");
   return (
     <div
       style={{
@@ -20,13 +24,13 @@ export const CTAImageSection = () => {
           variant="h2"
           className="text-center text-5xl font-extrabold"
         >
-          Start getting a lot of followers
+          {t("title")}
         </Typography>
         <Typography className="text-center font-bold">
-          By posting every day with Threader !
+          {t("description")}
         </Typography>
         <Link href="#pricing" className={buttonVariants({ size: "lg" })}>
-          Get started
+          {t("getStarted")}
         </Link>
       </SectionLayout>
     </div>

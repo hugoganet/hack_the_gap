@@ -1,10 +1,12 @@
 {
   "landing": {
     "hero": {
-      "title": "Transform Passive Learning into Active Retention",
-      "description": "AI-powered system that automatically converts your YouTube videos, lectures, and articles into personalized flashcards with spaced repetition. Remember what you learn, forever.",
-      "getStarted": "Get Started",
-      "signIn": "Sign In"
+      "title": "Stop Forgetting What You Learn",
+      "titleHighlight": "Forgetting",
+      "description": "Turn YouTube videos, articles, and PDFs into long-term memory — automatically. Upload your syllabus. Watch content. Review 3 min/day. Actually remember.",
+      "getStarted": "Upload Your Syllabus (Free)",
+      "signIn": "Sign In",
+      "seeHowItWorks": "See how it works"
     },
     "betaBanner": {
       "endsLabel": "Free Beta Test Ends",
@@ -42,6 +44,172 @@
       "title": "Ready to Remember Everything?",
       "description": "Join students who are transforming their passive content consumption into active learning",
       "button": "Start Learning Smarter"
+    },
+    "howItWorks": {
+      "badge": "How It Works",
+      "title": "From Passive Consumption to Active Retention",
+      "description": "No manual flashcard creation. No note-taking. No organizing. Just learn.",
+      "steps": {
+        "upload": {
+          "number": "1",
+          "title": "Upload Your Syllabus",
+          "description": "PDF, text, or talk to our AI to define your learning goals. Works for any course, any educational system worldwide."
+        },
+        "watch": {
+          "number": "2",
+          "title": "Watch Content You're Already Consuming",
+          "description": "YouTube videos, articles, PDFs. No behavior change required. Just paste the URL or upload the file."
+        },
+        "extract": {
+          "number": "3",
+          "title": "AI Extracts & Matches Concepts",
+          "description": "Within 60 seconds, concepts are extracted and matched to your syllabus. See exactly what you've learned vs. what's missing."
+        },
+        "review": {
+          "number": "4",
+          "title": "Review 3 Min/Day",
+          "description": "Spaced repetition schedules optimal review times. Flashcards unlock as you master concepts. 80% retention after 7 days."
+        }
+      }
+    },
+    "pain": {
+      "title": "You're Already Learning...",
+      "subtitle": "But without a retention system, you're forgetting 85% within 2 weeks.",
+      "without": {
+        "title": "😞 Learning Without Recall",
+        "items": [
+          "Watch 10 hours of YouTube explainers",
+          "Forget 85% within 2 weeks",
+          "Panic-cram before exams",
+          "Can't recall key concepts when needed",
+          "Feel like time was wasted"
+        ]
+      },
+      "with": {
+        "title": "😎 Learning WITH Recall",
+        "items": [
+          "Upload your syllabus (60 seconds)",
+          "Watch content you're already consuming",
+          "AI extracts concepts + generates flashcards",
+          "Review 3 min/day (spaced repetition)",
+          "80% retention after 7 days",
+          "See exactly what you know vs. don't know"
+        ]
+      }
+    },
+    "stats": {
+      "forgetting": {
+        "number": "85",
+        "suffix": "%",
+        "text": "of learning forgotten in 2 weeks without a system"
+      },
+      "reviewTime": {
+        "number": "3",
+        "suffix": " min/day",
+        "text": "Average review time to retain what you learn"
+      },
+      "accuracy": {
+        "number": "68",
+        "suffix": "%+",
+        "text": "Concept matching accuracy (improving daily)"
+      },
+      "manual": {
+        "number": "0",
+        "suffix": "",
+        "text": "Manual flashcard creation required"
+      }
+    },
+    "trustSignals": {
+      "badge": "Built on Proven Science",
+      "title": "Zettelkasten Methodology + Spaced Repetition + AI Automation",
+      "cards": {
+        "zettelkasten": {
+          "title": "Zettelkasten",
+          "description": "Knowledge graph methodology used by Nobel Prize winners. Atomic notes, typed links, hierarchical structure."
+        },
+        "spacedRepetition": {
+          "title": "Spaced Repetition",
+          "description": "Proven cognitive science technique. Review at optimal intervals for long-term retention (80% after 7 days)."
+        },
+        "aiAutomation": {
+          "title": "AI Automation",
+          "description": "GPT-4 + embeddings for concept extraction and matching. 68%+ accuracy, improving daily with user feedback."
+        }
+      },
+      "beta": {
+        "title": "Currently in Beta",
+        "description": "We're testing with early users to improve accuracy before launching paid plans. Join now to get early access and help shape the product."
+      }
+    },
+    "bento": {
+      "items": {
+        "extraction": {
+          "title": "AI Concept Extraction",
+          "description": "Watch any video or read any article. Our AI automatically extracts key concepts and creates atomic knowledge cards.",
+          "processing": "Processing video...",
+          "extracted": "concepts extracted",
+          "concepts": {
+            "categorical": "Categorical Imperative",
+            "deontological": "Deontological Ethics",
+            "moral": "Moral Law",
+            "practical": "Practical Reason"
+          }
+        },
+        "matching": {
+          "title": "Smart Syllabus Matching",
+          "description": "Concepts are matched to your course syllabus with confidence scores. Track exactly what you've learned vs. what's required.",
+          "analyzing": "Analyzing syllabus match...",
+          "matched": "Matched to",
+          "confidence": "confidence"
+        },
+        "progress": {
+          "title": "Visual Progress Tracking",
+          "description": "See your knowledge graph grow. Track which concepts are locked, unlocked, or mastered.",
+          "locked": "Locked",
+          "unlocked": "Unlocked",
+          "mastered": "Mastered",
+          "watchContent": "Watch content to unlock"
+        },
+        "repetition": {
+          "title": "Spaced Repetition",
+          "description": "Review flashcards at optimal intervals. Just 3-5 minutes daily ensures long-term retention.",
+          "dueToday": "Due today",
+          "dueTomorrow": "Due tomorrow",
+          "mastered": "Mastered"
+        },
+        "analytics": {
+          "title": "Learning Analytics",
+          "description": "Track your retention rate, review streaks, and concept mastery over time.",
+          "retention": "Retention Rate",
+          "streak": "day streak",
+          "concepts": "concepts mastered"
+        }
+      }
+    },
+    "ctaSection": {
+      "title": "Ready to Actually Remember What You Learn?",
+      "subtitle": "Join 20+ students testing Recall. Upload your syllabus in 60 seconds.",
+      "button": "Upload Your Syllabus (Free)"
+    },
+    "ctaCard": {
+      "title": "Boost your productivity today",
+      "description": "Create an account and start posting today.",
+      "getStarted": "Get started",
+      "learnMore": "Learn more"
+    },
+    "ctaImage": {
+      "title": "Start getting a lot of followers",
+      "description": "By posting every day with Threader !",
+      "getStarted": "Get started"
+    },
+    "featureSection": {
+      "badge": "The features you NEED.",
+      "title": "More than a post schedulure, we will help you grow.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, consequuntur! Similique, nulla placeat in expedita omnis ab error eaque esse a doloremque, iusto libero eligendi, animi minus architecto. Modi, consectetur?"
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "Frequently Asked Questions"
     }
   },
   "footer": {

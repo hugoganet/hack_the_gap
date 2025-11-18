@@ -4,36 +4,35 @@ import { Typography } from "@/components/nowts/typography";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, CheckCircle, Play, Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { SectionLayout } from "./section-layout";
 
 export const HowItWorksSection = () => {
+  const t = useTranslations("landing.howItWorks");
+  
   const steps = [
     {
-      number: "1",
-      title: "Upload Your Syllabus",
-      description:
-        "PDF, text, or talk to our AI to define your learning goals. Works for any course, any educational system worldwide.",
+      number: t("steps.upload.number"),
+      title: t("steps.upload.title"),
+      description: t("steps.upload.description"),
       icon: <Upload size={24} />,
     },
     {
-      number: "2",
-      title: "Watch Content You're Already Consuming",
-      description:
-        "YouTube videos, articles, PDFs. No behavior change required. Just paste the URL or upload the file.",
+      number: t("steps.watch.number"),
+      title: t("steps.watch.title"),
+      description: t("steps.watch.description"),
       icon: <Play size={24} />,
     },
     {
-      number: "3",
-      title: "AI Extracts & Matches Concepts",
-      description:
-        "Within 60 seconds, concepts are extracted and matched to your syllabus. See exactly what you've learned vs. what's missing.",
+      number: t("steps.extract.number"),
+      title: t("steps.extract.title"),
+      description: t("steps.extract.description"),
       icon: <Brain size={24} />,
     },
     {
-      number: "4",
-      title: "Review 3 Min/Day",
-      description:
-        "Spaced repetition schedules optimal review times. Flashcards unlock as you master concepts. 80% retention after 7 days.",
+      number: t("steps.review.number"),
+      title: t("steps.review.title"),
+      description: t("steps.review.description"),
       icon: <CheckCircle size={24} />,
     },
   ];
@@ -42,13 +41,12 @@ export const HowItWorksSection = () => {
     <SectionLayout size="lg" id="how-it-works">
       <div className="flex flex-col items-center gap-8">
         <div className="text-center">
-          <Badge>How It Works</Badge>
+          <Badge>{t("badge")}</Badge>
           <Typography variant="h2" className="mt-4">
-            From Passive Consumption to Active Retention
+            {t("title")}
           </Typography>
           <Typography variant="muted" className="mt-2 max-w-2xl">
-            No manual flashcard creation. No note-taking. No organizing.
-            Just learn.
+            {t("description")}
           </Typography>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">

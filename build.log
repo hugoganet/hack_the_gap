@@ -17,12 +17,20 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
      ✓ authInterrupts
 
    Creating an optimized production build ...
+ ✓ Compiled successfully in 37.8s
+   Linting and checking validity of types ...
+
+ ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/app/api-reference/config/eslint#migrating-existing-config
 Failed to compile.
 
-./app/home/page.tsx
-Module not found: Can't resolve '../page'
+./app/actions/process-uploaded-pdf.action.ts:237:41
+Type error: Expected 3 arguments, but got 2.
 
-https://nextjs.org/docs/messages/module-not-found
-
-
-> Build failed because of webpack errors
+[0m [90m 235 |[39m             [36mfor[39m ([36mconst[39m { courseId } [36mof[39m activeCourses) {
+ [90m 236 |[39m               [36mconst[39m startTime [33m=[39m [33mDate[39m[33m.[39mnow()[33m;[39m
+[31m[1m>[22m[39m[90m 237 |[39m               [36mconst[39m { results } [33m=[39m [36mawait[39m matchConceptsToSyllabus(contentJob[33m.[39mid[33m,[39m courseId)[33m;[39m
+ [90m     |[39m                                         [31m[1m^[22m[39m
+ [90m 238 |[39m               totalDurationMs [33m+=[39m [33mDate[39m[33m.[39mnow() [33m-[39m startTime[33m;[39m
+ [90m 239 |[39m
+ [90m 240 |[39m               [36mif[39m (results[33m.[39mlength [33m>[39m [35m0[39m) {[0m
+Next.js build worker exited with code: 1 and signal: null

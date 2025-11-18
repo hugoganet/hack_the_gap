@@ -4,6 +4,7 @@ import { Typography } from "@/components/nowts/typography";
 import { DotPattern } from "@/components/svg/dot-pattern";
 import { Badge } from "@/components/ui/badge";
 import { ClientMarkdown } from "@/features/markdown/client-markdown";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { SectionLayout } from "./section-layout";
 
@@ -12,22 +13,20 @@ export const FeaturesSection = ({
 }: {
   features: FeatureLineProps[];
 }) => {
+  const t = useTranslations("landing.featureSection");
   return (
     <SectionLayout size="sm" className="relative" id="features">
       <div className="relative flex flex-col gap-16 lg:gap-28">
         <div className="flex flex-col items-center gap-2">
-          <Badge>The features you NEED.</Badge>
+          <Badge>{t("badge")}</Badge>
           <Typography variant="h2" className="m-auto max-w-xl text-center">
-            More than a post schedulure, we will help you <u>grow</u>.
+            {t("title")}
           </Typography>
           <Typography
             variant="muted"
             className="m-auto max-w-lg text-center text-base"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates,
-            consequuntur! Similique, nulla placeat in expedita omnis ab error
-            eaque esse a doloremque, iusto libero eligendi, animi minus
-            architecto. Modi, consectetur?
+            {t("description")}
           </Typography>
         </div>
         {features.map((f, i) => {

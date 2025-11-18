@@ -1,10 +1,12 @@
 {
   "landing": {
     "hero": {
-      "title": "Transformez l'apprentissage passif en rétention active",
-      "description": "Système alimenté par l'IA qui convertit automatiquement vos vidéos YouTube, cours et articles en fiches personnalisées avec répétition espacée. Retenez ce que vous apprenez, pour toujours.",
-      "getStarted": "Commencer",
-      "signIn": "Se connecter"
+      "title": "Arrêtez d'oublier ce que vous apprenez",
+      "titleHighlight": "oublier",
+      "description": "Transformez les vidéos YouTube, articles et PDFs en mémoire à long terme — automatiquement. Téléchargez votre programme. Regardez du contenu. Révisez 3 min/jour. Retenez vraiment.",
+      "getStarted": "Télécharger votre programme (Gratuit)",
+      "signIn": "Se connecter",
+      "seeHowItWorks": "Voir comment ça marche"
     },
     "betaBanner": {
       "endsLabel": "Fin du test bêta gratuit",
@@ -42,6 +44,172 @@
       "title": "Prêt à tout retenir ?",
       "description": "Rejoignez les étudiants qui transforment leur consommation passive de contenu en apprentissage actif",
       "button": "Commencer à apprendre intelligemment"
+    },
+    "howItWorks": {
+      "badge": "Comment ça marche",
+      "title": "De la consommation passive à la rétention active",
+      "description": "Pas de création manuelle de fiches. Pas de prise de notes. Pas d'organisation. Apprenez simplement.",
+      "steps": {
+        "upload": {
+          "number": "1",
+          "title": "Téléchargez votre programme",
+          "description": "PDF, texte, ou parlez à notre IA pour définir vos objectifs d'apprentissage. Fonctionne pour n'importe quel cours, n'importe quel système éducatif dans le monde."
+        },
+        "watch": {
+          "number": "2",
+          "title": "Regardez le contenu que vous consommez déjà",
+          "description": "Vidéos YouTube, articles, PDFs. Aucun changement de comportement requis. Collez simplement l'URL ou téléchargez le fichier."
+        },
+        "extract": {
+          "number": "3",
+          "title": "L'IA extrait et associe les concepts",
+          "description": "En 60 secondes, les concepts sont extraits et associés à votre programme. Voyez exactement ce que vous avez appris vs ce qui manque."
+        },
+        "review": {
+          "number": "4",
+          "title": "Révisez 3 min/jour",
+          "description": "La répétition espacée planifie les moments de révision optimaux. Les fiches se débloquent au fur et à mesure que vous maîtrisez les concepts. 80% de rétention après 7 jours."
+        }
+      }
+    },
+    "pain": {
+      "title": "Vous apprenez déjà...",
+      "subtitle": "Mais sans système de rétention, vous oubliez 85% en 2 semaines.",
+      "without": {
+        "title": "😞 Apprendre sans mémorisation",
+        "items": [
+          "Regarder 10 heures d'explications YouTube",
+          "Oublier 85% en 2 semaines",
+          "Bachoter en panique avant les examens",
+          "Impossible de se rappeler les concepts clés quand nécessaire",
+          "Sentiment de temps perdu"
+        ]
+      },
+      "with": {
+        "title": "😎 Apprendre AVEC mémorisation",
+        "items": [
+          "Téléchargez votre programme (60 secondes)",
+          "Regardez le contenu que vous consommez déjà",
+          "L'IA extrait les concepts + génère des fiches",
+          "Révisez 3 min/jour (répétition espacée)",
+          "80% de rétention après 7 jours",
+          "Voyez exactement ce que vous savez vs ne savez pas"
+        ]
+      }
+    },
+    "stats": {
+      "forgetting": {
+        "number": "85",
+        "suffix": "%",
+        "text": "de l'apprentissage oublié en 2 semaines sans système"
+      },
+      "reviewTime": {
+        "number": "3",
+        "suffix": " min/jour",
+        "text": "Temps de révision moyen pour retenir ce que vous apprenez"
+      },
+      "accuracy": {
+        "number": "68",
+        "suffix": "%+",
+        "text": "Précision de l'association des concepts (s'améliore quotidiennement)"
+      },
+      "manual": {
+        "number": "0",
+        "suffix": "",
+        "text": "Création manuelle de fiches requise"
+      }
+    },
+    "trustSignals": {
+      "badge": "Basé sur la science éprouvée",
+      "title": "Méthodologie Zettelkasten + Répétition espacée + Automatisation IA",
+      "cards": {
+        "zettelkasten": {
+          "title": "Zettelkasten",
+          "description": "Méthodologie de graphe de connaissances utilisée par les lauréats du prix Nobel. Notes atomiques, liens typés, structure hiérarchique."
+        },
+        "spacedRepetition": {
+          "title": "Répétition espacée",
+          "description": "Technique de science cognitive éprouvée. Révisez à des intervalles optimaux pour une rétention à long terme (80% après 7 jours)."
+        },
+        "aiAutomation": {
+          "title": "Automatisation IA",
+          "description": "GPT-4 + embeddings pour l'extraction et l'association de concepts. Précision de 68%+, s'améliore quotidiennement avec les retours utilisateurs."
+        }
+      },
+      "beta": {
+        "title": "Actuellement en bêta",
+        "description": "Nous testons avec des utilisateurs précoces pour améliorer la précision avant de lancer des plans payants. Rejoignez-nous maintenant pour obtenir un accès anticipé et aider à façonner le produit."
+      }
+    },
+    "bento": {
+      "items": {
+        "extraction": {
+          "title": "Extraction de concepts par IA",
+          "description": "Regardez n'importe quelle vidéo ou lisez n'importe quel article. Notre IA extrait automatiquement les concepts clés et crée des cartes de connaissances atomiques.",
+          "processing": "Traitement de la vidéo...",
+          "extracted": "concepts extraits",
+          "concepts": {
+            "categorical": "Impératif catégorique",
+            "deontological": "Éthique déontologique",
+            "moral": "Loi morale",
+            "practical": "Raison pratique"
+          }
+        },
+        "matching": {
+          "title": "Association intelligente au programme",
+          "description": "Les concepts sont associés à votre programme de cours avec des scores de confiance. Suivez exactement ce que vous avez appris vs ce qui est requis.",
+          "analyzing": "Analyse de la correspondance au programme...",
+          "matched": "Associé à",
+          "confidence": "confiance"
+        },
+        "progress": {
+          "title": "Suivi visuel des progrès",
+          "description": "Voyez votre graphe de connaissances grandir. Suivez quels concepts sont verrouillés, débloqués ou maîtrisés.",
+          "locked": "Verrouillé",
+          "unlocked": "Débloqué",
+          "mastered": "Maîtrisé",
+          "watchContent": "Regardez du contenu pour débloquer"
+        },
+        "repetition": {
+          "title": "Répétition espacée",
+          "description": "Révisez les fiches à des intervalles optimaux. Seulement 3 à 5 minutes par jour garantissent une rétention à long terme.",
+          "dueToday": "À réviser aujourd'hui",
+          "dueTomorrow": "À réviser demain",
+          "mastered": "Maîtrisé"
+        },
+        "analytics": {
+          "title": "Analytiques d'apprentissage",
+          "description": "Suivez votre taux de rétention, vos séries de révisions et la maîtrise des concepts au fil du temps.",
+          "retention": "Taux de rétention",
+          "streak": "jours de série",
+          "concepts": "concepts maîtrisés"
+        }
+      }
+    },
+    "ctaSection": {
+      "title": "Prêt à vraiment retenir ce que vous apprenez ?",
+      "subtitle": "Rejoignez 20+ étudiants testant Recall. Téléchargez votre programme en 60 secondes.",
+      "button": "Télécharger votre programme (Gratuit)"
+    },
+    "ctaCard": {
+      "title": "Boostez votre productivité aujourd'hui",
+      "description": "Créez un compte et commencez à publier aujourd'hui.",
+      "getStarted": "Commencer",
+      "learnMore": "En savoir plus"
+    },
+    "ctaImage": {
+      "title": "Commencez à obtenir beaucoup d'abonnés",
+      "description": "En publiant chaque jour avec Threader !",
+      "getStarted": "Commencer"
+    },
+    "featureSection": {
+      "badge": "Les fonctionnalités dont vous avez BESOIN.",
+      "title": "Plus qu'un planificateur de publications, nous vous aiderons à grandir.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, consequuntur! Similique, nulla placeat in expedita omnis ab error eaque esse a doloremque, iusto libero eligendi, animi minus architecto. Modi, consectetur?"
+    },
+    "faq": {
+      "badge": "FAQ",
+      "title": "Questions fréquemment posées"
     }
   },
   "footer": {

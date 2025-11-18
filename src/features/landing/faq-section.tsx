@@ -7,6 +7,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 import { ClientMarkdown } from "../markdown/client-markdown";
 import { SectionLayout } from "./section-layout";
 
@@ -20,14 +22,15 @@ type FeaturesPreviewProps = {
 };
 
 export const FAQSection = (props: FeaturesPreviewProps) => {
+  const t = useTranslations("landing.faq");
   return (
     <SectionLayout size="lg" className="flex max-lg:flex-col">
       <div className="flex-1 space-y-2">
-        <Typography className="text-primary font-extrabold uppercase">
-          FAQ
-        </Typography>
+        <Badge className="text-primary font-extrabold uppercase">
+          {t("badge")}
+        </Badge>
         <Typography variant="h2" className="text-5xl">
-          Frequently Asked Questions
+          {t("title")}
         </Typography>
       </div>
       <div className="flex-1">

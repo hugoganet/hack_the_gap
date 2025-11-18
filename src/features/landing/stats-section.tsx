@@ -1,6 +1,7 @@
 "use client";
 
 import { animate } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { SectionLayout } from "./section-layout";
 
@@ -10,30 +11,31 @@ type StatProps = {
   text: string;
 };
 
-const stats: StatProps[] = [
-  {
-    number: 85,
-    suffix: "%",
-    text: "of learning forgotten in 2 weeks without a system",
-  },
-  {
-    number: 3,
-    suffix: " min/day",
-    text: "Average review time to retain what you learn",
-  },
-  {
-    number: 68,
-    suffix: "%+",
-    text: "Concept matching accuracy (improving daily)",
-  },
-  {
-    number: 0,
-    suffix: "",
-    text: "Manual flashcard creation required",
-  },
-];
-
 export function StatsSection() {
+  const t = useTranslations("landing.stats");
+  
+  const stats: StatProps[] = [
+    {
+      number: Number(t("forgetting.number")),
+      suffix: t("forgetting.suffix"),
+      text: t("forgetting.text"),
+    },
+    {
+      number: Number(t("reviewTime.number")),
+      suffix: t("reviewTime.suffix"),
+      text: t("reviewTime.text"),
+    },
+    {
+      number: Number(t("accuracy.number")),
+      suffix: t("accuracy.suffix"),
+      text: t("accuracy.text"),
+    },
+    {
+      number: Number(t("manual.number")),
+      suffix: t("manual.suffix"),
+      text: t("manual.text"),
+    },
+  ];
   return (
     <SectionLayout size="sm">
       <div className="grid w-full items-center gap-12 sm:grid-cols-2 md:-mx-5 md:max-w-none md:grid-cols-4 md:gap-0">

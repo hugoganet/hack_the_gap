@@ -1,10 +1,14 @@
+"use client";
+
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Typography } from "../../components/nowts/typography";
 
 export const Hero = () => {
+  const t = useTranslations("landing.hero");
   return (
     <div className="relative isolate flex flex-col">
       <GridBackground />
@@ -16,32 +20,31 @@ export const Hero = () => {
               variant="h1"
               className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl lg:text-7xl"
             >
-              Stop{" "}
+              {t("title").split(t("titleHighlight"))[0]}
               <span className="relative inline-block">
-                <span>Forgetting</span>
+                <span>{t("titleHighlight")}</span>
                 <CircleSvg className="fill-primary absolute inset-0" />
-              </span>{" "}
-              What You Learn
+              </span>
+              {t("title").split(t("titleHighlight"))[1]}
             </Typography>
             <Typography
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Turn YouTube videos, articles, and PDFs into long-term memory — automatically.
-              Upload your syllabus. Watch content. Review 3 min/day. Actually remember.
+              {t("description")}
             </Typography>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href="/signup"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
-                Upload Your Syllabus (Free)
+                {t("getStarted")}
               </Link>
               <Link
                 href="#how-it-works"
                 className={buttonVariants({ size: "lg", variant: "link" })}
               >
-                See how it works <span aria-hidden="true">→</span>
+                {t("seeHowItWorks")} <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
