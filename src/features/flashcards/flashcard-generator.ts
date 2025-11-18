@@ -57,7 +57,7 @@ function buildUserPrompt(input: ConceptMatchInput): string {
   // Determine languages for bilingual support
   const extractedLang = input.extractedConcept.language ?? "en";
   const syllabusLang = input.syllabusConcept.language ?? "en";
-  const primaryLang = syllabusLang; // Use syllabus language as primary
+  const primaryLang = extractedLang; // Use extracted content language as primary (student learned in this language)
   const needsTranslation = extractedLang !== syllabusLang;
   
   return `Generate a ${needsTranslation ? "BILINGUAL " : ""}flashcard for spaced repetition learning.
@@ -88,10 +88,10 @@ Rationale: ${input.match.rationale ?? "Matched based on similarity"}
 
 **LANGUAGE INSTRUCTIONS:**
 ${needsTranslation ? 
-  `- Primary language: ${primaryLang}
+  `- Primary language: ${primaryLang} (the language of the video content the student watched)
 - Create question and answer in ${primaryLang}
-- ALSO provide translations in ${extractedLang} (use "questionTranslation" and "answerTranslation" fields)
-- This enables students to review in both languages` :
+- ALSO provide translations in ${syllabusLang} (use "questionTranslation" and "answerTranslation" fields)
+- This enables students to review in both the content language and syllabus language` :
   `- Create question and answer in ${primaryLang}
 - No translation needed (both concepts are in the same language)`}
 
@@ -357,7 +357,7 @@ export async function generateFlashcardsForVideoJob(
   let skipped = 0;
 
   // Process each match sequentially (required for AI generation)
-  // eslint-disable-next-line no-await-in-loop
+   
   for (const match of matches) {
     // Check if flashcard already exists
     // eslint-disable-next-line no-await-in-loop

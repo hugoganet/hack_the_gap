@@ -11,7 +11,7 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
   return (
     <div className="h-1 bg-muted">
       <div
-        className="h-full bg-primary transition-all duration-300"
+        className="h-full progress-growth transition-all duration-300"
         style={{ width: `${percentage}%` }}
       />
     </div>

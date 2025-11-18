@@ -112,8 +112,8 @@ export const DIFFICULTY_CONFIGS: Record<DifficultyRating, DifficultyConfig> = {
     sublabel: 'Again',
     interval: '<1 day',
     emoji: '🔴',
-    colorClass: 'border-destructive text-destructive',
-    hoverClass: 'hover:bg-destructive/10',
+    colorClass: 'border-needs-work text-needs-work',
+    hoverClass: 'hover:bg-needs-work/10',
   },
   medium: {
     difficulty: 'medium',
@@ -121,8 +121,8 @@ export const DIFFICULTY_CONFIGS: Record<DifficultyRating, DifficultyConfig> = {
     sublabel: 'Good',
     interval: '3 days',
     emoji: '🟡',
-    colorClass: 'border-warning text-warning',
-    hoverClass: 'hover:bg-warning/10',
+    colorClass: 'border-learning text-learning',
+    hoverClass: 'hover:bg-learning/10',
   },
   easy: {
     difficulty: 'easy',

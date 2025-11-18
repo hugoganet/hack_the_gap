@@ -45,6 +45,17 @@
   --color-info: var(--info);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Extended semantic colors */
+  --color-learning-foreground: var(--learning-foreground);
+  --color-learning: var(--learning);
+  --color-needs-work-foreground: var(--needs-work-foreground);
+  --color-needs-work: var(--needs-work);
+  --color-due: var(--due);
+  --color-overdue: var(--overdue);
+  --color-connection-foreground: var(--connection-foreground);
+  --color-connection: var(--connection);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -129,6 +140,19 @@
   --sidebar-accent-foreground: oklch(0.20 0 0);
   --sidebar-border: oklch(0.88 0.02 60);
   --sidebar-ring: oklch(0.50 0 0);
+
+  /* Learning/Needs Work/Due/Overdue/Connection */
+  --learning: oklch(0.75 0.07 250); /* #8BA7C9 Dusty Blue (calm learning) */
+  --learning-foreground: oklch(0.20 0 0); /* charcoal */
+
+  --needs-work: oklch(0.83 0.04 70); /* #C9B5A6 Warm Gray/Beige (constructive) */
+  --needs-work-foreground: oklch(0.20 0 0); /* charcoal */
+
+  --due: var(--accent); /* Coral alias for 'Due Today' */
+  --overdue: var(--primary); /* Terracotta alias for 'Overdue' */
+
+  --connection: oklch(0.86 0.08 300); /* #C8B5E8 Warm Lavender (optional) */
+  --connection-foreground: oklch(0.20 0 0);
 }
 
 .dark {
@@ -187,6 +211,19 @@
   --sidebar-accent-foreground: oklch(0.99 0 0);
   --sidebar-border: oklch(0.30 0 0);
   --sidebar-ring: oklch(0.50 0 0);
+
+  /* Learning/Needs Work/Due/Overdue/Connection (dark) */
+  --learning: oklch(0.75 0.07 250);
+  --learning-foreground: oklch(0.99 0 0);
+
+  --needs-work: oklch(0.80 0.03 70);
+  --needs-work-foreground: oklch(0.99 0 0);
+
+  --due: var(--accent);
+  --overdue: var(--primary);
+
+  --connection: oklch(0.84 0.08 300);
+  --connection-foreground: oklch(0.99 0 0);
 }
 
 @layer base {
@@ -231,6 +268,11 @@
   .dynamic-gradient-bg {
     background-size: 200% 200%;
     transition: background-position 0.3s ease-out;
+  }
+
+  /* Sage → Coral growth gradient for progress indicators */
+  .progress-growth {
+    background: linear-gradient(90deg, var(--success), var(--accent));
   }
 }
 

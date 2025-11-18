@@ -74,7 +74,7 @@ async function main() {
   const errors: { videoJobId: string; error: string }[] = [];
 
   // Process each video job sequentially (required for AI generation)
-  // eslint-disable-next-line no-await-in-loop
+   
   for (const [videoJobId, { userId, matchCount }] of videoJobGroups.entries()) {
     console.log(`\n${"=".repeat(80)}`);
     console.log(`📹 Processing Video Job: ${videoJobId}`);

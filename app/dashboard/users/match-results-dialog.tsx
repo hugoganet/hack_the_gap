@@ -26,6 +26,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export type ConceptMatchDetail = {
@@ -55,16 +56,19 @@ type MatchResultsDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   data: MatchResultsData | null;
+  onFlashcardUnlocked?: () => void;
 };
 
 export function MatchResultsDialog({
   open,
   onOpenChange,
   data,
+  onFlashcardUnlocked,
 }: MatchResultsDialogProps) {
   const t = useTranslations("dashboard.users.matchResults");
   const [expandedSection, setExpandedSection] = useState<"high" | "medium" | null>(null);
   const [feedbackMap, setFeedbackMap] = useState<Record<string, "correct" | "incorrect">>({});
+  const [unlocking, setUnlocking] = useState<Record<string, boolean>>({});
 
   if (!data) return null;
 
@@ -80,28 +84,42 @@ export function MatchResultsDialog({
   };
 
   const handleFeedback = async (matchId: string, feedback: "correct" | "incorrect") => {
-    // Optimistic update
-    setFeedbackMap(prev => ({ ...prev, [matchId]: feedback }));
-    
-    // TODO: Send feedback to backend
+    if (feedback === "correct") {
+      // Unlock flow
+      setUnlocking(prev => ({ ...prev, [matchId]: true }));
+      try {
+        const res = await fetch(`/api/concept-matches/confirm/${matchId}`, { method: "POST" });
+        const json = await res.json();
+        if (json.success) {
+          setFeedbackMap(prev => ({ ...prev, [matchId]: "correct" }));
+          toast.success(t("feedback.toast.unlocked"));
+          // Notify parent that a flashcard was unlocked
+          onFlashcardUnlocked?.();
+        } else {
+          toast.error(json.error || t("feedback.toast.error"));
+        }
+      } catch (e) {
+        toast.error(t("feedback.toast.error"));
+      } finally {
+        setUnlocking(prev => ({ ...prev, [matchId]: false }));
+      }
+      return;
+    }
+    // Incorrect feedback path
+    setFeedbackMap(prev => ({ ...prev, [matchId]: "incorrect" }));
     try {
       await fetch(`/api/concept-matches/${matchId}/feedback`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userFeedback: feedback }),
+        body: JSON.stringify({ userFeedback: "incorrect" }),
       });
-      
-      toast.success(
-        feedback === "correct" 
-          ? t("feedback.toast.correct") 
-          : t("feedback.toast.incorrect")
-      );
+      toast.success(t("feedback.toast.incorrect"));
     } catch {
-      // Revert optimistic update
       setFeedbackMap(prev => {
         const { [matchId]: _, ...rest } = prev;
         return rest;
       });
+      toast.error(t("feedback.toast.error"));
     }
   };
 
@@ -205,11 +223,12 @@ export function MatchResultsDialog({
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
+                                    disabled={unlocking[match.id]}
+                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900 disabled:opacity-50"
                                     onClick={() => void handleFeedback(match.id, "correct")}
                                     title={t("feedback.tooltip.correct")}
                                   >
-                                    <ThumbsUp className="size-4" />
+                                    {unlocking[match.id] ? <Loader2 className="size-4 animate-spin" /> : <ThumbsUp className="size-4" />}
                                   </Button>
                                 </>
                               )}
@@ -251,7 +270,6 @@ export function MatchResultsDialog({
                       )}
                     </div>
                   </button>
-                  
                   {expandedSection === "medium" && data.mediumMatches && data.mediumMatches.length > 0 && (
                     <div className="border-t border-yellow-200 bg-white p-4 dark:border-yellow-800 dark:bg-gray-950">
                       <div className="space-y-3">
@@ -282,7 +300,6 @@ export function MatchResultsDialog({
                                 </Badge>
                               </div>
                             </div>
-                            
                             {/* Feedback Buttons */}
                             <div className="flex gap-1 flex-shrink-0">
                               {feedbackMap[match.id] === "correct" ? (
@@ -298,11 +315,12 @@ export function MatchResultsDialog({
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
+                                    disabled={unlocking[match.id]}
+                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900 disabled:opacity-50"
                                     onClick={() => void handleFeedback(match.id, "correct")}
                                     title={t("feedback.tooltip.correct")}
                                   >
-                                    <ThumbsUp className="size-4" />
+                                    {unlocking[match.id] ? <Loader2 className="size-4 animate-spin" /> : <ThumbsUp className="size-4" />}
                                   </Button>
                                   <Button
                                     size="sm"

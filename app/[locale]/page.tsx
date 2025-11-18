@@ -66,7 +66,7 @@ export default function HomePage() {
     e.preventDefault();
 
     if (!email.includes('@')) {
-      toast.error("Please enter a valid email address");
+      toast.error(t("betaBanner.validEmailError"));
       return;
     }
 
@@ -78,10 +78,10 @@ export default function HomePage() {
       // formData.append("email", email);
       // const result = await submitBetaInvitation(formData);
 
-      toast.success("Thanks for your interest! We'll be in touch soon.");
+      toast.success(t("betaBanner.successMessage"));
       setEmail(""); // Clear the input
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t("betaBanner.errorMessage"));
     } finally {
       setIsSubmitting(false);
     }
@@ -103,15 +103,14 @@ export default function HomePage() {
             {t("hero.title")}
           </TypographyH1>
           <TypographyP className="text-muted-foreground text-lg">
-            AI-powered system that automatically converts your YouTube videos, lectures, and articles
-            into personalized flashcards with spaced repetition. Remember what you learn, forever.
+            {t("hero.description")}
           </TypographyP>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
-              <Link href={`/${locale}/auth/signup`}>Get Started</Link>
+              <Link href={`/${locale}/auth/signup`}>{t("hero.getStarted")}</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href={`/${locale}/auth/signin`}>Sign In</Link>
+              <Link href={`/${locale}/auth/signin`}>{t("hero.signIn")}</Link>
             </Button>
           </div>
         </div>
@@ -125,7 +124,7 @@ export default function HomePage() {
             <CardHeader className="space-y-6 pb-8 text-center">
               <div className="inline-flex items-center justify-center gap-3 rounded-full bg-primary/10 px-6 py-2 mx-auto">
                 <Clock className="h-5 w-5 text-primary animate-pulse" />
-                <span className="text-sm font-semibold text-primary">Free Beta Test Ends</span>
+                <span className="text-sm font-semibold text-primary">{t("betaBanner.endsLabel")}</span>
               </div>
               
               <div className="flex items-center justify-center gap-3 sm:gap-6">
@@ -138,7 +137,7 @@ export default function HomePage() {
                   >
                     {timeLeft.days}
                   </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">days</span>
+                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("betaBanner.days")}</span>
                 </div>
                 <span className="text-3xl font-bold text-primary/40">:</span>
                 <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
@@ -150,7 +149,7 @@ export default function HomePage() {
                   >
                     {timeLeft.hours}
                   </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">hours</span>
+                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("betaBanner.hours")}</span>
                 </div>
                 <span className="text-3xl font-bold text-primary/40">:</span>
                 <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
@@ -162,7 +161,7 @@ export default function HomePage() {
                   >
                     {timeLeft.minutes}
                   </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">minutes</span>
+                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("betaBanner.minutes")}</span>
                 </div>
                 <span className="text-3xl font-bold text-primary/40">:</span>
                 <div className="flex flex-col items-center rounded-xl bg-primary/5 p-4 min-w-[80px] border border-primary/20">
@@ -174,12 +173,12 @@ export default function HomePage() {
                   >
                     {timeLeft.seconds}
                   </span>
-                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">seconds</span>
+                  <span className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("betaBanner.seconds")}</span>
                 </div>
               </div>
 
               <TypographyP className="text-muted-foreground text-sm">
-                November 17, 2025 at 10:00 AM
+                {t("betaBanner.date")}
               </TypographyP>
             </CardHeader>
 
@@ -191,10 +190,10 @@ export default function HomePage() {
                     backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
                   }}
                 >
-                  Get Early Access!
+                  {t("betaBanner.earlyAccessTitle")}
                 </TypographyH2>
                 <TypographyP className="text-muted-foreground mx-auto max-w-md">
-                  Sign up now and get early access to the platform with exclusive features
+                  {t("betaBanner.earlyAccessDescription")}
                 </TypographyP>
               </div>
 
@@ -203,7 +202,7 @@ export default function HomePage() {
                   <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-primary/60" />
                   <Input
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder={t("betaBanner.emailPlaceholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -220,10 +219,10 @@ export default function HomePage() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
+                      {t("betaBanner.sending")}
                     </>
                   ) : (
-                    "Get Invitation"
+                    t("betaBanner.getInvitation")
                   )}
                 </Button>
               </form>
@@ -235,9 +234,9 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="mb-12 text-center">
-          <TypographyH2>How It Works</TypographyH2>
+          <TypographyH2>{t("features.title")}</TypographyH2>
           <TypographyP className="text-muted-foreground mx-auto mt-4 max-w-2xl">
-            A simple 3-step process to transform any content into long-term knowledge
+            {t("features.description")}
           </TypographyP>
         </div>
 
@@ -247,10 +246,9 @@ export default function HomePage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
                 <Brain className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle>AI Concept Extraction</CardTitle>
+              <CardTitle>{t("features.extraction.title")}</CardTitle>
               <CardDescription>
-                Watch a video or read an article. Our AI automatically extracts key concepts
-                and creates atomic knowledge cards.
+                {t("features.extraction.description")}
               </CardDescription>
             </CardHeader>
           </Card>
@@ -260,10 +258,9 @@ export default function HomePage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
                 <Zap className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle>Smart Matching</CardTitle>
+              <CardTitle>{t("features.matching.title")}</CardTitle>
               <CardDescription>
-                Concepts are matched to your course syllabus with confidence scores.
-                Track exactly what you've learned vs. what's required.
+                {t("features.matching.description")}
               </CardDescription>
             </CardHeader>
           </Card>
@@ -273,10 +270,9 @@ export default function HomePage() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
                 <Calendar className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle>Spaced Repetition</CardTitle>
+              <CardTitle>{t("features.repetition.title")}</CardTitle>
               <CardDescription>
-                Review flashcards at optimal intervals. Just 3-5 minutes daily ensures
-                long-term retention of everything you learn.
+                {t("features.repetition.description")}
               </CardDescription>
             </CardHeader>
           </Card>
@@ -286,12 +282,12 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-muted/50 to-primary/5 py-16">
         <div className="container relative mx-auto px-4 text-center">
-          <TypographyH2 className="mb-4">Ready to Remember Everything?</TypographyH2>
+          <TypographyH2 className="mb-4">{t("cta.title")}</TypographyH2>
           <TypographyP className="text-muted-foreground mx-auto mb-8 max-w-2xl">
-            Join students who are transforming their passive content consumption into active learning
+            {t("cta.description")}
           </TypographyP>
           <Button size="lg" asChild>
-            <Link href={`/${locale}/auth/signup`}>Start Learning Smarter</Link>
+            <Link href={`/${locale}/auth/signup`}>{t("cta.button")}</Link>
           </Button>
         </div>
       </section>

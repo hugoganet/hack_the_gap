@@ -54,10 +54,10 @@ export function FlashcardCard({
     <Card 
       className={`relative ${
         isLocked 
-          ? "border-orange-200 dark:border-orange-800" 
+          ? "border-secondary" 
           : isMastered 
-          ? "border-green-200 dark:border-green-800" 
-          : "border-blue-200 dark:border-blue-800"
+          ? "border-success" 
+          : "border-learning"
       }`}
     >
       <CardHeader>
@@ -78,7 +78,7 @@ export function FlashcardCard({
             {conceptName}
           </Badge>
           {category && (
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-xs border-connection text-connection">
               {category}
             </Badge>
           )}
@@ -99,7 +99,7 @@ export function FlashcardCard({
           <LockedContent hints={hints} />
         ) : (
           <UnlockedContent
-            answer={answer!}
+            answer={answer ?? ""}
             unlockedAt={unlockedAt}
             unlockedBy={unlockedBy}
             isAnswerVisible={isAnswerVisible}
@@ -123,15 +123,24 @@ export function FlashcardCard({
 
 function LockedContent({ hints }: { hints?: string[] }) {
   return (
-    <div className="bg-orange-50 dark:bg-orange-950 p-4 rounded-lg space-y-3">
-      <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300">
+    <div className="bg-secondary/40 p-4 rounded-lg space-y-3">
+      <div className="flex items-center gap-2 text-foreground">
         <Lock className="w-5 h-5" />
         <p className="font-medium">Answer locked</p>
       </div>
       <p className="text-sm text-muted-foreground">
-        Watch content that covers this concept to unlock the answer
+        Add or watch learning content for this course to unlock this answer.
       </p>
-      
+      <Button
+        variant="outline"
+        className="w-full text-sm"
+        onClick={() => {
+          const localePrefix = window.location.pathname.startsWith('/fr/') ? '/fr' : '';
+          window.location.href = `${localePrefix}/dashboard/users`;
+        }}
+      >
+        Engage with content →
+      </Button>
       {hints && hints.length > 0 && (
         <div className="space-y-2 mt-4">
           <div className="flex items-center gap-2 text-sm font-medium">
@@ -141,7 +150,7 @@ function LockedContent({ hints }: { hints?: string[] }) {
           <ul className="space-y-1 text-sm text-muted-foreground">
             {hints.map((hint, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-orange-500">•</span>
+                <span className="text-muted-foreground">•</span>
                 <span>{hint}</span>
               </li>
             ))}
@@ -176,7 +185,7 @@ function UnlockedContent({
   return (
     <div className="space-y-3">
       {unlockedAt && (
-        <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
+        <div className="flex items-center gap-2 text-sm text-success">
           <Unlock className="w-4 h-4" />
           <span>
             Unlocked {new Date(unlockedAt).toLocaleDateString()}
@@ -204,7 +213,7 @@ function UnlockedContent({
       </Button>
 
       {isAnswerVisible && (
-        <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
+        <div className="rounded-lg border border-learning/30 bg-learning/10 p-4">
           <p className="text-sm font-medium mb-2">Answer:</p>
           <p className="text-sm leading-relaxed">{answer}</p>
         </div>
@@ -214,7 +223,7 @@ function UnlockedContent({
         <div className="text-xs text-muted-foreground flex items-center justify-between">
           <span>Reviewed: {timesReviewed} times</span>
           {successRate !== null && (
-            <span className={successRate >= 70 ? "text-green-600" : "text-amber-600"}>
+            <span className={successRate >= 70 ? "text-success" : "text-needs-work"}>
               {timesCorrect}/{timesReviewed} ({successRate}%)
               {isMastered && " • ⭐ Mastered"}
             </span>

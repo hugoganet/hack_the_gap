@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import type { ReviewSummary } from "@/features/reviews/types";
 import { DIFFICULTY_CONFIGS } from "@/features/reviews/types";
+import { cn } from "@/lib/utils";
 
 type CompletionScreenProps = {
   summary: ReviewSummary;
@@ -41,7 +42,7 @@ export function CompletionScreen({ summary, onBackToCourse }: CompletionScreenPr
               return (
                 <div
                   key={item.difficulty}
-                  className="flex items-center gap-3 rounded-lg border p-3"
+                  className={cn("flex items-center gap-3 rounded-lg border p-3", item.difficulty === "hard" ? "border-needs-work" : item.difficulty === "medium" ? "border-learning" : "border-success")}
                 >
                   <span className="text-2xl">{config.emoji}</span>
                   <div className="flex-1">

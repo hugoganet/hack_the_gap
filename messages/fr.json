@@ -1,7 +1,47 @@
 {
   "landing": {
     "hero": {
-      "title": "Transformez l’apprentissage passif en rétention active"
+      "title": "Transformez l'apprentissage passif en rétention active",
+      "description": "Système alimenté par l'IA qui convertit automatiquement vos vidéos YouTube, cours et articles en fiches personnalisées avec répétition espacée. Retenez ce que vous apprenez, pour toujours.",
+      "getStarted": "Commencer",
+      "signIn": "Se connecter"
+    },
+    "betaBanner": {
+      "endsLabel": "Fin du test bêta gratuit",
+      "date": "17 novembre 2025 à 10h00",
+      "days": "jours",
+      "hours": "heures",
+      "minutes": "minutes",
+      "seconds": "secondes",
+      "earlyAccessTitle": "Accès anticipé !",
+      "earlyAccessDescription": "Inscrivez-vous maintenant et obtenez un accès anticipé à la plateforme avec des fonctionnalités exclusives",
+      "emailPlaceholder": "votre@email.com",
+      "getInvitation": "Obtenir une invitation",
+      "sending": "Envoi en cours...",
+      "validEmailError": "Veuillez entrer une adresse e-mail valide",
+      "successMessage": "Merci pour votre intérêt ! Nous vous contacterons bientôt.",
+      "errorMessage": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "features": {
+      "title": "Comment ça marche",
+      "description": "Un processus simple en 3 étapes pour transformer n'importe quel contenu en connaissances durables",
+      "extraction": {
+        "title": "Extraction de concepts par IA",
+        "description": "Regardez une vidéo ou lisez un article. Notre IA extrait automatiquement les concepts clés et crée des cartes de connaissances atomiques."
+      },
+      "matching": {
+        "title": "Correspondance intelligente",
+        "description": "Les concepts sont associés à votre programme de cours avec des scores de confiance. Suivez exactement ce que vous avez appris par rapport à ce qui est requis."
+      },
+      "repetition": {
+        "title": "Répétition espacée",
+        "description": "Révisez les fiches à des intervalles optimaux. Seulement 3 à 5 minutes par jour garantissent la rétention à long terme de tout ce que vous apprenez."
+      }
+    },
+    "cta": {
+      "title": "Prêt à tout retenir ?",
+      "description": "Rejoignez les étudiants qui transforment leur consommation passive de contenu en apprentissage actif",
+      "button": "Commencer à apprendre intelligemment"
     }
   },
   "footer": {

@@ -43,7 +43,7 @@ export const SubjectDataSchema = z.object({
     .optional(),
 });
 
-export const NodeChildSchema: z.ZodType<any> = z.lazy(() =>
+export const NodeChildSchema: z.ZodType = z.lazy(() =>
   z.object({
     name: z.string(),
     slug: z.string(),

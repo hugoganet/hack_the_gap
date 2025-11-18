@@ -13,7 +13,7 @@ function withLocale(pathname: string, nextLocale: Locale): string {
     parts.splice(1, 0, nextLocale);
   }
   let nextPath = parts.join("/");
-  if (!nextPath.startsWith("/")) nextPath = "/" + nextPath;
+  if (!nextPath.startsWith("/")) nextPath = `/${  nextPath}`;
   return nextPath.replace(/\/+$/, "");
 }
 

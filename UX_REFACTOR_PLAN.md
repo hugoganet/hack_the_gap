@@ -8,6 +8,8 @@
 
 **Timeline:** 14 hours over 5 days.
 
+**Recent Update (Nov 2025):** My Learning page now includes gamification via `UnlockProgress` component showing unlock stats, streaks, and mastery progress. This component will be preserved and migrated to the new Learn page.
+
 ---
 
 ## Product Vision Analysis
@@ -26,13 +28,19 @@
 
 ### 3-Page Structure Issues
 
-| Page | Route | Purpose | Problems |
-|------|-------|---------|----------|
-| **Dashboard** | `/dashboard` | Metrics overview | ❌ No actions, just stats<br>❌ Subscribers chart irrelevant<br>❌ Redundant with My Learning |
-| **My Learning** | `/dashboard/users` | Content processing + reviews | ❌ Vague name<br>❌ Buried in navigation<br>❌ Most important but 3rd position |
-| **Courses** | `/dashboard/courses` | Course library | ❌ Duplicate review entry points<br>❌ Overlaps with My Learning |
+| Page | Route | Purpose | Current State | Problems |
+|------|-------|---------|---------------|----------|
+| **Dashboard** | `/dashboard` | Metrics overview | 4 metric cards + subscribers chart | ❌ No actions, just stats<br>❌ Subscribers chart irrelevant<br>❌ Redundant with My Learning |
+| **My Learning** | `/dashboard/users` | Content processing + reviews + gamification | Content inbox + review queue + unlock progress (NEW) | ❌ Vague name<br>❌ Buried in navigation (3rd position)<br>❌ Most important but hidden<br>✅ Has gamification (unlock stats, streaks) |
+| **Courses** | `/dashboard/courses` | Course library | Course grid with welcome message | ❌ Duplicate review entry points<br>❌ Overlaps with My Learning |
 
 **Core Issue:** Users must decide "Where do I go to review?" vs "Where do I add content?" → Decision fatigue.
+
+**Recent Addition:** My Learning now includes gamification via `UnlockProgress` component showing:
+- Total concepts (locked/unlocked/mastered)
+- Unlock rate and progress bars
+- Current streak and longest streak
+- Milestone badges
 
 ---
 
@@ -47,9 +55,12 @@
 1. **Quick Stats** (inline): X concepts • Y courses • Z sessions
 2. **Content Inbox**: Drag-and-drop URL/PDF processing
 3. **Review Queue**: Cards due today, grouped by course
-4. **Recent Activity**: Last processed content + review sessions
+4. **Unlock Progress** (gamification): Locked/unlocked/mastered stats, streaks, progress bars
+5. **Recent Activity**: Last processed content + review sessions (optional)
 
-**Why:** Single entry point for daily workflow (input → review → track).
+**Why:** Single entry point for daily workflow (input → review → track progress).
+
+**Note:** Unlock Progress component already exists in My Learning and should be migrated as-is.
 
 #### **Page 2: "Courses"** (`/dashboard/courses`)
 **Purpose:** Organization & exploration
@@ -116,6 +127,11 @@ export default async function LearnPage() {
   const user = await getRequiredUser();
   const t = await getTranslations("dashboard.learn");
 
+  // Fetch user unlock stats for gamification
+  const stats = await prisma.userStats.findUnique({
+    where: { userId: user.id },
+  });
+
   return (
     <Layout size="lg">
       <LayoutHeader>
@@ -127,6 +143,22 @@ export default async function LearnPage() {
         <QuickStats userId={user.id} />
         <ContentInbox />
         <ReviewQueue userId={user.id} />
+        
+        {/* Gamification - Unlock Progress */}
+        {stats && (
+          <UnlockProgress
+            stats={{
+              totalUnlocks: stats.totalUnlocks,
+              totalLocked: stats.totalLocked,
+              totalMastered: stats.totalMastered,
+              unlockRate: stats.unlockRate,
+              currentStreak: stats.currentStreak,
+              longestStreak: stats.longestStreak,
+            }}
+          />
+        )}
+        
+        {/* Optional: Recent Activity */}
         <RecentActivity userId={user.id} />
       </LayoutContent>
     </Layout>
@@ -175,9 +207,29 @@ export async function QuickStats({ userId }: { userId: string }) {
 // UPDATE translations: "dashboard.users.reviewsToday" → "dashboard.learn.reviewQueue"
 ```
 
-**3.1.4 RecentActivity Component**
+**3.1.4 UnlockProgress Component**
+```typescript
+// app/dashboard/_components/unlock-progress.tsx
+// COPY from: src/components/dashboard/unlock-progress.tsx
+// NO CHANGES NEEDED - component is already well-structured
+
+// Component displays 4 cards + 1 streak card:
+// 1. Total Concepts (with progress bar showing unlock %)
+// 2. Locked (orange) - concepts not yet unlocked
+// 3. Unlocked (blue) - concepts ready to review
+// 4. Mastered (green) - concepts fully learned
+// 5. Unlock Streak (2-column card) - current streak + longest streak with fire badge
+
+// Data source: UserStats model in Prisma
+// Fields: totalUnlocks, totalLocked, totalMastered, unlockRate, currentStreak, longestStreak
+```
+
+**3.1.5 RecentActivity Component (Optional - Can be added later)**
 ```typescript
 // app/dashboard/_components/recent-activity.tsx
+// NOTE: This is optional and can be added in a future iteration
+// The gamification component (UnlockProgress) already provides good engagement
+
 export async function RecentActivity({ userId }: { userId: string }) {
   // Fetch last 3 content jobs
   const recentJobs = await prisma.contentJob.findMany({
@@ -194,6 +246,10 @@ export async function RecentActivity({ userId }: { userId: string }) {
     take: 3,
     include: { course: { select: { name: true } } },
   });
+
+  if (recentJobs.length === 0 && recentSessions.length === 0) {
+    return null; // Don't show if no activity
+  }
 
   return (
     <Card>
@@ -416,7 +472,10 @@ grep -r "dashboard/users" src/
 - [ ] Match results dialog appears
 - [ ] Review queue shows correct courses
 - [ ] Review queue links work
-- [ ] Recent activity displays
+- [ ] Unlock progress displays (locked/unlocked/mastered stats)
+- [ ] Streak counter displays correctly
+- [ ] Progress bars animate correctly
+- [ ] Recent activity displays (if implemented)
 - [ ] Responsive on mobile
 
 **Courses Page:**
@@ -476,7 +535,8 @@ git push origin main
 app/dashboard/_components/quick-stats.tsx
 app/dashboard/_components/content-inbox.tsx
 app/dashboard/_components/review-queue.tsx
-app/dashboard/_components/recent-activity.tsx
+app/dashboard/_components/unlock-progress.tsx    # Copied from src/components/dashboard/
+app/dashboard/_components/recent-activity.tsx    # Optional
 ```
 
 ### Modified Files
@@ -568,6 +628,7 @@ git push origin main
 4. **Make syllabus optional** → Lower barrier to entry
 5. **Remove duplicate review buttons** → Single source of truth (Learn page)
 6. **Add filtering to Courses** → Better organization as library grows
+7. **Preserve gamification** → UnlockProgress component provides engagement and motivation
 
 ---
 
@@ -576,5 +637,31 @@ git push origin main
 1. Monitor user feedback (2 weeks)
 2. Analyze usage metrics (time on page, engagement)
 3. Add onboarding tour for new users
-4. Consider gamification (streaks, achievements)
+4. ~~Consider gamification (streaks, achievements)~~ ✅ Already implemented via UnlockProgress
 5. Explore customizable dashboard widgets
+6. Consider adding milestone celebrations (10/50/100 unlocks)
+7. Add social features (share streaks, compare progress)
+
+---
+
+## Current State (As of Review)
+
+**What's Already Built:**
+- ✅ Dashboard page with 4 metric cards + subscribers chart
+- ✅ My Learning page with content inbox + review queue + **gamification (UnlockProgress)**
+- ✅ Courses page with course grid
+- ✅ UnlockProgress component showing locked/unlocked/mastered stats and streaks
+- ✅ UserStats model in database tracking unlock progress
+
+**What Needs to Change:**
+- ❌ Merge Dashboard + My Learning → Learn page
+- ❌ Remove subscribers chart
+- ❌ Update navigation labels
+- ❌ Add course filtering
+- ❌ Simplify course creation
+
+**Key Preservation:**
+- 🔒 **Must preserve:** UnlockProgress component (gamification)
+- 🔒 **Must preserve:** Content inbox functionality
+- 🔒 **Must preserve:** Review queue functionality
+- 🔒 **Must preserve:** UserStats database model

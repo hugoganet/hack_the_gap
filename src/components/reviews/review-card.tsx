@@ -70,7 +70,7 @@ export function ReviewCard({ flashcard, onRate, disabled = false }: ReviewCardPr
             {/* Answer */}
             <div className="space-y-2">
               <div className="text-sm font-medium text-muted-foreground">Answer</div>
-              <div className="rounded-lg border bg-muted/50 p-4">
+              <div className="rounded-lg border border-learning/30 bg-learning/10 p-4">
                 <p className="text-base leading-relaxed">{flashcard.answer}</p>
               </div>
               {flashcard.sourceTimestamp && (

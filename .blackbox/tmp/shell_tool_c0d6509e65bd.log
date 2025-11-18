@@ -1,0 +1,46 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+
+> nowts@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/hugoganet/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/hugoganet/Code/WIP/hack_the_gap/pnpm-lock.yaml
+
+   ▲ Next.js 15.5.0 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.145:3000
+   - Environments: .env
+   - Experiments (use with caution):
+     ✓ authInterrupts
+
+ ✓ Starting...
+ ✓ Compiled middleware in 187ms
+ ✓ Ready in 2.3s
+ ○ Compiling /dashboard/courses ...
+ ✓ Compiled /dashboard/courses in 7.3s
+ GET /en/dashboard/courses 200 in 10880ms
+ ○ Compiling /api/auth/[...auth] ...
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 2719ms
+ ✓ Compiled /api/auth/[...auth] in 3.7s
+ ⨯ [Error [PageNotFoundError]: Cannot find module for page: /api/auth/[...auth]/route] {
+  type: 'PageNotFoundError',
+  code: 'ENOENT',
+  page: '/api/auth/get-session'
+}
+ ○ Compiling /_error ...
+ GET /api/courses 200 in 5760ms
+ ✓ Compiled /_error in 1379ms
+ GET /api/auth/get-session 500 in 6564ms
+ GET /api/user 200 in 1148ms
+ ✓ Compiled middleware in 3ms
+ ✓ Compiled in 230ms
+ GET /api/auth/get-session 200 in 2384ms
+ GET /api/auth/get-session 200 in 549ms
+ ○ Compiling /[...catchAll] ...
+ ✓ Compiled /[...catchAll] in 1430ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 2167ms
+ GET /en/dashboard/courses/9c423f6d-44ea-477a-b5d9-368ad50ae360 200 in 92ms

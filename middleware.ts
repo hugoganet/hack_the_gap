@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const firstSeg = pathname.split("/")[1];
   const hasLocalePrefix = isLocale(firstSeg);
 
-  // Handle bare root path: keep visible locale in URL
+  // Handle bare root path: redirect to locale-prefixed path
   if (pathname === "/") {
     const locale = pickPreferredLocale();
     const session = getSessionCookie(request, { cookiePrefix: SiteConfig.appId });
@@ -29,19 +29,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // If path starts with a locale, set cookie and rewrite internally to non-locale path
+  // If path starts with a locale, save it to cookie and continue
   if (hasLocalePrefix) {
     const locale = firstSeg;
-    const url = new URL(request.url);
-    // strip the locale segment
-    const rest = pathname.split("/").slice(2).join("/");
-    url.pathname = `/${rest}`;
-    const response = NextResponse.rewrite(url);
+    const response = NextResponse.next();
     response.cookies.set("NEXT_LOCALE", locale, { path: "/" });
     return response;
   }
 
-  return NextResponse.next();
+  // If no locale prefix, redirect to add the preferred locale
+  const locale = pickPreferredLocale();
+  const url = new URL(request.url);
+  url.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(url);
 }
 
 export const config = {

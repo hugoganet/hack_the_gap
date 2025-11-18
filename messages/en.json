@@ -1,7 +1,47 @@
 {
   "landing": {
     "hero": {
-      "title": "Transform Passive Learning into Active Retention"
+      "title": "Transform Passive Learning into Active Retention",
+      "description": "AI-powered system that automatically converts your YouTube videos, lectures, and articles into personalized flashcards with spaced repetition. Remember what you learn, forever.",
+      "getStarted": "Get Started",
+      "signIn": "Sign In"
+    },
+    "betaBanner": {
+      "endsLabel": "Free Beta Test Ends",
+      "date": "November 17, 2025 at 10:00 AM",
+      "days": "days",
+      "hours": "hours",
+      "minutes": "minutes",
+      "seconds": "seconds",
+      "earlyAccessTitle": "Get Early Access!",
+      "earlyAccessDescription": "Sign up now and get early access to the platform with exclusive features",
+      "emailPlaceholder": "your@email.com",
+      "getInvitation": "Get Invitation",
+      "sending": "Sending...",
+      "validEmailError": "Please enter a valid email address",
+      "successMessage": "Thanks for your interest! We'll be in touch soon.",
+      "errorMessage": "Something went wrong. Please try again."
+    },
+    "features": {
+      "title": "How It Works",
+      "description": "A simple 3-step process to transform any content into long-term knowledge",
+      "extraction": {
+        "title": "AI Concept Extraction",
+        "description": "Watch a video or read an article. Our AI automatically extracts key concepts and creates atomic knowledge cards."
+      },
+      "matching": {
+        "title": "Smart Matching",
+        "description": "Concepts are matched to your course syllabus with confidence scores. Track exactly what you've learned vs. what's required."
+      },
+      "repetition": {
+        "title": "Spaced Repetition",
+        "description": "Review flashcards at optimal intervals. Just 3-5 minutes daily ensures long-term retention of everything you learn."
+      }
+    },
+    "cta": {
+      "title": "Ready to Remember Everything?",
+      "description": "Join students who are transforming their passive content consumption into active learning",
+      "button": "Start Learning Smarter"
     }
   },
   "footer": {
@@ -184,8 +224,10 @@
             "correct": "Confirm match"
           },
           "toast": {
+            "unlocked": "🎉 Flashcard unlocked! Ready to review",
             "correct": "Thanks! Marked as correct match",
-            "incorrect": "Thanks for the feedback! We'll improve our matching"
+            "incorrect": "Thanks for the feedback! We'll improve our matching",
+            "error": "Failed to process feedback. Please try again."
           }
         },
         "unmatched": {

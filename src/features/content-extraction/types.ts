@@ -25,12 +25,12 @@ export type VideoExtractionResult = {
       url: string;
       wordCount: number;
       segments: number;
-      transcriptSegments?: Array<{
+      transcriptSegments?: {
         text: string;
         start: number;
         duration: number;
         timestamp: string;
-      }>;
+      }[];
     };
   };
 };

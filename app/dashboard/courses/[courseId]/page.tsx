@@ -58,59 +58,41 @@ export default async function CourseDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  // Fetch concept matches with flashcards for this course
-    const conceptMatches = await prisma.conceptMatch.findMany({
-      where: {
-        syllabusConcept: {
-          courseId: course.id,
-        },
-        flashcards: {
-          some: {
-            userId: user.id,
-          },
-        },
+  // Fetch all flashcards for this course (locked + unlocked)
+  const flashcardsRaw = await prisma.flashcard.findMany({
+    where: {
+      userId: user.id,
+      syllabusConcept: { courseId: course.id },
+    },
+    include: {
+      syllabusConcept: {
+        select: { conceptText: true, category: true },
       },
-      include: {
-        concept: {
-          select: {
-            conceptText: true,
-            definition: true,
-          },
-        },
-        syllabusConcept: {
-          select: {
-            conceptText: true,
-            category: true,
-          },
-        },
-        flashcards: {
-          where: {
-            userId: user.id,
-          },
-          select: {
-            id: true,
-            question: true,
-            answer: true,
-            sourceTimestamp: true,
-            timesReviewed: true,
-            timesCorrect: true,
-            lastReviewedAt: true,
-          },
-        },
-      },
-      orderBy: {
-        confidence: "desc",
-      },
-    });
-  
-    // Normalize flashcard fields to match frontend types (convert nullable answer to empty string)
-        const normalizedConceptMatches = conceptMatches.map((cm) => ({
-          ...cm,
-          flashcards: cm.flashcards.map((f) => ({
-            ...f,
-            answer: f.answer,
-          })),
-        }));
+    },
+    orderBy: {
+      syllabusConcept: { order: "asc" },
+    },
+  });
+
+  // Normalize hints JSON -> string[] | undefined for client component
+  const flashcards = flashcardsRaw.map(f => {
+    const rawHints = f.hints as unknown;
+    const hints = Array.isArray(rawHints) ? rawHints.filter(h => typeof h === "string") : undefined;
+    return {
+      id: f.id,
+      question: f.question,
+      answer: f.answer,
+      state: f.state,
+      difficulty: f.difficulty,
+      hints,
+      syllabusConcept: f.syllabusConcept,
+      unlockedAt: f.unlockedAt,
+      unlockedBy: f.unlockedBy,
+      sourceTimestamp: f.sourceTimestamp,
+      timesReviewed: f.timesReviewed,
+      timesCorrect: f.timesCorrect,
+    };
+  });
 
   const topSubdirectories = await prisma.knowledgeNode.findMany({
     where: {
@@ -153,10 +135,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
   return (
     <div className="container mx-auto py-8 space-y-6">
 
-      <CourseFlashcardsView
-        course={course}
-        conceptMatches={normalizedConceptMatches}
-      />
+      <CourseFlashcardsView course={course} flashcards={flashcards} />
 
       {visibleTopSubdirectories.length > 0 && (
         <Card className="w-full">

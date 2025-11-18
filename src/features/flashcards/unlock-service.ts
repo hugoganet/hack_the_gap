@@ -3,7 +3,7 @@
  * Unlocks flashcard answers when high-confidence concept matches are found
  */
 
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/prisma"; // Align with project-wide prisma import convention
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import type { ConceptMatch, Concept, SyllabusConcept } from "@/generated/prisma";
@@ -133,7 +133,7 @@ export async function unlockFlashcardAnswers(
   });
 
   // Execute all tasks in parallel (or concurrently) and collect results
-  const settled = await Promise.allSettled(tasks.map((t) => t()));
+  const settled = await Promise.allSettled(tasks.map(async (t) => t()));
   for (const r of settled) {
     if (r.status === "fulfilled" && r.value) {
       unlocked.push(r.value);
@@ -150,6 +150,117 @@ export async function unlockFlashcardAnswers(
   }
 
   return unlocked;
+}
+
+/**
+ * Force-unlock a single flashcard from a concept match (e.g. user confirmed a partial match)
+ * Bypasses confidence threshold and treats the match as if it were high-confidence.
+ * Idempotent: if flashcard already unlocked via this match, it returns existing state without duplicating events.
+ */
+export async function forceUnlockFlashcardAnswer(
+  conceptMatchId: string,
+  userId: string
+): Promise<UnlockResult | null> {
+  const match = await prisma.conceptMatch.findUnique({
+    where: { id: conceptMatchId },
+    include: {
+      concept: true,
+      syllabusConcept: true,
+    },
+  });
+
+  if (!match) {
+    console.log(`forceUnlock: ConceptMatch not found ${conceptMatchId}`);
+    return null;
+  }
+
+  // Locate locked flashcard for this syllabus concept + user
+  const flashcard = await prisma.flashcard.findFirst({
+    where: {
+      syllabusConceptId: match.syllabusConceptId,
+      userId,
+    },
+    include: { syllabusConcept: true },
+  });
+
+  if (!flashcard) {
+    console.log(`forceUnlock: No flashcard found for syllabusConcept ${match.syllabusConceptId}`);
+    return null;
+  }
+
+  // If already unlocked (answer present + state unlocked) do not regenerate
+  if (flashcard.state === "unlocked" && flashcard.answer) {
+    console.log(`forceUnlock: Flashcard already unlocked ${flashcard.id}`);
+    return {
+      flashcardId: flashcard.id,
+      question: flashcard.question,
+      answer: flashcard.answer,
+      conceptText: flashcard.syllabusConcept.conceptText,
+      unlockedAt: flashcard.unlockedAt ?? new Date(),
+      source: flashcard.unlockedBy ?? "manual-confirmation",
+      confidence: match.confidence,
+    };
+  }
+
+  // Fetch content job for source attribution & for unlock event foreign key
+  const contentJob = await prisma.contentJob.findUnique({
+    where: { id: match.concept.contentJobId },
+    select: { id: true, fileName: true, url: true },
+  });
+
+  const source = contentJob?.fileName || contentJob?.url || "manual-confirmation";
+
+  // Generate answer (reuse internal helper)
+  const answer = await generateAnswerFromContent(
+    match.concept,
+    match.syllabusConcept,
+    match.rationale || "User confirmed match"
+  );
+
+  const updated = await prisma.flashcard.update({
+    where: { id: flashcard.id },
+    data: {
+      answer,
+      conceptMatchId: match.id,
+      state: "unlocked",
+      unlockedAt: new Date(),
+      unlockedBy: match.concept.contentJobId,
+      nextReviewAt: new Date(),
+    },
+  });
+
+  // Mark user feedback for auditing (treat as exact)
+  await prisma.conceptMatch.update({
+    where: { id: match.id },
+    data: {
+      matchType: match.matchType === "exact" ? match.matchType : "exact",
+      userFeedback: "correct",
+    },
+  });
+
+  // Create unlock event (manual override equivalent)
+  await prisma.unlockEvent.create({
+    data: {
+      userId,
+      flashcardId: updated.id,
+      contentJobId: match.concept.contentJobId,
+      conceptMatchId: match.id,
+      confidence: match.confidence,
+    },
+  });
+
+  // Update stats (single unlock)
+  await updateUserStatsAfterUnlock(userId, 1);
+
+  return {
+    flashcardId: updated.id,
+    question: updated.question,
+    answer,
+    conceptText: match.syllabusConcept.conceptText,
+    unlockedAt: updated.unlockedAt ?? new Date(),
+    source,
+    confidence: match.confidence,
+  };
 }
 
 /**

@@ -25,9 +25,11 @@ import { matchConceptsAction } from "@app/actions/match-concepts.action";
 import { toast } from "sonner";
 import { MatchResultsDialog, type MatchResultsData } from "./match-results-dialog";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export const ClientOrg = () => {
   const locale = useLocale();
+  const router = useRouter();
   const t = useTranslations("dashboard.users.inbox");
   const [dragActive, setDragActive] = useState(false);
   const [url, setUrl] = useState("");
@@ -335,8 +337,18 @@ export const ClientOrg = () => {
 
     <MatchResultsDialog
       open={showMatchDialog}
-      onOpenChange={setShowMatchDialog}
+      onOpenChange={(open) => {
+        setShowMatchDialog(open);
+        // Refresh the page when dialog closes to show unlocked flashcards
+        if (!open) {
+          router.refresh();
+        }
+      }}
       data={matchResults}
+      onFlashcardUnlocked={() => {
+        // Refresh immediately when a flashcard is unlocked
+        router.refresh();
+      }}
     />
     </>
   );

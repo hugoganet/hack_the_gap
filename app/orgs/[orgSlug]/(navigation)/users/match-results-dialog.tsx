@@ -23,9 +23,9 @@ import {
   ChevronUp,
   ThumbsUp,
   ThumbsDown,
-  ArrowRight
+  ArrowRight,
+  Loader2
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export type ConceptMatchDetail = {
@@ -55,15 +55,18 @@ type MatchResultsDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   data: MatchResultsData | null;
+  onFlashcardUnlocked?: () => void;
 };
 
 export function MatchResultsDialog({
   open,
   onOpenChange,
   data,
+  onFlashcardUnlocked,
 }: MatchResultsDialogProps) {
   const [expandedSection, setExpandedSection] = useState<"high" | "medium" | null>(null);
   const [feedbackMap, setFeedbackMap] = useState<Record<string, "correct" | "incorrect">>({});
+  const [unlocking, setUnlocking] = useState<Record<string, boolean>>({});
 
   if (!data) return null;
 
@@ -79,29 +82,42 @@ export function MatchResultsDialog({
   };
 
   const handleFeedback = async (matchId: string, feedback: "correct" | "incorrect") => {
-    // Optimistic update
-    setFeedbackMap(prev => ({ ...prev, [matchId]: feedback }));
-    
-    // TODO: Send feedback to backend
+    if (feedback === "correct") {
+      // Unlock flow
+      setUnlocking(prev => ({ ...prev, [matchId]: true }));
+      try {
+        const res = await fetch(`/api/concept-matches/confirm/${matchId}`, { method: "POST" });
+        const json = await res.json();
+        if (json.success) {
+          setFeedbackMap(prev => ({ ...prev, [matchId]: "correct" }));
+          toast.success("🎉 Flashcard unlocked! Ready to review");
+          // Notify parent that a flashcard was unlocked
+          onFlashcardUnlocked?.();
+        } else {
+          toast.error(json.error || "Failed to unlock flashcard");
+        }
+      } catch (e) {
+        toast.error("Failed to unlock flashcard");
+      } finally {
+        setUnlocking(prev => ({ ...prev, [matchId]: false }));
+      }
+      return;
+    }
+    // Incorrect feedback path
+    setFeedbackMap(prev => ({ ...prev, [matchId]: "incorrect" }));
     try {
       await fetch(`/api/concept-matches/${matchId}/feedback`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userFeedback: feedback }),
+        body: JSON.stringify({ userFeedback: "incorrect" }),
       });
-      
-      toast.success(
-        feedback === "correct" 
-          ? "Thanks! Marked as correct match" 
-          : "Thanks for the feedback! We'll improve our matching"
-      );
-    } catch (error) {
-      console.error("Error submitting feedback:", error);
-      // Revert optimistic update
+      toast.success("Thanks for the feedback! We'll improve our matching");
+    } catch {
       setFeedbackMap(prev => {
         const { [matchId]: _, ...rest } = prev;
         return rest;
       });
+      toast.error("Failed to process feedback. Please try again.");
     }
   };
 
@@ -213,11 +229,12 @@ export function MatchResultsDialog({
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
+                                    disabled={unlocking[match.id]}
+                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900 disabled:opacity-50"
                                     onClick={() => void handleFeedback(match.id, "correct")}
                                     title="Confirm match"
                                   >
-                                    <ThumbsUp className="size-4" />
+                                    {unlocking[match.id] ? <Loader2 className="size-4 animate-spin" /> : <ThumbsUp className="size-4" />}
                                   </Button>
                                 </>
                               )}
@@ -308,11 +325,12 @@ export function MatchResultsDialog({
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
+                                    disabled={unlocking[match.id]}
+                                    className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900 disabled:opacity-50"
                                     onClick={() => void handleFeedback(match.id, "correct")}
                                     title="Confirm match"
                                   >
-                                    <ThumbsUp className="size-4" />
+                                    {unlocking[match.id] ? <Loader2 className="size-4 animate-spin" /> : <ThumbsUp className="size-4" />}
                                   </Button>
                                   <Button
                                     size="sm"
