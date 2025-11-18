@@ -1,19 +1,26 @@
 import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, Calendar, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export async function CardsToReviewToday() {
   const user = await getRequiredUser();
+  const locale = await getLocale();
+  const t = await getTranslations("dashboard.users.reviewsToday");
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  // Get flashcards due for review today
+  // Infer flashcard element type from prisma.findMany result
+  type FlashcardWithMatch = Awaited<ReturnType<typeof prisma.flashcard.findMany>> extends Array<infer T> ? T : never;
+
   const flashcardsToday = await prisma.flashcard.findMany({
     where: {
       userId: user.id,
@@ -54,7 +61,7 @@ export async function CardsToReviewToday() {
     },
   });
 
-  // Get flashcards due tomorrow
+  // Count flashcards due tomorrow
   const dayAfterTomorrow = new Date(tomorrow);
   dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 1);
 
@@ -68,8 +75,8 @@ export async function CardsToReviewToday() {
     },
   });
 
-  // Group flashcards by course
-  const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: typeof flashcardsToday }>>((acc, flashcard) => {
+  // Group flashcards by course (single declaration)
+  const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: FlashcardWithMatch[] }>>((acc, flashcard) => {
     const courseId = flashcard.conceptMatch.syllabusConcept.course.id;
     if (!(courseId in acc)) {
       acc[courseId] = {
@@ -88,40 +95,28 @@ export async function CardsToReviewToday() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Brain className="size-5" />
-          Cartes à réviser aujourd'hui
+          {t("title")}
         </CardTitle>
-        <CardDescription>
-          {flashcardsToday.length === 0
-            ? "Aucune carte à réviser"
-            : `${flashcardsToday.length} carte${flashcardsToday.length > 1 ? "s" : ""} à réviser`}
-        </CardDescription>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
+
       <CardContent>
-        {flashcardsToday.length === 0 ? (
-          <div className="py-8 text-center space-y-3">
-            <div className="flex justify-center">
-              <div className="rounded-full bg-muted p-3">
-                <Brain className="size-8 text-foreground" />
-              </div>
-            </div>
-            <div>
-              <p className="font-medium text-foreground">
-                Tu es à jour de tes répétitions pour aujourd'hui ! 🎉
+        {coursesWithFlashcards.length === 0 ? (
+          <div className="space-y-3">
+            <p className="font-medium text-foreground">{t("upToDate")}</p>
+            {flashcardsTomorrow > 0 && (
+              <p className="mt-2 text-sm text-muted-foreground flex items-center justify-center gap-1">
+                <Calendar className="size-4" />
+                {t("dueTomorrow", { count: flashcardsTomorrow })}
               </p>
-              {flashcardsTomorrow > 0 && (
-                <p className="mt-2 text-sm text-muted-foreground flex items-center justify-center gap-1">
-                  <Calendar className="size-4" />
-                  Tu as {flashcardsTomorrow} carte{flashcardsTomorrow > 1 ? "s" : ""} à réviser demain
-                </p>
-              )}
-            </div>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
             {coursesWithFlashcards.map(({ course, flashcards }) => (
               <Link
                 key={course.id}
-                href={`/dashboard/courses/${course.id}/review`}
+                href={`/${locale}/dashboard/courses/${course.id}/review`}
                 className="block"
               >
                 <Button
@@ -140,7 +135,7 @@ export async function CardsToReviewToday() {
                         {course.code}
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
-                        {flashcards.length} carte{flashcards.length > 1 ? "s" : ""} à réviser
+                        {t("perCourseCount", { count: flashcards.length })}
                       </div>
                     </div>
                   </div>

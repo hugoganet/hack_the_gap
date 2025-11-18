@@ -25,8 +25,8 @@ import {
   ThumbsDown,
   ArrowRight
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export type ConceptMatchDetail = {
   id: string;
@@ -62,6 +62,7 @@ export function MatchResultsDialog({
   onOpenChange,
   data,
 }: MatchResultsDialogProps) {
+  const t = useTranslations("dashboard.users.matchResults");
   const [expandedSection, setExpandedSection] = useState<"high" | "medium" | null>(null);
   const [feedbackMap, setFeedbackMap] = useState<Record<string, "correct" | "incorrect">>({});
 
@@ -92,11 +93,10 @@ export function MatchResultsDialog({
       
       toast.success(
         feedback === "correct" 
-          ? "Thanks! Marked as correct match" 
-          : "Thanks for the feedback! We'll improve our matching"
+          ? t("feedback.toast.correct") 
+          : t("feedback.toast.incorrect")
       );
-    } catch (error) {
-      console.error("Error submitting feedback:", error);
+    } catch {
       // Revert optimistic update
       setFeedbackMap(prev => {
         const { [matchId]: _, ...rest } = prev;
@@ -113,15 +113,13 @@ export function MatchResultsDialog({
             <Sparkles className="size-6 text-yellow-500" />
             <DialogTitle className="text-2xl">
               {isExcellent
-                ? "🎉 Excellent Matches!"
+                ? t("title.excellent")
                 : isGood
-                  ? "✅ Great Progress!"
-                  : "📊 Matching Complete"}
+                  ? t("title.good")
+                  : t("title.complete")}
             </DialogTitle>
           </div>
-          <DialogDescription>
-            Your concepts have been matched to your course syllabi
-          </DialogDescription>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-4">
@@ -138,11 +136,9 @@ export function MatchResultsDialog({
                     <div className="flex items-center gap-3">
                       <CheckCircle2 className="size-5 text-green-600 dark:text-green-400" />
                       <div>
-                        <p className="font-semibold text-green-900 dark:text-green-100">
-                          High Confidence
-                        </p>
+                        <p className="font-semibold text-green-900 dark:text-green-100">{t("high.title")}</p>
                         <p className="text-sm text-green-700 dark:text-green-300">
-                          {expandedSection === "high" ? "Click to collapse" : "Click to review matches"}
+                          {expandedSection === "high" ? t("high.collapse") : t("high.expand")}
                         </p>
                       </div>
                     </div>
@@ -181,10 +177,10 @@ export function MatchResultsDialog({
                               </p>
                               <div className="flex items-center gap-2 flex-wrap">
                                 <Badge variant="outline" className="text-xs">
-                                  {Math.round(match.confidence * 100)}% confident
+                                  {t("badges.confidence", { percent: Math.round(match.confidence * 100) })}
                                 </Badge>
                                 <Badge variant="outline" className="text-xs capitalize">
-                                  {match.matchType}
+                                  {t("badges.type", { type: match.matchType })}
                                 </Badge>
                               </div>
                             </div>
@@ -192,13 +188,9 @@ export function MatchResultsDialog({
                             {/* Feedback Buttons */}
                             <div className="flex gap-1 flex-shrink-0">
                               {feedbackMap[match.id] === "correct" ? (
-                                <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">
-                                  ✓ Confirmed
-                                </Badge>
+                                <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">{t("feedback.confirmed")}</Badge>
                               ) : feedbackMap[match.id] === "incorrect" ? (
-                                <Badge variant="secondary" className="bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300">
-                                  ✗ Rejected
-                                </Badge>
+                                <Badge variant="secondary" className="bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300">{t("feedback.rejected")}</Badge>
                               ) : (
                                 <>
                                   <Button
@@ -206,7 +198,7 @@ export function MatchResultsDialog({
                                     variant="ghost"
                                     className="h-8 w-8 p-0 text-red-600 hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-900"
                                     onClick={() => void handleFeedback(match.id, "incorrect")}
-                                    title="Mark as incorrect match"
+                                    title={t("feedback.tooltip.incorrect")}
                                   >
                                     <ThumbsDown className="size-4" />
                                   </Button>
@@ -215,7 +207,7 @@ export function MatchResultsDialog({
                                     variant="ghost"
                                     className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
                                     onClick={() => void handleFeedback(match.id, "correct")}
-                                    title="Confirm match"
+                                    title={t("feedback.tooltip.correct")}
                                   >
                                     <ThumbsUp className="size-4" />
                                   </Button>
@@ -242,11 +234,9 @@ export function MatchResultsDialog({
                     <div className="flex items-center gap-3">
                       <AlertCircle className="size-5 text-yellow-600 dark:text-yellow-400" />
                       <div>
-                        <p className="font-semibold text-yellow-900 dark:text-yellow-100">
-                          Partial Matches
-                        </p>
+                        <p className="font-semibold text-yellow-900 dark:text-yellow-100">{t("partial.title")}</p>
                         <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                          {expandedSection === "medium" ? "Click to collapse" : "Click to review - confirmation recommended"}
+                          {expandedSection === "medium" ? t("high.collapse") : t("partial.hint")}
                         </p>
                       </div>
                     </div>
@@ -285,10 +275,10 @@ export function MatchResultsDialog({
                               </p>
                               <div className="flex items-center gap-2 flex-wrap">
                                 <Badge variant="outline" className="text-xs">
-                                  {Math.round(match.confidence * 100)}% confident
+                                  {t("badges.confidence", { percent: Math.round(match.confidence * 100) })}
                                 </Badge>
                                 <Badge variant="outline" className="text-xs capitalize">
-                                  {match.matchType}
+                                  {t("badges.type", { type: match.matchType })}
                                 </Badge>
                               </div>
                             </div>
@@ -310,7 +300,7 @@ export function MatchResultsDialog({
                                     variant="ghost"
                                     className="h-8 w-8 p-0 text-green-600 hover:bg-green-100 hover:text-green-700 dark:hover:bg-green-900"
                                     onClick={() => void handleFeedback(match.id, "correct")}
-                                    title="Confirm match"
+                                    title={t("feedback.tooltip.correct")}
                                   >
                                     <ThumbsUp className="size-4" />
                                   </Button>
@@ -319,7 +309,7 @@ export function MatchResultsDialog({
                                     variant="ghost"
                                     className="h-8 w-8 p-0 text-red-600 hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-900"
                                     onClick={() => void handleFeedback(match.id, "incorrect")}
-                                    title="Mark as incorrect match"
+                                    title={t("feedback.tooltip.incorrect")}
                                   >
                                     <ThumbsDown className="size-4" />
                                   </Button>
@@ -342,12 +332,8 @@ export function MatchResultsDialog({
                   <div className="flex items-center gap-3">
                     <XCircle className="size-5 text-gray-500 dark:text-gray-400" />
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-gray-100">
-                        Unmatched
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        No clear syllabus match
-                      </p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{t("unmatched.title")}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t("unmatched.description")}</p>
                     </div>
                   </div>
                   <Badge variant="outline" className="text-gray-600">
@@ -363,17 +349,15 @@ export function MatchResultsDialog({
             <div className="flex items-center gap-2">
               <TrendingUp className="size-4 text-muted-foreground" />
               <div>
-                <p className="text-xs text-muted-foreground">Avg. Confidence</p>
+                <p className="text-xs text-muted-foreground">{t("stats.avgConfidence")}</p>
                 <p className="text-lg font-semibold">{confidencePercentage}%</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="size-4 text-muted-foreground" />
               <div>
-                <p className="text-xs text-muted-foreground">Processing Time</p>
-                <p className="text-lg font-semibold">
-                  {(data.durationMs / 1000).toFixed(1)}s
-                </p>
+                <p className="text-xs text-muted-foreground">{t("stats.processingTime")}</p>
+                <p className="text-lg font-semibold">{t("stats.seconds", { seconds: (data.durationMs / 1000).toFixed(1) })}</p>
               </div>
             </div>
           </div>
@@ -381,23 +365,17 @@ export function MatchResultsDialog({
           {/* Encouragement Message */}
           {isExcellent && (
             <div className="rounded-lg bg-primary/10 p-4 text-center">
-              <p className="text-sm font-medium text-primary">
-                🌟 Outstanding! You're covering the course material excellently.
-              </p>
+              <p className="text-sm font-medium text-primary">{t("encouragement.excellent")}</p>
             </div>
           )}
           {isGood && !isExcellent && (
             <div className="rounded-lg bg-blue-50 p-4 text-center dark:bg-blue-950">
-              <p className="text-sm font-medium text-blue-700 dark:text-blue-300">
-                💪 Great job! You're building solid coverage of the syllabus.
-              </p>
+              <p className="text-sm font-medium text-blue-700 dark:text-blue-300">{t("encouragement.good")}</p>
             </div>
           )}
           {!isGood && (
             <div className="rounded-lg bg-orange-50 p-4 text-center dark:bg-orange-950">
-              <p className="text-sm font-medium text-orange-700 dark:text-orange-300">
-                📚 Keep going! Try more videos to cover additional concepts.
-              </p>
+              <p className="text-sm font-medium text-orange-700 dark:text-orange-300">{t("encouragement.keepGoing")}</p>
             </div>
           )}
         </div>
@@ -408,7 +386,7 @@ export function MatchResultsDialog({
             onClick={() => onOpenChange(false)}
             className="w-full sm:w-auto"
           >
-            Close
+            {t("actions.close")}
           </Button>
           <Button
             onClick={() => {
@@ -417,7 +395,7 @@ export function MatchResultsDialog({
             }}
             className="w-full sm:w-auto"
           >
-            Start Learning →
+            {t("actions.startLearning")}
           </Button>
         </DialogFooter>
       </DialogContent>

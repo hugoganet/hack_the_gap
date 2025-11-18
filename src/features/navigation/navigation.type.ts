@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 
 export type NavigationGroup = {
   title: string;
+  titleKey?: string;
   roles?: AuthRole[];
   links: NavigationLink[];
   defaultOpenStartPath?: string;
@@ -17,6 +18,7 @@ type NavigationLink = {
       >
     | LucideIcon;
   label: string;
+  labelKey?: string;
   roles?: AuthRole[];
   hidden?: boolean;
   links?: NavigationLink[];

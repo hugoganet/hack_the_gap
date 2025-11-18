@@ -65,23 +65,23 @@ export async function matchConceptsAction(input: {
 
     const { videoJobId, courseId } = validation.data;
 
-    // 3. Check video job ownership
-    const videoJob = await prisma.videoJob.findUnique({
+    // 3. Check content job ownership
+    const contentJob = await prisma.contentJob.findUnique({
       where: { id: videoJobId },
       select: { userId: true, status: true },
     });
 
-    if (!videoJob) {
+    if (!contentJob) {
       return {
         success: false,
-        error: "Video job not found",
+        error: "Content job not found",
       };
     }
 
-    if (videoJob.userId !== user.id) {
+    if (contentJob.userId !== user.id) {
       return {
         success: false,
-        error: "You don't have permission to access this video job",
+        error: "You don't have permission to access this content job",
       };
     }
 
@@ -117,8 +117,8 @@ export async function matchConceptsAction(input: {
       };
     }
 
-    // 6. Update video job status to "matching"
-    await prisma.videoJob.update({
+    // 6. Update content job status to "matching"
+    await prisma.contentJob.update({
       where: { id: videoJobId },
       data: { status: "matching" },
     });
@@ -140,7 +140,7 @@ export async function matchConceptsAction(input: {
       console.error("[Matching] Algorithm error:", matchError);
       
       // Update status to failed
-      await prisma.videoJob.update({
+      await prisma.contentJob.update({
         where: { id: videoJobId },
         data: {
           status: "matching_failed",
@@ -167,7 +167,7 @@ export async function matchConceptsAction(input: {
       console.error("[Matching] Database write error:", writeError);
       
       // Update status to failed
-      await prisma.videoJob.update({
+      await prisma.contentJob.update({
         where: { id: videoJobId },
         data: {
           status: "matching_failed",
@@ -181,8 +181,8 @@ export async function matchConceptsAction(input: {
       };
     }
 
-    // 9. Update video job status to "matched"
-    await prisma.videoJob.update({
+    // 9. Update content job status to "matched"
+    await prisma.contentJob.update({
       where: { id: videoJobId },
       data: {
         status: "matched",
@@ -202,8 +202,8 @@ export async function matchConceptsAction(input: {
         skipped: flashcardSummary.skipped,
       });
 
-      // Update video job status to "completed" after flashcard generation
-      await prisma.videoJob.update({
+      // Update content job status to "completed" after flashcard generation
+      await prisma.contentJob.update({
         where: { id: videoJobId },
         data: {
           status: "completed",
@@ -216,7 +216,7 @@ export async function matchConceptsAction(input: {
       // Just update status to "matched" (flashcards can be generated later)
       console.warn("[Matching] Continuing despite flashcard generation error");
       
-      await prisma.videoJob.update({
+      await prisma.contentJob.update({
         where: { id: videoJobId },
         data: {
           status: "matched",

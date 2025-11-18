@@ -216,13 +216,17 @@ exports.Prisma.SyllabusConceptScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.VideoJobScalarFieldEnum = {
+exports.Prisma.ContentJobScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   url: 'url',
+  contentType: 'contentType',
   youtubeVideoId: 'youtubeVideoId',
   tiktokVideoId: 'tiktokVideoId',
-  transcript: 'transcript',
+  fileName: 'fileName',
+  fileSize: 'fileSize',
+  pageCount: 'pageCount',
+  extractedText: 'extractedText',
   status: 'status',
   processedConceptsCount: 'processedConceptsCount',
   errorMessage: 'errorMessage',
@@ -232,7 +236,7 @@ exports.Prisma.VideoJobScalarFieldEnum = {
 
 exports.Prisma.ConceptScalarFieldEnum = {
   id: 'id',
-  videoJobId: 'videoJobId',
+  contentJobId: 'contentJobId',
   conceptText: 'conceptText',
   definition: 'definition',
   timestamp: 'timestamp',
@@ -330,7 +334,13 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-
+exports.ContentType = exports.$Enums.ContentType = {
+  youtube: 'youtube',
+  tiktok: 'tiktok',
+  pdf: 'pdf',
+  url: 'url',
+  podcast: 'podcast'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -342,7 +352,7 @@ exports.Prisma.ModelName = {
   Course: 'Course',
   UserCourse: 'UserCourse',
   SyllabusConcept: 'SyllabusConcept',
-  VideoJob: 'VideoJob',
+  ContentJob: 'ContentJob',
   Concept: 'Concept',
   ConceptMatch: 'ConceptMatch',
   Flashcard: 'Flashcard',

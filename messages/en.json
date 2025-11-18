@@ -3,5 +3,301 @@
     "hero": {
       "title": "Transform Passive Learning into Active Retention"
     }
+  },
+  "footer": {
+    "sections": {
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "links": {
+      "blog": "Blog",
+      "docs": "Documentation",
+      "dashboard": "Dashboard",
+      "account": "Account",
+      "about": "About",
+      "contact": "Contact",
+      "terms": "Terms",
+      "privacy": "Privacy"
+    }
+  },
+  "sidebar": {
+    "groups": {
+      "menu": "Menu",
+      "account": "Account"
+    },
+    "links": {
+      "dashboard": "Dashboard",
+      "myLearning": "My Learning",
+      "courses": "Courses",
+      "settings": "Settings"
+    }
+  },
+  "dashboard": {
+    "courses": {
+      "welcome": "Welcome",
+      "welcomeNamed": "Welcome, {name}",
+      "subtitle": "Manage your courses and track your learning progress",
+      "actions": {
+        "new": "New"
+      },
+      "myCourses": "My courses",
+      "loading": "Loading courses..."
+      ,"empty": {
+        "title": "No courses yet",
+        "description": "Get started by creating your first course. Add your syllabus and start learning with AI-powered flashcards.",
+        "action": "Add a new course"
+      },
+      "detail": {
+        "subdirectories": {
+          "title": "Subdirectories",
+          "description": "Browse the course structure",
+          "count": "{count, plural, one {# concept} other {# concepts}}"
+        }
+      },
+      "node": {
+        "back": "Back to course",
+        "concepts": {
+          "title": "Concepts",
+          "description": "Concepts linked to this section for the course \"{courseName}\"",
+          "empty": "No concepts directly attached to this subdirectory for this course.",
+          "importanceLabel": "Importance:"
+        }
+      },
+      "flashcards": {
+        "back": "Back to courses",
+        "startReview": "Start Review Session",
+        "section": {
+          "title": "Concepts & Flashcards",
+          "description": "Click on a concept to view its flashcard"
+        },
+        "empty": {
+          "title": "No flashcards available yet for this course.",
+          "hint": "Flashcards will be generated automatically when you upload and process videos."
+        },
+        "reviewedShort": "Reviewed {count}x",
+        "accuracyShort": "{percent}% correct",
+        "dialog": {
+          "question": "Question",
+          "showAnswer": "Show Answer",
+          "answer": "Answer"
+        },
+        "meta": {
+          "source": "Source: {timestamp}",
+          "reviewedTimes": "Reviewed {count} times",
+          "correctCount": "{correct}/{reviewed} correct"
+        }
+      }
+    }
+    ,"overview": {
+      "title": "Dashboard"
+    }
+    ,"users": {
+      "title": "Never lose what you learn",
+      "reviewsToday": {
+        "title": "Cards to review today",
+        "count": "{count, plural, =0 {No cards to review} one {# card to review} other {# cards to review}}",
+        "upToDate": "You're up to date with today's reviews! 🎉",
+        "dueTomorrow": "You have {count} {count, plural, one {card} other {cards}} to review tomorrow",
+        "perCourseCount": "{count, plural, one {# card to review} other {# cards to review}}"
+      },
+      "inbox": {
+        "title": "Content Inbox",
+        "description": "Drop a URL or file to process content",
+        "drag": {
+          "dropHere": "Drop here",
+          "dragDrop": "Drag & drop content",
+          "supported": "YouTube, TikTok, articles, or PDF files"
+        },
+        "input": {
+          "placeholder": "Or paste a URL here..."
+        },
+        "button": {
+          "process": "Process",
+          "processing": "Processing"
+        },
+        "types": {
+          "youtube": "YouTube",
+          "tiktok": "TikTok",
+          "articles": "Articles",
+          "pdfs": "PDFs"
+        },
+        "toast": {
+          "successTitle": "✅ Processing complete!",
+          "successDesc": "Extracted {count} {count, plural, one {concept} other {concepts}} and matched to your courses",
+          "loadFailed": "Failed to load course data",
+          "processFailed": "Failed to process content",
+          "unexpected": "An unexpected error occurred. Please try again."
+        },
+        "browseHint": "Or use the search above to find courses quickly"
+      },
+      "addCourse": {
+        "title": "Add Course",
+        "description": "Search for a course or browse by subject",
+        "search": { "placeholder": "Quick search by course name or code..." },
+        "empty": "No results found.",
+        "headings": {
+          "searchResults": "Search Results",
+          "selectSubject": "Select Subject",
+          "selectCourse": "Select Course"
+        },
+        "overlay": { "adding": "Adding course..." },
+        "toast": {
+          "added": "Added {name} to your courses",
+          "failed": "Failed to add course",
+          "loadFailed": "Failed to load course data"
+        }
+      },
+      "courseSelection": {
+        "addButton": "Add Course"
+      },
+      "matchResults": {
+        "title": {
+          "excellent": "🎉 Excellent Matches!",
+          "good": "✅ Great Progress!",
+          "complete": "📊 Matching Complete"
+        },
+        "description": "Your concepts have been matched to your course syllabi",
+        "high": {
+          "title": "High Confidence",
+          "collapse": "Click to collapse",
+          "expand": "Click to review matches"
+        },
+        "partial": {
+          "title": "Partial Matches",
+          "hint": "Click to review - confirmation recommended"
+        },
+        "badges": {
+          "confidence": "{percent}% confident",
+          "type": "{type}"
+        },
+        "feedback": {
+          "confirmed": "✓ Confirmed",
+          "rejected": "✗ Rejected",
+          "tooltip": {
+            "incorrect": "Mark as incorrect match",
+            "correct": "Confirm match"
+          },
+          "toast": {
+            "correct": "Thanks! Marked as correct match",
+            "incorrect": "Thanks for the feedback! We'll improve our matching"
+          }
+        },
+        "unmatched": {
+          "title": "Unmatched",
+          "description": "No clear syllabus match"
+        },
+        "stats": {
+          "avgConfidence": "Avg. Confidence",
+          "processingTime": "Processing Time",
+          "seconds": "{seconds}s"
+        },
+        "encouragement": {
+          "excellent": "🌟 Outstanding! You're covering the course material excellently.",
+          "good": "💪 Great job! You're building solid coverage of the syllabus.",
+          "keepGoing": "📚 Keep going! Try more videos to cover additional concepts."
+        },
+        "actions": {
+          "close": "Close",
+          "startLearning": "Start Learning →"
+        }
+      }
+      ,"charts": {
+        "users": {
+          "title": "Active Users",
+          "description": "Monthly active users by device",
+          "series": {
+            "desktop": "Desktop",
+            "mobile": "Mobile"
+          },
+          "footer": {
+            "trending": "Trending up by {percent}% this month"
+          }
+        },
+        "donut": {
+          "title": "Pie Chart - Donut with Text",
+          "visitors": "Visitors",
+          "browsers": {
+            "chrome": "Chrome",
+            "safari": "Safari",
+            "firefox": "Firefox",
+            "edge": "Edge",
+            "other": "Other"
+          },
+          "footer": {
+            "trending": "Trending up by {percent}% this month",
+            "sub": "Showing total visitors for the last 6 months"
+          }
+        }
+      }
+    }
+    ,"courseDialog": {
+      "title": "Create a new course",
+      "description": "Add a new course to start learning with AI-powered flashcards.",
+      "fields": {
+        "subject": {
+          "label": "Subject",
+          "placeholder": "e.g., Philosophy, Mathematics, History",
+          "empty": "No subjects found.",
+          "searching": "Searching..."
+        },
+        "name": {
+          "label": "Course Name",
+          "placeholder": "e.g., Introduction to Philosophy"
+        },
+        "learningGoal": {
+          "label": "Learning Goal",
+          "placeholder": "Paste your course syllabus, outline, or any course materials here..."
+        }
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "create": "Create Course"
+      },
+      "errors": {
+        "subjectRequired": "Subject is required",
+        "nameMin": "Course name must be at least 3 characters",
+        "goalMin": "Learning goal must be at least 10 characters"
+      },
+      "toast": {
+        "success": "Course created successfully!",
+        "error": "Failed to create course. Please try again."
+      }
+    }
+  },
+  "auth": {
+    "signin": {
+      "description": "Please sign in to your account to continue.",
+      "or": "or",
+      "noAccount": "You don't have an account?",
+      "signUp": "Sign up",
+      "preferPassword": "Prefer password sign in?",
+      "usePassword": "Use password",
+      "wantFaster": "Want faster sign in?",
+      "loginWithOtp": "Login with OTP code"
+      ,"passwordForm": {
+        "email": { "label": "Email" },
+        "password": { "label": "Password", "forgot": "Forgot password ?" },
+        "submit": "Sign in"
+      }
+    }
+  }
+  ,"account": {
+    "profile": {
+      "toast": {
+        "updated": "Profile updated",
+        "verificationSent": "Verification email sent"
+      },
+      "email": {
+        "label": "Email",
+        "verifiedInfo": "Email verified. If you change your email, you will need to verify it again.",
+        "verifyAction": "Verify email"
+      },
+      "actions": {
+        "changeEmail": "Change email",
+        "changePassword": "Change password",
+        "save": "Save"
+      }
+    }
   }
 }

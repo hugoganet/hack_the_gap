@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { CoursesList } from "./_components/courses-list";
 import { CreateCourseDialog } from "./_components/create-course-dialog";
 import { EmptyCoursesState } from "./_components/empty-courses-state";
+import { useTranslations } from "next-intl";
 
 type Course = {
   id: string;
@@ -27,6 +28,7 @@ type Course = {
 };
 
 export default function CoursesPage() {
+  const t = useTranslations("dashboard.courses");
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -58,7 +60,7 @@ export default function CoursesPage() {
     void fetchData();
   }, []);
 
-  const welcomeMessage = userName ? `Welcome, ${userName}` : "Welcome";
+  const welcomeMessage = userName ? t("welcomeNamed", { name: userName }) : t("welcome");
 
   return (
     <>
@@ -68,13 +70,13 @@ export default function CoursesPage() {
             <div className="space-y-1">
               <LayoutTitle>{welcomeMessage}</LayoutTitle>
               <p className="text-muted-foreground text-sm">
-                Manage your courses and track your learning progress
+                {t("subtitle")}
               </p>
             </div>
             {courses.length > 0 && (
               <Button onClick={() => setIsDialogOpen(true)}>
                 <Plus className="mr-2" />
-                New
+                {t("actions.new")}
               </Button>
             )}
           </div>
@@ -82,10 +84,10 @@ export default function CoursesPage() {
 
         <LayoutContent className="flex flex-col gap-6">
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold">My courses</h2>
+            <h2 className="text-xl font-semibold">{t("myCourses")}</h2>
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
-                <div className="text-muted-foreground">Loading courses...</div>
+                <div className="text-muted-foreground">{t("loading")}</div>
               </div>
             ) : courses.length === 0 ? (
               <EmptyCoursesState onCreateCourse={() => setIsDialogOpen(true)} />

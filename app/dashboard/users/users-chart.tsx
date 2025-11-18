@@ -17,35 +17,42 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useTranslations, useFormatter } from "next-intl";
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: 0, desktop: 186, mobile: 80 },
+  { month: 1, desktop: 305, mobile: 200 },
+  { month: 2, desktop: 237, mobile: 120 },
+  { month: 3, desktop: 73, mobile: 190 },
+  { month: 4, desktop: 209, mobile: 130 },
+  { month: 5, desktop: 214, mobile: 140 },
 ];
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
-} satisfies ChartConfig;
-
 export function UsersChart() {
+  const t = useTranslations("dashboard.users.charts.users");
+  const f = useFormatter();
+
+  const start = new Date(2024, 0, 1);
+  const end = new Date(2024, 5, 1);
+  const startLabel = f.dateTime(start, { month: "long" });
+  const endLabel = f.dateTime(end, { month: "long" });
+
+  const chartConfig: ChartConfig = {
+    desktop: {
+      label: t("series.desktop"),
+      color: "var(--chart-1)",
+    },
+    mobile: {
+      label: t("series.mobile"),
+      color: "var(--chart-2)",
+    },
+  };
+
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -63,7 +70,9 @@ export function UsersChart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value: number) =>
+                f.dateTime(new Date(2024, value, 1), { month: "short" })
+              }
             />
             <ChartTooltip
               cursor={false}
@@ -92,10 +101,10 @@ export function UsersChart() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="size-4" />
+              {t("footer.trending", { percent: 5.2 })} <TrendingUp className="size-4" />
             </div>
             <div className="text-muted-foreground flex items-center gap-2 leading-none">
-              January - June 2024
+              {startLabel} - {endLabel} 2024
             </div>
           </div>
         </div>

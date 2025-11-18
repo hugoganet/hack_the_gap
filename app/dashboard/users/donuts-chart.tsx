@@ -18,6 +18,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useFormatter, useTranslations } from "next-intl";
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
@@ -26,42 +27,49 @@ const chartData = [
   { browser: "other", visitors: 190, fill: "var(--color-other)" },
 ];
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "var(--chart-3)",
-  },
-  edge: {
-    label: "Edge",
-    color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
-  },
-} satisfies ChartConfig;
-
 export function DonutChart() {
+  const t = useTranslations("dashboard.users.charts.donut");
+  const f = useFormatter();
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
   }, []);
 
+  const start = new Date(2024, 0, 1);
+  const end = new Date(2024, 5, 1);
+  const startLabel = f.dateTime(start, { month: "long" });
+  const endLabel = f.dateTime(end, { month: "long" });
+
+  const chartConfig: ChartConfig = {
+    visitors: {
+      label: t("visitors"),
+    },
+    chrome: {
+      label: t("browsers.chrome"),
+      color: "var(--chart-1)",
+    },
+    safari: {
+      label: t("browsers.safari"),
+      color: "var(--chart-2)",
+    },
+    firefox: {
+      label: t("browsers.firefox"),
+      color: "var(--chart-3)",
+    },
+    edge: {
+      label: t("browsers.edge"),
+      color: "var(--chart-4)",
+    },
+    other: {
+      label: t("browsers.other"),
+      color: "var(--chart-5)",
+    },
+  };
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{startLabel} - {endLabel} 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -95,14 +103,14 @@ export function DonutChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {f.number(totalVisitors)}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy ?? 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          {t("visitors")}
                         </tspan>
                       </text>
                     );
@@ -115,10 +123,10 @@ export function DonutChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="size-4" />
+          {t("footer.trending", { percent: 5.2 })} <TrendingUp className="size-4" />
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          {t("footer.sub")}
         </div>
       </CardFooter>
     </Card>

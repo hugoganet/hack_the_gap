@@ -24,8 +24,10 @@ import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { getAppNavigation } from "./app-navigation.links";
+import { useTranslations } from "next-intl";
 
 export function AppSidebar() {
+  const t = useTranslations("sidebar");
   const links: NavigationGroup[] = getAppNavigation();
 
   return (
@@ -44,7 +46,7 @@ export function AppSidebar() {
             <SidebarGroup key={link.title}>
               <SidebarGroupLabel asChild>
                 <CollapsibleTrigger>
-                  {link.title}
+                  {link.titleKey ? t(link.titleKey) : link.title}
                   <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                 </CollapsibleTrigger>
               </SidebarGroupLabel>

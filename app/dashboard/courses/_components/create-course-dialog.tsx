@@ -28,14 +28,10 @@ import { z } from "zod";
 import { Command, CommandList, CommandEmpty, CommandItem } from "@/components/ui/command";
 import { useDebounceFn } from "@/hooks/use-debounce-fn";
 import { Popover, PopoverContent, PopoverAnchor } from "@/components/ui/popover";
+import { useTranslations } from "next-intl";
 
-const createCourseSchema = z.object({
-  subject: z.string().min(1, "Subject is required"),
-  name: z.string().min(3, "Course name must be at least 3 characters"),
-  learningGoal: z.string().min(10, "Learning goal must be at least 10 characters"),
-});
+// Schema will be created inside component to access translations
 
-type CreateCourseFormData = z.infer<typeof createCourseSchema>;
 
 type CreateCourseDialogProps = {
   open: boolean;
@@ -48,6 +44,15 @@ export function CreateCourseDialog({
 }: CreateCourseDialogProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations("dashboard.courseDialog");
+
+  const createCourseSchema = z.object({
+    subject: z.string().min(1, t("errors.subjectRequired")),
+    name: z.string().min(3, t("errors.nameMin")),
+    learningGoal: z.string().min(10, t("errors.goalMin")),
+  });
+
+  type CreateCourseFormData = z.infer<typeof createCourseSchema>;
 
   const form = useZodForm({
     schema: createCourseSchema,
@@ -75,7 +80,7 @@ export function CreateCourseDialog({
       setSubjectLoading(true);
       const res = await fetch(`/api/subjects?q=${encodeURIComponent(query)}&take=8`);
       if (!res.ok) {
-        throw new Error("Failed to search subjects");
+        throw new Error("searchFailed");
       }
       const data = (await res.json()) as SubjectOption[];
       setSubjectOptions(data);
@@ -109,13 +114,13 @@ export function CreateCourseDialog({
       }
 
       const course = await response.json();
-      toast.success("Course created successfully!");
+      toast.success(t("toast.success"));
       onOpenChange(false);
       form.reset();
       router.push(`/dashboard/courses/${course.id}`);
       router.refresh();
     } catch (error) {
-      toast.error("Failed to create course. Please try again.");
+      toast.error(t("toast.error"));
     } finally {
       setIsSubmitting(false);
     }
@@ -125,9 +130,9 @@ export function CreateCourseDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Create a new course</DialogTitle>
+          <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>
-            Add a new course to start learning with AI-powered flashcards.
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
         <Form form={form} onSubmit={onSubmit}>
@@ -137,12 +142,12 @@ export function CreateCourseDialog({
               name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Subject</FormLabel>
+                  <FormLabel>{t("fields.subject.label")}</FormLabel>
                   <FormControl>
                     <Popover open={subjectOpen} onOpenChange={setSubjectOpen}>
                       <PopoverAnchor asChild>
                         <Input
-                          placeholder="e.g., Philosophy, Mathematics, History"
+                          placeholder={t("fields.subject.placeholder")}
                           {...field}
                           onKeyDown={(e) => {
                             // Prevent nested components (e.g., Command/cmdk) from capturing typing (bubble phase)
@@ -172,9 +177,9 @@ export function CreateCourseDialog({
                       >
                         <Command shouldFilter={false}>
                           <CommandList>
-                            <CommandEmpty>No subjects found.</CommandEmpty>
+                            <CommandEmpty>{t("fields.subject.empty")}</CommandEmpty>
                             {subjectLoading ? (
-                              <div className="p-2 text-sm text-muted-foreground">Searching...</div>
+                              <div className="p-2 text-sm text-muted-foreground">{t("fields.subject.searching")}</div>
                             ) : null}
                             {subjectOptions.map((s) => (
                               <CommandItem
@@ -207,10 +212,10 @@ export function CreateCourseDialog({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Name</FormLabel>
+                  <FormLabel>{t("fields.name.label")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="e.g., Introduction to Philosophy"
+                      placeholder={t("fields.name.placeholder")}
                       {...field}
                     />
                   </FormControl>
@@ -224,10 +229,10 @@ export function CreateCourseDialog({
               name="learningGoal"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Learning Goal</FormLabel>
+                  <FormLabel>{t("fields.learningGoal.label")}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Paste your course syllabus, outline, or any course materials here..."
+                      placeholder={t("fields.learningGoal.placeholder")}
                       className="min-h-[200px] resize-y font-mono text-sm"
                       {...field}
                     />
@@ -244,11 +249,11 @@ export function CreateCourseDialog({
               onClick={() => onOpenChange(false)}
               disabled={isSubmitting}
             >
-              Cancel
+              {t("actions.cancel")}
             </Button>
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" />}
-              Create Course
+              {t("actions.create")}
             </Button>
           </DialogFooter>
         </Form>

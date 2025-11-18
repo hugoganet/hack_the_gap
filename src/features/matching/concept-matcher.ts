@@ -14,9 +14,9 @@ export type MatchResultDTO = {
   llmConfidence: number | null;
 };
 
-export async function matchConceptsToSyllabus(videoJobId: string, courseId: string) {
+export async function matchConceptsToSyllabus(contentJobId: string, courseId: string) {
   const concepts = await prisma.concept.findMany({
-    where: { videoJobId },
+    where: { contentJobId },
     orderBy: { createdAt: "asc" },
   });
   const syllabus = await prisma.syllabusConcept.findMany({

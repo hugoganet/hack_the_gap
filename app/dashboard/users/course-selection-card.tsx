@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, BookOpen, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AddCourseDialog } from "./add-course-dialog";
+import { useLocale, useTranslations } from "next-intl";
 
 type Course = {
   id: string;
@@ -29,6 +30,8 @@ type CourseSelectionCardProps = {
 export function CourseSelectionCard({ 
   activeCourses: initialCourses = []
 }: CourseSelectionCardProps) {
+  const locale = useLocale();
+  const t = useTranslations("dashboard.users.courseSelection");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeCourses, setActiveCourses] = useState<Course[]>(initialCourses);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,8 +45,8 @@ export function CourseSelectionCard({
       const response = await fetch("/api/user/courses");
       const data = await response.json();
       setActiveCourses(data.courses ?? []);
-    } catch (error) {
-      console.error("Error fetching active courses:", error);
+    } catch {
+      setActiveCourses([]);
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +57,10 @@ export function CourseSelectionCard({
 
   const handleCourseClick = (course: Course) => {
     // Navigate to course details page
-    window.location.href = `/orgs/${window.location.pathname.split('/')[2]}/courses/${course.id}`;
+    const m = window.location.pathname.match(/\/orgs\/([^/]+)/);
+    const orgSlug = m ? m[1] : "";
+    const prefix = `/${locale}`;
+    window.location.href = `${prefix}/orgs/${orgSlug}/courses/${course.id}`;
   };
 
   return (
@@ -81,7 +87,7 @@ export function CourseSelectionCard({
                 >
                   <Plus className="size-8 text-muted-foreground" />
                   <span className="text-sm font-medium text-muted-foreground">
-                    Add Course
+                    {t("addButton")}
                   </span>
                 </Button>
 

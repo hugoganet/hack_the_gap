@@ -18,6 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useLocale, useTranslations } from "next-intl";
 
 const LoginCredentialsFormScheme = z.object({
   email: z.string().email(),
@@ -30,6 +31,8 @@ export const SignInPasswordForm = (props: {
   callbackUrl?: string;
   email?: string;
 }) => {
+  const locale = useLocale();
+  const t = useTranslations("auth.signin.passwordForm");
   const form = useZodForm({
     schema: LoginCredentialsFormScheme,
     defaultValues: {
@@ -68,7 +71,7 @@ export const SignInPasswordForm = (props: {
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>{t("email.label")}</FormLabel>
             <FormControl>
               <Input placeholder="john@doe.com" {...field} />
             </FormControl>
@@ -82,9 +85,9 @@ export const SignInPasswordForm = (props: {
         render={({ field }) => (
           <FormItem className="flex-1">
             <div className="flex items-center justify-between">
-              <FormLabel>Password</FormLabel>
-              <Link href="/auth/forget-password" className="text-sm underline">
-                Forgot password ?
+              <FormLabel>{t("password.label")}</FormLabel>
+              <Link href={`/${locale}/auth/forget-password`} className="text-sm underline">
+                {t("password.forgot")}
               </Link>
             </div>
             <FormControl>
@@ -100,7 +103,7 @@ export const SignInPasswordForm = (props: {
         type="submit"
         className="ring-offset-card w-full ring-offset-2"
       >
-        Sign in
+        {t("submit")}
       </LoadingButton>
     </Form>
   );

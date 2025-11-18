@@ -17,7 +17,7 @@ model User {
   reviewSessions  ReviewSession[]
   sessions        Session[]
   userCourses     UserCourse[]
-  videoJobs       VideoJob[]
+  contentJobs     ContentJob[]
 
   @@map("user")
 }

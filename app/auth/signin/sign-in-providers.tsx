@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ProviderButton } from "./provider-button";
 import { SignInCredentialsAndMagicLinkForm } from "./sign-in-credentials-and-magic-link-form";
+import { useTranslations } from "next-intl";
 
 export const SignInProviders = ({
   providers,
@@ -14,6 +15,7 @@ export const SignInProviders = ({
   providers: string[];
   callbackUrl?: string;
 }) => {
+  const t = useTranslations("auth.signin");
   const searchParams = useSearchParams();
   const callbackUrlParams = searchParams.get("callbackUrl");
 
@@ -22,7 +24,7 @@ export const SignInProviders = ({
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <SignInCredentialsAndMagicLinkForm callbackUrl={callbackUrl} />
-      {providers.length > 0 && <Divider>or</Divider>}
+      {providers.length > 0 && <Divider>{t("or")}</Divider>}
 
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-4">
         {/* ℹ️ Add provider you want to support here */}
@@ -35,13 +37,13 @@ export const SignInProviders = ({
       </div>
 
       <Typography variant="muted" className="text-xs">
-        You don't have an account?{" "}
+        {t("noAccount")} {" "}
         <Typography
           variant="link"
           as={Link}
           href={`/auth/signup?callbackUrl=${callbackUrl}`}
         >
-          Sign up
+          {t("signUp")}
         </Typography>
       </Typography>
     </div>

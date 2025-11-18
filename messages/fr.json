@@ -3,5 +3,301 @@
     "hero": {
       "title": "Transformez l’apprentissage passif en rétention active"
     }
+  },
+  "footer": {
+    "sections": {
+      "product": "Produit",
+      "company": "Entreprise",
+      "legal": "Légal"
+    },
+    "links": {
+      "blog": "Blog",
+      "docs": "Documentation",
+      "dashboard": "Tableau de bord",
+      "account": "Compte",
+      "about": "À propos",
+      "contact": "Contact",
+      "terms": "Conditions",
+      "privacy": "Confidentialité"
+    }
+  },
+  "sidebar": {
+    "groups": {
+      "menu": "Menu",
+      "account": "Compte"
+    },
+    "links": {
+      "dashboard": "Tableau de bord",
+      "myLearning": "Mon apprentissage",
+      "courses": "Cours",
+      "settings": "Paramètres"
+    }
+  },
+  "dashboard": {
+    "courses": {
+      "welcome": "Bienvenue",
+      "welcomeNamed": "Bienvenue, {name}",
+      "subtitle": "Gérez vos cours et suivez vos progrès d’apprentissage",
+      "actions": {
+        "new": "Nouveau"
+      },
+      "myCourses": "Mes cours",
+      "loading": "Chargement des cours..."
+      ,"empty": {
+        "title": "Pas encore de cours",
+        "description": "Créez votre premier cours. Ajoutez votre programme et commencez à apprendre avec des fiches générées par l’IA.",
+        "action": "Ajouter un nouveau cours"
+      },
+      "detail": {
+        "subdirectories": {
+          "title": "Sous-dossiers",
+          "description": "Parcourir la structure du cours",
+          "count": "{count, plural, one {# concept} other {# concepts}}"
+        }
+      },
+      "node": {
+        "back": "Retour au cours",
+        "concepts": {
+          "title": "Concepts",
+          "description": "Concepts liés à cette section pour le cours \"{courseName}\"",
+          "empty": "Aucun concept directement attaché à ce sous-dossier pour ce cours.",
+          "importanceLabel": "Importance :"
+        }
+      },
+      "flashcards": {
+        "back": "Retour aux cours",
+        "startReview": "Démarrer une session de révision",
+        "section": {
+          "title": "Concepts et fiches",
+          "description": "Cliquez sur un concept pour afficher sa fiche"
+        },
+        "empty": {
+          "title": "Aucune fiche disponible pour ce cours.",
+          "hint": "Les fiches seront générées automatiquement lorsque vous importerez et traiterez des vidéos."
+        },
+        "reviewedShort": "Révisé {count}×",
+        "accuracyShort": "{percent} % correct",
+        "dialog": {
+          "question": "Question",
+          "showAnswer": "Afficher la réponse",
+          "answer": "Réponse"
+        },
+        "meta": {
+          "source": "Source : {timestamp}",
+          "reviewedTimes": "Révisé {count} fois",
+          "correctCount": "{correct}/{reviewed} bonnes réponses"
+        }
+      }
+    }
+    ,"overview": {
+      "title": "Tableau de bord"
+    }
+    ,"users": {
+      "title": "Ne perdez jamais ce que vous apprenez",
+      "reviewsToday": {
+        "title": "Cartes à réviser aujourd'hui",
+        "count": "{count, plural, =0 {Aucune carte à réviser} one {# carte à réviser} other {# cartes à réviser}}",
+        "upToDate": "Tu es à jour de tes répétitions pour aujourd'hui ! 🎉",
+        "dueTomorrow": "Tu as {count} {count, plural, one {carte} other {cartes}} à réviser demain",
+        "perCourseCount": "{count, plural, one {# carte à réviser} other {# cartes à réviser}}"
+      },
+      "inbox": {
+        "title": "Boîte de contenu",
+        "description": "Déposez une URL ou un fichier pour traiter le contenu",
+        "drag": {
+          "dropHere": "Déposez ici",
+          "dragDrop": "Glissez-déposez du contenu",
+          "supported": "YouTube, TikTok, articles ou fichiers PDF"
+        },
+        "input": {
+          "placeholder": "Ou collez une URL ici..."
+        },
+        "button": {
+          "process": "Traiter",
+          "processing": "Traitement en cours"
+        },
+        "types": {
+          "youtube": "YouTube",
+          "tiktok": "TikTok",
+          "articles": "Articles",
+          "pdfs": "PDF"
+        },
+        "toast": {
+          "successTitle": "✅ Traitement terminé !",
+          "successDesc": "{count, plural, one {# concept extrait et associé à vos cours} other {# concepts extraits et associés à vos cours}}",
+          "loadFailed": "Échec du chargement des données des cours",
+          "processFailed": "Échec du traitement du contenu",
+          "unexpected": "Une erreur inattendue s'est produite. Veuillez réessayer."
+        },
+        "browseHint": "Ou utilisez la recherche ci-dessus pour trouver rapidement des cours"
+      },
+      "addCourse": {
+        "title": "Ajouter un cours",
+        "description": "Recherchez un cours ou parcourez par matière",
+        "search": { "placeholder": "Recherche rapide par nom ou code du cours..." },
+        "empty": "Aucun résultat trouvé.",
+        "headings": {
+          "searchResults": "Résultats de recherche",
+          "selectSubject": "Sélectionner une matière",
+          "selectCourse": "Sélectionner un cours"
+        },
+        "overlay": { "adding": "Ajout du cours..." },
+        "toast": {
+          "added": "{name} a été ajouté à vos cours",
+          "failed": "Échec de l'ajout du cours",
+          "loadFailed": "Échec du chargement des données des cours"
+        }
+      },
+      "courseSelection": {
+        "addButton": "Ajouter un cours"
+      },
+      "matchResults": {
+        "title": {
+          "excellent": "🎉 Correspondances excellentes !",
+          "good": "✅ Très bons progrès !",
+          "complete": "📊 Correspondance terminée"
+        },
+        "description": "Vos concepts ont été associés aux programmes de vos cours",
+        "high": {
+          "title": "Haute confiance",
+          "collapse": "Cliquer pour réduire",
+          "expand": "Cliquer pour voir les correspondances"
+        },
+        "partial": {
+          "title": "Correspondances partielles",
+          "hint": "Cliquer pour voir — confirmation recommandée"
+        },
+        "badges": {
+          "confidence": "{percent}% de confiance",
+          "type": "{type}"
+        },
+        "feedback": {
+          "confirmed": "✓ Confirmé",
+          "rejected": "✗ Rejeté",
+          "tooltip": {
+            "incorrect": "Marquer comme correspondance incorrecte",
+            "correct": "Confirmer la correspondance"
+          },
+          "toast": {
+            "correct": "Merci ! Marqué comme correspondance correcte",
+            "incorrect": "Merci pour le retour ! Nous améliorerons notre appariement"
+          }
+        },
+        "unmatched": {
+          "title": "Non apparié",
+          "description": "Aucune correspondance claire avec le programme"
+        },
+        "stats": {
+          "avgConfidence": "Confiance moyenne",
+          "processingTime": "Temps de traitement",
+          "seconds": "{seconds}s"
+        },
+        "encouragement": {
+          "excellent": "🌟 Excellent ! Vous couvrez très bien le contenu du cours.",
+          "good": "💪 Bravo ! Vous construisez une solide couverture du programme.",
+          "keepGoing": "📚 Continuez ! Essayez plus de vidéos pour couvrir d'autres concepts."
+        },
+        "actions": {
+          "close": "Fermer",
+          "startLearning": "Commencer à apprendre →"
+        }
+      }
+      ,"charts": {
+        "users": {
+          "title": "Utilisateurs actifs",
+          "description": "Utilisateurs actifs mensuels par appareil",
+          "series": {
+            "desktop": "Ordinateur",
+            "mobile": "Mobile"
+          },
+          "footer": {
+            "trending": "Tendance en hausse de {percent}% ce mois-ci"
+          }
+        },
+        "donut": {
+          "title": "Diagramme - Donut avec texte",
+          "visitors": "Visiteurs",
+          "browsers": {
+            "chrome": "Chrome",
+            "safari": "Safari",
+            "firefox": "Firefox",
+            "edge": "Edge",
+            "other": "Autre"
+          },
+          "footer": {
+            "trending": "Tendance en hausse de {percent}% ce mois-ci",
+            "sub": "Affichage du total des visiteurs sur les 6 derniers mois"
+          }
+        }
+      }
+    }
+    ,"courseDialog": {
+      "title": "Créer un nouveau cours",
+      "description": "Ajoutez un nouveau cours pour commencer à apprendre avec des fiches mémoire générées par l’IA.",
+      "fields": {
+        "subject": {
+          "label": "Sujet",
+          "placeholder": "ex. Philosophie, Mathématiques, Histoire",
+          "empty": "Aucun sujet trouvé.",
+          "searching": "Recherche..."
+        },
+        "name": {
+          "label": "Nom du cours",
+          "placeholder": "ex. Introduction à la Philosophie"
+        },
+        "learningGoal": {
+          "label": "Objectif d’apprentissage",
+          "placeholder": "Collez votre programme, plan ou matériel de cours ici..."
+        }
+      },
+      "actions": {
+        "cancel": "Annuler",
+        "create": "Créer le cours"
+      },
+      "errors": {
+        "subjectRequired": "Le sujet est requis",
+        "nameMin": "Le nom du cours doit contenir au moins 3 caractères",
+        "goalMin": "L’objectif doit contenir au moins 10 caractères"
+      },
+      "toast": {
+        "success": "Cours créé avec succès !",
+        "error": "Échec de la création du cours. Réessayez."
+      }
+    }
+  },
+  "auth": {
+    "signin": {
+      "description": "Veuillez vous connecter à votre compte pour continuer.",
+      "or": "ou",
+      "noAccount": "Vous n’avez pas de compte ?",
+      "signUp": "Inscrivez-vous",
+      "preferPassword": "Préférez-vous vous connecter avec mot de passe ?",
+      "usePassword": "Utiliser le mot de passe",
+      "wantFaster": "Vous voulez une connexion plus rapide ?",
+      "loginWithOtp": "Se connecter avec un code OTP"
+      ,"passwordForm": {
+        "email": { "label": "E-mail" },
+        "password": { "label": "Mot de passe", "forgot": "Mot de passe oublié ?" },
+        "submit": "Se connecter"
+      }
+    }
+  }
+  ,"account": {
+    "profile": {
+      "toast": {
+        "updated": "Profil mis à jour",
+        "verificationSent": "E-mail de vérification envoyé"
+      },
+      "email": {
+        "label": "E-mail",
+        "verifiedInfo": "E-mail vérifié. Si vous changez d’e-mail, vous devrez le vérifier à nouveau.",
+        "verifyAction": "Vérifier l’e-mail"
+      },
+      "actions": {
+        "changeEmail": "Changer d’e-mail",
+        "changePassword": "Changer le mot de passe",
+        "save": "Enregistrer"
+      }
+    }
   }
 }

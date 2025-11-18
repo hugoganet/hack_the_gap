@@ -23,8 +23,11 @@ import { processContent } from "@app/actions/process-content.action";
 import { matchConceptsAction } from "@app/actions/match-concepts.action";
 import { toast } from "sonner";
 import { MatchResultsDialog, type MatchResultsData } from "./match-results-dialog";
+import { useLocale, useTranslations } from "next-intl";
 
 export const ClientOrg = () => {
+  const locale = useLocale();
+  const t = useTranslations("dashboard.users.inbox");
   const [dragActive, setDragActive] = useState(false);
   const [url, setUrl] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -73,8 +76,8 @@ export const ClientOrg = () => {
         const concepts = result.data?.processedConceptsCount ?? 0;
         
         // Show success toast
-        toast.success(`✅ Processing complete!`, {
-          description: `Extracted ${concepts} concept${concepts === 1 ? "" : "s"} and matched to your courses`,
+        toast.success(t("toast.successTitle"), {
+          description: t("toast.successDesc", { count: concepts }),
           duration: 3000,
         });
         
@@ -94,11 +97,11 @@ export const ClientOrg = () => {
         setUrl("");
       } else {
         const error = "error" in result ? result.error : undefined;
-        toast.error(error ?? "Failed to process content");
+        toast.error(error ?? t("toast.processFailed"));
       }
     } catch (error) {
       console.error("Error processing content:", error);
-      toast.error("An unexpected error occurred. Please try again.");
+      toast.error(t("toast.unexpected"));
     } finally {
       setIsProcessing(false);
     }
@@ -126,10 +129,10 @@ export const ClientOrg = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Upload className="size-5" />
-            Content Inbox
+            {t("title")}
           </CardTitle>
           <CardDescription>
-            Drop a URL or file to process content
+            {t("description")}
           </CardDescription>
         </CardHeader>
       <CardContent className="space-y-4">
@@ -162,10 +165,10 @@ export const ClientOrg = () => {
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium">
-                {dragActive ? "Drop here" : "Drag & drop content"}
+                {dragActive ? t("drag.dropHere") : t("drag.dragDrop")}
               </p>
               <p className="text-xs text-muted-foreground">
-                YouTube, TikTok, articles, or PDF files
+                {t("drag.supported")}
               </p>
             </div>
           </div>
@@ -177,7 +180,7 @@ export const ClientOrg = () => {
             <div className="relative flex-1">
               <Input
                 type="url"
-                placeholder="Or paste a URL here..."
+                placeholder={t("input.placeholder")}
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => {
@@ -202,10 +205,10 @@ export const ClientOrg = () => {
               {isProcessing ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  Processing
+                  {t("button.processing")}
                 </>
               ) : (
-                "Process"
+                t("button.process")
               )}
             </Button>
           </div>
@@ -214,19 +217,19 @@ export const ClientOrg = () => {
           <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Video className="size-3 text-red-500" />
-              <span>YouTube</span>
+              <span>{t("types.youtube")}</span>
             </div>
             <div className="flex items-center gap-1">
               <Video className="size-3 text-cyan-500" />
-              <span>TikTok</span>
+              <span>{t("types.tiktok")}</span>
             </div>
             <div className="flex items-center gap-1">
               <Link2 className="size-3 text-primary" />
-              <span>Articles</span>
+              <span>{t("types.articles")}</span>
             </div>
             <div className="flex items-center gap-1">
               <FileText className="size-3 text-orange-500" />
-              <span>PDFs</span>
+              <span>{t("types.pdfs")}</span>
             </div>
           </div>
         </div>

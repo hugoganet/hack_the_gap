@@ -5,6 +5,7 @@ import { CourseFlashcardsView } from "./course-flashcards-view";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FolderTree } from "lucide-react";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 
 function getNodeDescription(meta: unknown): string | undefined {
   if (meta && typeof meta === "object") {
@@ -25,6 +26,8 @@ type PageProps = {
 export default async function CourseDetailPage({ params }: PageProps) {
   const { courseId } = await params;
   const user = await getRequiredUser();
+  const locale = await getLocale();
+  const t = await getTranslations("dashboard.courses.detail.subdirectories");
 
   // Fetch course with enrollment check
   const course = await prisma.course.findUnique({
@@ -149,9 +152,9 @@ export default async function CourseDetailPage({ params }: PageProps) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FolderTree className="size-5" />
-              Subdirectories
+              {t("title")}
             </CardTitle>
-            <CardDescription>Browse the course structure</CardDescription>
+            <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -165,7 +168,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 return (
                   <Link
                     key={node.id}
-                    href={`/dashboard/courses/${course.id}/nodes/${node.id}`}
+                    href={`/${locale}/dashboard/courses/${course.id}/nodes/${node.id}`}
                   >
                     <Card className="hover:border-primary transition-all cursor-pointer">
                       <CardHeader>
@@ -178,7 +181,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                       </CardHeader>
                       <CardContent>
                         <div className="text-sm text-muted-foreground">
-                          {totalCount} concepts
+                          {t("count", { count: totalCount })}
                         </div>
                       </CardContent>
                     </Card>

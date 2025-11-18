@@ -239,7 +239,7 @@ async function prepareConceptMatchInput(conceptMatchId: string): Promise<Concept
     include: {
       concept: {
         include: {
-          videoJob: true,
+          contentJob: true,
         },
       },
       syllabusConcept: {
@@ -282,9 +282,9 @@ async function prepareConceptMatchInput(conceptMatchId: string): Promise<Concept
       academicLevel,
     },
     video: {
-      id: match.concept.videoJob.id,
+      id: match.concept.contentJob.id,
       title: null, // Not stored in current schema
-      youtubeVideoId: match.concept.videoJob.youtubeVideoId,
+      youtubeVideoId: match.concept.contentJob.youtubeVideoId,
     },
     match: {
       confidence: match.confidence,
@@ -295,7 +295,7 @@ async function prepareConceptMatchInput(conceptMatchId: string): Promise<Concept
 }
 
 /**
- * Generates flashcards for all high-confidence matches of a video job
+ * Generates flashcards for all high-confidence matches of a content job
  * Only generates for matches with confidence >= HIGH threshold (0.8)
  */
 export async function generateFlashcardsForVideoJob(
@@ -304,13 +304,13 @@ export async function generateFlashcardsForVideoJob(
 ): Promise<FlashcardGenerationSummary> {
   const startTime = Date.now();
 
-  console.log(`[Flashcard Generation] Starting batch generation for videoJob ${videoJobId}`);
+  console.log(`[Flashcard Generation] Starting batch generation for contentJob ${videoJobId}`);
 
-  // Get all high-confidence matches for this video job
+  // Get all high-confidence matches for this content job
   const matches = await prisma.conceptMatch.findMany({
     where: {
       concept: {
-        videoJobId,
+        contentJobId: videoJobId,
       },
       confidence: {
         gte: MATCH_THRESHOLDS.HIGH, // 0.8

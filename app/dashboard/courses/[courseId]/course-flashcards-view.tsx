@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { BookOpen, Brain, ChevronRight, Clock, CheckCircle2, Play, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
 type Course = {
   id: string;
@@ -49,6 +50,8 @@ type CourseFlashcardsViewProps = {
 
 export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcardsViewProps) {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations("dashboard.courses.flashcards");
   const [selectedConcept, setSelectedConcept] = useState<ConceptMatch | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -65,7 +68,7 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
   const flashcard = selectedConcept?.flashcards[0];
 
   const handleStartReview = () => {
-    router.push(`/dashboard/courses/${course.id}/review`);
+    router.push(`/${locale}/dashboard/courses/${course.id}/review`);
   };
 
   return (
@@ -77,10 +80,10 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
             <BookOpen className="size-4" />
             <span>{course.subject.name}</span>
           </div>
-          <Link href="/dashboard/courses">
+          <Link href={`/${locale}/dashboard/courses`}>
             <Button variant="outline" className="gap-2">
               <ArrowLeft className="size-4" />
-              Back to courses
+              {t("back")}
             </Button>
           </Link>
         </div>
@@ -89,7 +92,7 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
           {conceptMatches.length > 0 && (
             <Button onClick={handleStartReview} size="lg" className="gap-2">
               <Play className="size-4" />
-              Start Review Session
+              {t("startReview")}
             </Button>
           )}
         </div>
@@ -100,10 +103,10 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Brain className="size-5" />
-            Concepts & Flashcards
+            {t("section.title")}
           </CardTitle>
           <CardDescription>
-            Click on a concept to view its flashcard
+            {t("section.description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -111,10 +114,10 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
             <div className="py-12 text-center">
               <Brain className="mx-auto size-12 text-muted-foreground/50" />
               <p className="mt-4 text-sm text-muted-foreground">
-                No flashcards available yet for this course.
+                {t("empty.title")}
               </p>
               <p className="mt-2 text-xs text-muted-foreground">
-                Flashcards will be generated automatically when you upload and process videos.
+                {t("empty.hint")}
               </p>
             </div>
           ) : (
@@ -153,12 +156,12 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
                             <>
                               <span className="flex items-center gap-1">
                                 <Clock className="size-3" />
-                                Reviewed {flashcard.timesReviewed}x
+                                {t("reviewedShort", { count: flashcard.timesReviewed })}
                               </span>
                               {accuracy !== null && (
                                 <span className="flex items-center gap-1">
                                   <CheckCircle2 className="size-3" />
-                                  {accuracy}% correct
+                                  {t("accuracyShort", { percent: accuracy })}
                                 </span>
                               )}
                             </>
@@ -189,7 +192,7 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
             <div className="space-y-6 py-4">
               {/* Question */}
               <div className="space-y-2">
-                <div className="text-sm font-medium text-muted-foreground">Question</div>
+                <div className="text-sm font-medium text-muted-foreground">{t("dialog.question")}</div>
                 <div className="text-lg font-medium">{flashcard.question}</div>
               </div>
 
@@ -200,12 +203,12 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
                   className="w-full"
                   size="lg"
                 >
-                  Show Answer
+                  {t("dialog.showAnswer")}
                 </Button>
               ) : (
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <div className="text-sm font-medium text-muted-foreground">Answer</div>
+                    <div className="text-sm font-medium text-muted-foreground">{t("dialog.answer")}</div>
                     <div className="rounded-lg border bg-muted/50 p-4">
                       <p className="text-base leading-relaxed">{flashcard.answer}</p>
                     </div>
@@ -216,16 +219,16 @@ export function CourseFlashcardsView({ course, conceptMatches }: CourseFlashcard
                     {flashcard.sourceTimestamp && (
                       <span className="flex items-center gap-1">
                         <Clock className="size-3" />
-                        Source: {flashcard.sourceTimestamp}
+                        {t("meta.source", { timestamp: flashcard.sourceTimestamp })}
                       </span>
                     )}
                     {flashcard.timesReviewed > 0 && (
                       <>
                         <span>•</span>
-                        <span>Reviewed {flashcard.timesReviewed} times</span>
+                        <span>{t("meta.reviewedTimes", { count: flashcard.timesReviewed })}</span>
                         <span>•</span>
                         <span>
-                          {flashcard.timesCorrect}/{flashcard.timesReviewed} correct
+                          {t("meta.correctCount", { correct: flashcard.timesCorrect, reviewed: flashcard.timesReviewed })}
                         </span>
                       </>
                     )}

@@ -11,8 +11,10 @@ import { Brain, Calendar, Zap, Clock, Mail, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { submitBetaInvitation } from "@app/actions/beta-invitation.action";
+import { useLocale } from "next-intl";
 
 export default function HomePage() {
+  const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState("");
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
@@ -108,10 +110,10 @@ export default function HomePage() {
           </TypographyP>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
-              <Link href="/auth/signup">Get Started</Link>
+              <Link href={`/${locale}/auth/signup`}>Get Started</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/auth/signin">Sign In</Link>
+              <Link href={`/${locale}/auth/signin`}>Sign In</Link>
             </Button>
           </div>
         </div>
@@ -291,7 +293,7 @@ export default function HomePage() {
             Join students who are transforming their passive content consumption into active learning
           </TypographyP>
           <Button size="lg" asChild>
-            <Link href="/auth/signup">Start Learning Smarter</Link>
+            <Link href={`/${locale}/auth/signup`}>Start Learning Smarter</Link>
           </Button>
         </div>
       </section>

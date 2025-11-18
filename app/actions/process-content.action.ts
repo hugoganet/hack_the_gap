@@ -8,30 +8,14 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { generateText } from "ai";
 import { getBlackboxModel } from "@/lib/blackbox";
-import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
 import { MATCH_THRESHOLDS } from "@/features/matching/config";
 import { matchConceptsAction } from "./match-concepts.action";
+import { extractContent, detectContentType } from "@/features/content-extraction";
+import { matchConceptsToSyllabus } from "@/features/matching/concept-matcher";
 
 const ProcessContentSchema = z.object({
   url: z.string().url("Invalid URL format"),
 });
-
-type SocialKitYouTubeResponse = {
-  success: boolean;
-  data?: {
-    url: string;
-    transcript: string; // Already a full string, not an array
-    transcriptSegments: {
-      text: string;
-      start: number;
-      duration: number;
-      timestamp: string;
-    }[];
-    wordCount: number;
-    segments: number;
-  };
-  error?: string;
-};
 
 export async function processContent(url: string) {
   // Get authenticated user
@@ -40,7 +24,7 @@ export async function processContent(url: string) {
   try {
     // Validate URL
     const validation = ProcessContentSchema.safeParse({ url });
-    
+
     if (!validation.success) {
       return {
         success: false,
@@ -50,129 +34,81 @@ export async function processContent(url: string) {
 
     const validatedUrl = validation.data.url;
 
-    // Determine content type (YouTube or TikTok)
-    const isYouTube =
-      validatedUrl.includes("youtube.com") ||
-      validatedUrl.includes("youtu.be");
+    // Detect content type and extract content
+    const detection = detectContentType(validatedUrl);
+    console.log(`Processing ${detection.contentType} content from: ${validatedUrl}`);
 
-    const isTikTok = validatedUrl.includes("tiktok.com");
+    const { contentType, result: extractionResult } = await extractContent(validatedUrl);
 
-    if (!isYouTube && !isTikTok) {
+    if (!extractionResult.success || !extractionResult.data) {
       return {
         success: false,
-        error: "Currently only YouTube and TikTok videos are supported",
+        error: extractionResult.error ?? "Failed to extract content",
       };
     }
 
-    // Extract video ID based on platform
-    let videoId: string | null = null;
-    let platform: "youtube" | "tiktok";
+    const { extractedText, metadata } = extractionResult.data;
 
-    if (isYouTube) {
-      videoId = extractYouTubeVideoId(validatedUrl);
-      platform = "youtube";
-
-      if (!videoId) {
-        return {
-          success: false,
-          error: "Could not extract video ID from YouTube URL",
-        };
-      }
-    } else {
-      videoId = extractTikTokVideoId(validatedUrl);
-      platform = "tiktok";
-
-      if (!videoId) {
-        return {
-          success: false,
-          error: "Could not extract video ID from TikTok URL",
-        };
-      }
-    }
-
-    // Check if API key is available
-    if (!env.SOCIALKIT_API_KEY) {
-      console.error("SOCIALKIT_API_KEY is not configured");
-      return {
-        success: false,
-        error: "API key not configured. Please check your environment variables.",
-      };
-    }
-
-    // Build API URL based on platform
-    const apiEndpoint = platform === "youtube" ? "youtube" : "tiktok";
-    const apiUrl = `https://api.socialkit.dev/${apiEndpoint}/transcript?access_key=${env.SOCIALKIT_API_KEY}&url=${encodeURIComponent(validatedUrl)}`;
-    console.log("Calling SocialKit API:", apiUrl.replace(env.SOCIALKIT_API_KEY, "***"));
-
-    // Call SocialKit API
-    const response = await fetch(apiUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    console.log("Content extracted successfully:", {
+      contentType,
+      textLength: extractedText.length,
+      metadata,
     });
 
-    console.log("API Response status:", response.status);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("API Error Response:", errorText);
-      
-      let errorData;
-      try {
-        errorData = JSON.parse(errorText);
-      } catch {
-        errorData = { message: errorText };
-      }
-      
-      return {
-        success: false,
-        error: errorData.message ?? `API error: ${response.status} - ${errorText}`,
-      };
-    }
-
-    const apiResponse: SocialKitYouTubeResponse = await response.json();
-
-    if (!apiResponse.success || apiResponse.error) {
-      return {
-        success: false,
-        error: apiResponse.error ?? "Failed to process video",
-      };
-    }
-
-    if (!apiResponse.data) {
-      return {
-        success: false,
-        error: "Failed to process video - no data returned",
-      };
-    }
-
-    // The transcript is already a full string from the API
-    const fullTranscript = apiResponse.data.transcript;
-    
-    console.log("Processed video data:", {
-      url: apiResponse.data.url,
-      wordCount: apiResponse.data.wordCount,
-      segments: apiResponse.data.segments,
-      transcriptPreview: `${fullTranscript.substring(0, 100)}...`,
-    });
-
-    // Store transcript in database
+    // Store content in database
     try {
-      const videoJob = await prisma.videoJob.create({
-        data: {
-          userId: user.id,
-          url: validatedUrl,
-          youtubeVideoId: platform === "youtube" ? videoId : null,
-          tiktokVideoId: platform === "tiktok" ? videoId : null,
-          transcript: fullTranscript,
-          status: "transcript_fetched",
-        },
+      // Prepare content-type specific fields
+      const contentJobData: {
+        userId: string;
+        url: string;
+        contentType: typeof contentType;
+        extractedText: string;
+        status: string;
+        youtubeVideoId?: string;
+        tiktokVideoId?: string;
+        fileName?: string;
+        fileSize?: number;
+        pageCount?: number;
+      } = {
+        userId: user.id,
+        url: validatedUrl,
+        contentType,
+        extractedText,
+        status: "text_extracted",
+      };
+
+      // Add content-type specific metadata
+      if (contentType === "youtube" || contentType === "tiktok") {
+        const videoMetadata = metadata as {
+          videoId: string;
+          wordCount: number;
+          segments: number;
+        };
+
+        if (contentType === "youtube") {
+          contentJobData.youtubeVideoId = videoMetadata.videoId;
+        } else {
+          contentJobData.tiktokVideoId = videoMetadata.videoId;
+        }
+      } else if (contentType === "pdf") {
+        const pdfMetadata = metadata as {
+          fileName: string;
+          fileSize: number;
+          pageCount: number;
+        };
+
+        contentJobData.fileName = pdfMetadata.fileName;
+        contentJobData.fileSize = pdfMetadata.fileSize;
+        contentJobData.pageCount = pdfMetadata.pageCount;
+      }
+
+      const contentJob = await prisma.contentJob.create({
+        data: contentJobData,
       });
 
-      console.log("Stored video job in database:", videoJob.id);
+      console.log("Stored content job in database:", contentJob.id);
 
-      // Phase 2: Extract concepts using the production prompt (prefer Blackbox, fallback OpenAI)
+      // Phase 2: Extract concepts using the production prompt
       let processedConceptsCount: number | undefined;
       try {
         // Choose model provider: Blackbox first if key present, else OpenAI if key present
@@ -183,21 +119,26 @@ export async function processContent(url: string) {
           const { openaiModel } = await import("@/lib/ai");
           model = openaiModel;
         } else {
-          console.warn("No AI provider configured (BLACKBOX_API_KEY or OPENAI_API_KEY). Skipping concept extraction.");
+          console.warn(
+            "No AI provider configured (BLACKBOX_API_KEY or OPENAI_API_KEY). Skipping concept extraction."
+          );
         }
 
         if (model) {
-          const promptPath = path.resolve(process.cwd(), "src/master-prompts/transcript-concept-extraction-prompt.md");
+          const promptPath = path.resolve(
+            process.cwd(),
+            "src/master-prompts/transcript-concept-extraction-prompt.md"
+          );
           const promptContent = await fs.readFile(promptPath, "utf8");
 
           // Build user message using the template defined in the prompt
           const transcriptBlock = [
-            "Please extract atomic, testable learning concepts from the following video transcript.",
+            `Please extract atomic, testable learning concepts from the following ${contentType} content.`,
             "Return a single JSON object that follows the schema in your instructions.",
             "",
-            "---TRANSCRIPT START---",
-            fullTranscript,
-            "---TRANSCRIPT END---",
+            "---CONTENT START---",
+            extractedText,
+            "---CONTENT END---",
           ].join("\n");
 
           // Keep temperature low for consistency
@@ -225,13 +166,17 @@ export async function processContent(url: string) {
             console.warn("Concept extraction returned error:", parsed.error);
           } else if (parsed.concepts && parsed.concepts.length > 0) {
             // Normalize and clamp fields to Prisma constraints
-            const conceptsData = parsed.concepts.map((c) => ({
-              videoJobId: videoJob.id,
-              conceptText: truncate(c.conceptText.trim(), 100),
-              definition: c.definition ? truncate(c.definition.trim(), 400) : null,
-              timestamp: c.timestamp?.trim() ?? null,
-              confidence: Number.isFinite(c.confidence) ? Math.max(0, Math.min(1, c.confidence)) : 0.0,
-            })).filter((c) => c.conceptText.length >= 3);
+            const conceptsData = parsed.concepts
+              .map(c => ({
+                contentJobId: contentJob.id,
+                conceptText: truncate(c.conceptText.trim(), 100),
+                definition: c.definition ? truncate(c.definition.trim(), 400) : null,
+                timestamp: c.timestamp?.trim() ?? null,
+                confidence: Number.isFinite(c.confidence)
+                  ? Math.max(0, Math.min(1, c.confidence))
+                  : 0.0,
+              }))
+              .filter(c => c.conceptText.length >= 3);
 
             if (conceptsData.length > 0) {
               // Insert concepts
@@ -239,8 +184,8 @@ export async function processContent(url: string) {
               processedConceptsCount = conceptsData.length;
 
               // Update job with count and status
-              await prisma.videoJob.update({
-                where: { id: videoJob.id },
+              await prisma.contentJob.update({
+                where: { id: contentJob.id },
                 data: {
                   processedConceptsCount,
                   status: "concepts_extracted",
@@ -248,7 +193,7 @@ export async function processContent(url: string) {
                 },
               });
               console.log(
-                `Concept extraction complete: ${processedConceptsCount} concepts inserted for videoJob ${videoJob.id}`,
+                `Concept extraction complete: ${processedConceptsCount} concepts inserted for contentJob ${contentJob.id}`
               );
 
               // 🆕 AUTO-TRIGGER MATCHING
@@ -265,39 +210,43 @@ export async function processContent(url: string) {
                 } else if (userCourses.length === 1) {
                   // Single course - auto-match immediately
                   const course = userCourses[0];
-                  console.log(`[Auto-Match] Triggering automatic matching to course: ${course.course.name}`);
-                  
+                  console.log(
+                    `[Auto-Match] Triggering automatic matching to course: ${course.course.name}`
+                  );
+
                   const matchResult = await matchConceptsAction({
-                    videoJobId: videoJob.id,
+                    videoJobId: contentJob.id, // Note: the action still uses videoJobId param name for now
                     courseId: course.courseId,
                   });
 
                   if (matchResult.success && matchResult.data) {
                     console.log(
-                      `[Auto-Match] ✓ Completed: ${matchResult.data.created} matches created (${matchResult.data.high} high, ${matchResult.data.medium} medium confidence)`,
+                      `[Auto-Match] ✓ Completed: ${matchResult.data.created} matches created (${matchResult.data.high} high, ${matchResult.data.medium} medium confidence)`
                     );
                   } else {
                     console.error(`[Auto-Match] ✗ Failed:`, matchResult.error);
                   }
                 } else {
                   // Multiple courses - match to all active courses
-                  console.log(`[Auto-Match] User has ${userCourses.length} active courses, matching to all...`);
-                  
-                  const matchPromises = userCourses.map(async (userCourse) => {
+                  console.log(
+                    `[Auto-Match] User has ${userCourses.length} active courses, matching to all...`
+                  );
+
+                  const matchPromises = userCourses.map(async userCourse => {
                     try {
                       const result = await matchConceptsAction({
-                        videoJobId: videoJob.id,
+                        videoJobId: contentJob.id,
                         courseId: userCourse.courseId,
                       });
-                      
+
                       if (result.success && result.data) {
                         console.log(
-                          `[Auto-Match] ✓ ${userCourse.course.name}: ${result.data.created} matches (${result.data.high} high, ${result.data.medium} medium)`,
+                          `[Auto-Match] ✓ ${userCourse.course.name}: ${result.data.created} matches (${result.data.high} high, ${result.data.medium} medium)`
                         );
                       } else {
                         console.error(`[Auto-Match] ✗ ${userCourse.course.name}:`, result.error);
                       }
-                      
+
                       return result;
                     } catch (err) {
                       console.error(`[Auto-Match] ✗ ${userCourse.course.name} error:`, err);
@@ -311,7 +260,7 @@ export async function processContent(url: string) {
                 }
               } catch (autoMatchError) {
                 console.error("[Auto-Match] Error during automatic matching:", autoMatchError);
-                // Don't fail the video processing if auto-match fails
+                // Don't fail the content processing if auto-match fails
               }
             }
           } else {
@@ -338,19 +287,21 @@ export async function processContent(url: string) {
           });
 
           if (activeCourses.length > 0) {
-            console.log(`Matching ${processedConceptsCount} concepts against ${activeCourses.length} active courses...`);
-            
+            console.log(
+              `Matching ${processedConceptsCount} concepts against ${activeCourses.length} active courses...`
+            );
+
             // Match against each course and aggregate results
             const allResults = [];
             let totalDurationMs = 0;
-            
+
             // Process courses sequentially to avoid overwhelming the system
             for (const { courseId } of activeCourses) {
               const startTime = Date.now();
-              const { results } = await matchConceptsToSyllabus(videoJob.id, courseId);
+              const { results } = await matchConceptsToSyllabus(contentJob.id, courseId);
               const durationMs = Date.now() - startTime;
               totalDurationMs += durationMs;
-              
+
               // Store matches in database (batch create for better performance)
               if (results.length > 0) {
                 await prisma.conceptMatch.createMany({
@@ -364,31 +315,31 @@ export async function processContent(url: string) {
                   skipDuplicates: true,
                 });
               }
-              
+
               allResults.push(...results);
             }
-            
+
             // Aggregate results across all courses
             // Treat "exact" matches as high confidence even if slightly below threshold
             const high = allResults.filter(
               r => r.confidence >= MATCH_THRESHOLDS.HIGH || r.matchType === "exact"
             ).length;
             const medium = allResults.filter(
-              r => r.confidence >= MATCH_THRESHOLDS.MEDIUM && 
-                   r.confidence < MATCH_THRESHOLDS.HIGH && 
-                   r.matchType !== "exact"
+              r =>
+                r.confidence >= MATCH_THRESHOLDS.MEDIUM &&
+                r.confidence < MATCH_THRESHOLDS.HIGH &&
+                r.matchType !== "exact"
             ).length;
             const created = allResults.length;
-            const avgConfidence = created > 0 
-              ? allResults.reduce((sum, r) => sum + r.confidence, 0) / created 
-              : 0;
-            
+            const avgConfidence =
+              created > 0 ? allResults.reduce((sum, r) => sum + r.confidence, 0) / created : 0;
+
             // Fetch concept and syllabus details for the dialog
             // Include "exact" matches in high confidence even if slightly below threshold
             const highMatches = await Promise.all(
               allResults
                 .filter(r => r.confidence >= MATCH_THRESHOLDS.HIGH || r.matchType === "exact")
-                .map(async (r) => {
+                .map(async r => {
                   const concept = await prisma.concept.findUnique({
                     where: { id: r.conceptId },
                     select: { conceptText: true },
@@ -417,15 +368,16 @@ export async function processContent(url: string) {
                   };
                 })
             );
-            
+
             const mediumMatches = await Promise.all(
               allResults
-                .filter(r => 
-                  r.confidence >= MATCH_THRESHOLDS.MEDIUM && 
-                  r.confidence < MATCH_THRESHOLDS.HIGH && 
-                  r.matchType !== "exact"
+                .filter(
+                  r =>
+                    r.confidence >= MATCH_THRESHOLDS.MEDIUM &&
+                    r.confidence < MATCH_THRESHOLDS.HIGH &&
+                    r.matchType !== "exact"
                 )
-                .map(async (r) => {
+                .map(async r => {
                   const concept = await prisma.concept.findUnique({
                     where: { id: r.conceptId },
                     select: { conceptText: true },
@@ -454,7 +406,7 @@ export async function processContent(url: string) {
                   };
                 })
             );
-            
+
             matchData = {
               totalConcepts: processedConceptsCount,
               created,
@@ -465,7 +417,7 @@ export async function processContent(url: string) {
               highMatches,
               mediumMatches,
             };
-            
+
             const message = `Matching complete: ${high} high, ${medium} medium, ${created} total matches`;
             console.log(message);
           } else {
@@ -477,15 +429,29 @@ export async function processContent(url: string) {
         }
       }
 
+      // Build success message based on content type
+      let successMessage = "";
+      if (contentType === "youtube" || contentType === "tiktok") {
+        const videoMetadata = metadata as { wordCount: number };
+        successMessage = `Successfully processed ${contentType} video! (${videoMetadata.wordCount} words)`;
+      } else if (contentType === "pdf") {
+        const pdfMetadata = metadata as { pageCount: number };
+        successMessage = `Successfully processed PDF! (${pdfMetadata.pageCount} pages)`;
+      } else {
+        successMessage = `Successfully processed ${contentType} content!`;
+      }
+
+      if (processedConceptsCount) {
+        successMessage += ` • Extracted ${processedConceptsCount} concepts`;
+      }
+
       return {
         success: true,
-        message: `Successfully fetched transcript! (${apiResponse.data.wordCount} words)` +
-          (processedConceptsCount ? ` • Extracted ${processedConceptsCount} concepts` : ""),
+        message: successMessage,
         data: {
-          videoJobId: videoJob.id,
-          url: apiResponse.data.url,
-          wordCount: apiResponse.data.wordCount,
-          segments: apiResponse.data.segments,
+          videoJobId: contentJob.id, // Keep this name for backward compatibility with UI
+          url: validatedUrl,
+          contentType,
           processedConceptsCount: processedConceptsCount ?? 0,
           matchData,
         },
@@ -494,7 +460,7 @@ export async function processContent(url: string) {
       console.error("Database error:", dbError);
       return {
         success: false,
-        error: "Failed to store transcript in database",
+        error: "Failed to store content in database",
       };
     }
   } catch (err) {
@@ -503,76 +469,6 @@ export async function processContent(url: string) {
       success: false,
       error: "Something went wrong. Please try again.",
     };
-  }
-}
-
-/**
- * Extract YouTube video ID from various URL formats
- */
-function extractYouTubeVideoId(url: string): string | null {
-  try {
-    const urlObj = new URL(url);
-
-    // Handle youtu.be format
-    if (urlObj.hostname === "youtu.be") {
-      return urlObj.pathname.slice(1);
-    }
-
-    // Handle youtube.com format
-    if (urlObj.hostname.includes("youtube.com")) {
-      // Check for /watch?v= format
-      const vParam = urlObj.searchParams.get("v");
-      if (vParam) {
-        return vParam;
-      }
-
-      // Check for /shorts/ format (YouTube Shorts)
-      const shortsMatch = urlObj.pathname.match(/\/shorts\/([^/?]+)/);
-      if (shortsMatch?.[1]) {
-        return shortsMatch[1];
-      }
-
-      // Check for /embed/ format
-      const embedMatch = urlObj.pathname.match(/\/embed\/([^/?]+)/);
-      if (embedMatch?.[1]) {
-        return embedMatch[1];
-      }
-
-      // Check for /v/ format
-      const vMatch = urlObj.pathname.match(/\/v\/([^/?]+)/);
-      if (vMatch?.[1]) {
-        return vMatch[1];
-      }
-    }
-
-    return null;
-  } catch (error) {
-    console.error("Error extracting YouTube video ID:", error);
-    return null;
-  }
-}
-
-/**
- * Extract TikTok video ID from URL
- * Format: https://www.tiktok.com/@username/video/VIDEO_ID
- */
-function extractTikTokVideoId(url: string): string | null {
-  try {
-    const urlObj = new URL(url);
-
-    // Check if it's a TikTok URL
-    if (urlObj.hostname.includes("tiktok.com")) {
-      // Extract from /video/VIDEO_ID format
-      const videoMatch = urlObj.pathname.match(/\/video\/(\d+)/);
-      if (videoMatch?.[1]) {
-        return videoMatch[1];
-      }
-    }
-
-    return null;
-  } catch (error) {
-    console.error("Error extracting TikTok video ID:", error);
-    return null;
   }
 }
 

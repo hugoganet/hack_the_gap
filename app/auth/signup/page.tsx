@@ -15,6 +15,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { SignUpCredentialsForm } from "./sign-up-credentials-form";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: `Sign Up | ${SiteConfig.title}`,
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AuthSignInPage() {
+  const locale = await getLocale();
   const user = await getUser();
 
   if (user) {
@@ -50,7 +52,7 @@ export default async function AuthSignInPage() {
 
         <Typography variant="muted" className="mt-4 text-xs">
           You already have an account?{" "}
-          <Typography variant="link" as={Link} href="/auth/signin">
+          <Typography variant="link" as={Link} href={`/${locale}/auth/signin`}>
             Sign in
           </Typography>
         </Typography>

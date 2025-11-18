@@ -1,22 +1,20 @@
 import type { MetadataRoute } from "next";
+import { locales } from "@/i18n";
+import { getServerUrl } from "@/lib/server-url";
 
-// Posts removed for hackathon - simplified sitemap
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  return [
-    {
-      url: "https://codeline.app",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+  const base = getServerUrl().replace(/\/$/, "");
+  const now = new Date();
+
+  // Emit locale roots with language alternates
+  const entries: MetadataRoute.Sitemap = locales.map((l) => ({
+    url: `${base}/${l}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    alternates: {
+      languages: Object.fromEntries(locales.map((ll) => [ll, `${base}/${ll}`])),
     },
-    {
-      url: "https://codeline.app/login",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-    },
-    {
-      url: "https://codeline.app/home",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-    },
-  ];
+  }));
+
+  return entries;
 }

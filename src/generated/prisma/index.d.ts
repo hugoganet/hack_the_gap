@@ -59,10 +59,10 @@ export type UserCourse = $Result.DefaultSelection<Prisma.$UserCoursePayload>
  */
 export type SyllabusConcept = $Result.DefaultSelection<Prisma.$SyllabusConceptPayload>
 /**
- * Model VideoJob
+ * Model ContentJob
  * 
  */
-export type VideoJob = $Result.DefaultSelection<Prisma.$VideoJobPayload>
+export type ContentJob = $Result.DefaultSelection<Prisma.$ContentJobPayload>
 /**
  * Model Concept
  * 
@@ -98,6 +98,26 @@ export type KnowledgeNode = $Result.DefaultSelection<Prisma.$KnowledgeNodePayloa
  * 
  */
 export type NodeSyllabusConcept = $Result.DefaultSelection<Prisma.$NodeSyllabusConceptPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const ContentType: {
+  youtube: 'youtube',
+  tiktok: 'tiktok',
+  pdf: 'pdf',
+  url: 'url',
+  podcast: 'podcast'
+};
+
+export type ContentType = (typeof ContentType)[keyof typeof ContentType]
+
+}
+
+export type ContentType = $Enums.ContentType
+
+export const ContentType: typeof $Enums.ContentType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -308,14 +328,14 @@ export class PrismaClient<
   get syllabusConcept(): Prisma.SyllabusConceptDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.videoJob`: Exposes CRUD operations for the **VideoJob** model.
+   * `prisma.contentJob`: Exposes CRUD operations for the **ContentJob** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more VideoJobs
-    * const videoJobs = await prisma.videoJob.findMany()
+    * // Fetch zero or more ContentJobs
+    * const contentJobs = await prisma.contentJob.findMany()
     * ```
     */
-  get videoJob(): Prisma.VideoJobDelegate<ExtArgs, ClientOptions>;
+  get contentJob(): Prisma.ContentJobDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.concept`: Exposes CRUD operations for the **Concept** model.
@@ -835,7 +855,7 @@ export namespace Prisma {
     Course: 'Course',
     UserCourse: 'UserCourse',
     SyllabusConcept: 'SyllabusConcept',
-    VideoJob: 'VideoJob',
+    ContentJob: 'ContentJob',
     Concept: 'Concept',
     ConceptMatch: 'ConceptMatch',
     Flashcard: 'Flashcard',
@@ -861,7 +881,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "subject" | "course" | "userCourse" | "syllabusConcept" | "videoJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent" | "knowledgeNode" | "nodeSyllabusConcept"
+      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "subject" | "course" | "userCourse" | "syllabusConcept" | "contentJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent" | "knowledgeNode" | "nodeSyllabusConcept"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1531,77 +1551,77 @@ export namespace Prisma {
           }
         }
       }
-      VideoJob: {
-        payload: Prisma.$VideoJobPayload<ExtArgs>
-        fields: Prisma.VideoJobFieldRefs
+      ContentJob: {
+        payload: Prisma.$ContentJobPayload<ExtArgs>
+        fields: Prisma.ContentJobFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.VideoJobFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload> | null
+            args: Prisma.ContentJobFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.VideoJobFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           findFirst: {
-            args: Prisma.VideoJobFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload> | null
+            args: Prisma.ContentJobFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.VideoJobFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           findMany: {
-            args: Prisma.VideoJobFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>[]
+            args: Prisma.ContentJobFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>[]
           }
           create: {
-            args: Prisma.VideoJobCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           createMany: {
-            args: Prisma.VideoJobCreateManyArgs<ExtArgs>
+            args: Prisma.ContentJobCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.VideoJobCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>[]
+            args: Prisma.ContentJobCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>[]
           }
           delete: {
-            args: Prisma.VideoJobDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           update: {
-            args: Prisma.VideoJobUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           deleteMany: {
-            args: Prisma.VideoJobDeleteManyArgs<ExtArgs>
+            args: Prisma.ContentJobDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.VideoJobUpdateManyArgs<ExtArgs>
+            args: Prisma.ContentJobUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.VideoJobUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>[]
+            args: Prisma.ContentJobUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>[]
           }
           upsert: {
-            args: Prisma.VideoJobUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VideoJobPayload>
+            args: Prisma.ContentJobUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContentJobPayload>
           }
           aggregate: {
-            args: Prisma.VideoJobAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateVideoJob>
+            args: Prisma.ContentJobAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContentJob>
           }
           groupBy: {
-            args: Prisma.VideoJobGroupByArgs<ExtArgs>
-            result: $Utils.Optional<VideoJobGroupByOutputType>[]
+            args: Prisma.ContentJobGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContentJobGroupByOutputType>[]
           }
           count: {
-            args: Prisma.VideoJobCountArgs<ExtArgs>
-            result: $Utils.Optional<VideoJobCountAggregateOutputType> | number
+            args: Prisma.ContentJobCountArgs<ExtArgs>
+            result: $Utils.Optional<ContentJobCountAggregateOutputType> | number
           }
         }
       }
@@ -2224,7 +2244,7 @@ export namespace Prisma {
     course?: CourseOmit
     userCourse?: UserCourseOmit
     syllabusConcept?: SyllabusConceptOmit
-    videoJob?: VideoJobOmit
+    contentJob?: ContentJobOmit
     concept?: ConceptOmit
     conceptMatch?: ConceptMatchOmit
     flashcard?: FlashcardOmit
@@ -2318,7 +2338,7 @@ export namespace Prisma {
     reviewSessions: number
     sessions: number
     userCourses: number
-    videoJobs: number
+    contentJobs: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2328,7 +2348,7 @@ export namespace Prisma {
     reviewSessions?: boolean | UserCountOutputTypeCountReviewSessionsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     userCourses?: boolean | UserCountOutputTypeCountUserCoursesArgs
-    videoJobs?: boolean | UserCountOutputTypeCountVideoJobsArgs
+    contentJobs?: boolean | UserCountOutputTypeCountContentJobsArgs
   }
 
   // Custom InputTypes
@@ -2387,8 +2407,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountVideoJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VideoJobWhereInput
+  export type UserCountOutputTypeCountContentJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentJobWhereInput
   }
 
 
@@ -2522,32 +2542,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type VideoJobCountOutputType
+   * Count Type ContentJobCountOutputType
    */
 
-  export type VideoJobCountOutputType = {
+  export type ContentJobCountOutputType = {
     concepts: number
   }
 
-  export type VideoJobCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    concepts?: boolean | VideoJobCountOutputTypeCountConceptsArgs
+  export type ContentJobCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    concepts?: boolean | ContentJobCountOutputTypeCountConceptsArgs
   }
 
   // Custom InputTypes
   /**
-   * VideoJobCountOutputType without action
+   * ContentJobCountOutputType without action
    */
-  export type VideoJobCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJobCountOutputType
+     * Select specific fields to fetch from the ContentJobCountOutputType
      */
-    select?: VideoJobCountOutputTypeSelect<ExtArgs> | null
+    select?: ContentJobCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * VideoJobCountOutputType without action
+   * ContentJobCountOutputType without action
    */
-  export type VideoJobCountOutputTypeCountConceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobCountOutputTypeCountConceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConceptWhereInput
   }
 
@@ -2946,7 +2966,7 @@ export namespace Prisma {
     reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
-    videoJobs?: boolean | User$videoJobsArgs<ExtArgs>
+    contentJobs?: boolean | User$contentJobsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3003,7 +3023,7 @@ export namespace Prisma {
     reviewSessions?: boolean | User$reviewSessionsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
-    videoJobs?: boolean | User$videoJobsArgs<ExtArgs>
+    contentJobs?: boolean | User$contentJobsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3018,7 +3038,7 @@ export namespace Prisma {
       reviewSessions: Prisma.$ReviewSessionPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       userCourses: Prisma.$UserCoursePayload<ExtArgs>[]
-      videoJobs: Prisma.$VideoJobPayload<ExtArgs>[]
+      contentJobs: Prisma.$ContentJobPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3433,7 +3453,7 @@ export namespace Prisma {
     reviewSessions<T extends User$reviewSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userCourses<T extends User$userCoursesArgs<ExtArgs> = {}>(args?: Subset<T, User$userCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    videoJobs<T extends User$videoJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$videoJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contentJobs<T extends User$contentJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$contentJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4007,27 +4027,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.videoJobs
+   * User.contentJobs
    */
-  export type User$videoJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$contentJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
-    where?: VideoJobWhereInput
-    orderBy?: VideoJobOrderByWithRelationInput | VideoJobOrderByWithRelationInput[]
-    cursor?: VideoJobWhereUniqueInput
+    include?: ContentJobInclude<ExtArgs> | null
+    where?: ContentJobWhereInput
+    orderBy?: ContentJobOrderByWithRelationInput | ContentJobOrderByWithRelationInput[]
+    cursor?: ContentJobWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: VideoJobScalarFieldEnum | VideoJobScalarFieldEnum[]
+    distinct?: ContentJobScalarFieldEnum | ContentJobScalarFieldEnum[]
   }
 
   /**
@@ -12989,32 +13009,40 @@ export namespace Prisma {
 
 
   /**
-   * Model VideoJob
+   * Model ContentJob
    */
 
-  export type AggregateVideoJob = {
-    _count: VideoJobCountAggregateOutputType | null
-    _avg: VideoJobAvgAggregateOutputType | null
-    _sum: VideoJobSumAggregateOutputType | null
-    _min: VideoJobMinAggregateOutputType | null
-    _max: VideoJobMaxAggregateOutputType | null
+  export type AggregateContentJob = {
+    _count: ContentJobCountAggregateOutputType | null
+    _avg: ContentJobAvgAggregateOutputType | null
+    _sum: ContentJobSumAggregateOutputType | null
+    _min: ContentJobMinAggregateOutputType | null
+    _max: ContentJobMaxAggregateOutputType | null
   }
 
-  export type VideoJobAvgAggregateOutputType = {
+  export type ContentJobAvgAggregateOutputType = {
+    fileSize: number | null
+    pageCount: number | null
     processedConceptsCount: number | null
   }
 
-  export type VideoJobSumAggregateOutputType = {
+  export type ContentJobSumAggregateOutputType = {
+    fileSize: number | null
+    pageCount: number | null
     processedConceptsCount: number | null
   }
 
-  export type VideoJobMinAggregateOutputType = {
+  export type ContentJobMinAggregateOutputType = {
     id: string | null
     userId: string | null
     url: string | null
+    contentType: $Enums.ContentType | null
     youtubeVideoId: string | null
     tiktokVideoId: string | null
-    transcript: string | null
+    fileName: string | null
+    fileSize: number | null
+    pageCount: number | null
+    extractedText: string | null
     status: string | null
     processedConceptsCount: number | null
     errorMessage: string | null
@@ -13022,13 +13050,17 @@ export namespace Prisma {
     completedAt: Date | null
   }
 
-  export type VideoJobMaxAggregateOutputType = {
+  export type ContentJobMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     url: string | null
+    contentType: $Enums.ContentType | null
     youtubeVideoId: string | null
     tiktokVideoId: string | null
-    transcript: string | null
+    fileName: string | null
+    fileSize: number | null
+    pageCount: number | null
+    extractedText: string | null
     status: string | null
     processedConceptsCount: number | null
     errorMessage: string | null
@@ -13036,13 +13068,17 @@ export namespace Prisma {
     completedAt: Date | null
   }
 
-  export type VideoJobCountAggregateOutputType = {
+  export type ContentJobCountAggregateOutputType = {
     id: number
     userId: number
     url: number
+    contentType: number
     youtubeVideoId: number
     tiktokVideoId: number
-    transcript: number
+    fileName: number
+    fileSize: number
+    pageCount: number
+    extractedText: number
     status: number
     processedConceptsCount: number
     errorMessage: number
@@ -13052,21 +13088,29 @@ export namespace Prisma {
   }
 
 
-  export type VideoJobAvgAggregateInputType = {
+  export type ContentJobAvgAggregateInputType = {
+    fileSize?: true
+    pageCount?: true
     processedConceptsCount?: true
   }
 
-  export type VideoJobSumAggregateInputType = {
+  export type ContentJobSumAggregateInputType = {
+    fileSize?: true
+    pageCount?: true
     processedConceptsCount?: true
   }
 
-  export type VideoJobMinAggregateInputType = {
+  export type ContentJobMinAggregateInputType = {
     id?: true
     userId?: true
     url?: true
+    contentType?: true
     youtubeVideoId?: true
     tiktokVideoId?: true
-    transcript?: true
+    fileName?: true
+    fileSize?: true
+    pageCount?: true
+    extractedText?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -13074,13 +13118,17 @@ export namespace Prisma {
     completedAt?: true
   }
 
-  export type VideoJobMaxAggregateInputType = {
+  export type ContentJobMaxAggregateInputType = {
     id?: true
     userId?: true
     url?: true
+    contentType?: true
     youtubeVideoId?: true
     tiktokVideoId?: true
-    transcript?: true
+    fileName?: true
+    fileSize?: true
+    pageCount?: true
+    extractedText?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -13088,13 +13136,17 @@ export namespace Prisma {
     completedAt?: true
   }
 
-  export type VideoJobCountAggregateInputType = {
+  export type ContentJobCountAggregateInputType = {
     id?: true
     userId?: true
     url?: true
+    contentType?: true
     youtubeVideoId?: true
     tiktokVideoId?: true
-    transcript?: true
+    fileName?: true
+    fileSize?: true
+    pageCount?: true
+    extractedText?: true
     status?: true
     processedConceptsCount?: true
     errorMessage?: true
@@ -13103,179 +13155,199 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type VideoJobAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which VideoJob to aggregate.
+     * Filter which ContentJob to aggregate.
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VideoJobs to fetch.
+     * Determine the order of ContentJobs to fetch.
      */
-    orderBy?: VideoJobOrderByWithRelationInput | VideoJobOrderByWithRelationInput[]
+    orderBy?: ContentJobOrderByWithRelationInput | ContentJobOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: VideoJobWhereUniqueInput
+    cursor?: ContentJobWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VideoJobs from the position of the cursor.
+     * Take `±n` ContentJobs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VideoJobs.
+     * Skip the first `n` ContentJobs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned VideoJobs
+     * Count returned ContentJobs
     **/
-    _count?: true | VideoJobCountAggregateInputType
+    _count?: true | ContentJobCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: VideoJobAvgAggregateInputType
+    _avg?: ContentJobAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: VideoJobSumAggregateInputType
+    _sum?: ContentJobSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: VideoJobMinAggregateInputType
+    _min?: ContentJobMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: VideoJobMaxAggregateInputType
+    _max?: ContentJobMaxAggregateInputType
   }
 
-  export type GetVideoJobAggregateType<T extends VideoJobAggregateArgs> = {
-        [P in keyof T & keyof AggregateVideoJob]: P extends '_count' | 'count'
+  export type GetContentJobAggregateType<T extends ContentJobAggregateArgs> = {
+        [P in keyof T & keyof AggregateContentJob]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateVideoJob[P]>
-      : GetScalarType<T[P], AggregateVideoJob[P]>
+        : GetScalarType<T[P], AggregateContentJob[P]>
+      : GetScalarType<T[P], AggregateContentJob[P]>
   }
 
 
 
 
-  export type VideoJobGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VideoJobWhereInput
-    orderBy?: VideoJobOrderByWithAggregationInput | VideoJobOrderByWithAggregationInput[]
-    by: VideoJobScalarFieldEnum[] | VideoJobScalarFieldEnum
-    having?: VideoJobScalarWhereWithAggregatesInput
+  export type ContentJobGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContentJobWhereInput
+    orderBy?: ContentJobOrderByWithAggregationInput | ContentJobOrderByWithAggregationInput[]
+    by: ContentJobScalarFieldEnum[] | ContentJobScalarFieldEnum
+    having?: ContentJobScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: VideoJobCountAggregateInputType | true
-    _avg?: VideoJobAvgAggregateInputType
-    _sum?: VideoJobSumAggregateInputType
-    _min?: VideoJobMinAggregateInputType
-    _max?: VideoJobMaxAggregateInputType
+    _count?: ContentJobCountAggregateInputType | true
+    _avg?: ContentJobAvgAggregateInputType
+    _sum?: ContentJobSumAggregateInputType
+    _min?: ContentJobMinAggregateInputType
+    _max?: ContentJobMaxAggregateInputType
   }
 
-  export type VideoJobGroupByOutputType = {
+  export type ContentJobGroupByOutputType = {
     id: string
     userId: string
     url: string
+    contentType: $Enums.ContentType
     youtubeVideoId: string | null
     tiktokVideoId: string | null
-    transcript: string | null
+    fileName: string | null
+    fileSize: number | null
+    pageCount: number | null
+    extractedText: string | null
     status: string
     processedConceptsCount: number | null
     errorMessage: string | null
     createdAt: Date
     completedAt: Date | null
-    _count: VideoJobCountAggregateOutputType | null
-    _avg: VideoJobAvgAggregateOutputType | null
-    _sum: VideoJobSumAggregateOutputType | null
-    _min: VideoJobMinAggregateOutputType | null
-    _max: VideoJobMaxAggregateOutputType | null
+    _count: ContentJobCountAggregateOutputType | null
+    _avg: ContentJobAvgAggregateOutputType | null
+    _sum: ContentJobSumAggregateOutputType | null
+    _min: ContentJobMinAggregateOutputType | null
+    _max: ContentJobMaxAggregateOutputType | null
   }
 
-  type GetVideoJobGroupByPayload<T extends VideoJobGroupByArgs> = Prisma.PrismaPromise<
+  type GetContentJobGroupByPayload<T extends ContentJobGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<VideoJobGroupByOutputType, T['by']> &
+      PickEnumerable<ContentJobGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof VideoJobGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ContentJobGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], VideoJobGroupByOutputType[P]>
-            : GetScalarType<T[P], VideoJobGroupByOutputType[P]>
+              : GetScalarType<T[P], ContentJobGroupByOutputType[P]>
+            : GetScalarType<T[P], ContentJobGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type VideoJobSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ContentJobSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     url?: boolean
+    contentType?: boolean
     youtubeVideoId?: boolean
     tiktokVideoId?: boolean
-    transcript?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    pageCount?: boolean
+    extractedText?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
     createdAt?: boolean
     completedAt?: boolean
-    concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
+    concepts?: boolean | ContentJob$conceptsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    _count?: boolean | VideoJobCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["videoJob"]>
+    _count?: boolean | ContentJobCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentJob"]>
 
-  export type VideoJobSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ContentJobSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     url?: boolean
+    contentType?: boolean
     youtubeVideoId?: boolean
     tiktokVideoId?: boolean
-    transcript?: boolean
-    status?: boolean
-    processedConceptsCount?: boolean
-    errorMessage?: boolean
-    createdAt?: boolean
-    completedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["videoJob"]>
-
-  export type VideoJobSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    url?: boolean
-    youtubeVideoId?: boolean
-    tiktokVideoId?: boolean
-    transcript?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    pageCount?: boolean
+    extractedText?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
     createdAt?: boolean
     completedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["videoJob"]>
+  }, ExtArgs["result"]["contentJob"]>
 
-  export type VideoJobSelectScalar = {
+  export type ContentJobSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     url?: boolean
+    contentType?: boolean
     youtubeVideoId?: boolean
     tiktokVideoId?: boolean
-    transcript?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    pageCount?: boolean
+    extractedText?: boolean
+    status?: boolean
+    processedConceptsCount?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    completedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contentJob"]>
+
+  export type ContentJobSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    url?: boolean
+    contentType?: boolean
+    youtubeVideoId?: boolean
+    tiktokVideoId?: boolean
+    fileName?: boolean
+    fileSize?: boolean
+    pageCount?: boolean
+    extractedText?: boolean
     status?: boolean
     processedConceptsCount?: boolean
     errorMessage?: boolean
@@ -13283,21 +13355,21 @@ export namespace Prisma {
     completedAt?: boolean
   }
 
-  export type VideoJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "youtubeVideoId" | "tiktokVideoId" | "transcript" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["videoJob"]>
-  export type VideoJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    concepts?: boolean | VideoJob$conceptsArgs<ExtArgs>
+  export type ContentJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "contentType" | "youtubeVideoId" | "tiktokVideoId" | "fileName" | "fileSize" | "pageCount" | "extractedText" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["contentJob"]>
+  export type ContentJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    concepts?: boolean | ContentJob$conceptsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    _count?: boolean | VideoJobCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | ContentJobCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type VideoJobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type VideoJobIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $VideoJobPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "VideoJob"
+  export type $ContentJobPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContentJob"
     objects: {
       concepts: Prisma.$ConceptPayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
@@ -13306,144 +13378,148 @@ export namespace Prisma {
       id: string
       userId: string
       url: string
+      contentType: $Enums.ContentType
       youtubeVideoId: string | null
       tiktokVideoId: string | null
-      transcript: string | null
+      fileName: string | null
+      fileSize: number | null
+      pageCount: number | null
+      extractedText: string | null
       status: string
       processedConceptsCount: number | null
       errorMessage: string | null
       createdAt: Date
       completedAt: Date | null
-    }, ExtArgs["result"]["videoJob"]>
+    }, ExtArgs["result"]["contentJob"]>
     composites: {}
   }
 
-  type VideoJobGetPayload<S extends boolean | null | undefined | VideoJobDefaultArgs> = $Result.GetResult<Prisma.$VideoJobPayload, S>
+  type ContentJobGetPayload<S extends boolean | null | undefined | ContentJobDefaultArgs> = $Result.GetResult<Prisma.$ContentJobPayload, S>
 
-  type VideoJobCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VideoJobFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: VideoJobCountAggregateInputType | true
+  type ContentJobCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContentJobFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContentJobCountAggregateInputType | true
     }
 
-  export interface VideoJobDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VideoJob'], meta: { name: 'VideoJob' } }
+  export interface ContentJobDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContentJob'], meta: { name: 'ContentJob' } }
     /**
-     * Find zero or one VideoJob that matches the filter.
-     * @param {VideoJobFindUniqueArgs} args - Arguments to find a VideoJob
+     * Find zero or one ContentJob that matches the filter.
+     * @param {ContentJobFindUniqueArgs} args - Arguments to find a ContentJob
      * @example
-     * // Get one VideoJob
-     * const videoJob = await prisma.videoJob.findUnique({
+     * // Get one ContentJob
+     * const contentJob = await prisma.contentJob.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends VideoJobFindUniqueArgs>(args: SelectSubset<T, VideoJobFindUniqueArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ContentJobFindUniqueArgs>(args: SelectSubset<T, ContentJobFindUniqueArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one VideoJob that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ContentJob that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {VideoJobFindUniqueOrThrowArgs} args - Arguments to find a VideoJob
+     * @param {ContentJobFindUniqueOrThrowArgs} args - Arguments to find a ContentJob
      * @example
-     * // Get one VideoJob
-     * const videoJob = await prisma.videoJob.findUniqueOrThrow({
+     * // Get one ContentJob
+     * const contentJob = await prisma.contentJob.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends VideoJobFindUniqueOrThrowArgs>(args: SelectSubset<T, VideoJobFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ContentJobFindUniqueOrThrowArgs>(args: SelectSubset<T, ContentJobFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first VideoJob that matches the filter.
+     * Find the first ContentJob that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobFindFirstArgs} args - Arguments to find a VideoJob
+     * @param {ContentJobFindFirstArgs} args - Arguments to find a ContentJob
      * @example
-     * // Get one VideoJob
-     * const videoJob = await prisma.videoJob.findFirst({
+     * // Get one ContentJob
+     * const contentJob = await prisma.contentJob.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends VideoJobFindFirstArgs>(args?: SelectSubset<T, VideoJobFindFirstArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ContentJobFindFirstArgs>(args?: SelectSubset<T, ContentJobFindFirstArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first VideoJob that matches the filter or
+     * Find the first ContentJob that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobFindFirstOrThrowArgs} args - Arguments to find a VideoJob
+     * @param {ContentJobFindFirstOrThrowArgs} args - Arguments to find a ContentJob
      * @example
-     * // Get one VideoJob
-     * const videoJob = await prisma.videoJob.findFirstOrThrow({
+     * // Get one ContentJob
+     * const contentJob = await prisma.contentJob.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends VideoJobFindFirstOrThrowArgs>(args?: SelectSubset<T, VideoJobFindFirstOrThrowArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ContentJobFindFirstOrThrowArgs>(args?: SelectSubset<T, ContentJobFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more VideoJobs that matches the filter.
+     * Find zero or more ContentJobs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ContentJobFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all VideoJobs
-     * const videoJobs = await prisma.videoJob.findMany()
+     * // Get all ContentJobs
+     * const contentJobs = await prisma.contentJob.findMany()
      * 
-     * // Get first 10 VideoJobs
-     * const videoJobs = await prisma.videoJob.findMany({ take: 10 })
+     * // Get first 10 ContentJobs
+     * const contentJobs = await prisma.contentJob.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const videoJobWithIdOnly = await prisma.videoJob.findMany({ select: { id: true } })
+     * const contentJobWithIdOnly = await prisma.contentJob.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends VideoJobFindManyArgs>(args?: SelectSubset<T, VideoJobFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ContentJobFindManyArgs>(args?: SelectSubset<T, ContentJobFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a VideoJob.
-     * @param {VideoJobCreateArgs} args - Arguments to create a VideoJob.
+     * Create a ContentJob.
+     * @param {ContentJobCreateArgs} args - Arguments to create a ContentJob.
      * @example
-     * // Create one VideoJob
-     * const VideoJob = await prisma.videoJob.create({
+     * // Create one ContentJob
+     * const ContentJob = await prisma.contentJob.create({
      *   data: {
-     *     // ... data to create a VideoJob
+     *     // ... data to create a ContentJob
      *   }
      * })
      * 
      */
-    create<T extends VideoJobCreateArgs>(args: SelectSubset<T, VideoJobCreateArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ContentJobCreateArgs>(args: SelectSubset<T, ContentJobCreateArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many VideoJobs.
-     * @param {VideoJobCreateManyArgs} args - Arguments to create many VideoJobs.
+     * Create many ContentJobs.
+     * @param {ContentJobCreateManyArgs} args - Arguments to create many ContentJobs.
      * @example
-     * // Create many VideoJobs
-     * const videoJob = await prisma.videoJob.createMany({
+     * // Create many ContentJobs
+     * const contentJob = await prisma.contentJob.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends VideoJobCreateManyArgs>(args?: SelectSubset<T, VideoJobCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ContentJobCreateManyArgs>(args?: SelectSubset<T, ContentJobCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many VideoJobs and returns the data saved in the database.
-     * @param {VideoJobCreateManyAndReturnArgs} args - Arguments to create many VideoJobs.
+     * Create many ContentJobs and returns the data saved in the database.
+     * @param {ContentJobCreateManyAndReturnArgs} args - Arguments to create many ContentJobs.
      * @example
-     * // Create many VideoJobs
-     * const videoJob = await prisma.videoJob.createManyAndReturn({
+     * // Create many ContentJobs
+     * const contentJob = await prisma.contentJob.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many VideoJobs and only return the `id`
-     * const videoJobWithIdOnly = await prisma.videoJob.createManyAndReturn({
+     * // Create many ContentJobs and only return the `id`
+     * const contentJobWithIdOnly = await prisma.contentJob.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -13453,28 +13529,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends VideoJobCreateManyAndReturnArgs>(args?: SelectSubset<T, VideoJobCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ContentJobCreateManyAndReturnArgs>(args?: SelectSubset<T, ContentJobCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a VideoJob.
-     * @param {VideoJobDeleteArgs} args - Arguments to delete one VideoJob.
+     * Delete a ContentJob.
+     * @param {ContentJobDeleteArgs} args - Arguments to delete one ContentJob.
      * @example
-     * // Delete one VideoJob
-     * const VideoJob = await prisma.videoJob.delete({
+     * // Delete one ContentJob
+     * const ContentJob = await prisma.contentJob.delete({
      *   where: {
-     *     // ... filter to delete one VideoJob
+     *     // ... filter to delete one ContentJob
      *   }
      * })
      * 
      */
-    delete<T extends VideoJobDeleteArgs>(args: SelectSubset<T, VideoJobDeleteArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ContentJobDeleteArgs>(args: SelectSubset<T, ContentJobDeleteArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one VideoJob.
-     * @param {VideoJobUpdateArgs} args - Arguments to update one VideoJob.
+     * Update one ContentJob.
+     * @param {ContentJobUpdateArgs} args - Arguments to update one ContentJob.
      * @example
-     * // Update one VideoJob
-     * const videoJob = await prisma.videoJob.update({
+     * // Update one ContentJob
+     * const contentJob = await prisma.contentJob.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13484,30 +13560,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends VideoJobUpdateArgs>(args: SelectSubset<T, VideoJobUpdateArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ContentJobUpdateArgs>(args: SelectSubset<T, ContentJobUpdateArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more VideoJobs.
-     * @param {VideoJobDeleteManyArgs} args - Arguments to filter VideoJobs to delete.
+     * Delete zero or more ContentJobs.
+     * @param {ContentJobDeleteManyArgs} args - Arguments to filter ContentJobs to delete.
      * @example
-     * // Delete a few VideoJobs
-     * const { count } = await prisma.videoJob.deleteMany({
+     * // Delete a few ContentJobs
+     * const { count } = await prisma.contentJob.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends VideoJobDeleteManyArgs>(args?: SelectSubset<T, VideoJobDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ContentJobDeleteManyArgs>(args?: SelectSubset<T, ContentJobDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more VideoJobs.
+     * Update zero or more ContentJobs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ContentJobUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many VideoJobs
-     * const videoJob = await prisma.videoJob.updateMany({
+     * // Update many ContentJobs
+     * const contentJob = await prisma.contentJob.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13517,14 +13593,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends VideoJobUpdateManyArgs>(args: SelectSubset<T, VideoJobUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ContentJobUpdateManyArgs>(args: SelectSubset<T, ContentJobUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more VideoJobs and returns the data updated in the database.
-     * @param {VideoJobUpdateManyAndReturnArgs} args - Arguments to update many VideoJobs.
+     * Update zero or more ContentJobs and returns the data updated in the database.
+     * @param {ContentJobUpdateManyAndReturnArgs} args - Arguments to update many ContentJobs.
      * @example
-     * // Update many VideoJobs
-     * const videoJob = await prisma.videoJob.updateManyAndReturn({
+     * // Update many ContentJobs
+     * const contentJob = await prisma.contentJob.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13533,8 +13609,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more VideoJobs and only return the `id`
-     * const videoJobWithIdOnly = await prisma.videoJob.updateManyAndReturn({
+     * // Update zero or more ContentJobs and only return the `id`
+     * const contentJobWithIdOnly = await prisma.contentJob.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -13547,56 +13623,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends VideoJobUpdateManyAndReturnArgs>(args: SelectSubset<T, VideoJobUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ContentJobUpdateManyAndReturnArgs>(args: SelectSubset<T, ContentJobUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one VideoJob.
-     * @param {VideoJobUpsertArgs} args - Arguments to update or create a VideoJob.
+     * Create or update one ContentJob.
+     * @param {ContentJobUpsertArgs} args - Arguments to update or create a ContentJob.
      * @example
-     * // Update or create a VideoJob
-     * const videoJob = await prisma.videoJob.upsert({
+     * // Update or create a ContentJob
+     * const contentJob = await prisma.contentJob.upsert({
      *   create: {
-     *     // ... data to create a VideoJob
+     *     // ... data to create a ContentJob
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the VideoJob we want to update
+     *     // ... the filter for the ContentJob we want to update
      *   }
      * })
      */
-    upsert<T extends VideoJobUpsertArgs>(args: SelectSubset<T, VideoJobUpsertArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ContentJobUpsertArgs>(args: SelectSubset<T, ContentJobUpsertArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of VideoJobs.
+     * Count the number of ContentJobs.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobCountArgs} args - Arguments to filter VideoJobs to count.
+     * @param {ContentJobCountArgs} args - Arguments to filter ContentJobs to count.
      * @example
-     * // Count the number of VideoJobs
-     * const count = await prisma.videoJob.count({
+     * // Count the number of ContentJobs
+     * const count = await prisma.contentJob.count({
      *   where: {
-     *     // ... the filter for the VideoJobs we want to count
+     *     // ... the filter for the ContentJobs we want to count
      *   }
      * })
     **/
-    count<T extends VideoJobCountArgs>(
-      args?: Subset<T, VideoJobCountArgs>,
+    count<T extends ContentJobCountArgs>(
+      args?: Subset<T, ContentJobCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], VideoJobCountAggregateOutputType>
+          : GetScalarType<T['select'], ContentJobCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a VideoJob.
+     * Allows you to perform aggregations operations on a ContentJob.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ContentJobAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -13616,13 +13692,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends VideoJobAggregateArgs>(args: Subset<T, VideoJobAggregateArgs>): Prisma.PrismaPromise<GetVideoJobAggregateType<T>>
+    aggregate<T extends ContentJobAggregateArgs>(args: Subset<T, ContentJobAggregateArgs>): Prisma.PrismaPromise<GetContentJobAggregateType<T>>
 
     /**
-     * Group by VideoJob.
+     * Group by ContentJob.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {VideoJobGroupByArgs} args - Group by arguments.
+     * @param {ContentJobGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -13637,14 +13713,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends VideoJobGroupByArgs,
+      T extends ContentJobGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VideoJobGroupByArgs['orderBy'] }
-        : { orderBy?: VideoJobGroupByArgs['orderBy'] },
+        ? { orderBy: ContentJobGroupByArgs['orderBy'] }
+        : { orderBy?: ContentJobGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -13693,22 +13769,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, VideoJobGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideoJobGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ContentJobGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContentJobGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the VideoJob model
+   * Fields of the ContentJob model
    */
-  readonly fields: VideoJobFieldRefs;
+  readonly fields: ContentJobFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for VideoJob.
+   * The delegate class that acts as a "Promise-like" for ContentJob.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__VideoJobClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ContentJobClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    concepts<T extends VideoJob$conceptsArgs<ExtArgs> = {}>(args?: Subset<T, VideoJob$conceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    concepts<T extends ContentJob$conceptsArgs<ExtArgs> = {}>(args?: Subset<T, ContentJob$conceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13736,419 +13812,423 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the VideoJob model
+   * Fields of the ContentJob model
    */
-  interface VideoJobFieldRefs {
-    readonly id: FieldRef<"VideoJob", 'String'>
-    readonly userId: FieldRef<"VideoJob", 'String'>
-    readonly url: FieldRef<"VideoJob", 'String'>
-    readonly youtubeVideoId: FieldRef<"VideoJob", 'String'>
-    readonly tiktokVideoId: FieldRef<"VideoJob", 'String'>
-    readonly transcript: FieldRef<"VideoJob", 'String'>
-    readonly status: FieldRef<"VideoJob", 'String'>
-    readonly processedConceptsCount: FieldRef<"VideoJob", 'Int'>
-    readonly errorMessage: FieldRef<"VideoJob", 'String'>
-    readonly createdAt: FieldRef<"VideoJob", 'DateTime'>
-    readonly completedAt: FieldRef<"VideoJob", 'DateTime'>
+  interface ContentJobFieldRefs {
+    readonly id: FieldRef<"ContentJob", 'String'>
+    readonly userId: FieldRef<"ContentJob", 'String'>
+    readonly url: FieldRef<"ContentJob", 'String'>
+    readonly contentType: FieldRef<"ContentJob", 'ContentType'>
+    readonly youtubeVideoId: FieldRef<"ContentJob", 'String'>
+    readonly tiktokVideoId: FieldRef<"ContentJob", 'String'>
+    readonly fileName: FieldRef<"ContentJob", 'String'>
+    readonly fileSize: FieldRef<"ContentJob", 'Int'>
+    readonly pageCount: FieldRef<"ContentJob", 'Int'>
+    readonly extractedText: FieldRef<"ContentJob", 'String'>
+    readonly status: FieldRef<"ContentJob", 'String'>
+    readonly processedConceptsCount: FieldRef<"ContentJob", 'Int'>
+    readonly errorMessage: FieldRef<"ContentJob", 'String'>
+    readonly createdAt: FieldRef<"ContentJob", 'DateTime'>
+    readonly completedAt: FieldRef<"ContentJob", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * VideoJob findUnique
+   * ContentJob findUnique
    */
-  export type VideoJobFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter, which VideoJob to fetch.
+     * Filter, which ContentJob to fetch.
      */
-    where: VideoJobWhereUniqueInput
+    where: ContentJobWhereUniqueInput
   }
 
   /**
-   * VideoJob findUniqueOrThrow
+   * ContentJob findUniqueOrThrow
    */
-  export type VideoJobFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter, which VideoJob to fetch.
+     * Filter, which ContentJob to fetch.
      */
-    where: VideoJobWhereUniqueInput
+    where: ContentJobWhereUniqueInput
   }
 
   /**
-   * VideoJob findFirst
+   * ContentJob findFirst
    */
-  export type VideoJobFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter, which VideoJob to fetch.
+     * Filter, which ContentJob to fetch.
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VideoJobs to fetch.
+     * Determine the order of ContentJobs to fetch.
      */
-    orderBy?: VideoJobOrderByWithRelationInput | VideoJobOrderByWithRelationInput[]
+    orderBy?: ContentJobOrderByWithRelationInput | ContentJobOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for VideoJobs.
+     * Sets the position for searching for ContentJobs.
      */
-    cursor?: VideoJobWhereUniqueInput
+    cursor?: ContentJobWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VideoJobs from the position of the cursor.
+     * Take `±n` ContentJobs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VideoJobs.
+     * Skip the first `n` ContentJobs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of VideoJobs.
+     * Filter by unique combinations of ContentJobs.
      */
-    distinct?: VideoJobScalarFieldEnum | VideoJobScalarFieldEnum[]
+    distinct?: ContentJobScalarFieldEnum | ContentJobScalarFieldEnum[]
   }
 
   /**
-   * VideoJob findFirstOrThrow
+   * ContentJob findFirstOrThrow
    */
-  export type VideoJobFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter, which VideoJob to fetch.
+     * Filter, which ContentJob to fetch.
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VideoJobs to fetch.
+     * Determine the order of ContentJobs to fetch.
      */
-    orderBy?: VideoJobOrderByWithRelationInput | VideoJobOrderByWithRelationInput[]
+    orderBy?: ContentJobOrderByWithRelationInput | ContentJobOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for VideoJobs.
+     * Sets the position for searching for ContentJobs.
      */
-    cursor?: VideoJobWhereUniqueInput
+    cursor?: ContentJobWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VideoJobs from the position of the cursor.
+     * Take `±n` ContentJobs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VideoJobs.
+     * Skip the first `n` ContentJobs.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of VideoJobs.
+     * Filter by unique combinations of ContentJobs.
      */
-    distinct?: VideoJobScalarFieldEnum | VideoJobScalarFieldEnum[]
+    distinct?: ContentJobScalarFieldEnum | ContentJobScalarFieldEnum[]
   }
 
   /**
-   * VideoJob findMany
+   * ContentJob findMany
    */
-  export type VideoJobFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter, which VideoJobs to fetch.
+     * Filter, which ContentJobs to fetch.
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of VideoJobs to fetch.
+     * Determine the order of ContentJobs to fetch.
      */
-    orderBy?: VideoJobOrderByWithRelationInput | VideoJobOrderByWithRelationInput[]
+    orderBy?: ContentJobOrderByWithRelationInput | ContentJobOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing VideoJobs.
+     * Sets the position for listing ContentJobs.
      */
-    cursor?: VideoJobWhereUniqueInput
+    cursor?: ContentJobWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` VideoJobs from the position of the cursor.
+     * Take `±n` ContentJobs from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` VideoJobs.
+     * Skip the first `n` ContentJobs.
      */
     skip?: number
-    distinct?: VideoJobScalarFieldEnum | VideoJobScalarFieldEnum[]
+    distinct?: ContentJobScalarFieldEnum | ContentJobScalarFieldEnum[]
   }
 
   /**
-   * VideoJob create
+   * ContentJob create
    */
-  export type VideoJobCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * The data needed to create a VideoJob.
+     * The data needed to create a ContentJob.
      */
-    data: XOR<VideoJobCreateInput, VideoJobUncheckedCreateInput>
+    data: XOR<ContentJobCreateInput, ContentJobUncheckedCreateInput>
   }
 
   /**
-   * VideoJob createMany
+   * ContentJob createMany
    */
-  export type VideoJobCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many VideoJobs.
+     * The data used to create many ContentJobs.
      */
-    data: VideoJobCreateManyInput | VideoJobCreateManyInput[]
+    data: ContentJobCreateManyInput | ContentJobCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * VideoJob createManyAndReturn
+   * ContentJob createManyAndReturn
    */
-  export type VideoJobCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ContentJobSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
-     * The data used to create many VideoJobs.
+     * The data used to create many ContentJobs.
      */
-    data: VideoJobCreateManyInput | VideoJobCreateManyInput[]
+    data: ContentJobCreateManyInput | ContentJobCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ContentJobIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * VideoJob update
+   * ContentJob update
    */
-  export type VideoJobUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * The data needed to update a VideoJob.
+     * The data needed to update a ContentJob.
      */
-    data: XOR<VideoJobUpdateInput, VideoJobUncheckedUpdateInput>
+    data: XOR<ContentJobUpdateInput, ContentJobUncheckedUpdateInput>
     /**
-     * Choose, which VideoJob to update.
+     * Choose, which ContentJob to update.
      */
-    where: VideoJobWhereUniqueInput
+    where: ContentJobWhereUniqueInput
   }
 
   /**
-   * VideoJob updateMany
+   * ContentJob updateMany
    */
-  export type VideoJobUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update VideoJobs.
+     * The data used to update ContentJobs.
      */
-    data: XOR<VideoJobUpdateManyMutationInput, VideoJobUncheckedUpdateManyInput>
+    data: XOR<ContentJobUpdateManyMutationInput, ContentJobUncheckedUpdateManyInput>
     /**
-     * Filter which VideoJobs to update
+     * Filter which ContentJobs to update
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
-     * Limit how many VideoJobs to update.
+     * Limit how many ContentJobs to update.
      */
     limit?: number
   }
 
   /**
-   * VideoJob updateManyAndReturn
+   * ContentJob updateManyAndReturn
    */
-  export type VideoJobUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ContentJobSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
-     * The data used to update VideoJobs.
+     * The data used to update ContentJobs.
      */
-    data: XOR<VideoJobUpdateManyMutationInput, VideoJobUncheckedUpdateManyInput>
+    data: XOR<ContentJobUpdateManyMutationInput, ContentJobUncheckedUpdateManyInput>
     /**
-     * Filter which VideoJobs to update
+     * Filter which ContentJobs to update
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
-     * Limit how many VideoJobs to update.
+     * Limit how many ContentJobs to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ContentJobIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * VideoJob upsert
+   * ContentJob upsert
    */
-  export type VideoJobUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * The filter to search for the VideoJob to update in case it exists.
+     * The filter to search for the ContentJob to update in case it exists.
      */
-    where: VideoJobWhereUniqueInput
+    where: ContentJobWhereUniqueInput
     /**
-     * In case the VideoJob found by the `where` argument doesn't exist, create a new VideoJob with this data.
+     * In case the ContentJob found by the `where` argument doesn't exist, create a new ContentJob with this data.
      */
-    create: XOR<VideoJobCreateInput, VideoJobUncheckedCreateInput>
+    create: XOR<ContentJobCreateInput, ContentJobUncheckedCreateInput>
     /**
-     * In case the VideoJob was found with the provided `where` argument, update it with this data.
+     * In case the ContentJob was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<VideoJobUpdateInput, VideoJobUncheckedUpdateInput>
+    update: XOR<ContentJobUpdateInput, ContentJobUncheckedUpdateInput>
   }
 
   /**
-   * VideoJob delete
+   * ContentJob delete
    */
-  export type VideoJobDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
     /**
-     * Filter which VideoJob to delete.
+     * Filter which ContentJob to delete.
      */
-    where: VideoJobWhereUniqueInput
+    where: ContentJobWhereUniqueInput
   }
 
   /**
-   * VideoJob deleteMany
+   * ContentJob deleteMany
    */
-  export type VideoJobDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which VideoJobs to delete
+     * Filter which ContentJobs to delete
      */
-    where?: VideoJobWhereInput
+    where?: ContentJobWhereInput
     /**
-     * Limit how many VideoJobs to delete.
+     * Limit how many ContentJobs to delete.
      */
     limit?: number
   }
 
   /**
-   * VideoJob.concepts
+   * ContentJob.concepts
    */
-  export type VideoJob$conceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJob$conceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Concept
      */
@@ -14170,21 +14250,21 @@ export namespace Prisma {
   }
 
   /**
-   * VideoJob without action
+   * ContentJob without action
    */
-  export type VideoJobDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ContentJobDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VideoJob
+     * Select specific fields to fetch from the ContentJob
      */
-    select?: VideoJobSelect<ExtArgs> | null
+    select?: ContentJobSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the VideoJob
+     * Omit specific fields from the ContentJob
      */
-    omit?: VideoJobOmit<ExtArgs> | null
+    omit?: ContentJobOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: VideoJobInclude<ExtArgs> | null
+    include?: ContentJobInclude<ExtArgs> | null
   }
 
 
@@ -14210,7 +14290,7 @@ export namespace Prisma {
 
   export type ConceptMinAggregateOutputType = {
     id: string | null
-    videoJobId: string | null
+    contentJobId: string | null
     conceptText: string | null
     definition: string | null
     timestamp: string | null
@@ -14220,7 +14300,7 @@ export namespace Prisma {
 
   export type ConceptMaxAggregateOutputType = {
     id: string | null
-    videoJobId: string | null
+    contentJobId: string | null
     conceptText: string | null
     definition: string | null
     timestamp: string | null
@@ -14230,7 +14310,7 @@ export namespace Prisma {
 
   export type ConceptCountAggregateOutputType = {
     id: number
-    videoJobId: number
+    contentJobId: number
     conceptText: number
     definition: number
     timestamp: number
@@ -14250,7 +14330,7 @@ export namespace Prisma {
 
   export type ConceptMinAggregateInputType = {
     id?: true
-    videoJobId?: true
+    contentJobId?: true
     conceptText?: true
     definition?: true
     timestamp?: true
@@ -14260,7 +14340,7 @@ export namespace Prisma {
 
   export type ConceptMaxAggregateInputType = {
     id?: true
-    videoJobId?: true
+    contentJobId?: true
     conceptText?: true
     definition?: true
     timestamp?: true
@@ -14270,7 +14350,7 @@ export namespace Prisma {
 
   export type ConceptCountAggregateInputType = {
     id?: true
-    videoJobId?: true
+    contentJobId?: true
     conceptText?: true
     definition?: true
     timestamp?: true
@@ -14367,7 +14447,7 @@ export namespace Prisma {
 
   export type ConceptGroupByOutputType = {
     id: string
-    videoJobId: string
+    contentJobId: string
     conceptText: string
     definition: string | null
     timestamp: string | null
@@ -14396,42 +14476,42 @@ export namespace Prisma {
 
   export type ConceptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    videoJobId?: boolean
+    contentJobId?: boolean
     conceptText?: boolean
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
     createdAt?: boolean
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
     _count?: boolean | ConceptCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
 
   export type ConceptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    videoJobId?: boolean
+    contentJobId?: boolean
     conceptText?: boolean
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
     createdAt?: boolean
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
 
   export type ConceptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    videoJobId?: boolean
+    contentJobId?: boolean
     conceptText?: boolean
     definition?: boolean
     timestamp?: boolean
     confidence?: boolean
     createdAt?: boolean
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["concept"]>
 
   export type ConceptSelectScalar = {
     id?: boolean
-    videoJobId?: boolean
+    contentJobId?: boolean
     conceptText?: boolean
     definition?: boolean
     timestamp?: boolean
@@ -14439,28 +14519,28 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type ConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "videoJobId" | "conceptText" | "definition" | "timestamp" | "confidence" | "createdAt", ExtArgs["result"]["concept"]>
+  export type ConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contentJobId" | "conceptText" | "definition" | "timestamp" | "confidence" | "createdAt", ExtArgs["result"]["concept"]>
   export type ConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | Concept$conceptMatchesArgs<ExtArgs>
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
     _count?: boolean | ConceptCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConceptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }
   export type ConceptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    videoJob?: boolean | VideoJobDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
   }
 
   export type $ConceptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Concept"
     objects: {
       conceptMatches: Prisma.$ConceptMatchPayload<ExtArgs>[]
-      videoJob: Prisma.$VideoJobPayload<ExtArgs>
+      contentJob: Prisma.$ContentJobPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      videoJobId: string
+      contentJobId: string
       conceptText: string
       definition: string | null
       timestamp: string | null
@@ -14861,7 +14941,7 @@ export namespace Prisma {
   export interface Prisma__ConceptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     conceptMatches<T extends Concept$conceptMatchesArgs<ExtArgs> = {}>(args?: Subset<T, Concept$conceptMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    videoJob<T extends VideoJobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VideoJobDefaultArgs<ExtArgs>>): Prisma__VideoJobClient<$Result.GetResult<Prisma.$VideoJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contentJob<T extends ContentJobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentJobDefaultArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14892,7 +14972,7 @@ export namespace Prisma {
    */
   interface ConceptFieldRefs {
     readonly id: FieldRef<"Concept", 'String'>
-    readonly videoJobId: FieldRef<"Concept", 'String'>
+    readonly contentJobId: FieldRef<"Concept", 'String'>
     readonly conceptText: FieldRef<"Concept", 'String'>
     readonly definition: FieldRef<"Concept", 'String'>
     readonly timestamp: FieldRef<"Concept", 'String'>
@@ -22435,13 +22515,17 @@ export namespace Prisma {
   export type SyllabusConceptScalarFieldEnum = (typeof SyllabusConceptScalarFieldEnum)[keyof typeof SyllabusConceptScalarFieldEnum]
 
 
-  export const VideoJobScalarFieldEnum: {
+  export const ContentJobScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
     url: 'url',
+    contentType: 'contentType',
     youtubeVideoId: 'youtubeVideoId',
     tiktokVideoId: 'tiktokVideoId',
-    transcript: 'transcript',
+    fileName: 'fileName',
+    fileSize: 'fileSize',
+    pageCount: 'pageCount',
+    extractedText: 'extractedText',
     status: 'status',
     processedConceptsCount: 'processedConceptsCount',
     errorMessage: 'errorMessage',
@@ -22449,12 +22533,12 @@ export namespace Prisma {
     completedAt: 'completedAt'
   };
 
-  export type VideoJobScalarFieldEnum = (typeof VideoJobScalarFieldEnum)[keyof typeof VideoJobScalarFieldEnum]
+  export type ContentJobScalarFieldEnum = (typeof ContentJobScalarFieldEnum)[keyof typeof ContentJobScalarFieldEnum]
 
 
   export const ConceptScalarFieldEnum: {
     id: 'id',
-    videoJobId: 'videoJobId',
+    contentJobId: 'contentJobId',
     conceptText: 'conceptText',
     definition: 'definition',
     timestamp: 'timestamp',
@@ -22644,6 +22728,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ContentType'
+   */
+  export type EnumContentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContentType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContentType[]'
+   */
+  export type ListEnumContentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContentType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -22696,7 +22794,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionListRelationFilter
     sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
-    videoJobs?: VideoJobListRelationFilter
+    contentJobs?: ContentJobListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22718,7 +22816,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     userCourses?: UserCourseOrderByRelationAggregateInput
-    videoJobs?: VideoJobOrderByRelationAggregateInput
+    contentJobs?: ContentJobOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22743,7 +22841,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionListRelationFilter
     sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
-    videoJobs?: VideoJobListRelationFilter
+    contentJobs?: ContentJobListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -23332,32 +23430,40 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"SyllabusConcept"> | Date | string
   }
 
-  export type VideoJobWhereInput = {
-    AND?: VideoJobWhereInput | VideoJobWhereInput[]
-    OR?: VideoJobWhereInput[]
-    NOT?: VideoJobWhereInput | VideoJobWhereInput[]
-    id?: StringFilter<"VideoJob"> | string
-    userId?: StringFilter<"VideoJob"> | string
-    url?: StringFilter<"VideoJob"> | string
-    youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    transcript?: StringNullableFilter<"VideoJob"> | string | null
-    status?: StringFilter<"VideoJob"> | string
-    processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
-    errorMessage?: StringNullableFilter<"VideoJob"> | string | null
-    createdAt?: DateTimeFilter<"VideoJob"> | Date | string
-    completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
+  export type ContentJobWhereInput = {
+    AND?: ContentJobWhereInput | ContentJobWhereInput[]
+    OR?: ContentJobWhereInput[]
+    NOT?: ContentJobWhereInput | ContentJobWhereInput[]
+    id?: StringFilter<"ContentJob"> | string
+    userId?: StringFilter<"ContentJob"> | string
+    url?: StringFilter<"ContentJob"> | string
+    contentType?: EnumContentTypeFilter<"ContentJob"> | $Enums.ContentType
+    youtubeVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    fileName?: StringNullableFilter<"ContentJob"> | string | null
+    fileSize?: IntNullableFilter<"ContentJob"> | number | null
+    pageCount?: IntNullableFilter<"ContentJob"> | number | null
+    extractedText?: StringNullableFilter<"ContentJob"> | string | null
+    status?: StringFilter<"ContentJob"> | string
+    processedConceptsCount?: IntNullableFilter<"ContentJob"> | number | null
+    errorMessage?: StringNullableFilter<"ContentJob"> | string | null
+    createdAt?: DateTimeFilter<"ContentJob"> | Date | string
+    completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
     concepts?: ConceptListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type VideoJobOrderByWithRelationInput = {
+  export type ContentJobOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     url?: SortOrder
+    contentType?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
     tiktokVideoId?: SortOrderInput | SortOrder
-    transcript?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    fileSize?: SortOrderInput | SortOrder
+    pageCount?: SortOrderInput | SortOrder
+    extractedText?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
     errorMessage?: SortOrderInput | SortOrder
@@ -23367,59 +23473,71 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type VideoJobWhereUniqueInput = Prisma.AtLeast<{
+  export type ContentJobWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: VideoJobWhereInput | VideoJobWhereInput[]
-    OR?: VideoJobWhereInput[]
-    NOT?: VideoJobWhereInput | VideoJobWhereInput[]
-    userId?: StringFilter<"VideoJob"> | string
-    url?: StringFilter<"VideoJob"> | string
-    youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    transcript?: StringNullableFilter<"VideoJob"> | string | null
-    status?: StringFilter<"VideoJob"> | string
-    processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
-    errorMessage?: StringNullableFilter<"VideoJob"> | string | null
-    createdAt?: DateTimeFilter<"VideoJob"> | Date | string
-    completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
+    AND?: ContentJobWhereInput | ContentJobWhereInput[]
+    OR?: ContentJobWhereInput[]
+    NOT?: ContentJobWhereInput | ContentJobWhereInput[]
+    userId?: StringFilter<"ContentJob"> | string
+    url?: StringFilter<"ContentJob"> | string
+    contentType?: EnumContentTypeFilter<"ContentJob"> | $Enums.ContentType
+    youtubeVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    fileName?: StringNullableFilter<"ContentJob"> | string | null
+    fileSize?: IntNullableFilter<"ContentJob"> | number | null
+    pageCount?: IntNullableFilter<"ContentJob"> | number | null
+    extractedText?: StringNullableFilter<"ContentJob"> | string | null
+    status?: StringFilter<"ContentJob"> | string
+    processedConceptsCount?: IntNullableFilter<"ContentJob"> | number | null
+    errorMessage?: StringNullableFilter<"ContentJob"> | string | null
+    createdAt?: DateTimeFilter<"ContentJob"> | Date | string
+    completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
     concepts?: ConceptListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type VideoJobOrderByWithAggregationInput = {
+  export type ContentJobOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     url?: SortOrder
+    contentType?: SortOrder
     youtubeVideoId?: SortOrderInput | SortOrder
     tiktokVideoId?: SortOrderInput | SortOrder
-    transcript?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    fileSize?: SortOrderInput | SortOrder
+    pageCount?: SortOrderInput | SortOrder
+    extractedText?: SortOrderInput | SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrderInput | SortOrder
     errorMessage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
-    _count?: VideoJobCountOrderByAggregateInput
-    _avg?: VideoJobAvgOrderByAggregateInput
-    _max?: VideoJobMaxOrderByAggregateInput
-    _min?: VideoJobMinOrderByAggregateInput
-    _sum?: VideoJobSumOrderByAggregateInput
+    _count?: ContentJobCountOrderByAggregateInput
+    _avg?: ContentJobAvgOrderByAggregateInput
+    _max?: ContentJobMaxOrderByAggregateInput
+    _min?: ContentJobMinOrderByAggregateInput
+    _sum?: ContentJobSumOrderByAggregateInput
   }
 
-  export type VideoJobScalarWhereWithAggregatesInput = {
-    AND?: VideoJobScalarWhereWithAggregatesInput | VideoJobScalarWhereWithAggregatesInput[]
-    OR?: VideoJobScalarWhereWithAggregatesInput[]
-    NOT?: VideoJobScalarWhereWithAggregatesInput | VideoJobScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"VideoJob"> | string
-    userId?: StringWithAggregatesFilter<"VideoJob"> | string
-    url?: StringWithAggregatesFilter<"VideoJob"> | string
-    youtubeVideoId?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
-    tiktokVideoId?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
-    transcript?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
-    status?: StringWithAggregatesFilter<"VideoJob"> | string
-    processedConceptsCount?: IntNullableWithAggregatesFilter<"VideoJob"> | number | null
-    errorMessage?: StringNullableWithAggregatesFilter<"VideoJob"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"VideoJob"> | Date | string
-    completedAt?: DateTimeNullableWithAggregatesFilter<"VideoJob"> | Date | string | null
+  export type ContentJobScalarWhereWithAggregatesInput = {
+    AND?: ContentJobScalarWhereWithAggregatesInput | ContentJobScalarWhereWithAggregatesInput[]
+    OR?: ContentJobScalarWhereWithAggregatesInput[]
+    NOT?: ContentJobScalarWhereWithAggregatesInput | ContentJobScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContentJob"> | string
+    userId?: StringWithAggregatesFilter<"ContentJob"> | string
+    url?: StringWithAggregatesFilter<"ContentJob"> | string
+    contentType?: EnumContentTypeWithAggregatesFilter<"ContentJob"> | $Enums.ContentType
+    youtubeVideoId?: StringNullableWithAggregatesFilter<"ContentJob"> | string | null
+    tiktokVideoId?: StringNullableWithAggregatesFilter<"ContentJob"> | string | null
+    fileName?: StringNullableWithAggregatesFilter<"ContentJob"> | string | null
+    fileSize?: IntNullableWithAggregatesFilter<"ContentJob"> | number | null
+    pageCount?: IntNullableWithAggregatesFilter<"ContentJob"> | number | null
+    extractedText?: StringNullableWithAggregatesFilter<"ContentJob"> | string | null
+    status?: StringWithAggregatesFilter<"ContentJob"> | string
+    processedConceptsCount?: IntNullableWithAggregatesFilter<"ContentJob"> | number | null
+    errorMessage?: StringNullableWithAggregatesFilter<"ContentJob"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ContentJob"> | Date | string
+    completedAt?: DateTimeNullableWithAggregatesFilter<"ContentJob"> | Date | string | null
   }
 
   export type ConceptWhereInput = {
@@ -23427,26 +23545,26 @@ export namespace Prisma {
     OR?: ConceptWhereInput[]
     NOT?: ConceptWhereInput | ConceptWhereInput[]
     id?: StringFilter<"Concept"> | string
-    videoJobId?: StringFilter<"Concept"> | string
+    contentJobId?: StringFilter<"Concept"> | string
     conceptText?: StringFilter<"Concept"> | string
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
     createdAt?: DateTimeFilter<"Concept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
-    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
+    contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
   }
 
   export type ConceptOrderByWithRelationInput = {
     id?: SortOrder
-    videoJobId?: SortOrder
+    contentJobId?: SortOrder
     conceptText?: SortOrder
     definition?: SortOrderInput | SortOrder
     timestamp?: SortOrderInput | SortOrder
     confidence?: SortOrder
     createdAt?: SortOrder
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
-    videoJob?: VideoJobOrderByWithRelationInput
+    contentJob?: ContentJobOrderByWithRelationInput
   }
 
   export type ConceptWhereUniqueInput = Prisma.AtLeast<{
@@ -23454,19 +23572,19 @@ export namespace Prisma {
     AND?: ConceptWhereInput | ConceptWhereInput[]
     OR?: ConceptWhereInput[]
     NOT?: ConceptWhereInput | ConceptWhereInput[]
-    videoJobId?: StringFilter<"Concept"> | string
+    contentJobId?: StringFilter<"Concept"> | string
     conceptText?: StringFilter<"Concept"> | string
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
     confidence?: FloatFilter<"Concept"> | number
     createdAt?: DateTimeFilter<"Concept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
-    videoJob?: XOR<VideoJobScalarRelationFilter, VideoJobWhereInput>
+    contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
   }, "id">
 
   export type ConceptOrderByWithAggregationInput = {
     id?: SortOrder
-    videoJobId?: SortOrder
+    contentJobId?: SortOrder
     conceptText?: SortOrder
     definition?: SortOrderInput | SortOrder
     timestamp?: SortOrderInput | SortOrder
@@ -23484,7 +23602,7 @@ export namespace Prisma {
     OR?: ConceptScalarWhereWithAggregatesInput[]
     NOT?: ConceptScalarWhereWithAggregatesInput | ConceptScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Concept"> | string
-    videoJobId?: StringWithAggregatesFilter<"Concept"> | string
+    contentJobId?: StringWithAggregatesFilter<"Concept"> | string
     conceptText?: StringWithAggregatesFilter<"Concept"> | string
     definition?: StringNullableWithAggregatesFilter<"Concept"> | string | null
     timestamp?: StringNullableWithAggregatesFilter<"Concept"> | string | null
@@ -23971,7 +24089,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -23993,7 +24111,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -24015,7 +24133,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24037,7 +24155,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -24673,73 +24791,93 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VideoJobCreateInput = {
+  export type ContentJobCreateInput = {
     id?: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
-    concepts?: ConceptCreateNestedManyWithoutVideoJobInput
-    user: UserCreateNestedOneWithoutVideoJobsInput
+    concepts?: ConceptCreateNestedManyWithoutContentJobInput
+    user: UserCreateNestedOneWithoutContentJobsInput
   }
 
-  export type VideoJobUncheckedCreateInput = {
-    id?: string
-    userId: string
-    url: string
-    youtubeVideoId?: string | null
-    tiktokVideoId?: string | null
-    transcript?: string | null
-    status: string
-    processedConceptsCount?: number | null
-    errorMessage?: string | null
-    createdAt?: Date | string
-    completedAt?: Date | string | null
-    concepts?: ConceptUncheckedCreateNestedManyWithoutVideoJobInput
-  }
-
-  export type VideoJobUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    concepts?: ConceptUpdateManyWithoutVideoJobNestedInput
-    user?: UserUpdateOneRequiredWithoutVideoJobsNestedInput
-  }
-
-  export type VideoJobUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    concepts?: ConceptUncheckedUpdateManyWithoutVideoJobNestedInput
-  }
-
-  export type VideoJobCreateManyInput = {
+  export type ContentJobUncheckedCreateInput = {
     id?: string
     userId: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
+    status: string
+    processedConceptsCount?: number | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+    concepts?: ConceptUncheckedCreateNestedManyWithoutContentJobInput
+  }
+
+  export type ContentJobUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    concepts?: ConceptUpdateManyWithoutContentJobNestedInput
+    user?: UserUpdateOneRequiredWithoutContentJobsNestedInput
+  }
+
+  export type ContentJobUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    concepts?: ConceptUncheckedUpdateManyWithoutContentJobNestedInput
+  }
+
+  export type ContentJobCreateManyInput = {
+    id?: string
+    userId: string
+    url: string
+    contentType?: $Enums.ContentType
+    youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -24747,12 +24885,16 @@ export namespace Prisma {
     completedAt?: Date | string | null
   }
 
-  export type VideoJobUpdateManyMutationInput = {
+  export type ContentJobUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24760,13 +24902,17 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type VideoJobUncheckedUpdateManyInput = {
+  export type ContentJobUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24782,12 +24928,12 @@ export namespace Prisma {
     confidence: number
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutConceptInput
-    videoJob: VideoJobCreateNestedOneWithoutConceptsInput
+    contentJob: ContentJobCreateNestedOneWithoutConceptsInput
   }
 
   export type ConceptUncheckedCreateInput = {
     id?: string
-    videoJobId: string
+    contentJobId: string
     conceptText: string
     definition?: string | null
     timestamp?: string | null
@@ -24804,12 +24950,12 @@ export namespace Prisma {
     confidence?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutConceptNestedInput
-    videoJob?: VideoJobUpdateOneRequiredWithoutConceptsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutConceptsNestedInput
   }
 
   export type ConceptUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    videoJobId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24820,7 +24966,7 @@ export namespace Prisma {
 
   export type ConceptCreateManyInput = {
     id?: string
-    videoJobId: string
+    contentJobId: string
     conceptText: string
     definition?: string | null
     timestamp?: string | null
@@ -24839,7 +24985,7 @@ export namespace Prisma {
 
   export type ConceptUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    videoJobId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25408,10 +25554,10 @@ export namespace Prisma {
     none?: UserCourseWhereInput
   }
 
-  export type VideoJobListRelationFilter = {
-    every?: VideoJobWhereInput
-    some?: VideoJobWhereInput
-    none?: VideoJobWhereInput
+  export type ContentJobListRelationFilter = {
+    every?: ContentJobWhereInput
+    some?: ContentJobWhereInput
+    none?: ContentJobWhereInput
   }
 
   export type SortOrderInput = {
@@ -25443,7 +25589,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type VideoJobOrderByRelationAggregateInput = {
+  export type ContentJobOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25970,6 +26116,13 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type EnumContentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
+  }
+
   export type ConceptListRelationFilter = {
     every?: ConceptWhereInput
     some?: ConceptWhereInput
@@ -25980,13 +26133,17 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type VideoJobCountOrderByAggregateInput = {
+  export type ContentJobCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     url?: SortOrder
+    contentType?: SortOrder
     youtubeVideoId?: SortOrder
     tiktokVideoId?: SortOrder
-    transcript?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    pageCount?: SortOrder
+    extractedText?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -25994,17 +26151,23 @@ export namespace Prisma {
     completedAt?: SortOrder
   }
 
-  export type VideoJobAvgOrderByAggregateInput = {
+  export type ContentJobAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+    pageCount?: SortOrder
     processedConceptsCount?: SortOrder
   }
 
-  export type VideoJobMaxOrderByAggregateInput = {
+  export type ContentJobMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     url?: SortOrder
+    contentType?: SortOrder
     youtubeVideoId?: SortOrder
     tiktokVideoId?: SortOrder
-    transcript?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    pageCount?: SortOrder
+    extractedText?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -26012,13 +26175,17 @@ export namespace Prisma {
     completedAt?: SortOrder
   }
 
-  export type VideoJobMinOrderByAggregateInput = {
+  export type ContentJobMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     url?: SortOrder
+    contentType?: SortOrder
     youtubeVideoId?: SortOrder
     tiktokVideoId?: SortOrder
-    transcript?: SortOrder
+    fileName?: SortOrder
+    fileSize?: SortOrder
+    pageCount?: SortOrder
+    extractedText?: SortOrder
     status?: SortOrder
     processedConceptsCount?: SortOrder
     errorMessage?: SortOrder
@@ -26026,8 +26193,20 @@ export namespace Prisma {
     completedAt?: SortOrder
   }
 
-  export type VideoJobSumOrderByAggregateInput = {
+  export type ContentJobSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+    pageCount?: SortOrder
     processedConceptsCount?: SortOrder
+  }
+
+  export type EnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentTypeFilter<$PrismaModel>
+    _max?: NestedEnumContentTypeFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -26041,14 +26220,14 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type VideoJobScalarRelationFilter = {
-    is?: VideoJobWhereInput
-    isNot?: VideoJobWhereInput
+  export type ContentJobScalarRelationFilter = {
+    is?: ContentJobWhereInput
+    isNot?: ContentJobWhereInput
   }
 
   export type ConceptCountOrderByAggregateInput = {
     id?: SortOrder
-    videoJobId?: SortOrder
+    contentJobId?: SortOrder
     conceptText?: SortOrder
     definition?: SortOrder
     timestamp?: SortOrder
@@ -26062,7 +26241,7 @@ export namespace Prisma {
 
   export type ConceptMaxOrderByAggregateInput = {
     id?: SortOrder
-    videoJobId?: SortOrder
+    contentJobId?: SortOrder
     conceptText?: SortOrder
     definition?: SortOrder
     timestamp?: SortOrder
@@ -26072,7 +26251,7 @@ export namespace Prisma {
 
   export type ConceptMinOrderByAggregateInput = {
     id?: SortOrder
-    videoJobId?: SortOrder
+    contentJobId?: SortOrder
     conceptText?: SortOrder
     definition?: SortOrder
     timestamp?: SortOrder
@@ -26485,11 +26664,11 @@ export namespace Prisma {
     connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
   }
 
-  export type VideoJobCreateNestedManyWithoutUserInput = {
-    create?: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput> | VideoJobCreateWithoutUserInput[] | VideoJobUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VideoJobCreateOrConnectWithoutUserInput | VideoJobCreateOrConnectWithoutUserInput[]
-    createMany?: VideoJobCreateManyUserInputEnvelope
-    connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
+  export type ContentJobCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput> | ContentJobCreateWithoutUserInput[] | ContentJobUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUserInput | ContentJobCreateOrConnectWithoutUserInput[]
+    createMany?: ContentJobCreateManyUserInputEnvelope
+    connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
   }
 
   export type FeedbackUncheckedCreateNestedManyWithoutUserInput = {
@@ -26534,11 +26713,11 @@ export namespace Prisma {
     connect?: UserCourseWhereUniqueInput | UserCourseWhereUniqueInput[]
   }
 
-  export type VideoJobUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput> | VideoJobCreateWithoutUserInput[] | VideoJobUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VideoJobCreateOrConnectWithoutUserInput | VideoJobCreateOrConnectWithoutUserInput[]
-    createMany?: VideoJobCreateManyUserInputEnvelope
-    connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
+  export type ContentJobUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput> | ContentJobCreateWithoutUserInput[] | ContentJobUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUserInput | ContentJobCreateOrConnectWithoutUserInput[]
+    createMany?: ContentJobCreateManyUserInputEnvelope
+    connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -26649,18 +26828,18 @@ export namespace Prisma {
     deleteMany?: UserCourseScalarWhereInput | UserCourseScalarWhereInput[]
   }
 
-  export type VideoJobUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput> | VideoJobCreateWithoutUserInput[] | VideoJobUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VideoJobCreateOrConnectWithoutUserInput | VideoJobCreateOrConnectWithoutUserInput[]
-    upsert?: VideoJobUpsertWithWhereUniqueWithoutUserInput | VideoJobUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VideoJobCreateManyUserInputEnvelope
-    set?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    disconnect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    delete?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    update?: VideoJobUpdateWithWhereUniqueWithoutUserInput | VideoJobUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VideoJobUpdateManyWithWhereWithoutUserInput | VideoJobUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
+  export type ContentJobUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput> | ContentJobCreateWithoutUserInput[] | ContentJobUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUserInput | ContentJobCreateOrConnectWithoutUserInput[]
+    upsert?: ContentJobUpsertWithWhereUniqueWithoutUserInput | ContentJobUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContentJobCreateManyUserInputEnvelope
+    set?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    disconnect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    delete?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    update?: ContentJobUpdateWithWhereUniqueWithoutUserInput | ContentJobUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContentJobUpdateManyWithWhereWithoutUserInput | ContentJobUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
   }
 
   export type FeedbackUncheckedUpdateManyWithoutUserNestedInput = {
@@ -26747,18 +26926,18 @@ export namespace Prisma {
     deleteMany?: UserCourseScalarWhereInput | UserCourseScalarWhereInput[]
   }
 
-  export type VideoJobUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput> | VideoJobCreateWithoutUserInput[] | VideoJobUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VideoJobCreateOrConnectWithoutUserInput | VideoJobCreateOrConnectWithoutUserInput[]
-    upsert?: VideoJobUpsertWithWhereUniqueWithoutUserInput | VideoJobUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VideoJobCreateManyUserInputEnvelope
-    set?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    disconnect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    delete?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    connect?: VideoJobWhereUniqueInput | VideoJobWhereUniqueInput[]
-    update?: VideoJobUpdateWithWhereUniqueWithoutUserInput | VideoJobUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VideoJobUpdateManyWithWhereWithoutUserInput | VideoJobUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
+  export type ContentJobUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput> | ContentJobCreateWithoutUserInput[] | ContentJobUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUserInput | ContentJobCreateOrConnectWithoutUserInput[]
+    upsert?: ContentJobUpsertWithWhereUniqueWithoutUserInput | ContentJobUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContentJobCreateManyUserInputEnvelope
+    set?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    disconnect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    delete?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+    update?: ContentJobUpdateWithWhereUniqueWithoutUserInput | ContentJobUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContentJobUpdateManyWithWhereWithoutUserInput | ContentJobUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -27171,59 +27350,63 @@ export namespace Prisma {
     deleteMany?: NodeSyllabusConceptScalarWhereInput | NodeSyllabusConceptScalarWhereInput[]
   }
 
-  export type ConceptCreateNestedManyWithoutVideoJobInput = {
-    create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
-    connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
-    createMany?: ConceptCreateManyVideoJobInputEnvelope
+  export type ConceptCreateNestedManyWithoutContentJobInput = {
+    create?: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput> | ConceptCreateWithoutContentJobInput[] | ConceptUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: ConceptCreateOrConnectWithoutContentJobInput | ConceptCreateOrConnectWithoutContentJobInput[]
+    createMany?: ConceptCreateManyContentJobInputEnvelope
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
   }
 
-  export type UserCreateNestedOneWithoutVideoJobsInput = {
-    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
+  export type UserCreateNestedOneWithoutContentJobsInput = {
+    create?: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContentJobsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type ConceptUncheckedCreateNestedManyWithoutVideoJobInput = {
-    create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
-    connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
-    createMany?: ConceptCreateManyVideoJobInputEnvelope
+  export type ConceptUncheckedCreateNestedManyWithoutContentJobInput = {
+    create?: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput> | ConceptCreateWithoutContentJobInput[] | ConceptUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: ConceptCreateOrConnectWithoutContentJobInput | ConceptCreateOrConnectWithoutContentJobInput[]
+    createMany?: ConceptCreateManyContentJobInputEnvelope
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
   }
 
-  export type ConceptUpdateManyWithoutVideoJobNestedInput = {
-    create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
-    connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
-    upsert?: ConceptUpsertWithWhereUniqueWithoutVideoJobInput | ConceptUpsertWithWhereUniqueWithoutVideoJobInput[]
-    createMany?: ConceptCreateManyVideoJobInputEnvelope
+  export type EnumContentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ContentType
+  }
+
+  export type ConceptUpdateManyWithoutContentJobNestedInput = {
+    create?: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput> | ConceptCreateWithoutContentJobInput[] | ConceptUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: ConceptCreateOrConnectWithoutContentJobInput | ConceptCreateOrConnectWithoutContentJobInput[]
+    upsert?: ConceptUpsertWithWhereUniqueWithoutContentJobInput | ConceptUpsertWithWhereUniqueWithoutContentJobInput[]
+    createMany?: ConceptCreateManyContentJobInputEnvelope
     set?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     disconnect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     delete?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
-    update?: ConceptUpdateWithWhereUniqueWithoutVideoJobInput | ConceptUpdateWithWhereUniqueWithoutVideoJobInput[]
-    updateMany?: ConceptUpdateManyWithWhereWithoutVideoJobInput | ConceptUpdateManyWithWhereWithoutVideoJobInput[]
+    update?: ConceptUpdateWithWhereUniqueWithoutContentJobInput | ConceptUpdateWithWhereUniqueWithoutContentJobInput[]
+    updateMany?: ConceptUpdateManyWithWhereWithoutContentJobInput | ConceptUpdateManyWithWhereWithoutContentJobInput[]
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutVideoJobsNestedInput = {
-    create?: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVideoJobsInput
-    upsert?: UserUpsertWithoutVideoJobsInput
+  export type UserUpdateOneRequiredWithoutContentJobsNestedInput = {
+    create?: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContentJobsInput
+    upsert?: UserUpsertWithoutContentJobsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideoJobsInput, UserUpdateWithoutVideoJobsInput>, UserUncheckedUpdateWithoutVideoJobsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContentJobsInput, UserUpdateWithoutContentJobsInput>, UserUncheckedUpdateWithoutContentJobsInput>
   }
 
-  export type ConceptUncheckedUpdateManyWithoutVideoJobNestedInput = {
-    create?: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput> | ConceptCreateWithoutVideoJobInput[] | ConceptUncheckedCreateWithoutVideoJobInput[]
-    connectOrCreate?: ConceptCreateOrConnectWithoutVideoJobInput | ConceptCreateOrConnectWithoutVideoJobInput[]
-    upsert?: ConceptUpsertWithWhereUniqueWithoutVideoJobInput | ConceptUpsertWithWhereUniqueWithoutVideoJobInput[]
-    createMany?: ConceptCreateManyVideoJobInputEnvelope
+  export type ConceptUncheckedUpdateManyWithoutContentJobNestedInput = {
+    create?: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput> | ConceptCreateWithoutContentJobInput[] | ConceptUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: ConceptCreateOrConnectWithoutContentJobInput | ConceptCreateOrConnectWithoutContentJobInput[]
+    upsert?: ConceptUpsertWithWhereUniqueWithoutContentJobInput | ConceptUpsertWithWhereUniqueWithoutContentJobInput[]
+    createMany?: ConceptCreateManyContentJobInputEnvelope
     set?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     disconnect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     delete?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
-    update?: ConceptUpdateWithWhereUniqueWithoutVideoJobInput | ConceptUpdateWithWhereUniqueWithoutVideoJobInput[]
-    updateMany?: ConceptUpdateManyWithWhereWithoutVideoJobInput | ConceptUpdateManyWithWhereWithoutVideoJobInput[]
+    update?: ConceptUpdateWithWhereUniqueWithoutContentJobInput | ConceptUpdateWithWhereUniqueWithoutContentJobInput[]
+    updateMany?: ConceptUpdateManyWithWhereWithoutContentJobInput | ConceptUpdateManyWithWhereWithoutContentJobInput[]
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
   }
 
@@ -27234,10 +27417,10 @@ export namespace Prisma {
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
   }
 
-  export type VideoJobCreateNestedOneWithoutConceptsInput = {
-    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
-    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
-    connect?: VideoJobWhereUniqueInput
+  export type ContentJobCreateNestedOneWithoutConceptsInput = {
+    create?: XOR<ContentJobCreateWithoutConceptsInput, ContentJobUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: ContentJobCreateOrConnectWithoutConceptsInput
+    connect?: ContentJobWhereUniqueInput
   }
 
   export type ConceptMatchUncheckedCreateNestedManyWithoutConceptInput = {
@@ -27269,12 +27452,12 @@ export namespace Prisma {
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
   }
 
-  export type VideoJobUpdateOneRequiredWithoutConceptsNestedInput = {
-    create?: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
-    connectOrCreate?: VideoJobCreateOrConnectWithoutConceptsInput
-    upsert?: VideoJobUpsertWithoutConceptsInput
-    connect?: VideoJobWhereUniqueInput
-    update?: XOR<XOR<VideoJobUpdateToOneWithWhereWithoutConceptsInput, VideoJobUpdateWithoutConceptsInput>, VideoJobUncheckedUpdateWithoutConceptsInput>
+  export type ContentJobUpdateOneRequiredWithoutConceptsNestedInput = {
+    create?: XOR<ContentJobCreateWithoutConceptsInput, ContentJobUncheckedCreateWithoutConceptsInput>
+    connectOrCreate?: ContentJobCreateOrConnectWithoutConceptsInput
+    upsert?: ContentJobUpsertWithoutConceptsInput
+    connect?: ContentJobWhereUniqueInput
+    update?: XOR<XOR<ContentJobUpdateToOneWithWhereWithoutConceptsInput, ContentJobUpdateWithoutConceptsInput>, ContentJobUncheckedUpdateWithoutConceptsInput>
   }
 
   export type ConceptMatchUncheckedUpdateManyWithoutConceptNestedInput = {
@@ -27885,6 +28068,23 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumContentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
+  }
+
+  export type NestedEnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentTypeFilter<$PrismaModel>
+    _max?: NestedEnumContentTypeFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -28118,41 +28318,49 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type VideoJobCreateWithoutUserInput = {
+  export type ContentJobCreateWithoutUserInput = {
     id?: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
-    concepts?: ConceptCreateNestedManyWithoutVideoJobInput
+    concepts?: ConceptCreateNestedManyWithoutContentJobInput
   }
 
-  export type VideoJobUncheckedCreateWithoutUserInput = {
+  export type ContentJobUncheckedCreateWithoutUserInput = {
     id?: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
-    concepts?: ConceptUncheckedCreateNestedManyWithoutVideoJobInput
+    concepts?: ConceptUncheckedCreateNestedManyWithoutContentJobInput
   }
 
-  export type VideoJobCreateOrConnectWithoutUserInput = {
-    where: VideoJobWhereUniqueInput
-    create: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput>
+  export type ContentJobCreateOrConnectWithoutUserInput = {
+    where: ContentJobWhereUniqueInput
+    create: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput>
   }
 
-  export type VideoJobCreateManyUserInputEnvelope = {
-    data: VideoJobCreateManyUserInput | VideoJobCreateManyUserInput[]
+  export type ContentJobCreateManyUserInputEnvelope = {
+    data: ContentJobCreateManyUserInput | ContentJobCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -28341,37 +28549,41 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"UserCourse"> | Date | string
   }
 
-  export type VideoJobUpsertWithWhereUniqueWithoutUserInput = {
-    where: VideoJobWhereUniqueInput
-    update: XOR<VideoJobUpdateWithoutUserInput, VideoJobUncheckedUpdateWithoutUserInput>
-    create: XOR<VideoJobCreateWithoutUserInput, VideoJobUncheckedCreateWithoutUserInput>
+  export type ContentJobUpsertWithWhereUniqueWithoutUserInput = {
+    where: ContentJobWhereUniqueInput
+    update: XOR<ContentJobUpdateWithoutUserInput, ContentJobUncheckedUpdateWithoutUserInput>
+    create: XOR<ContentJobCreateWithoutUserInput, ContentJobUncheckedCreateWithoutUserInput>
   }
 
-  export type VideoJobUpdateWithWhereUniqueWithoutUserInput = {
-    where: VideoJobWhereUniqueInput
-    data: XOR<VideoJobUpdateWithoutUserInput, VideoJobUncheckedUpdateWithoutUserInput>
+  export type ContentJobUpdateWithWhereUniqueWithoutUserInput = {
+    where: ContentJobWhereUniqueInput
+    data: XOR<ContentJobUpdateWithoutUserInput, ContentJobUncheckedUpdateWithoutUserInput>
   }
 
-  export type VideoJobUpdateManyWithWhereWithoutUserInput = {
-    where: VideoJobScalarWhereInput
-    data: XOR<VideoJobUpdateManyMutationInput, VideoJobUncheckedUpdateManyWithoutUserInput>
+  export type ContentJobUpdateManyWithWhereWithoutUserInput = {
+    where: ContentJobScalarWhereInput
+    data: XOR<ContentJobUpdateManyMutationInput, ContentJobUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type VideoJobScalarWhereInput = {
-    AND?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
-    OR?: VideoJobScalarWhereInput[]
-    NOT?: VideoJobScalarWhereInput | VideoJobScalarWhereInput[]
-    id?: StringFilter<"VideoJob"> | string
-    userId?: StringFilter<"VideoJob"> | string
-    url?: StringFilter<"VideoJob"> | string
-    youtubeVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    tiktokVideoId?: StringNullableFilter<"VideoJob"> | string | null
-    transcript?: StringNullableFilter<"VideoJob"> | string | null
-    status?: StringFilter<"VideoJob"> | string
-    processedConceptsCount?: IntNullableFilter<"VideoJob"> | number | null
-    errorMessage?: StringNullableFilter<"VideoJob"> | string | null
-    createdAt?: DateTimeFilter<"VideoJob"> | Date | string
-    completedAt?: DateTimeNullableFilter<"VideoJob"> | Date | string | null
+  export type ContentJobScalarWhereInput = {
+    AND?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
+    OR?: ContentJobScalarWhereInput[]
+    NOT?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
+    id?: StringFilter<"ContentJob"> | string
+    userId?: StringFilter<"ContentJob"> | string
+    url?: StringFilter<"ContentJob"> | string
+    contentType?: EnumContentTypeFilter<"ContentJob"> | $Enums.ContentType
+    youtubeVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    tiktokVideoId?: StringNullableFilter<"ContentJob"> | string | null
+    fileName?: StringNullableFilter<"ContentJob"> | string | null
+    fileSize?: IntNullableFilter<"ContentJob"> | number | null
+    pageCount?: IntNullableFilter<"ContentJob"> | number | null
+    extractedText?: StringNullableFilter<"ContentJob"> | string | null
+    status?: StringFilter<"ContentJob"> | string
+    processedConceptsCount?: IntNullableFilter<"ContentJob"> | number | null
+    errorMessage?: StringNullableFilter<"ContentJob"> | string | null
+    createdAt?: DateTimeFilter<"ContentJob"> | Date | string
+    completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -28392,7 +28604,7 @@ export namespace Prisma {
     flashcards?: FlashcardCreateNestedManyWithoutUserInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -28413,7 +28625,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -28450,7 +28662,7 @@ export namespace Prisma {
     flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -28471,7 +28683,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -28492,7 +28704,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -28513,7 +28725,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -28550,7 +28762,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -28571,7 +28783,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFeedbacksInput = {
@@ -28592,7 +28804,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFeedbacksInput = {
@@ -28613,7 +28825,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFeedbacksInput = {
@@ -28650,7 +28862,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFeedbacksInput = {
@@ -28671,7 +28883,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseCreateWithoutSubjectInput = {
@@ -29044,7 +29256,7 @@ export namespace Prisma {
     flashcards?: FlashcardCreateNestedManyWithoutUserInput
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserCoursesInput = {
@@ -29065,7 +29277,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserCoursesInput = {
@@ -29137,7 +29349,7 @@ export namespace Prisma {
     flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserCoursesInput = {
@@ -29158,7 +29370,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConceptMatchCreateWithoutSyllabusConceptInput = {
@@ -29335,7 +29547,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"NodeSyllabusConcept"> | Date | string
   }
 
-  export type ConceptCreateWithoutVideoJobInput = {
+  export type ConceptCreateWithoutContentJobInput = {
     id?: string
     conceptText: string
     definition?: string | null
@@ -29345,7 +29557,7 @@ export namespace Prisma {
     conceptMatches?: ConceptMatchCreateNestedManyWithoutConceptInput
   }
 
-  export type ConceptUncheckedCreateWithoutVideoJobInput = {
+  export type ConceptUncheckedCreateWithoutContentJobInput = {
     id?: string
     conceptText: string
     definition?: string | null
@@ -29355,17 +29567,17 @@ export namespace Prisma {
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutConceptInput
   }
 
-  export type ConceptCreateOrConnectWithoutVideoJobInput = {
+  export type ConceptCreateOrConnectWithoutContentJobInput = {
     where: ConceptWhereUniqueInput
-    create: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput>
+    create: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput>
   }
 
-  export type ConceptCreateManyVideoJobInputEnvelope = {
-    data: ConceptCreateManyVideoJobInput | ConceptCreateManyVideoJobInput[]
+  export type ConceptCreateManyContentJobInputEnvelope = {
+    data: ConceptCreateManyContentJobInput | ConceptCreateManyContentJobInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutVideoJobsInput = {
+  export type UserCreateWithoutContentJobsInput = {
     id: string
     name: string
     email: string
@@ -29386,7 +29598,7 @@ export namespace Prisma {
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutVideoJobsInput = {
+  export type UserUncheckedCreateWithoutContentJobsInput = {
     id: string
     name: string
     email: string
@@ -29407,25 +29619,25 @@ export namespace Prisma {
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutVideoJobsInput = {
+  export type UserCreateOrConnectWithoutContentJobsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+    create: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
   }
 
-  export type ConceptUpsertWithWhereUniqueWithoutVideoJobInput = {
+  export type ConceptUpsertWithWhereUniqueWithoutContentJobInput = {
     where: ConceptWhereUniqueInput
-    update: XOR<ConceptUpdateWithoutVideoJobInput, ConceptUncheckedUpdateWithoutVideoJobInput>
-    create: XOR<ConceptCreateWithoutVideoJobInput, ConceptUncheckedCreateWithoutVideoJobInput>
+    update: XOR<ConceptUpdateWithoutContentJobInput, ConceptUncheckedUpdateWithoutContentJobInput>
+    create: XOR<ConceptCreateWithoutContentJobInput, ConceptUncheckedCreateWithoutContentJobInput>
   }
 
-  export type ConceptUpdateWithWhereUniqueWithoutVideoJobInput = {
+  export type ConceptUpdateWithWhereUniqueWithoutContentJobInput = {
     where: ConceptWhereUniqueInput
-    data: XOR<ConceptUpdateWithoutVideoJobInput, ConceptUncheckedUpdateWithoutVideoJobInput>
+    data: XOR<ConceptUpdateWithoutContentJobInput, ConceptUncheckedUpdateWithoutContentJobInput>
   }
 
-  export type ConceptUpdateManyWithWhereWithoutVideoJobInput = {
+  export type ConceptUpdateManyWithWhereWithoutContentJobInput = {
     where: ConceptScalarWhereInput
-    data: XOR<ConceptUpdateManyMutationInput, ConceptUncheckedUpdateManyWithoutVideoJobInput>
+    data: XOR<ConceptUpdateManyMutationInput, ConceptUncheckedUpdateManyWithoutContentJobInput>
   }
 
   export type ConceptScalarWhereInput = {
@@ -29433,7 +29645,7 @@ export namespace Prisma {
     OR?: ConceptScalarWhereInput[]
     NOT?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
     id?: StringFilter<"Concept"> | string
-    videoJobId?: StringFilter<"Concept"> | string
+    contentJobId?: StringFilter<"Concept"> | string
     conceptText?: StringFilter<"Concept"> | string
     definition?: StringNullableFilter<"Concept"> | string | null
     timestamp?: StringNullableFilter<"Concept"> | string | null
@@ -29441,18 +29653,18 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Concept"> | Date | string
   }
 
-  export type UserUpsertWithoutVideoJobsInput = {
-    update: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
-    create: XOR<UserCreateWithoutVideoJobsInput, UserUncheckedCreateWithoutVideoJobsInput>
+  export type UserUpsertWithoutContentJobsInput = {
+    update: XOR<UserUpdateWithoutContentJobsInput, UserUncheckedUpdateWithoutContentJobsInput>
+    create: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutVideoJobsInput = {
+  export type UserUpdateToOneWithWhereWithoutContentJobsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutVideoJobsInput, UserUncheckedUpdateWithoutVideoJobsInput>
+    data: XOR<UserUpdateWithoutContentJobsInput, UserUncheckedUpdateWithoutContentJobsInput>
   }
 
-  export type UserUpdateWithoutVideoJobsInput = {
+  export type UserUpdateWithoutContentJobsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29473,7 +29685,7 @@ export namespace Prisma {
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutVideoJobsInput = {
+  export type UserUncheckedUpdateWithoutContentJobsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -29526,27 +29738,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type VideoJobCreateWithoutConceptsInput = {
+  export type ContentJobCreateWithoutConceptsInput = {
     id?: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutVideoJobsInput
+    user: UserCreateNestedOneWithoutContentJobsInput
   }
 
-  export type VideoJobUncheckedCreateWithoutConceptsInput = {
+  export type ContentJobUncheckedCreateWithoutConceptsInput = {
     id?: string
     userId: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -29554,9 +29774,9 @@ export namespace Prisma {
     completedAt?: Date | string | null
   }
 
-  export type VideoJobCreateOrConnectWithoutConceptsInput = {
-    where: VideoJobWhereUniqueInput
-    create: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
+  export type ContentJobCreateOrConnectWithoutConceptsInput = {
+    where: ContentJobWhereUniqueInput
+    create: XOR<ContentJobCreateWithoutConceptsInput, ContentJobUncheckedCreateWithoutConceptsInput>
   }
 
   export type ConceptMatchUpsertWithWhereUniqueWithoutConceptInput = {
@@ -29575,38 +29795,46 @@ export namespace Prisma {
     data: XOR<ConceptMatchUpdateManyMutationInput, ConceptMatchUncheckedUpdateManyWithoutConceptInput>
   }
 
-  export type VideoJobUpsertWithoutConceptsInput = {
-    update: XOR<VideoJobUpdateWithoutConceptsInput, VideoJobUncheckedUpdateWithoutConceptsInput>
-    create: XOR<VideoJobCreateWithoutConceptsInput, VideoJobUncheckedCreateWithoutConceptsInput>
-    where?: VideoJobWhereInput
+  export type ContentJobUpsertWithoutConceptsInput = {
+    update: XOR<ContentJobUpdateWithoutConceptsInput, ContentJobUncheckedUpdateWithoutConceptsInput>
+    create: XOR<ContentJobCreateWithoutConceptsInput, ContentJobUncheckedCreateWithoutConceptsInput>
+    where?: ContentJobWhereInput
   }
 
-  export type VideoJobUpdateToOneWithWhereWithoutConceptsInput = {
-    where?: VideoJobWhereInput
-    data: XOR<VideoJobUpdateWithoutConceptsInput, VideoJobUncheckedUpdateWithoutConceptsInput>
+  export type ContentJobUpdateToOneWithWhereWithoutConceptsInput = {
+    where?: ContentJobWhereInput
+    data: XOR<ContentJobUpdateWithoutConceptsInput, ContentJobUncheckedUpdateWithoutConceptsInput>
   }
 
-  export type VideoJobUpdateWithoutConceptsInput = {
+  export type ContentJobUpdateWithoutConceptsInput = {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutVideoJobsNestedInput
+    user?: UserUpdateOneRequiredWithoutContentJobsNestedInput
   }
 
-  export type VideoJobUncheckedUpdateWithoutConceptsInput = {
+  export type ContentJobUncheckedUpdateWithoutConceptsInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29621,12 +29849,12 @@ export namespace Prisma {
     timestamp?: string | null
     confidence: number
     createdAt?: Date | string
-    videoJob: VideoJobCreateNestedOneWithoutConceptsInput
+    contentJob: ContentJobCreateNestedOneWithoutConceptsInput
   }
 
   export type ConceptUncheckedCreateWithoutConceptMatchesInput = {
     id?: string
-    videoJobId: string
+    contentJobId: string
     conceptText: string
     definition?: string | null
     timestamp?: string | null
@@ -29722,12 +29950,12 @@ export namespace Prisma {
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    videoJob?: VideoJobUpdateOneRequiredWithoutConceptsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutConceptsNestedInput
   }
 
   export type ConceptUncheckedUpdateWithoutConceptMatchesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    videoJobId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null
     timestamp?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29829,7 +30057,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFlashcardsInput = {
@@ -29850,7 +30078,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFlashcardsInput = {
@@ -29948,7 +30176,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFlashcardsInput = {
@@ -29969,7 +30197,7 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReviewEventUpsertWithWhereUniqueWithoutFlashcardInput = {
@@ -30076,7 +30304,7 @@ export namespace Prisma {
     flashcards?: FlashcardCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewSessionsInput = {
@@ -30097,7 +30325,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
-    videoJobs?: VideoJobUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewSessionsInput = {
@@ -30185,7 +30413,7 @@ export namespace Prisma {
     flashcards?: FlashcardUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewSessionsInput = {
@@ -30206,7 +30434,7 @@ export namespace Prisma {
     flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
-    videoJobs?: VideoJobUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FlashcardCreateWithoutReviewEventsInput = {
@@ -30736,12 +30964,16 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type VideoJobCreateManyUserInput = {
+  export type ContentJobCreateManyUserInput = {
     id?: string
     url: string
+    contentType?: $Enums.ContentType
     youtubeVideoId?: string | null
     tiktokVideoId?: string | null
-    transcript?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
     status: string
     processedConceptsCount?: number | null
     errorMessage?: string | null
@@ -30948,40 +31180,52 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VideoJobUpdateWithoutUserInput = {
+  export type ContentJobUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    concepts?: ConceptUpdateManyWithoutVideoJobNestedInput
+    concepts?: ConceptUpdateManyWithoutContentJobNestedInput
   }
 
-  export type VideoJobUncheckedUpdateWithoutUserInput = {
+  export type ContentJobUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    concepts?: ConceptUncheckedUpdateManyWithoutVideoJobNestedInput
+    concepts?: ConceptUncheckedUpdateManyWithoutContentJobNestedInput
   }
 
-  export type VideoJobUncheckedUpdateManyWithoutUserInput = {
+  export type ContentJobUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31255,7 +31499,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ConceptCreateManyVideoJobInput = {
+  export type ConceptCreateManyContentJobInput = {
     id?: string
     conceptText: string
     definition?: string | null
@@ -31264,7 +31508,7 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type ConceptUpdateWithoutVideoJobInput = {
+  export type ConceptUpdateWithoutContentJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31274,7 +31518,7 @@ export namespace Prisma {
     conceptMatches?: ConceptMatchUpdateManyWithoutConceptNestedInput
   }
 
-  export type ConceptUncheckedUpdateWithoutVideoJobInput = {
+  export type ConceptUncheckedUpdateWithoutContentJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31284,7 +31528,7 @@ export namespace Prisma {
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutConceptNestedInput
   }
 
-  export type ConceptUncheckedUpdateManyWithoutVideoJobInput = {
+  export type ConceptUncheckedUpdateManyWithoutContentJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     conceptText?: StringFieldUpdateOperationsInput | string
     definition?: NullableStringFieldUpdateOperationsInput | string | null

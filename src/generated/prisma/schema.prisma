@@ -17,7 +17,7 @@ model User {
   reviewSessions  ReviewSession[]
   sessions        Session[]
   userCourses     UserCourse[]
-  videoJobs       VideoJob[]
+  contentJobs     ContentJob[]
 
   @@map("user")
 }
@@ -159,38 +159,59 @@ model SyllabusConcept {
   @@map("syllabus_concepts")
 }
 
-model VideoJob {
-  id                     String    @id @default(uuid())
-  userId                 String
-  url                    String
-  youtubeVideoId         String?
-  tiktokVideoId          String?
-  transcript             String?   @db.Text
+enum ContentType {
+  youtube
+  tiktok
+  pdf
+  url
+  podcast
+}
+
+model ContentJob {
+  id          String      @id @default(uuid())
+  userId      String
+  url         String
+  contentType ContentType @default(youtube)
+
+  // Video-specific fields
+  youtubeVideoId String?
+  tiktokVideoId  String?
+
+  // PDF-specific fields
+  fileName  String?
+  fileSize  Int?
+  pageCount Int?
+
+  // Common fields (transcript renamed to extractedText)
+  extractedText          String?   @map("transcript") @db.Text
   status                 String
   processedConceptsCount Int?
   errorMessage           String?
   createdAt              DateTime  @default(now())
   completedAt            DateTime?
-  concepts               Concept[]
-  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relations
+  concepts Concept[]
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
+  @@index([contentType])
   @@map("video_jobs")
 }
 
 model Concept {
   id             String         @id @default(uuid())
-  videoJobId     String
+  contentJobId   String         @map("videoJobId")
   conceptText    String
   definition     String?
   timestamp      String?
   confidence     Float
   createdAt      DateTime       @default(now())
   conceptMatches ConceptMatch[]
-  videoJob       VideoJob       @relation(fields: [videoJobId], references: [id], onDelete: Cascade)
+  contentJob     ContentJob     @relation(fields: [contentJobId], references: [id], onDelete: Cascade)
 
-  @@index([videoJobId])
+  @@index([contentJobId])
   @@index([confidence])
   @@map("concepts")
 }

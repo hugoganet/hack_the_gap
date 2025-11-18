@@ -4,10 +4,12 @@ import { Typography } from "@/components/nowts/typography";
 import { useLocalStorage } from "react-use";
 import { SignInWithEmailOTP } from "./_components/sign-in-otp-form";
 import { SignInPasswordForm } from "./_components/sign-in-password-form";
+import { useTranslations } from "next-intl";
 
 export const SignInCredentialsAndMagicLinkForm = (props: {
   callbackUrl?: string;
 }) => {
+  const t = useTranslations("auth.signin");
   const [isUsingCredentials, setIsUsingCredentials] = useLocalStorage(
     "sign-in-with-credentials",
     true,
@@ -18,7 +20,7 @@ export const SignInCredentialsAndMagicLinkForm = (props: {
       <div className="max-w-lg space-y-4">
         <SignInWithEmailOTP callbackUrl={props.callbackUrl} />
         <Typography variant="muted" className="text-xs">
-          Prefer password sign in?{" "}
+          {t("preferPassword")} {" "}
           <Typography
             variant="link"
             as="button"
@@ -27,7 +29,7 @@ export const SignInCredentialsAndMagicLinkForm = (props: {
               setIsUsingCredentials(true);
             }}
           >
-            Use password
+            {t("usePassword")}
           </Typography>
         </Typography>
       </div>
@@ -38,7 +40,7 @@ export const SignInCredentialsAndMagicLinkForm = (props: {
     <div className="max-w-lg space-y-4">
       <SignInPasswordForm callbackUrl={props.callbackUrl} />
       <Typography variant="muted" className="text-xs">
-        Want faster sign in?{" "}
+        {t("wantFaster")} {" "}
         <Typography
           variant="link"
           as="button"
@@ -47,7 +49,7 @@ export const SignInCredentialsAndMagicLinkForm = (props: {
             setIsUsingCredentials(false);
           }}
         >
-          Login with OTP code
+          {t("loginWithOtp")}
         </Typography>
       </Typography>
     </div>

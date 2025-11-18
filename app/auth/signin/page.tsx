@@ -12,6 +12,7 @@ import { SiteConfig } from "@/site-config";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { SignInProviders } from "./sign-in-providers";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: `Sign In | ${SiteConfig.title}`,
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 
 export default async function AuthSignInPage() {
   const user = await getUser();
+  const t = await getTranslations("auth.signin");
 
   if (user) {
     redirect("/account");
@@ -42,7 +44,7 @@ export default async function AuthSignInPage() {
         </div>
 
         <CardDescription className="text-center">
-          Please sign in to your account to continue.
+          {t("description")}
         </CardDescription>
       </CardHeader>
       <CardContent className="mt-4">

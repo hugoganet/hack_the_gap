@@ -1,6 +1,7 @@
 "use client";
 
 import type { NavigationGroup } from "@/features/navigation/navigation.type";
+import { useTranslations } from "next-intl";
 import {
   Collapsible,
   CollapsibleContent,
@@ -54,6 +55,7 @@ export const SidebarSubButtonLink = ({
 
 export const SidebarNavigationMenu = (props: { link: NavigationGroup }) => {
   const { link } = props;
+  const t = useTranslations("sidebar");
 
   return (
     <SidebarMenu>
@@ -68,7 +70,7 @@ export const SidebarNavigationMenu = (props: { link: NavigationGroup }) => {
               <SidebarMenuItem>
                 <SidebarMenuButtonLink href={item.href}>
                   <item.Icon />
-                  <span>{item.label}</span>
+                  <span>{item.labelKey ? t(item.labelKey) : item.label}</span>
                   <CollapsibleTrigger className="ml-auto">
                     <ChevronRight className="text-muted-foreground ml-auto size-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </CollapsibleTrigger>
@@ -80,7 +82,7 @@ export const SidebarNavigationMenu = (props: { link: NavigationGroup }) => {
                       <SidebarMenuSubItem key={subItem.label}>
                         <SidebarSubButtonLink href={subItem.href}>
                           <subItem.Icon />
-                          <span>{subItem.label}</span>
+                          <span>{subItem.labelKey ? t(subItem.labelKey) : subItem.label}</span>
                         </SidebarSubButtonLink>
                       </SidebarMenuSubItem>
                     ))}
@@ -95,7 +97,7 @@ export const SidebarNavigationMenu = (props: { link: NavigationGroup }) => {
           <SidebarMenuItem key={item.label}>
             <SidebarMenuButtonLink href={item.href}>
               <item.Icon />
-              <span>{item.label}</span>
+              <span>{item.labelKey ? t(item.labelKey) : item.label}</span>
             </SidebarMenuButtonLink>
           </SidebarMenuItem>
         );

@@ -10,6 +10,7 @@ import { SiteConfig } from "@/site-config";
 import { CheckCircle } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: `Account Deleted | ${SiteConfig.title}`,
@@ -17,7 +18,8 @@ export const metadata: Metadata = {
     "Your account has been successfully deleted. Thank you for using our service.",
 };
 
-export default function GoodbyePage() {
+export default async function GoodbyePage() {
+  const locale = await getLocale();
   return (
     <Card className="mx-auto w-full max-w-md lg:max-w-lg lg:p-6">
       <CardHeader>
@@ -45,7 +47,7 @@ export default function GoodbyePage() {
             anytime.
           </p>
           <Button asChild className="w-full">
-            <Link href="/auth/signup">Create New Account</Link>
+            <Link href={`/${locale}/auth/signup`}>Create New Account</Link>
           </Button>
         </div>
       </CardFooter>

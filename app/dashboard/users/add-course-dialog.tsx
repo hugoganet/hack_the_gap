@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/command";
 import { ChevronRight, BookOpen, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 type Subject = {
   id: string;
@@ -39,6 +40,7 @@ type AddCourseDialogProps = {
 type SelectionStep = "subject" | "course";
 
 export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
+  const t = useTranslations("dashboard.users.addCourse");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentStep, setCurrentStep] = useState<SelectionStep>("subject");
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
@@ -73,7 +75,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
       setCourses(coursesData.courses ?? []);
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("Failed to load course data");
+      toast.error(t("toast.loadFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -109,16 +111,16 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(`Added ${course.name} to your courses`);
+        toast.success(t("toast.added", { name: course.name }));
         handleClose();
         // Refresh the page to show the new course
         window.location.reload();
       } else {
-        toast.error(data.error ?? "Failed to add course");
+        toast.error(data.error ?? t("toast.failed"));
       }
     } catch (error) {
       console.error("Error adding course:", error);
-      toast.error("Failed to add course");
+      toast.error(t("toast.failed"));
     } finally {
       setIsAdding(false);
     }
@@ -130,9 +132,9 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle>Add Course</DialogTitle>
+          <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>
-            Search for a course or browse by subject
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -146,16 +148,16 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
             /* Search Command Palette */
             <Command className="rounded-lg border">
             <CommandInput
-              placeholder="Quick search by course name or code..."
+              placeholder={t("search.placeholder")}
               value={searchQuery}
               onValueChange={setSearchQuery}
             />
             <CommandList className="max-h-[400px]">
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{t("empty")}</CommandEmpty>
 
               {/* Search Results */}
               {searchQuery && (
-                <CommandGroup heading="Search Results">
+                <CommandGroup heading={t("headings.searchResults")}>
                   {courses
                     .filter(
                       (course) =>
@@ -179,7 +181,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
               {!searchQuery && (
                 <>
                   {currentStep === "subject" && (
-                    <CommandGroup heading="Select Subject">
+                    <CommandGroup heading={t("headings.selectSubject")}>
                       {subjects.map((subject) => (
                         <CommandItem
                           key={subject.id}
@@ -194,7 +196,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
                   )}
 
                   {currentStep === "course" && (
-                    <CommandGroup heading="Select Course">
+                    <CommandGroup heading={t("headings.selectCourse")}>
                       {courses
                         .filter(
                           (course) =>
@@ -222,7 +224,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
           {!isLoading && !searchQuery && currentStep === "subject" && (
             <div className="mt-4 text-center">
               <p className="text-sm text-muted-foreground">
-                Or use the search above to find courses quickly
+                {t("browseHint")}
               </p>
             </div>
           )}
@@ -232,7 +234,7 @@ export function AddCourseDialog({ open, onOpenChange }: AddCourseDialogProps) {
           <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
             <div className="flex items-center gap-2">
               <Loader2 className="size-5 animate-spin" />
-              <span className="text-sm font-medium">Adding course...</span>
+              <span className="text-sm font-medium">{t("overlay.adding")}</span>
             </div>
           </div>
         )}

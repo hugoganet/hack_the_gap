@@ -13,10 +13,12 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrganizationMembers } from "./_components/organization-members";
+import { getLocale } from "next-intl/server";
 
 export default async function OrganizationDetailPage(
   props: PageParams<{ orgId: string }>,
 ) {
+  const locale = await getLocale();
   await getRequiredAdmin();
   const params = await props.params;
 
@@ -48,7 +50,7 @@ export default async function OrganizationDetailPage(
     <Layout size="lg">
       <LayoutHeader>
         <div className="flex items-center gap-2">
-          <Link href="/admin/organizations">
+          <Link href={`/${locale}/admin/organizations`}>
             <Button variant="ghost" size="sm">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Organizations

@@ -33,6 +33,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import type { ProfileFormType } from "./edit-profile.schema";
 import { ProfileFormSchema } from "./edit-profile.schema";
+import { useLocale, useTranslations } from "next-intl";
 
 type EditProfileFormProps = {
   defaultValues: User;
@@ -41,6 +42,8 @@ type EditProfileFormProps = {
 export const EditProfileCardForm = ({
   defaultValues,
 }: EditProfileFormProps) => {
+  const locale = useLocale();
+  const t = useTranslations("account.profile");
   const form = useZodForm({
     schema: ProfileFormSchema,
     defaultValues: defaultValues,
@@ -57,7 +60,7 @@ export const EditProfileCardForm = ({
       );
     },
     onSuccess: () => {
-      toast.success("Profile updated");
+      toast.success(t("toast.updated"));
       router.refresh();
     },
     onError: (error) => {
@@ -74,7 +77,7 @@ export const EditProfileCardForm = ({
       );
     },
     onSuccess: () => {
-      toast.success("Verification email sent");
+      toast.success(t("toast.verificationSent"));
     },
     onError: (error) => {
       toast.error(error.message);
@@ -119,9 +122,9 @@ export const EditProfileCardForm = ({
             />
             <div className="flex flex-col gap-2">
               <Label className="flex items-center gap-4">
-                <span>Email</span>
+                <span>{t("email.label")}</span>
                 {defaultValues.emailVerified ? (
-                  <InlineTooltip title="Email verified. If you change your email, you will need to verify it again.">
+                  <InlineTooltip title={t("email.verifiedInfo")}>
                     <BadgeCheck size={16} />
                   </InlineTooltip>
                 ) : (
@@ -133,7 +136,7 @@ export const EditProfileCardForm = ({
                     onClick={() => verifyEmailMutation.mutate()}
                     loading={verifyEmailMutation.isPending}
                   >
-                    Verify email
+                    {t("email.verifyAction")}
                   </LoadingButton>
                 )}
               </Label>
@@ -143,19 +146,19 @@ export const EditProfileCardForm = ({
           <CardFooter className="flex gap-2">
             <Link
               className={buttonVariants({ size: "sm", variant: "link" })}
-              href="/account/change-email"
+              href={`/${locale}/account/change-email`}
             >
-              Change email
+              {t("actions.changeEmail")}
             </Link>
             <Link
               className={buttonVariants({ size: "sm", variant: "link" })}
-              href="/account/change-password"
+              href={`/${locale}/account/change-password`}
             >
-              Change password
+              {t("actions.changePassword")}
             </Link>
             <div className="flex-1"></div>
             <LoadingButton loading={updateProfileMutation.isPending}>
-              Save
+              {t("actions.save")}
             </LoadingButton>
           </CardFooter>
         </Card>

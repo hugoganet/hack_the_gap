@@ -35,14 +35,14 @@ type StartReviewResult = {
   error?: string;
   data?: {
     sessionId: string;
-    flashcards: Array<{
+    flashcards: {
       id: string;
       question: string;
       answer: string;
       sourceTimestamp: string | null;
       conceptName: string;
       category: string | null;
-    }>;
+    }[];
   };
 };
 
@@ -63,11 +63,11 @@ type CompleteSessionResult = {
     hardCount: number;
     mediumCount: number;
     easyCount: number;
-    nextReviewSchedule: Array<{
+    nextReviewSchedule: {
       difficulty: DifficultyRating;
       count: number;
       interval: string;
-    }>;
+    }[];
   };
 };
 
@@ -285,6 +285,7 @@ export async function completeReviewSessionAction(input: {
           difficulty: item.difficulty,
           count: item.count,
           interval: item.interval,
+          nextReviewDate: item.nextReviewDate,
         })),
       },
     };

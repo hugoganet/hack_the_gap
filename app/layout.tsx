@@ -20,6 +20,12 @@ export const metadata: Metadata = {
   title: SiteConfig.title,
   description: SiteConfig.description,
   metadataBase: new URL(getServerUrl()),
+  alternates: {
+    languages: {
+      en: "/en",
+      fr: "/fr",
+    },
+  },
 };
 
 // Martian Grotesk - Main font for body and headings

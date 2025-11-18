@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, HelpCircle, Loader2 } from "lucide-react";
@@ -15,10 +15,12 @@ import {
 } from "@app/actions/review-session.action";
 import type { DifficultyRating, ReviewFlashcard, ReviewSummary } from "@/features/reviews/types";
 import { KEYBOARD_SHORTCUTS } from "@/features/reviews/types";
+import { useLocale } from "next-intl";
 
 export default function ReviewSessionPage() {
   const router = useRouter();
   const params = useParams();
+  const locale = useLocale();
   const courseId = params.courseId as string;
 
   const [loading, setLoading] = useState(true);
@@ -29,7 +31,6 @@ export default function ReviewSessionPage() {
   const [isComplete, setIsComplete] = useState(false);
   const [summary, setSummary] = useState<ReviewSummary | null>(null);
   const [rating, setRating] = useState(false);
-
   // Initialize review session
   useEffect(() => {
     async function initSession() {
@@ -44,8 +45,7 @@ export default function ReviewSessionPage() {
 
         setSessionId(result.data.sessionId);
         setFlashcards(result.data.flashcards);
-      } catch (err) {
-        console.error("Failed to initialize session:", err);
+      } catch {
         setError("An unexpected error occurred");
       } finally {
         setLoading(false);
@@ -55,50 +55,9 @@ export default function ReviewSessionPage() {
     void initSession();
   }, [courseId]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      // Don't handle if user is typing in an input
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return;
-      }
+  
 
-      // Exit on Escape
-      if (KEYBOARD_SHORTCUTS.exit.includes(e.key as "Escape")) {
-        void handleExit();
-        return;
-      }
-
-      // Don't handle other shortcuts if rating or complete
-      if (rating || isComplete || currentIndex >= flashcards.length) {
-        return;
-      }
-
-      // Reveal answer (Space)
-      if (KEYBOARD_SHORTCUTS.reveal.includes(e.key as " " | "Space")) {
-        e.preventDefault();
-        // The reveal is handled by ReviewCard component
-        return;
-      }
-
-      // Rate flashcard (1, 2, 3 or Arrow keys)
-      if (KEYBOARD_SHORTCUTS.hard.includes(e.key as "1" | "ArrowLeft")) {
-        e.preventDefault();
-        void handleRate("hard");
-      } else if (KEYBOARD_SHORTCUTS.medium.includes(e.key as "2" | "ArrowDown")) {
-        e.preventDefault();
-        void handleRate("medium");
-      } else if (KEYBOARD_SHORTCUTS.easy.includes(e.key as "3" | "ArrowRight")) {
-        e.preventDefault();
-        void handleRate("easy");
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [rating, isComplete, currentIndex, flashcards.length]);
-
-  const handleRate = async (
+  const handleRate = useCallback(async (
     difficulty: DifficultyRating,
     timeToRevealMs?: number,
     timeToRateMs?: number
@@ -127,31 +86,74 @@ export default function ReviewSessionPage() {
         // Get summary and show completion screen
         const summaryResult = await completeReviewSessionAction({ sessionId });
         if (summaryResult.success && summaryResult.data) {
-          setSummary(summaryResult.data);
+          setSummary(summaryResult.data as ReviewSummary);
           setIsComplete(true);
         }
       } else {
         // Move to next card
         setCurrentIndex(result.data.nextCardIndex);
       }
-    } catch (err) {
-      console.error("Failed to rate flashcard:", err);
+    } catch {
       setError("An unexpected error occurred");
     } finally {
       setRating(false);
     }
-  };
+  }, [sessionId, rating, currentIndex, flashcards]);
 
-  const handleExit = async () => {
+  const handleExit = useCallback(async () => {
     if (sessionId && !isComplete) {
       await abandonReviewSessionAction({ sessionId });
     }
-    router.push(`/dashboard/courses/${courseId}`);
-  };
+    router.push(`/${locale}/dashboard/courses/${courseId}`);
+  }, [sessionId, isComplete, router, courseId, locale]);
 
   const handleBackToCourse = () => {
-    router.push(`/dashboard/courses/${courseId}`);
+    router.push(`/${locale}/dashboard/courses/${courseId}`);
   };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+
+      if (KEYBOARD_SHORTCUTS.exit.includes(e.key as "Escape")) {
+        void handleExit();
+        return;
+      }
+
+      if (rating || isComplete || currentIndex >= flashcards.length) {
+        return;
+      }
+
+      if (KEYBOARD_SHORTCUTS.reveal.includes(e.key as " " | "Space")) {
+        e.preventDefault();
+        return;
+      }
+
+      if (KEYBOARD_SHORTCUTS.hard.includes(e.key as "1" | "ArrowLeft")) {
+        e.preventDefault();
+        void handleRate("hard");
+      } else if (
+        KEYBOARD_SHORTCUTS.medium.includes(e.key as "2" | "ArrowDown")
+      ) {
+        e.preventDefault();
+        void handleRate("medium");
+      } else if (
+        KEYBOARD_SHORTCUTS.easy.includes(e.key as "3" | "ArrowRight")
+      ) {
+        e.preventDefault();
+        void handleRate("easy");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [rating, isComplete, currentIndex, flashcards.length, handleExit, handleRate]);
 
   // Loading state
   if (loading) {
