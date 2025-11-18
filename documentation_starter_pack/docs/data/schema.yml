@@ -1,8 +1,9 @@
-# Hackathon MVP Schema - 12 Tables (Updated: 2025-11-18)
+# Hackathon MVP Schema - 14 Tables (Updated: 2025-11-18)
 # JSON Schema format for database tables
 # MIGRATION (2025-11-16): Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
 # MIGRATION (2025-11-18): VideoJob → ContentJob with ContentType enum, added PDF-specific fields
 # MIGRATION (2025-11-18): Added language support for multilingual embeddings (concepts, syllabus_concepts, flashcards)
+# MIGRATION (2025-11-18): Added unlock_events and user_stats tables, updated flashcards with unlock fields
 
 ---
 $id: "https://hackthegap.com/schemas/users.schema.json"
@@ -314,21 +315,28 @@ $id: "https://hackthegap.com/schemas/flashcards.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: flashcards
 type: object
-required: [id, concept_match_id, user_id, question, answer, language]
+required: [id, syllabus_concept_id, user_id, question, language, state]
 properties:
   id:
     type: string
     format: uuid
-  concept_match_id:
+  syllabus_concept_id:
     type: string
     format: uuid
+    description: "FK to syllabus_concepts (always present)"
+  concept_match_id:
+    type: ["string", "null"]
+    format: uuid
+    description: "FK to concept_matches (NULL = locked, NOT NULL = unlocked)"
   user_id:
     type: string
     format: uuid
   question:
     type: string
+    description: "Always present (from syllabus)"
   answer:
-    type: string
+    type: ["string", "null"]
+    description: "NULL = locked, NOT NULL = unlocked"
   question_translation:
     type: ["string", "null"]
     description: "Translation of question (for bilingual flashcards when language mismatch detected)"
@@ -339,6 +347,38 @@ properties:
     type: string
     default: en
     description: "Primary language of flashcard (en, fr, es, de, etc.)"
+  difficulty:
+    type: string
+    enum: [easy, medium, hard]
+    default: medium
+  hints:
+    type: ["array", "null"]
+    description: "Array of hint strings (available when locked)"
+    items:
+      type: string
+  state:
+    type: string
+    enum: [locked, unlocked, mastered]
+    default: locked
+    description: "locked = question-only, unlocked = answer revealed, mastered = consistently correct"
+  unlocked_at:
+    type: ["string", "null"]
+    format: date-time
+    description: "When answer was revealed"
+  unlocked_by:
+    type: ["string", "null"]
+    description: "contentJobId that unlocked this flashcard"
+  unlock_progress:
+    type: number
+    minimum: 0
+    maximum: 1
+    default: 0.0
+    description: "0.0-1.0 for partial matches (Phase 2 gamification)"
+  related_content_ids:
+    type: ["array", "null"]
+    description: "Array of contentJobIds that could unlock this (Phase 2)"
+    items:
+      type: string
   source_timestamp:
     type: ["string", "null"]
     description: "Link back to video moment"
@@ -356,6 +396,9 @@ properties:
     format: date-time
     description: "For spaced repetition scheduling"
   created_at:
+    type: string
+    format: date-time
+  updated_at:
     type: string
     format: date-time
 
@@ -413,6 +456,77 @@ properties:
   time_to_rate_ms:
     type: ["integer", "null"]
   created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/unlock_events.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: unlock_events
+type: object
+description: "Tracks flashcard unlock history for analytics and gamification"
+required: [id, user_id, flashcard_id, content_job_id, concept_match_id, confidence]
+properties:
+  id:
+    type: string
+    format: uuid
+  user_id:
+    type: string
+    format: uuid
+    description: "FK to users"
+  flashcard_id:
+    type: string
+    format: uuid
+    description: "FK to flashcards"
+  content_job_id:
+    type: string
+    format: uuid
+    description: "FK to content_jobs (what content unlocked this)"
+  concept_match_id:
+    type: string
+    format: uuid
+    description: "FK to concept_matches (which match triggered unlock)"
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 1
+    description: "Match confidence that triggered unlock (≥0.70)"
+  created_at:
+    type: string
+    format: date-time
+
+---
+$id: "https://hackthegap.com/schemas/user_stats.schema.json"
+$schema: "http://json-schema.org/draft-07/schema#"
+title: user_stats
+type: object
+description: "Aggregate user statistics for dashboard and gamification"
+required: [id, user_id, total_unlocks, total_locked]
+properties:
+  id:
+    type: string
+    format: uuid
+  user_id:
+    type: string
+    format: uuid
+    description: "FK to users (unique)"
+  total_unlocks:
+    type: integer
+    default: 0
+    description: "Total flashcards unlocked"
+  total_locked:
+    type: integer
+    default: 0
+    description: "Total flashcards still locked"
+  unlock_rate:
+    type: ["number", "null"]
+    minimum: 0
+    maximum: 1
+    description: "Computed: total_unlocks / (total_unlocks + total_locked)"
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
     type: string
     format: date-time
 

@@ -8,6 +8,48 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Flashcard Answer Unlock System** (2025-11-18) 🔓
+  - **Gamified Learning**: Flashcards start locked (question-only), unlock when high-confidence matches found
+  - **Database Schema**: Added unlock tracking (Migration: `20251118075121_add_flashcard_unlock_system`)
+    - `unlock_events` table: Tracks unlock history (userId, flashcardId, contentJobId, conceptMatchId, confidence, createdAt)
+    - `user_stats` table: Aggregate unlock metrics (totalUnlocks, totalLocked, unlockRate)
+    - `flashcards` table updates:
+      - `state` field: locked | unlocked | mastered (default: locked)
+      - `unlockedAt` timestamp: When answer revealed
+      - `unlockedBy` field: contentJobId that triggered unlock
+      - `unlockProgress` field: 0.0-1.0 for partial matches (Phase 2)
+      - `relatedContentIds` JSON: Array of contentJobIds that could unlock (Phase 2)
+      - `hints` JSON: Array of hint strings (available when locked)
+      - Composite index: (userId, nextReviewAt) for efficient queries
+  - **Unlock Service** (`src/features/flashcards/unlock-service.ts`, 357 lines)
+    - Processes concept matches ≥70% confidence (lowered from 80%)
+    - Generates answers from matched content using AI
+    - Updates flashcard state: locked → unlocked
+    - Creates unlock events for analytics
+    - Updates user stats after unlock
+    - Returns unlock results for notifications
+  - **Notification System** (`src/lib/notifications/unlock-notifications.ts`, 143 lines)
+    - Toast notifications for unlocked flashcards
+    - Displays: question, concept, source, confidence
+    - Grouped notifications for multiple unlocks
+    - "View unlocked cards" CTA
+  - **API Routes**:
+    - `GET /api/flashcards`: Fetch user flashcards with filters (locked/unlocked/all)
+    - `GET /api/user/stats`: Fetch user unlock statistics
+  - **Dashboard Integration**:
+    - Unlock progress component: Visual progress bar, unlock rate, locked/unlocked counts
+    - Content recommendations: Suggests content to unlock remaining flashcards
+    - Updated user dashboard: Shows unlock stats and progress
+  - **UI Components**:
+    - `flashcard-card.tsx`: Locked/unlocked states with visual indicators (🔒/🔓)
+    - `flashcard-list.tsx`: Filter by state, sort by unlock status
+    - `unlock-progress.tsx`: Progress visualization with stats
+    - `content-recommendations.tsx`: Smart content suggestions
+  - **Integration**: Wired into concept matching pipeline (`app/actions/match-concepts.action.ts`)
+  - **Testing**: Comprehensive testing guide (`FLASHCARD_UNLOCK_TESTING_GUIDE.md`, 509 lines)
+  - **UX Planning**: Major refactor plan document (`UX_REFACTOR_PLAN.md`, 580 lines)
+  - **Threshold Decision**: 70% confidence for unlock (see ADR-0018)
+
 - **Multilingual Embeddings & Cross-Lingual Matching** (2025-11-18) 🌐
   - **Embedding Model Upgrade**: text-embedding-3-small → text-embedding-3-large
     - Supports 100+ languages with cross-lingual semantic matching

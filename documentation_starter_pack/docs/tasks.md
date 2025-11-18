@@ -9,6 +9,7 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] Create ADR-0012: Monolith architecture
 - [ ] Create ADR-0013: AI provider (OpenAI)
 - [ ] Create ADR-0014: Synchronous processing for MVP
+- [x] Create ADR-0018: Unlock threshold decision (70% confidence) ✅ 2025-11-18
 - [ ] Set up monitoring/observability (Sentry)
 - [ ] Configure email templates (Resend + React Email)
 
@@ -48,14 +49,26 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
   - ✅ Frontend: Transformed organization card into content inbox with drag-and-drop
   - ✅ Authentication: Added user authentication requirement
   - ⏳ Phase 2 TODO: AI concept extraction from stored transcripts
-- [ ] US-0003: Concept extraction ⚠️ CRITICAL → See `docs/specs/us-0003-concept-extraction.md`
-- [ ] US-0004: Concept-to-syllabus matching ⚠️ CRITICAL → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
+- [x] US-0003: Concept extraction ✅ 2025-11-16 → See `docs/specs/us-0003-concept-extraction.md`
+- [x] US-0004: Concept-to-syllabus matching ✅ 2025-11-16 → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
+- [x] Flashcard Unlock System ✅ 2025-11-18
+  - ✅ Database schema: unlock_events, user_stats tables, flashcards unlock fields
+  - ✅ Migration: 20251118075121_add_flashcard_unlock_system
+  - ✅ Unlock service: Answer generation from matched content (357 lines)
+  - ✅ Notification system: Toast notifications for unlocks (143 lines)
+  - ✅ API routes: GET /api/flashcards, GET /api/user/stats
+  - ✅ Dashboard components: unlock-progress, content-recommendations
+  - ✅ UI components: flashcard-card, flashcard-list with locked/unlocked states
+  - ✅ Integration: Wired into concept matching pipeline
+  - ✅ Testing guide: FLASHCARD_UNLOCK_TESTING_GUIDE.md (509 lines)
+  - ✅ UX planning: UX_REFACTOR_PLAN.md (580 lines)
+  - ✅ Threshold: 70% confidence for unlock (ADR-0018)
 
 ### MVP Implementation - Review System
 
-- [ ] US-0005: Flashcard generation → See `docs/specs/us-0005-flashcard-generation.md`
-- [ ] US-0006: First review session → See `docs/specs/us-0006-first-review-session.md`
-- [ ] US-0007: Review scheduling → See `docs/specs/us-0007-review-scheduling.md`
+- [x] US-0005: Flashcard generation ✅ 2025-11-16 → See `docs/specs/us-0005-flashcard-generation.md`
+- [x] US-0006: First review session ✅ 2025-11-16 → See `docs/specs/us-0006-first-review-session.md`
+- [x] US-0007: Review scheduling ✅ 2025-11-16 → See `docs/specs/us-0007-review-scheduling.md`
 
 ### MVP Implementation - Dashboard
 

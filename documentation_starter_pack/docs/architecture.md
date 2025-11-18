@@ -111,9 +111,10 @@ app/
 ├── api/                 # API routes
 │   ├── syllabus/        # NEW: Syllabus upload & parsing (US-0001)
 │   ├── videos/          # Video processing (US-0002) ✅ DONE
+│   ├── flashcards/      # 🆕 Flashcard queries (locked/unlocked filters)
+│   ├── user/stats/      # 🆕 User unlock statistics
 │   ├── concepts/        # Concept extraction (US-0003) ✅ DONE
 │   ├── matches/         # Concept matching (US-0004) ✅ DONE
-│   ├── flashcards/      # Flashcard generation (US-0005) ✅ DONE
 │   ├── reviews/         # Review sessions (US-0006, US-0007) ✅ DONE
 │   └── upload-pdf/      # 🆕 PDF file upload endpoint
 └── _components/         # Shared UI components
@@ -151,7 +152,10 @@ src/
 │   │   └── embeddingService.ts    # OpenAI embeddings
 │   ├── flashcards/
 │   │   ├── flashcardGenerator.ts  # US-0005: Auto-generation
-│   │   └── reviewScheduler.ts     # US-0007: Spaced repetition
+│   │   ├── reviewScheduler.ts     # US-0007: Spaced repetition
+│   │   └── unlock-service.ts      # 🆕 Answer unlock system (357 lines)
+│   ├── notifications/
+│   │   └── unlock-notifications.ts # 🆕 Unlock toast notifications (143 lines)
 │   ├── progress/
 │   │   ├── progressService.ts     # US-0008: Dashboard
 │   │   └── gapAnalyzer.ts         # US-0009: Gap analysis
@@ -166,6 +170,10 @@ src/
 │   ├── ai.ts                      # OpenAI client
 │   ├── blackbox.ts                # Blackbox AI client
 │   └── youtube.ts                 # YouTube client
+├── components/
+│   ├── dashboard/
+│   │   ├── unlock-progress.tsx    # 🆕 Unlock progress visualization
+│   │   └── content-recommendations.tsx # 🆕 Smart content suggestions
 └── app/actions/
     ├── process-content.action.ts  # ✅ Content processing + auto-match (all types)
     └── match-concepts.action.ts   # ✅ Manual matching trigger
@@ -243,6 +251,77 @@ Final Blending:
 - ADR-0007: Confidence threshold calibration
 - ADR-0017: Multilingual embeddings strategy (text-embedding-3-large upgrade)
 - `src/features/matching/README.md`: Technical details
+
+## Flashcard Answer Unlock System (2025-11-18)
+
+**Implementation Status:** ✅ Complete
+
+**Concept:** Gamified learning where flashcards start locked (question-only) and unlock when high-confidence concept matches are found.
+
+**Unlock Flow:**
+
+```
+Content Processing → Concept Matching (≥70% confidence) → Unlock Service → Answer Generation → Notification
+```
+
+**Components:**
+
+1. **Database Schema** (Migration: `20251118075121_add_flashcard_unlock_system`)
+   - `unlock_events` table: Tracks unlock history
+   - `user_stats` table: Aggregate metrics (totalUnlocks, totalLocked, unlockRate)
+   - `flashcards` table updates:
+     - `state`: locked | unlocked | mastered
+     - `unlockedAt`: Timestamp
+     - `unlockedBy`: contentJobId
+     - `unlockProgress`: 0.0-1.0 (Phase 2)
+     - `relatedContentIds`: JSON array (Phase 2)
+     - `hints`: JSON array (available when locked)
+     - Composite index: (userId, nextReviewAt)
+
+2. **Unlock Service** (`src/features/flashcards/unlock-service.ts`)
+   - Processes concept matches ≥70% confidence
+   - Generates answers from matched content using AI
+   - Updates flashcard state: locked → unlocked
+   - Creates unlock events for analytics
+   - Updates user stats
+   - Returns unlock results for notifications
+
+3. **Notification System** (`src/lib/notifications/unlock-notifications.ts`)
+   - Toast notifications for unlocked flashcards
+   - Displays: question, concept, source, confidence
+   - Grouped notifications for multiple unlocks
+   - "View unlocked cards" CTA
+
+4. **API Routes**
+   - `GET /api/flashcards`: Fetch user flashcards with filters (locked/unlocked/all)
+   - `GET /api/user/stats`: Fetch user unlock statistics
+
+5. **Dashboard Components**
+   - `unlock-progress.tsx`: Visual progress bar, unlock rate, locked/unlocked counts
+   - `content-recommendations.tsx`: Suggests content to unlock remaining flashcards
+   - Updated user dashboard: Shows unlock stats and progress
+
+6. **UI Components**
+   - `flashcard-card.tsx`: Locked/unlocked states with visual indicators (🔒/🔓)
+   - `flashcard-list.tsx`: Filter by state, sort by unlock status
+
+7. **Integration**
+   - Wired into concept matching pipeline (`app/actions/match-concepts.action.ts`)
+   - Auto-triggers after high-confidence matches found
+
+**Unlock Threshold:** 70% confidence (lowered from 80%)
+- Rationale: Balance between accuracy and unlock frequency
+- See ADR-0018 for decision details
+
+**Performance:**
+- Answer generation: ~2-3 seconds per flashcard
+- Batch processing: Parallel unlock for multiple matches
+- Database: Optimized composite index for queries
+
+**See Also:**
+- ADR-0018: Unlock threshold decision (70% confidence)
+- `FLASHCARD_UNLOCK_TESTING_GUIDE.md`: Comprehensive testing guide
+- `UX_REFACTOR_PLAN.md`: UX planning document
 
 ## Tech Stack
 
@@ -379,6 +458,14 @@ sequenceDiagram
 - `GET /api/syllabus/:userId` - Get user's uploaded syllabi and extracted concepts
 - `DELETE /api/syllabus/:syllabusId` - Delete syllabus and associated concepts
 
+**Flashcard Queries:** ✅ IMPLEMENTED (2025-11-18)
+
+- `GET /api/flashcards` - Fetch user flashcards with filters (locked/unlocked/all)
+
+**User Statistics:** ✅ IMPLEMENTED (2025-11-18)
+
+- `GET /api/user/stats` - Fetch user unlock statistics (totalUnlocks, totalLocked, unlockRate)
+
 **Deprecated (2025-11-17):**
 - ~~`GET /api/courses`~~ - No longer needed (students upload their own)
 - ~~`GET /api/user/courses`~~ - No longer needed
@@ -424,6 +511,8 @@ See `./data/` for complete schema documentation:
 - `flashcards` - Auto-generated review cards
 - `review_sessions` - Review tracking
 - `review_events` - Individual review attempts
+- `unlock_events` - Flashcard unlock history
+- `user_stats` - Aggregate user statistics
 
 **Deprecated (2025-11-17):**
 - ~~`courses`~~ - No longer needed (students upload their own)

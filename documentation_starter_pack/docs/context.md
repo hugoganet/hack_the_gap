@@ -6,8 +6,8 @@ This is the single entry point for reconstructing project context. AI tools and 
 
 - Name: Recall (formerly "hack the gap")
 - Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals
-- Stage: Implementation (Core pipeline complete, i18n + PDF upload added, syllabus upload in progress)
-- Last updated: 2025-11-18
+- Stage: Implementation (Core pipeline complete, i18n + PDF upload added, flashcard unlock system complete, syllabus upload in progress)
+- Last updated: 2025-11-18 (Flashcard unlock system added)
 - **Major Pivot (2025-11-17)**: Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses.
 
 ## Core Documents
@@ -43,11 +43,11 @@ Then record ADRs and Specs as needed under `./decisions/` and `./specs/`.
 
 ## Current Focus
 
-- **Current Phase:** Implementation - Core pipeline complete, syllabus upload feature in progress
+- **Current Phase:** Implementation - Core pipeline complete, flashcard unlock system complete, syllabus upload in progress
 - **High-level goal:** Build 48-hour hackathon MVP proving that auto-generated Zettelkasten from passive content consumption improves student retention
 - **Key risks:** Syllabus upload friction, concept matching accuracy (<50% = lost trust), retention validation in 4 days
 - **Next milestone:** Complete syllabus upload feature (NEW US-0001), progress dashboard (US-0008), gap analysis (US-0009)
-- **Recent achievement:** Core pipeline working end-to-end (video processing → concept extraction → matching → flashcards → review)
+- **Recent achievement:** Flashcard unlock system complete (gamified learning with locked/unlocked states)
 
 ## Tech Stack Summary
 
@@ -65,14 +65,16 @@ See `./tech_stack.md` for complete details.
 
 ## Data Schema Status
 
-✅ **COMPLETE** - 12 tables defined and synchronized (updated 2025-11-18):
+✅ **COMPLETE** - 14 tables defined and synchronized (updated 2025-11-18):
 
 - Reference tables: `users`, `subjects`
 - Course structure: `courses`, `user_courses`, `syllabus_concepts`, `knowledge_nodes`, `node_syllabus_concepts`
 - Processing pipeline: `content_jobs` (formerly `video_jobs`), `concepts`, `concept_matches`
-- Learning system: `flashcards`, `review_sessions`, `review_events`
+- Learning system: `flashcards`, `review_sessions`, `review_events`, `unlock_events`, `user_stats`
 
 **Recent Changes:**
+- 2025-11-18: Added `unlock_events` and `user_stats` tables for flashcard unlock system
+- 2025-11-18: Updated `flashcards` table with unlock fields (state, unlockedAt, unlockedBy, unlockProgress, hints)
 - 2025-11-18: `VideoJob` → `ContentJob` with `ContentType` enum (youtube, tiktok, pdf, url, podcast)
 - 2025-11-16: Removed `academic_years` and `semesters`, added `knowledge_nodes` for flexible hierarchy
 
@@ -106,6 +108,7 @@ See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-18**: **Flashcard Unlock System** - Gamified learning with locked flashcards (question-only) that unlock at 70% confidence matches
 - **2025-11-18**: **Multilingual Embeddings** - Upgraded to text-embedding-3-large for cross-lingual semantic matching (100+ languages, ~95% similarity for equivalent concepts)
 - **2025-11-18**: **Language Support** - Added language fields to concepts, syllabus_concepts, flashcards for bilingual flashcard generation
 - **2025-11-18**: **Comprehensive i18n** - Added next-intl 4.5.3 for EN/FR bilingual support across entire app (300+ translation keys)
@@ -149,6 +152,7 @@ See `./specs/` for detailed specifications.
 **Completed:**
 - ✅ **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs)
 - ✅ **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model)
+- ✅ **ADR-0018**: Unlock threshold decision (70% confidence for flashcard unlocks)
 
 **Priority ADRs needed:**
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives

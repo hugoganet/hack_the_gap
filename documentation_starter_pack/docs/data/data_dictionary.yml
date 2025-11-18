@@ -1,6 +1,7 @@
 # Data Dictionary - Hackathon MVP
-# Minimal documentation for 12 core tables (Updated: 2025-11-16)
+# Minimal documentation for 14 core tables (Updated: 2025-11-18)
 # MIGRATION: Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
+# MIGRATION (2025-11-18): Added unlock_events and user_stats tables, updated flashcards with unlock fields
 
 users:
   description: "Student accounts with basic auth info"
@@ -346,17 +347,22 @@ concept_matches:
       required: true
 
 flashcards:
-  description: "Auto-generated Q&A flashcards for spaced repetition"
+  description: "Auto-generated Q&A flashcards with unlock system (locked → unlocked → mastered)"
   source: "GPT-4/Claude generation from concept_matches"
   fields:
     id:
       type: uuid
       description: "Primary key"
       required: true
+    syllabus_concept_id:
+      type: uuid
+      description: "FK to syllabus_concepts (always present)"
+      required: true
+      index: true
     concept_match_id:
       type: uuid
-      description: "FK to concept_matches"
-      required: true
+      description: "FK to concept_matches (NULL = locked, NOT NULL = unlocked)"
+      required: false
       index: true
     user_id:
       type: uuid
@@ -365,12 +371,57 @@ flashcards:
       index: true
     question:
       type: string
-      description: "Active recall question (not yes/no)"
+      description: "Active recall question (always present, from syllabus)"
       required: true
     answer:
       type: string
-      description: "Concise answer (1-3 sentences)"
+      description: "Concise answer (NULL = locked, NOT NULL = unlocked)"
+      required: false
+    question_translation:
+      type: string
+      description: "Translation of question (for bilingual flashcards)"
+      required: false
+    answer_translation:
+      type: string
+      description: "Translation of answer (for bilingual flashcards)"
+      required: false
+    language:
+      type: string
+      description: "Primary language (en, fr, es, de, etc.)"
       required: true
+      default: en
+    difficulty:
+      type: string
+      description: "easy | medium | hard"
+      required: true
+      default: medium
+    hints:
+      type: json
+      description: "Array of hint strings (available when locked)"
+      required: false
+    state:
+      type: string
+      description: "locked | unlocked | mastered"
+      required: true
+      default: locked
+      index: true
+    unlocked_at:
+      type: timestamp
+      description: "When answer was revealed"
+      required: false
+    unlocked_by:
+      type: string
+      description: "contentJobId that unlocked this flashcard"
+      required: false
+    unlock_progress:
+      type: float
+      description: "0.0-1.0 for partial matches (Phase 2 gamification)"
+      required: false
+      default: 0.0
+    related_content_ids:
+      type: json
+      description: "Array of contentJobIds that could unlock this (Phase 2)"
+      required: false
     source_timestamp:
       type: string
       description: "Link back to video moment (MM:SS)"
@@ -395,6 +446,80 @@ flashcards:
       required: false
       index: true
     created_at:
+      type: timestamp
+      required: true
+    updated_at:
+      type: timestamp
+      required: true
+
+unlock_events:
+  description: "Tracks flashcard unlock history for analytics and gamification"
+  source: "unlock service (concept matching pipeline)"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    user_id:
+      type: uuid
+      description: "FK to users"
+      required: true
+      index: true
+    flashcard_id:
+      type: uuid
+      description: "FK to flashcards"
+      required: true
+      index: true
+    content_job_id:
+      type: uuid
+      description: "FK to content_jobs (what content unlocked this)"
+      required: true
+      index: true
+    concept_match_id:
+      type: uuid
+      description: "FK to concept_matches (which match triggered unlock)"
+      required: true
+      index: true
+    confidence:
+      type: float
+      description: "Match confidence that triggered unlock (≥0.70)"
+      required: true
+    created_at:
+      type: timestamp
+      required: true
+
+user_stats:
+  description: "Aggregate user statistics for dashboard and gamification"
+  source: "unlock service (updated after each unlock)"
+  fields:
+    id:
+      type: uuid
+      description: "Primary key"
+      required: true
+    user_id:
+      type: uuid
+      description: "FK to users (unique)"
+      required: true
+      index: true
+      unique: true
+    total_unlocks:
+      type: integer
+      description: "Total flashcards unlocked"
+      required: true
+      default: 0
+    total_locked:
+      type: integer
+      description: "Total flashcards still locked"
+      required: true
+      default: 0
+    unlock_rate:
+      type: float
+      description: "Computed: total_unlocks / (total_unlocks + total_locked)"
+      required: false
+    created_at:
+      type: timestamp
+      required: true
+    updated_at:
       type: timestamp
       required: true
 
