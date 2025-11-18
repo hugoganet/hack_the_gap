@@ -57,7 +57,7 @@ export const Hero = () => {
             </Typography>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-x-6">
               <Link
-                href="/signup"
+                href="/auth/signup"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
                 {t("getStarted")}

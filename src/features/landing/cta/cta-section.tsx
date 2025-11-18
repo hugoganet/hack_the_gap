@@ -20,7 +20,7 @@ export function CtaSection() {
         </span>
       </Typography>
       <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:shrink-0">
-        <Link className={buttonVariants({ size: "lg" })} href="/signup">
+        <Link className={buttonVariants({ size: "lg" })} href="/auth/signup">
           {t("button")}
         </Link>
       </div>
