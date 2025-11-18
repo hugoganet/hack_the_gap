@@ -44,9 +44,17 @@ export const UserDropdown = ({ children }: PropsWithChildren) => {
 
   const changeLanguage = (newLocale: string) => {
     // Remove current locale from pathname if it exists
-    const pathWithoutLocale = pathname.replace(/^\/(en|fr)/, "");
-    // Navigate to the new locale path
-    router.push(`/${newLocale}${pathWithoutLocale}`);
+    const pathWithoutLocale = pathname.replace(/^\/(en|fr)(?=\/|$)/, "");
+    const search = typeof window !== "undefined" ? window.location.search : "";
+
+    // Persist chosen locale for middleware/next-intl
+    if (typeof document !== "undefined") {
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
+    }
+
+    // Navigate and refresh to ensure server components re-render in new locale
+    router.replace(`/${newLocale}${pathWithoutLocale}${search}`);
+    router.refresh();
   };
 
   if (!session.data?.user) {
