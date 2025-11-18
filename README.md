@@ -97,6 +97,7 @@ make reset          # Reset complet (⚠️ perd les données)
 - **[Guide Docker](README.docker.md)** - Documentation complète Docker
 - **[Guide Agent IA](AGENTS.md)** - Instructions pour Claude/Copilot
 - **[Documentation Projet](documentation_starter_pack/README.md)** - Vision, architecture, ADRs
+- **[US-0006 — Semantic Color System](docs/implementation/us-0006-ui-semantic-colors.md)** — UI semantics applied to flashcards/reviews
 - **[NOW.TS Course](https://codeline.app/courses/clqn8pmte0001lr54itcjzl59/lessons/clqn8pz990003112iia11p7uo)** - Setup du template original
 
 ## 🛠️ Scripts de Développement
@@ -111,6 +112,22 @@ pnpm lint           # Linter
 pnpm ts             # Type checking
 pnpm clean          # Lint + type check + format
 ```
+
+## 🆕 2025-11-18 — Product Updates
+
+- **Confirm-to-Unlock Flow**: Users can confirm a concept match as correct to unlock the corresponding flashcard immediately. API: `POST /api/concept-matches/confirm/:conceptMatchId` (uses `src/lib/zod-route.ts`); backend service: `src/features/flashcards/unlock-service.ts#forceUnlockFlashcardAnswer`; UI: user match results dialog triggers unlock on thumbs-up.
+
+- **Course Page — Flashcards First**: The first section of a course now lists ALL flashcards for that course (locked + unlocked). Answers show only when unlocked; locked cards include a CTA to ingest content. Files: `app/dashboard/courses/[courseId]/page.tsx`, `course-flashcards-view.tsx`, `src/components/flashcards/flashcard-card.tsx`.
+
+- **Semantic Color System**: Non-anxious visual semantics for flashcards and reviews (Learning, Needs‑Work, Success) + growth gradient. Details: `docs/implementation/us-0006-ui-semantic-colors.md`. Applied in: `app/globals.css`, review components, and flashcard card.
+
+- **Landing i18n**: Hero, beta banner, features, and CTA now localized. Files: `app/[locale]/page.tsx`, `messages/en.json`, `messages/fr.json`.
+
+Notes:
+
+- Prefer Server Actions and `authRoute` wrappers for backend endpoints
+- Keep organization flows unchanged—user-only confirm/unlock path is authoritative
+
 
 ## 🔧 Configuration Requise
 

@@ -1,3 +1,33 @@
+# Changelog
+
+## 2025-11-18 - Unlock Flow, Course Flashcards, Semantic UI, Landing i18n
+
+### ✨ Features
+
+- Confirm-to-unlock flow: users can confirm a concept match to unlock its flashcard immediately
+  - API: `POST /api/concept-matches/confirm/:conceptMatchId` using `authRoute`
+  - Service: `forceUnlockFlashcardAnswer` in `src/features/flashcards/unlock-service.ts`
+  - UI: user match results dialog integrates the confirm action with loading state + toasts
+
+- Course page first section redesigned to show all course flashcards
+  - Answers are visible only when unlocked; locked cards show a CTA to ingest content
+  - Files: `app/dashboard/courses/[courseId]/page.tsx`, `course-flashcards-view.tsx`, `src/components/flashcards/flashcard-card.tsx`
+
+### 🎨 UI/UX
+
+- Semantic color system for flashcards & reviews (Learning, Needs‑Work, Success) and growth progress gradient
+  - See: `docs/implementation/us-0006-ui-semantic-colors.md`
+  - Implemented in `app/globals.css` and applied across review/flashcard components
+
+- Landing page i18n enhancements
+  - Localized hero, beta banner, features, CTA
+  - Files: `app/[locale]/page.tsx`, `messages/en.json`, `messages/fr.json`
+
+### ⚠️ Notes
+
+- Prefer Server Actions and `authRoute` for backend endpoints
+- Organization-scoped dialogs remain informational only; user scope drives unlock behavior
+
 ## 2025-08-23 - Major Platform Updates & Infrastructure Improvements
 
 ### 🚀 **New Features & Components**
