@@ -10,8 +10,7 @@ import type {
   HierarchicalExtractionResponse,
   ExtractionResult,
 } from "@/types/hierarchical-extraction";
-import { readFile } from "fs/promises";
-import { join } from "path";
+import { HIERARCHICAL_KNOWLEDGE_EXTRACTION_PROMPT } from "@/master-prompts/hierarchical-knowledge-extraction-prompt";
 
 /**
  * Input for hierarchical extraction
@@ -38,16 +37,6 @@ const DEFAULT_OPTIONS: Required<ExtractionOptions> = {
   timeout: 90000, // 90 seconds (increased for longer processing)
 };
 
-/**
- * Load the hierarchical extraction prompt from file
- */
-async function loadPrompt(): Promise<string> {
-  const promptPath = join(
-    process.cwd(),
-    "src/master-prompts/hierarchical-knowledge-extraction-prompt.md"
-  );
-  return readFile(promptPath, "utf-8");
-}
 
 /**
  * Format input for the AI prompt
@@ -143,8 +132,8 @@ export async function extractHierarchicalKnowledge(
   const opts = { ...DEFAULT_OPTIONS, ...options };
   
   try {
-    // Load the system prompt
-    const systemPrompt = await loadPrompt();
+    // Use the system prompt constant
+    const systemPrompt = HIERARCHICAL_KNOWLEDGE_EXTRACTION_PROMPT;
     
     // Format the user message
     const userMessage = formatPromptInput(input);
@@ -370,7 +359,7 @@ export async function extractHierarchicalKnowledgeStructured(
 ) {
   const opts = { ...DEFAULT_OPTIONS, ...options };
 
-  const systemPrompt = await loadPrompt();
+  const systemPrompt = HIERARCHICAL_KNOWLEDGE_EXTRACTION_PROMPT;
   const userMessage = formatPromptInput(input);
 
   const model = openai("gpt-4o-mini");
