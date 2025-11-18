@@ -80,39 +80,64 @@ export async function createKnowledgeStructure(
       );
     }
 
-    // 4. Create SyllabusConcepts
+    // 4. Create SyllabusConcepts + LOCKED Flashcards
     console.log(`Creating ${atomicConcepts.length} syllabus concepts...`);
     const conceptIdMap = new Map<string, string>(); // path -> conceptId
+    const flashcardIds: string[] = [];
     
     // Extract language from extraction metadata (default to 'en' if not provided)
     const detectedLanguage = extractionMetadata.detectedLanguage ?? "en";
     console.log(`Detected syllabus language: ${detectedLanguage}`);
 
-    const concepts = await Promise.all(
-      atomicConcepts.map(async (concept, index) => {
-        console.log(`Creating concept ${index + 1}/${atomicConcepts.length}: ${concept.conceptText}`);
-        return tx.syllabusConcept.create({
-          data: {
-            courseId: course.id,
-            conceptText: concept.conceptText,
-            category: concept.category,
-            importance: concept.importance,
-            order: concept.order,
-            language: detectedLanguage, // Store detected language
-          },
-        });
-      })
-    );
+    // Create concepts and flashcards sequentially to maintain order
+    for (let index = 0; index < atomicConcepts.length; index++) {
+      const concept = atomicConcepts[index];
+      if (!concept) continue;
 
-    console.log(`Created ${concepts.length} syllabus concepts successfully`);
+      console.log(`Creating concept ${index + 1}/${atomicConcepts.length}: ${concept.conceptText}`);
+      
+      // Create syllabus concept
+      const syllabusConcept = await tx.syllabusConcept.create({
+        data: {
+          courseId: course.id,
+          conceptText: concept.conceptText,
+          category: concept.category,
+          importance: concept.importance,
+          order: concept.order,
+          language: detectedLanguage,
+        },
+      });
 
-    // Map concept paths to IDs
-    atomicConcepts.forEach((concept, index) => {
-      const conceptId = concepts[index]?.id;
-      if (conceptId) {
-        conceptIdMap.set(concept.path, conceptId);
-      }
-    });
+      conceptIdMap.set(concept.path, syllabusConcept.id);
+
+      // Create LOCKED flashcard (question only, no answer)
+      console.log(`  Creating locked flashcard for: ${concept.conceptText}`);
+      const flashcard = await tx.flashcard.create({
+        data: {
+          syllabusConceptId: syllabusConcept.id,
+          conceptMatchId: null, // Not matched yet
+          userId,
+          question: concept.flashcard.question,
+          answer: null, // 🔒 LOCKED: No answer yet
+          questionTranslation: null,
+          answerTranslation: null,
+          language: detectedLanguage,
+          difficulty: concept.flashcard.difficulty,
+          hints: concept.flashcard.hints ?? [],
+          state: "locked",
+          unlockedAt: null,
+          unlockedBy: null,
+          unlockProgress: 0.0,
+          relatedContentIds: [],
+          nextReviewAt: null, // Can't review until unlocked
+        },
+      });
+
+      flashcardIds.push(flashcard.id);
+      console.log(`  ✓ Created locked flashcard: ${flashcard.id}`);
+    }
+
+    console.log(`Created ${conceptIdMap.size} syllabus concepts and ${flashcardIds.length} locked flashcards successfully`);
 
     // 5. Create NodeSyllabusConcept (link concepts to nodes)
     console.log(`Linking ${atomicConcepts.length} concepts to nodes...`);
@@ -161,6 +186,31 @@ export async function createKnowledgeStructure(
         learnedCount: 0,
       },
     });
+
+    // 7. Initialize or update UserStats
+    console.log(`Initializing user stats for ${flashcardIds.length} locked flashcards...`);
+    await tx.userStats.upsert({
+      where: { userId },
+      update: {
+        totalLocked: { increment: flashcardIds.length },
+      },
+      create: {
+        userId,
+        totalUnlocks: 0,
+        totalLocked: flashcardIds.length,
+        totalMastered: 0,
+        unlockRate: 0.0,
+        currentStreak: 0,
+        longestStreak: 0,
+      },
+    });
+
+    console.log(`✓ Knowledge structure created successfully`);
+    console.log(`  - Subject: ${subject.name}`);
+    console.log(`  - Course: ${course.name} (${course.code})`);
+    console.log(`  - Concepts: ${conceptIdMap.size}`);
+    console.log(`  - Locked flashcards: ${flashcardIds.length}`);
+    console.log(`  - Tree depth: ${extractionMetadata.treeDepth}`);
 
     // Return result
     return {
