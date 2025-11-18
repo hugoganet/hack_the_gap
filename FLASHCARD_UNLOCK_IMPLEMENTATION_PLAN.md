@@ -30,7 +30,7 @@
 ## ✅ Progress Tracker
 
 - [x] **STEP 1:** Database Schema (Single Migration) - COMPLETED
-- [ ] **STEP 2:** Update AI Prompt (Question-Only Generation)
+- [x] **STEP 2:** Update AI Prompt (Question-Only Generation) - COMPLETED
 - [ ] **STEP 3:** Update Zod Validation Schema
 - [ ] **STEP 4:** Update Knowledge Structure Creation
 - [ ] **STEP 5:** Create Answer Unlock Service
@@ -171,7 +171,7 @@ npx prisma generate
 
 ---
 
-### **STEP 2: Update AI Prompt (Question-Only Generation)**
+### **STEP 2: Update AI Prompt (Question-Only Generation)** ✅ COMPLETED
 
 **Duration:** 30 minutes  
 **Files:** `src/master-prompts/hierarchical-knowledge-extraction-prompt.md`

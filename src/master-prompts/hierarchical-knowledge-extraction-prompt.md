@@ -211,6 +211,46 @@ Decompose into:
 
 ---
 
+## Flashcard Generation (Question-Only)
+
+For each atomic concept, generate ONE question that tests understanding. 
+**DO NOT generate answers** - answers will be unlocked when students consume content.
+
+**Question Requirements:**
+- **Format:** "What is...", "How does...", "Why...", "Explain...", "What are the key characteristics of..."
+- **Clarity:** Question must be self-contained and unambiguous
+- **Testability:** Must have a clear, factual answer (not opinion-based)
+- **Difficulty:** Match concept importance (3=hard, 2=medium, 1=easy)
+- **Language:** Match detected language (L)
+
+**Hints (Optional but Recommended):**
+- Provide 2-3 hints that guide thinking without revealing the answer
+- Hints should prime curiosity and help students recognize the answer in content
+- Format: Array of strings
+
+**Example:**
+```json
+{
+  "conceptText": "Categorical Imperative",
+  "flashcard": {
+    "question": "What is the Categorical Imperative in Kantian ethics?",
+    "difficulty": "hard",
+    "hints": [
+      "Think about universal moral laws",
+      "Consider Kant's formulation about treating humanity",
+      "It's a principle that applies unconditionally"
+    ]
+  }
+}
+```
+
+**Bad Examples (Avoid):**
+- ❌ "Is the Categorical Imperative important?" (yes/no question)
+- ❌ "Discuss Kant's ethics" (too vague)
+- ❌ "What do you think about the Categorical Imperative?" (opinion-based)
+
+---
+
 ## Extraction Rules
 
 ### Rule 6: Node Naming Conventions
@@ -391,7 +431,11 @@ Return a single, valid JSON object with this structure:
       "category": "string | null",
       "order": "integer (order within parent)",
       "isAtomic": "boolean (always true)",
-      "flashcardQuestion": "string (example question to verify atomicity)"
+      "flashcard": {
+        "question": "string (10-500 chars, clear testable question)",
+        "difficulty": "string (easy | medium | hard)",
+        "hints": "array of strings (2-3 hints, optional)"
+      }
     }
   ],
   "extractionMetadata": {
@@ -667,7 +711,15 @@ Semester 2: Ethics, Epistemology, Modern Philosophy
       "category": "Philosophical Methods",
       "order": 1,
       "isAtomic": true,
-      "flashcardQuestion": "What is the Socratic Method?"
+      "flashcard": {
+        "question": "What is the Socratic Method?",
+        "difficulty": "hard",
+        "hints": [
+          "Think about questioning and dialogue",
+          "It's named after a famous Greek philosopher",
+          "Used to examine beliefs and assumptions"
+        ]
+      }
     },
     {
       "conceptText": "Categorical Imperative",
@@ -677,7 +729,15 @@ Semester 2: Ethics, Epistemology, Modern Philosophy
       "category": "Ethics",
       "order": 1,
       "isAtomic": true,
-      "flashcardQuestion": "What is the Categorical Imperative in Kantian ethics?"
+      "flashcard": {
+        "question": "What is the Categorical Imperative in Kantian ethics?",
+        "difficulty": "hard",
+        "hints": [
+          "Think about universal moral laws",
+          "Consider Kant's formulation about treating humanity",
+          "It's a principle that applies unconditionally"
+        ]
+      }
     }
   ],
   "extractionMetadata": {
@@ -831,7 +891,15 @@ Unit 3: Molecular Biology (Weeks 7-10)
       "category": "Cell Structure",
       "order": 1,
       "isAtomic": true,
-      "flashcardQuestion": "What is the structure and function of the cell membrane?"
+      "flashcard": {
+        "question": "What is the structure and function of the cell membrane?",
+        "difficulty": "hard",
+        "hints": [
+          "Think about the phospholipid bilayer",
+          "Consider selective permeability",
+          "It's the boundary of the cell"
+        ]
+      }
     },
     {
       "conceptText": "Mitosis",
@@ -841,7 +909,15 @@ Unit 3: Molecular Biology (Weeks 7-10)
       "category": "Cell Division",
       "order": 2,
       "isAtomic": true,
-      "flashcardQuestion": "What is mitosis and what are its stages?"
+      "flashcard": {
+        "question": "What is mitosis and what are its stages?",
+        "difficulty": "hard",
+        "hints": [
+          "Think about cell division for growth",
+          "Remember PMAT (Prophase, Metaphase, Anaphase, Telophase)",
+          "Results in two identical daughter cells"
+        ]
+      }
     }
   ],
   "extractionMetadata": {
