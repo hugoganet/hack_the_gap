@@ -76,19 +76,26 @@ export async function CardsToReviewToday() {
   });
 
   // Group flashcards by course (single declaration)
-  const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: FlashcardWithMatch[] }>>((acc, flashcard) => {
-    const courseId = flashcard.conceptMatch.syllabusConcept.course.id;
-    if (!(courseId in acc)) {
-      acc[courseId] = {
-        course: flashcard.conceptMatch.syllabusConcept.course,
-        flashcards: [],
-      };
-    }
-    acc[courseId].flashcards.push(flashcard);
-    return acc;
-  }, {});
-
-  const coursesWithFlashcards = Object.values(flashcardsByCourse);
+    const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: FlashcardWithMatch[] }>>((acc, flashcard) => {
+      // guard against missing conceptMatch / syllabusConcept / course
+      const course = flashcard.conceptMatch?.syllabusConcept?.course;
+      if (!course) {
+        // skip flashcards that have no course information
+        return acc;
+      }
+  
+      const courseId = course.id;
+      if (!(courseId in acc)) {
+        acc[courseId] = {
+          course,
+          flashcards: [],
+        };
+      }
+      acc[courseId].flashcards.push(flashcard);
+      return acc;
+    }, {});
+  
+    const coursesWithFlashcards = Object.values(flashcardsByCourse);
 
   return (
     <Card>
@@ -123,16 +130,13 @@ export async function CardsToReviewToday() {
                   variant="outline"
                   className="w-full justify-between h-auto py-4 px-4 hover:bg-accent transition-colors"
                 >
-                  <div className="flex items-start gap-3 text-left flex-1">
+                  <div className="flex items-start gap-3 text-left flex-1 min-w-0">
                     <div className="mt-0.5">
                       <Brain className="size-5 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-base">
+                      <div className="font-semibold text-base truncate text-left max-w-full min-w-0">
                         {course.name}
-                      </div>
-                      <div className="text-sm text-muted-foreground mt-1">
-                        {course.code}
                       </div>
                       <div className="text-xs text-muted-foreground mt-2">
                         {t("perCourseCount", { count: flashcards.length })}

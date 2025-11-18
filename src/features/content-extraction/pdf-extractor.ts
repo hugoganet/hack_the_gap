@@ -1,18 +1,11 @@
 import type { PDFExtractionResult } from "./types";
 import { PDFParse, VerbosityLevel } from "pdf-parse";
 
-// Set up the worker for server-side PDF parsing
-// This resolves the worker file from the pdf-parse package
-if (typeof window === "undefined") {
-  try {
-    // For Node.js/Next.js server-side, we need to set the worker path
-    // The worker file is in the pdf-parse package
-    const workerPath = require.resolve("pdf-parse/dist/worker/pdf.worker.mjs");
-    PDFParse.setWorker(workerPath);
-  } catch (error) {
-    console.warn("Failed to set PDF worker path:", error);
-  }
-}
+/**
+ * Server-side usage: no PDF.js worker path needed.
+ * pdf-parse runs in Node without a separate web worker.
+ * Avoid referencing browser worker files to prevent Next.js module resolution errors.
+ */
 
 /**
  * Extract text from PDF URL

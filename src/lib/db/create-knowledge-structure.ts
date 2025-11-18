@@ -70,6 +70,7 @@ export async function createKnowledgeStructure(
 
     // Create all nodes SEQUENTIALLY to avoid duplicate slug conflicts
     for (const subdirectory of courseData.subdirectories) {
+      // eslint-disable-next-line no-await-in-loop
       await createKnowledgeNodesRecursive(
         tx,
         subject.id,
@@ -92,11 +93,13 @@ export async function createKnowledgeStructure(
     // Create concepts and flashcards sequentially to maintain order
     for (let index = 0; index < atomicConcepts.length; index++) {
       const concept = atomicConcepts[index];
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!concept) continue;
 
       console.log(`Creating concept ${index + 1}/${atomicConcepts.length}: ${concept.conceptText}`);
       
       // Create syllabus concept
+      // eslint-disable-next-line no-await-in-loop
       const syllabusConcept = await tx.syllabusConcept.create({
         data: {
           courseId: course.id,
@@ -112,6 +115,7 @@ export async function createKnowledgeStructure(
 
       // Create LOCKED flashcard (question only, no answer)
       console.log(`  Creating locked flashcard for: ${concept.conceptText}`);
+      // eslint-disable-next-line no-await-in-loop
       const flashcard = await tx.flashcard.create({
         data: {
           syllabusConceptId: syllabusConcept.id,
@@ -139,43 +143,50 @@ export async function createKnowledgeStructure(
 
     console.log(`Created ${conceptIdMap.size} syllabus concepts and ${flashcardIds.length} locked flashcards successfully`);
 
-    // 5. Create NodeSyllabusConcept (link concepts to nodes)
+    // 5. Create NodeSyllabusConcept (link concepts to nodes) - batch insert to keep txn fast
     console.log(`Linking ${atomicConcepts.length} concepts to nodes...`);
-    
-    const linkResults = await Promise.all(
-      atomicConcepts.map(async (concept, index) => {
-        const nodeId = nodePathMap.get(concept.parentPath);
-        const conceptId = conceptIdMap.get(concept.path);
 
-        console.log(`Linking concept ${index + 1}: ${concept.conceptText}`);
-        console.log(`  Parent path: ${concept.parentPath}`);
-        console.log(`  Node ID: ${nodeId ? "found" : "NOT FOUND"}`);
-        console.log(`  Concept ID: ${conceptId ? "found" : "NOT FOUND"}`);
+    const linkData: Prisma.NodeSyllabusConceptCreateManyInput[] = [];
 
-        if (!nodeId) {
-          console.error(`ERROR: Node not found for parent path: ${concept.parentPath}`);
-          console.error(`Available node paths:`, Array.from(nodePathMap.keys()));
-          throw new Error(
-            `Node not found for parent path: ${concept.parentPath}`
-          );
-        }
+    for (let index = 0; index < atomicConcepts.length; index++) {
+      const concept = atomicConcepts[index];
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if (!concept) continue;
+      const nodeId = nodePathMap.get(concept.parentPath);
+      const conceptId = conceptIdMap.get(concept.path);
 
-        if (!conceptId) {
-          console.error(`ERROR: Concept not found for path: ${concept.path}`);
-          throw new Error(`Concept not found for path: ${concept.path}`);
-        }
+      console.log(`Linking concept ${index + 1}: ${concept.conceptText}`);
+      console.log(`  Parent path: ${concept.parentPath}`);
+      console.log(`  Node ID: ${nodeId ? "found" : "NOT FOUND"}`);
+      console.log(`  Concept ID: ${conceptId ? "found" : "NOT FOUND"}`);
 
-        return tx.nodeSyllabusConcept.create({
-          data: {
-            nodeId,
-            syllabusConceptId: conceptId,
-            addedByUserId: userId,
-          },
-        });
-      })
-    );
+      if (!nodeId) {
+        console.error(`ERROR: Node not found for parent path: ${concept.parentPath}`);
+        console.error(`Available node paths:`, Array.from(nodePathMap.keys()));
+        throw new Error(`Node not found for parent path: ${concept.parentPath}`);
+      }
 
-    console.log(`Successfully linked ${linkResults.length} concepts to nodes`);
+      if (!conceptId) {
+        console.error(`ERROR: Concept not found for path: ${concept.path}`);
+        throw new Error(`Concept not found for path: ${concept.path}`);
+      }
+
+      linkData.push({
+        nodeId,
+        syllabusConceptId: conceptId,
+        addedByUserId: userId,
+      });
+    }
+
+    if (linkData.length > 0) {
+      const createManyResult = await tx.nodeSyllabusConcept.createMany({
+        data: linkData,
+        skipDuplicates: true,
+      });
+      console.log(`Successfully linked ${createManyResult.count} concepts to nodes`);
+    } else {
+      console.log(`No concepts to link`);
+    }
 
     // 6. Create UserCourse (enrollment)
     await tx.userCourse.create({
@@ -225,7 +236,7 @@ export async function createKnowledgeStructure(
       inputType: extraction.inputAnalysis.inputType,
       requiresReview: qualityChecks.requiresReview,
     };
-  });
+  }, { timeout: 30000 }); // extend interactive transaction timeout to handle remote DB latency and batch work
 }
 
 /**
@@ -272,6 +283,7 @@ async function createKnowledgeNodesRecursive(
 
     // Create children SEQUENTIALLY to avoid duplicate slug conflicts
     for (const child of subdirectoryChildren) {
+      // eslint-disable-next-line no-await-in-loop
       await createKnowledgeNodesRecursive(
         tx,
         subjectId,

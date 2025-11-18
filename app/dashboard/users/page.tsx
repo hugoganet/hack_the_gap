@@ -27,6 +27,12 @@ export default async function RoutePage() {
         <LayoutTitle>{t("title")}</LayoutTitle>
       </LayoutHeader>
       <LayoutContent className="flex flex-col gap-4 lg:gap-6">
+        {/* Content Inbox and Cards to Review */}
+        <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
+          <ClientOrg />
+        </div>
+        <CardsToReviewToday />
+
         {/* Unlock Progress (Gamification) */}
         {stats && (
           <UnlockProgress
@@ -40,12 +46,6 @@ export default async function RoutePage() {
             }}
           />
         )}
-
-        <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
-          {/* <CourseSelectionCard /> */}
-          <ClientOrg />
-        </div>
-        <CardsToReviewToday />
       </LayoutContent>
     </Layout>
   );

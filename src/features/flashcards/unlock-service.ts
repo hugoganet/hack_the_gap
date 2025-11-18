@@ -7,8 +7,9 @@ import { prisma } from "@/lib/db";
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import type { ConceptMatch, Concept, SyllabusConcept } from "@/generated/prisma";
+import { buildFlashcardAnswerPrompt } from "@/master-prompts/flashcard-answer-unlock-prompt";
 
-export interface UnlockResult {
+export type UnlockResult = {
   flashcardId: string;
   question: string;
   answer: string;
@@ -16,7 +17,7 @@ export interface UnlockResult {
   unlockedAt: Date;
   source: string;
   confidence: number;
-}
+};
 
 /**
  * Unlock flashcard answers for high-confidence concept matches
@@ -125,7 +126,7 @@ export async function unlockFlashcardAnswers(
       question: flashcard.question,
       answer,
       conceptText: flashcard.syllabusConcept.conceptText,
-      unlockedAt: unlockedFlashcard.unlockedAt!,
+      unlockedAt: unlockedFlashcard.unlockedAt ?? new Date(),
       source,
       confidence: match.confidence,
     };
@@ -159,27 +160,11 @@ async function generateAnswerFromContent(
   syllabusConcept: SyllabusConcept,
   matchRationale: string
 ): Promise<string> {
-  const prompt = `You are generating a flashcard answer based on content the student consumed.
-
-QUESTION CONTEXT (from syllabus):
-- Concept: ${syllabusConcept.conceptText}
-- Category: ${syllabusConcept.category || "N/A"}
-- Importance: ${syllabusConcept.importance || "N/A"}
-
-CONTENT CONTEXT (from video/PDF):
-- Extracted concept: ${extractedConcept.conceptText}
-- Definition: ${extractedConcept.definition || "N/A"}
-
-MATCHING RATIONALE:
-${matchRationale}
-
-Generate a concise, accurate answer (1-3 sentences) that:
-1. Directly answers the question about the syllabus concept
-2. Incorporates specific details from the content consumed
-3. Includes a concrete example if available in the content
-4. Is suitable for flashcard review (clear and memorable)
-
-ANSWER:`;
+  const prompt = buildFlashcardAnswerPrompt({
+    extractedConcept,
+    syllabusConcept,
+    matchRationale,
+  });
 
   try {
     const { text } = await generateText({

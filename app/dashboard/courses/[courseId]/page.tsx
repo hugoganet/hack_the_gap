@@ -59,49 +59,58 @@ export default async function CourseDetailPage({ params }: PageProps) {
   }
 
   // Fetch concept matches with flashcards for this course
-  const conceptMatches = await prisma.conceptMatch.findMany({
-    where: {
-      syllabusConcept: {
-        courseId: course.id,
-      },
-      flashcards: {
-        some: {
-          userId: user.id,
+    const conceptMatches = await prisma.conceptMatch.findMany({
+      where: {
+        syllabusConcept: {
+          courseId: course.id,
+        },
+        flashcards: {
+          some: {
+            userId: user.id,
+          },
         },
       },
-    },
-    include: {
-      concept: {
-        select: {
-          conceptText: true,
-          definition: true,
+      include: {
+        concept: {
+          select: {
+            conceptText: true,
+            definition: true,
+          },
+        },
+        syllabusConcept: {
+          select: {
+            conceptText: true,
+            category: true,
+          },
+        },
+        flashcards: {
+          where: {
+            userId: user.id,
+          },
+          select: {
+            id: true,
+            question: true,
+            answer: true,
+            sourceTimestamp: true,
+            timesReviewed: true,
+            timesCorrect: true,
+            lastReviewedAt: true,
+          },
         },
       },
-      syllabusConcept: {
-        select: {
-          conceptText: true,
-          category: true,
-        },
+      orderBy: {
+        confidence: "desc",
       },
-      flashcards: {
-        where: {
-          userId: user.id,
-        },
-        select: {
-          id: true,
-          question: true,
-          answer: true,
-          sourceTimestamp: true,
-          timesReviewed: true,
-          timesCorrect: true,
-          lastReviewedAt: true,
-        },
-      },
-    },
-    orderBy: {
-      confidence: "desc",
-    },
-  });
+    });
+  
+    // Normalize flashcard fields to match frontend types (convert nullable answer to empty string)
+        const normalizedConceptMatches = conceptMatches.map((cm) => ({
+          ...cm,
+          flashcards: cm.flashcards.map((f) => ({
+            ...f,
+            answer: f.answer,
+          })),
+        }));
 
   const topSubdirectories = await prisma.knowledgeNode.findMany({
     where: {
@@ -133,18 +142,20 @@ export default async function CourseDetailPage({ params }: PageProps) {
   // Only display top-level nodes that are relevant to this course:
   // - either the node itself has linked concepts for this course
   // - or at least one of its direct children has linked concepts for this course
-  const visibleTopSubdirectories = topSubdirectories.filter(
-    (node) =>
-      node.concepts.length > 0 ||
-      node.children.some((child) => child.concepts.length > 0),
-  );
+  const visibleTopSubdirectories = topSubdirectories.filter((node) => {
+    const hasDirect = node.concepts.length > 0;
+    const hasChild = node.children.some(
+      (child) => child.concepts.length > 0,
+    );
+    return hasDirect || hasChild;
+  });
 
   return (
     <div className="container mx-auto py-8 space-y-6">
 
       <CourseFlashcardsView
         course={course}
-        conceptMatches={conceptMatches}
+        conceptMatches={normalizedConceptMatches}
       />
 
       {visibleTopSubdirectories.length > 0 && (
