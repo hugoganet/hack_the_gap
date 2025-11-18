@@ -12,6 +12,8 @@
 | ORM | TypeORM, Drizzle, Kysely | **Prisma 6.14** | Type-safe queries, great DX, migrations, schema-first design. Boilerplate already configured. | Excellent TypeScript support, auto-generated types, migration tooling | Can be slow for complex queries, abstracts SQL | Type safety vs raw SQL performance | Risk: Performance bottlenecks. Mitigation: Use raw queries for complex operations, optimize indexes | Schema split: better-auth.prisma + schema.prisma |
 | Auth | Clerk, Auth.js, Supabase Auth | **Better-Auth 1.3** | Modern auth library with org/team support, social providers, session management. Boilerplate integrated. | Multi-tenant ready, flexible, open-source, no vendor lock-in | Newer library (less battle-tested than Auth.js) | Flexibility vs maturity | Risk: Auth bugs. Mitigation: Thorough testing, fallback to email/password only for MVP | Supports Google, GitHub, email/password |
 | AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** + **SocialKit API** | GPT-4 for concept extraction, embeddings for matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs, reliable transcript API | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package. SocialKit: /youtube/transcript endpoint |
+| Internationalization | i18next, react-intl, next-intl | **next-intl 4.5.3** | Next.js-native i18n with App Router support, type-safe translations, locale routing. | Excellent Next.js integration, type safety, minimal config, server/client support | Smaller ecosystem than i18next | Next.js optimization vs flexibility | Risk: Limited community resources. Mitigation: Well-documented, active maintenance | Supports EN/FR, middleware-based locale detection |
+| PDF Processing | pdf.js, pdfjs-dist, pdf-parse | **pdf-parse 2.4.5** | Simple text extraction from PDFs, works with Buffer and URL inputs. | Lightweight, easy to use, no external dependencies | Limited to text extraction (no OCR) | Simplicity vs advanced features | Risk: Fails on scanned PDFs. Mitigation: Add OCR (Tesseract.js) post-MVP if needed | Using @types/pdf-parse for TypeScript |
 | File/Blob Storage | Vercel Blob, Cloudflare R2, AWS S3 | **TBD** (disabled for MVP) | Not needed for MVP (YouTube URLs only). Post-MVP: Vercel Blob or R2. | N/A | N/A | N/A | N/A | Feature flag: enableImageUpload = false |
 | Queue/Events | BullMQ, Inngest, Trigger.dev | **TBD** (post-MVP) | Not needed for MVP (synchronous processing). Post-MVP: Consider Inngest for video processing queue. | N/A | N/A | N/A | Risk: Video processing blocks UI. Mitigation: Show progress, allow cancellation | MVP uses synchronous API routes |
 | Infra/Hosting | Vercel, Railway, Fly.io | **Vercel** | Next.js native platform, zero-config deployment, edge functions, preview deployments. | Seamless Next.js integration, great DX, automatic scaling | Expensive at scale, vendor lock-in | Convenience vs cost | Risk: Costs spike. Mitigation: Monitor usage, optimize edge functions, consider Railway for DB-heavy workloads | Free tier sufficient for MVP |
@@ -94,10 +96,61 @@ flowchart TB
 **Rationale:** Simpler implementation, acceptable for demo (60s timeout).  
 **Post-MVP:** Move to queue (Inngest/BullMQ) for production.
 
+## Recent Tech Stack Additions (2025-11-18)
+
+### Internationalization (next-intl)
+
+**Added:** next-intl 4.5.3 for comprehensive EN/FR bilingual support
+
+**Key Features:**
+- Locale-based routing (`/en/*`, `/fr/*`)
+- Type-safe translations with autocomplete
+- Server and client component support
+- Middleware-based locale detection
+- Message catalogs in JSON format
+
+**Integration:**
+- `middleware.ts`: Locale detection and redirection
+- `src/i18n.ts`: Locale definitions and type guards
+- `src/i18n/request.ts`: Server-side locale resolution
+- `messages/en.json`, `messages/fr.json`: Translation catalogs (300+ keys)
+
+**Rationale:** Next.js-native solution with excellent App Router support, type safety, and minimal configuration overhead.
+
+### PDF Processing (pdf-parse)
+
+**Added:** pdf-parse 2.4.5 + @types/pdf-parse 1.1.5
+
+**Key Features:**
+- Text extraction from PDF files
+- Supports Buffer and URL inputs
+- Metadata extraction (page count, file info)
+- No external dependencies
+
+**Integration:**
+- `src/features/content-extraction/pdf-extractor.ts`: PDF text extraction
+- `/api/upload-pdf`: File upload endpoint (max 10MB)
+- `ContentJob` model: PDF-specific fields (fileName, fileSize, pageCount)
+
+**Rationale:** Lightweight, simple API, sufficient for MVP text extraction. OCR capabilities (Tesseract.js) can be added post-MVP for scanned PDFs.
+
+### Design System Updates
+
+**Typography:** Martian Grotesk font family (4 weights)
+- Files: `public/fonts/MartianGrotesk-Std*.otf`
+- Applied via `@font-face` in `app/globals.css`
+
+**Color Palette:** Warm orange/amber theme
+- Primary: Orange tones (#f97316, #fb923c)
+- Accent: Amber highlights (#f59e0b, #fbbf24)
+- Updated CSS variables for light/dark modes
+
 ## ADRs to Draft
 
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives considered
 - **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
+- **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs)
+- **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model)
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
 - **ADR-0013**: AI provider (OpenAI vs Anthropic vs local models)
 - **ADR-0014**: Synchronous processing for MVP (vs async queue)
@@ -112,6 +165,8 @@ flowchart TB
 - TanStack Query: 5.85.5
 - Zod: 3.25.56
 - Vercel AI SDK: 5.0.21
+- next-intl: 4.5.3 (i18n)
+- pdf-parse: 2.4.5 (PDF text extraction)
 
 **Dev dependencies:**
 

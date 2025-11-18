@@ -1,6 +1,6 @@
 # Entity Relationship Diagram
 
-> Updated: 2025-11-16 - Knowledge Tree Migration
+> Updated: 2025-11-18 - ContentJob Migration (VideoJob → ContentJob with ContentType enum)
 
 ```mermaid
 erDiagram
@@ -64,11 +64,17 @@ erDiagram
         datetime created_at
     }
 
-    VIDEO_JOBS {
+    CONTENT_JOBS {
         uuid id PK
         uuid user_id FK
         string url
+        enum content_type
         string youtube_video_id
+        string tiktok_video_id
+        string file_name
+        int file_size
+        int page_count
+        text extracted_text
         string status
         int processed_concepts_count
         string error_message
@@ -78,7 +84,7 @@ erDiagram
 
     CONCEPTS {
         uuid id PK
-        uuid video_job_id FK
+        uuid content_job_id FK
         string concept_text
         string definition
         string timestamp
@@ -133,7 +139,7 @@ erDiagram
     }
 
     USERS ||--o{ USER_COURSES : enrolls
-    USERS ||--o{ VIDEO_JOBS : submits
+    USERS ||--o{ CONTENT_JOBS : submits
     USERS ||--o{ FLASHCARDS : owns
     USERS ||--o{ REVIEW_SESSIONS : completes
     USERS ||--o{ NODE_SYLLABUS_CONCEPTS : "attaches (optional)"
@@ -149,7 +155,7 @@ erDiagram
 
     SYLLABUS_CONCEPTS ||--o{ NODE_SYLLABUS_CONCEPTS : "attached to"
 
-    VIDEO_JOBS ||--o{ CONCEPTS : extracts
+    CONTENT_JOBS ||--o{ CONCEPTS : extracts
 
     CONCEPTS ||--o{ CONCEPT_MATCHES : matches
     SYLLABUS_CONCEPTS ||--o{ CONCEPT_MATCHES : "matched to"
@@ -174,7 +180,28 @@ erDiagram
 - **Single active course**: `user_courses.is_active` flag
 - **Pre-computed learned_count**: `user_courses.learned_count` for dashboard performance ("12 learned")
 
-## Migration Notes (2025-11-16)
+## Migration Notes
+
+### 2025-11-18: ContentJob Migration (VideoJob → ContentJob)
+
+**Changed:**
+- Model rename: `VideoJob` → `ContentJob` (table name remains `video_jobs` for backward compatibility)
+- Field rename: `transcript` → `extractedText` (column name remains `transcript` via `@map`)
+- Added `content_type` enum field: `youtube | tiktok | pdf | url | podcast`
+- Added PDF-specific fields: `file_name`, `file_size`, `page_count`
+- Grouped video-specific fields: `youtube_video_id`, `tiktok_video_id`
+- Updated `Concept.video_job_id` → `Concept.content_job_id` (column name unchanged via `@map`)
+- Added index on `content_type`
+
+**Rationale:**
+- Unified content processing pipeline for multiple content types
+- Polymorphic schema design with content-type specific fields
+- Backward compatible column mappings for smooth migration
+- Enables PDF upload, article extraction, podcast transcription (future)
+
+**Migration:** `20251118035542_unified_content_processor`
+
+### 2025-11-16: Knowledge Tree Migration
 
 **Removed:**
 - `academic_years` table (rigid calendar structure)

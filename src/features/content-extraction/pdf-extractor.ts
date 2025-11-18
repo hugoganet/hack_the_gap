@@ -1,7 +1,18 @@
 import type { PDFExtractionResult } from "./types";
+import { PDFParse, VerbosityLevel } from "pdf-parse";
 
-// Dynamic import for pdf-parse (CommonJS module)
-const pdfParsePromise = import("pdf-parse").then(mod => mod.default || mod);
+// Set up the worker for server-side PDF parsing
+// This resolves the worker file from the pdf-parse package
+if (typeof window === "undefined") {
+  try {
+    // For Node.js/Next.js server-side, we need to set the worker path
+    // The worker file is in the pdf-parse package
+    const workerPath = require.resolve("pdf-parse/dist/worker/pdf.worker.mjs");
+    PDFParse.setWorker(workerPath);
+  } catch (error) {
+    console.warn("Failed to set PDF worker path:", error);
+  }
+}
 
 /**
  * Extract text from PDF URL
@@ -42,45 +53,51 @@ export async function extractPDFText(url: string): Promise<PDFExtractionResult> 
       sizeFromHeader: fileSize,
     });
 
-    // Load pdf-parse dynamically
-    const pdfParse = await pdfParsePromise;
-
-    // Parse the PDF
-    const data = await pdfParse(buffer);
-
-    // Extract filename from URL
-    const urlObj = new URL(url);
-    const pathParts = urlObj.pathname.split("/");
-    const fileName = pathParts[pathParts.length - 1] || "document.pdf";
-
-    const extractedText = data.text.trim();
-
-    if (!extractedText) {
-      return {
-        success: false,
-        error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
-      };
-    }
-
-    console.log("PDF parsed successfully:", {
-      fileName,
-      pages: data.numpages,
-      textLength: extractedText.length,
-      preview: `${extractedText.substring(0, 100)}...`,
+    // Parse the PDF using PDFParse class (v2.x API)
+    const parser = new PDFParse({
+      data: buffer,
+      verbosity: VerbosityLevel.ERRORS,
     });
 
-    return {
-      success: true,
-      data: {
-        extractedText,
-        metadata: {
-          fileName,
-          fileSize: buffer.length,
-          pageCount: data.numpages,
-          url,
+    try {
+      const result = await parser.getText();
+
+      // Extract filename from URL
+      const urlObj = new URL(url);
+      const pathParts = urlObj.pathname.split("/");
+      const fileName = pathParts[pathParts.length - 1] || "document.pdf";
+
+      const extractedText = result.text.trim();
+
+      if (!extractedText) {
+        return {
+          success: false,
+          error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
+        };
+      }
+
+      console.log("PDF parsed successfully:", {
+        fileName,
+        pages: result.pages.length,
+        textLength: extractedText.length,
+        preview: `${extractedText.substring(0, 100)}...`,
+      });
+
+      return {
+        success: true,
+        data: {
+          extractedText,
+          metadata: {
+            fileName,
+            fileSize: buffer.length,
+            pageCount: result.pages.length,
+            url,
+          },
         },
-      },
-    };
+      };
+    } finally {
+      await parser.destroy();
+    }
   } catch (error) {
     console.error("PDF extraction error:", error);
     return {
@@ -103,40 +120,46 @@ export async function extractPDFTextFromBuffer(
       size: buffer.length,
     });
 
-    // Load pdf-parse dynamically
-    const pdfParse = await pdfParsePromise;
-
-    // Parse the PDF
-    const data = await pdfParse(buffer);
-
-    const extractedText = data.text.trim();
-
-    if (!extractedText) {
-      return {
-        success: false,
-        error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
-      };
-    }
-
-    console.log("PDF parsed successfully:", {
-      fileName,
-      pages: data.numpages,
-      textLength: extractedText.length,
-      preview: `${extractedText.substring(0, 100)}...`,
+    // Parse the PDF using PDFParse class (v2.x API)
+    const parser = new PDFParse({
+      data: buffer,
+      verbosity: VerbosityLevel.ERRORS,
     });
 
-    return {
-      success: true,
-      data: {
-        extractedText,
-        metadata: {
-          fileName,
-          fileSize: buffer.length,
-          pageCount: data.numpages,
-          url: "", // No URL for uploaded files
+    try {
+      const result = await parser.getText();
+
+      const extractedText = result.text.trim();
+
+      if (!extractedText) {
+        return {
+          success: false,
+          error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
+        };
+      }
+
+      console.log("PDF parsed successfully:", {
+        fileName,
+        pages: result.pages.length,
+        textLength: extractedText.length,
+        preview: `${extractedText.substring(0, 100)}...`,
+      });
+
+      return {
+        success: true,
+        data: {
+          extractedText,
+          metadata: {
+            fileName,
+            fileSize: buffer.length,
+            pageCount: result.pages.length,
+            url: "", // No URL for uploaded files
+          },
         },
-      },
-    };
+      };
+    } finally {
+      await parser.destroy();
+    }
   } catch (error) {
     console.error("PDF extraction error:", error);
     return {

@@ -8,6 +8,50 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Comprehensive Internationalization (i18n)** (2025-11-18) 🌍
+  - **Framework**: next-intl 4.5.3 for EN/FR bilingual support
+  - **Locale Routing**: Dynamic `[locale]` route segment with middleware-based detection
+    - Supported locales: `en` (default), `fr`
+    - Automatic locale detection from Accept-Language header
+    - Locale switcher component in navigation
+  - **Message Catalogs**: Comprehensive translations in `messages/en.json` and `messages/fr.json`
+    - Namespaces: `dashboard.*`, `auth.signin`, `auth.signup`, `footer`, `sidebar`, `navigation`, `charts`
+    - 300+ translation keys covering entire application
+  - **Localized Components**: All user-facing text translated
+    - Dashboard: courses, users, stats, charts, empty states
+    - Auth: sign-in, sign-up, password forms, providers
+    - Navigation: sidebar, app navigation, breadcrumbs
+    - Charts: donut chart, users chart, cards-to-review widget
+    - Footer: links, copyright, language switcher
+  - **Locale-Aware Routing**: All internal links include locale prefix
+    - Pattern: `/{locale}/dashboard`, `/{locale}/courses/{courseId}`
+    - Review sessions: `/{locale}/dashboard/courses/{courseId}/review`
+    - Node detail pages: `/{locale}/dashboard/courses/{courseId}/nodes/{nodeId}`
+  - **Configuration**:
+    - `src/i18n.ts`: Locale definitions and type guards
+    - `src/i18n/request.ts`: Server-side locale resolution
+    - `middleware.ts`: Locale detection and redirection
+    - `next.config.ts`: i18n plugin integration
+  - **Developer Experience**: Type-safe translations with TypeScript autocomplete
+
+- **Design System Overhaul** (2025-11-18) 🎨
+  - **Typography**: Martian Grotesk font family (4 weights: Regular, Medium, Bold, Extra Bold)
+    - Font files: `public/fonts/MartianGrotesk-Std*.otf`
+    - Applied globally via `@font-face` in `app/globals.css`
+  - **Color Palette**: Warm color scheme with orange/amber accents
+    - Primary: Orange tones (#f97316, #fb923c, #fdba74)
+    - Accent: Amber highlights (#f59e0b, #fbbf24)
+    - Neutral: Warm grays (#78716c, #57534e, #44403c)
+    - Updated CSS variables in `app/globals.css` for light/dark modes
+  - **UI Components**: Refreshed styling across dashboard
+    - Cards: Warm borders and hover states
+    - Buttons: Orange primary actions
+    - Charts: Warm color scales (orange, amber, yellow)
+    - Progress indicators: Orange fills
+  - **Brand Identity**: Site name changed to "Recall" (from "hack the gap")
+    - Updated in `src/site-config.ts`
+    - New icon: `recall_icon.png` (1180x1180px)
+
 - **Unified Content Processor + PDF Upload** (2025-11-18) 📄
   - **Database Schema**: Migrated `VideoJob` → `ContentJob` with `ContentType` enum (youtube, tiktok, pdf, url, podcast)
     - Migration: `20251118035542_unified_content_processor`
@@ -172,7 +216,49 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 - ADR placeholders for key architectural decisions (ADR-0010 to ADR-0014)
 - Sprint planning with effort estimates and risk assessment
 
+- **UI/UX Enhancements** (2025-11-18) ✨
+  - **Course Navigation**: Added subdirectories display in course detail pages
+    - Hierarchical navigation breadcrumbs
+    - Node-based content organization
+  - **Node Detail Pages**: New route `/dashboard/courses/{courseId}/nodes/{nodeId}`
+    - Display node-specific flashcards and concepts
+    - 215 lines of new UI code
+  - **Course Flashcards View**: Enhanced with better filtering and sorting
+    - Improved empty states with localized messages
+    - Better loading states and error handling
+  - **Add Course Dialog**: Streamlined UX with better validation
+    - Removed redundant steps
+    - Improved error messages
+  - **TODO Tracking**: Added `TODO.md` for task management (29 items)
+
 ### Changed - Unreleased
+
+- **BREAKING: VideoJob → ContentJob Migration** (2025-11-18) ⚠️
+  - **Model Rename**: `VideoJob` → `ContentJob` (table name remains `video_jobs` for backward compatibility)
+  - **Field Rename**: `transcript` → `extractedText` (column name remains `transcript` via `@map`)
+  - **New Enum**: `ContentType` with values: `youtube`, `tiktok`, `pdf`, `url`, `podcast`
+  - **Schema Changes**:
+    - Added `contentType` field (default: `youtube`)
+    - Added PDF-specific fields: `fileName`, `fileSize`, `pageCount`
+    - Grouped video-specific fields: `youtubeVideoId`, `tiktokVideoId`
+    - Added index on `contentType`
+  - **Relation Updates**: `Concept.videoJobId` → `Concept.contentJobId` (column name unchanged via `@map`)
+  - **Migration**: `20251118035542_unified_content_processor`
+  - **Code Impact**: Updated 15+ files (actions, API routes, components, features)
+    - `app/actions/process-content.action.ts`: Refactored for content types
+    - `app/actions/match-concepts.action.ts`: Updated model references
+    - `src/features/flashcards/flashcard-generator.ts`: Updated queries
+    - `src/features/matching/concept-matcher.ts`: Updated relations
+    - Dashboard components: Updated stats and charts
+
+- **Site Branding** (2025-11-18)
+  - Product name: "hack the gap" → "Recall"
+  - Updated in site config, navigation, and footer
+  - New brand icon added
+
+- **Better-Auth Schema Update** (2025-11-18)
+  - Updated `prisma/schema/better-auth.prisma` with latest auth fields
+  - Regenerated Prisma client with new types
 
 - **US-0001 Status:** ✅ Implemented and functional (Course selection with hybrid UX)
 - **US-0004 Status:** ✅ Complete with interactive review UI and feedback system

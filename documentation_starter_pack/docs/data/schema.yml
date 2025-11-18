@@ -1,6 +1,7 @@
-# Hackathon MVP Schema - 12 Tables (Updated: 2025-11-16)
+# Hackathon MVP Schema - 12 Tables (Updated: 2025-11-18)
 # JSON Schema format for database tables
-# MIGRATION: Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
+# MIGRATION (2025-11-16): Removed academic_years and semesters, added knowledge_nodes and node_syllabus_concepts
+# MIGRATION (2025-11-18): VideoJob → ContentJob with ContentType enum, added PDF-specific fields
 
 ---
 $id: "https://hackthegap.com/schemas/users.schema.json"
@@ -182,11 +183,12 @@ properties:
     format: date-time
 
 ---
-$id: "https://hackthegap.com/schemas/video_jobs.schema.json"
+$id: "https://hackthegap.com/schemas/content_jobs.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
-title: video_jobs
+title: content_jobs
+description: "Unified content processing pipeline (formerly video_jobs). Table name remains 'video_jobs' for backward compatibility."
 type: object
-required: [id, user_id, url, status]
+required: [id, user_id, url, content_type, status]
 properties:
   id:
     type: string
@@ -196,11 +198,30 @@ properties:
     format: uuid
   url:
     type: string
+    description: "Source URL (YouTube, TikTok, PDF URL, article URL, podcast URL)"
+  content_type:
+    type: string
+    enum: [youtube, tiktok, pdf, url, podcast]
+    default: youtube
+    description: "Content type enum for polymorphic processing"
   youtube_video_id:
     type: ["string", "null"]
-  transcript:
+    description: "Video-specific: YouTube video ID"
+  tiktok_video_id:
     type: ["string", "null"]
-    description: "Full transcript text from video (stored before AI processing)"
+    description: "Video-specific: TikTok video ID"
+  file_name:
+    type: ["string", "null"]
+    description: "PDF-specific: Original filename"
+  file_size:
+    type: ["integer", "null"]
+    description: "PDF-specific: File size in bytes"
+  page_count:
+    type: ["integer", "null"]
+    description: "PDF-specific: Number of pages"
+  extracted_text:
+    type: ["string", "null"]
+    description: "Extracted text from any content type (transcript for videos, text for PDFs). Column name: 'transcript' (mapped via @map)"
   status:
     type: string
     enum: [transcript_fetched, processing, completed, failed, cancelled]
@@ -222,21 +243,22 @@ $id: "https://hackthegap.com/schemas/concepts.schema.json"
 $schema: "http://json-schema.org/draft-07/schema#"
 title: concepts
 type: object
-required: [id, video_job_id, concept_text, confidence]
+required: [id, content_job_id, concept_text, confidence]
 properties:
   id:
     type: string
     format: uuid
-  video_job_id:
+  content_job_id:
     type: string
     format: uuid
+    description: "FK to content_jobs (column name: 'videoJobId' via @map for backward compatibility)"
   concept_text:
     type: string
   definition:
     type: ["string", "null"]
   timestamp:
     type: ["string", "null"]
-    description: "MM:SS format"
+    description: "MM:SS format (video-specific, null for PDFs/articles)"
   confidence:
     type: number
     minimum: 0

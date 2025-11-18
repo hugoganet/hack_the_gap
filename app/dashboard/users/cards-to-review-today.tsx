@@ -19,7 +19,7 @@ export async function CardsToReviewToday() {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   // Infer flashcard element type from prisma.findMany result
-  type FlashcardWithMatch = Awaited<ReturnType<typeof prisma.flashcard.findMany>> extends Array<infer T> ? T : never;
+    type FlashcardWithMatch = Awaited<ReturnType<typeof prisma.flashcard.findMany>> extends (infer T)[] ? T : never;
 
   const flashcardsToday = await prisma.flashcard.findMany({
     where: {

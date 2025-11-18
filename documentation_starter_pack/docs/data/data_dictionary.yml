@@ -196,9 +196,10 @@ syllabus_concepts:
       type: timestamp
       required: true
 
-video_jobs:
-  description: "YouTube video processing pipeline (two-phase: transcript fetch → AI processing)"
-  source: "student-submitted URLs"
+content_jobs:
+  description: "Unified content processing pipeline (formerly video_jobs). Supports YouTube, TikTok, PDFs, articles, podcasts. Table name remains 'video_jobs' for backward compatibility."
+  source: "student-submitted URLs or file uploads"
+  migration: "2025-11-18: VideoJob → ContentJob with ContentType enum"
   fields:
     id:
       type: uuid
@@ -211,15 +212,37 @@ video_jobs:
       index: true
     url:
       type: string
-      description: "Full YouTube URL"
+      description: "Source URL (YouTube, TikTok, PDF URL, article URL, podcast URL)"
       required: true
+    content_type:
+      type: enum
+      description: "youtube | tiktok | pdf | url | podcast"
+      required: true
+      default: youtube
+      index: true
     youtube_video_id:
       type: string
-      description: "Extracted video ID for API calls"
+      description: "Video-specific: Extracted YouTube video ID for API calls"
       required: false
-    transcript:
+    tiktok_video_id:
+      type: string
+      description: "Video-specific: Extracted TikTok video ID"
+      required: false
+    file_name:
+      type: string
+      description: "PDF-specific: Original filename"
+      required: false
+    file_size:
+      type: integer
+      description: "PDF-specific: File size in bytes"
+      required: false
+    page_count:
+      type: integer
+      description: "PDF-specific: Number of pages"
+      required: false
+    extracted_text:
       type: text
-      description: "Full transcript text from SocialKit API. Stored before AI processing for data preservation and reprocessing capability."
+      description: "Extracted text from any content type (transcript for videos, text for PDFs). Column name: 'transcript' (mapped via @map for backward compatibility)."
       required: false
       pii: false
     status:
@@ -244,16 +267,16 @@ video_jobs:
       required: false
 
 concepts:
-  description: "AI-extracted atomic concepts from videos"
+  description: "AI-extracted atomic concepts from any content type (videos, PDFs, articles, podcasts)"
   source: "GPT-4/Claude extraction"
   fields:
     id:
       type: uuid
       description: "Primary key"
       required: true
-    video_job_id:
+    content_job_id:
       type: uuid
-      description: "FK to video_jobs"
+      description: "FK to content_jobs (column name: 'videoJobId' via @map for backward compatibility)"
       required: true
       index: true
     concept_text:
@@ -266,7 +289,7 @@ concepts:
       required: false
     timestamp:
       type: string
-      description: "MM:SS format linking to video moment"
+      description: "MM:SS format linking to video moment (video-specific, null for PDFs/articles)"
       required: false
     confidence:
       type: decimal

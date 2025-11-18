@@ -4,10 +4,10 @@ This is the single entry point for reconstructing project context. AI tools and 
 
 ## Project Snapshot
 
-- Name: hack the gap (temporary - name TBD)
+- Name: Recall (formerly "hack the gap")
 - Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals
-- Stage: Implementation (Core pipeline complete, syllabus upload in progress)
-- Last updated: 2025-11-17
+- Stage: Implementation (Core pipeline complete, i18n + PDF upload added, syllabus upload in progress)
+- Last updated: 2025-11-18
 - **Major Pivot (2025-11-17)**: Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses.
 
 ## Core Documents
@@ -56,6 +56,8 @@ Then record ADRs and Specs as needed under `./decisions/` and `./specs/`.
 - **Database:** Supabase (PostgreSQL) + Prisma 6.14
 - **Auth:** Better-Auth 1.3 (boilerplate integrated)
 - **AI:** OpenAI (GPT-4 + Embeddings) via Vercel AI SDK
+- **i18n:** next-intl 4.5.3 (EN/FR bilingual support)
+- **PDF Processing:** pdf-parse 2.4.5 (text extraction)
 - **Hosting:** Vercel
 - **Testing:** Vitest + Playwright
 
@@ -63,12 +65,16 @@ See `./tech_stack.md` for complete details.
 
 ## Data Schema Status
 
-✅ **COMPLETE** - 13 tables defined and synchronized:
+✅ **COMPLETE** - 12 tables defined and synchronized (updated 2025-11-18):
 
-- Reference tables: `users`, `subjects`, `academic_years`, `semesters`
-- Course structure: `courses`, `user_courses`, `syllabus_concepts`
-- Processing pipeline: `video_jobs`, `concepts`, `concept_matches`
+- Reference tables: `users`, `subjects`
+- Course structure: `courses`, `user_courses`, `syllabus_concepts`, `knowledge_nodes`, `node_syllabus_concepts`
+- Processing pipeline: `content_jobs` (formerly `video_jobs`), `concepts`, `concept_matches`
 - Learning system: `flashcards`, `review_sessions`, `review_events`
+
+**Recent Changes:**
+- 2025-11-18: `VideoJob` → `ContentJob` with `ContentType` enum (youtube, tiktok, pdf, url, podcast)
+- 2025-11-16: Removed `academic_years` and `semesters`, added `knowledge_nodes` for flexible hierarchy
 
 See `./data/` for:
 
@@ -100,6 +106,12 @@ See `./specs/` for detailed specifications.
 
 ## Recent Decisions
 
+- **2025-11-18**: **Comprehensive i18n** - Added next-intl 4.5.3 for EN/FR bilingual support across entire app (300+ translation keys)
+- **2025-11-18**: **Content Pipeline Refactor** - VideoJob → ContentJob with ContentType enum (youtube, tiktok, pdf, url, podcast)
+- **2025-11-18**: **PDF Upload Feature** - Added pdf-parse 2.4.5 for text extraction, file upload endpoint, unified content processor
+- **2025-11-18**: **Design System Overhaul** - Martian Grotesk font, warm orange/amber color palette
+- **2025-11-18**: **Site Branding** - Renamed from "hack the gap" to "Recall"
+- **2025-11-18**: **UI Enhancements** - Node detail pages, subdirectories display, improved navigation
 - **2025-11-17**: **MAJOR PIVOT** - Shifted from institution-centric to student-centric approach. Students now upload their own syllabi instead of selecting from pre-loaded courses. Removed academic year/semester structure for global flexibility.
 - **2025-11-17**: Deprecated US-0001 (Course Selection) and US-0012 (Admin Pre-load Syllabi)
 - **2025-11-17**: New US-0001: Student syllabus upload (PDF/text) or AI conversation to define learning goals
@@ -138,6 +150,8 @@ See `./specs/` for detailed specifications.
 - **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
 - **ADR-0013**: AI provider (OpenAI vs Anthropic vs local models)
 - **ADR-0014**: Synchronous processing for MVP (vs async queue)
+- **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs) - TODO
+- **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model) - TODO
 
 ## Pre-Hackathon Checklist
 

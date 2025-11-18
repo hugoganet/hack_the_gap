@@ -21,6 +21,7 @@
 - MVP: Single-tenant web app (no multi-org yet)
 - Scope: **YouTube, TikTok, PDFs** (URLs + file upload), articles/podcasts (placeholders)
 - Processing: Synchronous (no background jobs)
+- Localization: EN/FR bilingual support via next-intl
 
 ## C4 System Context Diagram
 
@@ -91,9 +92,18 @@ flowchart TB
 
 ```
 app/
+├── [locale]/            # 🌍 NEW: Locale-based routing (en, fr)
+│   ├── layout.tsx       # Locale-specific layout with next-intl provider
+│   └── page.tsx         # Localized landing page
 ├── (auth)/              # Auth pages (signin, signup)
 ├── (logged-in)/         # Protected routes
 │   ├── dashboard/       # Progress dashboard (US-0008) 🚧 TODO
+│   │   ├── courses/     # Course management
+│   │   │   └── [courseId]/
+│   │   │       ├── nodes/[nodeId]/  # 🆕 Node detail pages
+│   │   │       ├── review/          # Review sessions
+│   │   │       └── page.tsx         # Course overview
+│   │   └── users/       # User dashboard with stats
 │   ├── syllabus/        # NEW: Syllabus upload (US-0001) 🚧 IN PROGRESS
 │   ├── videos/          # Video submission (US-0002) ✅ DONE
 │   ├── review/          # Flashcard review (US-0006) ✅ DONE
@@ -104,7 +114,8 @@ app/
 │   ├── concepts/        # Concept extraction (US-0003) ✅ DONE
 │   ├── matches/         # Concept matching (US-0004) ✅ DONE
 │   ├── flashcards/      # Flashcard generation (US-0005) ✅ DONE
-│   └── reviews/         # Review sessions (US-0006, US-0007) ✅ DONE
+│   ├── reviews/         # Review sessions (US-0006, US-0007) ✅ DONE
+│   └── upload-pdf/      # 🆕 PDF file upload endpoint
 └── _components/         # Shared UI components
 ```
 
@@ -117,12 +128,21 @@ app/
 ```typescript
 src/
 ├── features/
+│   ├── content-extraction/        # 🆕 Unified content processor
+│   │   ├── index.ts               # Auto-detection + unified interface
+│   │   ├── types.ts               # ExtractionResult types
+│   │   ├── video-extractor.ts     # YouTube/TikTok via SocialKit
+│   │   ├── pdf-extractor.ts       # PDF text via pdf-parse
+│   │   ├── url-extractor.ts       # Article extraction (placeholder)
+│   │   └── podcast-extractor.ts   # Podcast transcription (placeholder)
 │   ├── matching/                  # ✅ US-0004: IMPLEMENTED
 │   │   ├── config.ts              # Thresholds, blend weights, concurrency
 │   │   ├── ai-reasoning.ts        # LLM-based concept verification
 │   │   ├── concept-matcher.ts     # Hybrid two-stage orchestrator
 │   │   ├── write-concept-matches.ts # Idempotent DB writer
 │   │   └── README.md              # Technical architecture docs
+│   ├── i18n/                      # 🌍 Internationalization
+│   │   └── language-switcher.tsx  # Locale switcher component
 │   ├── videos/
 │   │   ├── videoProcessor.ts      # US-0002: Video URL submission
 │   │   └── transcriptService.ts   # SocialKit API integration
@@ -137,6 +157,8 @@ src/
 │   │   └── gapAnalyzer.ts         # US-0009: Gap analysis
 │   └── courses/
 │       └── courseService.ts       # US-0001: Course selection
+├── i18n/                          # 🌍 i18n configuration
+│   └── request.ts                 # Server-side locale resolution
 ├── lib/
 │   ├── ai/
 │   │   └── embeddings.ts          # ✅ OpenAI embeddings service
@@ -145,7 +167,7 @@ src/
 │   ├── blackbox.ts                # Blackbox AI client
 │   └── youtube.ts                 # YouTube client
 └── app/actions/
-    ├── process-content.action.ts  # ✅ Video processing + auto-match
+    ├── process-content.action.ts  # ✅ Content processing + auto-match (all types)
     └── match-concepts.action.ts   # ✅ Manual matching trigger
 ```
 =======
@@ -501,6 +523,8 @@ pnpm prisma migrate deploy
 - **ADR-0012**: Monolith architecture
 - **ADR-0013**: AI provider (OpenAI)
 - **ADR-0014**: Synchronous processing for MVP
+- **ADR-0015**: TODO: Internationalization strategy (next-intl, locale routing)
+- **ADR-0016**: TODO: Content type architecture (unified processor, polymorphic schema)
 
 ## Related Documentation
 
@@ -553,3 +577,99 @@ Content Input → Type Detection → Extraction → ContentJob → AI Processing
 - PDF validation
 - Returns extracted text + metadata
 - Client calls `processUploadedPDF()` action
+
+## Internationalization Architecture (2025-11-18)
+
+### Locale Routing Strategy
+
+**Framework:** next-intl 4.5.3
+
+**Routing Pattern:**
+```
+/{locale}/...           # All routes prefixed with locale
+/en/dashboard           # English dashboard
+/fr/dashboard           # French dashboard
+/en/courses/{id}        # English course detail
+/fr/courses/{id}        # French course detail
+```
+
+**Locale Detection:**
+1. URL path segment (highest priority)
+2. Cookie (`NEXT_LOCALE`)
+3. Accept-Language header
+4. Default: `en`
+
+**Middleware:** `middleware.ts`
+- Intercepts all requests
+- Detects locale from URL/cookie/header
+- Redirects to localized route if needed
+- Sets `NEXT_LOCALE` cookie
+
+**Configuration:**
+- `src/i18n.ts`: Locale definitions (`en`, `fr`), type guards
+- `src/i18n/request.ts`: Server-side locale resolution
+- `next.config.ts`: next-intl plugin integration
+
+### Message Catalogs
+
+**Location:** `messages/{locale}.json`
+
+**Structure:**
+```json
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "courses": {
+      "empty": "No courses yet",
+      "add": "Add course"
+    }
+  },
+  "auth": {
+    "signin": { ... },
+    "signup": { ... }
+  },
+  "navigation": { ... },
+  "footer": { ... }
+}
+```
+
+**Coverage:** 300+ translation keys across:
+- Dashboard (courses, users, stats, charts)
+- Auth (sign-in, sign-up, forms)
+- Navigation (sidebar, breadcrumbs)
+- Charts (labels, tooltips)
+- Footer (links, copyright)
+
+### Component Localization
+
+**Server Components:**
+```typescript
+import { getTranslations } from 'next-intl/server';
+
+const t = await getTranslations('dashboard');
+return <h1>{t('title')}</h1>;
+```
+
+**Client Components:**
+```typescript
+import { useTranslations } from 'next-intl';
+
+const t = useTranslations('dashboard');
+return <h1>{t('title')}</h1>;
+```
+
+**Locale-Aware Links:**
+```typescript
+import { Link } from '@/i18n/routing';
+
+<Link href="/dashboard">Dashboard</Link>
+// Automatically prefixes with current locale
+```
+
+### Language Switcher
+
+**Component:** `src/features/i18n/language-switcher.tsx`
+- Dropdown in navigation
+- Switches between EN/FR
+- Updates cookie and redirects to localized route
+- Preserves current page path

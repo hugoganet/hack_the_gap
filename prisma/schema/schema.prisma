@@ -80,6 +80,7 @@ model SyllabusConcept {
   category       String?
   importance     Int?
   order          Int
+  language       String                @default("en") // Language of the concept (en, fr, etc.)
   createdAt      DateTime              @default(now())
   conceptMatches ConceptMatch[]
   course         Course                @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -87,6 +88,7 @@ model SyllabusConcept {
 
   @@index([courseId])
   @@index([importance])
+  @@index([language])
   @@map("syllabus_concepts")
 }
 
@@ -138,12 +140,14 @@ model Concept {
   definition     String?
   timestamp      String?
   confidence     Float
+  language       String         @default("en") // Language of the concept (en, fr, etc.)
   createdAt      DateTime       @default(now())
   conceptMatches ConceptMatch[]
   contentJob     ContentJob     @relation(fields: [contentJobId], references: [id], onDelete: Cascade)
 
   @@index([contentJobId])
   @@index([confidence])
+  @@index([language])
   @@map("concepts")
 }
 
@@ -167,24 +171,28 @@ model ConceptMatch {
 }
 
 model Flashcard {
-  id              String        @id @default(uuid())
-  conceptMatchId  String
-  userId          String
-  question        String
-  answer          String
-  sourceTimestamp String?
-  timesReviewed   Int           @default(0)
-  timesCorrect    Int           @default(0)
-  lastReviewedAt  DateTime?
-  nextReviewAt    DateTime?
-  createdAt       DateTime      @default(now())
-  conceptMatch    ConceptMatch  @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reviewEvents    ReviewEvent[]
+  id                  String        @id @default(uuid())
+  conceptMatchId      String
+  userId              String
+  question            String
+  answer              String
+  questionTranslation String?       // Translation of question (for bilingual support)
+  answerTranslation   String?       // Translation of answer (for bilingual support)
+  language            String        @default("en") // Primary language of the flashcard
+  sourceTimestamp     String?
+  timesReviewed       Int           @default(0)
+  timesCorrect        Int           @default(0)
+  lastReviewedAt      DateTime?
+  nextReviewAt        DateTime?
+  createdAt           DateTime      @default(now())
+  conceptMatch        ConceptMatch  @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
+  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviewEvents        ReviewEvent[]
 
   @@index([conceptMatchId])
   @@index([userId])
   @@index([nextReviewAt])
+  @@index([language])
   @@map("flashcards")
 }
 
