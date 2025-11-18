@@ -31,11 +31,12 @@ export async function unlockFlashcardAnswers(
   
   const unlocked: UnlockResult[] = [];
 
-  for (const match of matches) {
-    // Only unlock for high-confidence matches (≥80%)
-    if (match.confidence < 0.8) {
-      console.log(`  ⏭️  Skipping match (confidence ${match.confidence} < 0.8)`);
-      continue;
+  // Create tasks for processing each match to avoid top-level await inside a loop
+  const tasks = matches.map((match) => async (): Promise<UnlockResult | null> => {
+    // Only unlock for high-confidence matches (≥70%)
+    if (match.confidence < 0.7) {
+      console.log(`  ⏭️  Skipping match (confidence ${match.confidence} < 0.7)`);
+      return null;
     }
 
     console.log(`  🔍 Processing match: ${match.id} (confidence: ${match.confidence})`);
@@ -54,7 +55,7 @@ export async function unlockFlashcardAnswers(
 
     if (!flashcard) {
       console.log(`  ⏭️  No locked flashcard found for syllabus concept ${match.syllabusConceptId}`);
-      continue;
+      return null;
     }
 
     console.log(`  📝 Found locked flashcard: ${flashcard.id} - "${flashcard.question}"`);
@@ -66,7 +67,7 @@ export async function unlockFlashcardAnswers(
 
     if (!extractedConcept) {
       console.log(`  ⚠️  Extracted concept not found: ${match.conceptId}`);
-      continue;
+      return null;
     }
 
     console.log(`  🤖 Generating answer from content...`);
@@ -119,7 +120,7 @@ export async function unlockFlashcardAnswers(
       contentJob?.url ||
       "Unknown source";
 
-    unlocked.push({
+    return {
       flashcardId: unlockedFlashcard.id,
       question: flashcard.question,
       answer,
@@ -127,7 +128,17 @@ export async function unlockFlashcardAnswers(
       unlockedAt: unlockedFlashcard.unlockedAt!,
       source,
       confidence: match.confidence,
-    });
+    };
+  });
+
+  // Execute all tasks in parallel (or concurrently) and collect results
+  const settled = await Promise.allSettled(tasks.map((t) => t()));
+  for (const r of settled) {
+    if (r.status === "fulfilled" && r.value) {
+      unlocked.push(r.value);
+    } else if (r.status === "rejected") {
+      console.error("Error processing a match:", r.reason);
+    }
   }
 
   console.log(`🎉 Unlocked ${unlocked.length} flashcards total`);
@@ -175,7 +186,6 @@ ANSWER:`;
       model: openai("gpt-4"),
       prompt,
       temperature: 0.3,
-      maxTokens: 200,
     });
 
     return text.trim();

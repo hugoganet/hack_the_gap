@@ -12,9 +12,9 @@ export async function writeConceptMatches(
   results: MatchResultDTO[],
   contentJobId: string,
   userId: string
-): Promise<ConceptMatch[]> {
+): Promise<{ matches: ConceptMatch[]; created: number; updated: number }> {
   if (results.length === 0) {
-    return [];
+    return { matches: [], created: 0, updated: 0 };
   }
 
   // Get all existing matches for these concepts in one query
@@ -77,9 +77,12 @@ export async function writeConceptMatches(
     ...createdMatches,
   ];
 
-  console.log(`📝 Wrote ${allMatches.length} concept matches (${createdMatches.length} created, ${updatedMatches.filter(m => m !== null).length} updated)`);
+  const createdCount = createdMatches.length;
+  const updatedCount = updatedMatches.filter(m => m !== null).length;
 
-  return allMatches;
+  console.log(`📝 Wrote ${allMatches.length} concept matches (${createdCount} created, ${updatedCount} updated)`);
+
+  return { matches: allMatches, created: createdCount, updated: updatedCount };
 }
 
 /**
@@ -90,7 +93,7 @@ export async function deleteConceptMatchesByVideoJob(
   videoJobId: string
 ): Promise<number> {
   const concepts = await prisma.concept.findMany({
-    where: { videoJobId },
+    where: { videoJobId: videoJobId },
     select: { id: true },
   });
 

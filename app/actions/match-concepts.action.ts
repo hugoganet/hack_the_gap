@@ -127,7 +127,7 @@ export async function matchConceptsAction(input: {
     console.log(`[Matching] Starting concept matching for videoJob ${videoJobId} to course ${courseId}`);
     let matchResult;
     try {
-      matchResult = await matchConceptsToSyllabus(videoJobId, courseId);
+      matchResult = await matchConceptsToSyllabus(videoJobId, courseId, user.id);
       console.log(`[Matching] Algorithm completed:`, {
         totalConcepts: matchResult.summary.totalConcepts,
         evaluated: matchResult.summary.candidatesEvaluated,
@@ -158,7 +158,7 @@ export async function matchConceptsAction(input: {
     console.log(`[Matching] Writing ${matchResult.results.length} matches to database...`);
     let writeResult;
     try {
-      writeResult = await writeConceptMatches(matchResult.results);
+      writeResult = await writeConceptMatches(matchResult.results, videoJobId, user.id);
       console.log(`[Matching] Database write completed:`, {
         created: writeResult.created,
         updated: writeResult.updated,

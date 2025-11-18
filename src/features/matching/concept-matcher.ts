@@ -121,7 +121,7 @@ export async function matchConceptsToSyllabus(
   
   // First, write matches to database (needed for unlock service)
   const { writeConceptMatches } = await import("./write-concept-matches");
-  const writtenMatches = await writeConceptMatches(results, contentJobId, userId);
+  const { matches: writtenMatches } = await writeConceptMatches(results, contentJobId, userId);
   
   // Then unlock flashcards
   const unlocked = await unlockFlashcardAnswers(writtenMatches, contentJobId, userId);

@@ -303,12 +303,11 @@ export async function processContent(url: string) {
             const allResults = [];
             let totalDurationMs = 0;
 
-            // Process courses sequentially to avoid overwhelming the system
-            for (const { courseId } of activeCourses) {
+            // Run matching for all courses in parallel (persisting per-course results inside each promise)
+            const coursePromises = activeCourses.map(async ({ courseId }) => {
               const startTime = Date.now();
-              const { results } = await matchConceptsToSyllabus(contentJob.id, courseId);
+              const { results } = await matchConceptsToSyllabus(contentJob.id, courseId, user.id);
               const durationMs = Date.now() - startTime;
-              totalDurationMs += durationMs;
 
               // Store matches in database (batch create for better performance)
               if (results.length > 0) {
@@ -324,7 +323,17 @@ export async function processContent(url: string) {
                 });
               }
 
-              allResults.push(...results);
+              return { results, durationMs };
+            });
+
+            const courseResults = await Promise.all(coursePromises);
+
+            // Aggregate results from all courses
+            for (const { results, durationMs } of courseResults) {
+              totalDurationMs += durationMs;
+              if (results.length > 0) {
+                allResults.push(...results);
+              }
             }
 
             // Aggregate results across all courses
