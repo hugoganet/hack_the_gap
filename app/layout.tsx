@@ -15,6 +15,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { FeedbackFloatingButton } from "@/features/contact/feedback/feedback-floating-button";
 
 export const metadata: Metadata = {
   title: SiteConfig.title,
@@ -109,6 +110,8 @@ export default async function RootLayout({
               {modal}
               <TailwindIndicator />
               <FloatingLegalFooter />
+              {/* Global feedback floating access */}
+              <FeedbackFloatingButton />
               <Suspense>
                 <ServerToaster />
               </Suspense>

@@ -274,6 +274,53 @@
   .progress-growth {
     background: linear-gradient(90deg, var(--success), var(--accent));
   }
+
+  /* Gradient 3px border utility for feedback button */
+  .gradient-border-3 {
+    position: relative;
+    border: 3px solid transparent;
+    border-radius: var(--radius-xl);
+    background:
+      linear-gradient(var(--background), var(--background)) padding-box,
+      linear-gradient(135deg, #ff9b7c, #d97757, #ffb88c) border-box;
+  }
+
+  /* Feedback floating button attention animation (subtle, limited iterations) */
+  @keyframes feedback-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6%); }
+  }
+  @keyframes feedback-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0 0 0 / 0.15); }
+    50% { box-shadow: 0 8px 22px -6px oklch(0.62 0.15 40 / 0.45); }
+  }
+  .animate-feedback-attention {
+    animation: feedback-bob 3.2s ease-in-out 2, feedback-glow 3.2s ease-in-out 2;
+  }
+
+  /* 20s cycle jiggle: brief motion & glow early in cycle, then idle */
+  @keyframes feedback-jiggle-cycle {
+    0%, 89%, 100% { transform: translateY(0) scale(1); }
+    2% { transform: translateY(-6%) scale(1.02); }
+    4% { transform: translateY(0) scale(1); }
+    6% { transform: translateY(-3%) scale(1.015); }
+    8% { transform: translateY(0) scale(1); }
+  }
+  @keyframes feedback-jiggle-glow {
+    0%, 89%, 100% { box-shadow: 0 0 0 0 rgba(0 0 0 / 0.25); }
+    2% { box-shadow: 0 6px 18px -4px oklch(0.75 0.14 35 / 0.55); }
+    4% { box-shadow: 0 2px 8px -2px oklch(0.75 0.14 35 / 0.3); }
+    6% { box-shadow: 0 4px 14px -4px oklch(0.75 0.14 35 / 0.4); }
+    8% { box-shadow: 0 0 0 0 rgba(0 0 0 / 0.25); }
+  }
+  .animate-feedback-cycle {
+    /* Increased frequency: cycle reduced from 20s to 5s */
+    animation: feedback-jiggle-cycle 5s ease-in-out infinite,
+               feedback-jiggle-glow 5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-feedback-cycle, .animate-feedback-attention { animation: none !important; }
+  }
 }
 
 /* Other styles */

@@ -60,7 +60,14 @@ export function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter className="flex flex-col gap-2">
-        <ContactFeedbackPopover />
+        <ContactFeedbackPopover>
+          <button
+            type="button"
+            className="gradient-border-3 h-8 px-3 flex items-center gap-2 text-sm font-medium rounded-xl bg-background hover:opacity-90 transition animate-feedback-cycle"
+          >
+            <span>Feedback</span>
+          </button>
+        </ContactFeedbackPopover>
         <SidebarUserButton />
       </SidebarFooter>
       <SidebarRail />

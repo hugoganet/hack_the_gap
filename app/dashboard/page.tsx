@@ -24,6 +24,17 @@ export default async function LearnPage() {
     where: { userId: user.id },
   });
 
+  // Count syllabus concepts across user's enrolled courses
+  const syllabusConceptsCount = await prisma.syllabusConcept.count({
+    where: {
+      course: {
+        enrollments: {
+          some: { userId: user.id },
+        },
+      },
+    },
+  });
+
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
       <Layout size="lg">
@@ -43,7 +54,7 @@ export default async function LearnPage() {
         <QuickStats userId={user.id} />
 
         {/* Content Inbox - Drag-and-drop processing */}
-        <ContentInbox />
+        <ContentInbox showNoConcepts={syllabusConceptsCount === 0} />
 
         {/* Review Queue - Cards due today */}
         <ReviewQueue userId={user.id} />

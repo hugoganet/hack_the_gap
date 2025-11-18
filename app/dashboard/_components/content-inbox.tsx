@@ -22,10 +22,15 @@ import { processContent } from "@app/actions/process-content.action";
 import { processUploadedPDF } from "@app/actions/process-uploaded-pdf.action";
 import { toast } from "sonner";
 import { MatchResultsDialog, type MatchResultsData } from "../users/match-results-dialog";
+import { CreateCourseDialog } from "@app/dashboard/courses/_components/create-course-dialog";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-export function ContentInbox() {
+type ContentInboxProps = {
+  showNoConcepts?: boolean;
+};
+
+export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("dashboard.learn.inbox");
@@ -35,6 +40,7 @@ export function ContentInbox() {
   const [matchResults, setMatchResults] = useState<MatchResultsData | null>(null);
   const [showMatchDialog, setShowMatchDialog] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<string | null>(null);
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
 
 
   const handleDrag = (e: React.DragEvent) => {
@@ -209,6 +215,23 @@ export function ContentInbox() {
           <CardDescription>
             {t("description")}
           </CardDescription>
+          {showNoConcepts && (
+            <div className="mt-3 rounded-md border bg-muted/50 p-3 text-xs sm:text-sm flex flex-col gap-2">
+              <p className="text-muted-foreground leading-relaxed">
+                {t("noConcepts.message")}
+              </p>
+              <div>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => setCreateDialogOpen(true)}
+                >
+                  {t("noConcepts.cta")}
+                </Button>
+              </div>
+            </div>
+          )}
         </CardHeader>
       <CardContent className="space-y-4">
         {/* Drag and Drop Zone */}
@@ -337,6 +360,10 @@ export function ContentInbox() {
       onFlashcardUnlocked={() => {
         router.refresh();
       }}
+    />
+    <CreateCourseDialog
+      open={createDialogOpen}
+      onOpenChange={setCreateDialogOpen}
     />
     </>
   );

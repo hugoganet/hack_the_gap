@@ -162,6 +162,10 @@
       "inbox": {
         "title": "Add Content",
         "description": "Drop a URL or file to process content",
+          "noConcepts": {
+            "message": "You haven't added any learning goals yet. Create a course with a syllabus (learning goal) to enable smarter concept matching and meaningful flashcards.",
+            "cta": "Add a learning goal →"
+          },
         "drag": {
           "dropHere": "Drop here",
           "dragDrop": "Drag & drop content",

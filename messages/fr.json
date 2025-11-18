@@ -162,6 +162,10 @@
       "inbox": {
         "title": "Ajouter du contenu",
         "description": "Déposez une URL ou un fichier pour traiter le contenu",
+          "noConcepts": {
+            "message": "Vous n'avez pas encore ajouté d'objectifs d'apprentissage. Créez un cours avec un programme (objectif) pour activer l'appariement intelligent des concepts et des fiches utiles.",
+            "cta": "Ajouter un objectif →"
+          },
         "drag": {
           "dropHere": "Déposer ici",
           "dragDrop": "Glisser-déposer du contenu",
