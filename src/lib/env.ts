@@ -23,6 +23,9 @@ export const env = createEnv({
     BLACKBOX_API_KEY: z.string().optional(),
     // SocialKit API for processing YouTube videos
     SOCIALKIT_API_KEY: z.string().min(1),
+    // Notion API for feedback integration (optional)
+    NOTION_API_KEY: z.string().optional(),
+    NOTION_DB_ID: z.string().optional(),
   },
   /**
    * If you add `client` environment variables, you need to add them to
