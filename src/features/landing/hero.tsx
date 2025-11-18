@@ -2,13 +2,13 @@
 
 import { CircleSvg } from "@/components/svg/circle-svg";
 import { buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Typography } from "../../components/nowts/typography";
 
 export const Hero = () => {
   const t = useTranslations("landing.hero");
+  const locale = useLocale();
   return (
     <div className="relative isolate flex flex-col">
       <GridBackground />
@@ -20,12 +20,34 @@ export const Hero = () => {
               variant="h1"
               className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl lg:text-7xl"
             >
-              {t("title").split(t("titleHighlight"))[0]}
-              <span className="relative inline-block">
-                <span>{t("titleHighlight")}</span>
-                <CircleSvg className="fill-primary absolute inset-0" />
-              </span>
-              {t("title").split(t("titleHighlight"))[1]}
+              {(() => {
+                const title = t("title");
+                const highlight = t("titleHighlight");
+                const parts = title.split(highlight);
+                const before = parts[0] ?? "";
+                const after = parts[1] ?? "";
+
+                const endsWithDApos = /d[’']$/.test(before);
+                const beforeSansDApos = endsWithDApos
+                  ? before.slice(0, -2)
+                  : before;
+                const dApos = endsWithDApos ? before.slice(-2) : "";
+
+                return (
+                  <>
+                    {beforeSansDApos}
+                    {locale.startsWith("fr") && endsWithDApos ? (
+                      <br className="block sm:hidden" />
+                    ) : null}
+                    {dApos}
+                    <span className="relative inline-block">
+                      <span>{highlight}</span>
+                      <CircleSvg className="fill-primary absolute inset-0" />
+                    </span>
+                    {after}
+                  </>
+                );
+              })()}
             </Typography>
             <Typography
               variant="large"
@@ -33,7 +55,7 @@ export const Hero = () => {
             >
               {t("description")}
             </Typography>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-x-6">
               <Link
                 href="/signup"
                 className={buttonVariants({ size: "lg", variant: "default" })}

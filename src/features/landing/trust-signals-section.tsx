@@ -1,7 +1,6 @@
 "use client";
 
 import { Typography } from "@/components/nowts/typography";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
@@ -49,13 +48,7 @@ export const TrustSignalsSection = () => {
             </CardContent>
           </Card>
         </div>
-        <Alert className="mt-6">
-          <AlertCircle size={16} />
-          <AlertTitle>{t("beta.title")}</AlertTitle>
-          <AlertDescription>
-            {t("beta.description")}
-          </AlertDescription>
-        </Alert>
+        {/* Beta alert moved under FAQ section */}
       </div>
     </SectionLayout>
   );

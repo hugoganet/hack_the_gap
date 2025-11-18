@@ -3,8 +3,8 @@
     "hero": {
       "title": "Arrêtez d'oublier ce que vous apprenez",
       "titleHighlight": "oublier",
-      "description": "Transformez les vidéos YouTube, articles et PDFs en mémoire à long terme — automatiquement. Téléchargez votre programme. Regardez du contenu. Révisez 3 min/jour. Retenez vraiment.",
-      "getStarted": "Télécharger votre programme (Gratuit)",
+      "description": "Transformez les vidéos YouTube, articles et PDFs en mémoire à long terme — automatiquement. Ajoutez votre objectif d'apprentissage. Regardez du contenu. Révisez 3 min/jour. Retenez vraiment.",
+      "getStarted": "Ajouter votre objectif (Gratuit)",
       "signIn": "Se connecter",
       "seeHowItWorks": "Voir comment ça marche"
     },
@@ -52,7 +52,7 @@
       "steps": {
         "upload": {
           "number": "1",
-          "title": "Téléchargez votre programme",
+          "title": "Ajoutez votre objectif d'apprentissage",
           "description": "PDF, texte, ou parlez à notre IA pour définir vos objectifs d'apprentissage. Fonctionne pour n'importe quel cours, n'importe quel système éducatif dans le monde."
         },
         "watch": {
@@ -63,7 +63,7 @@
         "extract": {
           "number": "3",
           "title": "L'IA extrait et associe les concepts",
-          "description": "En 60 secondes, les concepts sont extraits et associés à votre programme. Voyez exactement ce que vous avez appris vs ce qui manque."
+          "description": "En 60 secondes, les concepts sont extraits et associés à votre objectif d'apprentissage. Voyez exactement ce que vous avez appris vs ce qui manque."
         },
         "review": {
           "number": "4",
@@ -76,24 +76,24 @@
       "title": "Vous apprenez déjà...",
       "subtitle": "Mais sans système de rétention, vous oubliez 85% en 2 semaines.",
       "without": {
-        "title": "😞 Apprendre sans mémorisation",
+        "title": "😞 Apprendre sans Recall",
         "items": [
           "Regarder 10 heures d'explications YouTube",
           "Oublier 85% en 2 semaines",
-          "Bachoter en panique avant les examens",
-          "Impossible de se rappeler les concepts clés quand nécessaire",
-          "Sentiment de temps perdu"
+          "Réviser en panique avant les examens",
+          "Impossible de se rappeler les concepts clés au moment voulu",
+          "Impression d'avoir perdu son temps"
         ]
       },
       "with": {
-        "title": "😎 Apprendre AVEC mémorisation",
+        "title": "😎 Apprendre AVEC Recall",
         "items": [
-          "Téléchargez votre programme (60 secondes)",
+          "Ajoutez votre objectif d'apprentissage (60 secondes)",
           "Regardez le contenu que vous consommez déjà",
           "L'IA extrait les concepts + génère des fiches",
           "Révisez 3 min/jour (répétition espacée)",
           "80% de rétention après 7 jours",
-          "Voyez exactement ce que vous savez vs ne savez pas"
+          "Voyez exactement ce que vous savez vs ce qui vous manque"
         ]
       }
     },
@@ -122,6 +122,7 @@
     "trustSignals": {
       "badge": "Basé sur la science éprouvée",
       "title": "Méthodologie Zettelkasten + Répétition espacée + Automatisation IA",
+      "earlyAccessTitle": "Bêta",
       "cards": {
         "zettelkasten": {
           "title": "Zettelkasten",
@@ -188,8 +189,8 @@
     },
     "ctaSection": {
       "title": "Prêt à vraiment retenir ce que vous apprenez ?",
-      "subtitle": "Rejoignez 20+ étudiants testant Recall. Téléchargez votre programme en 60 secondes.",
-      "button": "Télécharger votre programme (Gratuit)"
+      "subtitle": "Rejoignez 20+ étudiants testant Recall. Ajoutez votre objectif d'apprentissage en 60 secondes.",
+      "button": "Ajouter votre objectif (Gratuit)"
     },
     "ctaCard": {
       "title": "Boostez votre productivité aujourd'hui",
@@ -210,7 +211,81 @@
     "faq": {
       "badge": "FAQ",
       "title": "Questions fréquemment posées"
-    }
+    },
+    "reviews": [
+      {
+        "review": "J'ai échoué à mon examen de mi-session de Philosophie 101 malgré 15 heures de vidéos YouTube. Après avoir utilisé Recall pendant 2 semaines, j'ai réussi l'examen final. **La correspondance des concepts est incroyablement précise.** Je pouvais voir exactement quels sujets me manquaient.",
+        "name": "Alex P.",
+        "role": "Étudiant en philosophie, UC Berkeley"
+      },
+      {
+        "review": "Je suis un développeur autodidacte qui suit des cours en ligne. Recall m'a aidé à **vraiment retenir** ce que j'ai appris au lieu de simplement regarder des vidéos et oublier. La répétition espacée change la donne.",
+        "name": "Priya K.",
+        "role": "Étudiante en bootcamp, Inde"
+      },
+      {
+        "review": "J'ai enfin une habitude de révision quotidienne. **Les déblocages sont gratifiants** — comme monter de niveau dans un jeu. Je peux voir mes progrès : 23/67 concepts maîtrisés. C'est addictif dans le bon sens.",
+        "name": "Marco D.",
+        "role": "Étudiant en biologie, Italie"
+      },
+      {
+        "review": "J'ai téléchargé mon programme d'économie et traité 8 vidéos YouTube en un après-midi. **En 60 secondes, j'avais des fiches associées à mon cours.** Cela m'aurait pris 10 heures à faire manuellement.",
+        "name": "Sarah L.",
+        "role": "Étudiante en économie, Canada"
+      },
+      {
+        "review": "La fonctionnalité d'analyse des lacunes est incroyable. Avant mon examen, elle m'a dit : **'Il vous manque : Théorie du contrat social, Éthique de la vertu.'** J'ai regardé 2 vidéos, révisé les fiches, et c'était littéralement dans le test.",
+        "name": "James K.",
+        "role": "Étudiant en sciences politiques, Royaume-Uni"
+      },
+      {
+        "review": "J'apprends le japonais via des vidéos YouTube. Recall extrait automatiquement le vocabulaire et les concepts grammaticaux. **Je révise 3 minutes chaque matin** et ma rétention a explosé.",
+        "name": "Emily T.",
+        "role": "Apprenante de langues, Australie"
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "Quelle est la précision de l'association par IA ?",
+        "answer": "Actuellement **68-80% de précision** (s'améliore avec les retours). Nous affichons des scores de confiance pour que vous sachiez quelles correspondances sont fiables. Vous pouvez signaler les correspondances incorrectes pour nous aider à améliorer. Les correspondances à haute confiance (≥80%) sont affichées comme 'Associé' avec un indicateur vert."
+      },
+      {
+        "question": "Dois-je créer des fiches manuellement ?",
+        "answer": "**Non.** Téléchargez votre programme, regardez une vidéo, et les fiches apparaissent automatiquement en 60 secondes. La révision prend 3 min/jour. Zéro travail manuel requis."
+      },
+      {
+        "question": "Et si je n'ai pas de programme ?",
+        "answer": "Parlez à notre IA pour définir vos objectifs d'apprentissage. Fonctionne pour **les autodidactes, les bootcamps, les cours en ligne** — n'importe quel système éducatif dans le monde. Vous pouvez également télécharger des PDFs, des fichiers texte, ou même des notes manuscrites (OCR à venir)."
+      },
+      {
+        "question": "Quels types de contenu sont pris en charge ?",
+        "answer": "Actuellement : **vidéos YouTube et PDFs**. À venir : TikTok, articles, podcasts, enregistrements de cours. Le pipeline principal fonctionne de la même manière pour tous les types de contenu."
+      },
+      {
+        "question": "Comment fonctionne la répétition espacée ?",
+        "answer": "Le système planifie des moments de révision optimaux basés sur **la science cognitive éprouvée**. Vous révisez chaque concept à des intervalles croissants (1 jour, 3 jours, 7 jours, etc.). Cela déplace l'information de la mémoire à court terme vers la mémoire à long terme. Temps de révision moyen : **3 min/jour**."
+      },
+      {
+        "question": "Puis-je modifier ou supprimer des fiches ?",
+        "answer": "Oui. Vous pouvez signaler les correspondances incorrectes, supprimer des fiches ou ajouter des notes personnalisées. Nous développons des fonctionnalités d'édition manuelle post-MVP. Pour l'instant, concentrez-vous sur le signalement des mauvaises correspondances pour que nous puissions améliorer l'IA."
+      },
+      {
+        "question": "Est-ce uniquement pour les étudiants universitaires ?",
+        "answer": "**Non.** Fonctionne pour toute personne ayant des objectifs d'apprentissage : étudiants universitaires, autodidactes, participants de bootcamp, étudiants de cours en ligne, apprenants de langues, travailleurs du savoir. Si vous consommez du contenu éducatif, Recall vous aide à le retenir."
+      },
+      {
+        "question": "Combien ça coûte ?",
+        "answer": "Actuellement **gratuit pendant la bêta**. Nous testons avec des utilisateurs précoces pour améliorer la précision avant de lancer des plans payants. Rejoignez-nous maintenant pour obtenir un accès anticipé et aider à façonner le produit."
+      },
+      {
+        "question": "Quelles langues sont prises en charge ?",
+        "answer": "Actuellement **anglais et français** pour l'interface. L'extraction de contenu fonctionne pour **plus de 100 langues** (nos embeddings IA supportent la correspondance multilingue). Nous ajoutons plus de langues d'interface post-MVP."
+      },
+      {
+        "question": "En quoi est-ce différent d'Anki ou Quizlet ?",
+        "answer": "**Zéro travail manuel.** Anki/Quizlet nécessitent de créer des fiches manuellement (les étudiants ne le font pas). Recall extrait automatiquement les concepts du contenu que vous consommez déjà et les associe à vos objectifs d'apprentissage. C'est la méthodologie Zettelkasten avec automatisation IA."
+      }
+    ]
   },
   "footer": {
     "sections": {
@@ -302,8 +377,8 @@
         "locked": {
           "title": "Réponse verrouillée",
           "description": "Ajoutez ou regardez du contenu d'apprentissage pour ce cours afin de débloquer cette réponse.",
-          "cta": "Accéder au contenu →",
-          "hints": "Astuces :"
+          "cta": "Consulter du contenu →",
+          "hints": "Indices :"
         },
         "reviewedShort": "Révisé {count}×",
         "accuracyShort": "{percent} % correct",
@@ -331,7 +406,7 @@
         "title": "Ajouter du contenu",
         "description": "Déposez une URL ou un fichier pour traiter le contenu",
           "noConcepts": {
-            "message": "Vous n'avez pas encore ajouté d'objectifs d'apprentissage. Créez un cours avec un programme (objectif) pour activer l'appariement intelligent des concepts et des fiches utiles.",
+            "message": "Aucun objectif d'apprentissage pour le moment. Créez un cours avec un programme pour activer l'association intelligente des concepts et générer des fiches pertinentes.",
             "cta": "Ajouter un objectif →"
           },
         "drag": {
@@ -368,11 +443,11 @@
       },
       "reviewQueue": {
         "title": "Réviser aujourd'hui",
-        "description": "Révisez vos cartes pour renforcer votre mémoire",
-        "count": "{count, plural, =0 {Aucune carte à réviser} one {# carte à réviser} other {# cartes à réviser}}",
+        "description": "Révisez vos fiches pour renforcer votre mémoire",
+        "count": "{count, plural, =0 {Aucune fiche à réviser} one {# fiche à réviser} other {# fiches à réviser}}",
         "upToDate": "Vous êtes à jour ! 🎉",
-        "dueTomorrow": "{count} {count, plural, one {carte} other {cartes}} à réviser demain",
-        "perCourseCount": "{count, plural, one {# carte} other {# cartes}}"
+        "dueTomorrow": "{count} {count, plural, one {fiche} other {fiches}} à réviser demain",
+        "perCourseCount": "{count, plural, one {# fiche} other {# fiches}}"
       },
       "quickStats": {
         "concepts": "concepts",
@@ -395,9 +470,9 @@
           "percent": "{percent}% maîtrisés"
         },
         "streak": {
-          "title": "Série de déblocage",
+          "title": "Série active",
           "current": "Série actuelle",
-          "longest": "Série la plus longue",
+          "longest": "Meilleure série",
           "badge": "🔥 En feu ! Continuez !"
         }
       }
@@ -405,15 +480,15 @@
     "users": {
       "title": "Ne perdez jamais ce que vous apprenez",
       "reviewsToday": {
-        "title": "Cartes à réviser aujourd'hui",
-        "count": "{count, plural, =0 {Aucune carte à réviser} one {# carte à réviser} other {# cartes à réviser}}",
-        "upToDate": "Tu es à jour de tes répétitions pour aujourd'hui ! 🎉",
-        "dueTomorrow": "Tu as {count} {count, plural, one {carte} other {cartes}} à réviser demain",
-        "perCourseCount": "{count, plural, one {# carte à réviser} other {# cartes à réviser}}",
+        "title": "Fiches à réviser aujourd'hui",
+        "count": "{count, plural, =0 {Aucune fiche à réviser} one {# fiche à réviser} other {# fiches à réviser}}",
+        "upToDate": "Vous êtes à jour pour aujourd'hui ! 🎉",
+        "dueTomorrow": "Vous avez {count} {count, plural, one {fiche} other {fiches}} à réviser demain",
+        "perCourseCount": "{count, plural, one {# fiche à réviser} other {# fiches à réviser}}",
         "description": "Révisez vos fiches pour renforcer votre mémoire"
       },
       "inbox": {
-        "title": "Boîte de contenu",
+        "title": "Ajouter du contenu",
         "description": "Déposez une URL ou un fichier pour traiter le contenu",
         "drag": {
           "dropHere": "Déposez ici",
@@ -495,11 +570,11 @@
           },
           "toast": {
             "correct": "Merci ! Marqué comme correspondance correcte",
-            "incorrect": "Merci pour le retour ! Nous améliorerons notre appariement"
+            "incorrect": "Merci pour le retour ! Nous améliorerons notre association"
           }
         },
         "unmatched": {
-          "title": "Non apparié",
+          "title": "Non associé",
           "description": "Aucune correspondance claire avec le programme"
         },
         "stats": {
@@ -526,12 +601,12 @@
             "mobile": "Mobile"
           },
           "footer": {
-            "trending": "Tendance en hausse de {percent}% ce mois-ci"
+            "trending": "En hausse de {percent}% ce mois"
           }
         },
         "donut": {
-          "title": "Diagramme - Donut avec texte",
-          "visitors": "Visiteurs",
+          "title": "Graphique circulaire",
+          "visitors": "Étudiants",
           "browsers": {
             "chrome": "Chrome",
             "safari": "Safari",
@@ -540,8 +615,8 @@
             "other": "Autre"
           },
           "footer": {
-            "trending": "Tendance en hausse de {percent}% ce mois-ci",
-            "sub": "Affichage du total des visiteurs sur les 6 derniers mois"
+            "trending": "En hausse de {percent}% ce mois",
+            "sub": "Total des étudiants actifs sur les 6 derniers mois"
           }
         }
       }

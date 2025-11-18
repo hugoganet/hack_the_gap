@@ -25,7 +25,7 @@ export function Footer() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+              {/* <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
                 <div className="flex flex-col gap-3">
                   <h4 className="font-medium">{t("sections.product")}</h4>
                   <nav className="flex flex-col gap-2">
@@ -99,14 +99,14 @@ export function Footer() {
                     </Button>
                   </nav>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex flex-col gap-4 pt-8 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-col gap-1">
-                <p className="text-muted-foreground text-sm">
+                {/* <p className="text-muted-foreground text-sm">
                   {SiteConfig.company.address}
-                </p>
+                </p> */}
                 <p className="text-muted-foreground text-sm">
                   © {new Date().getFullYear()} {SiteConfig.company.name}. All
                   rights reserved.

@@ -83,7 +83,7 @@ export function BentoGridSection() {
   ];
   return (
     <SectionLayout>
-      <BentoGrid className="mx-auto max-w-4xl md:auto-rows-[20rem]">
+      <BentoGrid className="mx-auto w-full md:auto-rows-[minmax(18rem,auto)] lg:auto-rows-[minmax(18rem,auto)] xl:auto-rows-[minmax(20rem,auto)]">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
@@ -220,11 +220,11 @@ const Skeleton4 = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 flex-col gap-4"
+      className="flex flex-1 flex-col gap-3"
     >
       <motion.div
         variants={first}
-        className="border-border bg-background flex flex-col rounded-2xl border p-4"
+        className="border-border bg-background flex flex-col rounded-2xl border p-3"
       >
         <Typography variant="large" className="text-green-500">
           12/45 {t("mastered")}
@@ -234,7 +234,7 @@ const Skeleton4 = () => {
       </motion.div>
       <motion.div
         variants={second}
-        className="border-border bg-background flex flex-col rounded-2xl border p-4"
+        className="border-border bg-background flex flex-col rounded-2xl border p-3"
       >
         <Typography variant="large" className="text-amber-500">
           You're missing:
@@ -268,11 +268,11 @@ const Skeleton5 = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-1"
     >
       <motion.div
         variants={variants}
-        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-3"
+        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-2"
       >
         <Lock size={16} className="text-neutral-400" />
         <div>
@@ -282,7 +282,7 @@ const Skeleton5 = () => {
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-3"
+        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-2"
       >
         <Unlock size={16} className="text-green-500" />
         <div>

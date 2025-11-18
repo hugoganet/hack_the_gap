@@ -1,0 +1,8 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "pnpm vercel-build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "git": {
+    "deployOnPush": true
+  }
+}

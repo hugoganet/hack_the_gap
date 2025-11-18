@@ -17,8 +17,8 @@ export const PainSection = () => {
         <Typography variant="large" className="text-center max-w-2xl">
           {t("subtitle")}
         </Typography>
-        <div className="flex items-start gap-4 max-lg:flex-col">
-          <div className="flex-1 rounded-lg bg-red-500/20 p-4 lg:p-6">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="flex h-full min-h-full flex-col rounded-lg bg-red-500/20 p-4 lg:p-6">
             <Typography variant="h3" className="text-red-500">
               {t("without.title")}
             </Typography>
@@ -28,7 +28,7 @@ export const PainSection = () => {
               ))}
             </ul>
           </div>
-          <div className="flex-1 rounded-lg bg-green-500/20 p-4 lg:p-6">
+          <div className="flex h-full min-h-full flex-col rounded-lg bg-green-500/20 p-4 lg:p-6">
             <Typography variant="h3" className="text-green-500">
               {t("with.title")}
             </Typography>

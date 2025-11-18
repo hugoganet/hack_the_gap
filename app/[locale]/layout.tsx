@@ -8,9 +8,9 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const localeParam = params.locale;
+  const { locale: localeParam } = await params;
   const locale: Locale = isLocale(localeParam) ? localeParam : "en";
 
   // unstable_setRequestLocale(locale); // No longer needed
