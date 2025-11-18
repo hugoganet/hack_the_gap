@@ -15,16 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useSession } from "@/lib/auth-client";
-import {
-  LayoutDashboard,
-  Monitor,
-  Moon,
-  Settings,
-  Shield,
-  SunMedium,
-  SunMoon,
-  Languages,
-} from "lucide-react";
+import { Monitor, Moon, Shield, SunMedium, SunMoon, Languages } from "lucide-react";
 
 import { useTheme } from "next-themes";
 import { useLocale, useTranslations } from "next-intl";
@@ -78,18 +69,22 @@ export const UserDropdown = ({ children }: PropsWithChildren) => {
           )}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {/*
         <DropdownMenuItem asChild>
-          <Link href="/orgs">
+          <Link href="/dashboard">
             <LayoutDashboard className="mr-2 size-4" />
             Dashboard
           </Link>
         </DropdownMenuItem>
+        */}
+        {/*
         <DropdownMenuItem asChild>
           <Link href="/account">
             <Settings className="mr-2 size-4" />
             Account Settings
           </Link>
         </DropdownMenuItem>
+        */}
         {session.data.user.role === "admin" && (
           <DropdownMenuItem asChild>
             <Link href="/admin">

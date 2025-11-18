@@ -76,25 +76,33 @@ export async function GET(
       },
     });
 
-    // Format response
-    const formattedFlashcards = flashcards.map((flashcard) => ({
-      id: flashcard.id,
-      question: flashcard.question,
-      answer: flashcard.answer,
-      sourceTimestamp: flashcard.sourceTimestamp,
-      conceptName: flashcard.conceptMatch.concept.conceptText,
-      syllabusConceptName: flashcard.conceptMatch.syllabusConcept.conceptText,
-      category: flashcard.conceptMatch.syllabusConcept.category,
-      timesReviewed: flashcard.timesReviewed,
-      timesCorrect: flashcard.timesCorrect,
-      createdAt: flashcard.createdAt,
-    }));
+    // Format response - filter out flashcards without concept matches
+    const formattedFlashcards = flashcards
+      .filter((flashcard) => flashcard.conceptMatch !== null)
+      .map((flashcard) => {
+        const match = flashcard.conceptMatch;
+        if (!match) return null;
+        
+        return {
+          id: flashcard.id,
+          question: flashcard.question,
+          answer: flashcard.answer,
+          sourceTimestamp: flashcard.sourceTimestamp,
+          conceptName: match.concept.conceptText,
+          syllabusConceptName: match.syllabusConcept.conceptText,
+          category: match.syllabusConcept.category,
+          timesReviewed: flashcard.timesReviewed,
+          timesCorrect: flashcard.timesCorrect,
+          createdAt: flashcard.createdAt,
+        };
+      })
+      .filter((f): f is NonNullable<typeof f> => f !== null);
 
     return NextResponse.json({
       flashcards: formattedFlashcards,
       totalCount: formattedFlashcards.length,
       readyForReview: formattedFlashcards.length > 0,
-      videoJobStatus: videoJob.status,
+      videoJobStatus: contentJob.status,
     });
   } catch (error) {
     console.error("Flashcard preview API error:", error);
