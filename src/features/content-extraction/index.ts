@@ -6,9 +6,26 @@ import {
   isYouTubeURL,
   isTikTokURL,
 } from "./video-extractor";
-import { extractPDFText, isPDFURL } from "./pdf-extractor";
 import { extractArticleText, isArticleURL } from "./url-extractor";
 import { extractPodcastTranscript, isPodcastURL } from "./podcast-extractor";
+
+/**
+ * Dynamic import for PDF extractor to prevent canvas/DOMMatrix issues
+ * in serverless environments. The pdf-parse library uses canvas internally,
+ * which requires browser APIs not available in Node.js/Vercel runtime.
+ */
+async function loadPDFExtractor() {
+  const { extractPDFText, isPDFURL } = await import("./pdf-extractor");
+  return { extractPDFText, isPDFURL };
+}
+
+/**
+ * Detect if URL is a PDF (without importing pdf-extractor)
+ */
+function isPDFURLLocal(url: string): boolean {
+  const lowerUrl = url.toLowerCase();
+  return lowerUrl.endsWith(".pdf") || lowerUrl.includes(".pdf?");
+}
 
 /**
  * Detect content type from URL
@@ -23,7 +40,7 @@ export function detectContentType(url: string): ContentTypeDetection {
     return { contentType: "tiktok", confidence: 1.0 };
   }
 
-  if (isPDFURL(url)) {
+  if (isPDFURLLocal(url)) {
     return { contentType: "pdf", confidence: 1.0 };
   }
 
@@ -42,6 +59,7 @@ export function detectContentType(url: string): ContentTypeDetection {
 
 /**
  * Extract content based on detected content type
+ * Uses dynamic imports for PDF extraction to avoid bundling canvas in non-PDF routes
  */
 export async function extractContent(url: string): Promise<{
   contentType: ContentType;
@@ -63,9 +81,12 @@ export async function extractContent(url: string): Promise<{
       result = await extractTikTokTranscript(url);
       break;
 
-    case "pdf":
+    case "pdf": {
+      // Dynamic import to prevent canvas/DOMMatrix issues in serverless
+      const { extractPDFText } = await loadPDFExtractor();
       result = await extractPDFText(url);
       break;
+    }
 
     case "url":
       result = await extractArticleText(url);
@@ -92,16 +113,31 @@ export async function extractContent(url: string): Promise<{
 export {
   extractYouTubeTranscript,
   extractTikTokTranscript,
-  extractPDFText,
   extractArticleText,
   extractPodcastTranscript,
 };
 
-// Re-export type detectors
+/**
+ * Re-export PDF extractor with dynamic import wrapper
+ * This prevents canvas from being bundled in non-PDF routes
+ */
+export async function extractPDFText(url: string) {
+  const { extractPDFText: pdfExtractor } = await loadPDFExtractor();
+  return pdfExtractor(url);
+}
+
+/**
+ * Re-export PDF URL detector with dynamic import wrapper
+ */
+export async function isPDFURL(url: string): Promise<boolean> {
+  const { isPDFURL: pdfDetector } = await loadPDFExtractor();
+  return pdfDetector(url);
+}
+
+// Re-export type detectors (non-PDF)
 export {
   isYouTubeURL,
   isTikTokURL,
-  isPDFURL,
   isArticleURL,
   isPodcastURL,
 };

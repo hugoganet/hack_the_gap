@@ -1,11 +1,11 @@
 import type { NextRequest} from "next/server";
 import { NextResponse } from "next/server";
 import { getRequiredUser } from "@/lib/auth/auth-user";
-import { extractPDFTextFromBuffer } from "@/features/content-extraction/pdf-extractor";
 
 /**
  * Upload PDF file endpoint
  * Accepts PDF file upload and extracts text
+ * Uses dynamic import to prevent canvas/DOMMatrix issues in serverless
  */
 export async function POST(request: NextRequest) {
   try {
@@ -49,6 +49,11 @@ export async function POST(request: NextRequest) {
     // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+
+    // Dynamic import to prevent canvas/DOMMatrix issues in serverless
+    const { extractPDFTextFromBuffer } = await import(
+      "@/features/content-extraction/pdf-extractor"
+    );
 
     // Extract text from PDF
     const result = await extractPDFTextFromBuffer(buffer, file.name);
