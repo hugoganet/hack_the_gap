@@ -37,11 +37,6 @@ export default async function RoutePage(props: {
       id: params.userId,
     },
     include: {
-      members: {
-        include: {
-          organization: true,
-        },
-      },
       accounts: {
         orderBy: {
           createdAt: "desc",
@@ -68,70 +63,6 @@ export default async function RoutePage(props: {
 
       <LayoutContent className="flex flex-col gap-4">
         <UserDetailsCard user={userData} />
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Organizations</CardTitle>
-                <CardDescription>
-                  Organizations this user belongs to
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {userData.members.length === 0 ? (
-              <div className="text-muted-foreground py-4 text-center">
-                No organizations found
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {userData.members.map((memberRole) => (
-                  <div
-                    key={memberRole.id}
-                    className="flex items-center justify-between rounded-lg border p-3"
-                  >
-                    <div className="flex flex-1 items-center gap-3">
-                      <Avatar className="size-10">
-                        <AvatarImage
-                          src={memberRole.organization.logo ?? undefined}
-                          alt={memberRole.organization.name}
-                        />
-                        <AvatarFallback className="text-sm">
-                          {memberRole.organization.name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <Link
-                        href={`/admin/organizations/${memberRole.organization.id}`}
-                        className="flex-1"
-                      >
-                        <div className="space-y-1 transition-opacity hover:opacity-80">
-                          <div className="font-medium">
-                            {memberRole.organization.name}
-                          </div>
-                          <div className="text-muted-foreground text-sm">
-                            {memberRole.organization.email}
-                          </div>
-                          <div className="text-muted-foreground text-xs">
-                            Role: {memberRole.role}
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link
-                        href={`/admin/organizations/${memberRole.organization.id}`}
-                      >
-                        <ExternalLink className="size-4" />
-                        View
-                      </Link>
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
         <UserSessions userId={userData.id} />
         <UserProviders accounts={userData.accounts} />
