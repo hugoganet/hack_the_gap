@@ -184,7 +184,7 @@ export default function HomePage() {
             <CardContent className="space-y-6 pt-0">
               <div className="space-y-3 text-center">
                 <TypographyH2 
-                  className="dynamic-gradient bg-gradient-to-r from-primary via-primary/80 to-primary/60"
+                  className="dynamic-gradient bg-gradient-to-r from-learning via-learning/80 to-learning/60"
                   style={{
                     backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
                   }}
