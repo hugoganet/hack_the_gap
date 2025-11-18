@@ -1,7 +1,6 @@
 import type { PageParams } from "@/types/next";
 import type { Metadata, ResolvingMetadata } from "next";
 import { unstable_cache as cache } from "next/cache";
-import { prisma } from "./prisma";
 
 /**
  * Add a suffix to the title of the parent metadata
@@ -27,22 +26,11 @@ export const combineWithParentMetadata =
  * The cache is revalidate every 100 seconds.
  */
 export const orgMetadata = cache(
-  async (orgSlug: string): Promise<Metadata> => {
-    const org = await prisma.organization.findFirst({
-      where: {
-        slug: orgSlug,
-      },
-    });
-
-    if (!org) {
-      return {
-        title: "Organization not found",
-      };
-    }
-
+  async (_orgSlug: string): Promise<Metadata> => {
+    // Organizations feature removed - return a generic metadata
     return {
-      title: `${org.name}`,
-      description: "Your organization dashboard",
+      title: "Organizations unavailable",
+      description: "This project no longer supports organizations.",
     };
   },
   ["org-metadata"],
