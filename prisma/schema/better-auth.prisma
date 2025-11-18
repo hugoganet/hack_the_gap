@@ -18,6 +18,8 @@ model User {
   sessions        Session[]
   userCourses     UserCourse[]
   contentJobs     ContentJob[]
+  unlockEvents    UnlockEvent[]
+  stats           UserStats?
 
   @@map("user")
 }

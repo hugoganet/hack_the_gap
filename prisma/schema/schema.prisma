@@ -74,16 +74,17 @@ model UserCourse {
 }
 
 model SyllabusConcept {
-  id             String                @id @default(uuid())
-  courseId       String
-  conceptText    String
-  category       String?
-  importance     Int?
-  order          Int
-  language       String                @default("en") // Language of the concept (en, fr, etc.)
-  createdAt      DateTime              @default(now())
-  conceptMatches ConceptMatch[]
-  course         Course                @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id              String                @id @default(uuid())
+  courseId        String
+  conceptText     String
+  category        String?
+  importance      Int?
+  order           Int
+  language        String                @default("en") // Language of the concept (en, fr, etc.)
+  createdAt       DateTime              @default(now())
+  conceptMatches  ConceptMatch[]
+  flashcards      Flashcard[]
+  course          Course                @relation(fields: [courseId], references: [id], onDelete: Cascade)
   nodeAttachments NodeSyllabusConcept[]
 
   @@index([courseId])
@@ -101,10 +102,10 @@ enum ContentType {
 }
 
 model ContentJob {
-  id                     String       @id @default(uuid())
+  id                     String        @id @default(uuid())
   userId                 String
   url                    String
-  contentType            ContentType  @default(youtube)
+  contentType            ContentType   @default(youtube)
 
   // Video-specific fields
   youtubeVideoId         String?
@@ -116,16 +117,17 @@ model ContentJob {
   pageCount              Int?
 
   // Common fields (transcript renamed to extractedText)
-  extractedText          String?      @map("transcript") @db.Text
+  extractedText          String?       @map("transcript") @db.Text
   status                 String
   processedConceptsCount Int?
   errorMessage           String?
-  createdAt              DateTime     @default(now())
+  createdAt              DateTime      @default(now())
   completedAt            DateTime?
 
   // Relations
   concepts               Concept[]
-  user                   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  unlockEvents           UnlockEvent[]
+  user                   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -163,6 +165,7 @@ model ConceptMatch {
   concept           Concept         @relation(fields: [conceptId], references: [id], onDelete: Cascade)
   syllabusConcept   SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
   flashcards        Flashcard[]
+  unlockEvents      UnlockEvent[]
 
   @@index([conceptId])
   @@index([syllabusConceptId])
@@ -171,27 +174,54 @@ model ConceptMatch {
 }
 
 model Flashcard {
-  id                  String        @id @default(uuid())
-  conceptMatchId      String
+  id                  String         @id @default(uuid())
+  
+  // Relationships
+  syllabusConceptId   String
+  syllabusConcept     SyllabusConcept @relation(fields: [syllabusConceptId], references: [id], onDelete: Cascade)
+  
+  conceptMatchId      String?        // NULL = locked, NOT NULL = unlocked
+  conceptMatch        ConceptMatch?  @relation(fields: [conceptMatchId], references: [id], onDelete: SetNull)
+  
   userId              String
-  question            String
-  answer              String
-  questionTranslation String?       // Translation of question (for bilingual support)
-  answerTranslation   String?       // Translation of answer (for bilingual support)
-  language            String        @default("en") // Primary language of the flashcard
+  user                User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Content
+  question            String         // Always present (from syllabus)
+  answer              String?        // NULL = locked, NOT NULL = unlocked
+  questionTranslation String?
+  answerTranslation   String?
+  language            String         @default("en")
+  difficulty          String         @default("medium") // easy, medium, hard
+  hints               Json?          // Array of hint strings (available when locked)
+  
+  // State tracking (Phase 1)
+  state               String         @default("locked") // locked | unlocked | mastered
+  unlockedAt          DateTime?      // When answer was revealed
+  unlockedBy          String?        // contentJobId that unlocked it
+  
+  // Gamification (Phase 2)
+  unlockProgress      Float          @default(0.0) // 0.0-1.0 (for partial matches)
+  relatedContentIds   Json?          // Array of contentJobIds that could unlock this
+  
+  // Spaced repetition (only active when unlocked)
   sourceTimestamp     String?
-  timesReviewed       Int           @default(0)
-  timesCorrect        Int           @default(0)
+  timesReviewed       Int            @default(0)
+  timesCorrect        Int            @default(0)
   lastReviewedAt      DateTime?
-  nextReviewAt        DateTime?
-  createdAt           DateTime      @default(now())
-  conceptMatch        ConceptMatch  @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
-  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nextReviewAt        DateTime?      // NULL when locked
+  
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  
   reviewEvents        ReviewEvent[]
+  unlockEvents        UnlockEvent[]
 
+  @@unique([syllabusConceptId, userId])
+  @@index([userId, state])
+  @@index([userId, nextReviewAt])
+  @@index([syllabusConceptId])
   @@index([conceptMatchId])
-  @@index([userId])
-  @@index([nextReviewAt])
   @@index([language])
   @@map("flashcards")
 }
@@ -264,4 +294,55 @@ model NodeSyllabusConcept {
   @@index([nodeId])
   @@index([syllabusConceptId])
   @@map("node_syllabus_concepts")
+}
+
+model UnlockEvent {
+  id             String      @id @default(uuid())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  flashcardId    String
+  flashcard      Flashcard   @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  
+  contentJobId   String
+  contentJob     ContentJob  @relation(fields: [contentJobId], references: [id], onDelete: Cascade)
+  
+  conceptMatchId String
+  conceptMatch   ConceptMatch @relation(fields: [conceptMatchId], references: [id], onDelete: Cascade)
+  
+  confidence     Float       // Match confidence that triggered unlock
+  
+  createdAt      DateTime    @default(now())
+  
+  @@index([userId, createdAt])
+  @@index([contentJobId])
+  @@map("unlock_events")
+}
+
+model UserStats {
+  id                String    @id @default(uuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Unlock stats
+  totalUnlocks      Int       @default(0)
+  totalLocked       Int       @default(0)
+  totalMastered     Int       @default(0)
+  unlockRate        Float     @default(0.0) // totalUnlocks / (totalUnlocks + totalLocked)
+  
+  // Streaks
+  currentStreak     Int       @default(0)  // Days with at least 1 unlock
+  longestStreak     Int       @default(0)
+  lastUnlockDate    DateTime?
+  
+  // Milestones
+  firstUnlockAt     DateTime?
+  milestone10       DateTime? // 10 unlocks
+  milestone50       DateTime? // 50 unlocks
+  milestone100      DateTime? // 100 unlocks
+  
+  updatedAt         DateTime  @updatedAt
+  
+  @@index([userId])
+  @@map("user_stats")
 }

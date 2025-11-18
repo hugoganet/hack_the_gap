@@ -259,6 +259,7 @@ exports.Prisma.ConceptMatchScalarFieldEnum = {
 
 exports.Prisma.FlashcardScalarFieldEnum = {
   id: 'id',
+  syllabusConceptId: 'syllabusConceptId',
   conceptMatchId: 'conceptMatchId',
   userId: 'userId',
   question: 'question',
@@ -266,12 +267,20 @@ exports.Prisma.FlashcardScalarFieldEnum = {
   questionTranslation: 'questionTranslation',
   answerTranslation: 'answerTranslation',
   language: 'language',
+  difficulty: 'difficulty',
+  hints: 'hints',
+  state: 'state',
+  unlockedAt: 'unlockedAt',
+  unlockedBy: 'unlockedBy',
+  unlockProgress: 'unlockProgress',
+  relatedContentIds: 'relatedContentIds',
   sourceTimestamp: 'sourceTimestamp',
   timesReviewed: 'timesReviewed',
   timesCorrect: 'timesCorrect',
   lastReviewedAt: 'lastReviewedAt',
   nextReviewAt: 'nextReviewAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ReviewSessionScalarFieldEnum = {
@@ -312,6 +321,33 @@ exports.Prisma.NodeSyllabusConceptScalarFieldEnum = {
   syllabusConceptId: 'syllabusConceptId',
   addedByUserId: 'addedByUserId',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.UnlockEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  flashcardId: 'flashcardId',
+  contentJobId: 'contentJobId',
+  conceptMatchId: 'conceptMatchId',
+  confidence: 'confidence',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserStatsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalUnlocks: 'totalUnlocks',
+  totalLocked: 'totalLocked',
+  totalMastered: 'totalMastered',
+  unlockRate: 'unlockRate',
+  currentStreak: 'currentStreak',
+  longestStreak: 'longestStreak',
+  lastUnlockDate: 'lastUnlockDate',
+  firstUnlockAt: 'firstUnlockAt',
+  milestone10: 'milestone10',
+  milestone50: 'milestone50',
+  milestone100: 'milestone100',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -364,7 +400,9 @@ exports.Prisma.ModelName = {
   ReviewSession: 'ReviewSession',
   ReviewEvent: 'ReviewEvent',
   KnowledgeNode: 'KnowledgeNode',
-  NodeSyllabusConcept: 'NodeSyllabusConcept'
+  NodeSyllabusConcept: 'NodeSyllabusConcept',
+  UnlockEvent: 'UnlockEvent',
+  UserStats: 'UserStats'
 };
 
 /**

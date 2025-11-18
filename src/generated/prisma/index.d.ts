@@ -98,6 +98,16 @@ export type KnowledgeNode = $Result.DefaultSelection<Prisma.$KnowledgeNodePayloa
  * 
  */
 export type NodeSyllabusConcept = $Result.DefaultSelection<Prisma.$NodeSyllabusConceptPayload>
+/**
+ * Model UnlockEvent
+ * 
+ */
+export type UnlockEvent = $Result.DefaultSelection<Prisma.$UnlockEventPayload>
+/**
+ * Model UserStats
+ * 
+ */
+export type UserStats = $Result.DefaultSelection<Prisma.$UserStatsPayload>
 
 /**
  * Enums
@@ -406,6 +416,26 @@ export class PrismaClient<
     * ```
     */
   get nodeSyllabusConcept(): Prisma.NodeSyllabusConceptDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.unlockEvent`: Exposes CRUD operations for the **UnlockEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UnlockEvents
+    * const unlockEvents = await prisma.unlockEvent.findMany()
+    * ```
+    */
+  get unlockEvent(): Prisma.UnlockEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userStats`: Exposes CRUD operations for the **UserStats** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserStats
+    * const userStats = await prisma.userStats.findMany()
+    * ```
+    */
+  get userStats(): Prisma.UserStatsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -862,7 +892,9 @@ export namespace Prisma {
     ReviewSession: 'ReviewSession',
     ReviewEvent: 'ReviewEvent',
     KnowledgeNode: 'KnowledgeNode',
-    NodeSyllabusConcept: 'NodeSyllabusConcept'
+    NodeSyllabusConcept: 'NodeSyllabusConcept',
+    UnlockEvent: 'UnlockEvent',
+    UserStats: 'UserStats'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -881,7 +913,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "subject" | "course" | "userCourse" | "syllabusConcept" | "contentJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent" | "knowledgeNode" | "nodeSyllabusConcept"
+      modelProps: "user" | "session" | "account" | "verification" | "feedback" | "subject" | "course" | "userCourse" | "syllabusConcept" | "contentJob" | "concept" | "conceptMatch" | "flashcard" | "reviewSession" | "reviewEvent" | "knowledgeNode" | "nodeSyllabusConcept" | "unlockEvent" | "userStats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2143,6 +2175,154 @@ export namespace Prisma {
           }
         }
       }
+      UnlockEvent: {
+        payload: Prisma.$UnlockEventPayload<ExtArgs>
+        fields: Prisma.UnlockEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UnlockEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UnlockEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          findFirst: {
+            args: Prisma.UnlockEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UnlockEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          findMany: {
+            args: Prisma.UnlockEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>[]
+          }
+          create: {
+            args: Prisma.UnlockEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          createMany: {
+            args: Prisma.UnlockEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UnlockEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>[]
+          }
+          delete: {
+            args: Prisma.UnlockEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          update: {
+            args: Prisma.UnlockEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.UnlockEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UnlockEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UnlockEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.UnlockEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UnlockEventPayload>
+          }
+          aggregate: {
+            args: Prisma.UnlockEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUnlockEvent>
+          }
+          groupBy: {
+            args: Prisma.UnlockEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UnlockEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UnlockEventCountArgs<ExtArgs>
+            result: $Utils.Optional<UnlockEventCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserStats: {
+        payload: Prisma.$UserStatsPayload<ExtArgs>
+        fields: Prisma.UserStatsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserStatsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserStatsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          findFirst: {
+            args: Prisma.UserStatsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserStatsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          findMany: {
+            args: Prisma.UserStatsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>[]
+          }
+          create: {
+            args: Prisma.UserStatsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          createMany: {
+            args: Prisma.UserStatsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserStatsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>[]
+          }
+          delete: {
+            args: Prisma.UserStatsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          update: {
+            args: Prisma.UserStatsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserStatsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserStatsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserStatsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserStatsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserStatsPayload>
+          }
+          aggregate: {
+            args: Prisma.UserStatsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserStats>
+          }
+          groupBy: {
+            args: Prisma.UserStatsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserStatsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserStatsCountArgs<ExtArgs>
+            result: $Utils.Optional<UserStatsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2252,6 +2432,8 @@ export namespace Prisma {
     reviewEvent?: ReviewEventOmit
     knowledgeNode?: KnowledgeNodeOmit
     nodeSyllabusConcept?: NodeSyllabusConceptOmit
+    unlockEvent?: UnlockEventOmit
+    userStats?: UserStatsOmit
   }
 
   /* Types for Logging */
@@ -2339,6 +2521,7 @@ export namespace Prisma {
     sessions: number
     userCourses: number
     contentJobs: number
+    unlockEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2349,6 +2532,7 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     userCourses?: boolean | UserCountOutputTypeCountUserCoursesArgs
     contentJobs?: boolean | UserCountOutputTypeCountContentJobsArgs
+    unlockEvents?: boolean | UserCountOutputTypeCountUnlockEventsArgs
   }
 
   // Custom InputTypes
@@ -2409,6 +2593,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountContentJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContentJobWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUnlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnlockEventWhereInput
   }
 
 
@@ -2507,11 +2698,13 @@ export namespace Prisma {
 
   export type SyllabusConceptCountOutputType = {
     conceptMatches: number
+    flashcards: number
     nodeAttachments: number
   }
 
   export type SyllabusConceptCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | SyllabusConceptCountOutputTypeCountConceptMatchesArgs
+    flashcards?: boolean | SyllabusConceptCountOutputTypeCountFlashcardsArgs
     nodeAttachments?: boolean | SyllabusConceptCountOutputTypeCountNodeAttachmentsArgs
   }
 
@@ -2536,6 +2729,13 @@ export namespace Prisma {
   /**
    * SyllabusConceptCountOutputType without action
    */
+  export type SyllabusConceptCountOutputTypeCountFlashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashcardWhereInput
+  }
+
+  /**
+   * SyllabusConceptCountOutputType without action
+   */
   export type SyllabusConceptCountOutputTypeCountNodeAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NodeSyllabusConceptWhereInput
   }
@@ -2547,10 +2747,12 @@ export namespace Prisma {
 
   export type ContentJobCountOutputType = {
     concepts: number
+    unlockEvents: number
   }
 
   export type ContentJobCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     concepts?: boolean | ContentJobCountOutputTypeCountConceptsArgs
+    unlockEvents?: boolean | ContentJobCountOutputTypeCountUnlockEventsArgs
   }
 
   // Custom InputTypes
@@ -2569,6 +2771,13 @@ export namespace Prisma {
    */
   export type ContentJobCountOutputTypeCountConceptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConceptWhereInput
+  }
+
+  /**
+   * ContentJobCountOutputType without action
+   */
+  export type ContentJobCountOutputTypeCountUnlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnlockEventWhereInput
   }
 
 
@@ -2609,10 +2818,12 @@ export namespace Prisma {
 
   export type ConceptMatchCountOutputType = {
     flashcards: number
+    unlockEvents: number
   }
 
   export type ConceptMatchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     flashcards?: boolean | ConceptMatchCountOutputTypeCountFlashcardsArgs
+    unlockEvents?: boolean | ConceptMatchCountOutputTypeCountUnlockEventsArgs
   }
 
   // Custom InputTypes
@@ -2633,6 +2844,13 @@ export namespace Prisma {
     where?: FlashcardWhereInput
   }
 
+  /**
+   * ConceptMatchCountOutputType without action
+   */
+  export type ConceptMatchCountOutputTypeCountUnlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnlockEventWhereInput
+  }
+
 
   /**
    * Count Type FlashcardCountOutputType
@@ -2640,10 +2858,12 @@ export namespace Prisma {
 
   export type FlashcardCountOutputType = {
     reviewEvents: number
+    unlockEvents: number
   }
 
   export type FlashcardCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviewEvents?: boolean | FlashcardCountOutputTypeCountReviewEventsArgs
+    unlockEvents?: boolean | FlashcardCountOutputTypeCountUnlockEventsArgs
   }
 
   // Custom InputTypes
@@ -2662,6 +2882,13 @@ export namespace Prisma {
    */
   export type FlashcardCountOutputTypeCountReviewEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewEventWhereInput
+  }
+
+  /**
+   * FlashcardCountOutputType without action
+   */
+  export type FlashcardCountOutputTypeCountUnlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnlockEventWhereInput
   }
 
 
@@ -2967,6 +3194,8 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
     contentJobs?: boolean | User$contentJobsArgs<ExtArgs>
+    unlockEvents?: boolean | User$unlockEventsArgs<ExtArgs>
+    stats?: boolean | User$statsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3024,6 +3253,8 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     userCourses?: boolean | User$userCoursesArgs<ExtArgs>
     contentJobs?: boolean | User$contentJobsArgs<ExtArgs>
+    unlockEvents?: boolean | User$unlockEventsArgs<ExtArgs>
+    stats?: boolean | User$statsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3039,6 +3270,8 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       userCourses: Prisma.$UserCoursePayload<ExtArgs>[]
       contentJobs: Prisma.$ContentJobPayload<ExtArgs>[]
+      unlockEvents: Prisma.$UnlockEventPayload<ExtArgs>[]
+      stats: Prisma.$UserStatsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3454,6 +3687,8 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userCourses<T extends User$userCoursesArgs<ExtArgs> = {}>(args?: Subset<T, User$userCoursesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contentJobs<T extends User$contentJobsArgs<ExtArgs> = {}>(args?: Subset<T, User$contentJobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    unlockEvents<T extends User$unlockEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$unlockEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stats<T extends User$statsArgs<ExtArgs> = {}>(args?: Subset<T, User$statsArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4048,6 +4283,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContentJobScalarFieldEnum | ContentJobScalarFieldEnum[]
+  }
+
+  /**
+   * User.unlockEvents
+   */
+  export type User$unlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    where?: UnlockEventWhereInput
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    cursor?: UnlockEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.stats
+   */
+  export type User$statsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    where?: UserStatsWhereInput
   }
 
   /**
@@ -12055,6 +12333,7 @@ export namespace Prisma {
     language?: boolean
     createdAt?: boolean
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
+    flashcards?: boolean | SyllabusConcept$flashcardsArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
     nodeAttachments?: boolean | SyllabusConcept$nodeAttachmentsArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
@@ -12098,6 +12377,7 @@ export namespace Prisma {
   export type SyllabusConceptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "conceptText" | "category" | "importance" | "order" | "language" | "createdAt", ExtArgs["result"]["syllabusConcept"]>
   export type SyllabusConceptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conceptMatches?: boolean | SyllabusConcept$conceptMatchesArgs<ExtArgs>
+    flashcards?: boolean | SyllabusConcept$flashcardsArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
     nodeAttachments?: boolean | SyllabusConcept$nodeAttachmentsArgs<ExtArgs>
     _count?: boolean | SyllabusConceptCountOutputTypeDefaultArgs<ExtArgs>
@@ -12113,6 +12393,7 @@ export namespace Prisma {
     name: "SyllabusConcept"
     objects: {
       conceptMatches: Prisma.$ConceptMatchPayload<ExtArgs>[]
+      flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
       course: Prisma.$CoursePayload<ExtArgs>
       nodeAttachments: Prisma.$NodeSyllabusConceptPayload<ExtArgs>[]
     }
@@ -12520,6 +12801,7 @@ export namespace Prisma {
   export interface Prisma__SyllabusConceptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     conceptMatches<T extends SyllabusConcept$conceptMatchesArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$conceptMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flashcards<T extends SyllabusConcept$flashcardsArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     nodeAttachments<T extends SyllabusConcept$nodeAttachmentsArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConcept$nodeAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NodeSyllabusConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -12979,6 +13261,30 @@ export namespace Prisma {
   }
 
   /**
+   * SyllabusConcept.flashcards
+   */
+  export type SyllabusConcept$flashcardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flashcard
+     */
+    select?: FlashcardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Flashcard
+     */
+    omit?: FlashcardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashcardInclude<ExtArgs> | null
+    where?: FlashcardWhereInput
+    orderBy?: FlashcardOrderByWithRelationInput | FlashcardOrderByWithRelationInput[]
+    cursor?: FlashcardWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlashcardScalarFieldEnum | FlashcardScalarFieldEnum[]
+  }
+
+  /**
    * SyllabusConcept.nodeAttachments
    */
   export type SyllabusConcept$nodeAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13308,6 +13614,7 @@ export namespace Prisma {
     createdAt?: boolean
     completedAt?: boolean
     concepts?: boolean | ContentJob$conceptsArgs<ExtArgs>
+    unlockEvents?: boolean | ContentJob$unlockEventsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ContentJobCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contentJob"]>
@@ -13371,6 +13678,7 @@ export namespace Prisma {
   export type ContentJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "url" | "contentType" | "youtubeVideoId" | "tiktokVideoId" | "fileName" | "fileSize" | "pageCount" | "extractedText" | "status" | "processedConceptsCount" | "errorMessage" | "createdAt" | "completedAt", ExtArgs["result"]["contentJob"]>
   export type ContentJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     concepts?: boolean | ContentJob$conceptsArgs<ExtArgs>
+    unlockEvents?: boolean | ContentJob$unlockEventsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ContentJobCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13385,6 +13693,7 @@ export namespace Prisma {
     name: "ContentJob"
     objects: {
       concepts: Prisma.$ConceptPayload<ExtArgs>[]
+      unlockEvents: Prisma.$UnlockEventPayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13798,6 +14107,7 @@ export namespace Prisma {
   export interface Prisma__ContentJobClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     concepts<T extends ContentJob$conceptsArgs<ExtArgs> = {}>(args?: Subset<T, ContentJob$conceptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    unlockEvents<T extends ContentJob$unlockEventsArgs<ExtArgs> = {}>(args?: Subset<T, ContentJob$unlockEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14260,6 +14570,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ConceptScalarFieldEnum | ConceptScalarFieldEnum[]
+  }
+
+  /**
+   * ContentJob.unlockEvents
+   */
+  export type ContentJob$unlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    where?: UnlockEventWhereInput
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    cursor?: UnlockEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
   }
 
   /**
@@ -15667,6 +16001,7 @@ export namespace Prisma {
     concept?: boolean | ConceptDefaultArgs<ExtArgs>
     syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
     flashcards?: boolean | ConceptMatch$flashcardsArgs<ExtArgs>
+    unlockEvents?: boolean | ConceptMatch$unlockEventsArgs<ExtArgs>
     _count?: boolean | ConceptMatchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conceptMatch"]>
 
@@ -15712,6 +16047,7 @@ export namespace Prisma {
     concept?: boolean | ConceptDefaultArgs<ExtArgs>
     syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
     flashcards?: boolean | ConceptMatch$flashcardsArgs<ExtArgs>
+    unlockEvents?: boolean | ConceptMatch$unlockEventsArgs<ExtArgs>
     _count?: boolean | ConceptMatchCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConceptMatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15729,6 +16065,7 @@ export namespace Prisma {
       concept: Prisma.$ConceptPayload<ExtArgs>
       syllabusConcept: Prisma.$SyllabusConceptPayload<ExtArgs>
       flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
+      unlockEvents: Prisma.$UnlockEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16136,6 +16473,7 @@ export namespace Prisma {
     concept<T extends ConceptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConceptDefaultArgs<ExtArgs>>): Prisma__ConceptClient<$Result.GetResult<Prisma.$ConceptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     syllabusConcept<T extends SyllabusConceptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConceptDefaultArgs<ExtArgs>>): Prisma__SyllabusConceptClient<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     flashcards<T extends ConceptMatch$flashcardsArgs<ExtArgs> = {}>(args?: Subset<T, ConceptMatch$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    unlockEvents<T extends ConceptMatch$unlockEventsArgs<ExtArgs> = {}>(args?: Subset<T, ConceptMatch$unlockEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16593,6 +16931,30 @@ export namespace Prisma {
   }
 
   /**
+   * ConceptMatch.unlockEvents
+   */
+  export type ConceptMatch$unlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    where?: UnlockEventWhereInput
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    cursor?: UnlockEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
+  }
+
+  /**
    * ConceptMatch without action
    */
   export type ConceptMatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16624,17 +16986,20 @@ export namespace Prisma {
   }
 
   export type FlashcardAvgAggregateOutputType = {
+    unlockProgress: number | null
     timesReviewed: number | null
     timesCorrect: number | null
   }
 
   export type FlashcardSumAggregateOutputType = {
+    unlockProgress: number | null
     timesReviewed: number | null
     timesCorrect: number | null
   }
 
   export type FlashcardMinAggregateOutputType = {
     id: string | null
+    syllabusConceptId: string | null
     conceptMatchId: string | null
     userId: string | null
     question: string | null
@@ -16642,16 +17007,23 @@ export namespace Prisma {
     questionTranslation: string | null
     answerTranslation: string | null
     language: string | null
+    difficulty: string | null
+    state: string | null
+    unlockedAt: Date | null
+    unlockedBy: string | null
+    unlockProgress: number | null
     sourceTimestamp: string | null
     timesReviewed: number | null
     timesCorrect: number | null
     lastReviewedAt: Date | null
     nextReviewAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FlashcardMaxAggregateOutputType = {
     id: string | null
+    syllabusConceptId: string | null
     conceptMatchId: string | null
     userId: string | null
     question: string | null
@@ -16659,16 +17031,23 @@ export namespace Prisma {
     questionTranslation: string | null
     answerTranslation: string | null
     language: string | null
+    difficulty: string | null
+    state: string | null
+    unlockedAt: Date | null
+    unlockedBy: string | null
+    unlockProgress: number | null
     sourceTimestamp: string | null
     timesReviewed: number | null
     timesCorrect: number | null
     lastReviewedAt: Date | null
     nextReviewAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FlashcardCountAggregateOutputType = {
     id: number
+    syllabusConceptId: number
     conceptMatchId: number
     userId: number
     question: number
@@ -16676,28 +17055,39 @@ export namespace Prisma {
     questionTranslation: number
     answerTranslation: number
     language: number
+    difficulty: number
+    hints: number
+    state: number
+    unlockedAt: number
+    unlockedBy: number
+    unlockProgress: number
+    relatedContentIds: number
     sourceTimestamp: number
     timesReviewed: number
     timesCorrect: number
     lastReviewedAt: number
     nextReviewAt: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type FlashcardAvgAggregateInputType = {
+    unlockProgress?: true
     timesReviewed?: true
     timesCorrect?: true
   }
 
   export type FlashcardSumAggregateInputType = {
+    unlockProgress?: true
     timesReviewed?: true
     timesCorrect?: true
   }
 
   export type FlashcardMinAggregateInputType = {
     id?: true
+    syllabusConceptId?: true
     conceptMatchId?: true
     userId?: true
     question?: true
@@ -16705,16 +17095,23 @@ export namespace Prisma {
     questionTranslation?: true
     answerTranslation?: true
     language?: true
+    difficulty?: true
+    state?: true
+    unlockedAt?: true
+    unlockedBy?: true
+    unlockProgress?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
     lastReviewedAt?: true
     nextReviewAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type FlashcardMaxAggregateInputType = {
     id?: true
+    syllabusConceptId?: true
     conceptMatchId?: true
     userId?: true
     question?: true
@@ -16722,16 +17119,23 @@ export namespace Prisma {
     questionTranslation?: true
     answerTranslation?: true
     language?: true
+    difficulty?: true
+    state?: true
+    unlockedAt?: true
+    unlockedBy?: true
+    unlockProgress?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
     lastReviewedAt?: true
     nextReviewAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type FlashcardCountAggregateInputType = {
     id?: true
+    syllabusConceptId?: true
     conceptMatchId?: true
     userId?: true
     question?: true
@@ -16739,12 +17143,20 @@ export namespace Prisma {
     questionTranslation?: true
     answerTranslation?: true
     language?: true
+    difficulty?: true
+    hints?: true
+    state?: true
+    unlockedAt?: true
+    unlockedBy?: true
+    unlockProgress?: true
+    relatedContentIds?: true
     sourceTimestamp?: true
     timesReviewed?: true
     timesCorrect?: true
     lastReviewedAt?: true
     nextReviewAt?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -16836,19 +17248,28 @@ export namespace Prisma {
 
   export type FlashcardGroupByOutputType = {
     id: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId: string | null
     userId: string
     question: string
-    answer: string
+    answer: string | null
     questionTranslation: string | null
     answerTranslation: string | null
     language: string
+    difficulty: string
+    hints: JsonValue | null
+    state: string
+    unlockedAt: Date | null
+    unlockedBy: string | null
+    unlockProgress: number
+    relatedContentIds: JsonValue | null
     sourceTimestamp: string | null
     timesReviewed: number
     timesCorrect: number
     lastReviewedAt: Date | null
     nextReviewAt: Date | null
     createdAt: Date
+    updatedAt: Date
     _count: FlashcardCountAggregateOutputType | null
     _avg: FlashcardAvgAggregateOutputType | null
     _sum: FlashcardSumAggregateOutputType | null
@@ -16872,6 +17293,7 @@ export namespace Prisma {
 
   export type FlashcardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    syllabusConceptId?: boolean
     conceptMatchId?: boolean
     userId?: boolean
     question?: boolean
@@ -16879,20 +17301,31 @@ export namespace Prisma {
     questionTranslation?: boolean
     answerTranslation?: boolean
     language?: boolean
+    difficulty?: boolean
+    hints?: boolean
+    state?: boolean
+    unlockedAt?: boolean
+    unlockedBy?: boolean
+    unlockProgress?: boolean
+    relatedContentIds?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
     lastReviewedAt?: boolean
     nextReviewAt?: boolean
     createdAt?: boolean
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    updatedAt?: boolean
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     reviewEvents?: boolean | Flashcard$reviewEventsArgs<ExtArgs>
+    unlockEvents?: boolean | Flashcard$unlockEventsArgs<ExtArgs>
     _count?: boolean | FlashcardCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashcard"]>
 
   export type FlashcardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    syllabusConceptId?: boolean
     conceptMatchId?: boolean
     userId?: boolean
     question?: boolean
@@ -16900,18 +17333,28 @@ export namespace Prisma {
     questionTranslation?: boolean
     answerTranslation?: boolean
     language?: boolean
+    difficulty?: boolean
+    hints?: boolean
+    state?: boolean
+    unlockedAt?: boolean
+    unlockedBy?: boolean
+    unlockProgress?: boolean
+    relatedContentIds?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
     lastReviewedAt?: boolean
     nextReviewAt?: boolean
     createdAt?: boolean
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    updatedAt?: boolean
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashcard"]>
 
   export type FlashcardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    syllabusConceptId?: boolean
     conceptMatchId?: boolean
     userId?: boolean
     question?: boolean
@@ -16919,18 +17362,28 @@ export namespace Prisma {
     questionTranslation?: boolean
     answerTranslation?: boolean
     language?: boolean
+    difficulty?: boolean
+    hints?: boolean
+    state?: boolean
+    unlockedAt?: boolean
+    unlockedBy?: boolean
+    unlockProgress?: boolean
+    relatedContentIds?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
     lastReviewedAt?: boolean
     nextReviewAt?: boolean
     createdAt?: boolean
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    updatedAt?: boolean
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flashcard"]>
 
   export type FlashcardSelectScalar = {
     id?: boolean
+    syllabusConceptId?: boolean
     conceptMatchId?: boolean
     userId?: boolean
     question?: boolean
@@ -16938,52 +17391,75 @@ export namespace Prisma {
     questionTranslation?: boolean
     answerTranslation?: boolean
     language?: boolean
+    difficulty?: boolean
+    hints?: boolean
+    state?: boolean
+    unlockedAt?: boolean
+    unlockedBy?: boolean
+    unlockProgress?: boolean
+    relatedContentIds?: boolean
     sourceTimestamp?: boolean
     timesReviewed?: boolean
     timesCorrect?: boolean
     lastReviewedAt?: boolean
     nextReviewAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type FlashcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conceptMatchId" | "userId" | "question" | "answer" | "questionTranslation" | "answerTranslation" | "language" | "sourceTimestamp" | "timesReviewed" | "timesCorrect" | "lastReviewedAt" | "nextReviewAt" | "createdAt", ExtArgs["result"]["flashcard"]>
+  export type FlashcardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "syllabusConceptId" | "conceptMatchId" | "userId" | "question" | "answer" | "questionTranslation" | "answerTranslation" | "language" | "difficulty" | "hints" | "state" | "unlockedAt" | "unlockedBy" | "unlockProgress" | "relatedContentIds" | "sourceTimestamp" | "timesReviewed" | "timesCorrect" | "lastReviewedAt" | "nextReviewAt" | "createdAt" | "updatedAt", ExtArgs["result"]["flashcard"]>
   export type FlashcardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     reviewEvents?: boolean | Flashcard$reviewEventsArgs<ExtArgs>
+    unlockEvents?: boolean | Flashcard$unlockEventsArgs<ExtArgs>
     _count?: boolean | FlashcardCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FlashcardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type FlashcardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+    syllabusConcept?: boolean | SyllabusConceptDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | Flashcard$conceptMatchArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $FlashcardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Flashcard"
     objects: {
-      conceptMatch: Prisma.$ConceptMatchPayload<ExtArgs>
+      syllabusConcept: Prisma.$SyllabusConceptPayload<ExtArgs>
+      conceptMatch: Prisma.$ConceptMatchPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs>
       reviewEvents: Prisma.$ReviewEventPayload<ExtArgs>[]
+      unlockEvents: Prisma.$UnlockEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      conceptMatchId: string
+      syllabusConceptId: string
+      conceptMatchId: string | null
       userId: string
       question: string
-      answer: string
+      answer: string | null
       questionTranslation: string | null
       answerTranslation: string | null
       language: string
+      difficulty: string
+      hints: Prisma.JsonValue | null
+      state: string
+      unlockedAt: Date | null
+      unlockedBy: string | null
+      unlockProgress: number
+      relatedContentIds: Prisma.JsonValue | null
       sourceTimestamp: string | null
       timesReviewed: number
       timesCorrect: number
       lastReviewedAt: Date | null
       nextReviewAt: Date | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["flashcard"]>
     composites: {}
   }
@@ -17378,9 +17854,11 @@ export namespace Prisma {
    */
   export interface Prisma__FlashcardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    conceptMatch<T extends ConceptMatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConceptMatchDefaultArgs<ExtArgs>>): Prisma__ConceptMatchClient<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    syllabusConcept<T extends SyllabusConceptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SyllabusConceptDefaultArgs<ExtArgs>>): Prisma__SyllabusConceptClient<$Result.GetResult<Prisma.$SyllabusConceptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conceptMatch<T extends Flashcard$conceptMatchArgs<ExtArgs> = {}>(args?: Subset<T, Flashcard$conceptMatchArgs<ExtArgs>>): Prisma__ConceptMatchClient<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     reviewEvents<T extends Flashcard$reviewEventsArgs<ExtArgs> = {}>(args?: Subset<T, Flashcard$reviewEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    unlockEvents<T extends Flashcard$unlockEventsArgs<ExtArgs> = {}>(args?: Subset<T, Flashcard$unlockEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17411,6 +17889,7 @@ export namespace Prisma {
    */
   interface FlashcardFieldRefs {
     readonly id: FieldRef<"Flashcard", 'String'>
+    readonly syllabusConceptId: FieldRef<"Flashcard", 'String'>
     readonly conceptMatchId: FieldRef<"Flashcard", 'String'>
     readonly userId: FieldRef<"Flashcard", 'String'>
     readonly question: FieldRef<"Flashcard", 'String'>
@@ -17418,12 +17897,20 @@ export namespace Prisma {
     readonly questionTranslation: FieldRef<"Flashcard", 'String'>
     readonly answerTranslation: FieldRef<"Flashcard", 'String'>
     readonly language: FieldRef<"Flashcard", 'String'>
+    readonly difficulty: FieldRef<"Flashcard", 'String'>
+    readonly hints: FieldRef<"Flashcard", 'Json'>
+    readonly state: FieldRef<"Flashcard", 'String'>
+    readonly unlockedAt: FieldRef<"Flashcard", 'DateTime'>
+    readonly unlockedBy: FieldRef<"Flashcard", 'String'>
+    readonly unlockProgress: FieldRef<"Flashcard", 'Float'>
+    readonly relatedContentIds: FieldRef<"Flashcard", 'Json'>
     readonly sourceTimestamp: FieldRef<"Flashcard", 'String'>
     readonly timesReviewed: FieldRef<"Flashcard", 'Int'>
     readonly timesCorrect: FieldRef<"Flashcard", 'Int'>
     readonly lastReviewedAt: FieldRef<"Flashcard", 'DateTime'>
     readonly nextReviewAt: FieldRef<"Flashcard", 'DateTime'>
     readonly createdAt: FieldRef<"Flashcard", 'DateTime'>
+    readonly updatedAt: FieldRef<"Flashcard", 'DateTime'>
   }
     
 
@@ -17820,6 +18307,25 @@ export namespace Prisma {
   }
 
   /**
+   * Flashcard.conceptMatch
+   */
+  export type Flashcard$conceptMatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConceptMatch
+     */
+    select?: ConceptMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConceptMatch
+     */
+    omit?: ConceptMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConceptMatchInclude<ExtArgs> | null
+    where?: ConceptMatchWhereInput
+  }
+
+  /**
    * Flashcard.reviewEvents
    */
   export type Flashcard$reviewEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17841,6 +18347,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewEventScalarFieldEnum | ReviewEventScalarFieldEnum[]
+  }
+
+  /**
+   * Flashcard.unlockEvents
+   */
+  export type Flashcard$unlockEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    where?: UnlockEventWhereInput
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    cursor?: UnlockEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
   }
 
   /**
@@ -22444,6 +22974,2377 @@ export namespace Prisma {
 
 
   /**
+   * Model UnlockEvent
+   */
+
+  export type AggregateUnlockEvent = {
+    _count: UnlockEventCountAggregateOutputType | null
+    _avg: UnlockEventAvgAggregateOutputType | null
+    _sum: UnlockEventSumAggregateOutputType | null
+    _min: UnlockEventMinAggregateOutputType | null
+    _max: UnlockEventMaxAggregateOutputType | null
+  }
+
+  export type UnlockEventAvgAggregateOutputType = {
+    confidence: number | null
+  }
+
+  export type UnlockEventSumAggregateOutputType = {
+    confidence: number | null
+  }
+
+  export type UnlockEventMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    flashcardId: string | null
+    contentJobId: string | null
+    conceptMatchId: string | null
+    confidence: number | null
+    createdAt: Date | null
+  }
+
+  export type UnlockEventMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    flashcardId: string | null
+    contentJobId: string | null
+    conceptMatchId: string | null
+    confidence: number | null
+    createdAt: Date | null
+  }
+
+  export type UnlockEventCountAggregateOutputType = {
+    id: number
+    userId: number
+    flashcardId: number
+    contentJobId: number
+    conceptMatchId: number
+    confidence: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type UnlockEventAvgAggregateInputType = {
+    confidence?: true
+  }
+
+  export type UnlockEventSumAggregateInputType = {
+    confidence?: true
+  }
+
+  export type UnlockEventMinAggregateInputType = {
+    id?: true
+    userId?: true
+    flashcardId?: true
+    contentJobId?: true
+    conceptMatchId?: true
+    confidence?: true
+    createdAt?: true
+  }
+
+  export type UnlockEventMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    flashcardId?: true
+    contentJobId?: true
+    conceptMatchId?: true
+    confidence?: true
+    createdAt?: true
+  }
+
+  export type UnlockEventCountAggregateInputType = {
+    id?: true
+    userId?: true
+    flashcardId?: true
+    contentJobId?: true
+    conceptMatchId?: true
+    confidence?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type UnlockEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UnlockEvent to aggregate.
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnlockEvents to fetch.
+     */
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UnlockEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnlockEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnlockEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UnlockEvents
+    **/
+    _count?: true | UnlockEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UnlockEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UnlockEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UnlockEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UnlockEventMaxAggregateInputType
+  }
+
+  export type GetUnlockEventAggregateType<T extends UnlockEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateUnlockEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUnlockEvent[P]>
+      : GetScalarType<T[P], AggregateUnlockEvent[P]>
+  }
+
+
+
+
+  export type UnlockEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UnlockEventWhereInput
+    orderBy?: UnlockEventOrderByWithAggregationInput | UnlockEventOrderByWithAggregationInput[]
+    by: UnlockEventScalarFieldEnum[] | UnlockEventScalarFieldEnum
+    having?: UnlockEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UnlockEventCountAggregateInputType | true
+    _avg?: UnlockEventAvgAggregateInputType
+    _sum?: UnlockEventSumAggregateInputType
+    _min?: UnlockEventMinAggregateInputType
+    _max?: UnlockEventMaxAggregateInputType
+  }
+
+  export type UnlockEventGroupByOutputType = {
+    id: string
+    userId: string
+    flashcardId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt: Date
+    _count: UnlockEventCountAggregateOutputType | null
+    _avg: UnlockEventAvgAggregateOutputType | null
+    _sum: UnlockEventSumAggregateOutputType | null
+    _min: UnlockEventMinAggregateOutputType | null
+    _max: UnlockEventMaxAggregateOutputType | null
+  }
+
+  type GetUnlockEventGroupByPayload<T extends UnlockEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UnlockEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UnlockEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UnlockEventGroupByOutputType[P]>
+            : GetScalarType<T[P], UnlockEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UnlockEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    flashcardId?: boolean
+    contentJobId?: boolean
+    conceptMatchId?: boolean
+    confidence?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["unlockEvent"]>
+
+  export type UnlockEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    flashcardId?: boolean
+    contentJobId?: boolean
+    conceptMatchId?: boolean
+    confidence?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["unlockEvent"]>
+
+  export type UnlockEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    flashcardId?: boolean
+    contentJobId?: boolean
+    conceptMatchId?: boolean
+    confidence?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["unlockEvent"]>
+
+  export type UnlockEventSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    flashcardId?: boolean
+    contentJobId?: boolean
+    conceptMatchId?: boolean
+    confidence?: boolean
+    createdAt?: boolean
+  }
+
+  export type UnlockEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "flashcardId" | "contentJobId" | "conceptMatchId" | "confidence" | "createdAt", ExtArgs["result"]["unlockEvent"]>
+  export type UnlockEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }
+  export type UnlockEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }
+  export type UnlockEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    flashcard?: boolean | FlashcardDefaultArgs<ExtArgs>
+    contentJob?: boolean | ContentJobDefaultArgs<ExtArgs>
+    conceptMatch?: boolean | ConceptMatchDefaultArgs<ExtArgs>
+  }
+
+  export type $UnlockEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UnlockEvent"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      flashcard: Prisma.$FlashcardPayload<ExtArgs>
+      contentJob: Prisma.$ContentJobPayload<ExtArgs>
+      conceptMatch: Prisma.$ConceptMatchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      flashcardId: string
+      contentJobId: string
+      conceptMatchId: string
+      confidence: number
+      createdAt: Date
+    }, ExtArgs["result"]["unlockEvent"]>
+    composites: {}
+  }
+
+  type UnlockEventGetPayload<S extends boolean | null | undefined | UnlockEventDefaultArgs> = $Result.GetResult<Prisma.$UnlockEventPayload, S>
+
+  type UnlockEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UnlockEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UnlockEventCountAggregateInputType | true
+    }
+
+  export interface UnlockEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UnlockEvent'], meta: { name: 'UnlockEvent' } }
+    /**
+     * Find zero or one UnlockEvent that matches the filter.
+     * @param {UnlockEventFindUniqueArgs} args - Arguments to find a UnlockEvent
+     * @example
+     * // Get one UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UnlockEventFindUniqueArgs>(args: SelectSubset<T, UnlockEventFindUniqueArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UnlockEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UnlockEventFindUniqueOrThrowArgs} args - Arguments to find a UnlockEvent
+     * @example
+     * // Get one UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UnlockEventFindUniqueOrThrowArgs>(args: SelectSubset<T, UnlockEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UnlockEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventFindFirstArgs} args - Arguments to find a UnlockEvent
+     * @example
+     * // Get one UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UnlockEventFindFirstArgs>(args?: SelectSubset<T, UnlockEventFindFirstArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UnlockEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventFindFirstOrThrowArgs} args - Arguments to find a UnlockEvent
+     * @example
+     * // Get one UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UnlockEventFindFirstOrThrowArgs>(args?: SelectSubset<T, UnlockEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UnlockEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UnlockEvents
+     * const unlockEvents = await prisma.unlockEvent.findMany()
+     * 
+     * // Get first 10 UnlockEvents
+     * const unlockEvents = await prisma.unlockEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const unlockEventWithIdOnly = await prisma.unlockEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UnlockEventFindManyArgs>(args?: SelectSubset<T, UnlockEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UnlockEvent.
+     * @param {UnlockEventCreateArgs} args - Arguments to create a UnlockEvent.
+     * @example
+     * // Create one UnlockEvent
+     * const UnlockEvent = await prisma.unlockEvent.create({
+     *   data: {
+     *     // ... data to create a UnlockEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends UnlockEventCreateArgs>(args: SelectSubset<T, UnlockEventCreateArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UnlockEvents.
+     * @param {UnlockEventCreateManyArgs} args - Arguments to create many UnlockEvents.
+     * @example
+     * // Create many UnlockEvents
+     * const unlockEvent = await prisma.unlockEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UnlockEventCreateManyArgs>(args?: SelectSubset<T, UnlockEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UnlockEvents and returns the data saved in the database.
+     * @param {UnlockEventCreateManyAndReturnArgs} args - Arguments to create many UnlockEvents.
+     * @example
+     * // Create many UnlockEvents
+     * const unlockEvent = await prisma.unlockEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UnlockEvents and only return the `id`
+     * const unlockEventWithIdOnly = await prisma.unlockEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UnlockEventCreateManyAndReturnArgs>(args?: SelectSubset<T, UnlockEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UnlockEvent.
+     * @param {UnlockEventDeleteArgs} args - Arguments to delete one UnlockEvent.
+     * @example
+     * // Delete one UnlockEvent
+     * const UnlockEvent = await prisma.unlockEvent.delete({
+     *   where: {
+     *     // ... filter to delete one UnlockEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UnlockEventDeleteArgs>(args: SelectSubset<T, UnlockEventDeleteArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UnlockEvent.
+     * @param {UnlockEventUpdateArgs} args - Arguments to update one UnlockEvent.
+     * @example
+     * // Update one UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UnlockEventUpdateArgs>(args: SelectSubset<T, UnlockEventUpdateArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UnlockEvents.
+     * @param {UnlockEventDeleteManyArgs} args - Arguments to filter UnlockEvents to delete.
+     * @example
+     * // Delete a few UnlockEvents
+     * const { count } = await prisma.unlockEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UnlockEventDeleteManyArgs>(args?: SelectSubset<T, UnlockEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UnlockEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UnlockEvents
+     * const unlockEvent = await prisma.unlockEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UnlockEventUpdateManyArgs>(args: SelectSubset<T, UnlockEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UnlockEvents and returns the data updated in the database.
+     * @param {UnlockEventUpdateManyAndReturnArgs} args - Arguments to update many UnlockEvents.
+     * @example
+     * // Update many UnlockEvents
+     * const unlockEvent = await prisma.unlockEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UnlockEvents and only return the `id`
+     * const unlockEventWithIdOnly = await prisma.unlockEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UnlockEventUpdateManyAndReturnArgs>(args: SelectSubset<T, UnlockEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UnlockEvent.
+     * @param {UnlockEventUpsertArgs} args - Arguments to update or create a UnlockEvent.
+     * @example
+     * // Update or create a UnlockEvent
+     * const unlockEvent = await prisma.unlockEvent.upsert({
+     *   create: {
+     *     // ... data to create a UnlockEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UnlockEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UnlockEventUpsertArgs>(args: SelectSubset<T, UnlockEventUpsertArgs<ExtArgs>>): Prisma__UnlockEventClient<$Result.GetResult<Prisma.$UnlockEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UnlockEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventCountArgs} args - Arguments to filter UnlockEvents to count.
+     * @example
+     * // Count the number of UnlockEvents
+     * const count = await prisma.unlockEvent.count({
+     *   where: {
+     *     // ... the filter for the UnlockEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends UnlockEventCountArgs>(
+      args?: Subset<T, UnlockEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UnlockEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UnlockEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UnlockEventAggregateArgs>(args: Subset<T, UnlockEventAggregateArgs>): Prisma.PrismaPromise<GetUnlockEventAggregateType<T>>
+
+    /**
+     * Group by UnlockEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UnlockEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UnlockEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UnlockEventGroupByArgs['orderBy'] }
+        : { orderBy?: UnlockEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UnlockEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUnlockEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UnlockEvent model
+   */
+  readonly fields: UnlockEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UnlockEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UnlockEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    flashcard<T extends FlashcardDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FlashcardDefaultArgs<ExtArgs>>): Prisma__FlashcardClient<$Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contentJob<T extends ContentJobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContentJobDefaultArgs<ExtArgs>>): Prisma__ContentJobClient<$Result.GetResult<Prisma.$ContentJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conceptMatch<T extends ConceptMatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConceptMatchDefaultArgs<ExtArgs>>): Prisma__ConceptMatchClient<$Result.GetResult<Prisma.$ConceptMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UnlockEvent model
+   */
+  interface UnlockEventFieldRefs {
+    readonly id: FieldRef<"UnlockEvent", 'String'>
+    readonly userId: FieldRef<"UnlockEvent", 'String'>
+    readonly flashcardId: FieldRef<"UnlockEvent", 'String'>
+    readonly contentJobId: FieldRef<"UnlockEvent", 'String'>
+    readonly conceptMatchId: FieldRef<"UnlockEvent", 'String'>
+    readonly confidence: FieldRef<"UnlockEvent", 'Float'>
+    readonly createdAt: FieldRef<"UnlockEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UnlockEvent findUnique
+   */
+  export type UnlockEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UnlockEvent to fetch.
+     */
+    where: UnlockEventWhereUniqueInput
+  }
+
+  /**
+   * UnlockEvent findUniqueOrThrow
+   */
+  export type UnlockEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UnlockEvent to fetch.
+     */
+    where: UnlockEventWhereUniqueInput
+  }
+
+  /**
+   * UnlockEvent findFirst
+   */
+  export type UnlockEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UnlockEvent to fetch.
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnlockEvents to fetch.
+     */
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UnlockEvents.
+     */
+    cursor?: UnlockEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnlockEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnlockEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UnlockEvents.
+     */
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
+  }
+
+  /**
+   * UnlockEvent findFirstOrThrow
+   */
+  export type UnlockEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UnlockEvent to fetch.
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnlockEvents to fetch.
+     */
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UnlockEvents.
+     */
+    cursor?: UnlockEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnlockEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnlockEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UnlockEvents.
+     */
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
+  }
+
+  /**
+   * UnlockEvent findMany
+   */
+  export type UnlockEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter, which UnlockEvents to fetch.
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UnlockEvents to fetch.
+     */
+    orderBy?: UnlockEventOrderByWithRelationInput | UnlockEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UnlockEvents.
+     */
+    cursor?: UnlockEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UnlockEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UnlockEvents.
+     */
+    skip?: number
+    distinct?: UnlockEventScalarFieldEnum | UnlockEventScalarFieldEnum[]
+  }
+
+  /**
+   * UnlockEvent create
+   */
+  export type UnlockEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UnlockEvent.
+     */
+    data: XOR<UnlockEventCreateInput, UnlockEventUncheckedCreateInput>
+  }
+
+  /**
+   * UnlockEvent createMany
+   */
+  export type UnlockEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UnlockEvents.
+     */
+    data: UnlockEventCreateManyInput | UnlockEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UnlockEvent createManyAndReturn
+   */
+  export type UnlockEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many UnlockEvents.
+     */
+    data: UnlockEventCreateManyInput | UnlockEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UnlockEvent update
+   */
+  export type UnlockEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UnlockEvent.
+     */
+    data: XOR<UnlockEventUpdateInput, UnlockEventUncheckedUpdateInput>
+    /**
+     * Choose, which UnlockEvent to update.
+     */
+    where: UnlockEventWhereUniqueInput
+  }
+
+  /**
+   * UnlockEvent updateMany
+   */
+  export type UnlockEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UnlockEvents.
+     */
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyInput>
+    /**
+     * Filter which UnlockEvents to update
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * Limit how many UnlockEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UnlockEvent updateManyAndReturn
+   */
+  export type UnlockEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * The data used to update UnlockEvents.
+     */
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyInput>
+    /**
+     * Filter which UnlockEvents to update
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * Limit how many UnlockEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UnlockEvent upsert
+   */
+  export type UnlockEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UnlockEvent to update in case it exists.
+     */
+    where: UnlockEventWhereUniqueInput
+    /**
+     * In case the UnlockEvent found by the `where` argument doesn't exist, create a new UnlockEvent with this data.
+     */
+    create: XOR<UnlockEventCreateInput, UnlockEventUncheckedCreateInput>
+    /**
+     * In case the UnlockEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UnlockEventUpdateInput, UnlockEventUncheckedUpdateInput>
+  }
+
+  /**
+   * UnlockEvent delete
+   */
+  export type UnlockEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+    /**
+     * Filter which UnlockEvent to delete.
+     */
+    where: UnlockEventWhereUniqueInput
+  }
+
+  /**
+   * UnlockEvent deleteMany
+   */
+  export type UnlockEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UnlockEvents to delete
+     */
+    where?: UnlockEventWhereInput
+    /**
+     * Limit how many UnlockEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UnlockEvent without action
+   */
+  export type UnlockEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UnlockEvent
+     */
+    select?: UnlockEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UnlockEvent
+     */
+    omit?: UnlockEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UnlockEventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserStats
+   */
+
+  export type AggregateUserStats = {
+    _count: UserStatsCountAggregateOutputType | null
+    _avg: UserStatsAvgAggregateOutputType | null
+    _sum: UserStatsSumAggregateOutputType | null
+    _min: UserStatsMinAggregateOutputType | null
+    _max: UserStatsMaxAggregateOutputType | null
+  }
+
+  export type UserStatsAvgAggregateOutputType = {
+    totalUnlocks: number | null
+    totalLocked: number | null
+    totalMastered: number | null
+    unlockRate: number | null
+    currentStreak: number | null
+    longestStreak: number | null
+  }
+
+  export type UserStatsSumAggregateOutputType = {
+    totalUnlocks: number | null
+    totalLocked: number | null
+    totalMastered: number | null
+    unlockRate: number | null
+    currentStreak: number | null
+    longestStreak: number | null
+  }
+
+  export type UserStatsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalUnlocks: number | null
+    totalLocked: number | null
+    totalMastered: number | null
+    unlockRate: number | null
+    currentStreak: number | null
+    longestStreak: number | null
+    lastUnlockDate: Date | null
+    firstUnlockAt: Date | null
+    milestone10: Date | null
+    milestone50: Date | null
+    milestone100: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserStatsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalUnlocks: number | null
+    totalLocked: number | null
+    totalMastered: number | null
+    unlockRate: number | null
+    currentStreak: number | null
+    longestStreak: number | null
+    lastUnlockDate: Date | null
+    firstUnlockAt: Date | null
+    milestone10: Date | null
+    milestone50: Date | null
+    milestone100: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserStatsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalUnlocks: number
+    totalLocked: number
+    totalMastered: number
+    unlockRate: number
+    currentStreak: number
+    longestStreak: number
+    lastUnlockDate: number
+    firstUnlockAt: number
+    milestone10: number
+    milestone50: number
+    milestone100: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserStatsAvgAggregateInputType = {
+    totalUnlocks?: true
+    totalLocked?: true
+    totalMastered?: true
+    unlockRate?: true
+    currentStreak?: true
+    longestStreak?: true
+  }
+
+  export type UserStatsSumAggregateInputType = {
+    totalUnlocks?: true
+    totalLocked?: true
+    totalMastered?: true
+    unlockRate?: true
+    currentStreak?: true
+    longestStreak?: true
+  }
+
+  export type UserStatsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalUnlocks?: true
+    totalLocked?: true
+    totalMastered?: true
+    unlockRate?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastUnlockDate?: true
+    firstUnlockAt?: true
+    milestone10?: true
+    milestone50?: true
+    milestone100?: true
+    updatedAt?: true
+  }
+
+  export type UserStatsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalUnlocks?: true
+    totalLocked?: true
+    totalMastered?: true
+    unlockRate?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastUnlockDate?: true
+    firstUnlockAt?: true
+    milestone10?: true
+    milestone50?: true
+    milestone100?: true
+    updatedAt?: true
+  }
+
+  export type UserStatsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalUnlocks?: true
+    totalLocked?: true
+    totalMastered?: true
+    unlockRate?: true
+    currentStreak?: true
+    longestStreak?: true
+    lastUnlockDate?: true
+    firstUnlockAt?: true
+    milestone10?: true
+    milestone50?: true
+    milestone100?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserStatsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStats to aggregate.
+     */
+    where?: UserStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStats to fetch.
+     */
+    orderBy?: UserStatsOrderByWithRelationInput | UserStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserStats
+    **/
+    _count?: true | UserStatsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserStatsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserStatsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserStatsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserStatsMaxAggregateInputType
+  }
+
+  export type GetUserStatsAggregateType<T extends UserStatsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserStats]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserStats[P]>
+      : GetScalarType<T[P], AggregateUserStats[P]>
+  }
+
+
+
+
+  export type UserStatsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserStatsWhereInput
+    orderBy?: UserStatsOrderByWithAggregationInput | UserStatsOrderByWithAggregationInput[]
+    by: UserStatsScalarFieldEnum[] | UserStatsScalarFieldEnum
+    having?: UserStatsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserStatsCountAggregateInputType | true
+    _avg?: UserStatsAvgAggregateInputType
+    _sum?: UserStatsSumAggregateInputType
+    _min?: UserStatsMinAggregateInputType
+    _max?: UserStatsMaxAggregateInputType
+  }
+
+  export type UserStatsGroupByOutputType = {
+    id: string
+    userId: string
+    totalUnlocks: number
+    totalLocked: number
+    totalMastered: number
+    unlockRate: number
+    currentStreak: number
+    longestStreak: number
+    lastUnlockDate: Date | null
+    firstUnlockAt: Date | null
+    milestone10: Date | null
+    milestone50: Date | null
+    milestone100: Date | null
+    updatedAt: Date
+    _count: UserStatsCountAggregateOutputType | null
+    _avg: UserStatsAvgAggregateOutputType | null
+    _sum: UserStatsSumAggregateOutputType | null
+    _min: UserStatsMinAggregateOutputType | null
+    _max: UserStatsMaxAggregateOutputType | null
+  }
+
+  type GetUserStatsGroupByPayload<T extends UserStatsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserStatsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserStatsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserStatsGroupByOutputType[P]>
+            : GetScalarType<T[P], UserStatsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserStatsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalUnlocks?: boolean
+    totalLocked?: boolean
+    totalMastered?: boolean
+    unlockRate?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastUnlockDate?: boolean
+    firstUnlockAt?: boolean
+    milestone10?: boolean
+    milestone50?: boolean
+    milestone100?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStats"]>
+
+  export type UserStatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalUnlocks?: boolean
+    totalLocked?: boolean
+    totalMastered?: boolean
+    unlockRate?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastUnlockDate?: boolean
+    firstUnlockAt?: boolean
+    milestone10?: boolean
+    milestone50?: boolean
+    milestone100?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStats"]>
+
+  export type UserStatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalUnlocks?: boolean
+    totalLocked?: boolean
+    totalMastered?: boolean
+    unlockRate?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastUnlockDate?: boolean
+    firstUnlockAt?: boolean
+    milestone10?: boolean
+    milestone50?: boolean
+    milestone100?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userStats"]>
+
+  export type UserStatsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalUnlocks?: boolean
+    totalLocked?: boolean
+    totalMastered?: boolean
+    unlockRate?: boolean
+    currentStreak?: boolean
+    longestStreak?: boolean
+    lastUnlockDate?: boolean
+    firstUnlockAt?: boolean
+    milestone10?: boolean
+    milestone50?: boolean
+    milestone100?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalUnlocks" | "totalLocked" | "totalMastered" | "unlockRate" | "currentStreak" | "longestStreak" | "lastUnlockDate" | "firstUnlockAt" | "milestone10" | "milestone50" | "milestone100" | "updatedAt", ExtArgs["result"]["userStats"]>
+  export type UserStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserStatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserStats"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalUnlocks: number
+      totalLocked: number
+      totalMastered: number
+      unlockRate: number
+      currentStreak: number
+      longestStreak: number
+      lastUnlockDate: Date | null
+      firstUnlockAt: Date | null
+      milestone10: Date | null
+      milestone50: Date | null
+      milestone100: Date | null
+      updatedAt: Date
+    }, ExtArgs["result"]["userStats"]>
+    composites: {}
+  }
+
+  type UserStatsGetPayload<S extends boolean | null | undefined | UserStatsDefaultArgs> = $Result.GetResult<Prisma.$UserStatsPayload, S>
+
+  type UserStatsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserStatsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserStatsCountAggregateInputType | true
+    }
+
+  export interface UserStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserStats'], meta: { name: 'UserStats' } }
+    /**
+     * Find zero or one UserStats that matches the filter.
+     * @param {UserStatsFindUniqueArgs} args - Arguments to find a UserStats
+     * @example
+     * // Get one UserStats
+     * const userStats = await prisma.userStats.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserStatsFindUniqueArgs>(args: SelectSubset<T, UserStatsFindUniqueArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserStats that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserStatsFindUniqueOrThrowArgs} args - Arguments to find a UserStats
+     * @example
+     * // Get one UserStats
+     * const userStats = await prisma.userStats.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, UserStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsFindFirstArgs} args - Arguments to find a UserStats
+     * @example
+     * // Get one UserStats
+     * const userStats = await prisma.userStats.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserStatsFindFirstArgs>(args?: SelectSubset<T, UserStatsFindFirstArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserStats that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsFindFirstOrThrowArgs} args - Arguments to find a UserStats
+     * @example
+     * // Get one UserStats
+     * const userStats = await prisma.userStats.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, UserStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserStats
+     * const userStats = await prisma.userStats.findMany()
+     * 
+     * // Get first 10 UserStats
+     * const userStats = await prisma.userStats.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userStatsWithIdOnly = await prisma.userStats.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserStatsFindManyArgs>(args?: SelectSubset<T, UserStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserStats.
+     * @param {UserStatsCreateArgs} args - Arguments to create a UserStats.
+     * @example
+     * // Create one UserStats
+     * const UserStats = await prisma.userStats.create({
+     *   data: {
+     *     // ... data to create a UserStats
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserStatsCreateArgs>(args: SelectSubset<T, UserStatsCreateArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserStats.
+     * @param {UserStatsCreateManyArgs} args - Arguments to create many UserStats.
+     * @example
+     * // Create many UserStats
+     * const userStats = await prisma.userStats.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserStatsCreateManyArgs>(args?: SelectSubset<T, UserStatsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserStats and returns the data saved in the database.
+     * @param {UserStatsCreateManyAndReturnArgs} args - Arguments to create many UserStats.
+     * @example
+     * // Create many UserStats
+     * const userStats = await prisma.userStats.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserStats and only return the `id`
+     * const userStatsWithIdOnly = await prisma.userStats.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, UserStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserStats.
+     * @param {UserStatsDeleteArgs} args - Arguments to delete one UserStats.
+     * @example
+     * // Delete one UserStats
+     * const UserStats = await prisma.userStats.delete({
+     *   where: {
+     *     // ... filter to delete one UserStats
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserStatsDeleteArgs>(args: SelectSubset<T, UserStatsDeleteArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserStats.
+     * @param {UserStatsUpdateArgs} args - Arguments to update one UserStats.
+     * @example
+     * // Update one UserStats
+     * const userStats = await prisma.userStats.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserStatsUpdateArgs>(args: SelectSubset<T, UserStatsUpdateArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserStats.
+     * @param {UserStatsDeleteManyArgs} args - Arguments to filter UserStats to delete.
+     * @example
+     * // Delete a few UserStats
+     * const { count } = await prisma.userStats.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserStatsDeleteManyArgs>(args?: SelectSubset<T, UserStatsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserStats
+     * const userStats = await prisma.userStats.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserStatsUpdateManyArgs>(args: SelectSubset<T, UserStatsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserStats and returns the data updated in the database.
+     * @param {UserStatsUpdateManyAndReturnArgs} args - Arguments to update many UserStats.
+     * @example
+     * // Update many UserStats
+     * const userStats = await prisma.userStats.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserStats and only return the `id`
+     * const userStatsWithIdOnly = await prisma.userStats.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, UserStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserStats.
+     * @param {UserStatsUpsertArgs} args - Arguments to update or create a UserStats.
+     * @example
+     * // Update or create a UserStats
+     * const userStats = await prisma.userStats.upsert({
+     *   create: {
+     *     // ... data to create a UserStats
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserStats we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserStatsUpsertArgs>(args: SelectSubset<T, UserStatsUpsertArgs<ExtArgs>>): Prisma__UserStatsClient<$Result.GetResult<Prisma.$UserStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsCountArgs} args - Arguments to filter UserStats to count.
+     * @example
+     * // Count the number of UserStats
+     * const count = await prisma.userStats.count({
+     *   where: {
+     *     // ... the filter for the UserStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserStatsCountArgs>(
+      args?: Subset<T, UserStatsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserStatsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserStatsAggregateArgs>(args: Subset<T, UserStatsAggregateArgs>): Prisma.PrismaPromise<GetUserStatsAggregateType<T>>
+
+    /**
+     * Group by UserStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserStatsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserStatsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserStatsGroupByArgs['orderBy'] }
+        : { orderBy?: UserStatsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserStatsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserStatsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserStats model
+   */
+  readonly fields: UserStatsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserStats.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserStats model
+   */
+  interface UserStatsFieldRefs {
+    readonly id: FieldRef<"UserStats", 'String'>
+    readonly userId: FieldRef<"UserStats", 'String'>
+    readonly totalUnlocks: FieldRef<"UserStats", 'Int'>
+    readonly totalLocked: FieldRef<"UserStats", 'Int'>
+    readonly totalMastered: FieldRef<"UserStats", 'Int'>
+    readonly unlockRate: FieldRef<"UserStats", 'Float'>
+    readonly currentStreak: FieldRef<"UserStats", 'Int'>
+    readonly longestStreak: FieldRef<"UserStats", 'Int'>
+    readonly lastUnlockDate: FieldRef<"UserStats", 'DateTime'>
+    readonly firstUnlockAt: FieldRef<"UserStats", 'DateTime'>
+    readonly milestone10: FieldRef<"UserStats", 'DateTime'>
+    readonly milestone50: FieldRef<"UserStats", 'DateTime'>
+    readonly milestone100: FieldRef<"UserStats", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserStats", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserStats findUnique
+   */
+  export type UserStatsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStats to fetch.
+     */
+    where: UserStatsWhereUniqueInput
+  }
+
+  /**
+   * UserStats findUniqueOrThrow
+   */
+  export type UserStatsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStats to fetch.
+     */
+    where: UserStatsWhereUniqueInput
+  }
+
+  /**
+   * UserStats findFirst
+   */
+  export type UserStatsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStats to fetch.
+     */
+    where?: UserStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStats to fetch.
+     */
+    orderBy?: UserStatsOrderByWithRelationInput | UserStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStats.
+     */
+    cursor?: UserStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStats.
+     */
+    distinct?: UserStatsScalarFieldEnum | UserStatsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStats findFirstOrThrow
+   */
+  export type UserStatsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStats to fetch.
+     */
+    where?: UserStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStats to fetch.
+     */
+    orderBy?: UserStatsOrderByWithRelationInput | UserStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserStats.
+     */
+    cursor?: UserStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserStats.
+     */
+    distinct?: UserStatsScalarFieldEnum | UserStatsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStats findMany
+   */
+  export type UserStatsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserStats to fetch.
+     */
+    where?: UserStatsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserStats to fetch.
+     */
+    orderBy?: UserStatsOrderByWithRelationInput | UserStatsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserStats.
+     */
+    cursor?: UserStatsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserStats.
+     */
+    skip?: number
+    distinct?: UserStatsScalarFieldEnum | UserStatsScalarFieldEnum[]
+  }
+
+  /**
+   * UserStats create
+   */
+  export type UserStatsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserStats.
+     */
+    data: XOR<UserStatsCreateInput, UserStatsUncheckedCreateInput>
+  }
+
+  /**
+   * UserStats createMany
+   */
+  export type UserStatsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserStats.
+     */
+    data: UserStatsCreateManyInput | UserStatsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserStats createManyAndReturn
+   */
+  export type UserStatsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserStats.
+     */
+    data: UserStatsCreateManyInput | UserStatsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStats update
+   */
+  export type UserStatsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserStats.
+     */
+    data: XOR<UserStatsUpdateInput, UserStatsUncheckedUpdateInput>
+    /**
+     * Choose, which UserStats to update.
+     */
+    where: UserStatsWhereUniqueInput
+  }
+
+  /**
+   * UserStats updateMany
+   */
+  export type UserStatsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserStats.
+     */
+    data: XOR<UserStatsUpdateManyMutationInput, UserStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStats to update
+     */
+    where?: UserStatsWhereInput
+    /**
+     * Limit how many UserStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStats updateManyAndReturn
+   */
+  export type UserStatsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * The data used to update UserStats.
+     */
+    data: XOR<UserStatsUpdateManyMutationInput, UserStatsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserStats to update
+     */
+    where?: UserStatsWhereInput
+    /**
+     * Limit how many UserStats to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserStats upsert
+   */
+  export type UserStatsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserStats to update in case it exists.
+     */
+    where: UserStatsWhereUniqueInput
+    /**
+     * In case the UserStats found by the `where` argument doesn't exist, create a new UserStats with this data.
+     */
+    create: XOR<UserStatsCreateInput, UserStatsUncheckedCreateInput>
+    /**
+     * In case the UserStats was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserStatsUpdateInput, UserStatsUncheckedUpdateInput>
+  }
+
+  /**
+   * UserStats delete
+   */
+  export type UserStatsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+    /**
+     * Filter which UserStats to delete.
+     */
+    where: UserStatsWhereUniqueInput
+  }
+
+  /**
+   * UserStats deleteMany
+   */
+  export type UserStatsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserStats to delete
+     */
+    where?: UserStatsWhereInput
+    /**
+     * Limit how many UserStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserStats without action
+   */
+  export type UserStatsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserStats
+     */
+    select?: UserStatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserStats
+     */
+    omit?: UserStatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserStatsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22632,6 +25533,7 @@ export namespace Prisma {
 
   export const FlashcardScalarFieldEnum: {
     id: 'id',
+    syllabusConceptId: 'syllabusConceptId',
     conceptMatchId: 'conceptMatchId',
     userId: 'userId',
     question: 'question',
@@ -22639,12 +25541,20 @@ export namespace Prisma {
     questionTranslation: 'questionTranslation',
     answerTranslation: 'answerTranslation',
     language: 'language',
+    difficulty: 'difficulty',
+    hints: 'hints',
+    state: 'state',
+    unlockedAt: 'unlockedAt',
+    unlockedBy: 'unlockedBy',
+    unlockProgress: 'unlockProgress',
+    relatedContentIds: 'relatedContentIds',
     sourceTimestamp: 'sourceTimestamp',
     timesReviewed: 'timesReviewed',
     timesCorrect: 'timesCorrect',
     lastReviewedAt: 'lastReviewedAt',
     nextReviewAt: 'nextReviewAt',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum]
@@ -22700,6 +25610,39 @@ export namespace Prisma {
   };
 
   export type NodeSyllabusConceptScalarFieldEnum = (typeof NodeSyllabusConceptScalarFieldEnum)[keyof typeof NodeSyllabusConceptScalarFieldEnum]
+
+
+  export const UnlockEventScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    flashcardId: 'flashcardId',
+    contentJobId: 'contentJobId',
+    conceptMatchId: 'conceptMatchId',
+    confidence: 'confidence',
+    createdAt: 'createdAt'
+  };
+
+  export type UnlockEventScalarFieldEnum = (typeof UnlockEventScalarFieldEnum)[keyof typeof UnlockEventScalarFieldEnum]
+
+
+  export const UserStatsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalUnlocks: 'totalUnlocks',
+    totalLocked: 'totalLocked',
+    totalMastered: 'totalMastered',
+    unlockRate: 'unlockRate',
+    currentStreak: 'currentStreak',
+    longestStreak: 'longestStreak',
+    lastUnlockDate: 'lastUnlockDate',
+    firstUnlockAt: 'firstUnlockAt',
+    milestone10: 'milestone10',
+    milestone50: 'milestone50',
+    milestone100: 'milestone100',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserStatsScalarFieldEnum = (typeof UserStatsScalarFieldEnum)[keyof typeof UserStatsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -22865,6 +25808,8 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
     contentJobs?: ContentJobListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
+    stats?: XOR<UserStatsNullableScalarRelationFilter, UserStatsWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22887,6 +25832,8 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     userCourses?: UserCourseOrderByRelationAggregateInput
     contentJobs?: ContentJobOrderByRelationAggregateInput
+    unlockEvents?: UnlockEventOrderByRelationAggregateInput
+    stats?: UserStatsOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22912,6 +25859,8 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     userCourses?: UserCourseListRelationFilter
     contentJobs?: ContentJobListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
+    stats?: XOR<UserStatsNullableScalarRelationFilter, UserStatsWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -23440,6 +26389,7 @@ export namespace Prisma {
     language?: StringFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
+    flashcards?: FlashcardListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     nodeAttachments?: NodeSyllabusConceptListRelationFilter
   }
@@ -23454,6 +26404,7 @@ export namespace Prisma {
     language?: SortOrder
     createdAt?: SortOrder
     conceptMatches?: ConceptMatchOrderByRelationAggregateInput
+    flashcards?: FlashcardOrderByRelationAggregateInput
     course?: CourseOrderByWithRelationInput
     nodeAttachments?: NodeSyllabusConceptOrderByRelationAggregateInput
   }
@@ -23471,6 +26422,7 @@ export namespace Prisma {
     language?: StringFilter<"SyllabusConcept"> | string
     createdAt?: DateTimeFilter<"SyllabusConcept"> | Date | string
     conceptMatches?: ConceptMatchListRelationFilter
+    flashcards?: FlashcardListRelationFilter
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     nodeAttachments?: NodeSyllabusConceptListRelationFilter
   }, "id">
@@ -23525,6 +26477,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ContentJob"> | Date | string
     completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
     concepts?: ConceptListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -23545,6 +26498,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
     concepts?: ConceptOrderByRelationAggregateInput
+    unlockEvents?: UnlockEventOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
   }
 
@@ -23568,6 +26522,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ContentJob"> | Date | string
     completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
     concepts?: ConceptListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -23705,6 +26660,7 @@ export namespace Prisma {
     concept?: XOR<ConceptScalarRelationFilter, ConceptWhereInput>
     syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
     flashcards?: FlashcardListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
   }
 
   export type ConceptMatchOrderByWithRelationInput = {
@@ -23719,6 +26675,7 @@ export namespace Prisma {
     concept?: ConceptOrderByWithRelationInput
     syllabusConcept?: SyllabusConceptOrderByWithRelationInput
     flashcards?: FlashcardOrderByRelationAggregateInput
+    unlockEvents?: UnlockEventOrderByRelationAggregateInput
   }
 
   export type ConceptMatchWhereUniqueInput = Prisma.AtLeast<{
@@ -23736,6 +26693,7 @@ export namespace Prisma {
     concept?: XOR<ConceptScalarRelationFilter, ConceptWhereInput>
     syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
     flashcards?: FlashcardListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
   }, "id">
 
   export type ConceptMatchOrderByWithAggregationInput = {
@@ -23773,82 +26731,125 @@ export namespace Prisma {
     OR?: FlashcardWhereInput[]
     NOT?: FlashcardWhereInput | FlashcardWhereInput[]
     id?: StringFilter<"Flashcard"> | string
-    conceptMatchId?: StringFilter<"Flashcard"> | string
+    syllabusConceptId?: StringFilter<"Flashcard"> | string
+    conceptMatchId?: StringNullableFilter<"Flashcard"> | string | null
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
-    answer?: StringFilter<"Flashcard"> | string
+    answer?: StringNullableFilter<"Flashcard"> | string | null
     questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
     answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
     language?: StringFilter<"Flashcard"> | string
+    difficulty?: StringFilter<"Flashcard"> | string
+    hints?: JsonNullableFilter<"Flashcard">
+    state?: StringFilter<"Flashcard"> | string
+    unlockedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
+    unlockedBy?: StringNullableFilter<"Flashcard"> | string | null
+    unlockProgress?: FloatFilter<"Flashcard"> | number
+    relatedContentIds?: JsonNullableFilter<"Flashcard">
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
     lastReviewedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     nextReviewAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     createdAt?: DateTimeFilter<"Flashcard"> | Date | string
-    conceptMatch?: XOR<ConceptMatchScalarRelationFilter, ConceptMatchWhereInput>
+    updatedAt?: DateTimeFilter<"Flashcard"> | Date | string
+    syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
+    conceptMatch?: XOR<ConceptMatchNullableScalarRelationFilter, ConceptMatchWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reviewEvents?: ReviewEventListRelationFilter
+    unlockEvents?: UnlockEventListRelationFilter
   }
 
   export type FlashcardOrderByWithRelationInput = {
     id?: SortOrder
-    conceptMatchId?: SortOrder
+    syllabusConceptId?: SortOrder
+    conceptMatchId?: SortOrderInput | SortOrder
     userId?: SortOrder
     question?: SortOrder
-    answer?: SortOrder
+    answer?: SortOrderInput | SortOrder
     questionTranslation?: SortOrderInput | SortOrder
     answerTranslation?: SortOrderInput | SortOrder
     language?: SortOrder
+    difficulty?: SortOrder
+    hints?: SortOrderInput | SortOrder
+    state?: SortOrder
+    unlockedAt?: SortOrderInput | SortOrder
+    unlockedBy?: SortOrderInput | SortOrder
+    unlockProgress?: SortOrder
+    relatedContentIds?: SortOrderInput | SortOrder
     sourceTimestamp?: SortOrderInput | SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
     lastReviewedAt?: SortOrderInput | SortOrder
     nextReviewAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+    syllabusConcept?: SyllabusConceptOrderByWithRelationInput
     conceptMatch?: ConceptMatchOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     reviewEvents?: ReviewEventOrderByRelationAggregateInput
+    unlockEvents?: UnlockEventOrderByRelationAggregateInput
   }
 
   export type FlashcardWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    syllabusConceptId_userId?: FlashcardSyllabusConceptIdUserIdCompoundUniqueInput
     AND?: FlashcardWhereInput | FlashcardWhereInput[]
     OR?: FlashcardWhereInput[]
     NOT?: FlashcardWhereInput | FlashcardWhereInput[]
-    conceptMatchId?: StringFilter<"Flashcard"> | string
+    syllabusConceptId?: StringFilter<"Flashcard"> | string
+    conceptMatchId?: StringNullableFilter<"Flashcard"> | string | null
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
-    answer?: StringFilter<"Flashcard"> | string
+    answer?: StringNullableFilter<"Flashcard"> | string | null
     questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
     answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
     language?: StringFilter<"Flashcard"> | string
+    difficulty?: StringFilter<"Flashcard"> | string
+    hints?: JsonNullableFilter<"Flashcard">
+    state?: StringFilter<"Flashcard"> | string
+    unlockedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
+    unlockedBy?: StringNullableFilter<"Flashcard"> | string | null
+    unlockProgress?: FloatFilter<"Flashcard"> | number
+    relatedContentIds?: JsonNullableFilter<"Flashcard">
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
     lastReviewedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     nextReviewAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     createdAt?: DateTimeFilter<"Flashcard"> | Date | string
-    conceptMatch?: XOR<ConceptMatchScalarRelationFilter, ConceptMatchWhereInput>
+    updatedAt?: DateTimeFilter<"Flashcard"> | Date | string
+    syllabusConcept?: XOR<SyllabusConceptScalarRelationFilter, SyllabusConceptWhereInput>
+    conceptMatch?: XOR<ConceptMatchNullableScalarRelationFilter, ConceptMatchWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     reviewEvents?: ReviewEventListRelationFilter
-  }, "id">
+    unlockEvents?: UnlockEventListRelationFilter
+  }, "id" | "syllabusConceptId_userId">
 
   export type FlashcardOrderByWithAggregationInput = {
     id?: SortOrder
-    conceptMatchId?: SortOrder
+    syllabusConceptId?: SortOrder
+    conceptMatchId?: SortOrderInput | SortOrder
     userId?: SortOrder
     question?: SortOrder
-    answer?: SortOrder
+    answer?: SortOrderInput | SortOrder
     questionTranslation?: SortOrderInput | SortOrder
     answerTranslation?: SortOrderInput | SortOrder
     language?: SortOrder
+    difficulty?: SortOrder
+    hints?: SortOrderInput | SortOrder
+    state?: SortOrder
+    unlockedAt?: SortOrderInput | SortOrder
+    unlockedBy?: SortOrderInput | SortOrder
+    unlockProgress?: SortOrder
+    relatedContentIds?: SortOrderInput | SortOrder
     sourceTimestamp?: SortOrderInput | SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
     lastReviewedAt?: SortOrderInput | SortOrder
     nextReviewAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: FlashcardCountOrderByAggregateInput
     _avg?: FlashcardAvgOrderByAggregateInput
     _max?: FlashcardMaxOrderByAggregateInput
@@ -23861,19 +26862,28 @@ export namespace Prisma {
     OR?: FlashcardScalarWhereWithAggregatesInput[]
     NOT?: FlashcardScalarWhereWithAggregatesInput | FlashcardScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Flashcard"> | string
-    conceptMatchId?: StringWithAggregatesFilter<"Flashcard"> | string
+    syllabusConceptId?: StringWithAggregatesFilter<"Flashcard"> | string
+    conceptMatchId?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     userId?: StringWithAggregatesFilter<"Flashcard"> | string
     question?: StringWithAggregatesFilter<"Flashcard"> | string
-    answer?: StringWithAggregatesFilter<"Flashcard"> | string
+    answer?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     questionTranslation?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     answerTranslation?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     language?: StringWithAggregatesFilter<"Flashcard"> | string
+    difficulty?: StringWithAggregatesFilter<"Flashcard"> | string
+    hints?: JsonNullableWithAggregatesFilter<"Flashcard">
+    state?: StringWithAggregatesFilter<"Flashcard"> | string
+    unlockedAt?: DateTimeNullableWithAggregatesFilter<"Flashcard"> | Date | string | null
+    unlockedBy?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
+    unlockProgress?: FloatWithAggregatesFilter<"Flashcard"> | number
+    relatedContentIds?: JsonNullableWithAggregatesFilter<"Flashcard">
     sourceTimestamp?: StringNullableWithAggregatesFilter<"Flashcard"> | string | null
     timesReviewed?: IntWithAggregatesFilter<"Flashcard"> | number
     timesCorrect?: IntWithAggregatesFilter<"Flashcard"> | number
     lastReviewedAt?: DateTimeNullableWithAggregatesFilter<"Flashcard"> | Date | string | null
     nextReviewAt?: DateTimeNullableWithAggregatesFilter<"Flashcard"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Flashcard"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Flashcard"> | Date | string
   }
 
   export type ReviewSessionWhereInput = {
@@ -24165,6 +27175,184 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"NodeSyllabusConcept"> | Date | string
   }
 
+  export type UnlockEventWhereInput = {
+    AND?: UnlockEventWhereInput | UnlockEventWhereInput[]
+    OR?: UnlockEventWhereInput[]
+    NOT?: UnlockEventWhereInput | UnlockEventWhereInput[]
+    id?: StringFilter<"UnlockEvent"> | string
+    userId?: StringFilter<"UnlockEvent"> | string
+    flashcardId?: StringFilter<"UnlockEvent"> | string
+    contentJobId?: StringFilter<"UnlockEvent"> | string
+    conceptMatchId?: StringFilter<"UnlockEvent"> | string
+    confidence?: FloatFilter<"UnlockEvent"> | number
+    createdAt?: DateTimeFilter<"UnlockEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    flashcard?: XOR<FlashcardScalarRelationFilter, FlashcardWhereInput>
+    contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
+    conceptMatch?: XOR<ConceptMatchScalarRelationFilter, ConceptMatchWhereInput>
+  }
+
+  export type UnlockEventOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    flashcardId?: SortOrder
+    contentJobId?: SortOrder
+    conceptMatchId?: SortOrder
+    confidence?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    flashcard?: FlashcardOrderByWithRelationInput
+    contentJob?: ContentJobOrderByWithRelationInput
+    conceptMatch?: ConceptMatchOrderByWithRelationInput
+  }
+
+  export type UnlockEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UnlockEventWhereInput | UnlockEventWhereInput[]
+    OR?: UnlockEventWhereInput[]
+    NOT?: UnlockEventWhereInput | UnlockEventWhereInput[]
+    userId?: StringFilter<"UnlockEvent"> | string
+    flashcardId?: StringFilter<"UnlockEvent"> | string
+    contentJobId?: StringFilter<"UnlockEvent"> | string
+    conceptMatchId?: StringFilter<"UnlockEvent"> | string
+    confidence?: FloatFilter<"UnlockEvent"> | number
+    createdAt?: DateTimeFilter<"UnlockEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    flashcard?: XOR<FlashcardScalarRelationFilter, FlashcardWhereInput>
+    contentJob?: XOR<ContentJobScalarRelationFilter, ContentJobWhereInput>
+    conceptMatch?: XOR<ConceptMatchScalarRelationFilter, ConceptMatchWhereInput>
+  }, "id">
+
+  export type UnlockEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    flashcardId?: SortOrder
+    contentJobId?: SortOrder
+    conceptMatchId?: SortOrder
+    confidence?: SortOrder
+    createdAt?: SortOrder
+    _count?: UnlockEventCountOrderByAggregateInput
+    _avg?: UnlockEventAvgOrderByAggregateInput
+    _max?: UnlockEventMaxOrderByAggregateInput
+    _min?: UnlockEventMinOrderByAggregateInput
+    _sum?: UnlockEventSumOrderByAggregateInput
+  }
+
+  export type UnlockEventScalarWhereWithAggregatesInput = {
+    AND?: UnlockEventScalarWhereWithAggregatesInput | UnlockEventScalarWhereWithAggregatesInput[]
+    OR?: UnlockEventScalarWhereWithAggregatesInput[]
+    NOT?: UnlockEventScalarWhereWithAggregatesInput | UnlockEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UnlockEvent"> | string
+    userId?: StringWithAggregatesFilter<"UnlockEvent"> | string
+    flashcardId?: StringWithAggregatesFilter<"UnlockEvent"> | string
+    contentJobId?: StringWithAggregatesFilter<"UnlockEvent"> | string
+    conceptMatchId?: StringWithAggregatesFilter<"UnlockEvent"> | string
+    confidence?: FloatWithAggregatesFilter<"UnlockEvent"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"UnlockEvent"> | Date | string
+  }
+
+  export type UserStatsWhereInput = {
+    AND?: UserStatsWhereInput | UserStatsWhereInput[]
+    OR?: UserStatsWhereInput[]
+    NOT?: UserStatsWhereInput | UserStatsWhereInput[]
+    id?: StringFilter<"UserStats"> | string
+    userId?: StringFilter<"UserStats"> | string
+    totalUnlocks?: IntFilter<"UserStats"> | number
+    totalLocked?: IntFilter<"UserStats"> | number
+    totalMastered?: IntFilter<"UserStats"> | number
+    unlockRate?: FloatFilter<"UserStats"> | number
+    currentStreak?: IntFilter<"UserStats"> | number
+    longestStreak?: IntFilter<"UserStats"> | number
+    lastUnlockDate?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    firstUnlockAt?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone10?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone50?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone100?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    updatedAt?: DateTimeFilter<"UserStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserStatsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastUnlockDate?: SortOrderInput | SortOrder
+    firstUnlockAt?: SortOrderInput | SortOrder
+    milestone10?: SortOrderInput | SortOrder
+    milestone50?: SortOrderInput | SortOrder
+    milestone100?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserStatsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserStatsWhereInput | UserStatsWhereInput[]
+    OR?: UserStatsWhereInput[]
+    NOT?: UserStatsWhereInput | UserStatsWhereInput[]
+    totalUnlocks?: IntFilter<"UserStats"> | number
+    totalLocked?: IntFilter<"UserStats"> | number
+    totalMastered?: IntFilter<"UserStats"> | number
+    unlockRate?: FloatFilter<"UserStats"> | number
+    currentStreak?: IntFilter<"UserStats"> | number
+    longestStreak?: IntFilter<"UserStats"> | number
+    lastUnlockDate?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    firstUnlockAt?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone10?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone50?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    milestone100?: DateTimeNullableFilter<"UserStats"> | Date | string | null
+    updatedAt?: DateTimeFilter<"UserStats"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserStatsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastUnlockDate?: SortOrderInput | SortOrder
+    firstUnlockAt?: SortOrderInput | SortOrder
+    milestone10?: SortOrderInput | SortOrder
+    milestone50?: SortOrderInput | SortOrder
+    milestone100?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: UserStatsCountOrderByAggregateInput
+    _avg?: UserStatsAvgOrderByAggregateInput
+    _max?: UserStatsMaxOrderByAggregateInput
+    _min?: UserStatsMinOrderByAggregateInput
+    _sum?: UserStatsSumOrderByAggregateInput
+  }
+
+  export type UserStatsScalarWhereWithAggregatesInput = {
+    AND?: UserStatsScalarWhereWithAggregatesInput | UserStatsScalarWhereWithAggregatesInput[]
+    OR?: UserStatsScalarWhereWithAggregatesInput[]
+    NOT?: UserStatsScalarWhereWithAggregatesInput | UserStatsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserStats"> | string
+    userId?: StringWithAggregatesFilter<"UserStats"> | string
+    totalUnlocks?: IntWithAggregatesFilter<"UserStats"> | number
+    totalLocked?: IntWithAggregatesFilter<"UserStats"> | number
+    totalMastered?: IntWithAggregatesFilter<"UserStats"> | number
+    unlockRate?: FloatWithAggregatesFilter<"UserStats"> | number
+    currentStreak?: IntWithAggregatesFilter<"UserStats"> | number
+    longestStreak?: IntWithAggregatesFilter<"UserStats"> | number
+    lastUnlockDate?: DateTimeNullableWithAggregatesFilter<"UserStats"> | Date | string | null
+    firstUnlockAt?: DateTimeNullableWithAggregatesFilter<"UserStats"> | Date | string | null
+    milestone10?: DateTimeNullableWithAggregatesFilter<"UserStats"> | Date | string | null
+    milestone50?: DateTimeNullableWithAggregatesFilter<"UserStats"> | Date | string | null
+    milestone100?: DateTimeNullableWithAggregatesFilter<"UserStats"> | Date | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"UserStats"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -24185,6 +27373,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -24207,6 +27397,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -24229,6 +27421,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24251,6 +27445,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -24818,6 +28014,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
     nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
@@ -24832,6 +28029,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
@@ -24844,6 +28042,7 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
     nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
@@ -24858,6 +28057,7 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
@@ -24909,6 +28109,7 @@ export namespace Prisma {
     createdAt?: Date | string
     completedAt?: Date | string | null
     concepts?: ConceptCreateNestedManyWithoutContentJobInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutContentJobInput
     user: UserCreateNestedOneWithoutContentJobsInput
   }
 
@@ -24929,6 +28130,7 @@ export namespace Prisma {
     createdAt?: Date | string
     completedAt?: Date | string | null
     concepts?: ConceptUncheckedCreateNestedManyWithoutContentJobInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutContentJobInput
   }
 
   export type ContentJobUpdateInput = {
@@ -24947,6 +28149,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     concepts?: ConceptUpdateManyWithoutContentJobNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutContentJobNestedInput
     user?: UserUpdateOneRequiredWithoutContentJobsNestedInput
   }
 
@@ -24967,6 +28170,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     concepts?: ConceptUncheckedUpdateManyWithoutContentJobNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutContentJobNestedInput
   }
 
   export type ContentJobCreateManyInput = {
@@ -25112,6 +28316,7 @@ export namespace Prisma {
     concept: ConceptCreateNestedOneWithoutConceptMatchesInput
     syllabusConcept: SyllabusConceptCreateNestedOneWithoutConceptMatchesInput
     flashcards?: FlashcardCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchUncheckedCreateInput = {
@@ -25124,6 +28329,7 @@ export namespace Prisma {
     userFeedback?: string | null
     createdAt?: Date | string
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchUpdateInput = {
@@ -25136,6 +28342,7 @@ export namespace Prisma {
     concept?: ConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
     syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
     flashcards?: FlashcardUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateInput = {
@@ -25148,6 +28355,7 @@ export namespace Prisma {
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flashcards?: FlashcardUncheckedUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchCreateManyInput = {
@@ -25184,122 +28392,188 @@ export namespace Prisma {
   export type FlashcardCreateInput = {
     id?: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    conceptMatch: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    updatedAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutFlashcardsInput
+    conceptMatch?: ConceptMatchCreateNestedOneWithoutFlashcardsInput
     user: UserCreateNestedOneWithoutFlashcardsInput
     reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardUncheckedCreateInput = {
     id?: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
     userId: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneWithoutFlashcardsNestedInput
     user?: UserUpdateOneRequiredWithoutFlashcardsNestedInput
     reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardCreateManyInput = {
     id?: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
     userId: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FlashcardUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FlashcardUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewSessionCreateInput = {
@@ -25586,6 +28860,190 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UnlockEventCreateInput = {
+    id?: string
+    confidence: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutUnlockEventsInput
+    flashcard: FlashcardCreateNestedOneWithoutUnlockEventsInput
+    contentJob: ContentJobCreateNestedOneWithoutUnlockEventsInput
+    conceptMatch: ConceptMatchCreateNestedOneWithoutUnlockEventsInput
+  }
+
+  export type UnlockEventUncheckedCreateInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUnlockEventsNestedInput
+    flashcard?: FlashcardUpdateOneRequiredWithoutUnlockEventsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutUnlockEventsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutUnlockEventsNestedInput
+  }
+
+  export type UnlockEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventCreateManyInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatsCreateInput = {
+    id?: string
+    totalUnlocks?: number
+    totalLocked?: number
+    totalMastered?: number
+    unlockRate?: number
+    currentStreak?: number
+    longestStreak?: number
+    lastUnlockDate?: Date | string | null
+    firstUnlockAt?: Date | string | null
+    milestone10?: Date | string | null
+    milestone50?: Date | string | null
+    milestone100?: Date | string | null
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStatsInput
+  }
+
+  export type UserStatsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalUnlocks?: number
+    totalLocked?: number
+    totalMastered?: number
+    unlockRate?: number
+    currentStreak?: number
+    longestStreak?: number
+    lastUnlockDate?: Date | string | null
+    firstUnlockAt?: Date | string | null
+    milestone10?: Date | string | null
+    milestone50?: Date | string | null
+    milestone100?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type UserStatsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStatsNestedInput
+  }
+
+  export type UserStatsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatsCreateManyInput = {
+    id?: string
+    userId: string
+    totalUnlocks?: number
+    totalLocked?: number
+    totalMastered?: number
+    unlockRate?: number
+    currentStreak?: number
+    longestStreak?: number
+    lastUnlockDate?: Date | string | null
+    firstUnlockAt?: Date | string | null
+    milestone10?: Date | string | null
+    milestone50?: Date | string | null
+    milestone100?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type UserStatsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25690,6 +29148,17 @@ export namespace Prisma {
     none?: ContentJobWhereInput
   }
 
+  export type UnlockEventListRelationFilter = {
+    every?: UnlockEventWhereInput
+    some?: UnlockEventWhereInput
+    none?: UnlockEventWhereInput
+  }
+
+  export type UserStatsNullableScalarRelationFilter = {
+    is?: UserStatsWhereInput | null
+    isNot?: UserStatsWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -25720,6 +29189,10 @@ export namespace Prisma {
   }
 
   export type ContentJobOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UnlockEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26465,10 +29938,33 @@ export namespace Prisma {
   export type ConceptMatchSumOrderByAggregateInput = {
     confidence?: SortOrder
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type ConceptMatchScalarRelationFilter = {
-    is?: ConceptMatchWhereInput
-    isNot?: ConceptMatchWhereInput
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ConceptMatchNullableScalarRelationFilter = {
+    is?: ConceptMatchWhereInput | null
+    isNot?: ConceptMatchWhereInput | null
   }
 
   export type ReviewEventListRelationFilter = {
@@ -26481,8 +29977,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type FlashcardSyllabusConceptIdUserIdCompoundUniqueInput = {
+    syllabusConceptId: string
+    userId: string
+  }
+
   export type FlashcardCountOrderByAggregateInput = {
     id?: SortOrder
+    syllabusConceptId?: SortOrder
     conceptMatchId?: SortOrder
     userId?: SortOrder
     question?: SortOrder
@@ -26490,21 +29992,31 @@ export namespace Prisma {
     questionTranslation?: SortOrder
     answerTranslation?: SortOrder
     language?: SortOrder
+    difficulty?: SortOrder
+    hints?: SortOrder
+    state?: SortOrder
+    unlockedAt?: SortOrder
+    unlockedBy?: SortOrder
+    unlockProgress?: SortOrder
+    relatedContentIds?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
     lastReviewedAt?: SortOrder
     nextReviewAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FlashcardAvgOrderByAggregateInput = {
+    unlockProgress?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
   }
 
   export type FlashcardMaxOrderByAggregateInput = {
     id?: SortOrder
+    syllabusConceptId?: SortOrder
     conceptMatchId?: SortOrder
     userId?: SortOrder
     question?: SortOrder
@@ -26512,16 +30024,23 @@ export namespace Prisma {
     questionTranslation?: SortOrder
     answerTranslation?: SortOrder
     language?: SortOrder
+    difficulty?: SortOrder
+    state?: SortOrder
+    unlockedAt?: SortOrder
+    unlockedBy?: SortOrder
+    unlockProgress?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
     lastReviewedAt?: SortOrder
     nextReviewAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FlashcardMinOrderByAggregateInput = {
     id?: SortOrder
+    syllabusConceptId?: SortOrder
     conceptMatchId?: SortOrder
     userId?: SortOrder
     question?: SortOrder
@@ -26529,17 +30048,50 @@ export namespace Prisma {
     questionTranslation?: SortOrder
     answerTranslation?: SortOrder
     language?: SortOrder
+    difficulty?: SortOrder
+    state?: SortOrder
+    unlockedAt?: SortOrder
+    unlockedBy?: SortOrder
+    unlockProgress?: SortOrder
     sourceTimestamp?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
     lastReviewedAt?: SortOrder
     nextReviewAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FlashcardSumOrderByAggregateInput = {
+    unlockProgress?: SortOrder
     timesReviewed?: SortOrder
     timesCorrect?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type ReviewSessionCountOrderByAggregateInput = {
@@ -26634,29 +30186,6 @@ export namespace Prisma {
     timeToRevealMs?: SortOrder
     timeToRateMs?: SortOrder
   }
-  export type JsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type KnowledgeNodeNullableScalarRelationFilter = {
     is?: KnowledgeNodeWhereInput | null
@@ -26709,32 +30238,6 @@ export namespace Prisma {
   export type KnowledgeNodeSumOrderByAggregateInput = {
     order?: SortOrder
   }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
 
   export type KnowledgeNodeScalarRelationFilter = {
     is?: KnowledgeNodeWhereInput
@@ -26765,6 +30268,118 @@ export namespace Prisma {
     syllabusConceptId?: SortOrder
     addedByUserId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type ConceptMatchScalarRelationFilter = {
+    is?: ConceptMatchWhereInput
+    isNot?: ConceptMatchWhereInput
+  }
+
+  export type UnlockEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    flashcardId?: SortOrder
+    contentJobId?: SortOrder
+    conceptMatchId?: SortOrder
+    confidence?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UnlockEventAvgOrderByAggregateInput = {
+    confidence?: SortOrder
+  }
+
+  export type UnlockEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    flashcardId?: SortOrder
+    contentJobId?: SortOrder
+    conceptMatchId?: SortOrder
+    confidence?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UnlockEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    flashcardId?: SortOrder
+    contentJobId?: SortOrder
+    conceptMatchId?: SortOrder
+    confidence?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UnlockEventSumOrderByAggregateInput = {
+    confidence?: SortOrder
+  }
+
+  export type UserStatsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastUnlockDate?: SortOrder
+    firstUnlockAt?: SortOrder
+    milestone10?: SortOrder
+    milestone50?: SortOrder
+    milestone100?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatsAvgOrderByAggregateInput = {
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+  }
+
+  export type UserStatsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastUnlockDate?: SortOrder
+    firstUnlockAt?: SortOrder
+    milestone10?: SortOrder
+    milestone50?: SortOrder
+    milestone100?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
+    lastUnlockDate?: SortOrder
+    firstUnlockAt?: SortOrder
+    milestone10?: SortOrder
+    milestone50?: SortOrder
+    milestone100?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserStatsSumOrderByAggregateInput = {
+    totalUnlocks?: SortOrder
+    totalLocked?: SortOrder
+    totalMastered?: SortOrder
+    unlockRate?: SortOrder
+    currentStreak?: SortOrder
+    longestStreak?: SortOrder
   }
 
   export type FeedbackCreateNestedManyWithoutUserInput = {
@@ -26816,6 +30431,19 @@ export namespace Prisma {
     connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
   }
 
+  export type UnlockEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput> | UnlockEventCreateWithoutUserInput[] | UnlockEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutUserInput | UnlockEventCreateOrConnectWithoutUserInput[]
+    createMany?: UnlockEventCreateManyUserInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
+  export type UserStatsCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatsCreateOrConnectWithoutUserInput
+    connect?: UserStatsWhereUniqueInput
+  }
+
   export type FeedbackUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
     connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
@@ -26863,6 +30491,19 @@ export namespace Prisma {
     connectOrCreate?: ContentJobCreateOrConnectWithoutUserInput | ContentJobCreateOrConnectWithoutUserInput[]
     createMany?: ContentJobCreateManyUserInputEnvelope
     connect?: ContentJobWhereUniqueInput | ContentJobWhereUniqueInput[]
+  }
+
+  export type UnlockEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput> | UnlockEventCreateWithoutUserInput[] | UnlockEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutUserInput | UnlockEventCreateOrConnectWithoutUserInput[]
+    createMany?: UnlockEventCreateManyUserInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
+  export type UserStatsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatsCreateOrConnectWithoutUserInput
+    connect?: UserStatsWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -26987,6 +30628,30 @@ export namespace Prisma {
     deleteMany?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
   }
 
+  export type UnlockEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput> | UnlockEventCreateWithoutUserInput[] | UnlockEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutUserInput | UnlockEventCreateOrConnectWithoutUserInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutUserInput | UnlockEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UnlockEventCreateManyUserInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutUserInput | UnlockEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutUserInput | UnlockEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+  }
+
+  export type UserStatsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatsCreateOrConnectWithoutUserInput
+    upsert?: UserStatsUpsertWithoutUserInput
+    disconnect?: UserStatsWhereInput | boolean
+    delete?: UserStatsWhereInput | boolean
+    connect?: UserStatsWhereUniqueInput
+    update?: XOR<XOR<UserStatsUpdateToOneWithWhereWithoutUserInput, UserStatsUpdateWithoutUserInput>, UserStatsUncheckedUpdateWithoutUserInput>
+  }
+
   export type FeedbackUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<FeedbackCreateWithoutUserInput, FeedbackUncheckedCreateWithoutUserInput> | FeedbackCreateWithoutUserInput[] | FeedbackUncheckedCreateWithoutUserInput[]
     connectOrCreate?: FeedbackCreateOrConnectWithoutUserInput | FeedbackCreateOrConnectWithoutUserInput[]
@@ -27083,6 +30748,30 @@ export namespace Prisma {
     update?: ContentJobUpdateWithWhereUniqueWithoutUserInput | ContentJobUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ContentJobUpdateManyWithWhereWithoutUserInput | ContentJobUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ContentJobScalarWhereInput | ContentJobScalarWhereInput[]
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput> | UnlockEventCreateWithoutUserInput[] | UnlockEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutUserInput | UnlockEventCreateOrConnectWithoutUserInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutUserInput | UnlockEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UnlockEventCreateManyUserInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutUserInput | UnlockEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutUserInput | UnlockEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+  }
+
+  export type UserStatsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserStatsCreateOrConnectWithoutUserInput
+    upsert?: UserStatsUpsertWithoutUserInput
+    disconnect?: UserStatsWhereInput | boolean
+    delete?: UserStatsWhereInput | boolean
+    connect?: UserStatsWhereUniqueInput
+    update?: XOR<XOR<UserStatsUpdateToOneWithWhereWithoutUserInput, UserStatsUpdateWithoutUserInput>, UserStatsUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -27396,6 +31085,13 @@ export namespace Prisma {
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
   }
 
+  export type FlashcardCreateNestedManyWithoutSyllabusConceptInput = {
+    create?: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput> | FlashcardCreateWithoutSyllabusConceptInput[] | FlashcardUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutSyllabusConceptInput | FlashcardCreateOrConnectWithoutSyllabusConceptInput[]
+    createMany?: FlashcardCreateManySyllabusConceptInputEnvelope
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+  }
+
   export type CourseCreateNestedOneWithoutSyllabusConceptsInput = {
     create?: XOR<CourseCreateWithoutSyllabusConceptsInput, CourseUncheckedCreateWithoutSyllabusConceptsInput>
     connectOrCreate?: CourseCreateOrConnectWithoutSyllabusConceptsInput
@@ -27414,6 +31110,13 @@ export namespace Prisma {
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutSyllabusConceptInput | ConceptMatchCreateOrConnectWithoutSyllabusConceptInput[]
     createMany?: ConceptMatchCreateManySyllabusConceptInputEnvelope
     connect?: ConceptMatchWhereUniqueInput | ConceptMatchWhereUniqueInput[]
+  }
+
+  export type FlashcardUncheckedCreateNestedManyWithoutSyllabusConceptInput = {
+    create?: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput> | FlashcardCreateWithoutSyllabusConceptInput[] | FlashcardUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutSyllabusConceptInput | FlashcardCreateOrConnectWithoutSyllabusConceptInput[]
+    createMany?: FlashcardCreateManySyllabusConceptInputEnvelope
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
   }
 
   export type NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput = {
@@ -27443,6 +31146,20 @@ export namespace Prisma {
     update?: ConceptMatchUpdateWithWhereUniqueWithoutSyllabusConceptInput | ConceptMatchUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
     updateMany?: ConceptMatchUpdateManyWithWhereWithoutSyllabusConceptInput | ConceptMatchUpdateManyWithWhereWithoutSyllabusConceptInput[]
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
+  }
+
+  export type FlashcardUpdateManyWithoutSyllabusConceptNestedInput = {
+    create?: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput> | FlashcardCreateWithoutSyllabusConceptInput[] | FlashcardUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutSyllabusConceptInput | FlashcardCreateOrConnectWithoutSyllabusConceptInput[]
+    upsert?: FlashcardUpsertWithWhereUniqueWithoutSyllabusConceptInput | FlashcardUpsertWithWhereUniqueWithoutSyllabusConceptInput[]
+    createMany?: FlashcardCreateManySyllabusConceptInputEnvelope
+    set?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    disconnect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    delete?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    update?: FlashcardUpdateWithWhereUniqueWithoutSyllabusConceptInput | FlashcardUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
+    updateMany?: FlashcardUpdateManyWithWhereWithoutSyllabusConceptInput | FlashcardUpdateManyWithWhereWithoutSyllabusConceptInput[]
+    deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
   }
 
   export type CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput = {
@@ -27481,6 +31198,20 @@ export namespace Prisma {
     deleteMany?: ConceptMatchScalarWhereInput | ConceptMatchScalarWhereInput[]
   }
 
+  export type FlashcardUncheckedUpdateManyWithoutSyllabusConceptNestedInput = {
+    create?: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput> | FlashcardCreateWithoutSyllabusConceptInput[] | FlashcardUncheckedCreateWithoutSyllabusConceptInput[]
+    connectOrCreate?: FlashcardCreateOrConnectWithoutSyllabusConceptInput | FlashcardCreateOrConnectWithoutSyllabusConceptInput[]
+    upsert?: FlashcardUpsertWithWhereUniqueWithoutSyllabusConceptInput | FlashcardUpsertWithWhereUniqueWithoutSyllabusConceptInput[]
+    createMany?: FlashcardCreateManySyllabusConceptInputEnvelope
+    set?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    disconnect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    delete?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+    update?: FlashcardUpdateWithWhereUniqueWithoutSyllabusConceptInput | FlashcardUpdateWithWhereUniqueWithoutSyllabusConceptInput[]
+    updateMany?: FlashcardUpdateManyWithWhereWithoutSyllabusConceptInput | FlashcardUpdateManyWithWhereWithoutSyllabusConceptInput[]
+    deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
+  }
+
   export type NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput = {
     create?: XOR<NodeSyllabusConceptCreateWithoutSyllabusConceptInput, NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput> | NodeSyllabusConceptCreateWithoutSyllabusConceptInput[] | NodeSyllabusConceptUncheckedCreateWithoutSyllabusConceptInput[]
     connectOrCreate?: NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput | NodeSyllabusConceptCreateOrConnectWithoutSyllabusConceptInput[]
@@ -27502,6 +31233,13 @@ export namespace Prisma {
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
   }
 
+  export type UnlockEventCreateNestedManyWithoutContentJobInput = {
+    create?: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput> | UnlockEventCreateWithoutContentJobInput[] | UnlockEventUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutContentJobInput | UnlockEventCreateOrConnectWithoutContentJobInput[]
+    createMany?: UnlockEventCreateManyContentJobInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutContentJobsInput = {
     create?: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
     connectOrCreate?: UserCreateOrConnectWithoutContentJobsInput
@@ -27513,6 +31251,13 @@ export namespace Prisma {
     connectOrCreate?: ConceptCreateOrConnectWithoutContentJobInput | ConceptCreateOrConnectWithoutContentJobInput[]
     createMany?: ConceptCreateManyContentJobInputEnvelope
     connect?: ConceptWhereUniqueInput | ConceptWhereUniqueInput[]
+  }
+
+  export type UnlockEventUncheckedCreateNestedManyWithoutContentJobInput = {
+    create?: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput> | UnlockEventCreateWithoutContentJobInput[] | UnlockEventUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutContentJobInput | UnlockEventCreateOrConnectWithoutContentJobInput[]
+    createMany?: UnlockEventCreateManyContentJobInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
   }
 
   export type EnumContentTypeFieldUpdateOperationsInput = {
@@ -27531,6 +31276,20 @@ export namespace Prisma {
     update?: ConceptUpdateWithWhereUniqueWithoutContentJobInput | ConceptUpdateWithWhereUniqueWithoutContentJobInput[]
     updateMany?: ConceptUpdateManyWithWhereWithoutContentJobInput | ConceptUpdateManyWithWhereWithoutContentJobInput[]
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
+  }
+
+  export type UnlockEventUpdateManyWithoutContentJobNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput> | UnlockEventCreateWithoutContentJobInput[] | UnlockEventUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutContentJobInput | UnlockEventCreateOrConnectWithoutContentJobInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutContentJobInput | UnlockEventUpsertWithWhereUniqueWithoutContentJobInput[]
+    createMany?: UnlockEventCreateManyContentJobInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutContentJobInput | UnlockEventUpdateWithWhereUniqueWithoutContentJobInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutContentJobInput | UnlockEventUpdateManyWithWhereWithoutContentJobInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutContentJobsNestedInput = {
@@ -27553,6 +31312,20 @@ export namespace Prisma {
     update?: ConceptUpdateWithWhereUniqueWithoutContentJobInput | ConceptUpdateWithWhereUniqueWithoutContentJobInput[]
     updateMany?: ConceptUpdateManyWithWhereWithoutContentJobInput | ConceptUpdateManyWithWhereWithoutContentJobInput[]
     deleteMany?: ConceptScalarWhereInput | ConceptScalarWhereInput[]
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutContentJobNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput> | UnlockEventCreateWithoutContentJobInput[] | UnlockEventUncheckedCreateWithoutContentJobInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutContentJobInput | UnlockEventCreateOrConnectWithoutContentJobInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutContentJobInput | UnlockEventUpsertWithWhereUniqueWithoutContentJobInput[]
+    createMany?: UnlockEventCreateManyContentJobInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutContentJobInput | UnlockEventUpdateWithWhereUniqueWithoutContentJobInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutContentJobInput | UnlockEventUpdateManyWithWhereWithoutContentJobInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
   }
 
   export type ConceptMatchCreateNestedManyWithoutConceptInput = {
@@ -27638,11 +31411,25 @@ export namespace Prisma {
     connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
   }
 
+  export type UnlockEventCreateNestedManyWithoutConceptMatchInput = {
+    create?: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput> | UnlockEventCreateWithoutConceptMatchInput[] | UnlockEventUncheckedCreateWithoutConceptMatchInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutConceptMatchInput | UnlockEventCreateOrConnectWithoutConceptMatchInput[]
+    createMany?: UnlockEventCreateManyConceptMatchInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
   export type FlashcardUncheckedCreateNestedManyWithoutConceptMatchInput = {
     create?: XOR<FlashcardCreateWithoutConceptMatchInput, FlashcardUncheckedCreateWithoutConceptMatchInput> | FlashcardCreateWithoutConceptMatchInput[] | FlashcardUncheckedCreateWithoutConceptMatchInput[]
     connectOrCreate?: FlashcardCreateOrConnectWithoutConceptMatchInput | FlashcardCreateOrConnectWithoutConceptMatchInput[]
     createMany?: FlashcardCreateManyConceptMatchInputEnvelope
     connect?: FlashcardWhereUniqueInput | FlashcardWhereUniqueInput[]
+  }
+
+  export type UnlockEventUncheckedCreateNestedManyWithoutConceptMatchInput = {
+    create?: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput> | UnlockEventCreateWithoutConceptMatchInput[] | UnlockEventUncheckedCreateWithoutConceptMatchInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutConceptMatchInput | UnlockEventCreateOrConnectWithoutConceptMatchInput[]
+    createMany?: UnlockEventCreateManyConceptMatchInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
   }
 
   export type ConceptUpdateOneRequiredWithoutConceptMatchesNestedInput = {
@@ -27675,6 +31462,20 @@ export namespace Prisma {
     deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
   }
 
+  export type UnlockEventUpdateManyWithoutConceptMatchNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput> | UnlockEventCreateWithoutConceptMatchInput[] | UnlockEventUncheckedCreateWithoutConceptMatchInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutConceptMatchInput | UnlockEventCreateOrConnectWithoutConceptMatchInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutConceptMatchInput | UnlockEventUpsertWithWhereUniqueWithoutConceptMatchInput[]
+    createMany?: UnlockEventCreateManyConceptMatchInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutConceptMatchInput | UnlockEventUpdateWithWhereUniqueWithoutConceptMatchInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutConceptMatchInput | UnlockEventUpdateManyWithWhereWithoutConceptMatchInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+  }
+
   export type FlashcardUncheckedUpdateManyWithoutConceptMatchNestedInput = {
     create?: XOR<FlashcardCreateWithoutConceptMatchInput, FlashcardUncheckedCreateWithoutConceptMatchInput> | FlashcardCreateWithoutConceptMatchInput[] | FlashcardUncheckedCreateWithoutConceptMatchInput[]
     connectOrCreate?: FlashcardCreateOrConnectWithoutConceptMatchInput | FlashcardCreateOrConnectWithoutConceptMatchInput[]
@@ -27687,6 +31488,26 @@ export namespace Prisma {
     update?: FlashcardUpdateWithWhereUniqueWithoutConceptMatchInput | FlashcardUpdateWithWhereUniqueWithoutConceptMatchInput[]
     updateMany?: FlashcardUpdateManyWithWhereWithoutConceptMatchInput | FlashcardUpdateManyWithWhereWithoutConceptMatchInput[]
     deleteMany?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutConceptMatchNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput> | UnlockEventCreateWithoutConceptMatchInput[] | UnlockEventUncheckedCreateWithoutConceptMatchInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutConceptMatchInput | UnlockEventCreateOrConnectWithoutConceptMatchInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutConceptMatchInput | UnlockEventUpsertWithWhereUniqueWithoutConceptMatchInput[]
+    createMany?: UnlockEventCreateManyConceptMatchInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutConceptMatchInput | UnlockEventUpdateWithWhereUniqueWithoutConceptMatchInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutConceptMatchInput | UnlockEventUpdateManyWithWhereWithoutConceptMatchInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+  }
+
+  export type SyllabusConceptCreateNestedOneWithoutFlashcardsInput = {
+    create?: XOR<SyllabusConceptCreateWithoutFlashcardsInput, SyllabusConceptUncheckedCreateWithoutFlashcardsInput>
+    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutFlashcardsInput
+    connect?: SyllabusConceptWhereUniqueInput
   }
 
   export type ConceptMatchCreateNestedOneWithoutFlashcardsInput = {
@@ -27708,6 +31529,13 @@ export namespace Prisma {
     connect?: ReviewEventWhereUniqueInput | ReviewEventWhereUniqueInput[]
   }
 
+  export type UnlockEventCreateNestedManyWithoutFlashcardInput = {
+    create?: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput> | UnlockEventCreateWithoutFlashcardInput[] | UnlockEventUncheckedCreateWithoutFlashcardInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutFlashcardInput | UnlockEventCreateOrConnectWithoutFlashcardInput[]
+    createMany?: UnlockEventCreateManyFlashcardInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
   export type ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput = {
     create?: XOR<ReviewEventCreateWithoutFlashcardInput, ReviewEventUncheckedCreateWithoutFlashcardInput> | ReviewEventCreateWithoutFlashcardInput[] | ReviewEventUncheckedCreateWithoutFlashcardInput[]
     connectOrCreate?: ReviewEventCreateOrConnectWithoutFlashcardInput | ReviewEventCreateOrConnectWithoutFlashcardInput[]
@@ -27715,10 +31543,27 @@ export namespace Prisma {
     connect?: ReviewEventWhereUniqueInput | ReviewEventWhereUniqueInput[]
   }
 
-  export type ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput = {
+  export type UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput = {
+    create?: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput> | UnlockEventCreateWithoutFlashcardInput[] | UnlockEventUncheckedCreateWithoutFlashcardInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutFlashcardInput | UnlockEventCreateOrConnectWithoutFlashcardInput[]
+    createMany?: UnlockEventCreateManyFlashcardInputEnvelope
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+  }
+
+  export type SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput = {
+    create?: XOR<SyllabusConceptCreateWithoutFlashcardsInput, SyllabusConceptUncheckedCreateWithoutFlashcardsInput>
+    connectOrCreate?: SyllabusConceptCreateOrConnectWithoutFlashcardsInput
+    upsert?: SyllabusConceptUpsertWithoutFlashcardsInput
+    connect?: SyllabusConceptWhereUniqueInput
+    update?: XOR<XOR<SyllabusConceptUpdateToOneWithWhereWithoutFlashcardsInput, SyllabusConceptUpdateWithoutFlashcardsInput>, SyllabusConceptUncheckedUpdateWithoutFlashcardsInput>
+  }
+
+  export type ConceptMatchUpdateOneWithoutFlashcardsNestedInput = {
     create?: XOR<ConceptMatchCreateWithoutFlashcardsInput, ConceptMatchUncheckedCreateWithoutFlashcardsInput>
     connectOrCreate?: ConceptMatchCreateOrConnectWithoutFlashcardsInput
     upsert?: ConceptMatchUpsertWithoutFlashcardsInput
+    disconnect?: ConceptMatchWhereInput | boolean
+    delete?: ConceptMatchWhereInput | boolean
     connect?: ConceptMatchWhereUniqueInput
     update?: XOR<XOR<ConceptMatchUpdateToOneWithWhereWithoutFlashcardsInput, ConceptMatchUpdateWithoutFlashcardsInput>, ConceptMatchUncheckedUpdateWithoutFlashcardsInput>
   }
@@ -27745,6 +31590,20 @@ export namespace Prisma {
     deleteMany?: ReviewEventScalarWhereInput | ReviewEventScalarWhereInput[]
   }
 
+  export type UnlockEventUpdateManyWithoutFlashcardNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput> | UnlockEventCreateWithoutFlashcardInput[] | UnlockEventUncheckedCreateWithoutFlashcardInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutFlashcardInput | UnlockEventCreateOrConnectWithoutFlashcardInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutFlashcardInput | UnlockEventUpsertWithWhereUniqueWithoutFlashcardInput[]
+    createMany?: UnlockEventCreateManyFlashcardInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutFlashcardInput | UnlockEventUpdateWithWhereUniqueWithoutFlashcardInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutFlashcardInput | UnlockEventUpdateManyWithWhereWithoutFlashcardInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+  }
+
   export type ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput = {
     create?: XOR<ReviewEventCreateWithoutFlashcardInput, ReviewEventUncheckedCreateWithoutFlashcardInput> | ReviewEventCreateWithoutFlashcardInput[] | ReviewEventUncheckedCreateWithoutFlashcardInput[]
     connectOrCreate?: ReviewEventCreateOrConnectWithoutFlashcardInput | ReviewEventCreateOrConnectWithoutFlashcardInput[]
@@ -27757,6 +31616,20 @@ export namespace Prisma {
     update?: ReviewEventUpdateWithWhereUniqueWithoutFlashcardInput | ReviewEventUpdateWithWhereUniqueWithoutFlashcardInput[]
     updateMany?: ReviewEventUpdateManyWithWhereWithoutFlashcardInput | ReviewEventUpdateManyWithWhereWithoutFlashcardInput[]
     deleteMany?: ReviewEventScalarWhereInput | ReviewEventScalarWhereInput[]
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput = {
+    create?: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput> | UnlockEventCreateWithoutFlashcardInput[] | UnlockEventUncheckedCreateWithoutFlashcardInput[]
+    connectOrCreate?: UnlockEventCreateOrConnectWithoutFlashcardInput | UnlockEventCreateOrConnectWithoutFlashcardInput[]
+    upsert?: UnlockEventUpsertWithWhereUniqueWithoutFlashcardInput | UnlockEventUpsertWithWhereUniqueWithoutFlashcardInput[]
+    createMany?: UnlockEventCreateManyFlashcardInputEnvelope
+    set?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    disconnect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    delete?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    connect?: UnlockEventWhereUniqueInput | UnlockEventWhereUniqueInput[]
+    update?: UnlockEventUpdateWithWhereUniqueWithoutFlashcardInput | UnlockEventUpdateWithWhereUniqueWithoutFlashcardInput[]
+    updateMany?: UnlockEventUpdateManyWithWhereWithoutFlashcardInput | UnlockEventUpdateManyWithWhereWithoutFlashcardInput[]
+    deleteMany?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
   }
 
   export type ReviewEventCreateNestedManyWithoutSessionInput = {
@@ -27997,6 +31870,76 @@ export namespace Prisma {
     upsert?: SyllabusConceptUpsertWithoutNodeAttachmentsInput
     connect?: SyllabusConceptWhereUniqueInput
     update?: XOR<XOR<SyllabusConceptUpdateToOneWithWhereWithoutNodeAttachmentsInput, SyllabusConceptUpdateWithoutNodeAttachmentsInput>, SyllabusConceptUncheckedUpdateWithoutNodeAttachmentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutUnlockEventsInput = {
+    create?: XOR<UserCreateWithoutUnlockEventsInput, UserUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUnlockEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type FlashcardCreateNestedOneWithoutUnlockEventsInput = {
+    create?: XOR<FlashcardCreateWithoutUnlockEventsInput, FlashcardUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: FlashcardCreateOrConnectWithoutUnlockEventsInput
+    connect?: FlashcardWhereUniqueInput
+  }
+
+  export type ContentJobCreateNestedOneWithoutUnlockEventsInput = {
+    create?: XOR<ContentJobCreateWithoutUnlockEventsInput, ContentJobUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUnlockEventsInput
+    connect?: ContentJobWhereUniqueInput
+  }
+
+  export type ConceptMatchCreateNestedOneWithoutUnlockEventsInput = {
+    create?: XOR<ConceptMatchCreateWithoutUnlockEventsInput, ConceptMatchUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: ConceptMatchCreateOrConnectWithoutUnlockEventsInput
+    connect?: ConceptMatchWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUnlockEventsNestedInput = {
+    create?: XOR<UserCreateWithoutUnlockEventsInput, UserUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUnlockEventsInput
+    upsert?: UserUpsertWithoutUnlockEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUnlockEventsInput, UserUpdateWithoutUnlockEventsInput>, UserUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type FlashcardUpdateOneRequiredWithoutUnlockEventsNestedInput = {
+    create?: XOR<FlashcardCreateWithoutUnlockEventsInput, FlashcardUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: FlashcardCreateOrConnectWithoutUnlockEventsInput
+    upsert?: FlashcardUpsertWithoutUnlockEventsInput
+    connect?: FlashcardWhereUniqueInput
+    update?: XOR<XOR<FlashcardUpdateToOneWithWhereWithoutUnlockEventsInput, FlashcardUpdateWithoutUnlockEventsInput>, FlashcardUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type ContentJobUpdateOneRequiredWithoutUnlockEventsNestedInput = {
+    create?: XOR<ContentJobCreateWithoutUnlockEventsInput, ContentJobUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: ContentJobCreateOrConnectWithoutUnlockEventsInput
+    upsert?: ContentJobUpsertWithoutUnlockEventsInput
+    connect?: ContentJobWhereUniqueInput
+    update?: XOR<XOR<ContentJobUpdateToOneWithWhereWithoutUnlockEventsInput, ContentJobUpdateWithoutUnlockEventsInput>, ContentJobUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type ConceptMatchUpdateOneRequiredWithoutUnlockEventsNestedInput = {
+    create?: XOR<ConceptMatchCreateWithoutUnlockEventsInput, ConceptMatchUncheckedCreateWithoutUnlockEventsInput>
+    connectOrCreate?: ConceptMatchCreateOrConnectWithoutUnlockEventsInput
+    upsert?: ConceptMatchUpsertWithoutUnlockEventsInput
+    connect?: ConceptMatchWhereUniqueInput
+    update?: XOR<XOR<ConceptMatchUpdateToOneWithWhereWithoutUnlockEventsInput, ConceptMatchUpdateWithoutUnlockEventsInput>, ConceptMatchUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type UserCreateNestedOneWithoutStatsInput = {
+    create?: XOR<UserCreateWithoutStatsInput, UserUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStatsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutStatsNestedInput = {
+    create?: XOR<UserCreateWithoutStatsInput, UserUncheckedCreateWithoutStatsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStatsInput
+    upsert?: UserUpsertWithoutStatsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStatsInput, UserUpdateWithoutStatsInput>, UserUncheckedUpdateWithoutStatsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -28340,35 +32283,55 @@ export namespace Prisma {
   export type FlashcardCreateWithoutUserInput = {
     id?: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    conceptMatch: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    updatedAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutFlashcardsInput
+    conceptMatch?: ConceptMatchCreateNestedOneWithoutFlashcardsInput
     reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardUncheckedCreateWithoutUserInput = {
     id?: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardCreateOrConnectWithoutUserInput = {
@@ -28485,6 +32448,7 @@ export namespace Prisma {
     createdAt?: Date | string
     completedAt?: Date | string | null
     concepts?: ConceptCreateNestedManyWithoutContentJobInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutContentJobInput
   }
 
   export type ContentJobUncheckedCreateWithoutUserInput = {
@@ -28503,6 +32467,7 @@ export namespace Prisma {
     createdAt?: Date | string
     completedAt?: Date | string | null
     concepts?: ConceptUncheckedCreateNestedManyWithoutContentJobInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutContentJobInput
   }
 
   export type ContentJobCreateOrConnectWithoutUserInput = {
@@ -28513,6 +32478,71 @@ export namespace Prisma {
   export type ContentJobCreateManyUserInputEnvelope = {
     data: ContentJobCreateManyUserInput | ContentJobCreateManyUserInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UnlockEventCreateWithoutUserInput = {
+    id?: string
+    confidence: number
+    createdAt?: Date | string
+    flashcard: FlashcardCreateNestedOneWithoutUnlockEventsInput
+    contentJob: ContentJobCreateNestedOneWithoutUnlockEventsInput
+    conceptMatch: ConceptMatchCreateNestedOneWithoutUnlockEventsInput
+  }
+
+  export type UnlockEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    flashcardId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateOrConnectWithoutUserInput = {
+    where: UnlockEventWhereUniqueInput
+    create: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UnlockEventCreateManyUserInputEnvelope = {
+    data: UnlockEventCreateManyUserInput | UnlockEventCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserStatsCreateWithoutUserInput = {
+    id?: string
+    totalUnlocks?: number
+    totalLocked?: number
+    totalMastered?: number
+    unlockRate?: number
+    currentStreak?: number
+    longestStreak?: number
+    lastUnlockDate?: Date | string | null
+    firstUnlockAt?: Date | string | null
+    milestone10?: Date | string | null
+    milestone50?: Date | string | null
+    milestone100?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type UserStatsUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalUnlocks?: number
+    totalLocked?: number
+    totalMastered?: number
+    unlockRate?: number
+    currentStreak?: number
+    longestStreak?: number
+    lastUnlockDate?: Date | string | null
+    firstUnlockAt?: Date | string | null
+    milestone10?: Date | string | null
+    milestone50?: Date | string | null
+    milestone100?: Date | string | null
+    updatedAt?: Date | string
+  }
+
+  export type UserStatsCreateOrConnectWithoutUserInput = {
+    where: UserStatsWhereUniqueInput
+    create: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
   }
 
   export type FeedbackUpsertWithWhereUniqueWithoutUserInput = {
@@ -28600,19 +32630,28 @@ export namespace Prisma {
     OR?: FlashcardScalarWhereInput[]
     NOT?: FlashcardScalarWhereInput | FlashcardScalarWhereInput[]
     id?: StringFilter<"Flashcard"> | string
-    conceptMatchId?: StringFilter<"Flashcard"> | string
+    syllabusConceptId?: StringFilter<"Flashcard"> | string
+    conceptMatchId?: StringNullableFilter<"Flashcard"> | string | null
     userId?: StringFilter<"Flashcard"> | string
     question?: StringFilter<"Flashcard"> | string
-    answer?: StringFilter<"Flashcard"> | string
+    answer?: StringNullableFilter<"Flashcard"> | string | null
     questionTranslation?: StringNullableFilter<"Flashcard"> | string | null
     answerTranslation?: StringNullableFilter<"Flashcard"> | string | null
     language?: StringFilter<"Flashcard"> | string
+    difficulty?: StringFilter<"Flashcard"> | string
+    hints?: JsonNullableFilter<"Flashcard">
+    state?: StringFilter<"Flashcard"> | string
+    unlockedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
+    unlockedBy?: StringNullableFilter<"Flashcard"> | string | null
+    unlockProgress?: FloatFilter<"Flashcard"> | number
+    relatedContentIds?: JsonNullableFilter<"Flashcard">
     sourceTimestamp?: StringNullableFilter<"Flashcard"> | string | null
     timesReviewed?: IntFilter<"Flashcard"> | number
     timesCorrect?: IntFilter<"Flashcard"> | number
     lastReviewedAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     nextReviewAt?: DateTimeNullableFilter<"Flashcard"> | Date | string | null
     createdAt?: DateTimeFilter<"Flashcard"> | Date | string
+    updatedAt?: DateTimeFilter<"Flashcard"> | Date | string
   }
 
   export type ReviewSessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -28740,6 +32779,78 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ContentJob"> | Date | string | null
   }
 
+  export type UnlockEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: UnlockEventWhereUniqueInput
+    update: XOR<UnlockEventUpdateWithoutUserInput, UnlockEventUncheckedUpdateWithoutUserInput>
+    create: XOR<UnlockEventCreateWithoutUserInput, UnlockEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type UnlockEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: UnlockEventWhereUniqueInput
+    data: XOR<UnlockEventUpdateWithoutUserInput, UnlockEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UnlockEventUpdateManyWithWhereWithoutUserInput = {
+    where: UnlockEventScalarWhereInput
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UnlockEventScalarWhereInput = {
+    AND?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+    OR?: UnlockEventScalarWhereInput[]
+    NOT?: UnlockEventScalarWhereInput | UnlockEventScalarWhereInput[]
+    id?: StringFilter<"UnlockEvent"> | string
+    userId?: StringFilter<"UnlockEvent"> | string
+    flashcardId?: StringFilter<"UnlockEvent"> | string
+    contentJobId?: StringFilter<"UnlockEvent"> | string
+    conceptMatchId?: StringFilter<"UnlockEvent"> | string
+    confidence?: FloatFilter<"UnlockEvent"> | number
+    createdAt?: DateTimeFilter<"UnlockEvent"> | Date | string
+  }
+
+  export type UserStatsUpsertWithoutUserInput = {
+    update: XOR<UserStatsUpdateWithoutUserInput, UserStatsUncheckedUpdateWithoutUserInput>
+    create: XOR<UserStatsCreateWithoutUserInput, UserStatsUncheckedCreateWithoutUserInput>
+    where?: UserStatsWhereInput
+  }
+
+  export type UserStatsUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserStatsWhereInput
+    data: XOR<UserStatsUpdateWithoutUserInput, UserStatsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserStatsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserStatsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalUnlocks?: IntFieldUpdateOperationsInput | number
+    totalLocked?: IntFieldUpdateOperationsInput | number
+    totalMastered?: IntFieldUpdateOperationsInput | number
+    unlockRate?: FloatFieldUpdateOperationsInput | number
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    longestStreak?: IntFieldUpdateOperationsInput | number
+    lastUnlockDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    firstUnlockAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone10?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone50?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    milestone100?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -28759,6 +32870,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -28780,6 +32893,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -28817,6 +32932,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -28838,6 +32955,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -28859,6 +32978,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -28880,6 +33001,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -28917,6 +33040,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -28938,6 +33063,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFeedbacksInput = {
@@ -28959,6 +33086,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFeedbacksInput = {
@@ -28980,6 +33109,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFeedbacksInput = {
@@ -29017,6 +33148,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFeedbacksInput = {
@@ -29038,6 +33171,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type CourseCreateWithoutSubjectInput = {
@@ -29230,6 +33365,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
 
@@ -29242,6 +33378,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
@@ -29414,6 +33551,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserCoursesInput = {
@@ -29435,6 +33574,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserCoursesInput = {
@@ -29507,6 +33648,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserCoursesInput = {
@@ -29528,6 +33671,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ConceptMatchCreateWithoutSyllabusConceptInput = {
@@ -29539,6 +33684,7 @@ export namespace Prisma {
     createdAt?: Date | string
     concept: ConceptCreateNestedOneWithoutConceptMatchesInput
     flashcards?: FlashcardCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchUncheckedCreateWithoutSyllabusConceptInput = {
@@ -29550,6 +33696,7 @@ export namespace Prisma {
     userFeedback?: string | null
     createdAt?: Date | string
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchCreateOrConnectWithoutSyllabusConceptInput = {
@@ -29559,6 +33706,70 @@ export namespace Prisma {
 
   export type ConceptMatchCreateManySyllabusConceptInputEnvelope = {
     data: ConceptMatchCreateManySyllabusConceptInput | ConceptMatchCreateManySyllabusConceptInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FlashcardCreateWithoutSyllabusConceptInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conceptMatch?: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    user: UserCreateNestedOneWithoutFlashcardsInput
+    reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutFlashcardInput
+  }
+
+  export type FlashcardUncheckedCreateWithoutSyllabusConceptInput = {
+    id?: string
+    conceptMatchId?: string | null
+    userId: string
+    question: string
+    answer?: string | null
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput
+  }
+
+  export type FlashcardCreateOrConnectWithoutSyllabusConceptInput = {
+    where: FlashcardWhereUniqueInput
+    create: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput>
+  }
+
+  export type FlashcardCreateManySyllabusConceptInputEnvelope = {
+    data: FlashcardCreateManySyllabusConceptInput | FlashcardCreateManySyllabusConceptInput[]
     skipDuplicates?: boolean
   }
 
@@ -29641,6 +33852,22 @@ export namespace Prisma {
     rationale?: StringNullableFilter<"ConceptMatch"> | string | null
     userFeedback?: StringNullableFilter<"ConceptMatch"> | string | null
     createdAt?: DateTimeFilter<"ConceptMatch"> | Date | string
+  }
+
+  export type FlashcardUpsertWithWhereUniqueWithoutSyllabusConceptInput = {
+    where: FlashcardWhereUniqueInput
+    update: XOR<FlashcardUpdateWithoutSyllabusConceptInput, FlashcardUncheckedUpdateWithoutSyllabusConceptInput>
+    create: XOR<FlashcardCreateWithoutSyllabusConceptInput, FlashcardUncheckedCreateWithoutSyllabusConceptInput>
+  }
+
+  export type FlashcardUpdateWithWhereUniqueWithoutSyllabusConceptInput = {
+    where: FlashcardWhereUniqueInput
+    data: XOR<FlashcardUpdateWithoutSyllabusConceptInput, FlashcardUncheckedUpdateWithoutSyllabusConceptInput>
+  }
+
+  export type FlashcardUpdateManyWithWhereWithoutSyllabusConceptInput = {
+    where: FlashcardScalarWhereInput
+    data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyWithoutSyllabusConceptInput>
   }
 
   export type CourseUpsertWithoutSyllabusConceptsInput = {
@@ -29736,6 +33963,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UnlockEventCreateWithoutContentJobInput = {
+    id?: string
+    confidence: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutUnlockEventsInput
+    flashcard: FlashcardCreateNestedOneWithoutUnlockEventsInput
+    conceptMatch: ConceptMatchCreateNestedOneWithoutUnlockEventsInput
+  }
+
+  export type UnlockEventUncheckedCreateWithoutContentJobInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateOrConnectWithoutContentJobInput = {
+    where: UnlockEventWhereUniqueInput
+    create: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput>
+  }
+
+  export type UnlockEventCreateManyContentJobInputEnvelope = {
+    data: UnlockEventCreateManyContentJobInput | UnlockEventCreateManyContentJobInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutContentJobsInput = {
     id: string
     name: string
@@ -29755,6 +34010,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutContentJobsInput = {
@@ -29776,6 +34033,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutContentJobsInput = {
@@ -29813,6 +34072,22 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Concept"> | Date | string
   }
 
+  export type UnlockEventUpsertWithWhereUniqueWithoutContentJobInput = {
+    where: UnlockEventWhereUniqueInput
+    update: XOR<UnlockEventUpdateWithoutContentJobInput, UnlockEventUncheckedUpdateWithoutContentJobInput>
+    create: XOR<UnlockEventCreateWithoutContentJobInput, UnlockEventUncheckedCreateWithoutContentJobInput>
+  }
+
+  export type UnlockEventUpdateWithWhereUniqueWithoutContentJobInput = {
+    where: UnlockEventWhereUniqueInput
+    data: XOR<UnlockEventUpdateWithoutContentJobInput, UnlockEventUncheckedUpdateWithoutContentJobInput>
+  }
+
+  export type UnlockEventUpdateManyWithWhereWithoutContentJobInput = {
+    where: UnlockEventScalarWhereInput
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyWithoutContentJobInput>
+  }
+
   export type UserUpsertWithoutContentJobsInput = {
     update: XOR<UserUpdateWithoutContentJobsInput, UserUncheckedUpdateWithoutContentJobsInput>
     create: XOR<UserCreateWithoutContentJobsInput, UserUncheckedCreateWithoutContentJobsInput>
@@ -29843,6 +34118,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutContentJobsInput = {
@@ -29864,6 +34141,8 @@ export namespace Prisma {
     reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ConceptMatchCreateWithoutConceptInput = {
@@ -29875,6 +34154,7 @@ export namespace Prisma {
     createdAt?: Date | string
     syllabusConcept: SyllabusConceptCreateNestedOneWithoutConceptMatchesInput
     flashcards?: FlashcardCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchUncheckedCreateWithoutConceptInput = {
@@ -29886,6 +34166,7 @@ export namespace Prisma {
     userFeedback?: string | null
     createdAt?: Date | string
     flashcards?: FlashcardUncheckedCreateNestedManyWithoutConceptMatchInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchCreateOrConnectWithoutConceptInput = {
@@ -29913,6 +34194,7 @@ export namespace Prisma {
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
+    unlockEvents?: UnlockEventCreateNestedManyWithoutContentJobInput
     user: UserCreateNestedOneWithoutContentJobsInput
   }
 
@@ -29932,6 +34214,7 @@ export namespace Prisma {
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutContentJobInput
   }
 
   export type ContentJobCreateOrConnectWithoutConceptsInput = {
@@ -29981,6 +34264,7 @@ export namespace Prisma {
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockEvents?: UnlockEventUpdateManyWithoutContentJobNestedInput
     user?: UserUpdateOneRequiredWithoutContentJobsNestedInput
   }
 
@@ -30000,6 +34284,7 @@ export namespace Prisma {
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutContentJobNestedInput
   }
 
   export type ConceptCreateWithoutConceptMatchesInput = {
@@ -30037,6 +34322,7 @@ export namespace Prisma {
     order: number
     language?: string
     createdAt?: Date | string
+    flashcards?: FlashcardCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
     nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
   }
@@ -30050,6 +34336,7 @@ export namespace Prisma {
     order: number
     language?: string
     createdAt?: Date | string
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutSyllabusConceptInput
     nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
@@ -30061,35 +34348,55 @@ export namespace Prisma {
   export type FlashcardCreateWithoutConceptMatchInput = {
     id?: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutFlashcardsInput
     user: UserCreateNestedOneWithoutFlashcardsInput
     reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardUncheckedCreateWithoutConceptMatchInput = {
     id?: string
+    syllabusConceptId: string
     userId: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardCreateOrConnectWithoutConceptMatchInput = {
@@ -30099,6 +34406,34 @@ export namespace Prisma {
 
   export type FlashcardCreateManyConceptMatchInputEnvelope = {
     data: FlashcardCreateManyConceptMatchInput | FlashcardCreateManyConceptMatchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UnlockEventCreateWithoutConceptMatchInput = {
+    id?: string
+    confidence: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutUnlockEventsInput
+    flashcard: FlashcardCreateNestedOneWithoutUnlockEventsInput
+    contentJob: ContentJobCreateNestedOneWithoutUnlockEventsInput
+  }
+
+  export type UnlockEventUncheckedCreateWithoutConceptMatchInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    contentJobId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateOrConnectWithoutConceptMatchInput = {
+    where: UnlockEventWhereUniqueInput
+    create: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput>
+  }
+
+  export type UnlockEventCreateManyConceptMatchInputEnvelope = {
+    data: UnlockEventCreateManyConceptMatchInput | UnlockEventCreateManyConceptMatchInput[]
     skipDuplicates?: boolean
   }
 
@@ -30154,6 +34489,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcards?: FlashcardUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
     nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
@@ -30167,6 +34503,7 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcards?: FlashcardUncheckedUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
@@ -30186,6 +34523,53 @@ export namespace Prisma {
     data: XOR<FlashcardUpdateManyMutationInput, FlashcardUncheckedUpdateManyWithoutConceptMatchInput>
   }
 
+  export type UnlockEventUpsertWithWhereUniqueWithoutConceptMatchInput = {
+    where: UnlockEventWhereUniqueInput
+    update: XOR<UnlockEventUpdateWithoutConceptMatchInput, UnlockEventUncheckedUpdateWithoutConceptMatchInput>
+    create: XOR<UnlockEventCreateWithoutConceptMatchInput, UnlockEventUncheckedCreateWithoutConceptMatchInput>
+  }
+
+  export type UnlockEventUpdateWithWhereUniqueWithoutConceptMatchInput = {
+    where: UnlockEventWhereUniqueInput
+    data: XOR<UnlockEventUpdateWithoutConceptMatchInput, UnlockEventUncheckedUpdateWithoutConceptMatchInput>
+  }
+
+  export type UnlockEventUpdateManyWithWhereWithoutConceptMatchInput = {
+    where: UnlockEventScalarWhereInput
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyWithoutConceptMatchInput>
+  }
+
+  export type SyllabusConceptCreateWithoutFlashcardsInput = {
+    id?: string
+    conceptText: string
+    category?: string | null
+    importance?: number | null
+    order: number
+    language?: string
+    createdAt?: Date | string
+    conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    course: CourseCreateNestedOneWithoutSyllabusConceptsInput
+    nodeAttachments?: NodeSyllabusConceptCreateNestedManyWithoutSyllabusConceptInput
+  }
+
+  export type SyllabusConceptUncheckedCreateWithoutFlashcardsInput = {
+    id?: string
+    courseId: string
+    conceptText: string
+    category?: string | null
+    importance?: number | null
+    order: number
+    language?: string
+    createdAt?: Date | string
+    conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedCreateNestedManyWithoutSyllabusConceptInput
+  }
+
+  export type SyllabusConceptCreateOrConnectWithoutFlashcardsInput = {
+    where: SyllabusConceptWhereUniqueInput
+    create: XOR<SyllabusConceptCreateWithoutFlashcardsInput, SyllabusConceptUncheckedCreateWithoutFlashcardsInput>
+  }
+
   export type ConceptMatchCreateWithoutFlashcardsInput = {
     id?: string
     confidence: number
@@ -30195,6 +34579,7 @@ export namespace Prisma {
     createdAt?: Date | string
     concept: ConceptCreateNestedOneWithoutConceptMatchesInput
     syllabusConcept: SyllabusConceptCreateNestedOneWithoutConceptMatchesInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchUncheckedCreateWithoutFlashcardsInput = {
@@ -30206,6 +34591,7 @@ export namespace Prisma {
     rationale?: string | null
     userFeedback?: string | null
     createdAt?: Date | string
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutConceptMatchInput
   }
 
   export type ConceptMatchCreateOrConnectWithoutFlashcardsInput = {
@@ -30232,6 +34618,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFlashcardsInput = {
@@ -30253,6 +34641,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFlashcardsInput = {
@@ -30288,6 +34678,71 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UnlockEventCreateWithoutFlashcardInput = {
+    id?: string
+    confidence: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutUnlockEventsInput
+    contentJob: ContentJobCreateNestedOneWithoutUnlockEventsInput
+    conceptMatch: ConceptMatchCreateNestedOneWithoutUnlockEventsInput
+  }
+
+  export type UnlockEventUncheckedCreateWithoutFlashcardInput = {
+    id?: string
+    userId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateOrConnectWithoutFlashcardInput = {
+    where: UnlockEventWhereUniqueInput
+    create: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput>
+  }
+
+  export type UnlockEventCreateManyFlashcardInputEnvelope = {
+    data: UnlockEventCreateManyFlashcardInput | UnlockEventCreateManyFlashcardInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SyllabusConceptUpsertWithoutFlashcardsInput = {
+    update: XOR<SyllabusConceptUpdateWithoutFlashcardsInput, SyllabusConceptUncheckedUpdateWithoutFlashcardsInput>
+    create: XOR<SyllabusConceptCreateWithoutFlashcardsInput, SyllabusConceptUncheckedCreateWithoutFlashcardsInput>
+    where?: SyllabusConceptWhereInput
+  }
+
+  export type SyllabusConceptUpdateToOneWithWhereWithoutFlashcardsInput = {
+    where?: SyllabusConceptWhereInput
+    data: XOR<SyllabusConceptUpdateWithoutFlashcardsInput, SyllabusConceptUncheckedUpdateWithoutFlashcardsInput>
+  }
+
+  export type SyllabusConceptUpdateWithoutFlashcardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conceptText?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    importance?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
+    nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
+  }
+
+  export type SyllabusConceptUncheckedUpdateWithoutFlashcardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    conceptText?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    importance?: NullableIntFieldUpdateOperationsInput | number | null
+    order?: IntFieldUpdateOperationsInput | number
+    language?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+  }
+
   export type ConceptMatchUpsertWithoutFlashcardsInput = {
     update: XOR<ConceptMatchUpdateWithoutFlashcardsInput, ConceptMatchUncheckedUpdateWithoutFlashcardsInput>
     create: XOR<ConceptMatchCreateWithoutFlashcardsInput, ConceptMatchUncheckedCreateWithoutFlashcardsInput>
@@ -30308,6 +34763,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     concept?: ConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
     syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateWithoutFlashcardsInput = {
@@ -30319,6 +34775,7 @@ export namespace Prisma {
     rationale?: NullableStringFieldUpdateOperationsInput | string | null
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type UserUpsertWithoutFlashcardsInput = {
@@ -30351,6 +34808,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFlashcardsInput = {
@@ -30372,6 +34831,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ReviewEventUpsertWithWhereUniqueWithoutFlashcardInput = {
@@ -30401,6 +34862,22 @@ export namespace Prisma {
     timeToRevealMs?: IntNullableFilter<"ReviewEvent"> | number | null
     timeToRateMs?: IntNullableFilter<"ReviewEvent"> | number | null
     createdAt?: DateTimeFilter<"ReviewEvent"> | Date | string
+  }
+
+  export type UnlockEventUpsertWithWhereUniqueWithoutFlashcardInput = {
+    where: UnlockEventWhereUniqueInput
+    update: XOR<UnlockEventUpdateWithoutFlashcardInput, UnlockEventUncheckedUpdateWithoutFlashcardInput>
+    create: XOR<UnlockEventCreateWithoutFlashcardInput, UnlockEventUncheckedCreateWithoutFlashcardInput>
+  }
+
+  export type UnlockEventUpdateWithWhereUniqueWithoutFlashcardInput = {
+    where: UnlockEventWhereUniqueInput
+    data: XOR<UnlockEventUpdateWithoutFlashcardInput, UnlockEventUncheckedUpdateWithoutFlashcardInput>
+  }
+
+  export type UnlockEventUpdateManyWithWhereWithoutFlashcardInput = {
+    where: UnlockEventScalarWhereInput
+    data: XOR<UnlockEventUpdateManyMutationInput, UnlockEventUncheckedUpdateManyWithoutFlashcardInput>
   }
 
   export type ReviewEventCreateWithoutSessionInput = {
@@ -30479,6 +34956,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     userCourses?: UserCourseCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewSessionsInput = {
@@ -30500,6 +34979,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
     contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewSessionsInput = {
@@ -30588,6 +35069,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewSessionsInput = {
@@ -30609,40 +35092,62 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
     contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type FlashcardCreateWithoutReviewEventsInput = {
     id?: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
-    conceptMatch: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    updatedAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutFlashcardsInput
+    conceptMatch?: ConceptMatchCreateNestedOneWithoutFlashcardsInput
     user: UserCreateNestedOneWithoutFlashcardsInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardUncheckedCreateWithoutReviewEventsInput = {
     id?: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
     userId: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutFlashcardInput
   }
 
   export type FlashcardCreateOrConnectWithoutReviewEventsInput = {
@@ -30691,35 +35196,55 @@ export namespace Prisma {
   export type FlashcardUpdateWithoutReviewEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneWithoutFlashcardsNestedInput
     user?: UserUpdateOneRequiredWithoutFlashcardsNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateWithoutReviewEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput
   }
 
   export type ReviewSessionUpsertWithoutEventsInput = {
@@ -30997,6 +35522,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardCreateNestedManyWithoutSyllabusConceptInput
     course: CourseCreateNestedOneWithoutSyllabusConceptsInput
   }
 
@@ -31010,6 +35536,7 @@ export namespace Prisma {
     language?: string
     createdAt?: Date | string
     conceptMatches?: ConceptMatchUncheckedCreateNestedManyWithoutSyllabusConceptInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutSyllabusConceptInput
   }
 
   export type SyllabusConceptCreateOrConnectWithoutNodeAttachmentsInput = {
@@ -31074,6 +35601,7 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUpdateManyWithoutSyllabusConceptNestedInput
     course?: CourseUpdateOneRequiredWithoutSyllabusConceptsNestedInput
   }
 
@@ -31087,6 +35615,503 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+  }
+
+  export type UserCreateWithoutUnlockEventsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    stats?: UserStatsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUnlockEventsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    stats?: UserStatsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUnlockEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUnlockEventsInput, UserUncheckedCreateWithoutUnlockEventsInput>
+  }
+
+  export type FlashcardCreateWithoutUnlockEventsInput = {
+    id?: string
+    question: string
+    answer?: string | null
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutFlashcardsInput
+    conceptMatch?: ConceptMatchCreateNestedOneWithoutFlashcardsInput
+    user: UserCreateNestedOneWithoutFlashcardsInput
+    reviewEvents?: ReviewEventCreateNestedManyWithoutFlashcardInput
+  }
+
+  export type FlashcardUncheckedCreateWithoutUnlockEventsInput = {
+    id?: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
+    userId: string
+    question: string
+    answer?: string | null
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviewEvents?: ReviewEventUncheckedCreateNestedManyWithoutFlashcardInput
+  }
+
+  export type FlashcardCreateOrConnectWithoutUnlockEventsInput = {
+    where: FlashcardWhereUniqueInput
+    create: XOR<FlashcardCreateWithoutUnlockEventsInput, FlashcardUncheckedCreateWithoutUnlockEventsInput>
+  }
+
+  export type ContentJobCreateWithoutUnlockEventsInput = {
+    id?: string
+    url: string
+    contentType?: $Enums.ContentType
+    youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
+    status: string
+    processedConceptsCount?: number | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+    concepts?: ConceptCreateNestedManyWithoutContentJobInput
+    user: UserCreateNestedOneWithoutContentJobsInput
+  }
+
+  export type ContentJobUncheckedCreateWithoutUnlockEventsInput = {
+    id?: string
+    userId: string
+    url: string
+    contentType?: $Enums.ContentType
+    youtubeVideoId?: string | null
+    tiktokVideoId?: string | null
+    fileName?: string | null
+    fileSize?: number | null
+    pageCount?: number | null
+    extractedText?: string | null
+    status: string
+    processedConceptsCount?: number | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+    concepts?: ConceptUncheckedCreateNestedManyWithoutContentJobInput
+  }
+
+  export type ContentJobCreateOrConnectWithoutUnlockEventsInput = {
+    where: ContentJobWhereUniqueInput
+    create: XOR<ContentJobCreateWithoutUnlockEventsInput, ContentJobUncheckedCreateWithoutUnlockEventsInput>
+  }
+
+  export type ConceptMatchCreateWithoutUnlockEventsInput = {
+    id?: string
+    confidence: number
+    matchType?: string | null
+    rationale?: string | null
+    userFeedback?: string | null
+    createdAt?: Date | string
+    concept: ConceptCreateNestedOneWithoutConceptMatchesInput
+    syllabusConcept: SyllabusConceptCreateNestedOneWithoutConceptMatchesInput
+    flashcards?: FlashcardCreateNestedManyWithoutConceptMatchInput
+  }
+
+  export type ConceptMatchUncheckedCreateWithoutUnlockEventsInput = {
+    id?: string
+    conceptId: string
+    syllabusConceptId: string
+    confidence: number
+    matchType?: string | null
+    rationale?: string | null
+    userFeedback?: string | null
+    createdAt?: Date | string
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutConceptMatchInput
+  }
+
+  export type ConceptMatchCreateOrConnectWithoutUnlockEventsInput = {
+    where: ConceptMatchWhereUniqueInput
+    create: XOR<ConceptMatchCreateWithoutUnlockEventsInput, ConceptMatchUncheckedCreateWithoutUnlockEventsInput>
+  }
+
+  export type UserUpsertWithoutUnlockEventsInput = {
+    update: XOR<UserUpdateWithoutUnlockEventsInput, UserUncheckedUpdateWithoutUnlockEventsInput>
+    create: XOR<UserCreateWithoutUnlockEventsInput, UserUncheckedCreateWithoutUnlockEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUnlockEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUnlockEventsInput, UserUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type UserUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    stats?: UserStatsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type FlashcardUpsertWithoutUnlockEventsInput = {
+    update: XOR<FlashcardUpdateWithoutUnlockEventsInput, FlashcardUncheckedUpdateWithoutUnlockEventsInput>
+    create: XOR<FlashcardCreateWithoutUnlockEventsInput, FlashcardUncheckedCreateWithoutUnlockEventsInput>
+    where?: FlashcardWhereInput
+  }
+
+  export type FlashcardUpdateToOneWithWhereWithoutUnlockEventsInput = {
+    where?: FlashcardWhereInput
+    data: XOR<FlashcardUpdateWithoutUnlockEventsInput, FlashcardUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type FlashcardUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneWithoutFlashcardsNestedInput
+    user?: UserUpdateOneRequiredWithoutFlashcardsNestedInput
+    reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
+  }
+
+  export type FlashcardUncheckedUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
+  }
+
+  export type ContentJobUpsertWithoutUnlockEventsInput = {
+    update: XOR<ContentJobUpdateWithoutUnlockEventsInput, ContentJobUncheckedUpdateWithoutUnlockEventsInput>
+    create: XOR<ContentJobCreateWithoutUnlockEventsInput, ContentJobUncheckedCreateWithoutUnlockEventsInput>
+    where?: ContentJobWhereInput
+  }
+
+  export type ContentJobUpdateToOneWithWhereWithoutUnlockEventsInput = {
+    where?: ContentJobWhereInput
+    data: XOR<ContentJobUpdateWithoutUnlockEventsInput, ContentJobUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type ContentJobUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    concepts?: ConceptUpdateManyWithoutContentJobNestedInput
+    user?: UserUpdateOneRequiredWithoutContentJobsNestedInput
+  }
+
+  export type ContentJobUncheckedUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    contentType?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    youtubeVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokVideoId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    fileSize?: NullableIntFieldUpdateOperationsInput | number | null
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
+    extractedText?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    processedConceptsCount?: NullableIntFieldUpdateOperationsInput | number | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    concepts?: ConceptUncheckedUpdateManyWithoutContentJobNestedInput
+  }
+
+  export type ConceptMatchUpsertWithoutUnlockEventsInput = {
+    update: XOR<ConceptMatchUpdateWithoutUnlockEventsInput, ConceptMatchUncheckedUpdateWithoutUnlockEventsInput>
+    create: XOR<ConceptMatchCreateWithoutUnlockEventsInput, ConceptMatchUncheckedCreateWithoutUnlockEventsInput>
+    where?: ConceptMatchWhereInput
+  }
+
+  export type ConceptMatchUpdateToOneWithWhereWithoutUnlockEventsInput = {
+    where?: ConceptMatchWhereInput
+    data: XOR<ConceptMatchUpdateWithoutUnlockEventsInput, ConceptMatchUncheckedUpdateWithoutUnlockEventsInput>
+  }
+
+  export type ConceptMatchUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    matchType?: NullableStringFieldUpdateOperationsInput | string | null
+    rationale?: NullableStringFieldUpdateOperationsInput | string | null
+    userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    concept?: ConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
+    flashcards?: FlashcardUpdateManyWithoutConceptMatchNestedInput
+  }
+
+  export type ConceptMatchUncheckedUpdateWithoutUnlockEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conceptId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    matchType?: NullableStringFieldUpdateOperationsInput | string | null
+    rationale?: NullableStringFieldUpdateOperationsInput | string | null
+    userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcards?: FlashcardUncheckedUpdateManyWithoutConceptMatchNestedInput
+  }
+
+  export type UserCreateWithoutStatsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStatsInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified: boolean
+    image?: string | null
+    createdAt: Date | string
+    updatedAt: Date | string
+    resendContactId?: string | null
+    banExpires?: Date | string | null
+    banReason?: string | null
+    banned?: boolean | null
+    role?: string | null
+    feedbacks?: FeedbackUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    flashcards?: FlashcardUncheckedCreateNestedManyWithoutUserInput
+    reviewSessions?: ReviewSessionUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    userCourses?: UserCourseUncheckedCreateNestedManyWithoutUserInput
+    contentJobs?: ContentJobUncheckedCreateNestedManyWithoutUserInput
+    unlockEvents?: UnlockEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStatsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStatsInput, UserUncheckedCreateWithoutStatsInput>
+  }
+
+  export type UserUpsertWithoutStatsInput = {
+    update: XOR<UserUpdateWithoutStatsInput, UserUncheckedUpdateWithoutStatsInput>
+    create: XOR<UserCreateWithoutStatsInput, UserUncheckedCreateWithoutStatsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStatsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStatsInput, UserUncheckedUpdateWithoutStatsInput>
+  }
+
+  export type UserUpdateWithoutStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resendContactId?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    feedbacks?: FeedbackUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutUserNestedInput
+    reviewSessions?: ReviewSessionUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    userCourses?: UserCourseUncheckedUpdateManyWithoutUserNestedInput
+    contentJobs?: ContentJobUncheckedUpdateManyWithoutUserNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FeedbackCreateManyUserInput = {
@@ -31115,18 +36140,27 @@ export namespace Prisma {
 
   export type FlashcardCreateManyUserInput = {
     id?: string
-    conceptMatchId: string
+    syllabusConceptId: string
+    conceptMatchId?: string | null
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReviewSessionCreateManyUserInput = {
@@ -31172,6 +36206,15 @@ export namespace Prisma {
     errorMessage?: string | null
     createdAt?: Date | string
     completedAt?: Date | string | null
+  }
+
+  export type UnlockEventCreateManyUserInput = {
+    id?: string
+    flashcardId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
+    createdAt?: Date | string
   }
 
   export type FeedbackUpdateWithoutUserInput = {
@@ -31249,51 +36292,80 @@ export namespace Prisma {
   export type FlashcardUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutFlashcardsNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneWithoutFlashcardsNestedInput
     reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewSessionUpdateWithoutUserInput = {
@@ -31398,6 +36470,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     concepts?: ConceptUpdateManyWithoutContentJobNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutContentJobNestedInput
   }
 
   export type ContentJobUncheckedUpdateWithoutUserInput = {
@@ -31416,6 +36489,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     concepts?: ConceptUncheckedUpdateManyWithoutContentJobNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutContentJobNestedInput
   }
 
   export type ContentJobUncheckedUpdateManyWithoutUserInput = {
@@ -31433,6 +36507,33 @@ export namespace Prisma {
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UnlockEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    flashcard?: FlashcardUpdateOneRequiredWithoutUnlockEventsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutUnlockEventsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutUnlockEventsNestedInput
+  }
+
+  export type UnlockEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CourseCreateManySubjectInput = {
@@ -31593,6 +36694,7 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUpdateManyWithoutSyllabusConceptNestedInput
   }
 
@@ -31605,6 +36707,7 @@ export namespace Prisma {
     language?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conceptMatches?: ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptNestedInput
+    flashcards?: FlashcardUncheckedUpdateManyWithoutSyllabusConceptNestedInput
     nodeAttachments?: NodeSyllabusConceptUncheckedUpdateManyWithoutSyllabusConceptNestedInput
   }
 
@@ -31649,6 +36752,31 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type FlashcardCreateManySyllabusConceptInput = {
+    id?: string
+    conceptMatchId?: string | null
+    userId: string
+    question: string
+    answer?: string | null
+    questionTranslation?: string | null
+    answerTranslation?: string | null
+    language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: string | null
+    timesReviewed?: number
+    timesCorrect?: number
+    lastReviewedAt?: Date | string | null
+    nextReviewAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type NodeSyllabusConceptCreateManySyllabusConceptInput = {
     nodeId: string
     addedByUserId?: string | null
@@ -31664,6 +36792,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     concept?: ConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
     flashcards?: FlashcardUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateWithoutSyllabusConceptInput = {
@@ -31675,6 +36804,7 @@ export namespace Prisma {
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flashcards?: FlashcardUncheckedUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateManyWithoutSyllabusConceptInput = {
@@ -31685,6 +36815,85 @@ export namespace Prisma {
     rationale?: NullableStringFieldUpdateOperationsInput | string | null
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashcardUpdateWithoutSyllabusConceptInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conceptMatch?: ConceptMatchUpdateOneWithoutFlashcardsNestedInput
+    user?: UserUpdateOneRequiredWithoutFlashcardsNestedInput
+    reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutFlashcardNestedInput
+  }
+
+  export type FlashcardUncheckedUpdateWithoutSyllabusConceptInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput
+  }
+
+  export type FlashcardUncheckedUpdateManyWithoutSyllabusConceptInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    question?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
+    questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
+    sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
+    timesReviewed?: IntFieldUpdateOperationsInput | number
+    timesCorrect?: IntFieldUpdateOperationsInput | number
+    lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NodeSyllabusConceptUpdateWithoutSyllabusConceptInput = {
@@ -31712,6 +36921,15 @@ export namespace Prisma {
     timestamp?: string | null
     confidence: number
     language?: string
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateManyContentJobInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    conceptMatchId: string
+    confidence: number
     createdAt?: Date | string
   }
 
@@ -31747,6 +36965,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UnlockEventUpdateWithoutContentJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUnlockEventsNestedInput
+    flashcard?: FlashcardUpdateOneRequiredWithoutUnlockEventsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutUnlockEventsNestedInput
+  }
+
+  export type UnlockEventUncheckedUpdateWithoutContentJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutContentJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ConceptMatchCreateManyConceptInput = {
     id?: string
     syllabusConceptId: string
@@ -31766,6 +37011,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutConceptMatchesNestedInput
     flashcards?: FlashcardUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateWithoutConceptInput = {
@@ -31777,6 +37023,7 @@ export namespace Prisma {
     userFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     flashcards?: FlashcardUncheckedUpdateManyWithoutConceptMatchNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutConceptMatchNestedInput
   }
 
   export type ConceptMatchUncheckedUpdateManyWithoutConceptInput = {
@@ -31791,67 +37038,141 @@ export namespace Prisma {
 
   export type FlashcardCreateManyConceptMatchInput = {
     id?: string
+    syllabusConceptId: string
     userId: string
     question: string
-    answer: string
+    answer?: string | null
     questionTranslation?: string | null
     answerTranslation?: string | null
     language?: string
+    difficulty?: string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: string
+    unlockedAt?: Date | string | null
+    unlockedBy?: string | null
+    unlockProgress?: number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: string | null
     timesReviewed?: number
     timesCorrect?: number
     lastReviewedAt?: Date | string | null
     nextReviewAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UnlockEventCreateManyConceptMatchInput = {
+    id?: string
+    userId: string
+    flashcardId: string
+    contentJobId: string
+    confidence: number
+    createdAt?: Date | string
   }
 
   export type FlashcardUpdateWithoutConceptMatchInput = {
     id?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    syllabusConcept?: SyllabusConceptUpdateOneRequiredWithoutFlashcardsNestedInput
     user?: UserUpdateOneRequiredWithoutFlashcardsNestedInput
     reviewEvents?: ReviewEventUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateWithoutConceptMatchInput = {
     id?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewEvents?: ReviewEventUncheckedUpdateManyWithoutFlashcardNestedInput
+    unlockEvents?: UnlockEventUncheckedUpdateManyWithoutFlashcardNestedInput
   }
 
   export type FlashcardUncheckedUpdateManyWithoutConceptMatchInput = {
     id?: StringFieldUpdateOperationsInput | string
+    syllabusConceptId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     question?: StringFieldUpdateOperationsInput | string
-    answer?: StringFieldUpdateOperationsInput | string
+    answer?: NullableStringFieldUpdateOperationsInput | string | null
     questionTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     answerTranslation?: NullableStringFieldUpdateOperationsInput | string | null
     language?: StringFieldUpdateOperationsInput | string
+    difficulty?: StringFieldUpdateOperationsInput | string
+    hints?: NullableJsonNullValueInput | InputJsonValue
+    state?: StringFieldUpdateOperationsInput | string
+    unlockedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    unlockedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    unlockProgress?: FloatFieldUpdateOperationsInput | number
+    relatedContentIds?: NullableJsonNullValueInput | InputJsonValue
     sourceTimestamp?: NullableStringFieldUpdateOperationsInput | string | null
     timesReviewed?: IntFieldUpdateOperationsInput | number
     timesCorrect?: IntFieldUpdateOperationsInput | number
     lastReviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nextReviewAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUpdateWithoutConceptMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUnlockEventsNestedInput
+    flashcard?: FlashcardUpdateOneRequiredWithoutUnlockEventsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutUnlockEventsNestedInput
+  }
+
+  export type UnlockEventUncheckedUpdateWithoutConceptMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutConceptMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    flashcardId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31861,6 +37182,15 @@ export namespace Prisma {
     difficulty: string
     timeToRevealMs?: number | null
     timeToRateMs?: number | null
+    createdAt?: Date | string
+  }
+
+  export type UnlockEventCreateManyFlashcardInput = {
+    id?: string
+    userId: string
+    contentJobId: string
+    conceptMatchId: string
+    confidence: number
     createdAt?: Date | string
   }
 
@@ -31888,6 +37218,33 @@ export namespace Prisma {
     difficulty?: StringFieldUpdateOperationsInput | string
     timeToRevealMs?: NullableIntFieldUpdateOperationsInput | number | null
     timeToRateMs?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUpdateWithoutFlashcardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUnlockEventsNestedInput
+    contentJob?: ContentJobUpdateOneRequiredWithoutUnlockEventsNestedInput
+    conceptMatch?: ConceptMatchUpdateOneRequiredWithoutUnlockEventsNestedInput
+  }
+
+  export type UnlockEventUncheckedUpdateWithoutFlashcardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UnlockEventUncheckedUpdateManyWithoutFlashcardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contentJobId?: StringFieldUpdateOperationsInput | string
+    conceptMatchId?: StringFieldUpdateOperationsInput | string
+    confidence?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

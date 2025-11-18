@@ -35,17 +35,4 @@ export const APP_LINKS: NavigationGroup[] = [
       },
     ],
   },
-  {
-    title: "Account",
-    titleKey: "groups.account",
-    defaultOpenStartPath: "/dashboard/settings",
-    links: [
-      {
-        href: "/dashboard/settings",
-        Icon: Settings,
-        label: "Settings",
-        labelKey: "links.settings",
-      },
-    ],
-  },
 ] satisfies NavigationGroup[];
