@@ -1,10 +1,17 @@
 import type { PDFExtractionResult } from "./types";
-import { PDFParse, VerbosityLevel } from "pdf-parse";
+import { extractText } from "unpdf";
 
 /**
- * Server-side usage: no PDF.js worker path needed.
- * pdf-parse runs in Node without a separate web worker.
- * Avoid referencing browser worker files to prevent Next.js module resolution errors.
+ * Server-side PDF text extraction using unpdf
+ * 
+ * unpdf is a pure JavaScript library that works perfectly in serverless environments
+ * like Vercel. It has zero native dependencies and doesn't require canvas or browser APIs.
+ * 
+ * Key benefits:
+ * - No @napi-rs/canvas dependency
+ * - No DOMMatrix, ImageData, or Path2D requirements
+ * - Works in Node.js serverless functions
+ * - Lightweight and fast
  */
 
 /**
@@ -41,56 +48,53 @@ export async function extractPDFText(url: string): Promise<PDFExtractionResult> 
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    console.log("Parsing PDF...", {
+    console.log("Parsing PDF with unpdf...", {
       size: buffer.length,
       sizeFromHeader: fileSize,
     });
 
-    // Parse the PDF using PDFParse class (v2.x API)
-    const parser = new PDFParse({
-      data: buffer,
-      verbosity: VerbosityLevel.ERRORS,
+    // Extract text using unpdf with mergePages option
+    // This returns { totalPages: number, text: string }
+    // unpdf requires Uint8Array, not Buffer
+    const uint8Array = new Uint8Array(buffer);
+    const result = await extractText(uint8Array, {
+      mergePages: true,
     });
 
-    try {
-      const result = await parser.getText();
+    // Extract filename from URL
+    const urlObj = new URL(url);
+    const pathParts = urlObj.pathname.split("/");
+    const fileName = pathParts[pathParts.length - 1] ?? "document.pdf";
 
-      // Extract filename from URL
-      const urlObj = new URL(url);
-      const pathParts = urlObj.pathname.split("/");
-      const fileName = pathParts[pathParts.length - 1] || "document.pdf";
+    // Get the extracted text
+    const extractedText = result.text.trim();
 
-      const extractedText = result.text.trim();
-
-      if (!extractedText) {
-        return {
-          success: false,
-          error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
-        };
-      }
-
-      console.log("PDF parsed successfully:", {
-        fileName,
-        pages: result.pages.length,
-        textLength: extractedText.length,
-        preview: `${extractedText.substring(0, 100)}...`,
-      });
-
+    if (!extractedText) {
       return {
-        success: true,
-        data: {
-          extractedText,
-          metadata: {
-            fileName,
-            fileSize: buffer.length,
-            pageCount: result.pages.length,
-            url,
-          },
-        },
+        success: false,
+        error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
       };
-    } finally {
-      await parser.destroy();
     }
+
+    console.log("PDF parsed successfully with unpdf:", {
+      fileName,
+      pages: result.totalPages,
+      textLength: extractedText.length,
+      preview: `${extractedText.substring(0, 100)}...`,
+    });
+
+    return {
+      success: true,
+      data: {
+        extractedText,
+        metadata: {
+          fileName,
+          fileSize: buffer.length,
+          pageCount: result.totalPages,
+          url,
+        },
+      },
+    };
   } catch (error) {
     console.error("PDF extraction error:", error);
     return {
@@ -108,51 +112,48 @@ export async function extractPDFTextFromBuffer(
   fileName: string
 ): Promise<PDFExtractionResult> {
   try {
-    console.log("Parsing PDF from buffer...", {
+    console.log("Parsing PDF from buffer with unpdf...", {
       fileName,
       size: buffer.length,
     });
 
-    // Parse the PDF using PDFParse class (v2.x API)
-    const parser = new PDFParse({
-      data: buffer,
-      verbosity: VerbosityLevel.ERRORS,
+    // Extract text using unpdf with mergePages option
+    // This returns { totalPages: number, text: string }
+    // unpdf requires Uint8Array, not Buffer
+    const uint8Array = new Uint8Array(buffer);
+    const result = await extractText(uint8Array, {
+      mergePages: true,
     });
 
-    try {
-      const result = await parser.getText();
+    // Get the extracted text
+    const extractedText = result.text.trim();
 
-      const extractedText = result.text.trim();
-
-      if (!extractedText) {
-        return {
-          success: false,
-          error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
-        };
-      }
-
-      console.log("PDF parsed successfully:", {
-        fileName,
-        pages: result.pages.length,
-        textLength: extractedText.length,
-        preview: `${extractedText.substring(0, 100)}...`,
-      });
-
+    if (!extractedText) {
       return {
-        success: true,
-        data: {
-          extractedText,
-          metadata: {
-            fileName,
-            fileSize: buffer.length,
-            pageCount: result.pages.length,
-            url: "", // No URL for uploaded files
-          },
-        },
+        success: false,
+        error: "PDF appears to be empty or contains no extractable text (might be scanned images)",
       };
-    } finally {
-      await parser.destroy();
     }
+
+    console.log("PDF parsed successfully with unpdf:", {
+      fileName,
+      pages: result.totalPages,
+      textLength: extractedText.length,
+      preview: `${extractedText.substring(0, 100)}...`,
+    });
+
+    return {
+      success: true,
+      data: {
+        extractedText,
+        metadata: {
+          fileName,
+          fileSize: buffer.length,
+          pageCount: result.totalPages,
+          url: "", // No URL for uploaded files
+        },
+      },
+    };
   } catch (error) {
     console.error("PDF extraction error:", error);
     return {

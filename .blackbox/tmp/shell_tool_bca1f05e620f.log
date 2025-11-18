@@ -1,0 +1,17 @@
+
+> nowts@0.1.0 dev /Users/hugoganet/Code/WIP/hack_the_gap
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use by process 97495, using available port 3001 instead.
+   ▲ Next.js 15.5.0 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.1.145:3001
+   - Environments: .env
+   - Experiments (use with caution):
+     ✓ authInterrupts
+
+ ✓ Starting...
+ ✓ Compiled middleware in 142ms
+ ✓ Ready in 1223ms
+   Reload env: .env
+   Reload env: .env
