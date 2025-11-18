@@ -65,6 +65,12 @@ export type KnowledgeTree = {
   courses: CourseData[];
 };
 
+export type Flashcard = {
+  question: string;
+  difficulty: "easy" | "medium" | "hard";
+  hints?: string[];
+};
+
 export type AtomicConcept = {
   conceptText: string;
   path: string;
@@ -73,7 +79,7 @@ export type AtomicConcept = {
   category: string | null;
   order: number;
   isAtomic: boolean;
-  flashcardQuestion: string;
+  flashcard: Flashcard;
 };
 
 export type ExtractionMetadata = {
