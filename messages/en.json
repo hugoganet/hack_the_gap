@@ -67,8 +67,7 @@
       "account": "Account"
     },
     "links": {
-      "dashboard": "Dashboard",
-      "myLearning": "My Learning",
+      "learn": "Learn",
       "courses": "Courses",
       "settings": "Settings"
     }
@@ -131,6 +130,80 @@
     },
     "overview": {
       "title": "Dashboard"
+    },
+    "learn": {
+      "welcome": "Welcome back, {name}!",
+      "subtitle": "Your daily learning hub",
+      "inbox": {
+        "title": "Add Content",
+        "description": "Drop a URL or file to process content",
+        "drag": {
+          "dropHere": "Drop here",
+          "dragDrop": "Drag & drop content",
+          "supported": "YouTube, TikTok, articles, or PDF files"
+        },
+        "input": {
+          "placeholder": "Or paste a URL here..."
+        },
+        "button": {
+          "process": "Process",
+          "processing": "Processing"
+        },
+        "types": {
+          "youtube": "YouTube",
+          "tiktok": "TikTok",
+          "articles": "Articles",
+          "pdfs": "PDFs"
+        },
+        "toast": {
+          "successTitle": "✅ Processing complete!",
+          "successDesc": "Extracted {count} {count, plural, one {concept} other {concepts}}",
+          "loadFailed": "Failed to load course data",
+          "processFailed": "Failed to process content",
+          "unexpected": "An unexpected error occurred. Please try again.",
+          "uploadingPdf": "Uploading PDF...",
+          "extractingConcepts": "Extracting concepts...",
+          "onlyPdf": "Only PDF files are supported",
+          "fileTooLarge": "File size must be less than 10MB",
+          "uploadFailed": "Failed to upload PDF",
+          "pdfProcessedDesc": "Processed {pages} {pages, plural, one {page} other {pages}} • Extracted {count} {count, plural, one {concept} other {concepts}}"
+        }
+      },
+      "reviewQueue": {
+        "title": "Review Today",
+        "description": "Review your flashcards to strengthen your memory",
+        "count": "{count, plural, =0 {No cards to review} one {# card to review} other {# cards to review}}",
+        "upToDate": "You're up to date! 🎉",
+        "dueTomorrow": "{count} {count, plural, one {card} other {cards}} due tomorrow",
+        "perCourseCount": "{count, plural, one {# card} other {# cards}}"
+      },
+      "quickStats": {
+        "concepts": "concepts",
+        "courses": "courses",
+        "sessions": "sessions"
+      },
+      "unlock": {
+        "totalConcepts": "Total Concepts",
+        "percentUnlocked": "{percent}% unlocked",
+        "locked": {
+          "title": "Locked",
+          "hint": "Watch content to unlock"
+        },
+        "unlocked": {
+          "title": "Unlocked",
+          "hint": "Ready to review"
+        },
+        "mastered": {
+          "title": "Mastered",
+          "percent": "{percent}% mastered"
+        },
+        "streak": {
+          "title": "Unlock Streak",
+          "current": "Current streak",
+          "longest": "Longest streak",
+          "badge": "🔥 On fire! Keep it up!"
+        }
+      }
     },
     "users": {
       "title": "Never lose what you learn",

@@ -18,14 +18,8 @@ export const APP_LINKS: NavigationGroup[] = [
       {
         href: "/dashboard",
         Icon: Home,
-        label: "Dashboard",
-        labelKey: "links.dashboard",
-      },
-      {
-        href: "/dashboard/users",
-        Icon: User,
-        label: "My Learning",
-        labelKey: "links.myLearning",
+        label: "Learn",
+        labelKey: "links.learn",
       },
       {
         href: "/dashboard/courses",

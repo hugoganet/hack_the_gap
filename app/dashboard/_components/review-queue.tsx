@@ -1,16 +1,17 @@
-import { getRequiredUser } from "@/lib/auth/auth-user";
 import { prisma } from "@/lib/prisma";
-import type { Prisma } from "@prisma/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, Calendar, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 
-export async function CardsToReviewToday() {
-  const user = await getRequiredUser();
+type ReviewQueueProps = {
+  userId: string;
+};
+
+export async function ReviewQueue({ userId }: ReviewQueueProps) {
   const locale = await getLocale();
-  const t = await getTranslations("dashboard.users.reviewsToday");
+  const t = await getTranslations("dashboard.learn.reviewQueue");
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -19,11 +20,11 @@ export async function CardsToReviewToday() {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   // Infer flashcard element type from prisma.findMany result
-    type FlashcardWithMatch = Awaited<ReturnType<typeof prisma.flashcard.findMany>> extends (infer T)[] ? T : never;
+  type FlashcardWithMatch = Awaited<ReturnType<typeof prisma.flashcard.findMany>> extends (infer T)[] ? T : never;
 
   const flashcardsToday = await prisma.flashcard.findMany({
     where: {
-      userId: user.id,
+      userId,
       nextReviewAt: {
         gte: today,
         lt: tomorrow,
@@ -67,7 +68,7 @@ export async function CardsToReviewToday() {
 
   const flashcardsTomorrow = await prisma.flashcard.count({
     where: {
-      userId: user.id,
+      userId,
       nextReviewAt: {
         gte: tomorrow,
         lt: dayAfterTomorrow,
@@ -75,27 +76,25 @@ export async function CardsToReviewToday() {
     },
   });
 
-  // Group flashcards by course (single declaration)
-    const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: FlashcardWithMatch[] }>>((acc, flashcard) => {
-      // guard against missing conceptMatch / syllabusConcept / course
-      const course = flashcard.conceptMatch?.syllabusConcept?.course;
-      if (!course) {
-        // skip flashcards that have no course information
-        return acc;
-      }
-  
-      const courseId = course.id;
-      if (!(courseId in acc)) {
-        acc[courseId] = {
-          course,
-          flashcards: [],
-        };
-      }
-      acc[courseId].flashcards.push(flashcard);
+  // Group flashcards by course
+  const flashcardsByCourse = flashcardsToday.reduce<Record<string, { course: { id: string; name: string; code: string }; flashcards: FlashcardWithMatch[] }>>((acc, flashcard) => {
+    const course = flashcard.conceptMatch?.syllabusConcept?.course;
+    if (!course) {
       return acc;
-    }, {});
-  
-    const coursesWithFlashcards = Object.values(flashcardsByCourse);
+    }
+
+    const courseId = course.id;
+    if (!(courseId in acc)) {
+      acc[courseId] = {
+        course,
+        flashcards: [],
+      };
+    }
+    acc[courseId].flashcards.push(flashcard);
+    return acc;
+  }, {});
+
+  const coursesWithFlashcards = Object.values(flashcardsByCourse);
 
   return (
     <Card>

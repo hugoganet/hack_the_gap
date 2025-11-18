@@ -44,3 +44,77 @@ npm warn Unknown project config "auto-install-peers". This will stop working in 
  ✓ Compiled /[...catchAll] in 1430ms
  GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 2167ms
  GET /en/dashboard/courses/9c423f6d-44ea-477a-b5d9-368ad50ae360 200 in 92ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 97ms
+ ✓ Compiled in 1103ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 1491ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 404 in 791ms
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+[Error: The requested resource isn't a valid image.] { statusCode: 400 }
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 446ms
+ GET /favicon.ico 200 in 398ms
+ GET /api/auth/get-session 200 in 613ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 241ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 242ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 244ms
+ ✓ Compiled in 402ms
+ ✓ Compiled /[...catchAll] in 140ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 1800ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 506ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 318ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 346ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 276ms
+ ✓ Compiled in 246ms
+ ✓ Compiled /[...catchAll] in 36ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 962ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 200 in 489ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 300ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 237ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 244ms
+ GET /en/dashboard/courses/a65a1767-ee67-4d50-8ede-e74519e50cd6 404 in 893ms
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+[Error: The requested resource isn't a valid image.] { statusCode: 400 }
+ GET /api/auth/get-session 200 in 532ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 306ms
+ GET /en/orgs 200 in 62ms
+ GET /en/orgs 200 in 101ms
+ ✓ Compiled in 189ms
+ ✓ Compiled /[...catchAll] in 136ms
+ GET /en/orgs 200 in 2265ms
+ GET /en/orgs 200 in 885ms
+ ✓ Compiled in 269ms
+ ✓ Compiled /[...catchAll] in 46ms
+ GET /en/orgs 200 in 959ms
+ GET /en/orgs 200 in 624ms
+ GET /en/orgs 404 in 1384ms
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+[Error: The requested resource isn't a valid image.] { statusCode: 400 }
+ GET /api/auth/get-session 200 in 616ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 328ms
+ GET /en/orgs 200 in 432ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 426ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 397ms
+ GET /favicon.ico?favicon.5882ef59.ico 200 in 295ms
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 3.4s
+Error: Route "/[locale]" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at LocaleLayout (app/[locale]/layout.tsx:13:30)
+  11 |   params: { locale: string };
+  12 | }) {
+> 13 |   const localeParam = params.locale;
+     |                              ^
+  14 |   const locale: Locale = isLocale(localeParam) ? localeParam : "en";
+  15 |
+  16 |   // unstable_setRequestLocale(locale); // No longer needed
+ GET /en 200 in 5364ms
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+ GET /api/auth/get-session 200 in 649ms
+ GET /en/orgs 200 in 130ms
+ GET /en/dashboard 404 in 785ms
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+ ⨯ The requested resource isn't a valid image for /images/icon.png received null
+[Error: The requested resource isn't a valid image.] { statusCode: 400 }
+ GET /api/auth/get-session 200 in 653ms
+[?25h

@@ -59,14 +59,6 @@ export function CourseFlashcardsView({ course, flashcards }: Props) {
         </div>
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">{course.name}</h1>
-          {unlockedCount > 0 && (
-            <Button size="lg" className="gap-2" asChild>
-              <Link href={`/${locale}/dashboard/courses/${course.id}/review`}>
-                <Play className="size-4" />
-                {t("startReview")}
-              </Link>
-            </Button>
-          )}
         </div>
       </div>
 

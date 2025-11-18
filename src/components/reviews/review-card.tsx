@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Brain, Clock, ChevronDown } from "lucide-react";
 import { DifficultyButton } from "./difficulty-button";
+import { FeedbackNudgeInline } from "@/features/contact/feedback/feedback-nudge";
 import { DIFFICULTY_CONFIGS, type DifficultyRating, type ReviewFlashcard } from "@/features/reviews/types";
 
 type ReviewCardProps = {
@@ -18,6 +19,7 @@ export function ReviewCard({ flashcard, onRate, disabled = false }: ReviewCardPr
   const [revealed, setRevealed] = useState(false);
   const [revealedAt, setRevealedAt] = useState<number | null>(null);
   const [questionShownAt] = useState<number>(Date.now());
+  const [showNudge, setShowNudge] = useState(false);
 
   const handleReveal = () => {
     setRevealed(true);
@@ -30,6 +32,18 @@ export function ReviewCard({ flashcard, onRate, disabled = false }: ReviewCardPr
     const timeToRateMs = revealedAt ? now - revealedAt : undefined;
     
     onRate(difficulty, timeToRevealMs, timeToRateMs);
+
+    try {
+      const cnt = Number(sessionStorage.getItem("review_rating_count") || "0") + 1;
+      sessionStorage.setItem("review_rating_count", String(cnt));
+      const nudgeShown = sessionStorage.getItem("review_nudge_shown") === "1";
+      if (!nudgeShown && cnt >= 3) {
+        setShowNudge(true);
+        sessionStorage.setItem("review_nudge_shown", "1");
+      }
+    } catch {
+      // ignore storage errors
+    }
   };
 
   return (
@@ -106,6 +120,15 @@ export function ReviewCard({ flashcard, onRate, disabled = false }: ReviewCardPr
               <div className="text-xs text-center text-muted-foreground">
                 Press 1, 2, or 3
               </div>
+
+              {showNudge && (
+                <div className="mt-2 flex justify-center">
+                  <FeedbackNudgeInline
+                    label="Something confusing? Tell us."
+                    presetMessage={`Flashcard review feedback: `}
+                  />
+                </div>
+              )}
             </div>
           </>
         )}

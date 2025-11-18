@@ -25,13 +25,16 @@ import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { Angry, Frown, Meh, SmilePlus } from "lucide-react";
 import type { PropsWithChildren } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { feedbackAction } from "./contact-feedback.action";
 import type { ContactFeedbackSchemaType } from "./contact-feedback.schema";
 import { ContactFeedbackSchema } from "./contact-feedback.schema";
 
-type ContactFeedbackPopoverProps = PropsWithChildren;
+type ContactFeedbackPopoverProps = PropsWithChildren<{
+  presetMessage?: string;
+  onSent?: () => void;
+}>;
 
 export const ContactFeedbackPopover = (props: ContactFeedbackPopoverProps) => {
   const [open, setOpen] = useState(false);
@@ -41,8 +44,19 @@ export const ContactFeedbackPopover = (props: ContactFeedbackPopoverProps) => {
     schema: ContactFeedbackSchema,
     defaultValues: {
       email: email,
+      message: props.presetMessage ?? "",
     },
   });
+
+  useEffect(() => {
+    if (open && props.presetMessage) {
+      const current = form.getValues("message");
+      if (!current) {
+        form.setValue("message", props.presetMessage);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, props.presetMessage]);
 
   const mutation = useMutation({
     mutationFn: async (values: ContactFeedbackSchemaType) => {
@@ -52,6 +66,7 @@ export const ContactFeedbackPopover = (props: ContactFeedbackPopoverProps) => {
       toast.success("Your feedback has been sent! Thanks you.");
       form.reset();
       setOpen(false);
+      props.onSent?.();
     },
     onError: () => {
       toast.error("An error occurred");

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Youtube, FileText, ExternalLink } from "lucide-react";
+import { FeedbackNudgeInline } from "@/features/contact/feedback/feedback-nudge";
 
 type ContentRecommendation = {
   id: string;
@@ -29,10 +30,18 @@ export function ContentRecommendations({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recommended Content</CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Watch these to unlock the most answers
-        </p>
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <CardTitle>Recommended Content</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Watch these to unlock the most answers
+            </p>
+          </div>
+          <FeedbackNudgeInline
+            label="Improve suggestions?"
+            presetMessage="Recommendations feedback: "
+          />
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {recommendations.map((rec) => (

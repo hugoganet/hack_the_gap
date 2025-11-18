@@ -7,6 +7,7 @@ import { CheckCircle2, ChevronRight } from "lucide-react";
 import type { ReviewSummary } from "@/features/reviews/types";
 import { DIFFICULTY_CONFIGS } from "@/features/reviews/types";
 import { cn } from "@/lib/utils";
+import { FeedbackNudgeInline } from "@/features/contact/feedback/feedback-nudge";
 
 type CompletionScreenProps = {
   summary: ReviewSummary;
@@ -66,6 +67,15 @@ export function CompletionScreen({ summary, onBackToCourse }: CompletionScreenPr
           Back to Course
           <ChevronRight className="size-4" />
         </Button>
+
+        {/* Soft feedback nudge */}
+        <div className="flex justify-center">
+          <FeedbackNudgeInline
+            label="How was this review session?"
+            presetMessage="Review session feedback: "
+            className="mt-1"
+          />
+        </div>
       </CardContent>
     </Card>
   );
