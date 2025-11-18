@@ -82,6 +82,7 @@ export async function matchConceptsToSyllabus(
         syllabusName: s.conceptText,
         syllabusCategory: s.category ?? null,
         embeddingSimilarity: cand.v,
+        rationaleLanguage: s.language || c.language || "en",
       });
 
       // If LLM fails, keep an embeddings-only degraded result
