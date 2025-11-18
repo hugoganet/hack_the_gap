@@ -16,31 +16,32 @@ export const Hero = () => {
               variant="h1"
               className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl lg:text-7xl"
             >
-              Write the best content and Grow your{" "}
+              Stop{" "}
               <span className="relative inline-block">
-                <span>business</span>
+                <span>Forgetting</span>
                 <CircleSvg className="fill-primary absolute inset-0" />
-              </span>
+              </span>{" "}
+              What You Learn
             </Typography>
             <Typography
               variant="large"
               className="text-muted-foreground mt-8 text-lg font-medium text-pretty sm:text-xl/8"
             >
-              Build for Thread, create, schedule and publish your content to
-              your account with AI.
+              Turn YouTube videos, articles, and PDFs into long-term memory — automatically.
+              Upload your syllabus. Watch content. Review 3 min/day. Actually remember.
             </Typography>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/signin"
+                href="/signup"
                 className={buttonVariants({ size: "lg", variant: "default" })}
               >
-                Get started
+                Upload Your Syllabus (Free)
               </Link>
               <Link
-                href="#pricing"
+                href="#how-it-works"
                 className={buttonVariants({ size: "lg", variant: "link" })}
               >
-                Learn more <span aria-hidden="true">→</span>
+                See how it works <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>

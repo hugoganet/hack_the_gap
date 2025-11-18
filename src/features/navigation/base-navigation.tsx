@@ -18,6 +18,7 @@ import { SiteConfig } from "@/site-config";
 import { Building2, Home } from "lucide-react";
 import type { PropsWithChildren } from "react";
 import { SidebarUserButton } from "../sidebar/sidebar-user-button";
+import { BrandFont } from "@/styles/fonts";
 
 export function BaseNavigation({ children }: PropsWithChildren) {
   return (
@@ -41,7 +42,15 @@ const BaseSidebar = () => {
       <SidebarHeader>
         <div className="mb-4 flex flex-row items-center gap-2">
           <LogoSvg size={24} />
-          <Typography className="font-brand">{SiteConfig.title}</Typography>
+          <Typography
+            className={`${BrandFont.className} font-brand`}
+            style={{
+              fontFamily:
+                '"BangersLocal", var(--font-brand), var(--font-caption), var(--font-geist-sans), sans-serif',
+            }}
+          >
+            {SiteConfig.title}
+          </Typography>
         </div>
       </SidebarHeader>
       <SidebarContent>

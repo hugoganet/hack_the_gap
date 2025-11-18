@@ -339,6 +339,20 @@
 
 /* Other styles */
 
+/* Brand font fallback to ensure override in any context (including client islands) */
+@font-face {
+  font-family: "BangersLocal";
+  src: url("/fonts/Bangers-Regular.ttf") format("truetype");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Strong utility to apply brand font even when next/font variables/classes are present */
+.font-brand {
+  font-family: "BangersLocal", var(--font-brand), var(--font-caption), var(--font-geist-sans), system-ui, sans-serif !important;
+}
+
 .citation {
   position: relative;
   display: inline-block;

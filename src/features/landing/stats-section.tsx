@@ -12,24 +12,24 @@ type StatProps = {
 
 const stats: StatProps[] = [
   {
-    number: 476,
-    suffix: "K",
-    text: "Threads scheduled every month.",
+    number: 85,
+    suffix: "%",
+    text: "of learning forgotten in 2 weeks without a system",
   },
   {
-    number: 1.44,
-    suffix: "K",
-    text: "Users that use our platform.",
+    number: 3,
+    suffix: " min/day",
+    text: "Average review time to retain what you learn",
   },
   {
-    number: 1.5,
-    suffix: "M+",
-    text: "Interactions with posts created by our users.",
+    number: 68,
+    suffix: "%+",
+    text: "Concept matching accuracy (improving daily)",
   },
   {
-    number: 192,
-    suffix: "K",
-    text: "Users impacted by our published posts.",
+    number: 0,
+    suffix: "",
+    text: "Manual flashcard creation required",
   },
 ];
 
@@ -72,7 +72,10 @@ function Counter({
       ease: "easeInOut",
 
       onUpdate(value) {
-        node.textContent = value.toFixed(2);
+        // Show integers for whole numbers, otherwise show 1 decimal place
+        node.textContent = Number.isInteger(to) 
+          ? Math.round(value).toString() 
+          : value.toFixed(1);
       },
     });
 

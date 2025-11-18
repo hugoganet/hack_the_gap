@@ -1,14 +1,12 @@
 "use client";
 
-import { LogoSvg } from "@/components/svg/logo-svg";
 import { SiteConfig } from "@/site-config";
 import { motion, useMotionValue, useScroll, useTransform } from "motion/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { AuthButtonClient } from "../auth/auth-button-client";
 import { ThemeToggle } from "../theme/theme-toggle";
-
+import { BrandFont } from "@/styles/fonts";
 function useBoundedScroll(threshold: number) {
   const { scrollY } = useScroll();
   const scrollYBounded = useMotionValue(0);
@@ -63,12 +61,6 @@ export function LandingHeader() {
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8">
         <div className="flex items-center gap-1">
-          <LogoSvg
-            size={24}
-            onClick={() => {
-              router.push("/");
-            }}
-          />
           <motion.p
             style={{
               scale: useTransform(
@@ -76,8 +68,10 @@ export function LandingHeader() {
                 [0, 1],
                 [1, 0.9],
               ),
+              fontFamily:
+                '"BangersLocal", var(--font-brand), var(--font-caption), var(--font-geist-sans), sans-serif',
             }}
-            className="flex origin-left items-center text-xl font-semibold uppercase max-sm:hidden"
+            className={`${BrandFont.className} font-brand flex origin-left items-center text-xl font-semibold uppercase max-sm:hidden`}
           >
             {SiteConfig.title}
           </motion.p>

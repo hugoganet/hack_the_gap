@@ -4,14 +4,17 @@ import { BentoGrid, BentoGridItem } from "@/components/nowts/bentoo";
 import { Loader } from "@/components/nowts/loader";
 import { Typography } from "@/components/nowts/typography";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import {
   BarChart3,
+  Brain,
   Calendar,
-  CalendarCheck,
   CheckCircle,
-  Sparkles,
-  X,
+  Lock,
+  Target,
+  Unlock,
 } from "lucide-react";
 import type { Variants } from "motion/react";
 import { motion } from "motion/react";
@@ -48,27 +51,29 @@ const Skeleton1 = () => {
       whileHover="animate"
       className="flex h-full flex-col gap-2"
     >
-      <motion.div className="border-border bg-background flex flex-row items-start gap-2 rounded-2xl border p-3">
-        <img
-          alt="avatar"
-          src="https://melvynx.com/_next/image?url=%2Fimages%2Fmy-face.png&w=828&q=75"
-          className="size-6 shrink-0 rounded-full"
-        />
-        <div>
-          <p className="text-xs text-neutral-500">
-            Create a Thread to announce Now.ts
-          </p>
+      <motion.div className="border-border bg-background flex flex-col gap-2 rounded-2xl border p-3">
+        <div className="flex items-center gap-2">
+          <div className="size-2 rounded-full bg-red-500" />
+          <p className="text-xs text-neutral-500">Processing video...</p>
         </div>
+        <p className="text-xs font-medium">
+          "Kant's Categorical Imperative explained"
+        </p>
       </motion.div>
       <motion.div
         variants={variants}
-        className="border-border bg-background flex flex-row items-start justify-end gap-2 rounded-2xl border p-3"
+        className="border-border bg-background flex flex-col gap-2 rounded-2xl border p-3"
       >
-        <p className="text-xs text-neutral-500">
-          Today I announced my new project, Now.TS, the perfect way to create
-          professional Next.js application in days.
-        </p>
-        <div className="size-6 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-violet-500" />
+        <div className="flex items-center gap-2">
+          <CheckCircle size={12} className="text-green-500" />
+          <p className="text-xs text-neutral-500">4 concepts extracted</p>
+        </div>
+        <div className="flex flex-col gap-1">
+          <p className="text-xs">✓ Categorical Imperative</p>
+          <p className="text-xs">✓ Deontological Ethics</p>
+          <p className="text-xs">✓ Moral Law</p>
+          <p className="text-xs">✓ Practical Reason</p>
+        </div>
       </motion.div>
     </motion.div>
   );
@@ -88,102 +93,96 @@ const Skeleton2 = () => {
       <motion.div>
         <Alert variant="default" className="">
           <Loader size={20} />
-          <AlertTitle>Schedule your threads...</AlertTitle>
+          <AlertTitle>Matching to Philosophy 101 syllabus...</AlertTitle>
         </Alert>
       </motion.div>
       <motion.div variants={variants}>
         <Alert variant="success" className="">
           <CheckCircle size={20} />
-          <AlertTitle>Your threads are now scheduled for 7:00 AM</AlertTitle>
+          <AlertTitle>3/4 concepts matched (92% confidence)</AlertTitle>
         </Alert>
+      </motion.div>
+      <motion.div variants={variants} className="mt-2">
+        <div className="border-border bg-background rounded-lg border p-2">
+          <p className="text-xs text-neutral-500">
+            ✅ Categorical Imperative → Kant's moral philosophy
+          </p>
+          <p className="text-xs text-neutral-500">
+            ✅ Deontological Ethics → Duty-based theories
+          </p>
+          <p className="text-xs text-neutral-500">
+            ⚠️ Moral Law → Universal principles (67% - confirm?)
+          </p>
+        </div>
       </motion.div>
     </motion.div>
   );
 };
 const Skeleton3 = () => {
-  const variants = {
-    initial: {
-      backgroundPosition: "0 50%",
-    },
-    animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
-    },
-  };
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={variants}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex size-full min-h-24 flex-1 flex-col space-y-2 rounded-lg"
-      style={{
-        background:
-          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
-        backgroundSize: "400% 400%",
-      }}
-    >
-      <motion.div className="size-full rounded-lg"></motion.div>
+    <motion.div className="flex size-full flex-col gap-2 rounded-lg p-4">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-medium">Today's Review</p>
+        <Badge variant="secondary">3 min</Badge>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="border-border bg-background rounded-lg border p-2">
+          <p className="text-xs font-medium">Categorical Imperative</p>
+          <p className="text-xs text-neutral-500">Due: Now</p>
+        </div>
+        <div className="border-border bg-background rounded-lg border p-2 opacity-50">
+          <p className="text-xs font-medium">Deontological Ethics</p>
+          <p className="text-xs text-neutral-500">Due: Tomorrow</p>
+        </div>
+        <div className="border-border bg-background rounded-lg border p-2 opacity-30">
+          <p className="text-xs font-medium">Moral Law</p>
+          <p className="text-xs text-neutral-500">Due: In 3 days</p>
+        </div>
+      </div>
     </motion.div>
   );
 };
 const Skeleton4 = () => {
   const first = {
-    initial: {
-      x: 20,
-      rotate: -5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
+    initial: { x: 20, rotate: -5 },
+    hover: { x: 0, rotate: 0 },
   };
   const second = {
-    initial: {
-      x: -20,
-      rotate: 5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
+    initial: { x: -20, rotate: 5 },
+    hover: { x: 0, rotate: 0 },
   };
   return (
     <motion.div
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 flex-row gap-4"
+      className="flex flex-1 flex-col gap-4"
     >
       <motion.div
         variants={first}
-        className="border-border bg-background flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border p-4"
+        className="border-border bg-background flex flex-col rounded-2xl border p-4"
       >
-        <Typography variant="large">+123 followers</Typography>
-        <Typography variant={"muted"}>In the last 30 days</Typography>
-        <Typography variant={"muted"} className="text-green-500">
-          +12%
+        <Typography variant="large" className="text-green-500">
+          12/45 concepts mastered
         </Typography>
-      </motion.div>
-      <motion.div className="border-border bg-background flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border p-4">
-        <Typography variant="large">+1.4 M Views</Typography>
-        <Typography variant={"muted"}>In the last 30 days</Typography>
-        <Typography variant={"muted"} className="text-green-500">
-          +21%
-        </Typography>
+        <Typography variant="muted">Philosophy 101</Typography>
+        <Progress value={26.7} className="mt-2" />
       </motion.div>
       <motion.div
         variants={second}
-        className="border-border bg-background flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border p-4"
+        className="border-border bg-background flex flex-col rounded-2xl border p-4"
       >
-        <Typography variant="large">1244 likes</Typography>
-        <Typography variant="large">766 replis</Typography>
-        <Typography variant={"muted"}>In the last 30 days</Typography>
-        <Typography variant={"muted"} className="text-green-500">
-          +12%
+        <Typography variant="large" className="text-amber-500">
+          You're missing:
+        </Typography>
+        <Typography variant="muted" className="text-xs mt-1">
+          • Virtue Ethics (Aristotle)
+        </Typography>
+        <Typography variant="muted" className="text-xs">
+          • Social Contract Theory
+        </Typography>
+        <Typography variant="muted" className="text-xs">
+          • Utilitarianism (Mill)
         </Typography>
       </motion.div>
     </motion.div>
@@ -192,28 +191,12 @@ const Skeleton4 = () => {
 
 const Skeleton5 = () => {
   const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 10,
-      rotate: 5,
-      transition: {
-        duration: 0.2,
-      },
-    },
+    initial: { x: 0 },
+    animate: { x: 10, rotate: 5, transition: { duration: 0.2 } },
   };
   const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -10,
-      rotate: -5,
-      transition: {
-        duration: 0.2,
-      },
-    },
+    initial: { x: 0 },
+    animate: { x: -10, rotate: -5, transition: { duration: 0.2 } },
   };
 
   return (
@@ -224,41 +207,23 @@ const Skeleton5 = () => {
     >
       <motion.div
         variants={variants}
-        className="border-border bg-background flex flex-row items-start gap-2 rounded-2xl border p-3"
+        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-3"
       >
-        <img
-          src="https://melvynx.com/_next/image?url=%2Fimages%2Fmy-face.png&w=828&q=75"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="size-10 rounded-full"
-        />
-        <p className="text-xs text-neutral-500">
-          What I need to do to get more followers ?
-        </p>
+        <Lock size={16} className="text-neutral-400" />
+        <div>
+          <p className="text-xs font-medium">Categorical Imperative</p>
+          <p className="text-xs text-neutral-500">Locked (45% confidence)</p>
+        </div>
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="border-border bg-background flex flex-row items-start justify-end gap-2 rounded-2xl border p-3"
+        className="border-border bg-background flex items-center gap-2 rounded-2xl border p-3"
       >
+        <Unlock size={16} className="text-green-500" />
         <div>
-          <p className="text-xs text-neutral-500">Searching...</p>
-          <motion.p
-            className="text-xs text-neutral-500"
-            variants={{
-              initial: {
-                opacity: 0,
-              },
-              animate: {
-                opacity: 1,
-              },
-            }}
-          >
-            Based on the Threads activity of the past 30 days, you should focus
-            creating content on Next.js
-          </motion.p>
+          <p className="text-xs font-medium">Deontological Ethics</p>
+          <p className="text-xs text-green-500">Unlocked (85% confidence)</p>
         </div>
-        <div className="size-6 shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-violet-500" />
       </motion.div>
     </motion.div>
   );
@@ -266,59 +231,63 @@ const Skeleton5 = () => {
 
 const items = [
   {
-    title: "AI Content Generation",
+    title: "Atomic Concept Extraction",
     description: (
       <span className="text-sm">
-        Experience the power of AI in generating unique content.
+        AI breaks down videos and PDFs into learnable chunks. One concept = one flashcard.
+        No more overwhelming walls of text.
       </span>
     ),
     header: <Skeleton1 />,
     className: "md:col-span-1",
-    icon: <Sparkles size={20} />,
+    icon: <Brain size={20} />,
   },
   {
-    title: "Schedule with ease",
+    title: "Syllabus Matching",
     description: (
       <span className="text-sm">
-        We help you schedule your threads with ease.
+        See exactly which concepts you've learned vs. what's missing from your course requirements.
+        68%+ accuracy, improving daily.
       </span>
     ),
     header: <Skeleton2 />,
     className: "md:col-span-1",
-    icon: <Calendar size={20} />,
+    icon: <Target size={20} />,
   },
   {
-    title: "Calendar View",
+    title: "Spaced Repetition",
     description: (
       <span className="text-sm">
-        See what you have planned for the day with our calendar view.
+        Review 3 min/day. The system schedules optimal review times for long-term retention.
+        Based on proven cognitive science.
       </span>
     ),
     header: <Skeleton3 />,
     className: "md:col-span-1",
-    icon: <CalendarCheck size={20} />,
+    icon: <Calendar size={20} />,
   },
   {
-    title: "Threads Analysis",
+    title: "Gap Analysis",
     description: (
       <span className="text-sm">
-        Understand your threads with our powerful analytics.
+        "You're missing: [specific concepts]" before exams. Know exactly what you don't know.
+        No more false confidence.
       </span>
     ),
     header: <Skeleton4 />,
     className: "md:col-span-2",
     icon: <BarChart3 size={20} />,
   },
-
   {
-    title: "See what works",
+    title: "Unlock Progress",
     description: (
       <span className="text-sm">
-        Understand the hype and trends with our powerful research tools.
+        Gamified learning: flashcards unlock as you master concepts. Track your progress visually.
+        Stay motivated.
       </span>
     ),
     header: <Skeleton5 />,
     className: "md:col-span-1",
-    icon: <X className="size-4 text-neutral-500" />,
+    icon: <Unlock size={20} />,
   },
 ];

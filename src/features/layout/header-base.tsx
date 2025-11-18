@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { PropsWithChildren } from "react";
 import { Layout } from "../page/layout";
 import { ThemeToggle } from "../theme/theme-toggle";
+import { BrandFont } from "@/styles/fonts";
 
 export function HeaderBase({ children }: PropsWithChildren) {
   return (

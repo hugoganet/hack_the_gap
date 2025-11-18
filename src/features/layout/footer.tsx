@@ -5,6 +5,7 @@ import { Layout, LayoutContent } from "@/features/page/layout";
 import { SiteConfig } from "@/site-config";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { BrandFont } from "@/styles/fonts";
 
 export function Footer() {
   const locale = useLocale();

@@ -25,6 +25,8 @@ import type { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 import { getAppNavigation } from "./app-navigation.links";
 import { useTranslations } from "next-intl";
+import { BrandFont } from "@/styles/fonts";
+import { SiteConfig } from "@/site-config";
 
 export function AppSidebar() {
   const t = useTranslations("sidebar");
@@ -34,7 +36,15 @@ export function AppSidebar() {
     <Sidebar variant="inset">
       <SidebarHeader className="flex flex-col gap-2">
         <div className="flex items-center gap-2 px-2 py-1.5">
-          <h2 className="text-lg font-semibold">Recall</h2>
+          <h2
+            className={`${BrandFont.className} font-brand text-lg font-semibold`}
+            style={{
+              fontFamily:
+                '"BangersLocal", var(--font-brand), var(--font-caption), var(--font-geist-sans), sans-serif',
+            }}
+          >
+            {SiteConfig.title}
+          </h2>
         </div>
       </SidebarHeader>
       <SidebarContent>
