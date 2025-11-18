@@ -16,6 +16,8 @@ import { Providers } from "./providers";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { FeedbackFloatingButton } from "@/features/contact/feedback/feedback-floating-button";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: SiteConfig.title,
@@ -127,6 +129,8 @@ export default async function RootLayout({
               <Suspense>
                 <ServerToaster />
               </Suspense>
+              <Analytics />
+              <SpeedInsights />
             </NextIntlClientProvider>
           </Providers>
         </NuqsAdapter>
