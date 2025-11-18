@@ -11,6 +11,7 @@ export type FlashcardAnswerPromptParams = {
   extractedConcept: Concept;
   syllabusConcept: SyllabusConcept;
   matchRationale: string;
+  answerLanguage: string; // ISO code like "en", "fr"
 };
 
 /**
@@ -21,8 +22,11 @@ export function buildFlashcardAnswerPrompt({
   extractedConcept,
   syllabusConcept,
   matchRationale,
+  answerLanguage,
 }: FlashcardAnswerPromptParams): string {
   return `You are generating a flashcard answer based on content the student consumed.
+
+LANGUAGE REQUIREMENT: The answer must be written in ${answerLanguage}.
 
 QUESTION CONTEXT (from syllabus):
 - Concept: ${syllabusConcept.conceptText}

@@ -271,10 +271,13 @@ async function generateAnswerFromContent(
   syllabusConcept: SyllabusConcept,
   matchRationale: string
 ): Promise<string> {
+  const answerLanguage = (extractedConcept.language || syllabusConcept.language || "en").trim();
+  try { console.log(`[unlock] target answer language: ${answerLanguage}`); } catch {}
   const prompt = buildFlashcardAnswerPrompt({
     extractedConcept,
     syllabusConcept,
     matchRationale,
+    answerLanguage,
   });
 
   try {
