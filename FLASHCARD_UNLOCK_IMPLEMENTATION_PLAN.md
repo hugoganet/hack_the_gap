@@ -38,7 +38,7 @@
 - [x] **STEP 7:** Create UI Components - COMPLETED
 - [x] **STEP 8:** Create Progress Dashboard - COMPLETED
 - [x] **STEP 9:** Create Notification System - COMPLETED
-- [ ] **STEP 10:** Update API Routes
+- [x] **STEP 10:** Update API Routes - COMPLETED
 - [ ] **STEP 11:** Update Dashboard Pages
 - [ ] **STEP 12:** Testing & Validation
 
@@ -1433,10 +1433,10 @@ async function handleSubmit() {
 
 ---
 
-### **STEP 10: Update API Routes**
+### **STEP 10: Update API Routes** ✅ COMPLETED
 
 **Duration:** 1 hour  
-**Files:** `app/api/flashcards/`, `app/api/user/stats/`
+**Files:** `src/app/api/flashcards/route.ts`, `src/app/api/user/stats/route.ts`
 
 #### 10.1 Create Flashcards API
 
