@@ -42,8 +42,8 @@
         "new": "Nouveau"
       },
       "myCourses": "Mes cours",
-      "loading": "Chargement des cours..."
-      ,"empty": {
+      "loading": "Chargement des cours...",
+      "empty": {
         "title": "Pas encore de cours",
         "description": "Créez votre premier cours. Ajoutez votre programme et commencez à apprendre avec des fiches générées par l’IA.",
         "action": "Ajouter un nouveau cours"
@@ -88,18 +88,19 @@
           "correctCount": "{correct}/{reviewed} bonnes réponses"
         }
       }
-    }
-    ,"overview": {
+    },
+    "overview": {
       "title": "Tableau de bord"
-    }
-    ,"users": {
+    },
+    "users": {
       "title": "Ne perdez jamais ce que vous apprenez",
       "reviewsToday": {
         "title": "Cartes à réviser aujourd'hui",
         "count": "{count, plural, =0 {Aucune carte à réviser} one {# carte à réviser} other {# cartes à réviser}}",
         "upToDate": "Tu es à jour de tes répétitions pour aujourd'hui ! 🎉",
         "dueTomorrow": "Tu as {count} {count, plural, one {carte} other {cartes}} à réviser demain",
-        "perCourseCount": "{count, plural, one {# carte à réviser} other {# cartes à réviser}}"
+        "perCourseCount": "{count, plural, one {# carte à réviser} other {# cartes à réviser}}",
+        "description": "Révisez vos fiches pour renforcer votre mémoire"
       },
       "inbox": {
         "title": "Boîte de contenu",
@@ -134,14 +135,18 @@
       "addCourse": {
         "title": "Ajouter un cours",
         "description": "Recherchez un cours ou parcourez par matière",
-        "search": { "placeholder": "Recherche rapide par nom ou code du cours..." },
+        "search": {
+          "placeholder": "Recherche rapide par nom ou code du cours..."
+        },
         "empty": "Aucun résultat trouvé.",
         "headings": {
           "searchResults": "Résultats de recherche",
           "selectSubject": "Sélectionner une matière",
           "selectCourse": "Sélectionner un cours"
         },
-        "overlay": { "adding": "Ajout du cours..." },
+        "overlay": {
+          "adding": "Ajout du cours..."
+        },
         "toast": {
           "added": "{name} a été ajouté à vos cours",
           "failed": "Échec de l'ajout du cours",
@@ -201,8 +206,8 @@
           "close": "Fermer",
           "startLearning": "Commencer à apprendre →"
         }
-      }
-      ,"charts": {
+      },
+      "charts": {
         "users": {
           "title": "Utilisateurs actifs",
           "description": "Utilisateurs actifs mensuels par appareil",
@@ -230,8 +235,8 @@
           }
         }
       }
-    }
-    ,"courseDialog": {
+    },
+    "courseDialog": {
       "title": "Créer un nouveau cours",
       "description": "Ajoutez un nouveau cours pour commencer à apprendre avec des fiches mémoire générées par l’IA.",
       "fields": {
@@ -274,15 +279,20 @@
       "preferPassword": "Préférez-vous vous connecter avec mot de passe ?",
       "usePassword": "Utiliser le mot de passe",
       "wantFaster": "Vous voulez une connexion plus rapide ?",
-      "loginWithOtp": "Se connecter avec un code OTP"
-      ,"passwordForm": {
-        "email": { "label": "E-mail" },
-        "password": { "label": "Mot de passe", "forgot": "Mot de passe oublié ?" },
+      "loginWithOtp": "Se connecter avec un code OTP",
+      "passwordForm": {
+        "email": {
+          "label": "E-mail"
+        },
+        "password": {
+          "label": "Mot de passe",
+          "forgot": "Mot de passe oublié ?"
+        },
         "submit": "Se connecter"
       }
     }
-  }
-  ,"account": {
+  },
+  "account": {
     "profile": {
       "toast": {
         "updated": "Profil mis à jour",
@@ -298,6 +308,19 @@
         "changePassword": "Changer le mot de passe",
         "save": "Enregistrer"
       }
+    }
+  },
+  "settings": {
+    "theme": {
+      "label": "Thème",
+      "dark": "Sombre",
+      "light": "Clair",
+      "system": "Système"
+    },
+    "language": {
+      "label": "Langue",
+      "en": "English",
+      "fr": "Français"
     }
   }
 }

@@ -42,8 +42,8 @@
         "new": "New"
       },
       "myCourses": "My courses",
-      "loading": "Loading courses..."
-      ,"empty": {
+      "loading": "Loading courses...",
+      "empty": {
         "title": "No courses yet",
         "description": "Get started by creating your first course. Add your syllabus and start learning with AI-powered flashcards.",
         "action": "Add a new course"
@@ -88,18 +88,19 @@
           "correctCount": "{correct}/{reviewed} correct"
         }
       }
-    }
-    ,"overview": {
+    },
+    "overview": {
       "title": "Dashboard"
-    }
-    ,"users": {
+    },
+    "users": {
       "title": "Never lose what you learn",
       "reviewsToday": {
         "title": "Cards to review today",
         "count": "{count, plural, =0 {No cards to review} one {# card to review} other {# cards to review}}",
         "upToDate": "You're up to date with today's reviews! 🎉",
         "dueTomorrow": "You have {count} {count, plural, one {card} other {cards}} to review tomorrow",
-        "perCourseCount": "{count, plural, one {# card to review} other {# cards to review}}"
+        "perCourseCount": "{count, plural, one {# card to review} other {# cards to review}}",
+        "description": "Review your flashcards to strengthen your memory"
       },
       "inbox": {
         "title": "Content Inbox",
@@ -134,14 +135,18 @@
       "addCourse": {
         "title": "Add Course",
         "description": "Search for a course or browse by subject",
-        "search": { "placeholder": "Quick search by course name or code..." },
+        "search": {
+          "placeholder": "Quick search by course name or code..."
+        },
         "empty": "No results found.",
         "headings": {
           "searchResults": "Search Results",
           "selectSubject": "Select Subject",
           "selectCourse": "Select Course"
         },
-        "overlay": { "adding": "Adding course..." },
+        "overlay": {
+          "adding": "Adding course..."
+        },
         "toast": {
           "added": "Added {name} to your courses",
           "failed": "Failed to add course",
@@ -201,8 +206,8 @@
           "close": "Close",
           "startLearning": "Start Learning →"
         }
-      }
-      ,"charts": {
+      },
+      "charts": {
         "users": {
           "title": "Active Users",
           "description": "Monthly active users by device",
@@ -230,8 +235,8 @@
           }
         }
       }
-    }
-    ,"courseDialog": {
+    },
+    "courseDialog": {
       "title": "Create a new course",
       "description": "Add a new course to start learning with AI-powered flashcards.",
       "fields": {
@@ -274,15 +279,20 @@
       "preferPassword": "Prefer password sign in?",
       "usePassword": "Use password",
       "wantFaster": "Want faster sign in?",
-      "loginWithOtp": "Login with OTP code"
-      ,"passwordForm": {
-        "email": { "label": "Email" },
-        "password": { "label": "Password", "forgot": "Forgot password ?" },
+      "loginWithOtp": "Login with OTP code",
+      "passwordForm": {
+        "email": {
+          "label": "Email"
+        },
+        "password": {
+          "label": "Password",
+          "forgot": "Forgot password ?"
+        },
         "submit": "Sign in"
       }
     }
-  }
-  ,"account": {
+  },
+  "account": {
     "profile": {
       "toast": {
         "updated": "Profile updated",
@@ -298,6 +308,19 @@
         "changePassword": "Change password",
         "save": "Save"
       }
+    }
+  },
+  "settings": {
+    "theme": {
+      "label": "Theme",
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    },
+    "language": {
+      "label": "Language",
+      "en": "English",
+      "fr": "Français"
     }
   }
 }
