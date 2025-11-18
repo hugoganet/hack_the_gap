@@ -36,6 +36,16 @@ export async function middleware(request: NextRequest) {
   if (hasLocalePrefix) {
     const locale = firstSeg as string;
 
+    // If user is logged in and on the locale root (e.g., /en), redirect to dashboard
+    if (!secondSeg) {
+      const session = getSessionCookie(request, { cookiePrefix: SiteConfig.appId });
+      if (session) {
+        const url = new URL(request.url);
+        url.pathname = `/${locale}/dashboard`;
+        return NextResponse.redirect(url);
+      }
+    }
+
     // If the next segment is an app section, rewrite to non-prefixed path but keep URL
     if (secondSeg && appSections.has(secondSeg)) {
       const url = new URL(request.url);
