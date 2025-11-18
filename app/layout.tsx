@@ -13,7 +13,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { type ReactNode, Suspense } from "react";
 import "./globals.css";
 import { Providers } from "./providers";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
@@ -85,7 +85,7 @@ export default async function RootLayout({
   modal,
 }: LayoutParams & { modal?: ReactNode }) {
   const locale = await getLocale();
-  const messages = await getMessages();
+  const messages = (await import(`../messages/${locale}.json`)).default;
   return (
     <html lang={locale} className="h-full" suppressHydrationWarning>
       <body
@@ -99,7 +99,7 @@ export default async function RootLayout({
       >
         <NuqsAdapter>
           <Providers>
-            <NextIntlClientProvider locale={locale} messages={messages}>
+            <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
               <NextTopLoader
                 delay={100}
                 showSpinner={false}
