@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   description: SiteConfig.description,
   metadataBase: new URL(getServerUrl()),
   icons: {
-    icon: [{ url: "/icon.png" }, { url: "/favicon.ico" }],
-    shortcut: [{ url: "/icon.png" }, { url: "/favicon.ico" }],
+    icon: [{ url: "/icon.png" }, { url: "/images/icon.ico" }],
+    shortcut: [{ url: "/icon.png" }, { url: "/images/icon.ico" }],
   },
   alternates: {
     languages: {
