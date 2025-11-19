@@ -29,6 +29,7 @@ import { Command, CommandList, CommandEmpty, CommandItem } from "@/components/ui
 import { useDebounceFn } from "@/hooks/use-debounce-fn";
 import { Popover, PopoverContent, PopoverAnchor } from "@/components/ui/popover";
 import { useTranslations } from "next-intl";
+import { CourseCreationProgress } from "./course-creation-progress";
 
 // Schema will be created inside component to access translations
 
@@ -43,8 +44,13 @@ export function CreateCourseDialog({
   onOpenChange,
 }: CreateCourseDialogProps) {
   const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations("dashboard.courseDialog");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isApiComplete, setIsApiComplete] = useState(false);
+  const [courseMetadata, setCourseMetadata] = useState<{
+    name: string;
+    subject: string;
+  } | null>(null);
 
   const createCourseSchema = z.object({
     subject: z.string().min(1, t("errors.subjectRequired")),
@@ -100,6 +106,12 @@ export function CreateCourseDialog({
 
   const onSubmit = async (data: CreateCourseFormData) => {
     setIsSubmitting(true);
+    setCourseMetadata({
+      name: data.name,
+      subject: data.subject,
+    });
+    setIsApiComplete(false);
+    
     try {
       const response = await fetch("/api/courses", {
         method: "POST",
@@ -114,28 +126,49 @@ export function CreateCourseDialog({
       }
 
       const course = await response.json();
+      
+      // Signal API completion
+      setIsApiComplete(true);
+      
+      // Wait a moment for the progress to complete
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
       toast.success(t("toast.success"));
       onOpenChange(false);
       form.reset();
+      setCourseMetadata(null);
+      setIsApiComplete(false);
       router.push(`/dashboard/courses/${course.id}`);
       router.refresh();
     } catch (error) {
       toast.error(t("toast.error"));
-    } finally {
       setIsSubmitting(false);
+      setCourseMetadata(null);
+      setIsApiComplete(false);
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>{t("title")}</DialogTitle>
-          <DialogDescription>
-            {t("description")}
-          </DialogDescription>
-        </DialogHeader>
-        <Form form={form} onSubmit={onSubmit}>
+        {isSubmitting && courseMetadata ? (
+          <CourseCreationProgress
+            courseName={courseMetadata.name}
+            subjectName={courseMetadata.subject}
+            isProcessingComplete={isApiComplete}
+            onComplete={() => {
+              // Progress animation complete
+            }}
+          />
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle>{t("title")}</DialogTitle>
+              <DialogDescription>
+                {t("description")}
+              </DialogDescription>
+            </DialogHeader>
+            <Form form={form} onSubmit={onSubmit}>
           <div className="space-y-4 py-4">
             <FormField
               control={form.control}
@@ -256,7 +289,9 @@ export function CreateCourseDialog({
               {t("actions.create")}
             </Button>
           </DialogFooter>
-        </Form>
+            </Form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

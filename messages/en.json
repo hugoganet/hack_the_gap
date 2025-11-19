@@ -628,6 +628,126 @@
         }
       }
     },
+    "courseCreation": {
+      "creating": "Creating",
+      "subject": "Subject",
+      "complete": "complete",
+      "phases": {
+        "analyzing": "Analyzing syllabus",
+        "extracting": "Extracting concepts",
+        "structuring": "Building structure",
+        "validating": "Validating quality",
+        "saving": "Saving to database",
+        "complete": "Course created!"
+      },
+      "tips": {
+        "analyzing": [
+          "Reading your learning goals...",
+          "Understanding course objectives...",
+          "Analyzing subject matter..."
+        ],
+        "extracting": [
+          "Identifying key concepts...",
+          "Extracting learning objectives...",
+          "Building concept hierarchy...",
+          "Analyzing relationships..."
+        ],
+        "structuring": [
+          "Creating knowledge tree...",
+          "Organizing concepts logically...",
+          "Building learning pathways...",
+          "Optimizing for spaced repetition..."
+        ],
+        "validating": [
+          "Checking extraction quality...",
+          "Validating concept relationships...",
+          "Ensuring learning coherence...",
+          "Running quality checks..."
+        ],
+        "saving": [
+          "Creating database records...",
+          "Setting up flashcard sequences...",
+          "Preparing review schedules...",
+          "Finalizing course structure..."
+        ]
+      },
+      "encouragement": [
+        "🧠 Building your personalized learning path...",
+        "📚 Transforming goals into structured knowledge",
+        "🎯 Crafting the perfect flashcards for you",
+        "🌟 Your course is taking shape beautifully",
+        "⚡ Almost ready to start learning!",
+        "🎨 Designing your ideal study experience",
+        "🚀 Preparing your learning journey",
+        "✨ Your knowledge adventure begins soon!"
+      ],
+      "celebrations": {
+        "analyzing": "Syllabus analyzed successfully! ✓",
+        "extracting": "Concepts extracted! 🎯",
+        "structuring": "Knowledge structure built! 🏗️",
+        "validating": "Quality validated! ✅",
+        "saving": "Course saved successfully! 🎉"
+      }
+    },
+    "processing": {
+      "phases": {
+        "fetching": "Fetching content",
+        "analyzing": "AI is reading your content",
+        "matching": "Matching to your learning goals",
+        "generating": "Creating your flashcards",
+        "unlocking": "Unlocking new cards",
+        "complete": "All done!"
+      },
+      "tips": {
+        "fetching": [
+          "Downloading video transcript...",
+          "Extracting PDF text...",
+          "Connecting to content source..."
+        ],
+        "analyzing": [
+          "Identifying key concepts...",
+          "Understanding the main ideas...",
+          "Breaking down complex topics...",
+          "Analyzing content structure..."
+        ],
+        "matching": [
+          "Comparing with your syllabus...",
+          "Finding relevant concepts...",
+          "Calculating confidence scores...",
+          "Semantic similarity analysis..."
+        ],
+        "generating": [
+          "Crafting questions...",
+          "Writing clear answers...",
+          "Adding helpful hints...",
+          "Optimizing for recall..."
+        ],
+        "unlocking": [
+          "Checking unlock thresholds...",
+          "Revealing answers...",
+          "Updating progress..."
+        ]
+      },
+      "encouragement": [
+        "🧠 Your brain is about to get an upgrade!",
+        "📚 We're turning passive watching into active learning",
+        "🔥 This is where the magic happens!",
+        "🎓 Building your personal knowledge graph...",
+        "💡 Each concept = one step closer to mastery",
+        "🎨 Crafting the perfect flashcards for you...",
+        "🧩 Connecting the dots in your learning journey",
+        "⚡ Almost there! Your flashcards are taking shape"
+      ],
+      "timeRemaining": "⏱️ About {seconds}s remaining",
+      "processing": "Processing: {name}",
+      "celebrations": {
+        "fetching": "Content fetched successfully! ✓",
+        "analyzing": "Found concepts! 🎯",
+        "matching": "Matched to your goals! 🎉",
+        "generating": "Flashcards created! ✨",
+        "unlocking": "Cards unlocked! 🔓"
+      }
+    },
     "courseDialog": {
       "title": "Create a new course",
       "description": "Add a new course to start learning with AI-powered flashcards.",

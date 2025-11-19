@@ -626,6 +626,126 @@
         }
       }
     },
+    "processing": {
+      "phases": {
+        "fetching": "Récupération du contenu",
+        "analyzing": "L'IA lit votre contenu",
+        "matching": "Correspondance avec vos objectifs",
+        "generating": "Création de vos fiches",
+        "unlocking": "Déverrouillage des cartes",
+        "complete": "Terminé !"
+      },
+      "tips": {
+        "fetching": [
+          "Téléchargement de la transcription vidéo...",
+          "Extraction du texte PDF...",
+          "Connexion à la source de contenu..."
+        ],
+        "analyzing": [
+          "Identification des concepts clés...",
+          "Compréhension des idées principales...",
+          "Décomposition des sujets complexes...",
+          "Analyse de la structure du contenu..."
+        ],
+        "matching": [
+          "Comparaison avec votre programme...",
+          "Recherche de concepts pertinents...",
+          "Calcul des scores de confiance...",
+          "Analyse de similarité sémantique..."
+        ],
+        "generating": [
+          "Création des questions...",
+          "Rédaction de réponses claires...",
+          "Ajout d'indices utiles...",
+          "Optimisation pour la mémorisation..."
+        ],
+        "unlocking": [
+          "Vérification des seuils de déverrouillage...",
+          "Révélation des réponses...",
+          "Mise à jour des progrès..."
+        ]
+      },
+      "encouragement": [
+        "🧠 Votre cerveau va être amélioré !",
+        "📚 Nous transformons le visionnage passif en apprentissage actif",
+        "🔥 C'est là que la magie opère !",
+        "🎓 Construction de votre graphe de connaissances personnel...",
+        "💡 Chaque concept = un pas de plus vers la maîtrise",
+        "🎨 Création des fiches parfaites pour vous...",
+        "🧩 Connexion des points dans votre parcours d'apprentissage",
+        "⚡ Presque terminé ! Vos fiches prennent forme"
+      ],
+      "timeRemaining": "⏱️ Environ {seconds}s restantes",
+      "processing": "Traitement : {name}",
+      "celebrations": {
+        "fetching": "Contenu récupéré avec succès ! ✓",
+        "analyzing": "Concepts trouvés ! 🎯",
+        "matching": "Associé à vos objectifs ! 🎉",
+        "generating": "Fiches créées ! ✨",
+        "unlocking": "Cartes déverrouillées ! 🔓"
+      }
+    },
+    "courseCreation": {
+      "creating": "Création",
+      "subject": "Sujet",
+      "complete": "terminé",
+      "phases": {
+        "analyzing": "Analyse du programme",
+        "extracting": "Extraction des concepts",
+        "structuring": "Construction de la structure",
+        "validating": "Validation de la qualité",
+        "saving": "Sauvegarde en base",
+        "complete": "Cours créé !"
+      },
+      "tips": {
+        "analyzing": [
+          "Lecture de vos objectifs d'apprentissage...",
+          "Compréhension des objectifs du cours...",
+          "Analyse de la matière..."
+        ],
+        "extracting": [
+          "Identification des concepts clés...",
+          "Extraction des objectifs d'apprentissage...",
+          "Construction de la hiérarchie des concepts...",
+          "Analyse des relations..."
+        ],
+        "structuring": [
+          "Création de l'arbre de connaissances...",
+          "Organisation logique des concepts...",
+          "Construction des parcours d'apprentissage...",
+          "Optimisation pour la répétition espacée..."
+        ],
+        "validating": [
+          "Vérification de la qualité d'extraction...",
+          "Validation des relations entre concepts...",
+          "Assurance de la cohérence d'apprentissage...",
+          "Contrôles de qualité..."
+        ],
+        "saving": [
+          "Création des enregistrements en base...",
+          "Configuration des séquences de flashcards...",
+          "Préparation des plannings de révision...",
+          "Finalisation de la structure du cours..."
+        ]
+      },
+      "encouragement": [
+        "🧠 Construction de votre parcours d'apprentissage personnalisé...",
+        "📚 Transformation des objectifs en connaissances structurées",
+        "🎯 Création des flashcards parfaites pour vous",
+        "🌟 Votre cours prend forme magnifiquement",
+        "⚡ Presque prêt à commencer l'apprentissage !",
+        "🎨 Élaboration de votre expérience d'étude idéale",
+        "🚀 Préparation de votre voyage d'apprentissage",
+        "✨ Votre aventure de connaissances commence bientôt !"
+      ],
+      "celebrations": {
+        "analyzing": "Programme analysé avec succès ! ✓",
+        "extracting": "Concepts extraits ! 🎯",
+        "structuring": "Structure de connaissances construite ! 🏗️",
+        "validating": "Qualité validée ! ✅",
+        "saving": "Cours sauvegardé avec succès ! 🎉"
+      }
+    },
     "courseDialog": {
       "title": "Créer un nouveau cours",
       "description": "Ajoutez un nouveau cours pour commencer à apprendre avec des fiches mémoire générées par l’IA.",

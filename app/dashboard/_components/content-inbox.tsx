@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -23,15 +23,22 @@ import { processUploadedPDF } from "@app/actions/process-uploaded-pdf.action";
 import { toast } from "sonner";
 import { MatchResultsDialog, type MatchResultsData } from "../users/match-results-dialog";
 import { CreateCourseDialog } from "@app/dashboard/courses/_components/create-course-dialog";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { ProcessingProgress } from "./processing-progress";
+import { ContentPreviewCard, type ContentMetadata } from "./content-preview-card";
+import { fetchYouTubeMetadata } from "@/lib/youtube-utils";
+import {
+  loadProcessingState,
+  clearProcessingState,
+  saveProcessingState,
+} from "@/lib/processing-storage";
 
 type ContentInboxProps = {
   showNoConcepts?: boolean;
 };
 
 export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("dashboard.learn.inbox");
   const [dragActive, setDragActive] = useState(false);
@@ -41,6 +48,24 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
   const [showMatchDialog, setShowMatchDialog] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<string | null>(null);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [contentMetadata, setContentMetadata] = useState<ContentMetadata | null>(null);
+  const [processingUrl, setProcessingUrl] = useState<string>("");
+  const [isApiComplete, setIsApiComplete] = useState(false);
+
+  // Restore processing state on mount
+  useEffect(() => {
+    const savedState = loadProcessingState();
+    if (savedState) {
+      setIsProcessing(true);
+      setProcessingUrl(savedState.url);
+      setContentMetadata({
+        type: savedState.contentType,
+        title: savedState.contentName,
+        subtitle: savedState.metadata?.subtitle,
+        thumbnail: savedState.metadata?.thumbnail,
+      });
+    }
+  }, []);
 
 
   const handleDrag = (e: React.DragEvent) => {
@@ -96,10 +121,34 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
 
       if (!uploadResult.success) {
         toast.error(uploadResult.error ?? t("toast.uploadFailed"));
+        setIsProcessing(false);
+        setUploadProgress(null);
         return;
       }
 
-      setUploadProgress(t("toast.extractingConcepts"));
+      // Set PDF metadata for preview
+      const pdfMetadata: ContentMetadata = {
+        type: "pdf",
+        title: uploadResult.data.fileName,
+        subtitle: `${uploadResult.data.metadata.pageCount} pages • ${(uploadResult.data.fileSize / 1024 / 1024).toFixed(1)} MB`,
+      };
+      
+      setContentMetadata(pdfMetadata);
+      setProcessingUrl(uploadResult.data.fileName);
+      setUploadProgress(null);
+      
+      // Save initial state
+      saveProcessingState({
+        contentName: pdfMetadata.title,
+        contentType: "pdf",
+        currentPhaseIndex: 0,
+        progress: 0,
+        startedAt: Date.now(),
+        url: uploadResult.data.fileName,
+        metadata: {
+          subtitle: pdfMetadata.subtitle,
+        },
+      });
 
       const result = await processUploadedPDF({
         fileName: uploadResult.data.fileName,
@@ -107,6 +156,9 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
         pageCount: uploadResult.data.metadata.pageCount,
         extractedText: uploadResult.data.extractedText,
       });
+
+      // Signal that API is complete
+      setIsApiComplete(true);
 
       if (result.success) {
         const concepts = result.data?.processedConceptsCount ?? 0;
@@ -129,15 +181,25 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
             }, 500);
           }
         }
+        
+        // Clear processing state after successful completion
+        setTimeout(() => {
+          clearProcessingState();
+        }, 1000);
       } else {
         toast.error(result.error ?? t("toast.processFailed"));
+        clearProcessingState();
       }
     } catch (error) {
       console.error("Error uploading PDF:", error);
       toast.error(t("toast.unexpected"));
+      clearProcessingState();
     } finally {
       setIsProcessing(false);
       setUploadProgress(null);
+      setContentMetadata(null);
+      setProcessingUrl("");
+      setIsApiComplete(false);
     }
   };
 
@@ -151,10 +213,67 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
   const handleProcess = async () => {
     if (!url.trim()) return;
     
+    const trimmedUrl = url.trim();
+    setProcessingUrl(trimmedUrl);
     setIsProcessing(true);
     
+    // Detect content type and fetch metadata
+    let metadata: ContentMetadata | null = null;
+    const lowerUrl = trimmedUrl.toLowerCase();
+    
+    if (lowerUrl.includes("youtube.com") || lowerUrl.includes("youtu.be")) {
+      // Fetch YouTube metadata
+      const ytMetadata = await fetchYouTubeMetadata(trimmedUrl);
+      if (ytMetadata) {
+        metadata = {
+          type: "youtube",
+          title: ytMetadata.title,
+          subtitle: ytMetadata.author_name,
+          thumbnail: ytMetadata.thumbnail_url,
+        };
+      } else {
+        // Fallback if oEmbed fails
+        metadata = {
+          type: "youtube",
+          title: "YouTube Video",
+          subtitle: trimmedUrl,
+        };
+      }
+    } else if (lowerUrl.includes("tiktok.com")) {
+      metadata = {
+        type: "tiktok",
+        title: "TikTok Video",
+        subtitle: trimmedUrl,
+      };
+    } else {
+      metadata = {
+        type: "youtube", // Default fallback
+        title: "Content",
+        subtitle: trimmedUrl,
+      };
+    }
+    
+    setContentMetadata(metadata);
+    
+    // Save initial state
+    saveProcessingState({
+      contentName: metadata.title,
+      contentType: metadata.type,
+      currentPhaseIndex: 0,
+      progress: 0,
+      startedAt: Date.now(),
+      url: trimmedUrl,
+      metadata: {
+        subtitle: metadata.subtitle,
+        thumbnail: metadata.thumbnail,
+      },
+    });
+    
     try {
-      const result = await processContent(url);
+      const result = await processContent(trimmedUrl);
+      
+      // Signal that API is complete
+      setIsApiComplete(true);
       
       if (result.success) {
         const concepts = result.data?.processedConceptsCount ?? 0;
@@ -176,15 +295,25 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
         }
         
         setUrl("");
+        
+        // Clear processing state after successful completion
+        setTimeout(() => {
+          clearProcessingState();
+        }, 1000);
       } else {
         const error = "error" in result ? result.error : undefined;
         toast.error(error ?? t("toast.processFailed"));
+        clearProcessingState();
       }
     } catch (error) {
       console.error("Error processing content:", error);
       toast.error(t("toast.unexpected"));
+      clearProcessingState();
     } finally {
       setIsProcessing(false);
+      setContentMetadata(null);
+      setProcessingUrl("");
+      setIsApiComplete(false);
     }
   };
 
@@ -206,34 +335,50 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
 
   return (
     <>
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Upload className="size-5" />
-            {t("title")}
-          </CardTitle>
-          <CardDescription>
-            {t("description")}
-          </CardDescription>
-          {showNoConcepts && (
-            <div className="mt-3 rounded-md border bg-muted/50 p-3 text-xs sm:text-sm flex flex-col gap-2">
-              <p className="text-muted-foreground leading-relaxed">
-                {t("noConcepts.message")}
-              </p>
-              <div>
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => setCreateDialogOpen(true)}
-                >
-                  {t("noConcepts.cta")}
-                </Button>
+      {/* Show processing progress if active */}
+      {isProcessing && contentMetadata ? (
+        <div className="space-y-4">
+          <ContentPreviewCard metadata={contentMetadata} />
+          <ProcessingProgress
+            contentName={contentMetadata.title}
+            contentType={contentMetadata.type}
+            url={processingUrl}
+            isProcessingComplete={isApiComplete}
+            onComplete={() => {
+              // Processing complete - components will be hidden by state update
+              clearProcessingState();
+            }}
+          />
+        </div>
+      ) : (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Upload className="size-5" />
+              {t("title")}
+            </CardTitle>
+            <CardDescription>
+              {t("description")}
+            </CardDescription>
+            {showNoConcepts && (
+              <div className="mt-3 rounded-md border bg-muted/50 p-3 text-xs sm:text-sm flex flex-col gap-2">
+                <p className="text-muted-foreground leading-relaxed">
+                  {t("noConcepts.message")}
+                </p>
+                <div>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => setCreateDialogOpen(true)}
+                  >
+                    {t("noConcepts.cta")}
+                  </Button>
+                </div>
               </div>
-            </div>
-          )}
-        </CardHeader>
-      <CardContent className="space-y-4">
+            )}
+          </CardHeader>
+          <CardContent className="space-y-4">
         {/* Drag and Drop Zone */}
         <div
           onDragEnter={handleDrag}
@@ -345,8 +490,9 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+          </CardContent>
+        </Card>
+      )}
 
     <MatchResultsDialog
       open={showMatchDialog}
