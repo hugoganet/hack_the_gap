@@ -28,7 +28,7 @@ function OtpVerificationContent() {
         });
 
         toast.success("Signed in successfully");
-        const redirectUrl = getCallbackUrl(callbackUrl ?? "/home");
+        const redirectUrl = getCallbackUrl(callbackUrl ?? "/dashboard");
         window.location.href = redirectUrl;
       } catch {
         toast.error("Invalid or expired OTP");
