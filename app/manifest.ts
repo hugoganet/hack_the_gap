@@ -12,14 +12,14 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: SiteConfig.brand.primary,
     icons: [
       {
-        src: "/icon.png",
-        sizes: "any",
+        src: "/images/icon.png",
+        sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
         src: "/images/icon.ico",
-        sizes: "any",
+        sizes: "64x64 32x32 16x16",
         type: "image/x-icon",
         purpose: "any",
       },
