@@ -267,3 +267,43 @@ None connect: "student's own learning goals" + "what student actually consumes" 
 - Build feedback loop from day 1 (track bad matches, track non-atomic concepts)
 - Set expectations: "70% accurate MVP, improving with use" vs "perfect AI"
 - **Continuous monitoring of concept atomicity** (most important metric)
+
+---
+
+## Related Documents
+
+### Architecture & Technical
+
+- **[Architecture Overview](./architecture.md)** - System design, components, and data flow
+- **[Tech Stack](./tech_stack.md)** - Technology choices and rationale
+- **[Data Schema](./data/)** - Database structure, ERD, data dictionary
+
+### Implementation
+
+- **[User Stories](./specs/)** - Detailed feature specifications
+  - [US-0002: Video URL Submission](./specs/us-0002-video-url-submission.md)
+  - [US-0003: Concept Extraction](./specs/us-0003-concept-extraction.md)
+  - [US-0004: Concept Matching](./specs/us-0004-concept-to-syllabus-matching.md)
+  - [US-0005: Flashcard Generation](./specs/us-0005-flashcard-generation.md)
+  - [US-0006: First Review Session](./specs/us-0006-first-review-session.md)
+  - [US-0007: Review Scheduling](./specs/us-0007-review-scheduling.md)
+  - [US-0008: Progress Dashboard](./specs/us-0008-progress-dashboard.md)
+  - [US-0009: Gap Analysis](./specs/us-0009-gap-analysis.md)
+
+### Key Decisions
+
+- **[ADR-0013: AI Provider Selection](./decisions/ADR-0013-ai-provider-selection.md)** - Claude + OpenAI hybrid
+- **[ADR-0017: Multilingual Embeddings](./decisions/ADR-0017-multilingual-embeddings-strategy.md)** - Cross-lingual matching
+- **[ADR-0018: Flashcard Unlock Threshold](./decisions/ADR-0018-flashcard-unlock-threshold.md)** - 70% confidence
+- **[ADR-0020: Product Pivot](./decisions/ADR-0020-product-pivot-to-student-centric.md)** - Student-centric approach
+
+### Planning & Progress
+
+- **[Roadmap](./roadmap.md)** - Timeline and milestones
+- **[Tasks](./tasks.md)** - Current work and backlog
+- **[CHANGELOG](./CHANGELOG.md)** - Version history
+
+### Reference
+
+- **[Glossary](./GLOSSARY.md)** - Canonical terminology
+- **[Context Bundle](./context.md)** - Quick start for AI/humans

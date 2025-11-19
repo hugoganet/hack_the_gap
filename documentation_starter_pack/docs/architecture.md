@@ -813,3 +813,48 @@ import { Link } from '@/i18n/routing';
 **Alternative Component:** `src/features/i18n/language-switcher.tsx`
 - Standalone language switcher component (if needed in other locations)
 - Can be placed in navigation, footer, or other UI areas
+
+---
+
+## Related Documents
+
+### Vision & Planning
+
+- **[Product Vision](./vision.md)** - Problem, solution, target users, value proposition
+- **[Roadmap](./roadmap.md)** - Timeline, milestones, and strategic bets
+- **[Tasks](./tasks.md)** - Current work, backlog, and sprint notes
+
+### Technical Details
+
+- **[Tech Stack](./tech_stack.md)** - Technology choices and rationale
+- **[Data Schema](./data/)** - Database structure and relationships
+  - [ERD](./data/erd.md) - Entity relationship diagram
+  - [Data Dictionary](./data/data_dictionary.yml) - Field definitions
+  - [Migration History](./data/MIGRATION_HISTORY.md) - Schema changes over time
+
+### Key Architectural Decisions
+
+- **[ADR-0011: Auth Provider](./decisions/ADR-0011-auth-provider-selection.md)** - Better-Auth selection
+- **[ADR-0012: Monolith Architecture](./decisions/ADR-0012-monolith-architecture.md)** - Single Next.js app
+- **[ADR-0013: AI Provider](./decisions/ADR-0013-ai-provider-selection.md)** - Claude + OpenAI hybrid
+- **[ADR-0014: Synchronous Processing](./decisions/ADR-0014-synchronous-processing-for-mvp.md)** - No async queue for MVP
+- **[ADR-0015: Internationalization](./decisions/ADR-0015-internationalization-strategy.md)** - next-intl implementation
+- **[ADR-0016: Content Type Architecture](./decisions/ADR-0016-content-type-architecture.md)** - Unified processor
+- **[ADR-0017: Multilingual Embeddings](./decisions/ADR-0017-multilingual-embeddings-strategy.md)** - Cross-lingual matching
+- **[ADR-0019: Build Error Suppression](./decisions/ADR-0019-build-error-suppression-for-cicd.md)** - CI/CD optimization
+
+### Implementation Guides
+
+- **[Testing Strategy](./guides/TESTING_STRATEGY.md)** - Test coverage, E2E scenarios, performance benchmarks
+- **[User Stories](./specs/)** - Feature specifications
+  - [US-0002: Video URL Submission](./specs/us-0002-video-url-submission.md)
+  - [US-0003: Concept Extraction](./specs/us-0003-concept-extraction.md)
+  - [US-0004: Concept Matching](./specs/us-0004-concept-to-syllabus-matching.md)
+  - [US-0005: Flashcard Generation](./specs/us-0005-flashcard-generation.md)
+  - [US-0006: First Review Session](./specs/us-0006-first-review-session.md)
+  - [US-0007: Review Scheduling](./specs/us-0007-review-scheduling.md)
+
+### Reference
+
+- **[Glossary](./GLOSSARY.md)** - Canonical terminology
+- **[Context Bundle](./context.md)** - Quick start for AI/humans

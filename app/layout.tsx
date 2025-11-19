@@ -23,24 +23,9 @@ export const metadata: Metadata = {
   title: SiteConfig.title,
   description: SiteConfig.description,
   metadataBase: new URL(getServerUrl()),
-  // Favicon sources:
-  // - app/icon.png (served at /icon.png by Next special file route)
-  // - public/images/icon.ico (served at /images/icon.ico )
-  // Keep both; browsers auto-try /favicon.ico, but we removed it. If you want that path, also copy ICO to public/favicon.ico and add it here.
   icons: {
-    icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/images/icon.png", type: "image/png" },
-      { url: "/images/icon.svg", type: "image/svg+xml" },
-      { url: "/images/icon.ico", type: "image/x-icon" },
-    ],
-    apple: [
-      { url: "/apple-icon.png", type: "image/png" },
-    ],
-    shortcut: [
-      { url: "/icon.png" },
-      { url: "/images/icon.ico" },
-    ],
+    icon: [{ url: "/icon.png" }, { url: "/images/icon.ico" }],
+    shortcut: [{ url: "/icon.png" }, { url: "/images/icon.ico" }],
   },
   alternates: {
     languages: {
