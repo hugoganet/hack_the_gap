@@ -11,10 +11,10 @@
 | Database | PostgreSQL, MySQL, MongoDB | **Supabase** (PostgreSQL) | Managed Postgres with real-time, auth, storage. Free tier sufficient for MVP. | Generous free tier, real-time subscriptions, built-in auth (not using), PostGIS support | Vendor lock-in, limited control over DB config | Managed convenience vs self-hosted control | Risk: Supabase outage. Mitigation: Connection pooling, fallback to direct Postgres if needed | Using Prisma as ORM |
 | ORM | TypeORM, Drizzle, Kysely | **Prisma 6.14** | Type-safe queries, great DX, migrations, schema-first design. Boilerplate already configured. | Excellent TypeScript support, auto-generated types, migration tooling | Can be slow for complex queries, abstracts SQL | Type safety vs raw SQL performance | Risk: Performance bottlenecks. Mitigation: Use raw queries for complex operations, optimize indexes | Schema split: better-auth.prisma + schema.prisma |
 | Auth | Clerk, Auth.js, Supabase Auth | **Better-Auth 1.3** | Modern auth library with org/team support, social providers, session management. Boilerplate integrated. | Multi-tenant ready, flexible, open-source, no vendor lock-in | Newer library (less battle-tested than Auth.js) | Flexibility vs maturity | Risk: Auth bugs. Mitigation: Thorough testing, fallback to email/password only for MVP | Supports Google, GitHub, email/password |
-| AI Services | OpenAI, Anthropic, local models | **OpenAI (Vercel AI SDK)** + **SocialKit API** | GPT-4 for concept extraction, text-embedding-3-large for multilingual semantic matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class models, streaming support, good docs, reliable transcript API, multilingual embeddings (100+ languages) | API costs, rate limits, vendor lock-in | Quality vs cost | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, use GPT-3.5 for non-critical tasks, monitor usage | Using @ai-sdk/openai + ai package. SocialKit: /youtube/transcript endpoint. Embedding model upgraded 2025-11-18 |
+| AI Services | OpenAI, Anthropic, local models | **Claude 3.5 Sonnet (Anthropic)** + **OpenAI Embeddings** + **SocialKit API** | Claude for LLM tasks (concept extraction, matching, flashcard generation), OpenAI text-embedding-3-large for multilingual semantic matching. SocialKit for YouTube transcript fetching. Vercel AI SDK for streaming. | Best-in-class reasoning (Claude), best-in-class embeddings (OpenAI), streaming support, good docs, reliable transcript API, multilingual embeddings (100+ languages) | API costs, rate limits, two providers to manage | Quality vs cost vs complexity | Risk: API costs exceed budget. Mitigation: Cache transcripts in DB, monitor usage, implement fallback between providers | Using @ai-sdk/anthropic for Claude, @ai-sdk/openai for embeddings. SocialKit: /youtube/transcript endpoint. Embedding model upgraded 2025-11-18 |
 | Internationalization | i18next, react-intl, next-intl | **next-intl 4.5.3** | Next.js-native i18n with App Router support, type-safe translations, locale routing. | Excellent Next.js integration, type safety, minimal config, server/client support | Smaller ecosystem than i18next | Next.js optimization vs flexibility | Risk: Limited community resources. Mitigation: Well-documented, active maintenance | Supports EN/FR, middleware-based locale detection |
 | PDF Processing | pdf.js, pdfjs-dist, pdf-parse | **pdf-parse 2.4.5** | Simple text extraction from PDFs, works with Buffer and URL inputs. | Lightweight, easy to use, no external dependencies | Limited to text extraction (no OCR) | Simplicity vs advanced features | Risk: Fails on scanned PDFs. Mitigation: Add OCR (Tesseract.js) post-MVP if needed | Using @types/pdf-parse for TypeScript |
-| File/Blob Storage | Vercel Blob, Cloudflare R2, AWS S3 | **TBD** (disabled for MVP) | Not needed for MVP (YouTube URLs only). Post-MVP: Vercel Blob or R2. | N/A | N/A | N/A | N/A | Feature flag: enableImageUpload = false |
+| File/Blob Storage | Vercel Blob, Cloudflare R2, AWS S3 | **Implemented** (PDF upload) | PDF uploads stored temporarily for processing, then discarded. Post-MVP: Persistent storage with Vercel Blob or R2. | Simple implementation, no storage costs | Files not persisted, must re-upload | Simplicity vs persistence | Risk: Users lose uploaded files. Mitigation: Add persistent storage post-MVP | Using multipart/form-data, max 10MB per file |
 | Queue/Events | BullMQ, Inngest, Trigger.dev | **TBD** (post-MVP) | Not needed for MVP (synchronous processing). Post-MVP: Consider Inngest for video processing queue. | N/A | N/A | N/A | Risk: Video processing blocks UI. Mitigation: Show progress, allow cancellation | MVP uses synchronous API routes |
 | Infra/Hosting | Vercel, Railway, Fly.io | **Vercel** | Next.js native platform, zero-config deployment, edge functions, preview deployments. | Seamless Next.js integration, great DX, automatic scaling | Expensive at scale, vendor lock-in | Convenience vs cost | Risk: Costs spike. Mitigation: Monitor usage, optimize edge functions, consider Railway for DB-heavy workloads | Free tier sufficient for MVP |
 | Observability | Sentry, LogRocket, Datadog | **Console logs** (MVP) | Minimal observability for MVP. Post-MVP: Add Sentry for error tracking. | Simple, no setup | No structured logging, hard to debug production | Simplicity vs visibility | Risk: Production bugs hard to diagnose. Mitigation: Add Sentry before launch | Using tslog for structured logging in dev |
@@ -196,17 +196,21 @@ flowchart TB
 - `package.json`: lint-staged config for markdown and JS/TS files
 - `.markdownlint.json`: Markdown linting rules
 
+## ADRs Created
+
+- ✅ **ADR-0011**: Auth provider (Better-Auth) - Created 2025-11-18
+- ✅ **ADR-0012**: Monolith architecture - Created 2025-11-18
+- ✅ **ADR-0013**: AI provider (Claude + OpenAI hybrid) - Created 2025-11-18
+- ✅ **ADR-0014**: Synchronous processing for MVP - Created 2025-11-18
+- ✅ **ADR-0017**: Multilingual embeddings strategy - Created 2025-11-18
+- ✅ **ADR-0019**: Build error suppression for CI/CD - Created 2025-11-18
+- ✅ **ADR-0020**: Product pivot to student-centric - Created 2025-11-18
+
 ## ADRs to Draft
 
 - **ADR-0010**: Database choice (Supabase PostgreSQL) - rationale, alternatives considered
-- **ADR-0011**: Auth provider (Better-Auth vs Auth.js vs Clerk)
 - **ADR-0015**: Internationalization strategy (next-intl, locale routing, message catalogs)
 - **ADR-0016**: Content type architecture (unified processor, polymorphic schema, ContentJob model)
-- **ADR-0017**: Multilingual embeddings strategy (text-embedding-3-large, cross-lingual matching) - TODO
-- **ADR-0012**: Monolith architecture (Next.js full-stack vs separate backend)
-- **ADR-0013**: AI provider (OpenAI vs Anthropic vs local models)
-- **ADR-0014**: Synchronous processing for MVP (vs async queue)
-- **ADR-0019**: Build error suppression for CI/CD (ignore ESLint/TS errors during Vercel builds) - TODO
 
 ## Dependencies & Versions
 
@@ -241,7 +245,8 @@ BETTER_AUTH_SECRET="..."
 BETTER_AUTH_URL="http://localhost:3000"
 
 # AI
-OPENAI_API_KEY="sk-..."
+ANTHROPIC_API_KEY="sk-ant-..."
+OPENAI_API_KEY="sk-..."  # For embeddings only
 
 # Email
 RESEND_API_KEY="re_..."

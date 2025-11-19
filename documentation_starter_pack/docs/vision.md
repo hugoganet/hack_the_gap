@@ -27,7 +27,7 @@ Students won't manually create flashcards or organize notes anymore. The ONLY wa
 
 ## Target Users & Personas (ICP)
 
-### Primary Persona: "The Motivated Struggler"
+### Primary Persona: "Self-Directed Learner"
 
 - Age: 18-22, university student
 - Context: Takes conceptually dense courses (not just memorization-based)
@@ -104,8 +104,9 @@ Upload your syllabus → watch a video → see it auto-convert to flashcards mat
 5. **Concept matching**: Connects what you're learning to what YOU want to learn (not limited to institutional syllabi)
 6. **Gap analysis**: Shows exactly what you know vs don't know before exams/goals
 7. **Zettelkasten engine**: Uses proven knowledge graph methodology (atomic notes, typed links) as backend, but hides complexity from students
-8. **Intercepts passive flow**: Works with content students already consume (YouTube, articles, podcasts) rather than requiring behavior change
+8. **Intercepts passive flow**: Works with content students already consume (YouTube, TikTok, PDFs) rather than requiring behavior change
 9. **Global flexibility**: Not tied to any specific educational system - works for students worldwide
+10. **Multilingual support**: EN/FR implemented, 100+ languages supported via embeddings
 
 **vs Competitors:**
 
@@ -114,30 +115,36 @@ Upload your syllabus → watch a video → see it auto-convert to flashcards mat
 - MOOCs/video platforms: No retention mechanism, no concept tracking
 - AI note-takers (Otter, Notion AI): Focus on transcription/summarization, not retention or concept mastery
 
-None connect: "what professor requires" + "what student actually consumes" + "spaced repetition retention" + "knowledge graph understanding"
+None connect: "student's own learning goals" + "what student actually consumes" + "spaced repetition retention" + "knowledge graph understanding"
 
 ## Scope & Non-goals
 
-**In Scope (MVP - 48 hours):**
+**Implemented Features (Core Pipeline Complete):**
 
-- **Student uploads syllabus** (PDF/text) OR defines learning goals via AI conversation
-- **AI creates hierarchical knowledge structure** (Subject → Course(s) → Subdirectories → Atomic Concepts)
-- **CORE: Each atomic concept = ONE flashcard** (AI's primary responsibility)
-- AI determines appropriate number of concepts (no arbitrary limits)
-- Process YouTube video URLs → extract atomic concepts via AI ✅ DONE
-- Match extracted concepts to learning goals with confidence scores (>80% = learned, <80% = partial) ✅ DONE
-- Generate flashcards from matched concepts (one per atomic concept) ✅ DONE
-- Spaced repetition scheduling (basic algorithm) ✅ DONE
-- Progress dashboard: "X/Y concepts mastered"
-- Gap analysis: "You're missing: [list of concepts]"
-- Student feedback: "This match is wrong" button (data collection only)
-- Mobile-first web interface
-- Accept 20-30% concept matching error rate (show confidence scores)
+- ✅ **Student uploads syllabus** (PDF/text) OR defines learning goals via AI conversation 🚧 IN PROGRESS
+- ✅ **AI creates hierarchical knowledge structure** (Subject → Course(s) → Subdirectories → Atomic Concepts)
+- ✅ **CORE: Each atomic concept = ONE flashcard** (AI's primary responsibility)
+- ✅ AI determines appropriate number of concepts (no arbitrary limits)
+- ✅ Process YouTube/TikTok video URLs → extract atomic concepts via AI
+- ✅ Process PDF uploads → extract atomic concepts via AI
+- ✅ Match extracted concepts to learning goals with confidence scores (≥80% HIGH, ≥60% MEDIUM, <60% rejected)
+- ✅ Generate flashcards from matched concepts (one per atomic concept)
+- ✅ Confirm-to-unlock flashcard system (70% confidence threshold)
+- ✅ Spaced repetition scheduling (SM-2 algorithm)
+- ✅ Multilingual support (EN/FR interface via next-intl)
+- ✅ Multilingual embeddings (100+ languages via text-embedding-3-large)
+- ✅ Mobile-first web interface
+- ✅ Accept 20-30% concept matching error rate (show confidence scores)
 
-**In Scope (Post-MVP):**
+**In Progress:**
+
+- 🚧 **NEW US-0001: Student syllabus upload** (PDF/text upload + AI conversation)
+- 🚧 Progress dashboard: "X/Y concepts mastered"
+- 🚧 Gap analysis: "You're missing: [list of concepts]"
+
+**Planned (Post-MVP):**
 
 - Graph visualization (simplified for students, power users get full view)
-- Multiple content sources: TikTok, articles, lecture recordings, PDFs
 - Student editing: Delete/edit flashcards, add custom notes
 - Prerequisite relationship detection ("learn X before Y")
 - Export to Obsidian format (markdown + frontmatter)
@@ -145,17 +152,18 @@ None connect: "what professor requires" + "what student actually consumes" + "sp
 - Mobile app (native iOS/Android)
 - Collaborative learning goals (share syllabi with friends)
 - AI tutor chat (answer questions about concepts)
+- Additional content sources: articles, lecture recordings, podcasts
+- Student feedback: "This match is wrong" button (data collection)
 
 **Out of Scope:**
 
-- Fine-tuned models (use prompt engineering + GPT-4/Claude)
+- Fine-tuned models (use prompt engineering + Claude/GPT)
 - Social features, collaboration (focus on individual learning for MVP)
 - Content creation (not a MOOC platform)
 - Replacing teachers or courses (augmentation, not replacement)
 - Perfect AI accuracy (acknowledge limitations, show improvement path)
-- Multi-language support (English only for MVP)
 - Desktop apps (web-first for speed)
-- Institutional integrations (LMS, university systems) - focus on individual students
+- Institutional integrations (LMS, university systems) - focus on individual students first
 
 **Critical MVP Boundaries:**
 

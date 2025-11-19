@@ -5,13 +5,13 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 ## Inbox
 
 - [ ] Create ADR-0010: Database choice (Supabase PostgreSQL)
-- [ ] Create ADR-0011: Auth provider (Better-Auth)
-- [ ] Create ADR-0012: Monolith architecture
-- [ ] Create ADR-0013: AI provider (OpenAI)
-- [ ] Create ADR-0014: Synchronous processing for MVP
-- [x] Create ADR-0018: Unlock threshold decision (70% confidence) ✅ 2025-11-18
+- [ ] Create ADR-0015: Internationalization strategy (next-intl)
+- [ ] Create ADR-0016: Content type architecture (unified processor)
 - [ ] Set up monitoring/observability (Sentry)
 - [ ] Configure email templates (Resend + React Email)
+- [ ] Complete NEW US-0001: Student syllabus upload (PDF/text + AI conversation)
+- [ ] Implement US-0008: Progress dashboard
+- [ ] Implement US-0009: Gap analysis
 
 ## Backlog
 
@@ -34,23 +34,13 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 - [ ] Deploy boilerplate to Vercel (verify deployment pipeline works)
 - [ ] Test Better-Auth integration (signin/signup flows)
 
-### MVP Implementation - Core Pipeline
+### MVP Implementation - Core Pipeline (COMPLETE)
 
-- [ ] US-0012: Admin pre-load syllabi (seed data script) → See `docs/specs/`
-- [x] US-0001: Course selection UI ✅ 2025-11-16 → See `docs/specs/us-0001-course-selection.md`
-  - ✅ CourseSelectionCard component (2x2 grid with "Add Course" button)
-  - ✅ AddCourseDialog component (hybrid search: quick search + progressive selection)
-  - ✅ 5 API routes: /api/courses, /api/user/courses, /api/subjects, /api/years, /api/semesters
-  - ✅ Mobile-responsive design with text truncation
-  - ✅ Breadcrumb navigation and loading states
-- [x] US-0002: Video URL submission (Phase 1: Transcript Storage) ✅ 2025-11-15 → See `docs/specs/us-0002-video-url-submission.md`
-  - ✅ Database: Added `transcript` field to `VideoJob` model
-  - ✅ Backend: Implemented `processContent` server action with SocialKit API
-  - ✅ Frontend: Transformed organization card into content inbox with drag-and-drop
-  - ✅ Authentication: Added user authentication requirement
-  - ⏳ Phase 2 TODO: AI concept extraction from stored transcripts
+- [x] ~~US-0012: Admin pre-load syllabi~~ **DEPRECATED** (2025-11-17 pivot to student-centric)
+- [x] ~~US-0001: Course selection UI~~ **DEPRECATED** (2025-11-17 pivot to student-centric)
+- [x] US-0002: Video URL submission ✅ 2025-11-15 → See `docs/specs/us-0002-video-url-submission.md`
 - [x] US-0003: Concept extraction ✅ 2025-11-16 → See `docs/specs/us-0003-concept-extraction.md`
-- [x] US-0004: Concept-to-syllabus matching ✅ 2025-11-16 → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
+- [x] US-0004: Concept-to-goal matching ✅ 2025-11-16 → See `docs/specs/us-0004-concept-to-syllabus-matching.md`
 - [x] Flashcard Unlock System ✅ 2025-11-18
   - ✅ Database schema: unlock_events, user_stats tables, flashcards unlock fields
   - ✅ Migration: 20251118075121_add_flashcard_unlock_system
@@ -64,16 +54,19 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
   - ✅ UX planning: UX_REFACTOR_PLAN.md (580 lines)
   - ✅ Threshold: 70% confidence for unlock (ADR-0018)
 
-### MVP Implementation - Review System
+### MVP Implementation - Review System (COMPLETE)
 
 - [x] US-0005: Flashcard generation ✅ 2025-11-16 → See `docs/specs/us-0005-flashcard-generation.md`
 - [x] US-0006: First review session ✅ 2025-11-16 → See `docs/specs/us-0006-first-review-session.md`
 - [x] US-0007: Review scheduling ✅ 2025-11-16 → See `docs/specs/us-0007-review-scheduling.md`
 
-### MVP Implementation - Dashboard
+### MVP Implementation - Dashboard (IN PROGRESS)
 
-- [ ] US-0008: Progress dashboard → See `docs/specs/us-0008-progress-dashboard.md`
-- [ ] US-0009: Gap analysis → See `docs/specs/us-0009-gap-analysis.md`
+- [ ] NEW US-0001: Student syllabus upload 🚧 IN PROGRESS
+  - [ ] US-0001a: Add learning goal via AI conversation
+  - [ ] US-0001b: Add learning goal via document upload (PDF/text)
+- [ ] US-0008: Progress dashboard 🚧 TODO → See `docs/specs/us-0008-progress-dashboard.md`
+- [ ] US-0009: Gap analysis 🚧 TODO → See `docs/specs/us-0009-gap-analysis.md`
 
 ### Testing & Polish
 
@@ -95,14 +88,48 @@ A lightweight, single-file kanban. Move items across sections and link to specs/
 
 ## Done
 
+### Documentation (2025-11-18)
+
+- [x] Phase 1 Documentation Remediation ✅ 2025-11-18
+  - Product name finalized as "Recall"
+  - Created GLOSSARY.md with canonical terminology
+  - Created 7 ADRs (ADR-0011 through ADR-0020)
+  - Updated architecture.md (removed admin/founder)
+  - Updated context.md and project.yaml
+  - Updated vision.md (persona, scope, differentiators)
+  - Updated tech_stack.md (Claude + OpenAI hybrid, completed ADRs)
+  - Updated tasks.md (removed deprecated items)
+
+### ADRs Created (2025-11-18)
+
+- [x] ADR-0011: Auth provider selection (Better-Auth) ✅ 2025-11-18
+- [x] ADR-0012: Monolith architecture ✅ 2025-11-18
+- [x] ADR-0013: AI provider selection (Claude + OpenAI hybrid) ✅ 2025-11-18
+- [x] ADR-0014: Synchronous processing for MVP ✅ 2025-11-18
+- [x] ADR-0017: Multilingual embeddings strategy ✅ 2025-11-18
+- [x] ADR-0018: Flashcard unlock threshold (70% confidence) ✅ 2025-11-18
+- [x] ADR-0019: Build error suppression for CI/CD ✅ 2025-11-18
+- [x] ADR-0020: Product pivot to student-centric ✅ 2025-11-18
+
+### Implementation (2025-11-18)
+
+- [x] Flashcard Unlock System ✅ 2025-11-18
+  - Database schema: unlock_events, user_stats tables
+  - Unlock service with answer generation
+  - Notification system with toast notifications
+  - API routes for flashcards and user stats
+  - Dashboard components for unlock progress
+  - UI components with locked/unlocked states
+  - 70% confidence threshold (ADR-0018)
+
 ### Implementation (2025-11-16)
 
-- [x] US-0001: Course selection feature ✅ 2025-11-16
-  - CourseSelectionCard component with 2x2 grid layout
-  - AddCourseDialog with hybrid UX (search + progressive selection)
-  - 5 new API routes for course management
-  - Mobile-responsive design with text truncation
-  - Bug fixes: course filtering, text wrapping
+- [x] ~~US-0001: Course selection feature~~ **DEPRECATED** (2025-11-17 pivot)
+- [x] US-0003: Concept extraction ✅ 2025-11-16
+- [x] US-0004: Concept-to-goal matching ✅ 2025-11-16
+- [x] US-0005: Flashcard generation ✅ 2025-11-16
+- [x] US-0006: First review session ✅ 2025-11-16
+- [x] US-0007: Review scheduling ✅ 2025-11-16
 
 ### Implementation (2025-11-15)
 
