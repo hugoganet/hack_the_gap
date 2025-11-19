@@ -283,9 +283,80 @@ Search & discoverability
 - Notes: Key differentiator - shows exactly what's missing. Updated to support multiple learning goals.
 - Spec: [us-0009-gap-analysis.md](../specs/us-0009-gap-analysis.md)
 
+### UX Improvements - Long-Running Operations
+
+#### US-0010: Processing Progress Feedback (Tier 1: Quick Wins) 📋 TODO
+
+- ID: US-0010
+- Persona: Self-Directed Learner
+- Title: As a self-directed learner, I want to see detailed progress during content processing so that I know the system is working and understand what's happening.
+- Priority: P1 (Critical UX Issue)
+- Estimate: 1 day
+- Status: 📋 TODO
+- Acceptance Criteria:
+  - [ ] Content name/title displayed before processing starts
+  - [ ] 5-6 distinct processing phases with visual indicators
+  - [ ] Progress bar with percentage and smooth animations
+  - [ ] Rotating tips per phase (3-5 second intervals)
+  - [ ] Duolingo-style encouragement messages (8-10 second intervals)
+  - [ ] Phase completion celebrations (confetti + toast)
+  - [ ] Estimated time remaining (updates dynamically)
+  - [ ] Internationalization (EN/FR)
+  - [ ] Mobile-responsive and accessible
+- Notes: **CRITICAL UX ISSUE** - Users currently think 3+ minute processing is broken. Only 2 progress states exist. This reduces perceived wait time by 40-50% and eliminates "is it broken?" confusion.
+- Spec: [us-0010-processing-progress-feedback.md](us-0010-processing-progress-feedback.md)
+- Impact: Reduces abandonment from ~60-70% to <20%
+
+#### US-0011: Background Processing Option (Tier 2: Medium Effort) 📋 TODO
+
+- ID: US-0011
+- Persona: Self-Directed Learner
+- Title: As a self-directed learner, I want to navigate away from the processing screen so that I can be productive while my content is being processed.
+- Priority: P2 (User Empowerment)
+- Estimate: 1-2 days
+- Status: 📋 TODO
+- Acceptance Criteria:
+  - [ ] "Continue in background" option after 30s of processing
+  - [ ] Browser notification permission request with context
+  - [ ] localStorage persistence of job ID and metadata
+  - [ ] Polling mechanism (10s interval) when user returns
+  - [ ] Persistent banner showing processing status across pages
+  - [ ] Browser notifications on completion (success/failure)
+  - [ ] Notification click navigation to results
+  - [ ] Graceful degradation if notifications blocked
+  - [ ] Internationalization (EN/FR)
+- Notes: Requires US-0010 as prerequisite. Allows users to review flashcards, browse content, etc. while processing happens.
+- Spec: [us-0011-background-processing-option.md](us-0011-background-processing-option.md)
+- Dependencies: US-0010 (Processing Progress Feedback)
+- Impact: Reduces abandonment from ~20% (post-US-0010) to <10%
+
+#### US-0012: Gamified Waiting Experience (Tier 3: Advanced) 📋 TODO
+
+- ID: US-0012
+- Persona: Self-Directed Learner
+- Title: As a self-directed learner, I want to learn something interesting while I wait so that the time feels productive rather than wasted.
+- Priority: P3 (Post-MVP Enhancement)
+- Estimate: 3-5 days
+- Status: 📋 TODO
+- Acceptance Criteria:
+  - [ ] AI-generated contextual messages (GPT-4o-mini)
+  - [ ] Trivia quiz system (10 pre-written questions)
+  - [ ] "Did You Know?" facts (10 pre-written facts)
+  - [ ] XP system (earn XP for actions)
+  - [ ] Achievement system (5 tiers, 5 achievements)
+  - [ ] Streak counter (consecutive days)
+  - [ ] Level system (1-10 levels)
+  - [ ] Enhanced celebration screen with XP/achievements
+  - [ ] Database schema for gamification
+  - [ ] Internationalization (EN/FR)
+- Notes: Post-MVP enhancement. Transforms waiting from frustration to engagement. Aligns with Duolingo-like personality.
+- Spec: [us-0012-gamified-waiting-experience.md](us-0012-gamified-waiting-experience.md)
+- Dependencies: US-0010 (Processing Progress Feedback), US-0011 (Background Processing)
+- Impact: Increases engagement, reinforces learning mindset, reduces perceived wait time by 70-80%
+
 ### ~~Admin/Setup~~ **DEPRECATED**
 
-#### ~~US-0012: Admin Pre-load Syllabi~~ **DEPRECATED (2025-11-17)**
+#### ~~US-0013: Admin Pre-load Syllabi~~ **DEPRECATED (2025-11-17)**
 
 - **Reason**: Students now upload their own syllabi. No admin pre-loading needed.
 - **Replaced by**: NEW US-0001 (Syllabus Upload & Goal Definition)
