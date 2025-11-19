@@ -333,6 +333,42 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
     return <Link2 className="size-4 text-primary" />;
   };
 
+  // If user has no concepts (no courses yet), show ONLY the learning goal invitation
+  if (showNoConcepts) {
+    return (
+      <>
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Upload className="size-5" />
+              {t("title")}
+            </CardTitle>
+            <CardDescription>{t("description")}</CardDescription>
+            <div className="mt-3 rounded-md border bg-muted/50 p-3 text-xs sm:text-sm flex flex-col gap-2">
+              <p className="text-muted-foreground leading-relaxed">
+                {t("noConcepts.message")}
+              </p>
+              <div>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => setCreateDialogOpen(true)}
+                >
+                  {t("noConcepts.cta")}
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+        </Card>
+        <CreateCourseDialog
+          open={createDialogOpen}
+          onOpenChange={setCreateDialogOpen}
+        />
+      </>
+    );
+  }
+
   return (
     <>
       {/* Show processing progress if active */}
@@ -360,23 +396,6 @@ export function ContentInbox({ showNoConcepts }: ContentInboxProps) {
             <CardDescription>
               {t("description")}
             </CardDescription>
-            {showNoConcepts && (
-              <div className="mt-3 rounded-md border bg-muted/50 p-3 text-xs sm:text-sm flex flex-col gap-2">
-                <p className="text-muted-foreground leading-relaxed">
-                  {t("noConcepts.message")}
-                </p>
-                <div>
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => setCreateDialogOpen(true)}
-                  >
-                    {t("noConcepts.cta")}
-                  </Button>
-                </div>
-              </div>
-            )}
           </CardHeader>
           <CardContent className="space-y-4">
         {/* Drag and Drop Zone */}
