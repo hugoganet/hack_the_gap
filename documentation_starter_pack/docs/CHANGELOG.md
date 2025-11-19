@@ -8,6 +8,49 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
 
 ### Added - Unreleased
 
+- **Processing Progress Feedback (US-0010)** (2025-11-19) ⏳
+  - **Granular Progress System**: 5-phase progress feedback for content processing and course creation
+    - Phases: Fetching (10s) → Analyzing (45s) → Matching (30s) → Generating (20s) → Unlocking (10s)
+    - Visual phase indicators with completed/current/upcoming states
+    - Smooth progress bar animations with percentage display
+    - Estimated time remaining countdown
+  - **Engagement Features**:
+    - Rotating tips per phase (every 5 seconds) - 25 unique tips across 5 phases
+    - Rotating encouragement messages (every 8 seconds) - 15 Duolingo-style messages
+    - Confetti celebrations on phase completion (30 particles, 2s duration)
+    - Toast notifications with phase-specific success messages
+  - **Components Created** (`app/dashboard/_components/`):
+    - `processing-progress.tsx` (332 lines): Main progress component for content processing
+    - `content-preview-card.tsx` (50 lines): Content metadata display with type icons
+    - `course-creation-progress.tsx` (293 lines): Progress component for course creation
+  - **Utility Functions** (`src/lib/`):
+    - `youtube-utils.ts` (67 lines): YouTube video ID extraction and oEmbed metadata fetching
+    - `processing-storage.ts` (84 lines): localStorage helpers for state persistence
+  - **Integration**:
+    - Updated `content-inbox.tsx` (214 insertions): Integrated progress components, YouTube metadata fetching
+    - Updated `create-course-dialog.tsx` (55 insertions): Integrated course creation progress
+  - **Internationalization**: Complete EN/FR translations (120 keys each)
+    - `dashboard.processing.*`: Content processing translations (phases, tips, encouragement, celebrations)
+    - `dashboard.courseCreation.*`: Course creation translations (phases, tips, encouragement, celebrations)
+  - **User Experience**:
+    - localStorage persistence for page refresh (content processing only)
+    - Mobile-responsive design (320px+ widths)
+    - Accessibility features (ARIA labels, screen reader announcements, live regions)
+    - Brand-colored confetti (#10b981, #3b82f6, #8b5cf6)
+  - **Dependencies Added**:
+    - `canvas-confetti@1.9.4` (11KB) - Celebration animations
+    - `@types/canvas-confetti@1.9.0` - TypeScript types
+  - **Technical Approach**:
+    - Simulated progress based on estimated times (acceptable for MVP - users care about feedback)
+    - Lazy-loaded confetti using dynamic imports to minimize bundle size
+    - Fire-and-forget pattern for async operations (void operator)
+    - Course creation waits for API completion on last phase (stops at 99%)
+  - **Impact**: Targets <20% abandonment rate (from ~60-70% baseline), eliminates "is it broken?" confusion
+  - **Testing**: Validated in production - all features working correctly
+  - **Commit**: `0b4e2906` - feat(ux): implement processing progress feedback (US-0010)
+
+### Added - Unreleased
+
 - **Flashcard Answer Unlock System** (2025-11-18) 🔓
   - **Gamified Learning**: Flashcards start locked (question-only), unlock when high-confidence matches found
   - **Database Schema**: Added unlock tracking (Migration: `20251118075121_add_flashcard_unlock_system`)
