@@ -405,7 +405,7 @@
       "title": "Tableau de bord"
     },
     "learn": {
-      "welcome": "Bon retour, {name} !",
+      "welcome": "Salut, {name} !",
       "subtitle": "Votre hub d'apprentissage quotidien",
       "inbox": {
         "title": "Ajouter du contenu",

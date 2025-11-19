@@ -405,7 +405,7 @@
       "title": "Dashboard"
     },
     "learn": {
-      "welcome": "Welcome back, {name}!",
+      "welcome": "Hey, {name}!",
       "subtitle": "Your daily learning hub",
       "inbox": {
         "title": "Add Content",
