@@ -118,7 +118,7 @@ The format is inspired by Keep a Changelog. Summarize changes, link to PRs/specs
     - Progress indicators: Orange fills
   - **Brand Identity**: Site name changed to "Recall" (from "hack the gap")
     - Updated in `src/site-config.ts`
-    - New icon: `recall_icon.png` (1180x1180px)
+    - New icon: `recall_r.png` (1180x1180px)
 
 - **Unified Content Processor + PDF Upload** (2025-11-18) 📄
   - **Database Schema**: Migrated `VideoJob` → `ContentJob` with `ContentType` enum (youtube, tiktok, pdf, url, podcast)

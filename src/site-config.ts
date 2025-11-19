@@ -4,7 +4,7 @@ export const SiteConfig = {
   prodUrl: "http://localhost:3000",
   appId: "hackthegap",
   domain: "localhost",
-  appIcon: "/images/icon.png",
+  appIcon: "/images/r.png",
   company: {
     name: "Recall",
     address: "", // Not needed for hackathon
@@ -13,7 +13,7 @@ export const SiteConfig = {
     primary: "#8b5cf6", // Purple for education
   },
   team: {
-    image: "/images/icon.png",
+    image: "/images/r.png",
     website: "https://github.com/hugoganet/hack_the_gap",
     twitter: "",
     name: "Recall Team",

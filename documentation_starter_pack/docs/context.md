@@ -4,7 +4,7 @@ This is the single entry point for reconstructing project context. AI tools and 
 
 ## Project Snapshot
 
-- Name: Recall (formerly "hack the gap")
+- Name: Recall
 - Summary: AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals
 - Stage: Implementation (Core pipeline complete, i18n + PDF upload added, flashcard unlock system complete, syllabus upload in progress)
 - Last updated: 2025-11-18 (Landing page transparency + build config updates)

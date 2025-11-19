@@ -1,5 +1,5 @@
 project:
-  name: "hack the gap (temporary - name TBD)"
+  name: "Recall"
   summary: "AI-powered Zettelkasten that auto-converts students' passive content consumption into active long-term retention via concept extraction and spaced repetition, matching content to their own learning goals."
   owner: Hugo Ganet
   stage: build # discovery | build | alpha | beta | prod | sunset
@@ -25,7 +25,7 @@ status:
   major_pivot: "2025-11-17 - Shifted from institution-centric (pre-loaded courses) to student-centric (user-uploaded syllabi). Students now upload their own learning goals instead of selecting from pre-populated courses."
 
 notes:
-  naming: "Product name needed - 'hack the gap' is temporary placeholder. Consider: Retention, SyncGraph, ConceptFlow, MemoryMap, LearnFlow, GoalKeeper, etc."
+  naming: "Product name finalized as 'Recall' (2025-11-18). Previously 'hack the gap' during development."
   hackathon: "48-hour MVP timeline - focus on proof of concept, not production quality"
   pivot: "Major architectural change: removed academic year/semester structure for global flexibility. Students worldwide can now use the app with their own syllabi."
   implementation_status: "Core pipeline complete (US-0002 through US-0007). Syllabus upload feature (NEW US-0001) in progress. Dashboard features (US-0008, US-0009) remaining."

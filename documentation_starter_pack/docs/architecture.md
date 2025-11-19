@@ -7,7 +7,6 @@
 **Primary Users:**
 
 - Students (Self-Directed Learners) - upload syllabi, consume content, review flashcards, track progress
-- ~~Admin/Founder~~ - No longer needed (students upload their own syllabi)
 
 **External Systems:**
 
@@ -28,24 +27,21 @@
 ```mermaid
 flowchart TB
     Student[Student User]
-    Admin[Admin/Founder]
     
-    System[Hack the Gap System]
+    System[Recall System]
     
     SocialKit[SocialKit API]
     OpenAI[OpenAI API]
     Supabase[(Supabase PostgreSQL)]
     
-    Student -->|Watch videos, review flashcards| System
-    Admin -->|Pre-load syllabi| System
+    Student -->|Upload syllabi, consume content, review flashcards| System
     
     System -->|Fetch transcripts| SocialKit
-    System -->|Extract concepts, match| OpenAI
+    System -->|Extract concepts, match, generate flashcards| OpenAI
     System -->|Store data| Supabase
     
     style System fill:#007291
     style Student fill:#e1f5ff
-    style Admin fill:#fff4e1
 ```
 
 ## C4 Container Diagram

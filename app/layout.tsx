@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   title: SiteConfig.title,
   description: SiteConfig.description,
   metadataBase: new URL(getServerUrl()),
+  icons: {
+    icon: [{ url: "/icon.png" }, { url: "/favicon.ico" }],
+    shortcut: [{ url: "/icon.png" }, { url: "/favicon.ico" }],
+  },
   alternates: {
     languages: {
       en: "/en",
